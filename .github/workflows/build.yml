@@ -1,7 +1,10 @@
 name: build
 on:
   push:
+    branches: [main]
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,14 +16,24 @@ jobs:
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
       - name: Build
+        id: build
+        continue-on-error: true
         run: |
           chmod +x gradlew
           set -o pipefail
           ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log
-      - uses: actions/upload-artifact@v4
+      - name: Publish log and jar to ci-output branch
         if: always()
-        with:
-          name: jujutsuenhancement-jar-and-log
-          path: |
-            build/libs/*.jar
-            build.log
+        run: |
+          mkdir -p /tmp/out
+          cp build.log /tmp/out/ || true
+          grep -E "error:|warning: \[|FAILED|What went wrong|Caused by|Could not" build.log | head -300 > /tmp/out/errors.txt || true
+          cp build/libs/*.jar /tmp/out/ 2>/dev/null || true
+          echo "${{ steps.build.outcome }}" > /tmp/out/outcome.txt
+          cd /tmp/out
+          git init -q -b ci-output
+          git config user.name "ci"
+          git config user.email "ci@users.noreply.github.com"
+          git add -A
+          git commit -qm "ci output for ${{ github.sha }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-output
