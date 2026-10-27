@@ -37,6 +37,16 @@ public final class HollowPurpleEntity extends Entity {
         this.setNoGravity(true);
     }
 
+    /** Unlimited (imaginary) Purple: stationary charge that detonates in a large sphere. */
+    private boolean unlimited = false;
+    private static final double UNLIMITED_RADIUS = 24.0D;
+    private static final int UNLIMITED_CHARGE_TICKS = 24;
+
+    public void setUnlimited() {
+        this.unlimited = true;
+        this.damage = 300.0F;
+    }
+
     public void setCharged200Percent() {
         this.speed = 1.8D;
         this.damage = 80.0F;
@@ -44,7 +54,7 @@ public final class HollowPurpleEntity extends Entity {
     }
 
     public void launch(Entity owner, Vec3 direction) {
-        this.ownerUuid = owner.getUUID();
+        this.ownerUuid = owner == null ? null : owner.getUUID();
         Vec3 velocity = direction.normalize().scale(speed);
         this.setDeltaMovement(velocity);
         this.setYRot((float)(Math.atan2(velocity.z, velocity.x) * 180.0D / Math.PI) - 90.0F);
@@ -54,6 +64,10 @@ public final class HollowPurpleEntity extends Entity {
     @Override public void tick() {
         super.tick();
         age++;
+        if (unlimited) {
+            tickUnlimited();
+            return;
+        }
         Vec3 from = this.position();
         Vec3 movement = this.getDeltaMovement();
         Vec3 to = from.add(movement);
@@ -163,6 +177,57 @@ public final class HollowPurpleEntity extends Entity {
         if (age >= 100) discard();
     }
 
+    private void tickUnlimited() {
+        this.setDeltaMovement(Vec3.ZERO);
+        double progress = Math.min(1.0D, age / (double) UNLIMITED_CHARGE_TICKS);
+        if (this.level().isClientSide) {
+            double r = 0.6D + progress * 2.4D;
+            for (int i = 0; i < 6; i++) {
+                double a = this.random.nextDouble() * Math.PI * 2.0D;
+                double b = (this.random.nextDouble() - 0.5D) * Math.PI;
+                this.level().addParticle(PURPLE_CORE,
+                        getX() + Math.cos(a) * Math.cos(b) * r,
+                        getY() + Math.sin(b) * r,
+                        getZ() + Math.sin(a) * Math.cos(b) * r, 0.0D, 0.0D, 0.0D);
+            }
+            this.level().addParticle(WHITE_CORE, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
+            return;
+        }
+        if (!(this.level() instanceof ServerLevel server)) return;
+        if (age < UNLIMITED_CHARGE_TICKS) {
+            double r = 0.6D + progress * 2.4D;
+            server.sendParticles(PURPLE_CORE, getX(), getY(), getZ(), 14, r, r, r, 0.02D);
+            server.sendParticles(BLUE_EDGE, getX(), getY(), getZ(), 8, r, r, r, 0.03D);
+            if (age % 6 == 0) {
+                server.playSound(null, getX(), getY(), getZ(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT,
+                        net.minecraft.sounds.SoundSource.HOSTILE, 1.5F, 0.5F + (float) progress);
+            }
+            return;
+        }
+        Entity owner = ownerUuid == null ? null : server.getEntity(ownerUuid);
+        AABB area = new AABB(getX() - UNLIMITED_RADIUS, getY() - UNLIMITED_RADIUS, getZ() - UNLIMITED_RADIUS,
+                getX() + UNLIMITED_RADIUS, getY() + UNLIMITED_RADIUS, getZ() + UNLIMITED_RADIUS);
+        for (Entity target : server.getEntities(this, area, e -> e.isAlive() && e != this)) {
+            if (!(target instanceof net.minecraft.world.entity.LivingEntity)) continue;
+            if (owner != null && (target == owner || owner.isAlliedTo(target))) continue;
+            if (target.distanceToSqr(this) > UNLIMITED_RADIUS * UNLIMITED_RADIUS) continue;
+            if (owner != null) {
+                target.hurt(this.damageSources().indirectMagic(this, owner), damage);
+            } else {
+                target.hurt(this.damageSources().magic(), damage);
+            }
+        }
+        // Block damage follows the mobGriefing rule via ExplosionInteraction.MOB.
+        server.explode(owner, getX(), getY(), getZ(), 8.0F, Level.ExplosionInteraction.MOB);
+        server.sendParticles(PURPLE_CORE, getX(), getY(), getZ(), 220, 8.0D, 8.0D, 8.0D, 0.25D);
+        server.sendParticles(BLUE_EDGE, getX(), getY(), getZ(), 160, 8.0D, 8.0D, 8.0D, 0.2D);
+        server.sendParticles(WHITE_CORE, getX(), getY(), getZ(), 80, 4.0D, 4.0D, 4.0D, 0.1D);
+        server.sendParticles(ParticleTypes.EXPLOSION_EMITTER, getX(), getY(), getZ(), 3, 3.0D, 3.0D, 3.0D, 0.0D);
+        server.playSound(null, getX(), getY(), getZ(), net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE,
+                net.minecraft.sounds.SoundSource.HOSTILE, 4.0F, 0.5F);
+        discard();
+    }
+
     @Override protected void defineSynchedData() {}
     @Override protected void readAdditionalSaveData(CompoundTag tag) {
         if (tag.hasUUID("Owner")) ownerUuid = tag.getUUID("Owner");
@@ -170,6 +235,7 @@ public final class HollowPurpleEntity extends Entity {
         speed = tag.contains("Speed") ? tag.getDouble("Speed") : 1.35D;
         damage = tag.contains("Damage") ? tag.getFloat("Damage") : 40.0F;
         hitRadius = tag.contains("HitRadius") ? tag.getDouble("HitRadius") : 2.0D;
+        unlimited = tag.getBoolean("Unlimited");
     }
     @Override protected void addAdditionalSaveData(CompoundTag tag) {
         if (ownerUuid != null) tag.putUUID("Owner", ownerUuid);
@@ -177,6 +243,7 @@ public final class HollowPurpleEntity extends Entity {
         tag.putDouble("Speed", speed);
         tag.putFloat("Damage", damage);
         tag.putDouble("HitRadius", hitRadius);
+        tag.putBoolean("Unlimited", unlimited);
     }
     @Override public Packet<ClientGamePacketListener> getAddEntityPacket() { return NetworkHooks.getEntitySpawningPacket(this); }
 }

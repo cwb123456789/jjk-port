@@ -316,14 +316,15 @@ public final class PrototypeCommands {
         boolean prioritizeChargedPurple = !gojo.getPersistentData().getBoolean(NPC_PURPLE_USED)
                 && gojo.getPersistentData().getLong(NPC_CHARGE_START) == 0L
                 && findNearbyPossessedMegumi(gojo, level) != null;
-        if (!prioritizeChargedPurple && gojo.isCrouching() && gojo.getHealth() > 0.0F
+        if (!prioritizeChargedPurple && gojo.getHealth() > 0.0F
                 && gojo.getHealth() <= gojo.getMaxHealth() * 0.20F && now >= emergencyReadyAt) {
             Entity target = findEmergencyPurpleTarget(gojo, level);
             Vec3 emergencyDirection = target == null ? gojo.getLookAngle().normalize()
                     : target.getBoundingBox().getCenter().subtract(gojo.getEyePosition()).normalize();
             HollowPurpleEntity emergencyPurple = ModEntities.HOLLOW_PURPLE.get().create(level);
             if (emergencyPurple != null) {
-                Vec3 emergencyOrigin = gojo.getEyePosition().add(emergencyDirection.scale(1.8D));
+                emergencyPurple.setUnlimited();
+                Vec3 emergencyOrigin = gojo.position().add(0.0D, gojo.getBbHeight() + 3.0D, 0.0D);
                 emergencyPurple.setPos(emergencyOrigin.x, emergencyOrigin.y, emergencyOrigin.z);
                 emergencyPurple.launch(gojo, emergencyDirection);
                 if (level.addFreshEntity(emergencyPurple)) {
