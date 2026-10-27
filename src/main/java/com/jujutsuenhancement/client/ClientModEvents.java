@@ -68,6 +68,9 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        // The purple is drawn entirely by particles; without any registered renderer the
+        // client crashes the moment the entity enters view.
+        event.registerEntityRenderer(ModEntities.HOLLOW_PURPLE.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.MALEVOLENT_SHRINE.get(), DomainShrineRenderer::new);
         event.registerEntityRenderer(ModEntities.SUKUNA_FLAME_ARROW.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.HEIAN_SUKUNA.get(), HeianSukunaRenderer::new);

@@ -15,6 +15,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import com.mojang.logging.LogUtils;
+import org.slf4j.Logger;
+
 import java.util.UUID;
 
 /**
@@ -33,6 +36,8 @@ import java.util.UUID;
 public final class NativePurpleBridge {
     private static final ResourceLocation NATIVE_PURPLE = new ResourceLocation("jujutsucraft", "purple");
     private static final String REPLACED_KEY = "jujutsuenhancement_purple_replaced";
+
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     private NativePurpleBridge() {}
 
@@ -64,6 +69,10 @@ public final class NativePurpleBridge {
         }
         if (level.addFreshEntity(replacement)) {
             purple.discard();
+            LOGGER.info("[JujutsuEnhancement] Replaced native Hollow Purple (unlimited={}, charged={}, owner={})",
+                    unlimited, charged, owner == null ? "none" : owner.getName().getString());
+        } else {
+            LOGGER.warn("[JujutsuEnhancement] Failed to add replacement Hollow Purple; keeping the native one");
         }
     }
 
