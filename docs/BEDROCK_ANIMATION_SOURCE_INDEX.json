@@ -1,0 +1,152 @@
+[
+  {
+    "source": "JujutsuAwa/animations/sukuna/divine_flames.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/sukuna/divine_flames.animation.json",
+    "bytes": 576575,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/sukuna/domain_expansions.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/sukuna/domain_expansions.animation.json",
+    "bytes": 58481,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/sukuna/malevolent_shrine.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/sukuna/malevolent_shrine.animation.json",
+    "bytes": 30365,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/sukuna/sukuna_awakenings.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/sukuna/sukuna_awakenings.animation.json",
+    "bytes": 254602,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/sukuna/sukuna_moves.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/sukuna/sukuna_moves.animation.json",
+    "bytes": 687456,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/sukuna_finger.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/sukuna_finger.animation.json",
+    "bytes": 1649,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/gojo_high.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/gojo_high.animation.json",
+    "bytes": 5732,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/yuji.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/yuji.animation.json",
+    "bytes": 282297,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/enraged_yuji_cutscene.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/enraged_yuji_cutscene.animation.json",
+    "bytes": 59141,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/mahito.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/mahito.animation.json",
+    "bytes": 957295,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/mahito_effects.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/mahito_effects.animation.json",
+    "bytes": 103764,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/shikigami/mahoraga_player_interaction.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/shikigami/mahoraga_player_interaction.animation.json",
+    "bytes": 94161,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/shikigami/mahoraga_ritual1.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/shikigami/mahoraga_ritual1.animation.json",
+    "bytes": 2446,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/judgeman.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/judgeman.animation.json",
+    "bytes": 395030,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/judgeman2.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/judgeman2.animation.json",
+    "bytes": 51474,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/animations/domain_stuff/clashing_animations.animation.json",
+    "copied_to": "docs/bedrock-source-reference/animations/domain_stuff/clashing_animations.animation.json",
+    "bytes": 115776,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/models/entity/entities/student_gojo.geo.json",
+    "copied_to": "docs/bedrock-source-reference/models/entity/entities/student_gojo.geo.json",
+    "bytes": 10048,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/models/entity/entities/innate_sukuna.geo.json",
+    "copied_to": "docs/bedrock-source-reference/models/entity/entities/innate_sukuna.geo.json",
+    "bytes": 33473,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/models/entity/yuji.geo.json",
+    "copied_to": "docs/bedrock-source-reference/models/entity/yuji.geo.json",
+    "bytes": 17574,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/models/entity/shikigami/mahoraga_ritual1.geo.json",
+    "copied_to": "docs/bedrock-source-reference/models/entity/shikigami/mahoraga_ritual1.geo.json",
+    "bytes": 256183,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/entity/sukuna/malevolent_shrine1.json",
+    "copied_to": "docs/bedrock-source-reference/entity/sukuna/malevolent_shrine1.json",
+    "bytes": 2190,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/entity/sukuna/malevolent_shrine2.json",
+    "copied_to": "docs/bedrock-source-reference/entity/sukuna/malevolent_shrine2.json",
+    "bytes": 3132,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/entity/domain_entities/infinite_void_clashing.json",
+    "copied_to": "docs/bedrock-source-reference/entity/domain_entities/infinite_void_clashing.json",
+    "bytes": 2425,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/entity/domain_entities/malevolent_shrine_clashing.json",
+    "copied_to": "docs/bedrock-source-reference/entity/domain_entities/malevolent_shrine_clashing.json",
+    "bytes": 2260,
+    "status": "REFERENCE_ONLY"
+  },
+  {
+    "source": "JujutsuAwa/entity/domain_entities/yuji_domain_clashing.json",
+    "copied_to": "docs/bedrock-source-reference/entity/domain_entities/yuji_domain_clashing.json",
+    "bytes": 1241,
+    "status": "REFERENCE_ONLY"
+  }
+]

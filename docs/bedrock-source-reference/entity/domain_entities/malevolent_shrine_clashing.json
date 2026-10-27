@@ -1,0 +1,56 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "ds:malevolent_shrine_clashing",
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/models/malevolent_shrine"
+      },
+      "geometry": {
+        "default": "geometry.malevolent_shrine"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true,
+        "animate": [
+          "temp"
+        ]
+      },
+      "animations": {
+        "temp": "animation.malevolent_shrine_clashing"
+      },
+      "particle_effects": {
+        "malevolent_shrine_clash1": "ds:malevolent_shrine_clash1",
+        "malevolent_shrine_clash2": "ds:malevolent_shrine_clash2",
+        "malevolent_shrine_clash2b": "ds:malevolent_shrine_clash2b",
+        "malevolent_shrine_clash2c": "ds:malevolent_shrine_clash2c",
+        "malevolent_shrine_clash2d": "ds:malevolent_shrine_clash2d",
+        "malevolent_shrine_clash3": "ds:malevolent_shrine_clash3",
+        "malevolent_shrine_clash4": "ds:malevolent_shrine_clash4",
+        "malevolent_shrine_clash5": "ds:malevolent_shrine_clash5",
+        "malevolent_shrine_clash6": "ds:malevolent_shrine_clash6",
+        "malevolent_shrine_clash7": "ds:malevolent_shrine_clash7",
+        "malevolent_shrine_clash8": "ds:malevolent_shrine_clash8",
+        "malevolent_shrine_clash9": "ds:malevolent_shrine_clash9",
+        "malevolent_shrine_clash10": "ds:malevolent_shrine_clash10",
+        "malevolent_shrine_clash11": "ds:malevolent_shrine_clash11",
+        "malevolent_shrine_clash12": "ds:malevolent_shrine_clash12",
+        "malevolent_shrine1": "ds:malevolent_shrine1",
+        "malevolent_shrine2": "ds:malevolent_shrine2",
+        "malevolent_shrine3": "ds:malevolent_shrine3",
+        "malevolent_shrine4": "ds:malevolent_shrine4",
+        "malevolent_shrine5": "ds:malevolent_shrine5",
+        "malevolent_shrine6": "ds:malevolent_shrine6",
+        "malevolent_shrine7": "ds:malevolent_shrine7",
+        "malevolent_shrine8": "ds:malevolent_shrine8",
+        "malevolent_shrine9": "ds:malevolent_shrine9"
+      },
+      "render_controllers": [
+        "controller.render.default"
+      ],
+      "enable_attachables": true
+    }
+  }
+}

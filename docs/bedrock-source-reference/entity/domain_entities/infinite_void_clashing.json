@@ -1,0 +1,63 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "ds:infinite_void_clashing",
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/entity/textureoff"
+      },
+      "geometry": {
+        "default": "geometry.no_model"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true,
+        "animate": [
+          "temp"
+        ]
+      },
+      "animations": {
+        "temp": "animation.infinite_void_clashing"
+      },
+      "particle_effects": {
+        "unlimited_void_clash1": "ds:unlimited_void_clash1",
+        "unlimited_void_clash2": "ds:unlimited_void_clash2",
+        "unlimited_void_clash2b": "ds:unlimited_void_clash2b",
+        "unlimited_void_clash2c": "ds:unlimited_void_clash2c",
+        "unlimited_void_clash2d": "ds:unlimited_void_clash2d",
+        "unlimited_void_clash3": "ds:unlimited_void_clash3",
+        "unlimited_void_clash4": "ds:unlimited_void_clash4",
+        "unlimited_void_clash5": "ds:unlimited_void_clash5",
+        "unlimited_void_clash6": "ds:unlimited_void_clash6",
+        "unlimited_void_clash7": "ds:unlimited_void_clash7",
+        "unlimited_void_clash8": "ds:unlimited_void_clash8",
+        "unlimited_void_clash9": "ds:unlimited_void_clash9",
+        "unlimited_void_clash10": "ds:unlimited_void_clash10",
+        "unlimited_void_clash11": "ds:unlimited_void_clash11",
+        "unlimited_void_clash12": "ds:unlimited_void_clash12",
+        "unlimited_eye1": "ds:unlimited_eye1",
+        "unlimited_eye1b": "ds:unlimited_eye1b",
+        "unlimited_eye1c": "ds:unlimited_eye1c",
+        "unlimited_eye2": "ds:unlimited_eye2",
+        "unlimited_eye3": "ds:unlimited_eye3",
+        "unlimited_eye4": "ds:unlimited_eye4",
+        "unlimited_eye5": "ds:unlimited_eye5",
+        "unlimited_void1": "ds:unlimited_void1",
+        "unlimited_void2": "ds:unlimited_void2",
+        "unlimited_void3": "ds:unlimited_void3",
+        "unlimited_void4": "ds:unlimited_void4",
+        "unlimited_void5": "ds:unlimited_void5",
+        "unlimited_void6": "ds:unlimited_void6",
+        "unlimited_void7": "ds:unlimited_void7",
+        "unlimited_void8": "ds:unlimited_void8",
+        "unlimited_void9": "ds:unlimited_void9"
+      },
+      "render_controllers": [
+        "controller.render.default"
+      ],
+      "enable_attachables": true
+    }
+  }
+}

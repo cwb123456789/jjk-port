@@ -1,0 +1,20 @@
+{
+  "source": "docs/bedrock-source-reference/animations/sukuna/malevolent_shrine.animation.json",
+  "target": "src/main/resources/assets/jujutsuenhancement/animations/malevolent_shrine.animation.json",
+  "converted_animations": [
+    {
+      "name": "animation.malevolent_shrine.form",
+      "bones": 21,
+      "channels": 63,
+      "duration_seconds": 10
+    }
+  ],
+  "warnings": [
+    "Bedrock catmullrom interpolation is flattened to a single post keyframe value; motion curves require visual tuning.",
+    "This animation only covers a subset of the 126 target model bones; it is a first pass, not a full-fidelity conversion."
+  ],
+  "geometry_bone_count": 126,
+  "animation_bone_count": 21,
+  "animation_bones_missing_from_geometry": [],
+  "geometry_bones_not_animated": 105
+}

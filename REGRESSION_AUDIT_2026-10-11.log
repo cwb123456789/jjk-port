@@ -1,0 +1,192 @@
+
+===== tools/audit_sukuna_attack_spawn_atomicity.py =====
+PASS: custom projectile spawn success gate exists
+PASS: attack commit occurs inside success gate
+PASS: release state is separate from regular combo sequence
+PASS: cooldown advances inside entity commit
+PASS: release animation timer is set by entity commit
+PASS: failed spawn path does not commit attack
+
+===== tools/audit_sukuna_interaction_consumption.py =====
+PASS: server/client gate precedes event consumption
+PASS: interaction is canceled before domain factory or cooldown branches
+PASS: failed domain factory cannot fall through to vanilla
+PASS: failed projectile spawn cannot fall through to vanilla
+PASS: projectile commit still depends on successful spawn
+PASS: static interaction-consumption audit; no runtime claim.
+
+===== tools/audit_sukuna_interaction_server_flow.py =====
+PASS: server-player gate
+PASS: client-side guard
+PASS: only main hand
+PASS: projectile spawn success gates attack commit
+PASS: cooldown applied by entity commit
+PASS: failed spawn does not advance sequence
+PASS: animation state is synchronized
+PASS: approximation is explicitly distinguished from native skill
+PASS: server-flow static audit; not a substitute for Forge compilation or an in-game test.
+
+===== tools/audit_sukuna_fuga_charge_flow.py =====
+PASS charge duration is 55 ticks
+PASS charge animation state is synchronized
+PASS hold state follows charge completion
+PASS ready state has a bounded release window
+PASS expired ready state clears ownership and animation
+PASS charger identity prevents release theft
+PASS early release is rejected
+PASS successful spawn commits cooldown and attack
+PASS Bedrock activation clip imported
+PASS Bedrock hold clip imported
+PASS activation clip is non-looping
+PASS hold clip loops
+PASS activation bones match Java geometry
+PASS hold bones match Java geometry
+PASS controller maps charge, hold, and release states
+PASS release animation exists and uses compatible bones
+PASS release animation has a finite duration
+PASS release state timer is configured
+
+===== tools/audit_sukuna_entity_owned_cooldowns.py =====
+PASS: entity owns basic attack cooldown
+PASS: entity owns domain cooldown
+PASS: entity owns attack sequence
+PASS: basic attack cooldown checked before projectile spawn
+PASS: domain cooldown checked before domain creation
+PASS: basic attack state committed only after spawn success
+PASS: domain cooldown committed only after entity added
+PASS: player persistent data no longer stores Sukuna cooldown/sequence
+PASS: entity-owned cooldown/sequence static audit; not a substitute for compilation or in-game testing.
+
+===== tools/audit_sukuna_persistent_state.py =====
+PASS: basic cooldown saved
+PASS: domain cooldown saved
+PASS: combo sequence saved
+PASS: basic cooldown restored
+PASS: domain cooldown restored
+PASS: combo sequence restored and normalized
+PASS: visual animation reset on load
+PASS: 7 Sukuna persistence checks
+
+===== tools/audit_sukuna_animation_trigger.py =====
+PASS: synced entity data declared
+PASS: server-only animation state mutation
+PASS: state timer resets animation
+PASS: bridge commits attack only after accepted custom-arrow spawn
+PASS: entity release commit sets synchronized release state
+PASS: all five attack clips exist
+PASS: all Java attack animation refs exist
+
+===== tools/audit_purple_charge_session_lifecycle.py =====
+PASS login event clears stale charge start
+PASS dimension change cancels charge
+PASS dimension change does not clear cooldown
+PASS normal tick still cancels charge on death
+PASS five-second charge remains configured
+PASS charged release still occurs after elapsed charge
+
+===== tools/audit_mahito_domain_visual_recovery.py =====
+PASS: active intro schedules visual repair after loading
+PASS: repair runs on the first eligible server tick
+PASS: repair retries after transient insertion failure
+PASS: repair checks hand UUID against the expected entity type
+PASS: repair checks barrier UUID against the expected entity type
+PASS: repair does not call the domain pulse entry point
+PASS: restored age follows remaining intro time
+PASS: hands expose bounded restored-age setter
+PASS: barrier exposes bounded restored-age setter
+PASS: normal intro expiration disables pending repair
+Result: 10/10 checks passed
+
+===== tools/audit_mahito_stale_visual_reload_cleanup.py =====
+PASS: cleanup is deferred via a dedicated transient flag
+PASS: pending cleanup runs only on server tick
+PASS: both saved visual UUIDs are cleaned
+PASS: both UUID references are reset after cleanup
+PASS: stale visual references schedule cleanup outside active intro
+PASS: load path avoids immediate ServerLevel lookup
+Result: 6/6 checks passed
+
+===== tools/audit_mahito_domain_chunk_lifecycle.py =====
+PASS: prototype preserves visuals during chunk unload
+PASS: prototype preserves visuals during player unload
+PASS: actual removal still invokes visual cleanup
+PASS: visual cleanup remains restricted to known effect types
+PASS: prototype saves hand UUID for reload tracking
+PASS: prototype saves barrier UUID for reload tracking
+PASS: hands persist age across chunk unload/reload
+PASS: barrier persists age across chunk unload/reload
+PASS: hands age is clamped to legal bounds on load
+PASS: barrier age is clamped to legal bounds on load
+PASS: hands expire server-side at the 60-tick boundary
+PASS: barrier expires server-side at the 60-tick boundary
+PASS: domain end resets tracked UUIDs after cleanup
+Result: 13/13 checks passed
+
+===== tools/audit_mahito_domain_test_commands.py =====
+PASS: /mahito_domain_visual_test routes to spawnMahitoDomainVisuals
+PASS: /mahito_domain_hands_test routes to spawnMahitoDomainPart
+PASS: /mahito_domain_barrier_test routes to spawnMahitoDomainPart
+PASS: combined test reports partial entity-spawn failure
+PASS: single-part test reports entity insertion failure
+PASS: MahitoDomainHandsEntity.java expires after 60 ticks
+PASS: MahitoDomainHandsEntity.java expires server-side
+PASS: MahitoDomainHandsEntity.java persists age under a dedicated NBT key
+PASS: MahitoDomainHandsEntity.java has no direct damage implementation
+PASS: MahitoDomainBarrierEntity.java expires after 60 ticks
+PASS: MahitoDomainBarrierEntity.java expires server-side
+PASS: MahitoDomainBarrierEntity.java persists age under a dedicated NBT key
+PASS: MahitoDomainBarrierEntity.java has no direct damage implementation
+SUMMARY: 13 passed, 0 errors
+
+===== tools/validate_resources.py =====
+heian_shrine: 195 bones; 1626 cubes; 9756 UV faces within declared 1024x1024 atlas
+heian_shrine: no paired animation resource; geometry/UV checks only
+heian_sukuna: 62 bones; 1154 cubes; 6918 UV faces within declared 512x512 atlas
+heian_sukuna: 13 animated bone names; 13 match
+innate_sukuna: 16 bones; 49 cubes; 294 UV faces within declared 64x64 atlas
+innate_sukuna: no paired animation resource; geometry/UV checks only
+mahito: 16 bones; 23 cubes; 102 UV faces within declared 64x64 atlas
+mahito: no paired animation resource; geometry/UV checks only
+mahito_domain_barrier: 24 bones; 24 cubes; 144 UV faces within declared 64x512 atlas
+mahito_domain_barrier: no paired animation resource; geometry/UV checks only
+mahito_stage2: 16 bones; 23 cubes; 102 UV faces within declared 64x64 atlas
+mahito_stage2: no paired animation resource; geometry/UV checks only
+malevolent_shrine: 126 bones; 2326 cubes; 13956 UV faces within declared 4096x4096 atlas
+malevolent_shrine: 21 animated bone names; 21 match
+perfection_domain_hands: 195 bones; 410 cubes; 2460 UV faces within declared 128x128 atlas
+perfection_domain_hands: no paired animation resource; geometry/UV checks only
+perfection_domain_hands_compat: 195 bones; 410 cubes; 2460 UV faces within declared 128x128 atlas
+perfection_domain_hands_compat: no paired animation resource; geometry/UV checks only
+student_gojo: 11 bones; 16 cubes; 96 UV faces within declared 64x64 atlas
+student_gojo: no paired animation resource; geometry/UV checks only
+yuji_domain: 2 bones; 401 cubes; 2406 UV faces within declared 512x512 atlas
+yuji_domain: no paired animation resource; geometry/UV checks only
+Animation compatibility: gojo_high.animation.json -> best geometry student_gojo (6/6 bones match)
+Animation compatibility: heian_sukuna.animation.json -> best geometry heian_sukuna (13/13 bones match)
+Animation compatibility: mahito_compatible.animation.json -> best geometry student_gojo (7/7 bones match)
+Animation compatibility: malevolent_shrine.animation.json -> best geometry malevolent_shrine (21/21 bones match)
+Texture reference OK: src/main/resources/assets/jujutsuenhancement/textures/entity/mahito_domain_barrier.png
+Texture reference OK: src/main/resources/assets/jujutsuenhancement/textures/entity/heian_sukuna.png
+Texture reference OK: src/main/resources/assets/jujutsuenhancement/textures/entity/malevolent_shrine.png
+Texture reference OK: src/main/resources/assets/jujutsuenhancement/textures/entity/perfection_domain_hands.png
+Texture reference OK: src/main/resources/assets/jujutsuenhancement/textures/entity/mahito.png
+Texture reference OK: src/main/resources/assets/jujutsuenhancement/textures/entity/mahito_stage2.png
+JSON files checked: 16
+PASS: JSON syntax, cube coordinates, UV bounds, paired bone names, keyframe schema, and renderer texture paths validated.
+
+===== REGRESSION SUMMARY =====
+PASS (exit 0): tools/audit_sukuna_attack_spawn_atomicity.py
+PASS (exit 0): tools/audit_sukuna_interaction_consumption.py
+PASS (exit 0): tools/audit_sukuna_interaction_server_flow.py
+PASS (exit 0): tools/audit_sukuna_fuga_charge_flow.py
+PASS (exit 0): tools/audit_sukuna_entity_owned_cooldowns.py
+PASS (exit 0): tools/audit_sukuna_persistent_state.py
+PASS (exit 0): tools/audit_sukuna_animation_trigger.py
+PASS (exit 0): tools/audit_purple_charge_session_lifecycle.py
+PASS (exit 0): tools/audit_mahito_domain_visual_recovery.py
+PASS (exit 0): tools/audit_mahito_stale_visual_reload_cleanup.py
+PASS (exit 0): tools/audit_mahito_domain_chunk_lifecycle.py
+PASS (exit 0): tools/audit_mahito_domain_test_commands.py
+PASS (exit 0): tools/validate_resources.py
+Static audits: 13/13 passed
+Note: this does not replace Gradle compilation or an in-game test.

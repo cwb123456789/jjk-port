@@ -1,0 +1,53 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "ds:malevolent_shrine1",
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/models/malevolent_shrine"
+      },
+      "geometry": {
+        "default": "geometry.malevolent_shrine"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true,
+        "animate": [
+          "temp"
+        ]
+      },
+      "animations": {
+        "temp": "controller.animation.temp"
+      },
+      "particle_effects": {
+        "malevolent_shrine_background": "ds:malevolent_shrine_background",
+        "malevolent_shrine_background1": "ds:malevolent_shrine_background1",
+        "malevolent_shrine_background2": "ds:malevolent_shrine_background2",
+        "malevolent_shrine_background3": "ds:malevolent_shrine_background3",
+        "malevolent_shrine_background4": "ds:malevolent_shrine_background4",
+        "malevolent_shrine1": "ds:malevolent_shrine1",
+        "malevolent_shrine2": "ds:malevolent_shrine2",
+        "malevolent_shrine3": "ds:malevolent_shrine3",
+        "malevolent_shrine_slashes1": "ds:malevolent_shrine_slashes1",
+        "malevolent_shrine_slashes2": "ds:malevolent_shrine_slashes2",
+        "malevolent_shrine_slashes3": "ds:malevolent_shrine_slashes3",
+        "malevolent_shrine_slashes4": "ds:malevolent_shrine_slashes4",
+        "malevolent_shrine_slashes5": "ds:malevolent_shrine_slashes5",
+        "malevolent_shrine_slashes6": "ds:malevolent_shrine_slashes6",
+        "malevolent_shrine_slashes7": "ds:malevolent_shrine_slashes7",
+        "malevolent_shrine_slashes8": "ds:malevolent_shrine_slashes8",
+        "malevolent_shrine_slashes9": "ds:malevolent_shrine_slashes9",
+        "malevolent_shrine_slashes10": "ds:malevolent_shrine_slashes10",
+        "malevolent_shrine_floor": "ds:malevolent_shrine_floor",
+        "malevolent_shrine_floor2": "ds:malevolent_shrine_floor2",
+        "malevolent_shrine_barrier": "ds:malevolent_shrine_barrier"
+      },
+      "render_controllers": [
+        "controller.render.default"
+      ],
+      "enable_attachables": true
+    }
+  }
+}

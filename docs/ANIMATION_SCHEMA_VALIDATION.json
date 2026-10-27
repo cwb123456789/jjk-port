@@ -1,0 +1,13 @@
+{
+  "status": "static-validation-passed",
+  "target": "src/main/resources/assets/jujutsuenhancement/animations/malevolent_shrine.animation.json",
+  "animation_count": 1,
+  "animated_bone_count": 21,
+  "keyframe_count": 540,
+  "keyframe_schema": "GeckoLib-style vector objects",
+  "known_limitations": [
+    "200 Catmull-Rom keyframes flattened to linear interpolation",
+    "Bedrock/GeckoLib axis and pivot differences not visually verified",
+    "No successful Gradle build or in-game render test yet"
+  ]
+}

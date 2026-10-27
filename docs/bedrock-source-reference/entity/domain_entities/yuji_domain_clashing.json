@@ -1,0 +1,44 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "ds:yuji_domain_clashing",
+      "spawn_egg": {
+        "overlay_color": "#a29920",
+        "base_color": "#a28949"
+      },
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/models/yuji_domain"
+      },
+      "geometry": {
+        "default": "geometry.yuji_domain_clashing"
+			},
+			"scripts": {
+			"should_update_bones_and_effects_offscreen": true,
+			"animate": [
+			"root"
+			   ]
+			      },
+      "animations": {
+        "root": "animation.yuji_domain_clashing"
+      },
+      "particle_effects": {
+        "idle_clash1": "ds:idle_clash1",
+        "idle_clash2": "ds:idle_clash2",
+        "yuji_domain_clash1": "ds:yuji_domain_clash1",
+        "yuji_domain_clash2": "ds:yuji_domain_clash2",
+        "yuji_domain_clash3": "ds:yuji_domain_clash3",
+        "yuji_domain_clash4": "ds:yuji_domain_clash4",
+        "yuji_domain_clash5": "ds:yuji_domain_clash5",
+        "yuji_domain_clash6": "ds:yuji_domain_clash6",
+        "yuji_domain_clash7": "ds:yuji_domain_clash7"
+      },
+      "render_controllers": [
+        "controller.render.default"
+      ]
+    }
+  }
+}

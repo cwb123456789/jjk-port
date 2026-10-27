@@ -1,0 +1,86 @@
+{
+    "format_version": "1.19.0",
+    "animation_controllers": {
+        "controller.animation.heian_sukuna.idle": {
+            "initial_state": "idle",
+            "states": {
+                "idle": {
+                    "animations": [
+                        {
+                            "heian_sukuna.idle": "query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "transitions": [
+                        {
+                            "walk": "query.is_moving && query.is_on_ground && !q.is_sprinting && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "sprint": "query.is_on_ground && q.is_sprinting && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "jump": "query.is_jumping && query.property('property:body_transformation') == 1 && !query.is_in_water && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "blend_transition": 0.1
+                },
+                "walk": {
+                    "animations": [
+                        {
+                            "heian_sukuna.walk": "query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "transitions": [
+                        {
+                            "idle": "query.is_on_ground && !query.is_moving && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "sprint": "query.is_on_ground && q.is_sprinting && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "jump": "query.is_jumping && query.property('property:body_transformation') == 1 && !query.is_in_water && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "blend_transition": 0.2
+                },
+                "sprint": {
+                    "animations": [
+                        {
+                            "heian_sukuna.sprint": "query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "transitions": [
+                        {
+                            "walk": "query.is_moving && query.is_on_ground && !q.is_sprinting && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "idle": "query.is_on_ground && !query.is_moving && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "jump": "query.is_jumping && query.property('property:body_transformation') == 1 && !query.is_in_water && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "blend_transition": 0.1
+                },
+                "jump": {
+                    "animations": [
+                        {
+                            "heian_sukuna.jump": "query.property('property:body_transformation') == 1 && !query.is_in_water && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "transitions": [
+                        {
+                            "idle": "query.is_on_ground && !query.is_moving && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "walk": "query.is_moving && query.is_on_ground && !q.is_sprinting && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        },
+                        {
+                            "sprint": "query.is_on_ground && q.is_sprinting && query.property('property:body_transformation') == 1 && query.property('property:hiten') != 1"
+                        }
+                    ],
+                    "blend_transition": 0.1
+                }
+            }
+        }
+    }
+}
