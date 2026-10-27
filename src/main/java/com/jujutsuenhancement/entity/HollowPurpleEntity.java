@@ -117,7 +117,7 @@ public final class HollowPurpleEntity extends Entity {
             // Sweep the projectile's path rather than damaging every entity in a large box.
             // This prevents the purple from hitting targets far to the side or through a wall.
             AABB area = this.getBoundingBox().expandTowards(movement).inflate(hitRadius);
-            Entity owner = ownerUuid == null ? null : this.level().getEntity(ownerUuid);
+            Entity owner = ownerUuid == null ? null : server.getEntity(ownerUuid);
             double segmentLengthSqr = movement.lengthSqr();
             double blockDistanceSqr = hit.getType() == HitResult.Type.BLOCK
                     ? from.distanceToSqr(hit.getLocation()) : Double.POSITIVE_INFINITY;

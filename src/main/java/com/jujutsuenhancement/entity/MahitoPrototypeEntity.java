@@ -147,7 +147,7 @@ public final class MahitoPrototypeEntity extends Entity implements GeoEntity {
                 if (idleSkillCooldown == 0 && level() instanceof ServerLevel serverLevel) {
                     AABB area = getBoundingBox().inflate(6.0, 3.0, 6.0);
                     for (LivingEntity target : serverLevel.getEntitiesOfClass(LivingEntity.class, area,
-                            candidate -> candidate.isAlive() && candidate != this
+                            candidate -> candidate.isAlive() && (Object) candidate != this
                                     && candidate != player && !candidate.isAlliedTo(player))) {
                         target.hurt(damageSources().indirectMagic(this, player), 14.0F);
                         target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
@@ -168,7 +168,7 @@ public final class MahitoPrototypeEntity extends Entity implements GeoEntity {
                 // Right-click: Soul Strike.
                 AABB area = getBoundingBox().inflate(4.0, 2.0, 4.0);
                 for (LivingEntity target : serverLevel.getEntitiesOfClass(LivingEntity.class, area,
-                        candidate -> candidate.isAlive() && candidate != this
+                        candidate -> candidate.isAlive() && (Object) candidate != this
                                 && candidate != player && !candidate.isAlliedTo(player))) {
                     target.hurt(damageSources().indirectMagic(this, player), 8.0F);
                     serverLevel.sendParticles(ParticleTypes.CRIT, target.getX(), target.getY() + target.getBbHeight() * 0.55,
@@ -218,7 +218,7 @@ public final class MahitoPrototypeEntity extends Entity implements GeoEntity {
         Entity foundOwner = transformationOwner == null ? null : serverLevel.getEntity(transformationOwner);
         final Player owner = foundOwner instanceof Player p ? p : null;
         for (LivingEntity target : serverLevel.getEntitiesOfClass(LivingEntity.class, area,
-                candidate -> candidate.isAlive() && candidate != this
+                candidate -> candidate.isAlive() && (Object) candidate != this
                         && (owner == null || (candidate != owner && !candidate.isAlliedTo(owner))))) {
             if (target.distanceToSqr(this) > radius * radius) continue;
             target.hurt(damageSources().indirectMagic(this, owner), 10.0F);

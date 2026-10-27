@@ -33,7 +33,8 @@ public final class ClientModEvents {
         @SuppressWarnings("unchecked")
         EntityType<? extends LivingEntity> entityType = (EntityType<? extends LivingEntity>) registeredType;
         var renderer = event.getRenderer(entityType);
-        if (!(renderer instanceof GeoEntityRenderer<?> geoRenderer)) {
+        Object rendererObject = renderer;
+        if (!(rendererObject instanceof GeoEntityRenderer<?> geoRenderer)) {
             LOGGER.debug("JujutsuCraft Mahito renderer is not a GeckoLib GeoEntityRenderer; skipping phase-two adapter");
             return;
         }
