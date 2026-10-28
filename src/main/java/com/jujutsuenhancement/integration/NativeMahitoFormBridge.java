@@ -18,7 +18,7 @@ import org.slf4j.Logger;
  * own phase-two texture. The native entity/model remains owned by JujutsuCraft;
  * this does not replace its skill dispatcher or GeckoLib animation set.
  */
-@Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+// Disabled: the original JujutsuCraft mod is left untouched.
 public final class NativeMahitoFormBridge {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final String MAHITO_CLASS = "net.mcreator.jujutsucraft.entity.MahitoEntity";

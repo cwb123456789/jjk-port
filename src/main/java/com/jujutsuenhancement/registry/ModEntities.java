@@ -2,6 +2,7 @@ package com.jujutsuenhancement.registry;
 
 import com.jujutsuenhancement.JujutsuEnhancement;
 import com.jujutsuenhancement.entity.DomainShrineEntity;
+import com.jujutsuenhancement.entity.GojoAwakenedEntity;
 import com.jujutsuenhancement.entity.HeianSukunaEntity;
 import com.jujutsuenhancement.entity.HollowPurpleEntity;
 import com.jujutsuenhancement.entity.SukunaFlameArrowEntity;
@@ -75,6 +76,14 @@ public final class ModEntities {
                     .clientTrackingRange(10)
                     .updateInterval(1)
                     .build("hollow_purple"));
+
+    public static final RegistryObject<EntityType<GojoAwakenedEntity>> GOJO_AWAKENED =
+            ENTITY_TYPES.register("gojo_awakened", () -> EntityType.Builder
+                    .of(GojoAwakenedEntity::new, MobCategory.CREATURE)
+                    .sized(0.6F, 1.95F)
+                    .clientTrackingRange(10)
+                    .updateInterval(2)
+                    .build("gojo_awakened"));
 
     private ModEntities() {}
 }

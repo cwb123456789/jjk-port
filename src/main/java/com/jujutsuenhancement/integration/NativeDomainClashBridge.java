@@ -25,7 +25,7 @@ import java.util.UUID;
  * Native skill suppression/winner resolution is intentionally not attempted until the base
  * mod's domain lifecycle has been verified in-game.
  */
-@Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+// Disabled: the original JujutsuCraft mod is left untouched.
 public final class NativeDomainClashBridge {
     private static final double CLASH_RADIUS = 32.0D;
     private static final long PAIR_RELEASE_GRACE_TICKS = 10L;

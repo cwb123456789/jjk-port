@@ -23,7 +23,7 @@ public final class ClientModEvents {
     private static final Logger LOGGER = LogUtils.getLogger();
     private ClientModEvents() {}
 
-    @SubscribeEvent
+    // Disabled: the original JujutsuCraft mod is left untouched.
     public static void attachNativeMahitoModel(EntityRenderersEvent.AddLayers event) {
         EntityType<?> registeredType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("jujutsucraft", "mahito"));
         if (registeredType == null) {
@@ -71,6 +71,7 @@ public final class ClientModEvents {
         // The purple is drawn entirely by particles; without any registered renderer the
         // client crashes the moment the entity enters view.
         event.registerEntityRenderer(ModEntities.HOLLOW_PURPLE.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+        event.registerEntityRenderer(ModEntities.GOJO_AWAKENED.get(), GojoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.MALEVOLENT_SHRINE.get(), DomainShrineRenderer::new);
         event.registerEntityRenderer(ModEntities.SUKUNA_FLAME_ARROW.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.HEIAN_SUKUNA.get(), HeianSukunaRenderer::new);

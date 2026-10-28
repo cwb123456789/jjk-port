@@ -302,7 +302,7 @@ public final class PrototypeCommands {
      * a Sukuna-possessed Megumi NPC is within 20 blocks. Class names are checked by
      * string to avoid a hard compile-time dependency on JujutsuCraft internals.
      */
-    @SubscribeEvent
+    // Disabled: the original JujutsuCraft Gojo is left untouched (see GojoAwakenedEntity).
     public static void onLivingTick(LivingEvent.LivingTickEvent event) {
         LivingEntity gojo = event.getEntity();
         if (gojo.level().isClientSide || !(gojo.level() instanceof ServerLevel level)) return;

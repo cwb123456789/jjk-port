@@ -32,7 +32,7 @@ import java.util.UUID;
  *   - otherwise                                              -> normal Purple
  * Native classes are never referenced at compile time; only registry ids and NBT keys.
  */
-@Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+// Disabled: the original JujutsuCraft mod is left untouched.
 public final class NativePurpleBridge {
     private static final ResourceLocation NATIVE_PURPLE = new ResourceLocation("jujutsucraft", "purple");
     private static final String REPLACED_KEY = "jujutsuenhancement_purple_replaced";
