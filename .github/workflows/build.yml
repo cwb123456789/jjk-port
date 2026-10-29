@@ -29,6 +29,14 @@ jobs:
           cp build.log /tmp/out/ || true
           grep -E "error:|warning: \[|FAILED|What went wrong|Caused by|Could not" build.log | head -300 > /tmp/out/errors.txt || true
           cp build/libs/*.jar /tmp/out/ 2>/dev/null || true
+          GJ=$(find ~/.gradle -name 'geckolib-forge-1.20.1-*.jar' ! -name '*sources*' 2>/dev/null | head -1)
+          echo "geckolib jar: $GJ" > /tmp/out/api.txt
+          if [ -n "$GJ" ]; then
+            for c in software.bernie.geckolib.renderer.GeoRenderer software.bernie.geckolib.renderer.GeoEntityRenderer software.bernie.geckolib.renderer.layer.GeoRenderLayer software.bernie.geckolib.cache.object.GeoBone software.bernie.geckolib.cache.object.BakedGeoModel software.bernie.geckolib.model.GeoModel software.bernie.geckolib.core.animation.AnimationState software.bernie.geckolib.core.animation.AnimationController software.bernie.geckolib.core.animation.RawAnimation software.bernie.geckolib.core.animatable.model.CoreGeoBone software.bernie.geckolib.util.RenderUtils; do
+              echo "=== $c" >> /tmp/out/api.txt
+              javap -p -cp "$GJ" "$c" >> /tmp/out/api.txt 2>&1 || true
+            done
+          fi
           echo "${{ steps.build.outcome }}" > /tmp/out/outcome.txt
           cd /tmp/out
           git init -q -b ci-output
