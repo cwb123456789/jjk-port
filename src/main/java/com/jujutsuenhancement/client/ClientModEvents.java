@@ -75,6 +75,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.MAHITO_AWAKENED.get(), MahitoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.SUKUNA_AWAKENED.get(), SukunaAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.YUJI_AWAKENED.get(), YujiAwakenedRenderer::new);
+        event.registerEntityRenderer(ModEntities.HIGURUMA_AWAKENED.get(), HigurumaAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.MALEVOLENT_SHRINE.get(), DomainShrineRenderer::new);
         event.registerEntityRenderer(ModEntities.SUKUNA_FLAME_ARROW.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.HEIAN_SUKUNA.get(), HeianSukunaRenderer::new);

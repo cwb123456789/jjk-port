@@ -5,6 +5,7 @@ import com.jujutsuenhancement.entity.DomainShrineEntity;
 import com.jujutsuenhancement.entity.GojoAwakenedEntity;
 import com.jujutsuenhancement.entity.MahitoAwakenedEntity;
 import com.jujutsuenhancement.entity.SukunaAwakenedEntity;
+import com.jujutsuenhancement.entity.HigurumaAwakenedEntity;
 import com.jujutsuenhancement.entity.YujiAwakenedEntity;
 import com.jujutsuenhancement.entity.HeianSukunaEntity;
 import com.jujutsuenhancement.entity.HollowPurpleEntity;
@@ -111,6 +112,14 @@ public final class ModEntities {
                     .clientTrackingRange(10)
                     .updateInterval(2)
                     .build("yuji_awakened"));
+
+    public static final RegistryObject<EntityType<HigurumaAwakenedEntity>> HIGURUMA_AWAKENED =
+            ENTITY_TYPES.register("higuruma_awakened", () -> EntityType.Builder
+                    .of(HigurumaAwakenedEntity::new, MobCategory.CREATURE)
+                    .sized(0.6F, 1.8F)
+                    .clientTrackingRange(10)
+                    .updateInterval(2)
+                    .build("higuruma_awakened"));
 
     private ModEntities() {}
 }

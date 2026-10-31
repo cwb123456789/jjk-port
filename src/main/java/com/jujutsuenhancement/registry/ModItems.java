@@ -27,5 +27,9 @@ public final class ModItems {
             ITEMS.register("yuji_awakened_spawn_egg",
                     () -> new ForgeSpawnEggItem(ModEntities.YUJI_AWAKENED, 0xE8A0B0, 0x222222, new Item.Properties()));
 
+    public static final RegistryObject<Item> HIGURUMA_AWAKENED_SPAWN_EGG =
+            ITEMS.register("higuruma_awakened_spawn_egg",
+                    () -> new ForgeSpawnEggItem(ModEntities.HIGURUMA_AWAKENED, 0x3A3A44, 0xC9A227, new Item.Properties()));
+
     private ModItems() {}
 }
