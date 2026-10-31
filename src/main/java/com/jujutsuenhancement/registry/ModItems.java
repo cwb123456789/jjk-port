@@ -19,5 +19,9 @@ public final class ModItems {
             ITEMS.register("mahito_awakened_spawn_egg",
                     () -> new ForgeSpawnEggItem(ModEntities.MAHITO_AWAKENED, 0x7C8FB5, 0x3B2A52, new Item.Properties()));
 
+    public static final RegistryObject<Item> SUKUNA_AWAKENED_SPAWN_EGG =
+            ITEMS.register("sukuna_awakened_spawn_egg",
+                    () -> new ForgeSpawnEggItem(ModEntities.SUKUNA_AWAKENED, 0x8B1A1A, 0x111111, new Item.Properties()));
+
     private ModItems() {}
 }

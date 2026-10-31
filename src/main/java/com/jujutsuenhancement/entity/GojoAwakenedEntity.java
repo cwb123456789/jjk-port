@@ -249,7 +249,8 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         Entity best = null;
         double bestDist = Double.MAX_VALUE;
         for (Entity e : level.getEntities(this, box, Entity::isAlive)) {
-            if (!e.getClass().getSimpleName().equals("SukunaFushiguroEntity")) continue;
+            String cn = e.getClass().getSimpleName();
+            if (!cn.equals("SukunaFushiguroEntity") && !cn.equals("SukunaAwakenedEntity")) continue;
             if (!this.hasLineOfSight(e)) continue;
             double d = e.distanceToSqr(this);
             if (d < bestDist) {
