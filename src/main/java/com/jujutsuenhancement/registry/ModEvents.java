@@ -4,6 +4,7 @@ import com.jujutsuenhancement.JujutsuEnhancement;
 import com.jujutsuenhancement.entity.GojoAwakenedEntity;
 import com.jujutsuenhancement.entity.MahitoAwakenedEntity;
 import com.jujutsuenhancement.entity.SukunaAwakenedEntity;
+import com.jujutsuenhancement.entity.YujiAwakenedEntity;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -19,6 +20,7 @@ public final class ModEvents {
         event.put(ModEntities.GOJO_AWAKENED.get(), GojoAwakenedEntity.createAttributes().build());
         event.put(ModEntities.MAHITO_AWAKENED.get(), MahitoAwakenedEntity.createAttributes().build());
         event.put(ModEntities.SUKUNA_AWAKENED.get(), SukunaAwakenedEntity.createAttributes().build());
+        event.put(ModEntities.YUJI_AWAKENED.get(), YujiAwakenedEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -27,6 +29,7 @@ public final class ModEvents {
             event.accept(ModItems.GOJO_AWAKENED_SPAWN_EGG);
             event.accept(ModItems.MAHITO_AWAKENED_SPAWN_EGG);
             event.accept(ModItems.SUKUNA_AWAKENED_SPAWN_EGG);
+            event.accept(ModItems.YUJI_AWAKENED_SPAWN_EGG);
         }
     }
 }

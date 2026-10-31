@@ -105,7 +105,7 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false,
-                e -> (e instanceof Player p && !p.isCreative() && !p.isSpectator()) || e instanceof GojoAwakenedEntity));
+                e -> (e instanceof Player p && !p.isCreative() && !p.isSpectator()) || e instanceof GojoAwakenedEntity || e instanceof YujiAwakenedEntity));
     }
 
     private static final class ChaseGoal extends Goal {
@@ -131,7 +131,7 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
     private boolean isFoe(Entity e) {
         if (!(e instanceof LivingEntity) || e == this || e instanceof SukunaAwakenedEntity) return false;
         if (e instanceof Player p) return !p.isCreative() && !p.isSpectator();
-        return e instanceof GojoAwakenedEntity || e == getTarget();
+        return e instanceof GojoAwakenedEntity || e instanceof YujiAwakenedEntity || e == getTarget();
     }
 
     @Override

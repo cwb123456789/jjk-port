@@ -142,6 +142,19 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
 
     public boolean isStage2() { return entityData.get(STAGE2); }
 
+    private boolean executed;
+
+    public boolean isExecuted() { return executed; }
+
+    /** Held in place (dying pose) while Yuji's execution plays. */
+    public void setExecuted(boolean value) {
+        executed = value;
+        move = null;
+        domainTick = -1;
+        if (level() instanceof ServerLevel s) discardVisuals(s);
+        entityData.set(ANIM, value ? "dying" : "");
+    }
+
     // ------------------------------------------------------------------ AI
 
     @Override
@@ -153,7 +166,7 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false,
-                e -> (e instanceof Player p && !p.isCreative() && !p.isSpectator()) || e instanceof GojoAwakenedEntity));
+                e -> (e instanceof Player p && !p.isCreative() && !p.isSpectator()) || e instanceof GojoAwakenedEntity || e instanceof YujiAwakenedEntity));
     }
 
     private boolean busy() {
@@ -190,6 +203,7 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
 
     private void serverTick(ServerLevel level) {
         long now = level.getGameTime();
+        if (executed) { freeze(); return; }
         if (stage2Tick >= 0) { runStage2(level); return; }
         if (domainTick >= 0) { runDomain(level); return; }
         if (move != null) { runMove(level); return; }
@@ -259,7 +273,7 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
     private boolean isFoe(Entity e) {
         if (!(e instanceof LivingEntity) || e == this || e instanceof MahitoAwakenedEntity) return false;
         if (e instanceof Player p) return !p.isCreative() && !p.isSpectator();
-        return e instanceof GojoAwakenedEntity || e == getTarget();
+        return e instanceof GojoAwakenedEntity || e instanceof YujiAwakenedEntity || e == getTarget();
     }
 
     private void runMove(ServerLevel level) {
@@ -399,7 +413,7 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (stage2Tick >= 0) return false;
+        if (stage2Tick >= 0 || executed) return false;
         return super.hurt(source, amount);
     }
 
@@ -437,7 +451,7 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "main", 3, state -> {
             String anim = entityData.get(ANIM);
-            if (!anim.isEmpty()) return state.setAndContinue(once(anim));
+            if (!anim.isEmpty()) return state.setAndContinue(anim.equals("dying") ? loop(anim) : once(anim));
             boolean moving = state.isMoving();
             if (isStage2()) return state.setAndContinue(loop("2s_domain_idle"));
             return switch (entityData.get(FORM)) {
