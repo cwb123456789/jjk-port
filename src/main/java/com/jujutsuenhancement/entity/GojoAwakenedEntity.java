@@ -42,6 +42,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
+import java.util.UUID;
 import java.util.List;
 
 /**
@@ -89,11 +90,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private static final int PURPLE_NORMAL_FIRE = 455;
     private static final int PURPLE_200_TOTAL = 321;
     private static final int PURPLE_200_FORM = 100;
-    private static final int PURPLE_200_FIRE = 235;
+    private static final int PURPLE_200_FIRE = 240;
     private static final int UNLIMITED_TOTAL = 76;
-    private static final int UNLIMITED_RELEASE = 30;
+    private static final int UNLIMITED_RELEASE = 56;
     private static final int DOMAIN_TOTAL = 370;
-    private static final int DOMAIN_START = 30;
+    private static final int DOMAIN_START = 1;
     private static final int DOMAIN_LENGTH = 200;
     private static final int QUICK_TOTAL = 141;
     private static final int QUICK_START = 4;
@@ -118,8 +119,10 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private long nextDomainTime;
     private long nextQuickDomainTime;
     private boolean casting200ForSukuna;
-    private int domainEndTick;
-    private int domainStartTick;
+    private long domainEndTime;
+    private final java.util.Set<java.util.UUID> frozenMobs = new java.util.HashSet<>();
+    private static final int DOMAIN_DURATION = 900;
+    private static final double DOMAIN_LOCK_RADIUS = 40.0D;
 
     public GojoAwakenedEntity(EntityType<? extends GojoAwakenedEntity> type, Level level) {
         super(type, level);
@@ -205,6 +208,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     }
 
     private void serverTick(ServerLevel level) {
+        tickDomainLock(level);
         if (skill != ANIM_NONE) {
             runSkill(level);
             return;
@@ -278,7 +282,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         this.skillTarget = target;
         this.getNavigation().stop();
         this.entityData.set(ANIM, id);
-        if (id == ANIM_PURPLE_UNLIMITED) this.setShiftKeyDown(true);
+        if (id == ANIM_PURPLE_UNLIMITED) {
+            this.setShiftKeyDown(true);
+            this.setNoGravity(true);
+            this.setPos(getX(), getY() + 2.0D, getZ()); // levitation before the shot
+        }
         this.setTarget(target instanceof LivingEntity le ? le : this.getTarget());
     }
 
@@ -297,6 +305,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         this.skillTarget = null;
         this.casting200ForSukuna = false;
         this.setShiftKeyDown(false);
+        this.setNoGravity(false);
         this.entityData.set(ANIM, ANIM_NONE);
     }
 
@@ -375,7 +384,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         Vec3 dir = aimDirection();
         HollowPurpleEntity purple = ModEntities.HOLLOW_PURPLE.get().create(level);
         if (purple == null) return;
-        Vec3 origin = this.getEyePosition().add(dir.scale(charged ? 5.0D : 3.0D));
+        Vec3 origin = this.getEyePosition().add(dir.scale(charged ? 16.0D : 6.0D));
         purple.setPos(origin.x, origin.y, origin.z);
         if (charged) purple.setCharged200Percent();
         purple.launch(this, dir);
@@ -389,53 +398,77 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private void fireUnlimited(ServerLevel level) {
         HollowPurpleEntity purple = ModEntities.HOLLOW_PURPLE.get().create(level);
         if (purple == null) return;
-        Vec3 origin = this.position().add(0.0D, this.getBbHeight() + 3.0D, 0.0D);
+        Vec3 dir = aimDirection();
+        Vec3 origin = this.getEyePosition().add(dir);
         purple.setPos(origin.x, origin.y, origin.z);
         purple.setUnlimited();
-        purple.launch(this, this.getLookAngle());
+        purple.launch(this, dir);
         level.addFreshEntity(purple);
     }
 
+    /**
+     * Unlimited Void as the Bedrock functions run it: there is no direct damage. Everything in the
+     * domain is locked (Stun/Move/Disabled refreshed every tick) for the whole duration, which
+     * outlives Gojo's own animation. {@code start} is the tick the lock begins (1 for the full
+     * domain, 4 = 0.2 s for the quick domain).
+     */
     private void runDomain(ServerLevel level, int start, int length, int total, long cooldown, int amplifier, float finalDamage) {
         if (skillTick == 1) {
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.HOSTILE, 3.0F, 0.6F);
         }
         if (skillTick == start) {
-            domainStartTick = skillTick;
-            domainEndTick = skillTick + length;
+            domainEndTime = level.getGameTime() + DOMAIN_DURATION;
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.END_PORTAL_SPAWN, SoundSource.HOSTILE, 4.0F, 0.5F);
             level.sendParticles(ParticleTypes.FLASH, getX(), getY() + 1.0D, getZ(), 1, 0, 0, 0, 0);
         }
-        if (skillTick >= start && skillTick < start + length) {
-            List<Entity> victims = level.getEntities(this, this.getBoundingBox().inflate(DOMAIN_RADIUS),
-                    e -> isEnemy(e) && e.distanceToSqr(this) <= DOMAIN_RADIUS * DOMAIN_RADIUS);
-            for (Entity e : victims) {
-                LivingEntity living = (LivingEntity) e;
-                if (skillTick % 10 == 0 || skillTick == start) {
-                    living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 14, amplifier + 3, false, false));
-                    living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 14, 4, false, false));
-                    living.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 14, 4, false, false));
-                    living.addEffect(new MobEffectInstance(MobEffects.JUMP, 14, 128, false, false));
-                }
-                if (skillTick % 20 == 0) {
-                    living.hurt(this.damageSources().indirectMagic(this, this), 2.0F + amplifier);
-                }
-                if (skillTick % 4 == 0) {
-                    level.sendParticles(ParticleTypes.END_ROD, living.getX(), living.getY() + 1.0D, living.getZ(), 3, 0.4D, 0.6D, 0.4D, 0.01D);
+        if (skillTick >= total) {
+            endSkill(Math.max(0L, domainEndTime - level.getGameTime()) + cooldown);
+        }
+    }
+
+    /** Keeps every enemy inside the domain frozen until it ends. */
+    private void tickDomainLock(ServerLevel level) {
+        long now = level.getGameTime();
+        if (now >= domainEndTime) {
+            releaseFrozen(level);
+            return;
+        }
+        for (Entity e : level.getEntities(this, getBoundingBox().inflate(DOMAIN_LOCK_RADIUS),
+                x -> isEnemy(x) && x.distanceToSqr(this) <= DOMAIN_LOCK_RADIUS * DOMAIN_LOCK_RADIUS)) {
+            LivingEntity living = (LivingEntity) e;
+            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6, 99, false, false));
+            living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 6, 9, false, false));
+            living.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 6, 9, false, false));
+            living.addEffect(new MobEffectInstance(MobEffects.JUMP, 6, 128, false, false));
+            if (living instanceof Mob mob) {
+                mob.setTarget(null);
+                if (!mob.isNoAi()) {
+                    mob.setNoAi(true);
+                    frozenMobs.add(mob.getUUID());
                 }
             }
-            if (skillTick % 2 == 0) {
-                level.sendParticles(ParticleTypes.END_ROD, getX(), getY() + 1.0D, getZ(), 24, DOMAIN_RADIUS / 2.0D, 6.0D, DOMAIN_RADIUS / 2.0D, 0.02D);
+            if (now % 10 == 0) {
+                level.sendParticles(ParticleTypes.END_ROD, living.getX(), living.getY() + 1.0D, living.getZ(), 3, 0.3D, 0.6D, 0.3D, 0.01D);
             }
         }
-        if (skillTick == start + length) {
-            for (Entity e : level.getEntities(this, this.getBoundingBox().inflate(DOMAIN_RADIUS),
-                    x -> isEnemy(x) && x.distanceToSqr(this) <= DOMAIN_RADIUS * DOMAIN_RADIUS)) {
-                e.hurt(this.damageSources().indirectMagic(this, this), finalDamage);
-            }
-            level.playSound(null, getX(), getY(), getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 3.0F, 0.6F);
+    }
+
+    private void releaseFrozen(ServerLevel level) {
+        if (frozenMobs.isEmpty()) return;
+        for (UUID id : frozenMobs) {
+            Entity e = level.getEntity(id);
+            if (e instanceof Mob mob) mob.setNoAi(false);
         }
-        if (skillTick >= total) endSkill(cooldown);
+        frozenMobs.clear();
+    }
+
+    @Override
+    public void remove(Entity.RemovalReason reason) {
+        if (this.level() instanceof ServerLevel server && reason != Entity.RemovalReason.UNLOADED_TO_CHUNK
+                && reason != Entity.RemovalReason.UNLOADED_WITH_PLAYER) {
+            releaseFrozen(server);
+        }
+        super.remove(reason);
     }
 
     private void runAttack(ServerLevel level) {

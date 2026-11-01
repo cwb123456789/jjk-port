@@ -1,8 +1,8 @@
 package com.jujutsuenhancement.entity;
 
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import org.joml.Vector3f;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -10,26 +10,39 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
-import java.util.UUID;
-import java.util.HashSet;
-import java.util.Set;
+import org.joml.Vector3f;
 
-/** Server-authoritative first-pass Hollow Purple projectile prototype. */
+import java.util.UUID;
+
+/**
+ * Hollow Purple projectile, ported from the Bedrock "Jujutsu Awakening" functions
+ * (limitless/hollow_purple, 200hollow_purple, imaginary_purple and the script-driven
+ * ds:shootprojectile motion).
+ *
+ * Normal   : 4 blocks/tick for 98 ticks. Every tick 40 damage within 7 blocks and 5 damage within 15.
+ * 200%     : 1.65 blocks/tick for 12 ticks, then 5 blocks/tick up to 58 ticks total.
+ *            Every tick 300 damage within 17 blocks (+10 bypassing invulnerability).
+ * Unlimited: 4 blocks/tick for 40 ticks. Every tick 200 damage within 4 blocks, and every living
+ *            thing within 64 blocks is frozen (heavy slowness) while it exists.
+ * All three erase terrain along their path when mob griefing is on (the "griefable" tag).
+ */
 public final class HollowPurpleEntity extends Entity {
-    private UUID ownerUuid;
-    private int age;
-    private final Set<UUID> hitEntities = new HashSet<>();
-    private double speed = 1.35D;
-    private float damage = 40.0F;
-    private double hitRadius = 2.0D;
+    private enum Mode { NORMAL, CHARGED, UNLIMITED }
+
     private static final DustParticleOptions PURPLE_CORE = new DustParticleOptions(new Vector3f(0.42F, 0.08F, 0.95F), 1.8F);
     private static final DustParticleOptions BLUE_EDGE = new DustParticleOptions(new Vector3f(0.12F, 0.38F, 1.0F), 1.15F);
     private static final DustParticleOptions WHITE_CORE = new DustParticleOptions(new Vector3f(0.92F, 0.88F, 1.0F), 0.8F);
+
+    private UUID ownerUuid;
+    private int age;
+    private Mode mode = Mode.NORMAL;
 
     public HollowPurpleEntity(EntityType<? extends HollowPurpleEntity> type, Level level) {
         super(type, level);
@@ -37,213 +50,161 @@ public final class HollowPurpleEntity extends Entity {
         this.setNoGravity(true);
     }
 
-    /** Unlimited (imaginary) Purple: stationary charge that detonates in a large sphere. */
-    private boolean unlimited = false;
-    private static final double UNLIMITED_RADIUS = 24.0D;
-    private static final int UNLIMITED_CHARGE_TICKS = 24;
+    public void setUnlimited() { mode = Mode.UNLIMITED; }
 
-    public void setUnlimited() {
-        this.unlimited = true;
-        this.damage = 300.0F;
-    }
-
-    public void setCharged200Percent() {
-        this.speed = 1.8D;
-        this.damage = 80.0F;
-        this.hitRadius = 3.0D;
-    }
+    public void setCharged200Percent() { mode = Mode.CHARGED; }
 
     public void launch(Entity owner, Vec3 direction) {
         this.ownerUuid = owner == null ? null : owner.getUUID();
-        Vec3 velocity = direction.normalize().scale(speed);
-        this.setDeltaMovement(velocity);
-        this.setYRot((float)(Math.atan2(velocity.z, velocity.x) * 180.0D / Math.PI) - 90.0F);
-        this.setXRot((float)(-Math.atan2(velocity.y, Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z)) * 180.0D / Math.PI));
+        Vec3 dir = direction.normalize();
+        this.setDeltaMovement(dir);
+        this.setYRot((float) (Math.atan2(dir.z, dir.x) * 180.0D / Math.PI) - 90.0F);
+        this.setXRot((float) (-Math.atan2(dir.y, Math.sqrt(dir.x * dir.x + dir.z * dir.z)) * 180.0D / Math.PI));
     }
 
-    @Override public void tick() {
+    private int lifetime() {
+        return switch (mode) { case NORMAL -> 98; case CHARGED -> 58; case UNLIMITED -> 40; };
+    }
+
+    private double speedNow() {
+        return switch (mode) {
+            case NORMAL, UNLIMITED -> 4.0D;
+            case CHARGED -> age <= 12 ? 1.65D : 5.0D;
+        };
+    }
+
+    @Override
+    public void tick() {
         super.tick();
         age++;
-        if (unlimited) {
-            tickUnlimited();
+        Vec3 dir = getDeltaMovement();
+        if (dir.lengthSqr() < 1.0E-6D) dir = getLookAngle();
+        dir = dir.normalize();
+        setDeltaMovement(dir);
+
+        if (level().isClientSide) {
+            clientParticles();
             return;
         }
-        Vec3 from = this.position();
-        Vec3 movement = this.getDeltaMovement();
-        Vec3 to = from.add(movement);
-        if (this.level().isClientSide) {
-            // Client-side layered core and orbiting motes; these are a Forge approximation,
-            // not a direct execution of Bedrock's particle controller format.
-            double phase = age * 0.42D;
-            for (int i = 0; i < 3; i++) {
-                double angle = phase + (Math.PI * 2.0D * i / 3.0D);
-                double radius = 0.48D + 0.08D * Math.sin(phase * 0.7D + i);
-                this.level().addParticle(PURPLE_CORE,
-                    getX() + Math.cos(angle) * radius,
-                    getY() + Math.sin(angle * 1.35D) * radius * 0.7D,
-                    getZ() + Math.sin(angle) * radius,
-                    0.0D, 0.015D, 0.0D);
-                this.level().addParticle(BLUE_EDGE,
-                    getX() + (this.random.nextDouble() - 0.5D) * 0.72D,
-                    getY() + (this.random.nextDouble() - 0.5D) * 0.72D,
-                    getZ() + (this.random.nextDouble() - 0.5D) * 0.72D,
-                    0.0D, 0.01D, 0.0D);
+        if (!(level() instanceof ServerLevel server)) return;
+        if (age > lifetime() || !server.hasChunkAt(blockPosition())) {
+            finish(server);
+            return;
+        }
+        Vec3 from = position();
+        Vec3 to = from.add(dir.scale(speedNow()));
+        setPos(to.x, to.y, to.z);
+
+        Entity owner = ownerUuid == null ? null : server.getEntity(ownerUuid);
+        switch (mode) {
+            case NORMAL -> {
+                hurtWithin(server, owner, 15.0D, 5.0F);
+                hurtWithin(server, owner, 7.0D, 40.0F);
+                destroyTerrain(server, 3);
             }
-            this.level().addParticle(WHITE_CORE, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
-            for (int i = 0; i < 2; i++) {
-                this.level().addParticle(ParticleTypes.PORTAL,
-                    this.getX() + (this.random.nextDouble() - 0.5D) * 1.0D,
-                    this.getY() + (this.random.nextDouble() - 0.5D) * 1.0D,
-                    this.getZ() + (this.random.nextDouble() - 0.5D) * 1.0D,
-                    (this.random.nextDouble() - 0.5D) * 0.08D, 0.015D,
-                    (this.random.nextDouble() - 0.5D) * 0.08D);
+            case CHARGED -> {
+                hurtWithin(server, owner, 17.0D, 300.0F);
+                destroyTerrain(server, 7);
             }
-        } else if (this.level() instanceof ServerLevel server) {
-            // Recreate the Bedrock pack's layered Hollow Purple silhouette with vanilla
-            // particle primitives: a bright core, a blue/purple shell, and a segmented trail.
-            // The 200% variant gets a wider and denser trail; this is an approximation,
-            // because Bedrock's custom particle JSON cannot run directly on Forge.
-            boolean charged = damage >= 80.0F;
-            int trailSegments = charged ? 6 : 4;
-            for (int i = 0; i < trailSegments; i++) {
-                double t = (i + 1.0D) / (trailSegments + 1.0D);
-                double px = from.x + (to.x - from.x) * t;
-                double py = from.y + (to.y - from.y) * t;
-                double pz = from.z + (to.z - from.z) * t;
-                server.sendParticles(PURPLE_CORE, px, py, pz, charged ? 3 : 2,
-                        charged ? 0.34D : 0.20D, charged ? 0.34D : 0.20D,
-                        charged ? 0.34D : 0.20D, 0.008D);
-                server.sendParticles(BLUE_EDGE, px, py, pz, 1,
-                        charged ? 0.40D : 0.24D, charged ? 0.40D : 0.24D,
-                        charged ? 0.40D : 0.24D, 0.012D);
-            }
-            server.sendParticles(PURPLE_CORE, getX(), getY(), getZ(), charged ? 10 : 6,
-                    charged ? 0.36D : 0.24D, charged ? 0.36D : 0.24D,
-                    charged ? 0.36D : 0.24D, 0.012D);
-            server.sendParticles(BLUE_EDGE, getX(), getY(), getZ(), charged ? 8 : 4,
-                    charged ? 0.48D : 0.30D, charged ? 0.48D : 0.30D,
-                    charged ? 0.48D : 0.30D, 0.018D);
-            server.sendParticles(WHITE_CORE, getX(), getY(), getZ(), charged ? 3 : 1,
-                    0.10D, 0.10D, 0.10D, 0.0D);
-            HitResult hit = this.level().clip(new net.minecraft.world.level.ClipContext(from, to,
-                net.minecraft.world.level.ClipContext.Block.COLLIDER,
-                net.minecraft.world.level.ClipContext.Fluid.NONE, this));
-            // Sweep the projectile's path rather than damaging every entity in a large box.
-            // This prevents the purple from hitting targets far to the side or through a wall.
-            AABB area = this.getBoundingBox().expandTowards(movement).inflate(hitRadius);
-            Entity owner = ownerUuid == null ? null : server.getEntity(ownerUuid);
-            double segmentLengthSqr = movement.lengthSqr();
-            double blockDistanceSqr = hit.getType() == HitResult.Type.BLOCK
-                    ? from.distanceToSqr(hit.getLocation()) : Double.POSITIVE_INFINITY;
-            for (Entity target : this.level().getEntities(this, area, e -> e.isAlive() && e.isPickable()
-                    && (ownerUuid == null || !ownerUuid.equals(e.getUUID()))
-                    && !hitEntities.contains(e.getUUID()))) {
-                // A projectile should not damage the shooter's allies while sweeping through a crowd.
-                // Keep the UUID check above as well, because not every entity reports itself as allied.
-                if (owner != null && owner.isAlliedTo(target)) continue;
-                Vec3 toTarget = target.getBoundingBox().getCenter().subtract(from);
-                double t = segmentLengthSqr < 1.0E-9D ? 0.0D
-                        : Math.max(0.0D, Math.min(1.0D, toTarget.dot(movement) / segmentLengthSqr));
-                Vec3 closest = from.add(movement.scale(t));
-                // Do not apply the hit to an entity beyond the first blocking block.
-                if (closest.distanceToSqr(target.getBoundingBox().getCenter()) > hitRadius * hitRadius) continue;
-                if (closest.distanceToSqr(from) > blockDistanceSqr) continue;
-                hitEntities.add(target.getUUID());
-                // Preserve both projectile and living owner in the damage source so kill
-                // attribution, combat logs, and owner-based damage hooks can identify Gojo.
-                // If the owner is temporarily unloaded, keep a safe generic magic fallback.
-                if (owner != null) {
-                    target.hurt(this.damageSources().indirectMagic(this, owner), damage);
-                } else {
-                    target.hurt(this.damageSources().magic(), damage);
-                }
-            }
-            if (hit.getType() == HitResult.Type.BLOCK || age >= 100) {
-                // Put the impact burst at the actual ray-traced block contact, not at
-                // the projectile's previous tick position. This keeps the visual burst
-                // on the near side of walls and avoids appearing to pass through them.
-                Vec3 impact = hit.getType() == HitResult.Type.BLOCK ? hit.getLocation() : to;
-                this.setPos(impact.x, impact.y, impact.z);
-                server.sendParticles(PURPLE_CORE, impact.x, impact.y, impact.z, 36, 1.0D, 1.0D, 1.0D, 0.12D);
-                server.sendParticles(BLUE_EDGE, impact.x, impact.y, impact.z, 24, 0.9D, 0.9D, 0.9D, 0.08D);
-                server.sendParticles(WHITE_CORE, impact.x, impact.y, impact.z, 12, 0.6D, 0.6D, 0.6D, 0.04D);
-                server.sendParticles(ParticleTypes.EXPLOSION, impact.x, impact.y, impact.z, 3, 0.5D, 0.5D, 0.5D, 0.02D);
-                server.sendParticles(ParticleTypes.PORTAL, impact.x, impact.y, impact.z, 24, 0.8D, 0.8D, 0.8D, 0.18D);
-                discard();
-                return;
+            case UNLIMITED -> {
+                freezeEverything(server, owner);
+                hurtWithin(server, owner, 4.0D, 200.0F);
+                destroyTerrain(server, 2);
             }
         }
-        this.setPos(to.x, to.y, to.z);
-        if (age >= 100) discard();
+        serverParticles(server, from, to);
     }
 
-    private void tickUnlimited() {
-        this.setDeltaMovement(Vec3.ZERO);
-        double progress = Math.min(1.0D, age / (double) UNLIMITED_CHARGE_TICKS);
-        if (this.level().isClientSide) {
-            double r = 0.6D + progress * 2.4D;
-            for (int i = 0; i < 6; i++) {
-                double a = this.random.nextDouble() * Math.PI * 2.0D;
-                double b = (this.random.nextDouble() - 0.5D) * Math.PI;
-                this.level().addParticle(PURPLE_CORE,
-                        getX() + Math.cos(a) * Math.cos(b) * r,
-                        getY() + Math.sin(b) * r,
-                        getZ() + Math.sin(a) * Math.cos(b) * r, 0.0D, 0.0D, 0.0D);
-            }
-            this.level().addParticle(WHITE_CORE, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
-            return;
+    private void hurtWithin(ServerLevel server, Entity owner, double radius, float amount) {
+        AABB box = getBoundingBox().inflate(radius);
+        for (LivingEntity target : server.getEntitiesOfClass(LivingEntity.class, box, e -> e.isAlive() && e != owner
+                && !(e instanceof GojoAwakenedEntity) && e.distanceToSqr(this) <= radius * radius)) {
+            // Bedrock uses "damage ... override", which ignores invulnerability frames.
+            target.invulnerableTime = 0;
+            DamageSource source = owner != null ? damageSources().indirectMagic(this, owner) : damageSources().magic();
+            target.hurt(source, amount);
         }
-        if (!(this.level() instanceof ServerLevel server)) return;
-        if (age < UNLIMITED_CHARGE_TICKS) {
-            double r = 0.6D + progress * 2.4D;
-            server.sendParticles(PURPLE_CORE, getX(), getY(), getZ(), 14, r, r, r, 0.02D);
-            server.sendParticles(BLUE_EDGE, getX(), getY(), getZ(), 8, r, r, r, 0.03D);
-            if (age % 6 == 0) {
-                server.playSound(null, getX(), getY(), getZ(), net.minecraft.sounds.SoundEvents.BEACON_POWER_SELECT,
-                        net.minecraft.sounds.SoundSource.HOSTILE, 1.5F, 0.5F + (float) progress);
-            }
-            return;
+    }
+
+    /** imaginary_purple: Stun/Camera 20, slowness 30 and slow falling on everything within 64 blocks. */
+    private void freezeEverything(ServerLevel server, Entity owner) {
+        double r = 64.0D;
+        AABB box = getBoundingBox().inflate(r);
+        for (LivingEntity target : server.getEntitiesOfClass(LivingEntity.class, box, e -> e.isAlive() && e != owner
+                && !(e instanceof GojoAwakenedEntity) && e.distanceToSqr(this) <= r * r)) {
+            target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 20, 10, false, false));
+            target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    net.minecraft.world.effect.MobEffects.SLOW_FALLING, 20, 0, false, false));
         }
-        Entity owner = ownerUuid == null ? null : server.getEntity(ownerUuid);
-        AABB area = new AABB(getX() - UNLIMITED_RADIUS, getY() - UNLIMITED_RADIUS, getZ() - UNLIMITED_RADIUS,
-                getX() + UNLIMITED_RADIUS, getY() + UNLIMITED_RADIUS, getZ() + UNLIMITED_RADIUS);
-        for (Entity target : server.getEntities(this, area, e -> e.isAlive() && e != this)) {
-            if (!(target instanceof net.minecraft.world.entity.LivingEntity)) continue;
-            if (owner != null && (target == owner || owner.isAlliedTo(target))) continue;
-            if (target.distanceToSqr(this) > UNLIMITED_RADIUS * UNLIMITED_RADIUS) continue;
-            if (owner != null) {
-                target.hurt(this.damageSources().indirectMagic(this, owner), damage);
-            } else {
-                target.hurt(this.damageSources().magic(), damage);
+    }
+
+    /** The "griefable" spheres: erase blocks around the projectile when mob griefing is allowed. */
+    private void destroyTerrain(ServerLevel server, int radius) {
+        if (!server.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) return;
+        BlockPos center = blockPosition().above(2);
+        int r2 = radius * radius;
+        for (int dx = -radius; dx <= radius; dx++) {
+            for (int dy = -radius; dy <= radius; dy++) {
+                for (int dz = -radius; dz <= radius; dz++) {
+                    if (dx * dx + dy * dy + dz * dz > r2) continue;
+                    BlockPos pos = center.offset(dx, dy, dz);
+                    if (pos.getY() < server.getMinBuildHeight() || pos.getY() >= server.getMaxBuildHeight()) continue;
+                    BlockState state = server.getBlockState(pos);
+                    if (state.isAir() || state.getDestroySpeed(server, pos) < 0.0F) continue;
+                    server.setBlock(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2 | 16);
+                }
             }
         }
-        // Block damage follows the mobGriefing rule via ExplosionInteraction.MOB.
-        server.explode(owner, getX(), getY(), getZ(), 8.0F, Level.ExplosionInteraction.MOB);
-        server.sendParticles(PURPLE_CORE, getX(), getY(), getZ(), 220, 8.0D, 8.0D, 8.0D, 0.25D);
-        server.sendParticles(BLUE_EDGE, getX(), getY(), getZ(), 160, 8.0D, 8.0D, 8.0D, 0.2D);
-        server.sendParticles(WHITE_CORE, getX(), getY(), getZ(), 80, 4.0D, 4.0D, 4.0D, 0.1D);
-        server.sendParticles(ParticleTypes.EXPLOSION_EMITTER, getX(), getY(), getZ(), 3, 3.0D, 3.0D, 3.0D, 0.0D);
-        server.playSound(null, getX(), getY(), getZ(), net.minecraft.sounds.SoundEvents.GENERIC_EXPLODE,
-                net.minecraft.sounds.SoundSource.HOSTILE, 4.0F, 0.5F);
+    }
+
+    private void finish(ServerLevel server) {
+        server.sendParticles(PURPLE_CORE, getX(), getY(), getZ(), 40, 1.5D, 1.5D, 1.5D, 0.12D);
+        server.sendParticles(WHITE_CORE, getX(), getY(), getZ(), 12, 0.6D, 0.6D, 0.6D, 0.04D);
         discard();
     }
 
+    private void serverParticles(ServerLevel server, Vec3 from, Vec3 to) {
+        double size = switch (mode) { case NORMAL -> 1.2D; case CHARGED -> 3.0D; case UNLIMITED -> 1.0D; };
+        int segments = 4;
+        for (int i = 0; i < segments; i++) {
+            double t = (i + 1.0D) / (segments + 1.0D);
+            double px = from.x + (to.x - from.x) * t;
+            double py = from.y + (to.y - from.y) * t;
+            double pz = from.z + (to.z - from.z) * t;
+            server.sendParticles(PURPLE_CORE, px, py, pz, 5, size * 0.5D, size * 0.5D, size * 0.5D, 0.01D);
+            server.sendParticles(BLUE_EDGE, px, py, pz, 3, size * 0.6D, size * 0.6D, size * 0.6D, 0.02D);
+        }
+        server.sendParticles(WHITE_CORE, to.x, to.y, to.z, 3, size * 0.2D, size * 0.2D, size * 0.2D, 0.0D);
+    }
+
+    private void clientParticles() {
+        double size = switch (mode) { case NORMAL -> 0.9D; case CHARGED -> 2.5D; case UNLIMITED -> 0.8D; };
+        double phase = age * 0.42D;
+        for (int i = 0; i < 3; i++) {
+            double angle = phase + (Math.PI * 2.0D * i / 3.0D);
+            double radius = size * (0.5D + 0.08D * Math.sin(phase * 0.7D + i));
+            level().addParticle(PURPLE_CORE, getX() + Math.cos(angle) * radius, getY() + Math.sin(angle * 1.35D) * radius * 0.7D,
+                    getZ() + Math.sin(angle) * radius, 0.0D, 0.015D, 0.0D);
+            level().addParticle(BLUE_EDGE, getX() + (random.nextDouble() - 0.5D) * size, getY() + (random.nextDouble() - 0.5D) * size,
+                    getZ() + (random.nextDouble() - 0.5D) * size, 0.0D, 0.01D, 0.0D);
+        }
+        level().addParticle(WHITE_CORE, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
+    }
+
     @Override protected void defineSynchedData() {}
+
     @Override protected void readAdditionalSaveData(CompoundTag tag) {
         if (tag.hasUUID("Owner")) ownerUuid = tag.getUUID("Owner");
         age = tag.getInt("Age");
-        speed = tag.contains("Speed") ? tag.getDouble("Speed") : 1.35D;
-        damage = tag.contains("Damage") ? tag.getFloat("Damage") : 40.0F;
-        hitRadius = tag.contains("HitRadius") ? tag.getDouble("HitRadius") : 2.0D;
-        unlimited = tag.getBoolean("Unlimited");
+        mode = Mode.values()[Math.floorMod(tag.getInt("Mode"), Mode.values().length)];
     }
+
     @Override protected void addAdditionalSaveData(CompoundTag tag) {
         if (ownerUuid != null) tag.putUUID("Owner", ownerUuid);
         tag.putInt("Age", age);
-        tag.putDouble("Speed", speed);
-        tag.putFloat("Damage", damage);
-        tag.putDouble("HitRadius", hitRadius);
-        tag.putBoolean("Unlimited", unlimited);
+        tag.putInt("Mode", mode.ordinal());
     }
+
     @Override public Packet<ClientGamePacketListener> getAddEntityPacket() { return NetworkHooks.getEntitySpawningPacket(this); }
 }
