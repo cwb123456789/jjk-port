@@ -132,6 +132,7 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
 
     private boolean isFoe(Entity e) {
         if (!(e instanceof LivingEntity) || e == this || e instanceof SukunaAwakenedEntity) return false;
+        if (e == getTarget()) return true;
         if (e instanceof Player p) return !p.isCreative() && !p.isSpectator();
         return e instanceof GojoAwakenedEntity || e instanceof YujiAwakenedEntity || e instanceof HigurumaAwakenedEntity || e == getTarget();
     }

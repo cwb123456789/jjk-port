@@ -1,7 +1,7 @@
 package com.jujutsuenhancement.integration;
 
 import com.jujutsuenhancement.JujutsuEnhancement;
-import com.jujutsuenhancement.entity.AwakenedCaster;
+import com.jujutsuenhancement.entity.TestCastable;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -34,7 +34,7 @@ public final class AwakenedCommands {
                         .then(Commands.argument("skill", StringArgumentType.word())
                                 .suggests((ctx, builder) -> {
                                     Mob m = nearest(ctx.getSource());
-                                    if (m instanceof AwakenedCaster c) return SharedSuggestionProvider.suggest(c.skillNames(), builder);
+                                    if (m instanceof TestCastable c) return SharedSuggestionProvider.suggest(c.castableSkills(), builder);
                                     return builder.buildFuture();
                                 })
                                 .executes(ctx -> cast(ctx.getSource(), StringArgumentType.getString(ctx, "skill"))))));
@@ -43,17 +43,17 @@ public final class AwakenedCommands {
     private static Mob nearest(CommandSourceStack src) {
         if (!(src.getEntity() instanceof ServerPlayer player)) return null;
         List<Mob> mobs = player.level().getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(48.0D),
-                e -> e instanceof AwakenedCaster && e.isAlive());
+                e -> e instanceof TestCastable && e.isAlive());
         return mobs.stream().min(Comparator.comparingDouble(e -> e.distanceToSqr(player))).orElse(null);
     }
 
     private static int skills(CommandSourceStack src) {
         Mob m = nearest(src);
-        if (!(m instanceof AwakenedCaster c)) {
+        if (!(m instanceof TestCastable c)) {
             src.sendFailure(Component.literal("48 格内没有觉醒版角色"));
             return 0;
         }
-        src.sendSuccess(() -> Component.literal(m.getName().getString() + " 的技能: " + String.join(", ", c.skillNames())), false);
+        src.sendSuccess(() -> Component.literal(m.getName().getString() + " 的技能: " + String.join(", ", c.castableSkills())), false);
         return 1;
     }
 
@@ -70,7 +70,7 @@ public final class AwakenedCommands {
 
     private static int cast(CommandSourceStack src, String skill) {
         Mob m = nearest(src);
-        if (!(m instanceof AwakenedCaster c) || !(src.getEntity() instanceof ServerPlayer player)) {
+        if (!(m instanceof TestCastable c) || !(src.getEntity() instanceof ServerPlayer player)) {
             src.sendFailure(Component.literal("48 格内没有觉醒版角色"));
             return 0;
         }

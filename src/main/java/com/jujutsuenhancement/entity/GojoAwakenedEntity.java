@@ -170,8 +170,8 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     /** Whether a target of one of this Gojo's techniques should be hurt. */
     public boolean isEnemy(Entity e) {
         if (!(e instanceof LivingEntity living) || e == this || e instanceof GojoAwakenedEntity) return false;
-        if (living instanceof Player p && (p.isCreative() || p.isSpectator())) return false;
         if (living == getTarget()) return true;
+        if (living instanceof Player p && (p.isCreative() || p.isSpectator())) return false;
         if (living instanceof Mob m && m.getTarget() == this) return true;
         return isHostileCandidate(living);
     }
