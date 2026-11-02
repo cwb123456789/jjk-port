@@ -9,6 +9,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -44,7 +46,7 @@ import java.util.Map;
  * Black Flashes build a streak (higher chance, higher damage). Executes a weakened Mahito
  * with the Bedrock "enraged Yuji vs Mahito" sequence.
  */
-public final class YujiAwakenedEntity extends PathfinderMob implements GeoEntity {
+public final class YujiAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(YujiAwakenedEntity.class, EntityDataSerializers.STRING);
     private static final Map<String, RawAnimation> CACHE = new HashMap<>();
@@ -184,7 +186,7 @@ public final class YujiAwakenedEntity extends PathfinderMob implements GeoEntity
             Vec3 look = getLookAngle().multiply(1, 0, 1).normalize();
             boolean landed = false;
             for (Entity e : level.getEntities(this, getBoundingBox().inflate(move.reach()),
-                    x -> x instanceof LivingEntity le && isCurse(le))) {
+                    x -> x instanceof LivingEntity le && (isCurse(le) || le == getTarget()))) {
                 Vec3 to = e.position().subtract(position()).multiply(1, 0, 1);
                 if (to.lengthSqr() > 1.0E-4D && to.normalize().dot(look) < 0.2D) continue;
                 landed = true;
@@ -277,6 +279,38 @@ public final class YujiAwakenedEntity extends PathfinderMob implements GeoEntity
     }
 
     @Override public boolean removeWhenFarAway(double distance) { return false; }
+
+    @Override
+    public java.util.List<String> castableSkills() {
+        java.util.List<String> names = new java.util.ArrayList<>();
+        for (Move m : COMBO) names.add(m.anim());
+        for (Move m : SKILLS) names.add(m.anim());
+        return names;
+    }
+
+    @Override
+    public boolean cast(String name, LivingEntity target) {
+        if (busy() || !(level() instanceof ServerLevel)) return false;
+        for (Move[] group : new Move[][] {COMBO, SKILLS}) {
+            for (Move m : group) {
+                if (m.anim().equals(name)) {
+                    move = m;
+                    moveTick = 0;
+                    moveHit = false;
+                    getNavigation().stop();
+                    entityData.set(ANIM, m.anim());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        return TestCastable.interact(this, player, hand);
+    }
+
 
     @Override
     protected void defineSynchedData() {

@@ -9,6 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -49,7 +51,7 @@ import java.util.Map;
  * Awakened Higuruma: gavel combat, the Deadly Sentencing trial domain, then the
  * Executioner's Sword (new skill set) for a limited time after a guilty verdict.
  */
-public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEntity {
+public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(HigurumaAwakenedEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Boolean> SWORD =
@@ -166,7 +168,7 @@ public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEn
     }
 
     private boolean isFoe(Entity e) {
-        return e instanceof LivingEntity le && le != this && isCurse(le);
+        return e instanceof LivingEntity le && le != this && (isCurse(le) || le == getTarget());
     }
 
     @Override
@@ -318,6 +320,46 @@ public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEn
     }
 
     @Override public boolean removeWhenFarAway(double distance) { return false; }
+
+    @Override
+    public java.util.List<String> castableSkills() {
+        java.util.List<String> names = new java.util.ArrayList<>();
+        for (Move[] group : new Move[][] {GAVEL_COMBO, GAVEL_SKILL, SWORD_COMBO, SWORD_SKILL}) {
+            for (Move m : group) names.add(m.anim());
+        }
+        names.add("domain");
+        return names;
+    }
+
+    @Override
+    public boolean cast(String name, LivingEntity target) {
+        if (busy() || !(level() instanceof ServerLevel)) return false;
+        if (name.equals("domain")) {
+            domainTick = 0;
+            getNavigation().stop();
+            entityData.set(ANIM, "domain");
+            return true;
+        }
+        for (Move[] group : new Move[][] {GAVEL_COMBO, GAVEL_SKILL, SWORD_COMBO, SWORD_SKILL}) {
+            for (Move m : group) {
+                if (m.anim().equals(name)) {
+                    move = m;
+                    moveTick = 0;
+                    moveHit = false;
+                    getNavigation().stop();
+                    entityData.set(ANIM, m.anim());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        return TestCastable.interact(this, player, hand);
+    }
+
 
     @Override
     protected void defineSynchedData() {

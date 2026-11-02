@@ -9,6 +9,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -42,7 +44,7 @@ import java.util.Map;
  * Skills: combo, Dismantle, Cleave, Fuga "Open" (flame arrow), "Furnace" (flame volley),
  * Malevolent Shrine, and the possession cutscene on first contact.
  */
-public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEntity {
+public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(SukunaAwakenedEntity.class, EntityDataSerializers.STRING);
 
@@ -346,6 +348,26 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
     }
 
     @Override public boolean removeWhenFarAway(double distance) { return false; }
+
+    @Override
+    public java.util.List<String> castableSkills() {
+        return java.util.List.of("attack1", "attack2", "attack3", "attack4", "attack5",
+                "dismantle", "cleave", "fuga", "furnace", "shrine", "possession");
+    }
+
+    @Override
+    public boolean cast(String name, LivingEntity target) {
+        if (!skill.isEmpty() || !castableSkills().contains(name)) return false;
+        if (!name.equals("possession")) possessed = true;
+        start(name);
+        return true;
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        return TestCastable.interact(this, player, hand);
+    }
+
 
     @Override
     protected void defineSynchedData() {

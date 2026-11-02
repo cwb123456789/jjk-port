@@ -11,6 +11,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -56,7 +58,7 @@ import java.util.List;
  *   domain        : 18.5 s animation, 10 s of stun inside the domain
  *   quick domain  : 7.025 s animation, domain starts after 0.2 s
  */
-public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity {
+public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
     // --- animation state ids (synced to clients) ---
     public static final int ANIM_NONE = 0;
     public static final int ANIM_PURPLE_NORMAL = 1;
@@ -501,6 +503,40 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     }
 
     @Override public boolean removeWhenFarAway(double distance) { return false; }
+
+    @Override
+    public java.util.List<String> castableSkills() {
+        return java.util.List.of("purple", "purple200", "unlimited", "domain", "quick_domain",
+                "attack1", "attack2", "attack3", "attack4", "attack5");
+    }
+
+    @Override
+    public boolean cast(String name, LivingEntity target) {
+        if (skill != ANIM_NONE || !(level() instanceof ServerLevel)) return false;
+        int id = switch (name) {
+            case "purple" -> ANIM_PURPLE_NORMAL;
+            case "purple200" -> ANIM_PURPLE_200;
+            case "unlimited" -> ANIM_PURPLE_UNLIMITED;
+            case "domain" -> ANIM_DOMAIN;
+            case "quick_domain" -> ANIM_DOMAIN_QUICK;
+            case "attack1" -> ANIM_ATTACK_BASE + 1;
+            case "attack2" -> ANIM_ATTACK_BASE + 2;
+            case "attack3" -> ANIM_ATTACK_BASE + 3;
+            case "attack4" -> ANIM_ATTACK_BASE + 4;
+            case "attack5" -> ANIM_ATTACK_BASE + 5;
+            default -> -1;
+        };
+        if (id < 0) return false;
+        casting200ForSukuna = false;
+        startSkill(id, target);
+        return true;
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        return TestCastable.interact(this, player, hand);
+    }
+
 
     // --------------------------------------------------------- persistence
 

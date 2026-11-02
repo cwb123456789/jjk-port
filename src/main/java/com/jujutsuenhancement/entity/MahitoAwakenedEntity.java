@@ -9,6 +9,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -47,7 +49,7 @@ import java.util.UUID;
  * "Instant Spirit Body of Distorted Killing" transformation (stage 2, Bedrock skin and
  * body/human techniques). The Self-Embodiment-of-Perfection domain starts 0.2 s after casting.
  */
-public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEntity {
+public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(MahitoAwakenedEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> FORM =
@@ -104,6 +106,13 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
             new Move("human_ab1", 30, 20, 2.2F, 6.0D, 1.0D),
             new Move("human_ab2", 30, 18, 2.2F, 6.0D, 1.0D),
             new Move("body_ab4", 70, 42, 3.2F, 7.0D, 2.0D)};
+
+    private static final java.util.Map<String, Move> MOVES = new java.util.LinkedHashMap<>();
+    static {
+        for (Move[] group : new Move[][] {BASE, BLADE, BLADE_SKILL, HEAVY, HEAVY_SKILL, STAGE2_COMBO, STAGE2_SKILL}) {
+            for (Move m : group) MOVES.put(m.anim(), m);
+        }
+    }
 
     private static final int STAGE2_TICKS = 110;
     private static final int DOMAIN_START = 4;       // 0.2 s
@@ -418,6 +427,35 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
     }
 
     @Override public boolean removeWhenFarAway(double distance) { return false; }
+
+    @Override
+    public java.util.List<String> castableSkills() {
+        java.util.List<String> names = new java.util.ArrayList<>(MOVES.keySet());
+        names.add("stage2");
+        names.add("domain");
+        return names;
+    }
+
+    @Override
+    public boolean cast(String name, LivingEntity target) {
+        if (busy() || executed || !(level() instanceof ServerLevel)) return false;
+        switch (name) {
+            case "stage2" -> startStage2();
+            case "domain" -> startDomain();
+            default -> {
+                Move m = MOVES.get(name);
+                if (m == null) return false;
+                startMove(m);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        return TestCastable.interact(this, player, hand);
+    }
+
 
     // --------------------------------------------------------- persistence
 
