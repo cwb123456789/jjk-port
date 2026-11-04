@@ -15,6 +15,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -64,6 +66,12 @@ public final class ClientModEvents {
         } catch (ReflectiveOperationException | RuntimeException exception) {
             LOGGER.warn("Could not attach phase-two geometry adapter; retaining original Mahito renderer model: {}", exception.toString());
         }
+    }
+
+    @SubscribeEvent
+    public static void registerOverlays(RegisterGuiOverlaysEvent event) {
+        // Under the crosshair and hotbar, like the HUD in the original's domain.
+        event.registerAbove(VanillaGuiOverlay.PORTAL.id(), "domain_void", DomainVoidFx.OVERLAY);
     }
 
     @SubscribeEvent

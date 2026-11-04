@@ -8,8 +8,11 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -70,6 +73,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
 
     private static final EntityDataAccessor<Integer> ANIM =
             SynchedEntityData.defineId(GojoAwakenedEntity.class, EntityDataSerializers.INT);
+    /** -1 while no domain is running, otherwise how many ticks of the screen sequence to skip. */
+    private static final EntityDataAccessor<Integer> DOMAIN_FX =
+            SynchedEntityData.defineId(GojoAwakenedEntity.class, EntityDataSerializers.INT);
+    /** The screen sequence is skipped by this much for the 0.2 s domain: it starts in the tunnel. */
+    private static final int QUICK_FX_SKIP = 80;
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.gojo.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.gojo.walk");
@@ -420,8 +428,13 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         }
         if (skillTick == start) {
             domainEndTime = level.getGameTime() + DOMAIN_DURATION;
+            this.entityData.set(DOMAIN_FX, start == QUICK_START ? QUICK_FX_SKIP : 0);
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.END_PORTAL_SPAWN, SoundSource.HOSTILE, 4.0F, 0.5F);
-            level.sendParticles(ParticleTypes.FLASH, getX(), getY() + 1.0D, getZ(), 1, 0, 0, 0, 0);
+            // The original mod plays this at the first tick of every domain.
+            SoundEvent slowMotion = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("jujutsucraft", "slow_motion_end"));
+            if (slowMotion != null) {
+                level.playSound(null, getX(), getY(), getZ(), slowMotion, SoundSource.NEUTRAL, 3.0F, 1.0F);
+            }
         }
         if (skillTick >= total) {
             endSkill(Math.max(0L, domainEndTime - level.getGameTime()) + cooldown);
@@ -433,6 +446,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         long now = level.getGameTime();
         if (now >= domainEndTime) {
             releaseFrozen(level);
+            if (this.entityData.get(DOMAIN_FX) >= 0) this.entityData.set(DOMAIN_FX, -1);
             return;
         }
         for (Entity e : level.getEntities(this, getBoundingBox().inflate(DOMAIN_LOCK_RADIUS),
@@ -470,6 +484,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
                 && reason != Entity.RemovalReason.UNLOADED_WITH_PLAYER) {
             releaseFrozen(server);
         }
+        if (!this.level().isClientSide) this.entityData.set(DOMAIN_FX, -1);
         super.remove(reason);
     }
 
@@ -503,6 +518,16 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     }
 
     @Override public boolean removeWhenFarAway(double distance) { return false; }
+
+    /** Client side: -1 when no domain is running, otherwise the number of ticks of the sequence to skip. */
+    public int getDomainFx() {
+        return this.entityData.get(DOMAIN_FX);
+    }
+
+    /** Length of the lock, so the client screen sequence ends together with it. */
+    public static int domainDurationTicks() {
+        return DOMAIN_DURATION;
+    }
 
     @Override
     public java.util.List<String> castableSkills() {
@@ -544,6 +569,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ANIM, ANIM_NONE);
+        this.entityData.define(DOMAIN_FX, -1);
     }
 
     @Override
