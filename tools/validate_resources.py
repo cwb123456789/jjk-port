@@ -91,9 +91,16 @@ for geo_path in geo_files:
                                 raise ValueError("time must be finite and non-negative")
                         except (TypeError, ValueError):
                             errors.append(f"Invalid animation time: {anim_path.relative_to(ROOT)} / {bone_name}.{channel_name}@{time_key}")
-                        if not isinstance(keyframe, dict) or not isinstance(keyframe.get("vector"), list) or len(keyframe["vector"]) != 3:
+                        # GeckoLib reads both {"vector": [...]} and Blockbench/Bedrock {"post"/"pre": [...], "lerp_mode": ...}.
+                        vec = keyframe if isinstance(keyframe, list) else None  # plain [x, y, z] is valid too
+                        if isinstance(keyframe, dict):
+                            for key in ("vector", "post", "pre"):
+                                if isinstance(keyframe.get(key), list):
+                                    vec = keyframe[key]
+                                    break
+                        if vec is None or len(vec) != 3:
                             errors.append(f"Invalid GeckoLib keyframe schema: {anim_path.relative_to(ROOT)} / {bone_name}.{channel_name}@{time_key}")
-                        elif not all(isinstance(v, (int, float)) and math.isfinite(v) for v in keyframe["vector"]):
+                        elif not all(isinstance(v, (int, float)) and math.isfinite(v) for v in vec):
                             errors.append(f"Non-finite animation vector: {anim_path.relative_to(ROOT)} / {bone_name}.{channel_name}@{time_key}")
         unknown = sorted(animated_bones - geometry_bones)
         if unknown:
