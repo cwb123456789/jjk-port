@@ -98,7 +98,9 @@
 2. 五条悟普通茈播的是 `animation.hollowpurple`（24 秒，`purple_normal`），不是 `limitless_purple`（`purple_cutscene`）。
 3. `gojo_awakened.animation.json` 保持 Bedrock 写法（`post` + `lerp_mode: catmullrom`），不要转成 `vector` + `linear`。
 4. `tools/audit_*.py` 是文字匹配，不能证明和基岩版一致。行为只依据 mcfunction 和脚本；检查和源码冲突就改检查。
-5. 改动请写清楚「对照了基岩版哪个文件」。详见 `docs/REVIEW_r72.md`。
+5. 改动请写清楚「对照了基岩版哪个文件」。详见 `docs/REVIEW_r72.md`、`docs/REVIEW_2026-11-06.md`。
+6. **原模组不动。** `NativePurpleBridge`、`NativeDomainClashBridge`、`NativeMahitoFormBridge` 保持停用（不要加回 `@Mod.EventBusSubscriber`），因为用户要求只新增自己的生物，不改原模组的技能。
+7. 这个工程目前只能靠 GitHub Actions 编译（本地通常联不上 Gradle / Forge 仓库，也可能只有 Java 21）。没编译、没进游戏测过的改动，要在说明里写明。
 
 ## 9. 目录说明
 

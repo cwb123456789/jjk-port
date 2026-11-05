@@ -118,6 +118,7 @@ public final class HollowPurpleEntity extends Entity {
     private void hurtWithin(ServerLevel server, Entity owner, double radius, float amount) {
         AABB box = getBoundingBox().inflate(radius);
         for (LivingEntity target : server.getEntitiesOfClass(LivingEntity.class, box, e -> e.isAlive() && e != owner
+                && (owner == null || !owner.isAlliedTo(e))
                 && !(e instanceof GojoAwakenedEntity) && e.distanceToSqr(this) <= radius * radius)) {
             // Bedrock uses "damage ... override", which ignores invulnerability frames.
             target.invulnerableTime = 0;
