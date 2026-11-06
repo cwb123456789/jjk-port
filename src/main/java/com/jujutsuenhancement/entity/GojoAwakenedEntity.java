@@ -130,6 +130,8 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private long nextQuickDomainTime;
     private boolean casting200ForSukuna;
     private long domainEndTime;
+    /** The original-style look of the domain (black sphere, black hole, particles); null when no domain runs. */
+    private com.jujutsuenhancement.domain.UnlimitedVoidDomain voidDomain;
     private final java.util.Set<java.util.UUID> frozenMobs = new java.util.HashSet<>();
     private static final int DOMAIN_DURATION = 900;
     private static final double DOMAIN_LOCK_RADIUS = 40.0D;
@@ -428,6 +430,8 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         }
         if (skillTick == start) {
             domainEndTime = level.getGameTime() + DOMAIN_DURATION;
+            if (voidDomain != null) voidDomain.endNow();
+            voidDomain = new com.jujutsuenhancement.domain.UnlimitedVoidDomain(level, this);
             this.entityData.set(DOMAIN_FX, start == QUICK_START ? QUICK_FX_SKIP : 0);
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.END_PORTAL_SPAWN, SoundSource.HOSTILE, 4.0F, 0.5F);
             // The original mod plays this at the first tick of every domain.
@@ -444,6 +448,17 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     /** Keeps every enemy inside the domain frozen until it ends. */
     private void tickDomainLock(ServerLevel level) {
         long now = level.getGameTime();
+        if (voidDomain != null) {
+            if (now < domainEndTime) {
+                voidDomain.tick(domainEndTime - now);
+            } else if (voidDomain.tickEnd()) {
+                voidDomain = null;
+            }
+        }
+        if (voidDomain == null && this.getPersistentData().getDouble("select") != 0.0D) {
+            // A reload in the middle of a domain: let the original black hole go away.
+            this.getPersistentData().putDouble("select", 0.0D);
+        }
         if (now >= domainEndTime) {
             releaseFrozen(level);
             if (this.entityData.get(DOMAIN_FX) >= 0) this.entityData.set(DOMAIN_FX, -1);
@@ -483,6 +498,10 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         if (this.level() instanceof ServerLevel server && reason != Entity.RemovalReason.UNLOADED_TO_CHUNK
                 && reason != Entity.RemovalReason.UNLOADED_WITH_PLAYER) {
             releaseFrozen(server);
+        }
+        if (voidDomain != null) {
+            voidDomain.endNow();
+            voidDomain = null;
         }
         if (!this.level().isClientSide) this.entityData.set(DOMAIN_FX, -1);
         super.remove(reason);
