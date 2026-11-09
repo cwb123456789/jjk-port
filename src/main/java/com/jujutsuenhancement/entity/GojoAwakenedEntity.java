@@ -76,9 +76,12 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     /** -1 while no domain is running, 0 during the full domain, 1 during the quick domain. */
     private static final EntityDataAccessor<Integer> DOMAIN_FX =
             SynchedEntityData.defineId(GojoAwakenedEntity.class, EntityDataSerializers.INT);
-    /** The addon's UnlimitedVoid arena lives 731 ticks after it appears (tick 454 of the full cast, 80 of the quick one). */
-    private static final int FULL_DOMAIN_DURATION = 454 + 731;
-    private static final int QUICK_DOMAIN_DURATION = 80 + 731;
+    /**
+     * In the addon the UnlimitedVoid arena appears at tick 454 of the full cast (80 of the quick one) and lives as long as the
+     * caster's Energy lasts; the recording of the full domain breaks at tick ~885, i.e. 431 ticks after the arena appears.
+     */
+    private static final int FULL_DOMAIN_DURATION = 885;
+    private static final int QUICK_DOMAIN_DURATION = 80 + 431;
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.gojo.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.gojo.walk");
@@ -423,18 +426,10 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
      * domain, 4 = 0.2 s for the quick domain).
      */
     private void runDomain(ServerLevel level, int start, int length, int total, long cooldown, int amplifier, float finalDamage) {
-        if (skillTick == 1) {
-            level.playSound(null, getX(), getY(), getZ(), SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.HOSTILE, 3.0F, 0.6F);
-        }
         if (skillTick == start) {
+            // Same as the Bedrock addon: the whole show (sound included) is played by the clients.
             domainEndTime = level.getGameTime() + (start == QUICK_START ? QUICK_DOMAIN_DURATION : FULL_DOMAIN_DURATION);
             this.entityData.set(DOMAIN_FX, start == QUICK_START ? 1 : 0);
-            level.playSound(null, getX(), getY(), getZ(), SoundEvents.END_PORTAL_SPAWN, SoundSource.HOSTILE, 4.0F, 0.5F);
-            // The original mod plays this at the first tick of every domain.
-            SoundEvent slowMotion = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("jujutsucraft", "slow_motion_end"));
-            if (slowMotion != null) {
-                level.playSound(null, getX(), getY(), getZ(), slowMotion, SoundSource.NEUTRAL, 3.0F, 1.0F);
-            }
         }
         if (skillTick >= total) {
             endSkill(Math.max(0L, domainEndTime - level.getGameTime()) + cooldown);

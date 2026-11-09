@@ -19,6 +19,10 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -73,6 +77,8 @@ public final class VoidShow {
     private static int e;
     private static int breakTick;
     private static boolean cameraOwned;
+    private static SoundInstance track;
+    private static int breakStartE;
     private static Marker marker;
     private static CameraType savedCamera;
     private static VoidScript.Pose startPose;
@@ -108,17 +114,47 @@ public final class VoidShow {
         shakeAmp = 0;
         lastNanos = System.nanoTime();
         phase = Phase.RUN;
+        playAudio(fx == 1);
         script.onTick(0, VoidShow::spawn);
+    }
+
+    /**
+     * The addon plays {@code music.infinitevoid2} 20 ticks into the full cast and {@code music.infinitevoidmusic} when the
+     * arena appears (quick cast: {@code mob.infinitevoidfast2} at once, {@code music.infinitevoid_fast} at tick 10). Those
+     * music files are not in the supplied packs, so the full cast uses a track cut from the reference recording, which
+     * has the same timeline (silence until tick 0, music from tick 20, arena music at 454, domain break at ~885).
+     */
+    private static void playAudio(boolean quick) {
+        Minecraft mc = Minecraft.getInstance();
+        // the addon runs stopsound on everybody in range when the cast starts
+        mc.getSoundManager().stop(null, SoundSource.MUSIC);
+        stopTrack();
+        String name = quick ? "bedrock.unlimited_void.quick" : "bedrock.unlimited_void.full";
+        track = new SimpleSoundInstance(new ResourceLocation(JujutsuEnhancement.MODID, name),
+                quick ? SoundSource.HOSTILE : SoundSource.MUSIC, 1.0F, 1.0F, RandomSource.create(), false, 0,
+                SoundInstance.Attenuation.NONE, 0.0D, 0.0D, 0.0D, true);
+        mc.getSoundManager().play(track);
+    }
+
+    private static void stopTrack() {
+        if (track != null) {
+            Minecraft.getInstance().getSoundManager().stop(track);
+            track = null;
+        }
     }
 
     private static void beginBreak() {
         phase = Phase.BREAK;
         breakTick = 0;
+        breakStartE = e;
         releaseCamera();
     }
 
     private static void stop() {
         releaseCamera();
+        // the recorded track covers the break itself; only cut it when the show was interrupted early
+        if (breakStartE < 850) stopTrack();
+        else track = null;
         SIM.clear();
         phase = Phase.OFF;
         script = null;

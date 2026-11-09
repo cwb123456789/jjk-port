@@ -1,0 +1,14 @@
+{
+  "bedrock.unlimited_void.full": {
+    "category": "music",
+    "sounds": [
+      { "name": "jujutsuenhancement:bedrock/unlimited_void_full", "stream": true }
+    ]
+  },
+  "bedrock.unlimited_void.quick": {
+    "category": "hostile",
+    "sounds": [
+      { "name": "jujutsuenhancement:bedrock/infinitevoidfast2", "volume": 1.0 }
+    ]
+  }
+}
