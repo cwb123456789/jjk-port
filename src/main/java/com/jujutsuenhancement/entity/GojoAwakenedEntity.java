@@ -73,11 +73,12 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
 
     private static final EntityDataAccessor<Integer> ANIM =
             SynchedEntityData.defineId(GojoAwakenedEntity.class, EntityDataSerializers.INT);
-    /** -1 while no domain is running, otherwise how many ticks of the screen sequence to skip. */
+    /** -1 while no domain is running, 0 during the full domain, 1 during the quick domain. */
     private static final EntityDataAccessor<Integer> DOMAIN_FX =
             SynchedEntityData.defineId(GojoAwakenedEntity.class, EntityDataSerializers.INT);
-    /** The screen sequence is skipped by this much for the 0.2 s domain: it starts in the tunnel. */
-    private static final int QUICK_FX_SKIP = 80;
+    /** The addon's UnlimitedVoid arena lives 731 ticks after it appears (tick 454 of the full cast, 80 of the quick one). */
+    private static final int FULL_DOMAIN_DURATION = 454 + 731;
+    private static final int QUICK_DOMAIN_DURATION = 80 + 731;
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.gojo.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.gojo.walk");
@@ -130,10 +131,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private long nextQuickDomainTime;
     private boolean casting200ForSukuna;
     private long domainEndTime;
-    /** The original-style look of the domain (black sphere, black hole, particles); null when no domain runs. */
-    private com.jujutsuenhancement.domain.UnlimitedVoidDomain voidDomain;
     private final java.util.Set<java.util.UUID> frozenMobs = new java.util.HashSet<>();
-    private static final int DOMAIN_DURATION = 900;
     private static final double DOMAIN_LOCK_RADIUS = 40.0D;
 
     public GojoAwakenedEntity(EntityType<? extends GojoAwakenedEntity> type, Level level) {
@@ -429,10 +427,8 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.HOSTILE, 3.0F, 0.6F);
         }
         if (skillTick == start) {
-            domainEndTime = level.getGameTime() + DOMAIN_DURATION;
-            if (voidDomain != null) voidDomain.endNow();
-            voidDomain = new com.jujutsuenhancement.domain.UnlimitedVoidDomain(level, this);
-            this.entityData.set(DOMAIN_FX, start == QUICK_START ? QUICK_FX_SKIP : 0);
+            domainEndTime = level.getGameTime() + (start == QUICK_START ? QUICK_DOMAIN_DURATION : FULL_DOMAIN_DURATION);
+            this.entityData.set(DOMAIN_FX, start == QUICK_START ? 1 : 0);
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.END_PORTAL_SPAWN, SoundSource.HOSTILE, 4.0F, 0.5F);
             // The original mod plays this at the first tick of every domain.
             SoundEvent slowMotion = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("jujutsucraft", "slow_motion_end"));
@@ -448,17 +444,6 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     /** Keeps every enemy inside the domain frozen until it ends. */
     private void tickDomainLock(ServerLevel level) {
         long now = level.getGameTime();
-        if (voidDomain != null) {
-            if (now < domainEndTime) {
-                voidDomain.tick(domainEndTime - now);
-            } else if (voidDomain.tickEnd()) {
-                voidDomain = null;
-            }
-        }
-        if (voidDomain == null && this.getPersistentData().getDouble("select") != 0.0D) {
-            // A reload in the middle of a domain: let the original black hole go away.
-            this.getPersistentData().putDouble("select", 0.0D);
-        }
         if (now >= domainEndTime) {
             releaseFrozen(level);
             if (this.entityData.get(DOMAIN_FX) >= 0) this.entityData.set(DOMAIN_FX, -1);
@@ -499,10 +484,6 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
                 && reason != Entity.RemovalReason.UNLOADED_WITH_PLAYER) {
             releaseFrozen(server);
         }
-        if (voidDomain != null) {
-            voidDomain.endNow();
-            voidDomain = null;
-        }
         if (!this.level().isClientSide) this.entityData.set(DOMAIN_FX, -1);
         super.remove(reason);
     }
@@ -538,14 +519,9 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
 
     @Override public boolean removeWhenFarAway(double distance) { return false; }
 
-    /** Client side: -1 when no domain is running, otherwise the number of ticks of the sequence to skip. */
+    /** Client side: -1 when no domain is running, 0 for the full domain, 1 for the quick domain. */
     public int getDomainFx() {
         return this.entityData.get(DOMAIN_FX);
-    }
-
-    /** Length of the lock, so the client screen sequence ends together with it. */
-    public static int domainDurationTicks() {
-        return DOMAIN_DURATION;
     }
 
     @Override

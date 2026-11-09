@@ -16,7 +16,6 @@ import java.lang.reflect.Modifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -70,8 +69,16 @@ public final class ClientModEvents {
 
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
-        // Under the crosshair and hotbar, like the HUD in the original's domain.
-        event.registerAbove(VanillaGuiOverlay.PORTAL.id(), "domain_void", DomainVoidFx.OVERLAY);
+        // The Bedrock domain's screen fades sit above everything, like the camera fades they replace.
+        event.registerAboveAll("void_show", com.jujutsuenhancement.client.bedrock.VoidShow.OVERLAY);
+    }
+
+    @SubscribeEvent
+    public static void registerShaders(net.minecraftforge.client.event.RegisterShadersEvent event) throws java.io.IOException {
+        event.registerShader(new net.minecraft.client.renderer.ShaderInstance(event.getResourceProvider(),
+                        new ResourceLocation(JujutsuEnhancement.MODID, "bedrock_particle"),
+                        com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR_TEX),
+                shader -> com.jujutsuenhancement.client.bedrock.VoidShow.particleShader = shader);
     }
 
     @SubscribeEvent
