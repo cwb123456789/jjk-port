@@ -107,3 +107,19 @@
 - `src/`、`tools/`、`docs/`、`build.gradle` 等：当前工程。
 - `old-notes/`：早期几十份检查记录（那时还在尝试改原模组），**大多已过时**，只在想查某个历史决定时翻。
 - 压缩包里没有 `.git` 历史，也没有任何 jar。
+
+## Impact frames (2026-11-10, v16)
+- The newest `.mcaddon` is the "impact frames on" build of the behavior pack: it only differs from the previous one by
+  not adding the `impactframesoff` tag in `add_scores.mcfunction`. Every `title @a[tag=!impactframesoff,...] title \ueXYZ`
+  is a full-screen picture: cell XYZ of the glyph page `glyph_E3` (16x16 cells, 172 px each, frames ~172x104).
+- `tools/build_glyph_frames.py <glyph_E3 page> <assets dir> [low bytes in hex]` cuts the frames into
+  `textures/bedrock/glyph/e3xx.png` (+ `.mcmeta` with blur). Only the frames in use are committed (E330/32/34/35/36/38/39/3C);
+  the blank 1-px glyphs (E333, E337, E33B) are intentionally absent = "empty title".
+- `client/bedrock/ImpactFrames` is the title state (show = `title <glyph>` with the 20-tick stay from `times 0 20 0`,
+  clear = `title §l`) and a gui overlay drawn over the fades. `VoidScript.impactFrame(e)` (e = 761 - domain) and
+  `VoidScript.impactFrameBreak(k)` (k = 25 - Deleter) feed it.
+- Not yet wired (glyph use found with a grep over the pack): E33C domain-end flash in every other domain
+  (malevolent_shrine, shadow_garden, storm_domain, yuji domain, deadly_sentencing...), E33D letterbox bars (clashes, cutscenes),
+  E35F generic hit flash, E3A0-E3BC black-flash finisher (blackflash_finisher_gojo), E350-E356 / E3CF-E3E8 (forced_roles, skyfall),
+  E370-E37C (idledeathgamble2), E390-E398 (lightning_am2), E3C1-E3C6 (hr4), E3E9-E3EE (bluecore). Glyph pages F3xx are NOT supplied yet.
+- Unverified: whether Bedrock draws the title above or below `camera fade`; we draw it above.
