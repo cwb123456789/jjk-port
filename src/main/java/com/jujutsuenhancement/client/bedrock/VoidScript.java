@@ -350,6 +350,43 @@ public final class VoidScript {
 
     // ------------------------------------------------------------------ ending
 
+    /**
+     * The title commands of {@code gojo_domain.mcfunction} (the "impact frames"), which run on Gojo's {@code domain}
+     * counter: {@code e = 761 - domain}. Returns the glyph that {@code title @a title ...} sets at tick {@code e},
+     * {@code 0} for the empty title {@code §l} that clears it and {@code -1} when no title command runs that tick.
+     * (The addon also sets {@code \ue33a} at domain 333, but the clear that runs in the same tick overrides it.)
+     * The quick cast has no titles.
+     */
+    public int impactFrame(int e) {
+        if (kind != Kind.FULL) return -1;
+        switch (e) {
+            case 341: return 0xE330;
+            case 343: return 0xE333;
+            case 345:
+            case 347: return 0xE332;
+            case 349: return 0;
+            case 381: return 0xE334;
+            case 383: return 0xE335;
+            case 385: return 0xE336;
+            case 387: return 0xE337;
+            case 389: return 0;
+            case 411: return 0xE339;
+            case 415: return 0xE338;
+            case 417: return 0xE33B;
+            default: return e >= 419 && e <= 461 ? 0 : -1;
+        }
+    }
+
+    /**
+     * {@code unlimited_void.mcfunction} when the domain ends (k = ticks since the break started, k = 25 - Deleter):
+     * the cracked-glass frame {@code \ue33c} at Deleter 15..9, cleared at Deleter 2..1. Same return values as above.
+     */
+    public static int impactFrameBreak(int k) {
+        if (k >= 10 && k <= 16) return 0xE33C;
+        if (k >= 23 && k <= 24) return 0;
+        return -1;
+    }
+
     /** Fade used when the domain ends (Deleter == 25 in the addon). */
     public static float[] breakFade(double k) {
         double in = 5, hold = 19, out = 30;

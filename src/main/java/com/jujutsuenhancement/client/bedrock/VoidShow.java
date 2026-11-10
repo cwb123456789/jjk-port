@@ -150,8 +150,14 @@ public final class VoidShow {
         releaseCamera();
     }
 
+    private static void applyImpactFrame(int glyph) {
+        if (glyph > 0) ImpactFrames.show(glyph);
+        else if (glyph == 0) ImpactFrames.clear();
+    }
+
     private static void stop() {
         releaseCamera();
+        ImpactFrames.clear();
         // the recorded track covers the break itself; only cut it when the show was interrupted early
         if (breakStartE < 850) stopTrack();
         else track = null;
@@ -241,6 +247,7 @@ public final class VoidShow {
             } else {
                 e++;
                 script.onTick(e, VoidShow::spawn);
+                applyImpactFrame(script.impactFrame(e));
                 shakeAmp = Math.max(script.shake(e), shakeAmp * 0.6);
                 if (cinematic()) acquireCamera(mc);
                 else releaseCamera();
@@ -248,6 +255,7 @@ public final class VoidShow {
         } else if (phase == Phase.BREAK) {
             breakTick++;
             script.onBreakTick(breakTick, VoidShow::spawn);
+            applyImpactFrame(VoidScript.impactFrameBreak(breakTick));
             if (breakTick >= BREAK_LENGTH) stop();
         }
     }
@@ -277,7 +285,8 @@ public final class VoidShow {
 
     @SubscribeEvent
     public static void onOverlay(RenderGuiOverlayEvent.Pre event) {
-        if (cameraOwned && cinematic() && !OVERLAY_ID.equals(event.getOverlay().id())) event.setCanceled(true);
+        if (cameraOwned && cinematic() && !OVERLAY_ID.equals(event.getOverlay().id())
+                && !ImpactFrames.OVERLAY_ID.equals(event.getOverlay().id())) event.setCanceled(true);
     }
 
     @SubscribeEvent
