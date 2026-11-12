@@ -1,6 +1,7 @@
 package com.jujutsuenhancement.client.bedrock;
 
 import com.jujutsuenhancement.JujutsuEnhancement;
+import com.jujutsuenhancement.entity.DomainClashEntity;
 import com.jujutsuenhancement.entity.GojoAwakenedEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
