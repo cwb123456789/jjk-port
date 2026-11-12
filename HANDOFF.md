@@ -123,3 +123,21 @@
   E35F generic hit flash, E3A0-E3BC black-flash finisher (blackflash_finisher_gojo), E350-E356 / E3CF-E3E8 (forced_roles, skyfall),
   E370-E37C (idledeathgamble2), E390-E398 (lightning_am2), E3C1-E3C6 (hr4), E3E9-E3EE (bluecore). Glyph pages F3xx are NOT supplied yet.
 - Unverified: whether Bedrock draws the title above or below `camera fade`; we draw it above.
+
+## Domain clash (2026-11-12, v17) — compiled only, never run in game
+Source of truth: Bedrock `domain_clash_starting`, `domain_clash_main`, `domain_clasher_failed`, `scripts/domain_clashing.js`.
+- Server: `entity/DomainClashEntity` (invisible entity, synched T/phase/slots). `DomainClashEntity.check(caster)` is called from each
+  caster's serverTick (Gojo/Sukuna/Mahito/Higuruma implement `ClashCaster`). Trigger = caster domain timer 4..70 and another
+  caster's domain within 48 blocks. Timeline: t=3 shockwave, 40 fade, 60 barrier platform (±33, y300/299), 61 teleport
+  (slot0 z+33, slot1 z-33, slot2 x+33, slot3 x-33), 65 domain visuals, ~208 resistances, 210 fight (<=595 ticks; damage d lowers
+  resistance by floor(d); Shrine drains 1/tick from others; res 0 or death = fail), resolve (white fade, 1 s stun), winner =
+  highest resistance, winner's domain continues (Unlimited Void keeps the sky arena), then everyone is sent home.
+- Resistances: UV 700 (the video showed 750 once — kept 700 from the function), Shrine 250, Perfection 600, Deadly Sentencing 600.
+  Tempest/Idle/Shadow/Speech/Yuji/Iron/Incomplete kinds are NOT wired (no caster class for them yet).
+- Client: `client/bedrock/ClashShow` (shockwave, shake, fades, camera shots, per-domain particle lists from
+  `bedrock/clash/effects.json`, smash on a broken domain). `VoidShow` has a clash-win mode (`clashMode`) for Gojo's UV after a win.
+- `tools/build_clash_assets.py` exports the ~70 clash particle JSONs/textures/sounds from the Bedrock pack.
+- Not done / guessed: clash music (files not supplied), Sukuna-wins long cinematic (3000–3200 in Bedrock, simplified), camera
+  keys and FOV were read from the function but not compared frame by frame with a recording, shake amplitude is estimated.
+- Skill inventory of the 31 reference videos (Gojo, Higuruma, Sukuna) is in `docs/skill_videos.md`; it is a to-do list for
+  auditing each character against its Bedrock functions, nothing there is ported yet.
