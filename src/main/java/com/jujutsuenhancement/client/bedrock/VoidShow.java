@@ -77,6 +77,9 @@ public final class VoidShow {
     private static int e;
     private static int breakTick;
     private static boolean cameraOwned;
+    /** The Unlimited Void that won a domain clash: it starts at the arena scene, in the clash's sky arena. */
+    private static boolean clashMode;
+    private static double sceneFloorY;
     private static SoundInstance track;
     private static int breakStartE;
     private static Marker marker;
@@ -98,6 +101,9 @@ public final class VoidShow {
 
     private static void start(GojoAwakenedEntity g, int fx) {
         Minecraft mc = Minecraft.getInstance();
+        clashMode = false;
+        DomainClashEntity clash = fx == 2 ? ClashShow.nearestClash(mc, g) : null;
+        if (fx == 2 && clash == null) fx = 0;
         Camera cam = mc.gameRenderer.getMainCamera();
         startPose = new VoidScript.Pose();
         startPose.x = cam.getPosition().x;
@@ -105,17 +111,32 @@ public final class VoidShow {
         startPose.z = cam.getPosition().z;
         startPose.pitch = cam.getXRot();
         startPose.yaw = cam.getYRot();
-        script = new VoidScript(fx == 1 ? VoidScript.Kind.QUICK : VoidScript.Kind.FULL,
-                g.getX(), g.getY(), g.getZ(), g.getEyeHeight(), g.getYRot(), g.getXRot());
+        if (clash != null) {
+            // the scene is centred on the clash arena (the addon's arena entity sits 2.15 below the platform's top face)
+            double floorTop = ClashShow.floorTop(clash);
+            script = new VoidScript(VoidScript.Kind.FULL, clash.getX(), floorTop + 0.1D, clash.getZ(), g.getEyeHeight(), 0.0D, 0.0D);
+            sceneFloorY = floorTop;
+            clashMode = true;
+        } else {
+            script = new VoidScript(fx == 1 ? VoidScript.Kind.QUICK : VoidScript.Kind.FULL,
+                    g.getX(), g.getY(), g.getZ(), g.getEyeHeight(), g.getYRot(), g.getXRot());
+            sceneFloorY = script.fy;
+        }
         SIM.clear();
         gojoId = g.getId();
-        e = 0;
+        e = clashMode ? script.arenaTick : 0;
         breakTick = 0;
         shakeAmp = 0;
         lastNanos = System.nanoTime();
         phase = Phase.RUN;
-        playAudio(fx == 1);
-        script.onTick(0, VoidShow::spawn);
+        if (clashMode) {
+            // the dome has already been built: carry on from the arena scene (no music file for it, see HANDOFF)
+            breakStartE = 0;
+            script.onTick(e, VoidShow::spawn);
+        } else {
+            playAudio(fx == 1);
+            script.onTick(0, VoidShow::spawn);
+        }
     }
 
     /**
@@ -165,6 +186,7 @@ public final class VoidShow {
         phase = Phase.OFF;
         script = null;
         gojoId = -1;
+        clashMode = false;
     }
 
     private static void spawn(String name, double x, double y, double z) {
@@ -176,7 +198,7 @@ public final class VoidShow {
     // ------------------------------------------------------------------ camera
 
     private static boolean cinematic() {
-        return phase == Phase.RUN && script != null && e < script.cinematicEnd;
+        return phase == Phase.RUN && script != null && !clashMode && e < script.cinematicEnd;
     }
 
     private static void acquireCamera(Minecraft mc) {
@@ -233,7 +255,8 @@ public final class VoidShow {
             int fx = g.getDomainFx();
             int prev = LAST_FX.getOrDefault(g.getId(), -1);
             LAST_FX.put(g.getId(), fx);
-            if (phase == Phase.OFF && prev < 0 && fx >= 0 && g.isAlive() && g.distanceToSqr(mc.player) <= RANGE * RANGE) {
+            if (phase == Phase.OFF && prev < 0 && fx >= 0 && g.isAlive()
+                    && (fx == 2 ? ClashShow.involved(mc, g) : g.distanceToSqr(mc.player) <= RANGE * RANGE)) {
                 start(g, fx);
             }
         }
@@ -242,7 +265,10 @@ public final class VoidShow {
         if (phase == Phase.RUN) {
             Entity g = mc.level.getEntity(gojoId);
             boolean running = g instanceof GojoAwakenedEntity gojo && gojo.isAlive() && gojo.getDomainFx() >= 0;
-            if (!running) {
+            if (g instanceof GojoAwakenedEntity gojo && gojo.isAlive() && gojo.getDomainFx() == -2) {
+                // a domain clash took the cast away: nothing of it is left to break
+                stop();
+            } else if (!running) {
                 beginBreak();
             } else {
                 e++;
@@ -342,7 +368,7 @@ public final class VoidShow {
             RenderSystem.clear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
             drawEntities(mc, ps, cp, pt);
         }
-        drawParticles(cam, cp, ps.last().pose());
+        drawParticles(SIM, cam, cp, ps.last().pose());
     }
 
     private static void drawEntities(Minecraft mc, PoseStack ps, Vec3 cp, float pt) {
@@ -351,17 +377,18 @@ public final class VoidShow {
         MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
         dispatcher.setRenderShadow(false);
         boolean firstPerson = mc.getCameraEntity() == mc.player;
-        boolean turned = phase == Phase.RUN && e >= script.turnTick;
+        boolean turned = phase == Phase.RUN && !clashMode && e >= script.turnTick;
         for (Entity entity : mc.level.entitiesForRendering()) {
             if (!(entity instanceof LivingEntity living)) continue;
             if (living.isInvisible() || living.isSpectator()) continue;
             if (firstPerson && living == mc.player) continue;
             double dx = living.getX() - script.fx, dz = living.getZ() - script.fz;
             if (dx * dx + dz * dz > 48.0D * 48.0D) continue;
+            if (clashMode && Math.abs(living.getY() - sceneFloorY) > 12.0D) continue;
             double x = Mth.lerp(pt, living.xo, living.getX());
             double z = Mth.lerp(pt, living.zo, living.getZ());
             // everybody stands on the arena floor
-            double y = script.fy + (living.onGround() ? 0.0D : Mth.lerp(pt, living.yo, living.getY()) - living.getY());
+            double y = sceneFloorY + (living.onGround() ? 0.0D : Mth.lerp(pt, living.yo, living.getY()) - living.getY());
             float yaw = Mth.lerp(pt, living.yRotO, living.getYRot());
             boolean gojo = living.getId() == gojoId;
             float bodyO = living.yBodyRotO, body = living.yBodyRot, headO = living.yHeadRotO, head = living.yHeadRot;
@@ -392,7 +419,8 @@ public final class VoidShow {
         dispatcher.setRenderShadow(true);
     }
 
-    private static void drawParticles(Camera cam, Vec3 cp, Matrix4f view) {
+    /** Draws every particle of {@code sim} as camera-facing quads (also used by {@link ClashShow}). */
+    static void drawParticles(ParticleSim sim, Camera cam, Vec3 cp, Matrix4f view) {
         List<Quad> quads = new ArrayList<>(2048);
         Vector3f look = cam.getLookVector();
         Vector3f up = cam.getUpVector();
@@ -401,7 +429,7 @@ public final class VoidShow {
         double[] right = {-left.x(), -left.y(), -left.z()};
         double[] upv = {up.x(), up.y(), up.z()};
         double[] fwd = {look.x(), look.y(), look.z()};
-        SIM.render(camPos, right, upv, fwd, (def, dist, c, u0, v0, u1, v1, r, g, b, a) -> {
+        sim.render(camPos, right, upv, fwd, (def, dist, c, u0, v0, u1, v1, r, g, b, a) -> {
             Quad q = new Quad();
             q.def = def;
             q.dist = dist;

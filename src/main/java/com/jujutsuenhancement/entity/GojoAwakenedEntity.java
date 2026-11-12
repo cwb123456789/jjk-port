@@ -61,7 +61,7 @@ import java.util.List;
  *   domain        : 18.5 s animation, 10 s of stun inside the domain
  *   quick domain  : 7.025 s animation, domain starts after 0.2 s
  */
-public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
+public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable, ClashCaster {
     // --- animation state ids (synced to clients) ---
     public static final int ANIM_NONE = 0;
     public static final int ANIM_PURPLE_NORMAL = 1;
@@ -82,6 +82,8 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
      */
     private static final int FULL_DOMAIN_DURATION = 885;
     private static final int QUICK_DOMAIN_DURATION = 80 + 431;
+    /** What is left of the full domain once its arena scene (script tick 454) begins. */
+    private static final int CLASH_ARENA_DURATION = FULL_DOMAIN_DURATION - 454;
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.gojo.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.gojo.walk");
@@ -134,6 +136,9 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private long nextQuickDomainTime;
     private boolean casting200ForSukuna;
     private long domainEndTime;
+    private long domainStartTime;
+    private boolean clashHold;
+    private long fxAbortUntil;
     private final java.util.Set<java.util.UUID> frozenMobs = new java.util.HashSet<>();
     private static final double DOMAIN_LOCK_RADIUS = 40.0D;
 
@@ -222,6 +227,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
 
     private void serverTick(ServerLevel level) {
         tickDomainLock(level);
+        if (clashHold) {
+            this.getNavigation().stop();
+            return;
+        }
+        DomainClashEntity.check(this);
         if (skill != ANIM_NONE) {
             runSkill(level);
             return;
@@ -428,6 +438,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private void runDomain(ServerLevel level, int start, int length, int total, long cooldown, int amplifier, float finalDamage) {
         if (skillTick == start) {
             // Same as the Bedrock addon: the whole show (sound included) is played by the clients.
+            domainStartTime = level.getGameTime();
             domainEndTime = level.getGameTime() + (start == QUICK_START ? QUICK_DOMAIN_DURATION : FULL_DOMAIN_DURATION);
             this.entityData.set(DOMAIN_FX, start == QUICK_START ? 1 : 0);
         }
@@ -441,7 +452,8 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         long now = level.getGameTime();
         if (now >= domainEndTime) {
             releaseFrozen(level);
-            if (this.entityData.get(DOMAIN_FX) >= 0) this.entityData.set(DOMAIN_FX, -1);
+            int fx = this.entityData.get(DOMAIN_FX);
+            if (fx >= 0 || fx == -2 && now >= fxAbortUntil) this.entityData.set(DOMAIN_FX, -1);
             return;
         }
         for (Entity e : level.getEntities(this, getBoundingBox().inflate(DOMAIN_LOCK_RADIUS),
@@ -504,6 +516,47 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         }
         if (skillTick >= total) endSkill(0);
     }
+
+    // ------------------------------------------------------------------ domain clash
+
+    @Override public ClashKind clashKind() { return ClashKind.UNLIMITED_VOID; }
+
+    @Override
+    public int clashCastTicks() {
+        if (this.level().isClientSide) return -1;
+        long now = this.level().getGameTime();
+        if (domainEndTime <= now || domainStartTime <= 0L) return -1;
+        int c = (int) (now - domainStartTime);
+        return c > 70 ? 1000 : c;
+    }
+
+    @Override
+    public void clashBegin() {
+        long now = this.level().getGameTime();
+        // the clash takes the domain away: the dome, the stun and the cinematic stop at once
+        if (skill == ANIM_DOMAIN || skill == ANIM_DOMAIN_QUICK) endSkill(2400);
+        nextDomainTime = Math.max(nextDomainTime, now + 2400);
+        nextQuickDomainTime = Math.max(nextQuickDomainTime, now + 1200);
+        domainEndTime = 0L;
+        if (this.level() instanceof ServerLevel server) releaseFrozen(server);
+        fxAbortUntil = now + 10;
+        this.entityData.set(DOMAIN_FX, -2);
+    }
+
+    @Override public void clashHold(boolean hold) { this.clashHold = hold; }
+
+    @Override
+    public void clashWin(DomainClashEntity clash) {
+        long now = this.level().getGameTime();
+        // the Unlimited Void goes on in the sky arena: the addon resumes it at the point where the arena scene begins
+        domainStartTime = now;
+        domainEndTime = now + CLASH_ARENA_DURATION;
+        this.entityData.set(DOMAIN_FX, 2);
+    }
+
+    @Override public void clashLose() { }
+
+    @Override public boolean clashKeepArena() { return domainEndTime > this.level().getGameTime(); }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {

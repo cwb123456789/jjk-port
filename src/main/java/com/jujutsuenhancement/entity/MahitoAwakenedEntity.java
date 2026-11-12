@@ -49,7 +49,7 @@ import java.util.UUID;
  * "Instant Spirit Body of Distorted Killing" transformation (stage 2, Bedrock skin and
  * body/human techniques). The Self-Embodiment-of-Perfection domain starts 0.2 s after casting.
  */
-public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
+public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable, ClashCaster {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(MahitoAwakenedEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> FORM =
@@ -132,6 +132,7 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
     private int stage2Tick = -1;
     private boolean stage2Done;
     private int domainTick = -1;
+    private boolean clashHold;
     private UUID handsUuid;
     private UUID barrierUuid;
 
@@ -213,6 +214,8 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
     private void serverTick(ServerLevel level) {
         long now = level.getGameTime();
         if (executed) { freeze(); return; }
+        if (clashHold) { freeze(); return; }
+        DomainClashEntity.check(this);
         if (stage2Tick >= 0) { runStage2(level); return; }
         if (domainTick >= 0) { runDomain(level); return; }
         if (move != null) { runMove(level); return; }
@@ -388,6 +391,38 @@ public final class MahitoAwakenedEntity extends PathfinderMob implements GeoEnti
             nextMoveTime = level.getGameTime() + 20;
         }
     }
+
+    // ------------------------------------------------------------------ domain clash
+
+    @Override public ClashKind clashKind() { return ClashKind.PERFECTION; }
+
+    @Override
+    public int clashCastTicks() {
+        if (domainTick < DOMAIN_START) return -1;
+        int c = domainTick - DOMAIN_START + 1;
+        return c > 70 ? 1000 : c;
+    }
+
+    @Override
+    public void clashBegin() {
+        if (!(level() instanceof ServerLevel server)) return;
+        discardVisuals(server);
+        domainTick = -1;
+        entityData.set(ANIM, "");
+        nextDomainTime = Math.max(nextDomainTime, server.getGameTime() + 2400);
+        nextMoveTime = server.getGameTime() + 20;
+    }
+
+    @Override public void clashHold(boolean hold) { this.clashHold = hold; }
+
+    /** Self-Embodiment of Perfection won: the domain is cast again where Mahito stands. */
+    @Override
+    public void clashWin(DomainClashEntity clash) {
+        startDomain();
+        domainTick = DOMAIN_START - 1;
+    }
+
+    @Override public void clashLose() { }
 
     private void spawnVisuals(ServerLevel level) {
         var hands = ModEntities.MAHITO_DOMAIN_HANDS.get().create(level);

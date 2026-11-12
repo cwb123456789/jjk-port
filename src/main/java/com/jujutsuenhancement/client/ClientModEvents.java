@@ -71,6 +71,7 @@ public final class ClientModEvents {
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
         // The Bedrock domain's screen fades sit above everything, like the camera fades they replace.
         event.registerAboveAll("void_show", com.jujutsuenhancement.client.bedrock.VoidShow.OVERLAY);
+        event.registerAboveAll("clash_show", com.jujutsuenhancement.client.bedrock.ClashShow.OVERLAY);
         // Titles (the addon's impact frames) are drawn over the fades.
         event.registerAboveAll("impact_frames", com.jujutsuenhancement.client.bedrock.ImpactFrames.OVERLAY);
     }
@@ -88,6 +89,7 @@ public final class ClientModEvents {
         // The purple is drawn entirely by particles; without any registered renderer the
         // client crashes the moment the entity enters view.
         event.registerEntityRenderer(ModEntities.HOLLOW_PURPLE.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+        event.registerEntityRenderer(ModEntities.DOMAIN_CLASH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.GOJO_AWAKENED.get(), GojoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.MAHITO_AWAKENED.get(), MahitoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.SUKUNA_AWAKENED.get(), SukunaAwakenedRenderer::new);

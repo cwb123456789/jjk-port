@@ -44,7 +44,7 @@ import java.util.Map;
  * Skills: combo, Dismantle, Cleave, Fuga "Open" (flame arrow), "Furnace" (flame volley),
  * Malevolent Shrine, and the possession cutscene on first contact.
  */
-public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
+public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable, ClashCaster {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(SukunaAwakenedEntity.class, EntityDataSerializers.STRING);
 
@@ -73,6 +73,7 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    private boolean clashHold;
     private String skill = "";
     private int skillTick;
     private int comboIndex;
@@ -144,6 +145,11 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
     }
 
     private void serverTick(ServerLevel level) {
+        if (clashHold) {
+            getNavigation().stop();
+            return;
+        }
+        DomainClashEntity.check(this);
         if (!skill.isEmpty()) { runSkill(level); return; }
         LivingEntity target = getTarget();
         if (target == null || !target.isAlive()) return;
@@ -341,6 +347,39 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
         level.sendParticles(ParticleTypes.FLAME, getX(), getY() + 1.0D, getZ(), 150, 4.0D, 1.5D, 4.0D, 0.15D);
         level.playSound(null, getX(), getY(), getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 3.0F, 0.6F);
     }
+
+    // ------------------------------------------------------------------ domain clash
+
+    @Override public ClashKind clashKind() { return ClashKind.MALEVOLENT_SHRINE; }
+
+    /** The cast animation is the casting phase (1..100); the shrine then stands until the skill ends. */
+    @Override
+    public int clashCastTicks() {
+        if (!skill.equals("shrine")) return -1;
+        return skillTick <= 100 ? skillTick : 1000;
+    }
+
+    @Override
+    public void clashBegin() {
+        if (!(level() instanceof ServerLevel server)) return;
+        if (skill.equals("shrine")) end(0);
+        nextShrine = Math.max(nextShrine, server.getGameTime() + 2400);
+        for (DomainShrineEntity shrine : server.getEntitiesOfClass(DomainShrineEntity.class, getBoundingBox().inflate(64.0D),
+                s -> getUUID().equals(s.getOwnerUuid()))) {
+            shrine.discard();
+        }
+    }
+
+    @Override public void clashHold(boolean hold) { this.clashHold = hold; }
+
+    /** The Malevolent Shrine won: it is cast again where Sukuna stands. */
+    @Override
+    public void clashWin(DomainClashEntity clash) {
+        if (!skill.isEmpty()) end(0);
+        start("shrine");
+    }
+
+    @Override public void clashLose() { }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {

@@ -34,6 +34,8 @@ public final class ParticleDef {
     public DirMode dirMode = DirMode.OUTWARDS;
     public Molang.Expr[] dir = zero3();
     public double[] planeNormal = {0, 1, 0};
+    /** {@code minecraft:emitter_local_space} with {@code rotation: true}: the whole effect turns with the emitter's yaw. */
+    public boolean localRotation;
 
     // particle
     public Molang.Expr lifetime = Molang.constant(1);
@@ -121,6 +123,9 @@ public final class ParticleDef {
         d.material = mat.contains("add") ? Material.ADD : mat.contains("alpha") ? Material.ALPHA : Material.BLEND;
         d.texture = brp.get("texture").getAsString();
         JsonObject c = pe.getAsJsonObject("components");
+
+        JsonObject ls = c.getAsJsonObject("minecraft:emitter_local_space");
+        if (ls != null && ls.has("rotation")) d.localRotation = ls.get("rotation").getAsBoolean();
 
         JsonObject o = c.getAsJsonObject("minecraft:emitter_rate_instant");
         if (o != null) {

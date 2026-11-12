@@ -1,6 +1,7 @@
 package com.jujutsuenhancement.registry;
 
 import com.jujutsuenhancement.JujutsuEnhancement;
+import com.jujutsuenhancement.entity.DomainClashEntity;
 import com.jujutsuenhancement.entity.DomainShrineEntity;
 import com.jujutsuenhancement.entity.GojoAwakenedEntity;
 import com.jujutsuenhancement.entity.MahitoAwakenedEntity;
@@ -72,6 +73,16 @@ public final class ModEntities {
                     .clientTrackingRange(12)
                     .updateInterval(2)
                     .build("mahito_domain_barrier"));
+
+    public static final RegistryObject<EntityType<DomainClashEntity>> DOMAIN_CLASH =
+            ENTITY_TYPES.register("domain_clash", () -> EntityType.Builder
+                    .of(DomainClashEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(12)
+                    .updateInterval(1)
+                    .noSave()
+                    .fireImmune()
+                    .build("domain_clash"));
 
     public static final RegistryObject<EntityType<HollowPurpleEntity>> HOLLOW_PURPLE =
             ENTITY_TYPES.register("hollow_purple", () -> EntityType.Builder

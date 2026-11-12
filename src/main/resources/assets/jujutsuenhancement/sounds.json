@@ -2,13 +2,64 @@
   "bedrock.unlimited_void.full": {
     "category": "music",
     "sounds": [
-      { "name": "jujutsuenhancement:bedrock/unlimited_void_full", "stream": true }
+      {
+        "name": "jujutsuenhancement:bedrock/unlimited_void_full",
+        "stream": true
+      }
     ]
   },
   "bedrock.unlimited_void.quick": {
     "category": "hostile",
     "sounds": [
-      { "name": "jujutsuenhancement:bedrock/infinitevoidfast2", "volume": 1.0 }
+      {
+        "name": "jujutsuenhancement:bedrock/infinitevoidfast2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.clash.blasted3": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/clash_blasted3",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.clash.blasted4": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/clash_blasted4",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.clash.whoosh3": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/clash_whoosh3",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.clash.fuga_shoot": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/clash_fuga_shoot",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.clash.fuga_appear": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/clash_fuga_appear",
+        "volume": 1.0
+      }
     ]
   }
 }

@@ -18,6 +18,8 @@ public final class ParticleSim {
     public static final class Emitter {
         final ParticleDef def;
         final double x, y, z;
+        /** Cosine / sine of the emitter's yaw (Minecraft yaw: 0 faces +z); only used when the particle is in local space. */
+        final double cy, sy;
         double age;
         final double lifetime;
         final double[] rnd = new double[4];
@@ -25,11 +27,14 @@ public final class ParticleSim {
         double acc;
         int alive;
 
-        Emitter(ParticleDef def, double x, double y, double z) {
+        Emitter(ParticleDef def, double x, double y, double z, double yawDeg) {
             this.def = def;
             this.x = x;
             this.y = y;
             this.z = z;
+            double r = def.localRotation ? Math.toRadians(yawDeg) : 0.0;
+            this.cy = Math.cos(r);
+            this.sy = Math.sin(r);
             this.lifetime = def.activeTime;
             for (int i = 0; i < 4; i++) rnd[i] = RNG.nextDouble();
         }
@@ -68,7 +73,12 @@ public final class ParticleSim {
     }
 
     public void spawn(ParticleDef def, double x, double y, double z) {
-        emitters.add(new Emitter(def, x, y, z));
+        emitters.add(new Emitter(def, x, y, z, 0.0));
+    }
+
+    /** Spawns an emitter that turns with {@code yawDeg} (Minecraft yaw) when the effect is in local space. */
+    public void spawn(ParticleDef def, double x, double y, double z, double yawDeg) {
+        emitters.add(new Emitter(def, x, y, z, yawDeg));
     }
 
     private void fillEmitterCtx(Emitter e) {
@@ -136,9 +146,11 @@ public final class ParticleSim {
             default:
                 break;
         }
-        p.x = e.x + ox + px;
+        // local space: x is the emitter's left, z its forward (same convention as Minecraft's ^ coordinates)
+        double lx = ox + px, lz = oz + pz;
+        p.x = e.x + lx * e.cy - lz * e.sy;
         p.y = e.y + oy + py;
-        p.z = e.z + oz + pz;
+        p.z = e.z + lx * e.sy + lz * e.cy;
 
         switch (d.dirMode) {
             case OUTWARDS:
@@ -160,6 +172,12 @@ public final class ParticleSim {
                     p.dz = n[2];
                 }
                 break;
+        }
+        if (e.sy != 0.0) {
+            double rx = p.dx * e.cy - p.dz * e.sy;
+            double rz = p.dx * e.sy + p.dz * e.cy;
+            p.dx = rx;
+            p.dz = rz;
         }
         double sp = d.speed.eval(ctx);
         p.vx = p.dx * sp;
@@ -201,6 +219,11 @@ public final class ParticleSim {
             ctx.age = p.age;
             ctx.lifetime = p.life;
             double ax = d.accel[0].eval(ctx), ay = d.accel[1].eval(ctx), az = d.accel[2].eval(ctx);
+            if (p.em.sy != 0.0) {
+                double rx = ax * p.em.cy - az * p.em.sy;
+                az = ax * p.em.sy + az * p.em.cy;
+                ax = rx;
+            }
             double drag = d.drag.eval(ctx);
             p.vx += (ax - drag * p.vx) * dt;
             p.vy += (ay - drag * p.vy) * dt;

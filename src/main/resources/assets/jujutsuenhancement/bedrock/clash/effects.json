@@ -1,0 +1,59 @@
+{
+ "unlimited_void": [
+  "unlimited_eye1",
+  "unlimited_eye1b",
+  "unlimited_eye1c",
+  "unlimited_eye2",
+  "unlimited_eye3",
+  "unlimited_eye4",
+  "unlimited_eye5",
+  "unlimited_void_clash1",
+  "unlimited_void_clash2",
+  "unlimited_void_clash2b",
+  "unlimited_void_clash2c",
+  "unlimited_void_clash3",
+  "unlimited_void_clash4",
+  "unlimited_void_clash5",
+  "unlimited_void_clash6",
+  "unlimited_void_clash7",
+  "unlimited_void_clash8",
+  "unlimited_void_clash9",
+  "unlimited_void6",
+  "unlimited_void_clash10",
+  "unlimited_void_clash11",
+  "unlimited_void_clash12"
+ ],
+ "malevolent_shrine": [
+  "malevolent_shrine_clash1",
+  "malevolent_shrine_clash2",
+  "malevolent_shrine_clash3",
+  "malevolent_shrine_clash4",
+  "malevolent_shrine_clash5",
+  "malevolent_shrine1",
+  "malevolent_shrine",
+  "malevolent_shrine_floor",
+  "malevolent_shrine_clash6",
+  "malevolent_shrine_clash7",
+  "malevolent_shrine_clash8",
+  "malevolent_shrine_clash9",
+  "malevolent_shrine_clash10",
+  "malevolent_shrine_clash11",
+  "malevolent_shrine_clash12"
+ ],
+ "perfection": [
+  "perfection_domain5",
+  "perfection_domain6",
+  "perfection_domain7",
+  "perfection_domain8",
+  "perfection_domain9",
+  "perfection_clash1",
+  "perfection_clash2",
+  "perfection_clash3",
+  "perfection_clash4"
+ ],
+ "deadly_sentencing": [
+  "deadly_sentencing1",
+  "deadly_sentencing2",
+  "deadly_sentencing_clash3"
+ ]
+}

@@ -51,7 +51,7 @@ import java.util.Map;
  * Awakened Higuruma: gavel combat, the Deadly Sentencing trial domain, then the
  * Executioner's Sword (new skill set) for a limited time after a guilty verdict.
  */
-public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable {
+public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable, ClashCaster {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(HigurumaAwakenedEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Boolean> SWORD =
@@ -100,6 +100,7 @@ public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEn
     private long nextMove;
     private long nextDomain;
     private int domainTick = -1;
+    private boolean clashHold;
     private int sentenceTick = -1;
     private long swordUntil;
 
@@ -183,6 +184,8 @@ public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEn
             entityData.set(SWORD, false);
             equip(false);
         }
+        if (clashHold) { freeze(); return; }
+        DomainClashEntity.check(this);
         if (domainTick >= 0) { runDomain(level); return; }
         if (sentenceTick >= 0) { runSentence(level); return; }
         if (move != null) { runMove(level); return; }
@@ -313,6 +316,36 @@ public final class HigurumaAwakenedEntity extends PathfinderMob implements GeoEn
             nextMove = level.getGameTime() + 10;
         }
     }
+
+    // ------------------------------------------------------------------ domain clash
+
+    @Override public ClashKind clashKind() { return ClashKind.DEADLY_SENTENCING; }
+
+    /** The courtroom stands from tick 1; the trial runs until DOMAIN_INTRO + DOMAIN_TRIAL. */
+    @Override
+    public int clashCastTicks() {
+        if (domainTick < 1) return -1;
+        return domainTick > 70 ? 1000 : domainTick;
+    }
+
+    @Override
+    public void clashBegin() {
+        domainTick = -1;
+        entityData.set(ANIM, "");
+        nextDomain = Math.max(nextDomain, level().getGameTime() + 2400);
+    }
+
+    @Override public void clashHold(boolean hold) { this.clashHold = hold; }
+
+    /** Deadly Sentencing won: the trial is held again, beginning where the courtroom takes over. */
+    @Override
+    public void clashWin(DomainClashEntity clash) {
+        domainTick = DOMAIN_INTRO - 1;
+        getNavigation().stop();
+        entityData.set(ANIM, "domain");
+    }
+
+    @Override public void clashLose() { }
 
     @Override public boolean hurt(DamageSource source, float amount) {
         if (domainTick >= 0 && domainTick < DOMAIN_INTRO) return false;

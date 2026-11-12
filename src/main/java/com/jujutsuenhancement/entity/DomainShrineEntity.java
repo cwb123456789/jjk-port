@@ -32,11 +32,21 @@ public final class DomainShrineEntity extends Entity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private UUID ownerUuid;
     private int age;
+    /** Used by the domain clash: only the geometry is shown, nothing is damaged and it never expires on its own. */
+    private boolean visualOnly;
 
     public DomainShrineEntity(EntityType<? extends DomainShrineEntity> type, Level level) {
         super(type, level);
         this.noPhysics = true;
         this.setNoGravity(true);
+    }
+
+    public UUID getOwnerUuid() {
+        return ownerUuid;
+    }
+
+    public void setVisualOnly() {
+        this.visualOnly = true;
     }
 
     public void setOwner(Entity owner) {
@@ -48,7 +58,7 @@ public final class DomainShrineEntity extends Entity implements GeoEntity {
         super.tick();
         this.setNoGravity(true);
         this.setDeltaMovement(Vec3.ZERO);
-        if (this.level().isClientSide) return;
+        if (this.level().isClientSide || visualOnly) return;
 
         age++;
         if (age >= LIFETIME_TICKS) {
@@ -90,6 +100,11 @@ public final class DomainShrineEntity extends Entity implements GeoEntity {
     }
 
     @Override protected void defineSynchedData() {}
+
+    @Override
+    public boolean shouldBeSaved() {
+        return !visualOnly && super.shouldBeSaved();
+    }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
