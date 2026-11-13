@@ -44,7 +44,7 @@ import java.util.Map;
  * Skills: combo, Dismantle, Cleave, Fuga "Open" (flame arrow), "Furnace" (flame volley),
  * Malevolent Shrine, and the possession cutscene on first contact.
  */
-public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable, ClashCaster {
+public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEntity, TestCastable, ClashCaster, DismantleCaster {
     private static final EntityDataAccessor<String> ANIM =
             SynchedEntityData.defineId(SukunaAwakenedEntity.class, EntityDataSerializers.STRING);
 
@@ -80,6 +80,9 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
     private boolean possessed;
     private long nextAttack;
     private long nextDismantle;
+    private long nextDissect;
+    private long nextBack;
+    private long nextDown;
     private long nextCleave;
     private long nextFuga;
     private long nextFurnace;
@@ -162,8 +165,13 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
             start(COMBO[comboIndex % COMBO.length]);
         } else if (dist < 3.4D && now >= nextCleave && random.nextInt(60) == 0) {
             start("cleave");
+        } else if (dist < 6.5D && now >= nextBack && random.nextInt(40) == 0) {
+            start("dismantle_back");
+        } else if (dist < 8.0D && now >= nextDown && random.nextInt(160) == 0) {
+            start("dismantle_down");
         } else if (dist >= 3.4D && random.nextInt(30) == 0) {
-            if (dist < 14.0D && now >= nextDismantle) start("dismantle");
+            if (dist > 6.0D && dist < 40.0D && now >= nextDissect && random.nextInt(3) == 0 && hasLineOfSight(target)) start("dissect");
+            else if (dist < 30.0D && now >= nextDismantle && hasLineOfSight(target)) start("dismantle");
             else if (dist > 8.0D && now >= nextFuga && hasLineOfSight(target)) start("fuga");
             else if (dist > 6.0D && now >= nextFurnace && hasLineOfSight(target)) start("furnace");
         }
@@ -173,6 +181,15 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
         skill = name;
         skillTick = 0;
         getNavigation().stop();
+        // cooldowns from the addon's click function (sukuna_ab1 50, dissect 150, backwards 150, downwards 480 ticks)
+        long now = level().getGameTime();
+        switch (name) {
+            case "dismantle" -> nextDismantle = now + 50;
+            case "dissect" -> nextDissect = now + 150;
+            case "dismantle_back" -> nextBack = now + 150;
+            case "dismantle_down" -> nextDown = now + 480;
+            default -> { }
+        }
         entityData.set(ANIM, name);
         if (name.equals("possession")) level().playSound(null, getX(), getY(), getZ(),
                 SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 2.0F, 0.5F);
@@ -181,7 +198,6 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
     private void end(long cooldown) {
         long now = level().getGameTime();
         switch (skill) {
-            case "dismantle" -> nextDismantle = now + 60;
             case "cleave" -> nextCleave = now + 100;
             case "fuga" -> nextFuga = now + 400;
             case "furnace" -> nextFurnace = now + 600;
@@ -196,6 +212,7 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
         }
         skill = "";
         skillTick = 0;
+        setNoGravity(false);
         entityData.set(ANIM, "");
     }
 
@@ -223,7 +240,8 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
         skillTick++;
         getNavigation().stop();
         Vec3 m = getDeltaMovement();
-        setDeltaMovement(0.0D, Math.min(0.0D, m.y), 0.0D);
+        boolean airborne = skill.equals("dismantle_back") || skill.equals("dismantle_down");
+        setDeltaMovement(0.0D, airborne ? m.y : Math.min(0.0D, m.y), 0.0D);
         if (!skill.equals("shrine") && !skill.equals("possession")) faceTarget();
 
         switch (skill) {
@@ -237,9 +255,17 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
                 }
             }
             case "dismantle" -> {
-                if (skillTick == 6) dismantle(level);
-                if (skillTick >= 13) end(0);
+                // sukuna_ab1: move 11 -> 1, the slash is made at move 5 (tick 7), animation dismantle1
+                if (skillTick == 7) {
+                    Vec3 dir = aim();
+                    DismantleSlashEntity.launch(level, this, DismantleSlashEntity.QUICK, getEyePosition().add(dir.scale(2.0D)), dir);
+                    BedrockFxEntity.play(level, "quick_cast", getX(), getY(), getZ(), getYRot());
+                }
+                if (skillTick >= 11) end(0);
             }
+            case "dissect" -> dissectTick(level);
+            case "dismantle_back" -> backTick(level);
+            case "dismantle_down" -> downTick(level);
             case "cleave" -> {
                 if (skillTick == 4) cleave(level);
                 if (skillTick >= 10) end(0);
@@ -296,21 +322,86 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
         if (skillTick >= total) end(0);
     }
 
-    private void dismantle(ServerLevel level) {
-        Vec3 dir = aim();
-        Vec3 start = getEyePosition();
-        for (int i = 1; i <= 14; i++) {
-            Vec3 p = start.add(dir.scale(i));
-            level.sendParticles(ParticleTypes.SWEEP_ATTACK, p.x, p.y, p.z, 1, 0.3D, 0.3D, 0.3D, 0.0D);
+    /** Horizontal push along {@code dir} (unit), used for the addon's ds:knockback dashes; the strengths are estimates. */
+    private void dash(Vec3 dir, double speed) {
+        Vec3 h = new Vec3(dir.x, 0.0D, dir.z);
+        if (h.lengthSqr() < 1.0E-6D) return;
+        h = h.normalize().scale(speed);
+        setDeltaMovement(h.x, getDeltaMovement().y, h.z);
+    }
+
+    private Vec3 flat() {
+        Vec3 a = aim();
+        Vec3 h = new Vec3(a.x, 0.0D, a.z);
+        return h.lengthSqr() < 1.0E-6D ? new Vec3(0, 0, 1) : h.normalize();
+    }
+
+    /**
+     * sukuna_ab1d (解·切 / dissect), move 36 -> 1: flashstep at moves 33..35 and 25..27, back-step at move 34, dash forward
+     * at moves 27..32, the slash is made at move 15 (tick 22), voice at move 23.
+     */
+    private void dissectTick(ServerLevel level) {
+        Vec3 f = flat();
+        if (skillTick == 3 || skillTick == 11) BedrockFxEntity.play(level, "flashstep", getX(), getY(), getZ(), getYRot());
+        if (skillTick >= 3 && skillTick <= 5) dash(f.scale(-1.0D), 0.9D);
+        if (skillTick >= 8 && skillTick <= 13) dash(f, 0.8D);
+        if (skillTick == 14) BedrockFxEntity.play(level, "voice_kai", getX(), getY(), getZ(), getYRot());
+        if (skillTick == 22) {
+            Vec3 dir = aim();
+            DismantleSlashEntity.launch(level, this, DismantleSlashEntity.DISSECT, position().add(0.0D, 1.0D, 0.0D).add(dir), dir);
+            BedrockFxEntity.play(level, "dissect_cast", getX(), getY(), getZ(), getYRot());
         }
-        for (Entity e : level.getEntities(this, getBoundingBox().inflate(15.0D), this::isFoe)) {
-            Vec3 to = e.getBoundingBox().getCenter().subtract(start);
-            double along = to.dot(dir);
-            if (along < 0.0D || along > 14.0D) continue;
-            if (to.subtract(dir.scale(along)).length() > 1.6D) continue;
-            e.hurt(damageSources().indirectMagic(this, this), 12.0F);
+        if (skillTick >= 36) end(0);
+    }
+
+    /**
+     * sukuna_ab1e (后撤宽斩 / wide dismantle), move 41 -> 1: leap back at move 39, drift back until move 34, lunge at
+     * moves 29..30, come down at 22..25, ground slam and sounds at move 21, the wide slash is made at move 20 (tick 22).
+     */
+    private void backTick(ServerLevel level) {
+        Vec3 f = flat();
+        if (skillTick == 3) {
+            BedrockFxEntity.play(level, "leap", getX(), getY(), getZ(), getYRot());
+            setDeltaMovement(getDeltaMovement().x, 0.55D, getDeltaMovement().z);
         }
-        level.playSound(null, getX(), getY(), getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.HOSTILE, 1.5F, 0.6F);
+        if (skillTick >= 3 && skillTick <= 8) {
+            Vec3 d = getDeltaMovement();
+            dash(f.scale(-1.0D), 0.9D);
+            setDeltaMovement(getDeltaMovement().x, d.y, getDeltaMovement().z);
+        }
+        if (skillTick == 12 || skillTick == 13) dash(f, 1.2D);
+        if (skillTick >= 17 && skillTick <= 20 && getDeltaMovement().y > -0.8D) {
+            setDeltaMovement(getDeltaMovement().x, -0.8D, getDeltaMovement().z);
+        }
+        if (skillTick == 21) BedrockFxEntity.play(level, "wide_cast", getX(), getY(), getZ(), getYRot());
+        if (skillTick == 22) {
+            Vec3 dir = aim();
+            DismantleSlashEntity.launch(level, this, DismantleSlashEntity.WIDE, position().add(0.0D, 1.0D, 0.0D).add(dir), dir);
+        }
+        if (skillTick >= 41) end(0);
+    }
+
+    /**
+     * sukuna_ab1b (空中解 / downwards), move 66 -> 1: rises and hovers, three slashes fall from his position at moves
+     * 25, 23 and 21 (below him, 3 blocks in front, 3 blocks to the west); each makes a 10 block shockwave where it lands.
+     */
+    private void downTick(ServerLevel level) {
+        if (skillTick == 1) BedrockFxEntity.play(level, "voice_done", getX(), getY(), getZ(), getYRot());
+        if (skillTick == 3) setNoGravity(true);
+        if (skillTick >= 3 && skillTick <= 14) setDeltaMovement(0.0D, 0.5D, 0.0D);
+        else if (skillTick > 14 && skillTick < 47) setDeltaMovement(0.0D, 0.0D, 0.0D);
+        if (skillTick == 47) setNoGravity(false);
+        if (skillTick == 42 || skillTick == 44 || skillTick == 46) {
+            Vec3 o = skillTick == 42 ? new Vec3(0, -1, 0) : skillTick == 44 ? new Vec3(0, -1, 3) : new Vec3(-3, -1, 0);
+            Vec3 p = position().add(o);
+            DismantleSlashEntity.launch(level, this, DismantleSlashEntity.DOWN, p, new Vec3(0, -1, 0));
+        }
+        if (skillTick >= 66) end(0);
+    }
+
+    @Override
+    public boolean isDismantleTarget(Entity target) {
+        return isFoe(target);
     }
 
     private void cleave(ServerLevel level) {
@@ -392,7 +483,7 @@ public final class SukunaAwakenedEntity extends PathfinderMob implements GeoEnti
     @Override
     public java.util.List<String> castableSkills() {
         return java.util.List.of("attack1", "attack2", "attack3", "attack4", "attack5",
-                "dismantle", "cleave", "fuga", "furnace", "shrine", "possession");
+                "dismantle", "dissect", "dismantle_back", "dismantle_down", "cleave", "fuga", "furnace", "shrine", "possession");
     }
 
     @Override

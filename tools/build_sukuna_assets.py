@@ -15,7 +15,9 @@ sources = {
         "animation.sukuna.attack1": "attack1", "animation.sukuna.attack2": "attack2",
         "animation.sukuna.attack3": "attack3", "animation.sukuna.attack4": "attack4",
         "animation.sukuna.attack5": "attack5", "animation.dismantle1": "dismantle",
-        "animation.cleave": "cleave"},
+        "animation.cleave": "cleave",
+        "animation.dismantle_downwards": "dismantle_down", "animation.dissect": "dissect",
+        "animation.dismantle_backwards": "dismantle_back"},
     "sukuna/divine_flames.animation.json": {
         "animation.fuga_activate": "fuga_activate", "animation.fuga_activate_hold": "fuga_hold",
         "animation.fuga_arrow1": "furnace"},

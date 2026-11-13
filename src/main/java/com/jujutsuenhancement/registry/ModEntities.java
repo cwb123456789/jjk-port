@@ -1,7 +1,9 @@
 package com.jujutsuenhancement.registry;
 
 import com.jujutsuenhancement.JujutsuEnhancement;
+import com.jujutsuenhancement.entity.BedrockFxEntity;
 import com.jujutsuenhancement.entity.DomainClashEntity;
+import com.jujutsuenhancement.entity.DismantleSlashEntity;
 import com.jujutsuenhancement.entity.DomainShrineEntity;
 import com.jujutsuenhancement.entity.GojoAwakenedEntity;
 import com.jujutsuenhancement.entity.MahitoAwakenedEntity;
@@ -73,6 +75,26 @@ public final class ModEntities {
                     .clientTrackingRange(12)
                     .updateInterval(2)
                     .build("mahito_domain_barrier"));
+
+    public static final RegistryObject<EntityType<BedrockFxEntity>> BEDROCK_FX =
+            ENTITY_TYPES.register("bedrock_fx", () -> EntityType.Builder
+                    .of(BedrockFxEntity::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F)
+                    .clientTrackingRange(12)
+                    .updateInterval(1)
+                    .noSave()
+                    .fireImmune()
+                    .build("bedrock_fx"));
+
+    public static final RegistryObject<EntityType<DismantleSlashEntity>> DISMANTLE_SLASH =
+            ENTITY_TYPES.register("dismantle_slash", () -> EntityType.Builder
+                    .of(DismantleSlashEntity::new, MobCategory.MISC)
+                    .sized(0.3F, 0.3F)
+                    .clientTrackingRange(12)
+                    .updateInterval(1)
+                    .noSave()
+                    .fireImmune()
+                    .build("dismantle_slash"));
 
     public static final RegistryObject<EntityType<DomainClashEntity>> DOMAIN_CLASH =
             ENTITY_TYPES.register("domain_clash", () -> EntityType.Builder

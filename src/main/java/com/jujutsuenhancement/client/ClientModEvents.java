@@ -90,6 +90,8 @@ public final class ClientModEvents {
         // client crashes the moment the entity enters view.
         event.registerEntityRenderer(ModEntities.HOLLOW_PURPLE.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.DOMAIN_CLASH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+        event.registerEntityRenderer(ModEntities.BEDROCK_FX.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+        event.registerEntityRenderer(ModEntities.DISMANTLE_SLASH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.GOJO_AWAKENED.get(), GojoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.MAHITO_AWAKENED.get(), MahitoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.SUKUNA_AWAKENED.get(), SukunaAwakenedRenderer::new);

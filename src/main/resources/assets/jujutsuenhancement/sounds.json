@@ -61,5 +61,59 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.sukuna.slash": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/sukuna_slash",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.sukuna.dismantle": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/sukuna_dismantle",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.sukuna.slice1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/sukuna_slice1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.sukuna.kai": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/sukuna_kai",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.sukuna.youvedoneitnow": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/sukuna_youvedoneitnow",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.sukuna.shock1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/sukuna_shock1",
+        "volume": 1.0
+      }
+    ]
   }
 }
