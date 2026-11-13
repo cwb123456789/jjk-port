@@ -1,0 +1,205 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Java: 17.0.21, JVM: 17.0.21+9 (Eclipse Adoptium), Arch: amd64
+
+> Task :compileJava
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/entity/HigurumaAwakenedEntity.java:126: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("jujutsucraft", sword ? "executioners_sword" : "gavel"));
+                                                   ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/integration/NativePurpleBridge.java:37: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation NATIVE_PURPLE = new ResourceLocation("jujutsucraft", "purple");
+                                                          ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/JujutsuEnhancement.java:17: warning: [removal] get() in FMLJavaModLoadingContext has been deprecated and marked for removal
+        ModEntities.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+                                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/JujutsuEnhancement.java:18: warning: [removal] get() in FMLJavaModLoadingContext has been deprecated and marked for removal
+        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+                                                        ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/ClientModEvents.java:29: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        EntityType<?> registeredType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("jujutsucraft", "mahito"));
+                                                                             ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/ClientModEvents.java:82: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+                        new ResourceLocation(JujutsuEnhancement.MODID, "bedrock_particle"),
+                        ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/ImpactFrames.java:36: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation OVERLAY_ID = new ResourceLocation(JujutsuEnhancement.MODID, "impact_frames");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/ImpactFrames.java:78: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        ResourceLocation rl = new ResourceLocation(JujutsuEnhancement.MODID,
+                              ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/BedrockAssets.java:30: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        ResourceLocation id = new ResourceLocation(JujutsuEnhancement.MODID, "bedrock/particles/" + name + ".json");
+                              ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/BedrockAssets.java:58: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            loc = new ResourceLocation(JujutsuEnhancement.MODID, "textures/bedrock/" + path + ".png");
+                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/ClashShow.java:62: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    public static final ResourceLocation OVERLAY_ID = new ResourceLocation(JujutsuEnhancement.MODID, "clash_show");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/ClashShow.java:157: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+                ResourceLocation id = new ResourceLocation(JujutsuEnhancement.MODID, "bedrock/clash/effects.json");
+                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/ClashShow.java:204: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        mc.getSoundManager().play(new SimpleSoundInstance(new ResourceLocation(JujutsuEnhancement.MODID, "bedrock.clash." + name),
+                                                          ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/FxShow.java:113: warning: [removal] ResourceLocation(String) in ResourceLocation has been deprecated and marked for removal
+        ResourceLocation id = s.name().contains(":") ? new ResourceLocation(s.name()) : new ResourceLocation(JujutsuEnhancement.MODID, s.name());
+                                                       ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/FxShow.java:113: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        ResourceLocation id = s.name().contains(":") ? new ResourceLocation(s.name()) : new ResourceLocation(JujutsuEnhancement.MODID, s.name());
+                                                                                        ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/VoidShow.java:69: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation OVERLAY_ID = new ResourceLocation(JujutsuEnhancement.MODID, "void_show");
+                                                       ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/bedrock/VoidShow.java:155: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        track = new SimpleSoundInstance(new ResourceLocation(JujutsuEnhancement.MODID, name),
+                                        ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/NativeMahitoPhase2GeoModel.java:17: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation NATIVE_MODEL = new ResourceLocation("jujutsucraft", "geo/human.geo.json");
+                                                         ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/NativeMahitoPhase2GeoModel.java:18: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation PHASE_TWO_MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/mahito_stage2_native.geo.json");
+                                                            ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/NativeMahitoPhase2GeoModel.java:19: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation NATIVE_ANIMATION = new ResourceLocation("jujutsucraft", "animations/human.animation.json");
+                                                             ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/NativeMahitoPhase2GeoModel.java:20: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation FALLBACK_TEXTURE = new ResourceLocation("jujutsucraft", "textures/entities/mahito.png");
+                                                             ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/NativeMahitoPhase2GeoModel.java:33: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            return new ResourceLocation("jujutsucraft", "textures/entities/mahito_phase2__body.png");
+                   ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/NativeMahitoPhase2GeoModel.java:36: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            return new ResourceLocation("jujutsucraft", "textures/entities/" + texture + ".png");
+                   ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/SukunaAwakenedModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/innate_sukuna.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/SukunaAwakenedModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/sukuna_awakened.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/SukunaAwakenedModel.java:12: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation("jujutsucraft", "textures/entities/fushiguro_megumi_sukuna.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/HigurumaAwakenedModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/gojo_awakened.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/HigurumaAwakenedModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/higuruma_awakened.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/HigurumaAwakenedModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation("jujutsucraft", "textures/entities/higuruma_hiromi.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/DomainShrineModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/DomainShrineModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation(
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/DomainShrineModel.java:13: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/GojoAwakenedModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/gojo_awakened.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/GojoAwakenedModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/gojo_awakened.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/GojoAwakenedModel.java:12: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation("jujutsucraft", "textures/entities/gojo_satoru.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/HeianSukunaModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/heian_sukuna.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/HeianSukunaModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation(JujutsuEnhancement.MODID, "textures/entity/heian_sukuna.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/HeianSukunaModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/heian_sukuna.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoDomainBarrierModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/mahito_domain_barrier.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoDomainBarrierModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation(JujutsuEnhancement.MODID, "textures/entity/mahito_domain_barrier.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoDomainBarrierModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/empty.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoPrototypeModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/mahito.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoPrototypeModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation(JujutsuEnhancement.MODID, "textures/entity/mahito.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoPrototypeModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation STAGE2_MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/mahito_stage2.geo.json");
+                                                         ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoPrototypeModel.java:12: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation STAGE2_TEXTURE = new ResourceLocation(JujutsuEnhancement.MODID, "textures/entity/mahito_stage2.png");
+                                                           ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoPrototypeModel.java:13: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/mahito_compatible.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/YujiAwakenedModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/gojo_awakened.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/YujiAwakenedModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/yuji_awakened.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/YujiAwakenedModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation("jujutsucraft", "textures/entities/itadori_yuji.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoDomainHandsModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/perfection_domain_hands_compat.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoDomainHandsModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation(JujutsuEnhancement.MODID, "textures/entity/perfection_domain_hands.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoDomainHandsModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/empty.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoAwakenedModel.java:9: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation MODEL = new ResourceLocation(JujutsuEnhancement.MODID, "geo/mahito.geo.json");
+                                                  ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoAwakenedModel.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation ANIMATION = new ResourceLocation(JujutsuEnhancement.MODID, "animations/mahito_compatible.animation.json");
+                                                      ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoAwakenedModel.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation TEXTURE = new ResourceLocation(JujutsuEnhancement.MODID, "textures/entity/mahito.png");
+                                                    ^
+/home/runner/work/jjk-port/jjk-port/src/main/java/com/jujutsuenhancement/client/model/MahitoAwakenedModel.java:12: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+    private static final ResourceLocation STAGE2 = new ResourceLocation(JujutsuEnhancement.MODID, "textures/entity/mahito_stage2.png");
+                                                   ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+56 warnings
+
+> Task :processResources
+> Task :classes
+> Task :jar
+> Task :downloadMcpConfig
+> Task :extractSrg
+> Task :createMcpToSrg
+> Task :reobfJar
+> Task :jarJar SKIPPED
+> Task :reobfJarJar SKIPPED
+> Task :assemble
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :check UP-TO-DATE
+> Task :build
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/build-1794608220460.json
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.8/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 25s
+7 actionable tasks: 7 executed

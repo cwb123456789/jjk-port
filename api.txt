@@ -1,0 +1,461 @@
+geckolib jar: /home/runner/.gradle/caches/modules-2/files-2.1/software.bernie.geckolib/geckolib-forge-1.20.1/4.8.4/35153b92ee86becebbf3b0b2559e2bc9ee8d16fb/geckolib-forge-1.20.1-4.8.4.jar
+=== software.bernie.geckolib.renderer.GeoRenderer
+Compiled from "GeoRenderer.java"
+public interface software.bernie.geckolib.renderer.GeoRenderer<T extends software.bernie.geckolib.core.animatable.GeoAnimatable> {
+  public abstract software.bernie.geckolib.model.GeoModel<T> getGeoModel();
+  public abstract T getAnimatable();
+  public default net.minecraft.resources.ResourceLocation getTextureLocation(T);
+  public default java.util.List<software.bernie.geckolib.renderer.layer.GeoRenderLayer<T>> getRenderLayers();
+  public default net.minecraft.client.renderer.RenderType getRenderType(T, net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.MultiBufferSource, float);
+  public default software.bernie.geckolib.core.object.Color getRenderColor(T, float, int);
+  public default int getPackedOverlay(T, float);
+  public default int getPackedOverlay(T, float, float);
+  public default long getInstanceId(T);
+  public default float getMotionAnimThreshold(T);
+  public default void defaultRender(com.mojang.blaze3d.vertex.PoseStack, T, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, com.mojang.blaze3d.vertex.VertexConsumer, float, float, int);
+  public default void reRender(software.bernie.geckolib.cache.object.BakedGeoModel, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, T, net.minecraft.client.renderer.RenderType, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int, float, float, float, float);
+  public default void actuallyRender(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public default void preApplyRenderLayers(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+  public default void applyRenderLayersForBone(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+  public default void applyRenderLayers(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+  public default void preRender(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public default void postRender(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public default void renderFinal(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int, float, float, float, float);
+  public default void doPostRenderCleanup();
+  public default void renderRecursively(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public default void renderCubesOfBone(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.GeoBone, com.mojang.blaze3d.vertex.VertexConsumer, int, int, float, float, float, float);
+  public default void renderChildBones(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public default void renderCube(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.GeoCube, com.mojang.blaze3d.vertex.VertexConsumer, int, int, float, float, float, float);
+  public default void createVerticesOfQuad(software.bernie.geckolib.cache.object.GeoQuad, org.joml.Matrix4f, org.joml.Vector3f, com.mojang.blaze3d.vertex.VertexConsumer, int, int, float, float, float, float);
+  public abstract void fireCompileRenderLayersEvent();
+  public abstract boolean firePreRenderEvent(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, float, int);
+  public abstract void firePostRenderEvent(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, float, int);
+  public default void scaleModelForRender(float, float, com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, boolean, float, int, int);
+  public abstract void updateAnimatedTextureFrame(T);
+}
+=== software.bernie.geckolib.renderer.GeoEntityRenderer
+Compiled from "GeoEntityRenderer.java"
+public class software.bernie.geckolib.renderer.GeoEntityRenderer<T extends net.minecraft.world.entity.Entity & software.bernie.geckolib.core.animatable.GeoAnimatable> extends net.minecraft.client.renderer.entity.EntityRenderer<T> implements software.bernie.geckolib.renderer.GeoRenderer<T> {
+  protected final software.bernie.geckolib.renderer.layer.GeoRenderLayersContainer<T> renderLayers;
+  protected final software.bernie.geckolib.model.GeoModel<T> model;
+  protected T animatable;
+  protected float scaleWidth;
+  protected float scaleHeight;
+  protected org.joml.Matrix4f entityRenderTranslations;
+  protected org.joml.Matrix4f modelRenderTranslations;
+  public software.bernie.geckolib.renderer.GeoEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, net.minecraft.world.entity.EntityType<? extends T>);
+  public software.bernie.geckolib.renderer.GeoEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, software.bernie.geckolib.model.GeoModel<T>);
+  public software.bernie.geckolib.model.GeoModel<T> getGeoModel();
+  public T getAnimatable();
+  public long getInstanceId(T);
+  public net.minecraft.resources.ResourceLocation m_5478_(T);
+  public java.util.List<software.bernie.geckolib.renderer.layer.GeoRenderLayer<T>> getRenderLayers();
+  public software.bernie.geckolib.renderer.GeoEntityRenderer<T> addRenderLayer(software.bernie.geckolib.renderer.layer.GeoRenderLayer<T>);
+  public software.bernie.geckolib.renderer.GeoEntityRenderer<T> withScale(float);
+  public software.bernie.geckolib.renderer.GeoEntityRenderer<T> withScale(float, float);
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public void m_7392_(T, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public void actuallyRender(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public void applyRenderLayers(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+  public void renderFinal(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int, float, float, float, float);
+  public void doPostRenderCleanup();
+  public void renderRecursively(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  protected void applyRotations(T, com.mojang.blaze3d.vertex.PoseStack, float, float, float);
+  protected float getDeathMaxRotation(T);
+  public double getNameRenderCutoffDistance(T);
+  public boolean m_6512_(T);
+  public int getPackedOverlay(T, float);
+  public int getPackedOverlay(T, float, float);
+  public boolean isShaking(T);
+  public <E extends net.minecraft.world.entity.Entity, M extends net.minecraft.world.entity.Mob> void renderLeash(M, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, E);
+  private static void renderLeashPiece(com.mojang.blaze3d.vertex.VertexConsumer, org.joml.Matrix4f, float, float, float, int, int, int, int, float, float, float, float, int, boolean);
+  public void updateAnimatedTextureFrame(T);
+  public void fireCompileRenderLayersEvent();
+  public boolean firePreRenderEvent(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, float, int);
+  public void firePostRenderEvent(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, float, int);
+  public void updateAnimatedTextureFrame(software.bernie.geckolib.core.animatable.GeoAnimatable);
+  public void renderRecursively(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public void renderFinal(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int, float, float, float, float);
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public void applyRenderLayers(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+  public void actuallyRender(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+  public long getInstanceId(software.bernie.geckolib.core.animatable.GeoAnimatable);
+  public int getPackedOverlay(software.bernie.geckolib.core.animatable.GeoAnimatable, float, float);
+  public int getPackedOverlay(software.bernie.geckolib.core.animatable.GeoAnimatable, float);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(software.bernie.geckolib.core.animatable.GeoAnimatable);
+  public software.bernie.geckolib.core.animatable.GeoAnimatable getAnimatable();
+}
+=== software.bernie.geckolib.renderer.layer.GeoRenderLayer
+Compiled from "GeoRenderLayer.java"
+public abstract class software.bernie.geckolib.renderer.layer.GeoRenderLayer<T extends software.bernie.geckolib.core.animatable.GeoAnimatable> {
+  protected final software.bernie.geckolib.renderer.GeoRenderer<T> renderer;
+  public software.bernie.geckolib.renderer.layer.GeoRenderLayer(software.bernie.geckolib.renderer.GeoRenderer<T>);
+  public software.bernie.geckolib.model.GeoModel<T> getGeoModel();
+  public software.bernie.geckolib.cache.object.BakedGeoModel getDefaultBakedModel(T);
+  public software.bernie.geckolib.renderer.GeoRenderer<T> getRenderer();
+  protected net.minecraft.resources.ResourceLocation getTextureResource(T);
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+  public void render(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+  public void renderForBone(com.mojang.blaze3d.vertex.PoseStack, T, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, float, int, int);
+}
+=== software.bernie.geckolib.cache.object.GeoBone
+Compiled from "GeoBone.java"
+public class software.bernie.geckolib.cache.object.GeoBone implements software.bernie.geckolib.core.animatable.model.CoreGeoBone {
+  private final software.bernie.geckolib.cache.object.GeoBone parent;
+  private final java.lang.String name;
+  private final java.util.List<software.bernie.geckolib.cache.object.GeoBone> children;
+  private final java.util.List<software.bernie.geckolib.cache.object.GeoCube> cubes;
+  private final java.lang.Boolean mirror;
+  private final java.lang.Double inflate;
+  private final java.lang.Boolean dontRender;
+  private final java.lang.Boolean reset;
+  private software.bernie.geckolib.core.state.BoneSnapshot initialSnapshot;
+  private boolean hidden;
+  private boolean childrenHidden;
+  private float scaleX;
+  private float scaleY;
+  private float scaleZ;
+  private float positionX;
+  private float positionY;
+  private float positionZ;
+  private float pivotX;
+  private float pivotY;
+  private float pivotZ;
+  private float rotX;
+  private float rotY;
+  private float rotZ;
+  private boolean positionChanged;
+  private boolean rotationChanged;
+  private boolean scaleChanged;
+  private final org.joml.Matrix4f modelSpaceMatrix;
+  private final org.joml.Matrix4f localSpaceMatrix;
+  private final org.joml.Matrix4f worldSpaceMatrix;
+  private org.joml.Matrix3f worldSpaceNormal;
+  private boolean trackingMatrices;
+  public software.bernie.geckolib.cache.object.GeoBone(software.bernie.geckolib.cache.object.GeoBone, java.lang.String, java.lang.Boolean, java.lang.Double, java.lang.Boolean, java.lang.Boolean);
+  public java.lang.String getName();
+  public software.bernie.geckolib.cache.object.GeoBone getParent();
+  public float getRotX();
+  public float getRotY();
+  public float getRotZ();
+  public float getPosX();
+  public float getPosY();
+  public float getPosZ();
+  public float getScaleX();
+  public float getScaleY();
+  public float getScaleZ();
+  public void setRotX(float);
+  public void setRotY(float);
+  public void setRotZ(float);
+  public void setPosX(float);
+  public void setPosY(float);
+  public void setPosZ(float);
+  public void setScaleX(float);
+  public void setScaleY(float);
+  public void setScaleZ(float);
+  public boolean isHidden();
+  public void setHidden(boolean);
+  public void setChildrenHidden(boolean);
+  public void setPivotX(float);
+  public void setPivotY(float);
+  public void setPivotZ(float);
+  public float getPivotX();
+  public float getPivotY();
+  public float getPivotZ();
+  public boolean isHidingChildren();
+  public void markScaleAsChanged();
+  public void markRotationAsChanged();
+  public void markPositionAsChanged();
+  public boolean hasScaleChanged();
+  public boolean hasRotationChanged();
+  public boolean hasPositionChanged();
+  public void resetStateChanges();
+  public software.bernie.geckolib.core.state.BoneSnapshot getInitialSnapshot();
+  public java.util.List<software.bernie.geckolib.cache.object.GeoBone> getChildBones();
+  public void saveInitialSnapshot();
+  public java.lang.Boolean getMirror();
+  public java.lang.Double getInflate();
+  public java.lang.Boolean shouldNeverRender();
+  public java.lang.Boolean getReset();
+  public java.util.List<software.bernie.geckolib.cache.object.GeoCube> getCubes();
+  public boolean isTrackingMatrices();
+  public void setTrackingMatrices(boolean);
+  public org.joml.Matrix4f getModelSpaceMatrix();
+  public void setModelSpaceMatrix(org.joml.Matrix4f);
+  public org.joml.Matrix4f getLocalSpaceMatrix();
+  public void setLocalSpaceMatrix(org.joml.Matrix4f);
+  public org.joml.Matrix4f getWorldSpaceMatrix();
+  public void setWorldSpaceMatrix(org.joml.Matrix4f);
+  public void setWorldSpaceNormal(org.joml.Matrix3f);
+  public org.joml.Matrix3f getWorldSpaceNormal();
+  public org.joml.Vector3d getLocalPosition();
+  public org.joml.Vector3d getModelPosition();
+  public org.joml.Vector3d getWorldPosition();
+  public void setModelPosition(org.joml.Vector3d);
+  public org.joml.Matrix4f getModelRotationMatrix();
+  public org.joml.Vector3d getPositionVector();
+  public org.joml.Vector3d getRotationVector();
+  public org.joml.Vector3d getScaleVector();
+  public void addRotationOffsetFromBone(software.bernie.geckolib.cache.object.GeoBone);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public software.bernie.geckolib.core.animatable.model.CoreGeoBone getParent();
+}
+=== software.bernie.geckolib.cache.object.BakedGeoModel
+Compiled from "BakedGeoModel.java"
+public final class software.bernie.geckolib.cache.object.BakedGeoModel extends java.lang.Record implements software.bernie.geckolib.core.animatable.model.CoreBakedGeoModel {
+  private final java.util.List<software.bernie.geckolib.cache.object.GeoBone> topLevelBones;
+  private final software.bernie.geckolib.loading.json.raw.ModelProperties properties;
+  public software.bernie.geckolib.cache.object.BakedGeoModel(java.util.List<software.bernie.geckolib.cache.object.GeoBone>, software.bernie.geckolib.loading.json.raw.ModelProperties);
+  public java.util.List<? extends software.bernie.geckolib.core.animatable.model.CoreGeoBone> getBones();
+  public java.util.Optional<software.bernie.geckolib.cache.object.GeoBone> getBone(java.lang.String);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.List<software.bernie.geckolib.cache.object.GeoBone> topLevelBones();
+  public software.bernie.geckolib.loading.json.raw.ModelProperties properties();
+}
+=== software.bernie.geckolib.model.GeoModel
+Compiled from "GeoModel.java"
+public abstract class software.bernie.geckolib.model.GeoModel<T extends software.bernie.geckolib.core.animatable.GeoAnimatable> implements software.bernie.geckolib.core.animatable.model.CoreGeoModel<T> {
+  private final software.bernie.geckolib.core.animation.AnimationProcessor<T> processor;
+  private software.bernie.geckolib.cache.object.BakedGeoModel currentModel;
+  private double animTime;
+  private double lastGameTickTime;
+  private long lastRenderedInstance;
+  public software.bernie.geckolib.model.GeoModel();
+  public net.minecraft.resources.ResourceLocation getModelResource(T, software.bernie.geckolib.renderer.GeoRenderer<T>);
+  public abstract net.minecraft.resources.ResourceLocation getModelResource(T);
+  public net.minecraft.resources.ResourceLocation getTextureResource(T, software.bernie.geckolib.renderer.GeoRenderer<T>);
+  public abstract net.minecraft.resources.ResourceLocation getTextureResource(T);
+  public abstract net.minecraft.resources.ResourceLocation getAnimationResource(T);
+  public net.minecraft.resources.ResourceLocation[] getAnimationResourceFallbacks(T);
+  public boolean crashIfBoneMissing();
+  public net.minecraft.client.renderer.RenderType getRenderType(T, net.minecraft.resources.ResourceLocation);
+  public final software.bernie.geckolib.cache.object.BakedGeoModel getBakedGeoModel(java.lang.String);
+  public software.bernie.geckolib.cache.object.BakedGeoModel getBakedModel(net.minecraft.resources.ResourceLocation);
+  public java.util.Optional<software.bernie.geckolib.cache.object.GeoBone> getBone(java.lang.String);
+  public software.bernie.geckolib.core.animation.Animation getAnimation(T, java.lang.String);
+  public software.bernie.geckolib.core.animation.AnimationProcessor<T> getAnimationProcessor();
+  public void addAdditionalStateData(T, long, java.util.function.BiConsumer<software.bernie.geckolib.core.object.DataTicket<T>, T>);
+  public void handleAnimations(T, long, software.bernie.geckolib.core.animation.AnimationState<T>);
+  public void applyMolangQueries(T, double);
+  public software.bernie.geckolib.core.animatable.model.CoreBakedGeoModel getBakedGeoModel(java.lang.String);
+  private static double lambda$applyMolangQueries$9(net.minecraft.world.entity.LivingEntity, double);
+  private static double lambda$applyMolangQueries$8(net.minecraft.world.entity.LivingEntity);
+  private static double lambda$applyMolangQueries$7(net.minecraft.world.entity.LivingEntity);
+  private static double lambda$applyMolangQueries$6(net.minecraft.world.entity.Entity);
+  private static double lambda$applyMolangQueries$5(net.minecraft.world.entity.Entity);
+  private static double lambda$applyMolangQueries$4(net.minecraft.world.entity.Entity);
+  private static double lambda$applyMolangQueries$3(net.minecraft.client.Minecraft, net.minecraft.world.entity.Entity);
+  private static double lambda$applyMolangQueries$2(net.minecraft.client.Minecraft);
+  private static double lambda$applyMolangQueries$1(double);
+  private static double lambda$handleAnimations$0(software.bernie.geckolib.core.animation.AnimationState);
+}
+=== software.bernie.geckolib.core.animation.AnimationState
+Compiled from "AnimationState.java"
+public class software.bernie.geckolib.core.animation.AnimationState<T extends software.bernie.geckolib.core.animatable.GeoAnimatable> {
+  private final T animatable;
+  private final float limbSwing;
+  private final float limbSwingAmount;
+  private final float partialTick;
+  private final boolean isMoving;
+  private final java.util.Map<software.bernie.geckolib.core.object.DataTicket<?>, java.lang.Object> extraData;
+  protected software.bernie.geckolib.core.animation.AnimationController<T> controller;
+  public double animationTick;
+  public software.bernie.geckolib.core.animation.AnimationState(T, float, float, float, boolean);
+  public double getAnimationTick();
+  public T getAnimatable();
+  public float getLimbSwing();
+  public float getLimbSwingAmount();
+  public float getPartialTick();
+  public boolean isMoving();
+  public software.bernie.geckolib.core.animation.AnimationController<T> getController();
+  public software.bernie.geckolib.core.animation.AnimationState<T> withController(software.bernie.geckolib.core.animation.AnimationController<T>);
+  public java.util.Map<software.bernie.geckolib.core.object.DataTicket<?>, ?> getExtraData();
+  public <D> D getData(software.bernie.geckolib.core.object.DataTicket<D>);
+  public <D> void setData(software.bernie.geckolib.core.object.DataTicket<D>, D);
+  public void setAnimation(software.bernie.geckolib.core.animation.RawAnimation);
+  public software.bernie.geckolib.core.object.PlayState setAndContinue(software.bernie.geckolib.core.animation.RawAnimation);
+  public boolean isCurrentAnimation(software.bernie.geckolib.core.animation.RawAnimation);
+  public boolean isCurrentAnimationStage(java.lang.String);
+  public void resetCurrentAnimation();
+  public void setControllerSpeed(float);
+}
+=== software.bernie.geckolib.core.animation.AnimationController
+Compiled from "AnimationController.java"
+public class software.bernie.geckolib.core.animation.AnimationController<T extends software.bernie.geckolib.core.animatable.GeoAnimatable> {
+  protected final T animatable;
+  protected final java.lang.String name;
+  protected final software.bernie.geckolib.core.animation.AnimationController$AnimationStateHandler<T> stateHandler;
+  protected final java.util.Map<java.lang.String, software.bernie.geckolib.core.keyframe.BoneAnimationQueue> boneAnimationQueues;
+  protected final java.util.Map<java.lang.String, software.bernie.geckolib.core.state.BoneSnapshot> boneSnapshots;
+  protected java.util.Queue<software.bernie.geckolib.core.animation.AnimationProcessor$QueuedAnimation> animationQueue;
+  protected boolean isJustStarting;
+  protected boolean needsAnimationReload;
+  protected boolean shouldResetTick;
+  private boolean justStopped;
+  protected boolean justStartedTransition;
+  protected software.bernie.geckolib.core.animation.AnimationController$SoundKeyframeHandler<T> soundKeyframeHandler;
+  protected software.bernie.geckolib.core.animation.AnimationController$ParticleKeyframeHandler<T> particleKeyframeHandler;
+  protected software.bernie.geckolib.core.animation.AnimationController$CustomKeyframeHandler<T> customKeyframeHandler;
+  protected final java.util.Map<java.lang.String, software.bernie.geckolib.core.animation.RawAnimation> triggerableAnimations;
+  protected software.bernie.geckolib.core.animation.RawAnimation triggeredAnimation;
+  protected boolean handlingTriggeredAnimations;
+  protected double transitionLength;
+  protected software.bernie.geckolib.core.animation.RawAnimation currentRawAnimation;
+  protected software.bernie.geckolib.core.animation.AnimationProcessor$QueuedAnimation currentAnimation;
+  protected software.bernie.geckolib.core.animation.AnimationController$State animationState;
+  protected double tickOffset;
+  protected double lastPollTime;
+  protected java.util.function.Function<T, java.lang.Double> animationSpeedModifier;
+  protected java.util.function.Function<T, software.bernie.geckolib.core.animation.EasingType> overrideEasingTypeFunction;
+  private final java.util.Set<software.bernie.geckolib.core.keyframe.event.data.KeyFrameData> executedKeyFrames;
+  protected software.bernie.geckolib.core.animatable.model.CoreGeoModel<T> lastModel;
+  public software.bernie.geckolib.core.animation.AnimationController(T, software.bernie.geckolib.core.animation.AnimationController$AnimationStateHandler<T>);
+  public software.bernie.geckolib.core.animation.AnimationController(T, java.lang.String, software.bernie.geckolib.core.animation.AnimationController$AnimationStateHandler<T>);
+  public software.bernie.geckolib.core.animation.AnimationController(T, int, software.bernie.geckolib.core.animation.AnimationController$AnimationStateHandler<T>);
+  public software.bernie.geckolib.core.animation.AnimationController(T, java.lang.String, int, software.bernie.geckolib.core.animation.AnimationController$AnimationStateHandler<T>);
+  public software.bernie.geckolib.core.animation.AnimationController<T> setSoundKeyframeHandler(software.bernie.geckolib.core.animation.AnimationController$SoundKeyframeHandler<T>);
+  public software.bernie.geckolib.core.animation.AnimationController<T> setParticleKeyframeHandler(software.bernie.geckolib.core.animation.AnimationController$ParticleKeyframeHandler<T>);
+  public software.bernie.geckolib.core.animation.AnimationController<T> setCustomInstructionKeyframeHandler(software.bernie.geckolib.core.animation.AnimationController$CustomKeyframeHandler<T>);
+  public software.bernie.geckolib.core.animation.AnimationController<T> setAnimationSpeedHandler(java.util.function.Function<T, java.lang.Double>);
+  public software.bernie.geckolib.core.animation.AnimationController<T> setAnimationSpeed(double);
+  public software.bernie.geckolib.core.animation.AnimationController<T> setOverrideEasingType(software.bernie.geckolib.core.animation.EasingType);
+  public software.bernie.geckolib.core.animation.AnimationController<T> setOverrideEasingTypeFunction(java.util.function.Function<T, software.bernie.geckolib.core.animation.EasingType>);
+  public software.bernie.geckolib.core.animation.AnimationController<T> triggerableAnim(java.lang.String, software.bernie.geckolib.core.animation.RawAnimation);
+  public software.bernie.geckolib.core.animation.AnimationController<T> receiveTriggeredAnimations();
+  public java.lang.String getName();
+  public software.bernie.geckolib.core.animation.AnimationProcessor$QueuedAnimation getCurrentAnimation();
+  public software.bernie.geckolib.core.animation.RawAnimation getTriggeredAnimation();
+  public software.bernie.geckolib.core.animation.AnimationController$State getAnimationState();
+  public software.bernie.geckolib.core.animation.AnimationController$AnimationStateHandler<T> getStateHandler();
+  public java.util.Map<java.lang.String, software.bernie.geckolib.core.keyframe.BoneAnimationQueue> getBoneAnimationQueues();
+  public double getAnimationSpeed();
+  public void forceAnimationReset();
+  public void stop();
+  public void setTransitionLength(int);
+  public software.bernie.geckolib.core.animation.AnimationController<T> transitionLength(int);
+  public boolean hasAnimationFinished();
+  public software.bernie.geckolib.core.animation.RawAnimation getCurrentRawAnimation();
+  public boolean isPlayingTriggeredAnimation();
+  public void setAnimation(software.bernie.geckolib.core.animation.RawAnimation);
+  public boolean tryTriggerAnimation(java.lang.String);
+  protected boolean stopTriggeredAnimation();
+  protected software.bernie.geckolib.core.object.PlayState handleAnimationState(software.bernie.geckolib.core.animation.AnimationState<T>);
+  public void process(software.bernie.geckolib.core.animatable.model.CoreGeoModel<T>, software.bernie.geckolib.core.animation.AnimationState<T>, java.util.Map<java.lang.String, software.bernie.geckolib.core.animatable.model.CoreGeoBone>, java.util.Map<java.lang.String, software.bernie.geckolib.core.state.BoneSnapshot>, double, boolean);
+  private void processCurrentAnimation(double, double, boolean);
+  private void createInitialQueues(java.util.Collection<software.bernie.geckolib.core.animatable.model.CoreGeoBone>);
+  private void saveSnapshotsForAnimation(software.bernie.geckolib.core.animation.AnimationProcessor$QueuedAnimation, java.util.Map<java.lang.String, software.bernie.geckolib.core.state.BoneSnapshot>);
+  protected double adjustTick(double);
+  private software.bernie.geckolib.core.keyframe.AnimationPoint getAnimationPointAtTick(java.util.List<software.bernie.geckolib.core.keyframe.Keyframe<com.eliotlash.mclib.math.IValue>>, double, boolean, software.bernie.geckolib.core.object.Axis);
+  private software.bernie.geckolib.core.keyframe.KeyframeLocation<software.bernie.geckolib.core.keyframe.Keyframe<com.eliotlash.mclib.math.IValue>> getCurrentKeyFrameLocation(java.util.List<software.bernie.geckolib.core.keyframe.Keyframe<com.eliotlash.mclib.math.IValue>>, double);
+  private void resetEventKeyFrames();
+  private static double lambda$processCurrentAnimation$5(double);
+  private static double lambda$process$4();
+  private static software.bernie.geckolib.core.animation.EasingType lambda$setOverrideEasingType$3(software.bernie.geckolib.core.animation.EasingType, software.bernie.geckolib.core.animatable.GeoAnimatable);
+  private static java.lang.Double lambda$setAnimationSpeed$2(double, software.bernie.geckolib.core.animatable.GeoAnimatable);
+  private static software.bernie.geckolib.core.animation.EasingType lambda$new$1(software.bernie.geckolib.core.animatable.GeoAnimatable);
+  private static java.lang.Double lambda$new$0(software.bernie.geckolib.core.animatable.GeoAnimatable);
+}
+=== software.bernie.geckolib.core.animation.RawAnimation
+Compiled from "RawAnimation.java"
+public final class software.bernie.geckolib.core.animation.RawAnimation {
+  private final java.util.List<software.bernie.geckolib.core.animation.RawAnimation$Stage> animationList;
+  private software.bernie.geckolib.core.animation.RawAnimation();
+  public software.bernie.geckolib.core.animation.RawAnimation(java.util.List<software.bernie.geckolib.core.animation.RawAnimation$Stage>);
+  public static software.bernie.geckolib.core.animation.RawAnimation begin();
+  public software.bernie.geckolib.core.animation.RawAnimation thenPlay(java.lang.String);
+  public software.bernie.geckolib.core.animation.RawAnimation thenLoop(java.lang.String);
+  public software.bernie.geckolib.core.animation.RawAnimation thenWait(int);
+  public software.bernie.geckolib.core.animation.RawAnimation thenPlayAndHold(java.lang.String);
+  public software.bernie.geckolib.core.animation.RawAnimation thenPlayXTimes(java.lang.String, int);
+  public software.bernie.geckolib.core.animation.RawAnimation then(java.lang.String, software.bernie.geckolib.core.animation.Animation$LoopType);
+  public java.util.List<software.bernie.geckolib.core.animation.RawAnimation$Stage> getAnimationStages();
+  public static software.bernie.geckolib.core.animation.RawAnimation copyOf(software.bernie.geckolib.core.animation.RawAnimation);
+  public int getStageCount();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+=== software.bernie.geckolib.core.animatable.model.CoreGeoBone
+Compiled from "CoreGeoBone.java"
+public interface software.bernie.geckolib.core.animatable.model.CoreGeoBone {
+  public abstract java.lang.String getName();
+  public abstract software.bernie.geckolib.core.animatable.model.CoreGeoBone getParent();
+  public abstract float getRotX();
+  public abstract float getRotY();
+  public abstract float getRotZ();
+  public abstract float getPosX();
+  public abstract float getPosY();
+  public abstract float getPosZ();
+  public abstract float getScaleX();
+  public abstract float getScaleY();
+  public abstract float getScaleZ();
+  public abstract void setRotX(float);
+  public abstract void setRotY(float);
+  public abstract void setRotZ(float);
+  public default void updateRotation(float, float, float);
+  public abstract void setPosX(float);
+  public abstract void setPosY(float);
+  public abstract void setPosZ(float);
+  public default void updatePosition(float, float, float);
+  public abstract void setScaleX(float);
+  public abstract void setScaleY(float);
+  public abstract void setScaleZ(float);
+  public default void updateScale(float, float, float);
+  public abstract void setPivotX(float);
+  public abstract void setPivotY(float);
+  public abstract void setPivotZ(float);
+  public default void updatePivot(float, float, float);
+  public abstract float getPivotX();
+  public abstract float getPivotY();
+  public abstract float getPivotZ();
+  public abstract boolean isHidden();
+  public abstract boolean isHidingChildren();
+  public abstract void setHidden(boolean);
+  public abstract void setChildrenHidden(boolean);
+  public abstract void saveInitialSnapshot();
+  public abstract void markScaleAsChanged();
+  public abstract void markRotationAsChanged();
+  public abstract void markPositionAsChanged();
+  public abstract boolean hasScaleChanged();
+  public abstract boolean hasRotationChanged();
+  public abstract boolean hasPositionChanged();
+  public abstract void resetStateChanges();
+  public abstract software.bernie.geckolib.core.state.BoneSnapshot getInitialSnapshot();
+  public abstract java.util.List<? extends software.bernie.geckolib.core.animatable.model.CoreGeoBone> getChildBones();
+  public default software.bernie.geckolib.core.state.BoneSnapshot saveSnapshot();
+}
+=== software.bernie.geckolib.util.RenderUtils
+Compiled from "RenderUtils.java"
+public final class software.bernie.geckolib.util.RenderUtils {
+  public software.bernie.geckolib.util.RenderUtils();
+  public static void translateMatrixToBone(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static void rotateMatrixAroundBone(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static void rotateMatrixAroundCube(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.GeoCube);
+  public static void scaleMatrixForBone(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static void translateToPivotPoint(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.GeoCube);
+  public static void translateToPivotPoint(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static void translateAwayFromPivotPoint(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.cache.object.GeoCube);
+  public static void translateAwayFromPivotPoint(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static void translateAndRotateMatrixForBone(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static void prepMatrixForBone(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static org.joml.Matrix4f invertAndMultiplyMatrices(org.joml.Matrix4f, org.joml.Matrix4f);
+  public static void faceRotation(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.world.entity.Entity, float);
+  public static org.joml.Matrix4f translateMatrix(org.joml.Matrix4f, org.joml.Vector3f);
+  public static it.unimi.dsi.fastutil.ints.IntIntPair getTextureDimensions(net.minecraft.resources.ResourceLocation);
+  public static double getCurrentSystemTick();
+  public static double getCurrentTick();
+  public static float booleanToFloat(boolean);
+  public static net.minecraft.world.phys.Vec3 arrayToVec(double[]);
+  public static void matchModelPartRot(net.minecraft.client.model.geom.ModelPart, software.bernie.geckolib.core.animatable.model.CoreGeoBone);
+  public static void fixInvertedFlatCube(software.bernie.geckolib.cache.object.GeoCube, org.joml.Vector3f);
+  public static float getDirectionAngle(net.minecraft.core.Direction);
+  public static software.bernie.geckolib.model.GeoModel<?> getGeoModelForEntityType(net.minecraft.world.entity.EntityType<?>);
+  public static software.bernie.geckolib.core.animatable.GeoAnimatable getReplacedAnimatable(net.minecraft.world.entity.EntityType<?>);
+  public static software.bernie.geckolib.model.GeoModel<?> getGeoModelForEntity(net.minecraft.world.entity.Entity);
+  public static software.bernie.geckolib.model.GeoModel<?> getGeoModelForItem(net.minecraft.world.item.Item);
+  public static software.bernie.geckolib.model.GeoModel<?> getGeoModelForBlock(net.minecraft.world.level.block.entity.BlockEntity);
+  public static software.bernie.geckolib.model.GeoModel<?> getGeoModelForArmor(net.minecraft.world.item.ItemStack);
+  private static net.minecraft.client.renderer.texture.AbstractTexture lambda$getTextureDimensions$0(net.minecraft.client.Minecraft, net.minecraft.resources.ResourceLocation);
+}
