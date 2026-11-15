@@ -98,11 +98,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private static final RawAnimation PURPLE_UNLIMITED = RawAnimation.begin().thenPlay("animation.gojo.purple_unlimited");
     private static final RawAnimation DOMAIN = RawAnimation.begin().thenPlay("animation.gojo.domain");
     private static final RawAnimation DOMAIN_QUICK = RawAnimation.begin().thenPlay("animation.gojo.domain_quick");
-    private static final RawAnimation BLUE = RawAnimation.begin().thenPlay("animation.gojo.blue");
-    private static final RawAnimation BLUE_PULL = RawAnimation.begin().thenPlay("animation.gojo.blue_pull");
-    private static final RawAnimation BLUE_MAX = RawAnimation.begin().thenPlay("animation.gojo.blue_max");
-    private static final RawAnimation RED = RawAnimation.begin().thenPlay("animation.gojo.red");
-    private static final RawAnimation RED_REVERSE = RawAnimation.begin().thenPlay("animation.gojo.red_reverse");
+    private static final RawAnimation BLUE_ANIM = RawAnimation.begin().thenPlay("animation.gojo.blue");
+    private static final RawAnimation BLUE_PULL_ANIM = RawAnimation.begin().thenPlay("animation.gojo.blue_pull");
+    private static final RawAnimation BLUE_MAX_ANIM = RawAnimation.begin().thenPlay("animation.gojo.blue_max");
+    private static final RawAnimation RED_ANIM = RawAnimation.begin().thenPlay("animation.gojo.red");
+    private static final RawAnimation RED_REVERSE_ANIM = RawAnimation.begin().thenPlay("animation.gojo.red_reverse");
     private static final RawAnimation[] ATTACKS = {
             RawAnimation.begin().thenPlay("animation.gojo.attack1"),
             RawAnimation.begin().thenPlay("animation.gojo.attack2"),
@@ -826,11 +826,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
             if (a == ANIM_PURPLE_UNLIMITED) return state.setAndContinue(PURPLE_UNLIMITED);
             if (a == ANIM_DOMAIN) return state.setAndContinue(DOMAIN);
             if (a == ANIM_DOMAIN_QUICK) return state.setAndContinue(DOMAIN_QUICK);
-            if (a == ANIM_BLUE) return state.setAndContinue(BLUE);
-            if (a == ANIM_BLUE_PULL) return state.setAndContinue(BLUE_PULL);
-            if (a == ANIM_BLUE_MAX) return state.setAndContinue(BLUE_MAX);
-            if (a == ANIM_RED) return state.setAndContinue(RED);
-            if (a == ANIM_RED_REVERSE) return state.setAndContinue(RED_REVERSE);
+            if (a == ANIM_BLUE) return state.setAndContinue(BLUE_ANIM);
+            if (a == ANIM_BLUE_PULL) return state.setAndContinue(BLUE_PULL_ANIM);
+            if (a == ANIM_BLUE_MAX) return state.setAndContinue(BLUE_MAX_ANIM);
+            if (a == ANIM_RED) return state.setAndContinue(RED_ANIM);
+            if (a == ANIM_RED_REVERSE) return state.setAndContinue(RED_REVERSE_ANIM);
             if (a > ANIM_ATTACK_BASE && a <= ANIM_ATTACK_BASE + ATTACKS.length) {
                 return state.setAndContinue(ATTACKS[a - ANIM_ATTACK_BASE - 1]);
             }
