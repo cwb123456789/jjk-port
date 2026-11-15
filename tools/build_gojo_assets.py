@@ -63,6 +63,9 @@ wanted = {
     "limitless_attack3": "attack3", "limitless_attack4": "attack4",
     "limitless_attack5": "attack5",
     "stunned": "stunned",
+    # Blue (苍) and Red (赫)
+    "lapse_blue1": "blue", "lapse_pull": "blue_pull", "lapse_blue2": "blue_max",
+    "reversal_red1": "red", "reversal_red2": "red_reverse",
 }
 anims = {}
 for old, new in wanted.items():

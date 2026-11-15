@@ -4,6 +4,7 @@ import com.jujutsuenhancement.registry.ModEntities;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -70,6 +71,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     public static final int ANIM_DOMAIN = 4;
     public static final int ANIM_DOMAIN_QUICK = 5;
     public static final int ANIM_ATTACK_BASE = 10; // 11..15 = attack1..attack5
+    public static final int ANIM_BLUE = 20;          // limitless2: Blue (苍), animation.lapse_blue1
+    public static final int ANIM_BLUE_PULL = 21;     // limitless2c: Blue pull (苍·拉), animation.lapse_pull
+    public static final int ANIM_BLUE_MAX = 22;      // limitless2b: maximum output Blue, animation.lapse_blue2
+    public static final int ANIM_RED = 23;           // limitless3: Red (赫), animation.reversal_red1
+    public static final int ANIM_RED_REVERSE = 24;   // limitless3c: Reversal Red, animation.reversal_red2
 
     private static final EntityDataAccessor<Integer> ANIM =
             SynchedEntityData.defineId(GojoAwakenedEntity.class, EntityDataSerializers.INT);
@@ -92,6 +98,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private static final RawAnimation PURPLE_UNLIMITED = RawAnimation.begin().thenPlay("animation.gojo.purple_unlimited");
     private static final RawAnimation DOMAIN = RawAnimation.begin().thenPlay("animation.gojo.domain");
     private static final RawAnimation DOMAIN_QUICK = RawAnimation.begin().thenPlay("animation.gojo.domain_quick");
+    private static final RawAnimation BLUE = RawAnimation.begin().thenPlay("animation.gojo.blue");
+    private static final RawAnimation BLUE_PULL = RawAnimation.begin().thenPlay("animation.gojo.blue_pull");
+    private static final RawAnimation BLUE_MAX = RawAnimation.begin().thenPlay("animation.gojo.blue_max");
+    private static final RawAnimation RED = RawAnimation.begin().thenPlay("animation.gojo.red");
+    private static final RawAnimation RED_REVERSE = RawAnimation.begin().thenPlay("animation.gojo.red_reverse");
     private static final RawAnimation[] ATTACKS = {
             RawAnimation.begin().thenPlay("animation.gojo.attack1"),
             RawAnimation.begin().thenPlay("animation.gojo.attack2"),
@@ -101,6 +112,15 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private static final int[] ATTACK_TICKS = {21, 16, 16, 17, 19};
 
     // --- skill timings (ticks) ---
+    // Blue / Red as the NPC (shinjuku_gojo) runs them: the cast function starts with move = N and counts down, so "move == k"
+    // of the addon is skillTick N - k here. Animations start at move N-1 (BLUE, RED, RED_REVERSE) or later (see animDelay).
+    private static final int BLUE_SHOOT = 11, BLUE_TOTAL = 14;                       // N 15: shot at move 4
+    private static final int PULL_MARK = 11, PULL_STUN = 15, PULL_TELEPORT = 19, PULL_TOTAL = 25; // N 26: moves 15, 11, 7
+    private static final int MAX_SPAWN = 49, MAX_TOTAL = 142;                         // N 143: MaxBlue summoned at move 94
+    private static final int RED_BLAST = 28, RED_TOTAL = 40;                          // N 41: damage at move 13
+    private static final int REVERSE_BLAST = 41, REVERSE_TOTAL = 50;                  // N 51: blast and Reversal at move 10
+    private static final double RED_RADIUS = 15.0D;
+    private static final double PULL_RADIUS = 14.95D;
     private static final int PURPLE_NORMAL_TOTAL = 480;
     private static final int PURPLE_NORMAL_FORM = 360;
     private static final int PURPLE_NORMAL_FIRE = 455;
@@ -134,6 +154,10 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     private long nextUnlimitedTime;
     private long nextDomainTime;
     private long nextQuickDomainTime;
+    private long nextSkillTime;
+    private long nextBlueMaxTime;
+    private long nextReverseTime;
+    private final java.util.List<UUID> pullTargets = new java.util.ArrayList<>();
     private boolean casting200ForSukuna;
     private long domainEndTime;
     private long domainStartTime;
@@ -154,6 +178,10 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
                 .add(Attributes.ATTACK_DAMAGE, 14.0D)
                 .add(Attributes.FOLLOW_RANGE, 48.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D);
+    }
+
+    public int getSkillId() {
+        return skill;
     }
 
     public int getAnimState() {
@@ -254,6 +282,14 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
             startSkill(ANIM_PURPLE_UNLIMITED, target);
             return;
         }
+        // the NPC picks a random move every few ticks (shinjuku_gojo.mcfunction: chance 11 Red, 20 pull, 21 Blue, 22 max Blue, 26 Reversal)
+        if (now >= nextSkillTime && this.random.nextInt(dist < 3.4D ? 40 : 25) == 0) {
+            int pick = pickTechnique(now, dist, target);
+            if (pick != ANIM_NONE) {
+                startSkill(pick, target);
+                return;
+            }
+        }
         if (dist < 3.4D && now >= nextAttackTime) {
             startSkill(ANIM_ATTACK_BASE + 1 + attackIndex, target);
             attackIndex = (attackIndex + 1) % ATTACKS.length;
@@ -269,6 +305,19 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
                 startSkill(ANIM_PURPLE_NORMAL, target);
             }
         }
+    }
+
+    /** One of the Blue / Red techniques that suits the distance, or ANIM_NONE. */
+    private int pickTechnique(long now, double dist, LivingEntity target) {
+        int[] options = new int[5];
+        int n = 0;
+        boolean los = hasLineOfSight(target);
+        if (dist >= 4.0D && dist <= 60.0D && los) options[n++] = ANIM_BLUE;
+        if (dist >= 5.0D && dist <= 28.0D) options[n++] = ANIM_BLUE_PULL;
+        if (dist <= RED_RADIUS) options[n++] = ANIM_RED;
+        if (dist <= 22.0D && now >= nextBlueMaxTime) options[n++] = ANIM_BLUE_MAX;
+        if (dist <= 30.0D && los && now >= nextReverseTime) options[n++] = ANIM_RED_REVERSE;
+        return n == 0 ? ANIM_NONE : options[this.random.nextInt(n)];
     }
 
     private Entity findPossessedMegumi(ServerLevel level) {
@@ -304,13 +353,18 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         this.attackHit = false;
         this.skillTarget = target;
         this.getNavigation().stop();
-        this.entityData.set(ANIM, id);
+        this.entityData.set(ANIM, animDelay(id) > 0 ? ANIM_NONE : id);
         if (id == ANIM_PURPLE_UNLIMITED) {
             this.setShiftKeyDown(true);
             this.setNoGravity(true);
             this.setPos(getX(), getY() + 2.0D, getZ()); // levitation before the shot
         }
         this.setTarget(target instanceof LivingEntity le ? le : this.getTarget());
+    }
+
+    /** Ticks the addon waits before it plays the animation (the cast function starts above the animation's move value). */
+    private static int animDelay(int id) {
+        return id == ANIM_BLUE_PULL ? 5 : id == ANIM_BLUE_MAX ? 2 : 0;
     }
 
     private void endSkill(long cooldownTicks) {
@@ -320,8 +374,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
             case ANIM_PURPLE_UNLIMITED -> nextUnlimitedTime = now + cooldownTicks;
             case ANIM_DOMAIN -> nextDomainTime = now + cooldownTicks;
             case ANIM_DOMAIN_QUICK -> nextQuickDomainTime = now + cooldownTicks;
+            case ANIM_BLUE_MAX -> nextBlueMaxTime = now + 999;      // ability2 999
+            case ANIM_RED_REVERSE -> nextReverseTime = now + 800;   // ability3 800
             default -> { }
         }
+        if (skill >= ANIM_BLUE && skill <= ANIM_RED_REVERSE) nextSkillTime = now + (skill == ANIM_RED ? 40 : 10); // Disabled
         if (skill > ANIM_ATTACK_BASE) nextAttackTime = now + 8;
         this.skill = ANIM_NONE;
         this.skillTick = 0;
@@ -368,10 +425,128 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
                 if (skillTick == UNLIMITED_RELEASE) fireUnlimited(level);
                 if (skillTick >= UNLIMITED_TOTAL) endSkill(600);
             }
+            case ANIM_BLUE -> runBlue(level);
+            case ANIM_BLUE_PULL -> runBluePull(level);
+            case ANIM_BLUE_MAX -> runBlueMax(level);
+            case ANIM_RED -> runRed(level);
+            case ANIM_RED_REVERSE -> runReverse(level);
             case ANIM_DOMAIN -> runDomain(level, DOMAIN_START, DOMAIN_LENGTH, DOMAIN_TOTAL, 2400, 6, 26.0F);
             case ANIM_DOMAIN_QUICK -> runDomain(level, QUICK_START, QUICK_LENGTH, QUICK_TOTAL, 1200, 3, 12.0F);
             default -> runAttack(level);
         }
+    }
+
+    // ------------------------------------------------------------------ Blue (苍) and Red (赫)
+
+    /** limitless2: animation lapse_blue1; at move 4 {@code ds:shootprojectile ds:projectile Lapse velocity:4 Deleter 45}. */
+    private void runBlue(ServerLevel level) {
+        if (skillTick == BLUE_SHOOT) {
+            Vec3 dir = aimDirection();
+            GojoTechEntity.launch(level, this, GojoTechEntity.BLUE_FLY, new Vec3(getX(), getY() + 0.1D, getZ()), dir);
+            level.playSound(null, getX(), getY() + 1.0D, getZ(), SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, 3.0F, 1.25F);
+        }
+        if (skillTick >= BLUE_TOTAL) endSkill(0);
+    }
+
+    /** limitless2c: animation lapse_pull; everything within 14.95 of the point 15 ahead is stunned and then put 1.5 blocks in front of him. */
+    private void runBluePull(ServerLevel level) {
+        if (skillTick == animDelay(ANIM_BLUE_PULL) + 1) this.entityData.set(ANIM, ANIM_BLUE_PULL);
+        Vec3 center = position().add(getLookAngle().normalize().scale(15.0D));
+        if (skillTick == PULL_MARK) {
+            pullTargets.clear();
+            for (Entity e : level.getEntities(this, new AABB(center, center).inflate(PULL_RADIUS), Entity::isAlive)) {
+                if (isEnemy(e) && e.position().distanceTo(center) <= PULL_RADIUS) {
+                    pullTargets.add(e.getUUID());
+                    BedrockFxEntity.play(level, "gojo_pull_hit", e.getX(), e.getY(), e.getZ(), getYRot());
+                }
+            }
+            level.playSound(null, getX(), getY() + 1.0D, getZ(), SoundEvents.WITHER_SHOOT, SoundSource.HOSTILE, 1.0F, 0.8F);
+        }
+        if (skillTick == PULL_STUN) {
+            for (UUID id : pullTargets) {
+                Entity e = level.getEntity(id);
+                if (!(e instanceof LivingEntity t) || !t.isAlive()) continue;
+                GojoTechEntity.stun(t, 35);
+                BedrockFxEntity.play(level, "gojo_pull_mark", t.getX(), t.getY() + 1.0D, t.getZ(), getYRot());
+            }
+            double yawRad = Math.toRadians(getYRot());
+            BedrockFxEntity.play(level, "gojo_pull_mark", getX() - Math.sin(yawRad) * 1.5D, getY() + 0.5D, getZ() + Math.cos(yawRad) * 1.5D, getYRot());
+        }
+        if (skillTick == PULL_TELEPORT) {
+            double yawRad = Math.toRadians(getYRot());
+            double tx = getX() - Math.sin(yawRad) * 1.5D, tz = getZ() + Math.cos(yawRad) * 1.5D, ty = getY() + 0.5D;
+            float faceYaw = getYRot() + 180.0F;
+            for (UUID id : pullTargets) {
+                Entity e = level.getEntity(id);
+                if (!(e instanceof LivingEntity t) || !t.isAlive()) continue;
+                if (t instanceof net.minecraft.server.level.ServerPlayer sp) {
+                    sp.connection.teleport(tx, ty, tz, faceYaw, sp.getXRot());
+                } else {
+                    t.moveTo(tx, ty, tz, faceYaw, t.getXRot());
+                    t.setDeltaMovement(Vec3.ZERO);
+                }
+                t.fallDistance = 0.0F;
+            }
+            pullTargets.clear();
+        }
+        if (skillTick >= PULL_TOTAL) endSkill(0);
+    }
+
+    /** limitless2b: animation lapse_blue2; MaxBlue is summoned 14 blocks ahead at move 94 and follows him. */
+    private void runBlueMax(ServerLevel level) {
+        if (skillTick == animDelay(ANIM_BLUE_MAX) + 1) {
+            this.entityData.set(ANIM, ANIM_BLUE_MAX);
+            level.playSound(null, getX(), getY(), getZ(), SoundEvents.WITHER_SHOOT, SoundSource.HOSTILE, 5.0F, 0.7F);
+            level.playSound(null, getX(), getY(), getZ(), SoundEvents.BEACON_ACTIVATE, SoundSource.HOSTILE, 5.0F, 0.74F);
+        }
+        if (skillTick == MAX_SPAWN) {
+            GojoTechEntity.launch(level, this, GojoTechEntity.BLUE_MAX, position().add(getLookAngle().normalize().scale(14.0D)), getLookAngle());
+        }
+        if (skillTick >= MAX_TOTAL) endSkill(0);
+    }
+
+    /** limitless3: animation reversal_red1; at move 13 everything within 15 blocks takes 35, is thrown away and lifted. */
+    private void runRed(ServerLevel level) {
+        if (skillTick == RED_BLAST) {
+            Vec3 c = position();
+            for (Entity e : level.getEntities(this, getBoundingBox().inflate(RED_RADIUS), Entity::isAlive)) {
+                if (!(e instanceof LivingEntity t) || !isEnemy(e) || t.position().distanceTo(c) > RED_RADIUS) continue;
+                GojoTechEntity.hurt(level, this, t, 35.0F);
+            }
+            // levitation 1 15 for everything within 7.5 of the points 7.5 above him and 8.5 to each side of that
+            double yawRad = Math.toRadians(getYRot());
+            Vec3 left = new Vec3(Math.cos(yawRad), 0.0D, Math.sin(yawRad));
+            Vec3[] lifts = {c.add(0.0D, 7.5D, 0.0D), c.add(left.scale(-8.5D)).add(0.0D, 7.5D, 0.0D), c.add(left.scale(8.5D)).add(0.0D, 7.5D, 0.0D)};
+            for (Vec3 p : lifts) {
+                for (Entity e : level.getEntities(this, new AABB(p, p).inflate(7.5D), Entity::isAlive)) {
+                    if (e instanceof LivingEntity t && isEnemy(e) && t.position().distanceTo(p) <= 7.5D) {
+                        t.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20, 15, false, false));
+                    }
+                }
+            }
+            GojoTechEntity.roar(level, this, c, 7.0D, 1.5D);  // ds:red_reverse
+            level.playSound(null, getX(), getY(), getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 4.0F, 0.5F);
+        }
+        if (skillTick >= RED_TOTAL) endSkill(0);
+    }
+
+    /** limitless3c: animation reversal_red2; at move 10 a 100-damage blast 7 blocks ahead and the Reversal beam. */
+    private void runReverse(ServerLevel level) {
+        if (skillTick == REVERSE_BLAST) {
+            Vec3 look = getLookAngle().normalize();
+            Vec3 c = position().add(look.scale(7.0D));
+            for (Entity e : level.getEntities(this, new AABB(c, c).inflate(6.95D), Entity::isAlive)) {
+                if (!(e instanceof LivingEntity t) || !isEnemy(e) || t.position().distanceTo(c) > 6.95D) continue;
+                GojoTechEntity.hurt(level, this, t, 100.0F);
+                GojoTechEntity.stun(t, 30);
+                Vec3 away = t.position().subtract(position()).multiply(1.0D, 0.0D, 1.0D);
+                away = away.lengthSqr() < 1.0E-6D ? look.multiply(1.0D, 0.0D, 1.0D) : away.normalize();
+                t.setDeltaMovement(away.x * 3.0D, 0.5D, away.z * 3.0D); // ds:knockback -120 is far beyond anything the engine can show
+                t.hurtMarked = true;
+            }
+            GojoTechEntity.launch(level, this, GojoTechEntity.RED_BEAM, new Vec3(getX(), getY() + 0.1D, getZ()), look);
+        }
+        if (skillTick >= REVERSE_TOTAL) endSkill(0);
     }
 
     private void faceTarget(Entity target) {
@@ -382,6 +557,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
         this.yBodyRot = yaw;
         this.yHeadRot = yaw;
         this.yRotO = yaw;
+        // a mob looks at its target, and the addon's ^^^ offsets and projectiles follow that view direction
+        double dy = target.getBoundingBox().getCenter().y - this.getEyeY();
+        float pitch = (float) -(Math.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * 180.0D / Math.PI);
+        this.setXRot(Mth.clamp(pitch, -60.0F, 60.0F));
+        this.xRotO = this.getXRot();
     }
 
     private Vec3 aimDirection() {
@@ -575,6 +755,7 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
     @Override
     public java.util.List<String> castableSkills() {
         return java.util.List.of("purple", "purple200", "unlimited", "domain", "quick_domain",
+                "blue", "blue_pull", "blue_max", "red", "red_reverse",
                 "attack1", "attack2", "attack3", "attack4", "attack5");
     }
 
@@ -587,6 +768,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
             case "unlimited" -> ANIM_PURPLE_UNLIMITED;
             case "domain" -> ANIM_DOMAIN;
             case "quick_domain" -> ANIM_DOMAIN_QUICK;
+            case "blue" -> ANIM_BLUE;
+            case "blue_pull" -> ANIM_BLUE_PULL;
+            case "blue_max" -> ANIM_BLUE_MAX;
+            case "red" -> ANIM_RED;
+            case "red_reverse" -> ANIM_RED_REVERSE;
             case "attack1" -> ANIM_ATTACK_BASE + 1;
             case "attack2" -> ANIM_ATTACK_BASE + 2;
             case "attack3" -> ANIM_ATTACK_BASE + 3;
@@ -640,6 +826,11 @@ public final class GojoAwakenedEntity extends PathfinderMob implements GeoEntity
             if (a == ANIM_PURPLE_UNLIMITED) return state.setAndContinue(PURPLE_UNLIMITED);
             if (a == ANIM_DOMAIN) return state.setAndContinue(DOMAIN);
             if (a == ANIM_DOMAIN_QUICK) return state.setAndContinue(DOMAIN_QUICK);
+            if (a == ANIM_BLUE) return state.setAndContinue(BLUE);
+            if (a == ANIM_BLUE_PULL) return state.setAndContinue(BLUE_PULL);
+            if (a == ANIM_BLUE_MAX) return state.setAndContinue(BLUE_MAX);
+            if (a == ANIM_RED) return state.setAndContinue(RED);
+            if (a == ANIM_RED_REVERSE) return state.setAndContinue(RED_REVERSE);
             if (a > ANIM_ATTACK_BASE && a <= ANIM_ATTACK_BASE + ATTACKS.length) {
                 return state.setAndContinue(ATTACKS[a - ANIM_ATTACK_BASE - 1]);
             }

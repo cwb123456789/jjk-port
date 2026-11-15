@@ -115,5 +115,41 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.gojo.red1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_red1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.shock1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_shock1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.shock2": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_shock2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.blood": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_blood",
+        "volume": 1.0
+      }
+    ]
   }
 }

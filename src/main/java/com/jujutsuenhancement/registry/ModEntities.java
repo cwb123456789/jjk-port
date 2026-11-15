@@ -6,6 +6,7 @@ import com.jujutsuenhancement.entity.DomainClashEntity;
 import com.jujutsuenhancement.entity.DismantleSlashEntity;
 import com.jujutsuenhancement.entity.DomainShrineEntity;
 import com.jujutsuenhancement.entity.GojoAwakenedEntity;
+import com.jujutsuenhancement.entity.GojoTechEntity;
 import com.jujutsuenhancement.entity.MahitoAwakenedEntity;
 import com.jujutsuenhancement.entity.SukunaAwakenedEntity;
 import com.jujutsuenhancement.entity.HigurumaAwakenedEntity;
@@ -95,6 +96,16 @@ public final class ModEntities {
                     .noSave()
                     .fireImmune()
                     .build("dismantle_slash"));
+
+    public static final RegistryObject<EntityType<GojoTechEntity>> GOJO_TECH =
+            ENTITY_TYPES.register("gojo_tech", () -> EntityType.Builder
+                    .of(GojoTechEntity::new, MobCategory.MISC)
+                    .sized(0.3F, 0.3F)
+                    .clientTrackingRange(12)
+                    .updateInterval(1)
+                    .noSave()
+                    .fireImmune()
+                    .build("gojo_tech"));
 
     public static final RegistryObject<EntityType<DomainClashEntity>> DOMAIN_CLASH =
             ENTITY_TYPES.register("domain_clash", () -> EntityType.Builder

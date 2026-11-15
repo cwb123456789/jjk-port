@@ -3,11 +3,19 @@ package com.jujutsuenhancement.client.bedrock;
 import com.jujutsuenhancement.JujutsuEnhancement;
 import com.jujutsuenhancement.entity.BedrockFxEntity;
 import com.jujutsuenhancement.entity.DismantleSlashEntity;
+import com.jujutsuenhancement.entity.GojoAwakenedEntity;
+import com.jujutsuenhancement.entity.GojoTechEntity;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +32,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Plays the particle and sound effects of the Bedrock skills that are shown by entities: {@link BedrockFxEntity}
@@ -44,6 +54,11 @@ public final class FxShow {
     private static final ParticleSim SIM = new ParticleSim();
     private static final Random RNG = new Random();
     private static final Map<Integer, Integer> SEEN = new HashMap<>();
+    /** Gojo entity id -> {animation id, ticks since that animation started}. */
+    private static final Map<Integer, int[]> GOJO = new HashMap<>();
+    private static final Set<Integer> gojoSeen = new java.util.HashSet<>();
+    private record GE(int tick, String name, double left, double up, double fwd) {}
+    private static Map<String, List<GE>> gojoAnim;
     private static long lastNanos;
     private static int tickCount;
     private static int shakeUntil;
@@ -87,6 +102,9 @@ public final class FxShow {
         def("dissect_cast", 0.8, List.of(p("ground_slam2")), List.of(s("bedrock.sukuna.slash", 3.0F, 1.0F)));
         def("voice_kai", 0, List.of(), List.of(s("bedrock.sukuna.kai", 3.0F, 1.0F)));
         def("voice_done", 0, List.of(), List.of(s("bedrock.sukuna.youvedoneitnow", 3.0F, 1.0F)));
+        // limitless2c.mcfunction: the targets of the Blue pull ("particle ds:impact" at move 15, lapse_pull2/3/4 at move 11)
+        def("gojo_pull_hit", 0, List.of(p("impact")), List.of());
+        def("gojo_pull_mark", 0, List.of(p("lapse_pull2"), p("lapse_pull3"), p("lapse_pull4")), List.of());
     }
 
     private FxShow() {}
@@ -159,6 +177,179 @@ public final class FxShow {
         }
     }
 
+    // ------------------------------------------------------------------ Gojo: Blue and Red
+
+    private static boolean ground(Minecraft mc, double x, double y, double z) {
+        // "unless block ~~-1~ air" (and not barrier)
+        var st = mc.level.getBlockState(BlockPos.containing(x, y - 1.0D, z));
+        return !st.isAir() && !st.is(net.minecraft.world.level.block.Blocks.BARRIER);
+    }
+
+    private static Map<String, List<GE>> gojoAnim(Minecraft mc) {
+        if (gojoAnim != null) return gojoAnim;
+        Map<String, List<GE>> out = new HashMap<>();
+        try {
+            Optional<Resource> res = mc.getResourceManager().getResource(new ResourceLocation(JujutsuEnhancement.MODID, "bedrock/gojo/anim_fx.json"));
+            if (res.isPresent()) {
+                try (java.io.Reader r = res.get().openAsReader()) {
+                    JsonObject root = JsonParser.parseReader(r).getAsJsonObject();
+                    for (Map.Entry<String, JsonElement> en : root.entrySet()) {
+                        List<GE> list = new ArrayList<>();
+                        for (JsonElement ev : en.getValue().getAsJsonObject().getAsJsonArray("events")) {
+                            JsonArray a = ev.getAsJsonArray();
+                            list.add(new GE(a.get(0).getAsInt(), a.get(1).getAsString(), a.get(2).getAsDouble(), a.get(3).getAsDouble(), a.get(4).getAsDouble()));
+                        }
+                        out.put(en.getKey(), list);
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+            // no animation effects then
+        }
+        gojoAnim = out;
+        return out;
+    }
+
+    private static String gojoAnimName(int anim) {
+        return switch (anim) {
+            case GojoAwakenedEntity.ANIM_BLUE -> "lapse_blue1";
+            case GojoAwakenedEntity.ANIM_BLUE_PULL -> "lapse_pull";
+            case GojoAwakenedEntity.ANIM_BLUE_MAX -> "lapse_blue2";
+            case GojoAwakenedEntity.ANIM_RED -> "reversal_red1";
+            case GojoAwakenedEntity.ANIM_RED_REVERSE -> "reversal_red2";
+            default -> null;
+        };
+    }
+
+    /** Server tick of the cast that the animation's first tick corresponds to, minus one (see GojoAwakenedEntity.animDelay). */
+    private static int gojoDelay(int anim) {
+        return anim == GojoAwakenedEntity.ANIM_BLUE_PULL ? 5 : anim == GojoAwakenedEntity.ANIM_BLUE_MAX ? 2 : 0;
+    }
+
+    private static void near(Minecraft mc, Entity e, double radius, double amp, int ticks) {
+        if (mc.player != null && mc.player.distanceToSqr(e) < radius * radius) shake(amp, ticks);
+    }
+
+    /**
+     * The effects of the Blue / Red casts: the particle events of the Bedrock animation (fired at the right hand, offsets computed
+     * by tools/build_gojo_fx_assets.py) and what the cast functions in functions/limitless/limitless2*.mcfunction and
+     * limitless3*.mcfunction play. {@code elapsed} is the number of ticks since the animation began, {@code sk} the matching tick of the cast
+     * (the addon's move score is N - sk).
+     */
+    private static void gojoTick(Minecraft mc, GojoAwakenedEntity g, int anim, int elapsed) {
+        String an = gojoAnimName(anim);
+        if (an == null) return;
+        double yaw = g.yBodyRot;
+        List<GE> events = gojoAnim(mc).get(an);
+        if (events != null) {
+            for (GE ev : events) {
+                if (ev.tick() == elapsed) spawn(ev.name(), g, ev.left(), ev.up(), ev.fwd(), yaw);
+            }
+        }
+        int sk = elapsed + 1 + gojoDelay(anim);
+        double x = g.getX(), y = g.getY(), z = g.getZ();
+        switch (anim) {
+            case GojoAwakenedEntity.ANIM_BLUE -> {
+                if (sk >= 1 && sk <= 9 && sk % 3 == 1) sound(mc, s("minecraft:block.beacon.ambient", 0.6F, 2.0F), x, y + 1, z);
+                if (sk == 11) near(mc, g, 15, 2.0, 2);
+            }
+            case GojoAwakenedEntity.ANIM_BLUE_PULL -> {
+                if (sk >= 12 && sk <= 24 && sk % 3 == 0) sound(mc, s("minecraft:block.beacon.ambient", 0.6F, 2.0F), x, y + 1, z);
+                if (sk == 11) {
+                    near(mc, g, 15, 2.0, 2);
+                    sound(mc, s("minecraft:block.beacon.deactivate", 1.0F, 1.75F), x, y + 1, z);
+                }
+                if (sk == 15) {
+                    double r = Math.toRadians(yaw);
+                    spawnWorld("lapse_pull2", x - Math.sin(r) * 1.5, y + 0.5, z + Math.cos(r) * 1.5, 0);
+                    spawnWorld("lapse_pull4", x - Math.sin(r) * 1.5, y + 0.5, z + Math.cos(r) * 1.5, 0);
+                }
+            }
+            case GojoAwakenedEntity.ANIM_BLUE_MAX -> {
+                if (sk == 4) {
+                    sound(mc, s("minecraft:entity.wither.shoot", 4.0F, 0.7F), x, y, z);
+                    sound(mc, s("minecraft:block.beacon.activate", 4.0F, 0.74F), x, y, z);
+                }
+            }
+            case GojoAwakenedEntity.ANIM_RED -> {
+                // limitless3.mcfunction, move = 41 - sk
+                if (sk == 6) sound(mc, s("bedrock.gojo.red1", 4.0F, 0.5F), x, y, z);
+                if (sk >= 23) near(mc, g, 15, 0.1, 2);
+                if (sk >= 19 && sk <= 26) spawnWorld("red_ex1", x, y + 1, z, 0);
+                if (sk == 25 || sk == 26) {
+                    for (String n : new String[] {"red_ex2", "red_ex3", "red_ex4", "red_ex5", "red_ex6"}) spawnWorld(n, x, y + 1, z, 0);
+                    near(mc, g, 40, 2.0, 2);
+                    if (ground(mc, x, y, z)) {
+                        spawnWorld("crater3", x, y, z, 0);
+                        for (double[] o : new double[][] {{0, 2}, {0, -2}, {2, 0}, {-2, 0}, {0, 0}}) spawnWorld("rubble3", x + o[0], y, z + o[1], 0);
+                        sound(mc, s("minecraft:entity.generic.explode", 4.0F, 0.5F), x, y, z);
+                        sound(mc, s("minecraft:entity.wither.break_block", 4.0F, 0.5F), x, y, z);
+                    }
+                }
+                if (sk == 25) {
+                    sound(mc, s("bedrock.gojo.shock2", 4.0F, 0.5F), x, y, z);
+                    sound(mc, s("bedrock.gojo.shock1", 4.0F, 1.0F), x, y, z);
+                }
+            }
+            case GojoAwakenedEntity.ANIM_RED_REVERSE -> {
+                // limitless3c.mcfunction, move = 51 - sk
+                if (sk == 6) sound(mc, s("bedrock.gojo.red1", 4.0F, 0.5F), x, y, z);
+                if (sk == 45) {
+                    near(mc, g, 50, 4.0, 3);
+                    sound(mc, s("bedrock.gojo.shock2", 4.0F, 0.5F), x, y, z);
+                    sound(mc, s("bedrock.gojo.shock1", 4.0F, 0.5F), x, y, z);
+                }
+            }
+            default -> { }
+        }
+    }
+
+    /** The particle lists the addon runs each tick for Lapse, Lapse2, MaxBlue and Reversal (lapseblue*.mcfunction, maxblue.mcfunction, reversal.mcfunction). */
+    private static void techTick(Minecraft mc, GojoTechEntity t, int a) {
+        double x = t.getX(), y = t.getY(), z = t.getZ();
+        switch (t.getKind()) {
+            case GojoTechEntity.BLUE_FLY -> {
+                spawnWorld("lapse", x, y, z, 0);
+                spawnWorld("lapseblue0a", x, y, z, 0);
+                spawnWorld("lapseblue0b", x, y, z, 0);
+            }
+            case GojoTechEntity.BLUE_PULL -> {
+                int left = 40 - a; // Deleter
+                near(mc, t, 15, 0.5, 3);
+                spawnWorld("lapseblue3", x, y, z, 0);
+                spawnWorld("lapseblue5", x, y, z, 0);
+                if (left >= 1 && left <= 30) spawnWorld("lapseblue2", x, y, z, 0);
+                if (left >= 1 && left <= 22 || left == 30 || left == 28 || left == 27 || left == 25) spawnWorld("lapseblue1", x, y, z, 0);
+                if (left >= 21) spawnWorld("blue_gas", x, y, z, 0);
+                if (left >= 1 && left <= 35 && ground(mc, x, y, z)) {
+                    spawnWorld("rubble_sucked1", x, y, z, 0);
+                    spawnWorld("rubble_sucked2", x, y, z, 0);
+                }
+            }
+            case GojoTechEntity.BLUE_MAX -> {
+                int left = GojoTechEntity.MAX_LIFE - a;
+                near(mc, t, 15, 0.5, 3);
+                spawnWorld("rubble3", x, y, z, 0);
+                spawnWorld("blue_gas", x, y, z, 0);
+                // animation.max_lapse (loops on the projectile)
+                for (String n : new String[] {"lapseblue1", "lapseblue2", "lapseblue3", "lapseblue5", "lapseblue6", "lapseblue4",
+                        "rubble_sucked_big", "lapse_energy"}) spawnWorld(n, x, y, z, 0);
+                if (left <= 2) {
+                    for (String n : new String[] {"lapseblue_ex1", "lapseblue_ex2", "lapseblue_ex3", "lapseblue_ex4"}) spawnWorld(n, x, y, z, 0);
+                }
+                if (ground(mc, x, y, z)) {
+                    spawnWorld("rubble_sucked1", x, y, z, 0);
+                    spawnWorld("rubble_sucked2", x, y, z, 0);
+                }
+            }
+            default -> {
+                // animation.phase_red and the particles reversal.mcfunction fires
+                for (String n : new String[] {"red1", "red2", "red3", "red7", "red_ex6", "red_ex4", "red_ex", "air_effect1"}) spawnWorld(n, x, y, z, 0);
+                near(mc, t, 40, 1.0, 2);
+            }
+        }
+    }
+
     // ------------------------------------------------------------------ events
 
     @SubscribeEvent
@@ -184,8 +375,23 @@ public final class FxShow {
                 int prev = SEEN.getOrDefault(sl.getId(), -1);
                 now.put(sl.getId(), a);
                 if (a > prev) slashTick(sl, a);
+            } else if (e instanceof GojoTechEntity gt) {
+                int a = Math.max(0, gt.tickCount - 1);
+                int prev = SEEN.getOrDefault(gt.getId(), -1);
+                now.put(gt.getId(), a);
+                if (a > prev) techTick(mc, gt, a);
+            } else if (e instanceof GojoAwakenedEntity g) {
+                int anim = g.getAnimState();
+                int[] st = GOJO.get(g.getId());
+                if (st == null || st[0] != anim) st = new int[] {anim, -1};
+                st[1]++;
+                gojoSeen.add(g.getId());
+                GOJO.put(g.getId(), st);
+                if (gojoAnimName(anim) != null) gojoTick(mc, g, anim, st[1]);
             }
         }
+        GOJO.keySet().retainAll(gojoSeen);
+        gojoSeen.clear();
         SEEN.clear();
         SEEN.putAll(now);
     }
@@ -215,6 +421,8 @@ public final class FxShow {
 
     @SubscribeEvent
     public static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
+        GOJO.clear();
+        gojoAnim = null;
         SEEN.clear();
         SIM.clear();
         shakeUntil = 0;

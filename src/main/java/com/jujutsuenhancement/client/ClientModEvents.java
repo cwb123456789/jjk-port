@@ -92,6 +92,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.DOMAIN_CLASH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.BEDROCK_FX.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.DISMANTLE_SLASH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+        event.registerEntityRenderer(ModEntities.GOJO_TECH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.GOJO_AWAKENED.get(), GojoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.MAHITO_AWAKENED.get(), MahitoAwakenedRenderer::new);
         event.registerEntityRenderer(ModEntities.SUKUNA_AWAKENED.get(), SukunaAwakenedRenderer::new);
