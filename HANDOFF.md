@@ -141,3 +141,22 @@ Source of truth: Bedrock `domain_clash_starting`, `domain_clash_main`, `domain_c
   keys and FOV were read from the function but not compared frame by frame with a recording, shake amplitude is estimated.
 - Skill inventory of the 31 reference videos (Gojo, Higuruma, Sukuna) is in `docs/skill_videos.md`; it is a to-do list for
   auditing each character against its Bedrock functions, nothing there is ported yet.
+
+## Sukuna Dismantle + Gojo Blue/Red (2026-11-14/16, v18) — compiled only, never run in game
+- Sukuna 解 series (quick / dissect / wide / down): `entity/DismantleSlashEntity`, `DismantleCaster`, `BedrockFxEntity` (named effect set played
+  by clients, see `FxShow`), `tools/build_dismantle_assets.py`. Other Sukuna parts (捌/斩拳/四手/开/原身/神武解/领域变体) are NOT done.
+- Gojo Blue/Red: `entity/GojoTechEntity` (kinds BLUE_FLY=Lapse, BLUE_PULL=Lapse2, BLUE_MAX=MaxBlue, RED_BEAM=Reversal), skills
+  `blue`, `blue_pull`, `blue_max`, `red`, `red_reverse` in `GojoAwakenedEntity` (right-click the NPC with the test item to cast each by name).
+  Timeline = addon's `move` score: move k  <->  skillTick N-k (BLUE N15 shot at 11; PULL N26 mark 11/stun 15/teleport 19; MAX N143 spawn 49;
+  RED N41 blast 28; REVERSE N51 blast+beam 41). Cooldowns: max Blue 999, Reversal 800, Disabled 10 (40 after Red). NPC picks randomly
+  like shinjuku_gojo (chance 11/20/21/22/26).
+- Effects: `tools/build_gojo_fx_assets.py` -> `bedrock/gojo/anim_fx.json` (particle events of lapse_blue1/2, lapse_pull, reversal_red1/2 with
+  the right-hand offset computed from the rightArm rotation keys) + particles + sounds `bedrock.gojo.*`. `FxShow.gojoTick/techTick` play them.
+  Animations `animation.gojo.blue|blue_pull|blue_max|red|red_reverse` come from `tools/build_gojo_assets.py` (limitless.animation.json).
+- Guessed / not equal to Bedrock: knockback strengths (ds:knockback scale unknown), explosions are particles+sound only and nothing breaks
+  blocks (Bedrock only with the "griefable" tag), no screen fade (blue flash at MaxBlue move 90, red fade), pull speed approximated from the tp
+  steps (0.382/tick), hands approximated from the animation, missing pack particles: lapseblue_ex4, red_launch2/3, rubble_suck2, no mob.beam3
+  sound in the pack, friendly fire is off (only Gojo's enemies are hit).
+- Not done for Gojo: infinity (1/1b/1c), 空间撕扯 (limitless4/4b/4c), 茈 variants (5b/5c/5d), chant versions (2e/3e), levitate purple, fists set
+  (bluefists, fury_barrage, infinity_backhand, shockwave_punch, pointblank), Black Flash execution, reversal variants 3b, enchant/phase animations.
+- CI quirk: `ci-output` is force-pushed; fetch with `git fetch origin +ci-output:refs/remotes/origin/ci-output`.
