@@ -402,7 +402,7 @@ public final class FxShow {
         long t = System.nanoTime();
         double dt = Math.min(0.1D, (t - lastNanos) / 1.0e9D);
         lastNanos = t;
-        if (SIM.particleCount() > 0 && !Minecraft.getInstance().isPaused()) SIM.step(dt);
+        if (SIM.active() && !Minecraft.getInstance().isPaused()) SIM.step(dt);
     }
 
     @SubscribeEvent

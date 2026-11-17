@@ -415,7 +415,7 @@ public final class ClashShow {
         long now = System.nanoTime();
         double dt = Math.min(0.1, (now - lastNanos) / 1.0e9);
         lastNanos = now;
-        if (SIM.particleCount() > 0 && !mc.isPaused()) SIM.step(dt);
+        if (SIM.active() && !mc.isPaused()) SIM.step(dt);
         if (cameraOwned) placeCamera(event.renderTickTime);
     }
 

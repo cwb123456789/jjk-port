@@ -67,6 +67,15 @@ public final class ParticleSim {
         return particles.size();
     }
 
+    /**
+     * True while the simulation has anything to step: live particles or emitters that have not emitted yet.
+     * A new emitter has no particle until the first {@link #step}, so a caller that only steps when
+     * {@link #particleCount()} is above zero never starts anything.
+     */
+    public boolean active() {
+        return !particles.isEmpty() || !emitters.isEmpty();
+    }
+
     public void clear() {
         emitters.clear();
         particles.clear();
