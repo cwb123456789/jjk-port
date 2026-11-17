@@ -3,6 +3,7 @@ package com.jujutsuenhancement;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import com.jujutsuenhancement.registry.ModCreativeTabs;
 import com.jujutsuenhancement.registry.ModEntities;
 import com.jujutsuenhancement.registry.ModItems;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +17,7 @@ public final class JujutsuEnhancement {
     public JujutsuEnhancement() {
         ModEntities.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModCreativeTabs.TABS.register(FMLJavaModLoadingContext.get().getModEventBus());
         LOGGER.info("[JujutsuEnhancement] Loaded version 0.1.0");
         LOGGER.info("[JujutsuEnhancement] JujutsuCraft detected: {}",
                 ModList.get().isLoaded("jujutsucraft"));

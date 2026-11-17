@@ -104,6 +104,8 @@ public final class FxShow {
         def("voice_done", 0, List.of(), List.of(s("bedrock.sukuna.youvedoneitnow", 3.0F, 1.0F)));
         // limitless2c.mcfunction: the targets of the Blue pull ("particle ds:impact" at move 15, lapse_pull2/3/4 at move 11)
         def("gojo_pull_hit", 0, List.of(p("impact")), List.of());
+        // relics/rough_crystal.mcfunction: "particle ds:rough_crystal1 ~~1~" and "ds:rough_crystal2 ~~1~" at the player
+        def("rough_crystal", 0, List.of(p("rough_crystal1", 0, 1, 0), p("rough_crystal2", 0, 1, 0)), List.of());
         def("gojo_pull_mark", 0, List.of(p("lapse_pull2"), p("lapse_pull3"), p("lapse_pull4")), List.of());
     }
 

@@ -8,5 +8,13 @@
   "entity.jujutsuenhancement.yuji_awakened": "Itadori Yuji (Awakening)",
   "item.jujutsuenhancement.yuji_awakened_spawn_egg": "Itadori Yuji (Awakening) Spawn Egg",
   "entity.jujutsuenhancement.higuruma_awakened": "Higuruma Hiromi (Awakening)",
-  "item.jujutsuenhancement.higuruma_awakened_spawn_egg": "Higuruma Hiromi (Awakening) Spawn Egg"
+  "item.jujutsuenhancement.higuruma_awakened_spawn_egg": "Higuruma Hiromi (Awakening) Spawn Egg",
+  "item.jujutsuenhancement.unobtanium_ingot": "§l§o§b超导矿石块",
+  "item.jujutsuenhancement.unobtanium_ingot.lore": "§5- 这个矿石块在不断波动着，就好像虚构作品里的一样，但它却实际的出现在了现实...\n不知道是什么东西做的，它完全不可被延展或塑形",
+  "item.jujutsuenhancement.rough_crystal": "§r§l§d§o粗糙咒晶",
+  "item.jujutsuenhancement.rough_crystal.lore": "§r§l§5- 由一种稀有的粗糙质感咒力凝结而成的咒晶\n§l§e+2点 §l§4力量\n\n§l§o§4-咒物-",
+  "itemGroup.jujutsuenhancement": "Jujutsu Awakening",
+  "item.jujutsuenhancement.pigs_crown": "§l§d猪之冠",
+  "item.jujutsuenhancement.gojo_cloak": "§l§5决战之袍",
+  "item.jujutsuenhancement.kusakabe_fit": "§l§b最强の穿搭"
 }
