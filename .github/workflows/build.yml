@@ -37,6 +37,13 @@ jobs:
               javap -p -cp "$GJ" "$c" >> /tmp/out/api.txt 2>&1 || true
             done
           fi
+          if [ -n "$GJ" ]; then
+            jar tf "$GJ" | grep -E "loading|Adapter|Factory" > /tmp/out/classes.txt 2>&1 || true
+            for c in software.bernie.geckolib.renderer.GeoArmorRenderer software.bernie.geckolib.util.RenderUtils software.bernie.geckolib.cache.object.GeoBone software.bernie.geckolib.loading.json.typeadapter.BakedAnimationsAdapter software.bernie.geckolib.loading.json.typeadapter.KeyFramesAdapter software.bernie.geckolib.cache.object.BakedGeoModel software.bernie.geckolib.loading.object.BakedModelFactory software.bernie.geckolib.loading.object.BakedModelFactory\$Builtin software.bernie.geckolib.core.animation.AnimationProcessor; do
+              echo "=== $c" >> /tmp/out/bytecode.txt
+              javap -p -c -cp "$GJ" "$c" >> /tmp/out/bytecode.txt 2>&1 || true
+            done
+          fi
           echo "${{ steps.build.outcome }}" > /tmp/out/outcome.txt
           cd /tmp/out
           git init -q -b ci-output
