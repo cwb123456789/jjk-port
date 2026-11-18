@@ -20,19 +20,24 @@ public final class BedrockArmorRenderer extends GeoArmorRenderer<BedrockArmorIte
         super(new BedrockArmorModel(id));
     }
 
-    // the bones are called like the addon's player skeleton calls them, not armorHead / armorBody ...
-    @Override public GeoBone getHeadBone(BakedGeoModel model) { return model.getBone("head").orElse(null); }
-    @Override public GeoBone getBodyBone(BakedGeoModel model) { return model.getBone("body").orElse(null); }
-    @Override public GeoBone getRightArmBone(BakedGeoModel model) { return model.getBone("rightArm").orElse(null); }
-    @Override public GeoBone getLeftArmBone(BakedGeoModel model) { return model.getBone("leftArm").orElse(null); }
-    @Override public GeoBone getRightLegBone(BakedGeoModel model) { return model.getBone("rightLeg").orElse(null); }
-    @Override public GeoBone getLeftLegBone(BakedGeoModel model) { return model.getBone("leftLeg").orElse(null); }
-    @Override public GeoBone getRightBootBone(BakedGeoModel model) { return null; }
-    @Override public GeoBone getLeftBootBone(BakedGeoModel model) { return null; }
+    /** The bones are called like the addon's player skeleton calls them, not armorHead / armorBody ... */
+    @Override
+    protected void grabRelevantBones(BakedGeoModel baked) {
+        if (lastModel == baked) return;
+        head = baked.getBone("head").orElse(null);
+        body = baked.getBone("body").orElse(null);
+        rightArm = baked.getBone("rightArm").orElse(null);
+        leftArm = baked.getBone("leftArm").orElse(null);
+        rightLeg = baked.getBone("rightLeg").orElse(null);
+        leftLeg = baked.getBone("leftLeg").orElse(null);
+        rightBoot = null;
+        leftBoot = null;
+        lastModel = baked;
+    }
 
     @Override
     protected void applyBoneVisibilityBySlot(EquipmentSlot slot) {
-        setAllVisible(true);
+        setAllBonesVisible(true);
     }
 
     /**
