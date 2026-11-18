@@ -16,5 +16,7 @@
   "itemGroup.jujutsuenhancement": "咒术觉醒",
   "item.jujutsuenhancement.pigs_crown": "§l§d猪之冠",
   "item.jujutsuenhancement.gojo_cloak": "§l§5决战之袍",
-  "item.jujutsuenhancement.kusakabe_fit": "§l§b最强の穿搭"
+  "item.jujutsuenhancement.kusakabe_fit": "§l§b最强の穿搭",
+  "entity.jujutsuenhancement.flyhead": "§r§l§f[§a 4级咒灵 §r§l§f] 蝇头§r",
+  "item.jujutsuenhancement.flyhead_spawn_egg": "§r§l§f[§r§a 4级咒灵 §r§l§f]§r§f 蝇头 生成蛋"
 }

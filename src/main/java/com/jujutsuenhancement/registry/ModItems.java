@@ -3,6 +3,7 @@ package com.jujutsuenhancement.registry;
 import com.jujutsuenhancement.JujutsuEnhancement;
 import com.jujutsuenhancement.item.BedrockArmorItem;
 import com.jujutsuenhancement.item.BedrockItem;
+import com.jujutsuenhancement.item.BedrockSpawnEggItem;
 import com.jujutsuenhancement.item.RoughCrystalItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,10 @@ public final class ModItems {
     /** ds:kusakabe_fit, "最强の穿搭", leggings (its model is a whole outfit), protection 1. */
     public static final RegistryObject<Item> KUSAKABE_FIT =
             reg("kusakabe_fit", () -> new BedrockArmorItem("kusakabe_fit", ArmorItem.Type.LEGGINGS, 1, 9999, 14, 60, 100, null));
+
+    /** ds:flyhead spawn egg; the addon's colours "#1144262" / "#000000" (the first has 7 digits, Bedrock keeps the low 24 bits). */
+    public static final RegistryObject<Item> FLYHEAD_SPAWN_EGG =
+            reg("flyhead_spawn_egg", () -> new BedrockSpawnEggItem(ModEntities.FLYHEAD, 0x144262, 0x000000, new Item.Properties()));
 
     private ModItems() {}
 }

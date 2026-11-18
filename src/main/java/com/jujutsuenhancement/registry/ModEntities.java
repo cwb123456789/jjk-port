@@ -5,6 +5,7 @@ import com.jujutsuenhancement.entity.BedrockFxEntity;
 import com.jujutsuenhancement.entity.DomainClashEntity;
 import com.jujutsuenhancement.entity.DismantleSlashEntity;
 import com.jujutsuenhancement.entity.DomainShrineEntity;
+import com.jujutsuenhancement.entity.FlyheadEntity;
 import com.jujutsuenhancement.entity.GojoAwakenedEntity;
 import com.jujutsuenhancement.entity.GojoTechEntity;
 import com.jujutsuenhancement.entity.MahitoAwakenedEntity;
@@ -124,6 +125,15 @@ public final class ModEntities {
                     .clientTrackingRange(10)
                     .updateInterval(1)
                     .build("hollow_purple"));
+
+    /** ds:flyhead: 0.4 x 0.8 box, immune to fire, spawned like the addon's "monster" mobs. */
+    public static final RegistryObject<EntityType<FlyheadEntity>> FLYHEAD =
+            ENTITY_TYPES.register("flyhead", () -> EntityType.Builder
+                    .of(FlyheadEntity::new, MobCategory.MONSTER)
+                    .sized(0.4F, 0.8F)
+                    .fireImmune()
+                    .clientTrackingRange(8)
+                    .build("flyhead"));
 
     public static final RegistryObject<EntityType<GojoAwakenedEntity>> GOJO_AWAKENED =
             ENTITY_TYPES.register("gojo_awakened", () -> EntityType.Builder

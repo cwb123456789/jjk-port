@@ -16,5 +16,7 @@
   "itemGroup.jujutsuenhancement": "Jujutsu Awakening",
   "item.jujutsuenhancement.pigs_crown": "§l§d猪之冠",
   "item.jujutsuenhancement.gojo_cloak": "§l§5决战之袍",
-  "item.jujutsuenhancement.kusakabe_fit": "§l§b最强の穿搭"
+  "item.jujutsuenhancement.kusakabe_fit": "§l§b最强の穿搭",
+  "entity.jujutsuenhancement.flyhead": "§r§f[§a Grade 4 §r§f] Flyhead Curse",
+  "item.jujutsuenhancement.flyhead_spawn_egg": "§r§f[§a Grade 4 §r§f] Flyhead Curse"
 }

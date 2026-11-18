@@ -106,6 +106,8 @@ public final class FxShow {
         def("gojo_pull_hit", 0, List.of(p("impact")), List.of());
         // relics/rough_crystal.mcfunction: "particle ds:rough_crystal1 ~~1~" and "ds:rough_crystal2 ~~1~" at the player
         def("rough_crystal", 0, List.of(p("rough_crystal1", 0, 1, 0), p("rough_crystal2", 0, 1, 0)), List.of());
+        // events.curse_die of the small curses: "particle ds:curse_death_small ~~~"
+        def("curse_death_small", 0, List.of(p("curse_death_small")), List.of());
         def("gojo_pull_mark", 0, List.of(p("lapse_pull2"), p("lapse_pull3"), p("lapse_pull4")), List.of());
     }
 
