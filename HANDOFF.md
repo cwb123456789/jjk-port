@@ -160,3 +160,13 @@ Source of truth: Bedrock `domain_clash_starting`, `domain_clash_main`, `domain_c
 - Not done for Gojo: infinity (1/1b/1c), 空间撕扯 (limitless4/4b/4c), 茈 variants (5b/5c/5d), chant versions (2e/3e), levitate purple, fists set
   (bluefists, fury_barrage, infinity_backhand, shockwave_punch, pointblank), Black Flash execution, reversal variants 3b, enchant/phase animations.
 - CI quirk: `ci-output` is force-pushed; fetch with `git fetch origin +ci-output:refs/remotes/origin/ci-output`.
+
+## Round 1 (items) — status 2026-11-19
+Order changed by the user on 2026-11-19: make ALL techniques (术式) first — Gojo first (that is where 苍 limitless2 / 赫 limitless3 items go), then the other characters — then spawn eggs, then the other items.
+Done in round 1 (CI-built, NOT tested in game): unobtanium_ingot, rough_crystal (+ strength stats), pigs_crown, gojo_cloak, kusakabe_fit (GeckoLib equipment), flyhead spawn egg, katana (咒具), creative tab "咒术觉醒".
+Katana: `combat/KatanaCombat` (server state machine, ports functions/fighting/katana/*), `net/ModNet` (PlayAnimPacket S->C, SwingPacket C->S),
+`client/anim/*` (BedrockAnim sampler, PlayerAnims state + particle events, AnimPlayerModel swapped into the player renderers, AnimClientEvents),
+`client/render/HeldKatanaLayer|Renderer` (attachable geo drawn through GeoArmorRenderer; the flat item model has display scale 0 in third person).
+Axis conventions (verified in GeckoLib 4.8.4 bytecode, see ci-output bytecode.txt): Bedrock bone rotation (rx,ry,rz) = vanilla ModelPart rotation (same numbers); Bedrock position (x,y,z) = vanilla (x,-y,z); pivots (x,24-y,z). Armor/attachable geo exporters snap player-bone pivots (tools/build_armor_assets.py SNAP).
+Not done: Black Flash chance of the katana heavy skills, Mahoraga adaptation, first-person 3D katana, Energy (咒力) bar.
+Open question: the user asked to delete "刚开始的初始菜单界面"; the Java mod has no start menu, so nothing was removed — ask what screen he means.
