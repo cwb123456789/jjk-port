@@ -151,5 +151,41 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.katana.slash1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/katana_slash1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.katana.sword": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/katana_sword",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.katana.slice": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/katana_slice",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.katana.sword_swing1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/katana_sword_swing1",
+        "volume": 1.0
+      }
+    ]
   }
 }

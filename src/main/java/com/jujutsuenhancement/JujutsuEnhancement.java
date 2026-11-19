@@ -18,6 +18,7 @@ public final class JujutsuEnhancement {
         ModEntities.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModCreativeTabs.TABS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        FMLJavaModLoadingContext.get().getModEventBus().addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent e) -> e.enqueueWork(com.jujutsuenhancement.net.ModNet::register));
         LOGGER.info("[JujutsuEnhancement] Loaded version 0.1.0");
         LOGGER.info("[JujutsuEnhancement] JujutsuCraft detected: {}",
                 ModList.get().isLoaded("jujutsucraft"));

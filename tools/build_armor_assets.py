@@ -21,7 +21,7 @@ import shutil
 import sys
 
 TRACKED = {'head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg', 'hat'}
-IDS = ['pigs_crown', 'gojo_cloak', 'kusakabe_fit']
+IDS = ['pigs_crown', 'gojo_cloak', 'kusakabe_fit', 'katana']
 PACKS = ['rpnew', 'rp8', 'rp4', 'rp1']
 
 
@@ -86,8 +86,17 @@ def geometry(src, ident):
     return None, None
 
 
+# the pivots of the player's own bones: an attachable's bone of the same name takes the player's pose, so its own
+# pivot (the katana's rightArm sits at x=-3) must not move the point it turns around
+SNAP = {'head': [0, 24, 0], 'body': [0, 24, 0], 'leftArm': [5, 22, 0], 'rightArm': [-5, 22, 0],
+        'leftLeg': [1.9, 12, 0], 'rightLeg': [-1.9, 12, 0]}
+
+
 def untrack(geo):
     bones = {b['name']: b for b in geo['bones']}
+    for b in geo['bones']:
+        if b['name'] in SNAP and not b.get('cubes'):
+            b['pivot'] = list(SNAP[b['name']])
     for b in geo['bones']:
         if b['name'] not in TRACKED:
             continue

@@ -18,5 +18,11 @@
   "item.jujutsuenhancement.gojo_cloak": "§l§5决战之袍",
   "item.jujutsuenhancement.kusakabe_fit": "§l§b最强の穿搭",
   "entity.jujutsuenhancement.flyhead": "§r§f[§a Grade 4 §r§f] Flyhead Curse",
-  "item.jujutsuenhancement.flyhead_spawn_egg": "§r§f[§a Grade 4 §r§f] Flyhead Curse"
+  "item.jujutsuenhancement.flyhead_spawn_egg": "§r§f[§a Grade 4 §r§f] Flyhead Curse",
+  "item.jujutsuenhancement.katana": "§l§a武士刀",
+  "item.jujutsuenhancement.katana.lore": "§l§5- §o不一般的武士刀，足以看出打造者在这把刀上倾注的心血，异常锋利\n\n§r§l§t疾斩 §7(§e右键(长按)§7)\n\n§l§t袭滑快斩 §7(§e潜行 + 右键(长按)§7)\n\n§l§c零时刃闪 §7(§e潜行 + 左键(单击)§7)\n§l§4-=- 使用前置: 天与咒缚 - 肉体天赋 -=-",
+  "item.jujutsuenhancement.limitless2": "§l§b术式顺转 苍",
+  "item.jujutsuenhancement.limitless2.lore": "§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§b苍之拉取 §l§7(§l§e跳起+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§1术式顺转 苍: 最大输出 §l§7(§l§e视角朝下+潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§7250 点咒力 §l§g]\n\n§l§o§c术式顺转 苍: 咒词吟唱§l §l§7(§l§e潜行+长按§l§7)§l\n§l§g- 消耗: [ §l§7300 点咒力 §l§g]\n§l§5- §l§o2号技能",
+  "item.jujutsuenhancement.limitless3": "§l§4术式反转 赫",
+  "item.jujutsuenhancement.limitless3.lore": "§l§g- 消耗: [ §l§730 点咒力 §l§g]\n\n§l§c术式反转 赫: 最大输出 §l§7(§l§e跳起+长按§l§7)§l\n§l§g- 消耗: [ §l§7200 点咒力 §l§g]\n\n§l§4术式反转 赫 - 弹射起飞 §l§7(§l§e视角朝下+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§715 点咒力 §l§g]\n\n§l§o§c术式反转 赫: 咒词吟唱§l §l§7(§l§e潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§7300 点咒力 §l§g]\n§l§5- §l§o3号技能"
 }

@@ -108,6 +108,26 @@ public final class FxShow {
         def("rough_crystal", 0, List.of(p("rough_crystal1", 0, 1, 0), p("rough_crystal2", 0, 1, 0)), List.of());
         // events.curse_die of the small curses: "particle ds:curse_death_small ~~~"
         def("curse_death_small", 0, List.of(p("curse_death_small")), List.of());
+        // katana (functions/fighting/katana/*): the sounds and particles of the hits; the slash arcs themselves come from
+        // the animations (particle_effects of animation.katana_attack1..4 / katana.ab1..3, see animParticle)
+        def("katana_swing", 0, List.of(), List.of(s("minecraft:entity.witch.throw", 1.0F, 0.75F)));
+        def("katana_hit", 0, List.of(), List.of(s("bedrock.katana.sword", 3.0F, 1.15F)));
+        def("katana_hit4", 0.1, List.of(), List.of(s("bedrock.katana.sword", 3.0F, 0.85F), s("bedrock.katana.slash1", 1.0F, 1.25F),
+                s("minecraft:entity.witch.throw", 1.0F, 1.15F)));
+        def("katana_quick_wind", 0, List.of(), List.of(s("minecraft:entity.witch.throw", 1.0F, 1.0F), s("minecraft:entity.wither.shoot", 0.2F, 0.6F)));
+        def("katana_quick_hit", 0.15, List.of(p("ground_slam2", 0, 1, 1), p("ground_slam3", 0, 1, 1)),
+                List.of(s("bedrock.katana.slash1", 3.0F, 0.8F)));
+        def("katana_quick_sword", 0, List.of(), List.of(s("bedrock.katana.sword", 3.0F, 0.85F)));
+        def("katana_prom_tick", 0.15, List.of(p("ground_slam2", 0, 1, 1), p("ground_slam3", 0, 1, 1)), List.of());
+        def("katana_prom_start", 0, List.of(), List.of(s("bedrock.katana.slash1", 3.0F, 0.5F)));
+        def("katana_prom_hit", 0.15, List.of(), List.of(s("bedrock.katana.sword", 3.0F, 0.5F)));
+        def("katana_rapid_start", 0, List.of(p("ground_slam2")), List.of(s("minecraft:entity.bat.takeoff", 1.0F, 1.0F)));
+        def("katana_rapid_tick", 0.12, List.of(p("rapid_cuts1", 0, 1, 4), p("rapid_cuts2", 0, 1, 4), p("rapid_cuts3", 0, 1, 4),
+                p("rapid_cuts4", 0, 1, 4), p("rapid_cuts5", 0, 1, 4)),
+                List.of(s("bedrock.katana.slash1", 1.0F, 2.0F), s("minecraft:entity.witch.throw", 1.0F, 1.0F)));
+        def("katana_rapid_dirt", 0, List.of(p("dirt0")), List.of());
+        def("katana_rapid_end", 3.0, List.of(p("large_impact1", 0, 1, 4), p("large_impact2", 0, 1, 4)),
+                List.of(s("bedrock.katana.sword", 3.0F, 0.6F)));
         def("gojo_pull_mark", 0, List.of(p("lapse_pull2"), p("lapse_pull3"), p("lapse_pull4")), List.of());
     }
 
@@ -123,6 +143,14 @@ public final class FxShow {
         double cy = Math.cos(r), sy = Math.sin(r);
         // ^left ^up ^forward turned by the yaw (forward = (-sin, cos), left = (cos, sin))
         SIM.spawn(def, e.getX() + cy * left - sy * fwd, e.getY() + up, e.getZ() + sy * left + cy * fwd, yaw);
+    }
+
+    /** An animation's particle event: the effect at a locator of the player (animation.*.particle_effects). */
+    public static void animParticle(String name, Entity e, String locator) {
+        double left = 0, up = 0, fwd = 0;
+        if ("locator_right".equals(locator)) { left = -0.45; up = 1.2; fwd = 0.5; }
+        else if ("forward_locator".equals(locator)) { up = 1.0; }
+        spawn(name, e, left, up, fwd, e.getYRot());
     }
 
     private static void spawnWorld(String name, double x, double y, double z, double yaw) {

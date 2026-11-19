@@ -23,7 +23,12 @@ ITEMS = {
     'pigs_crown': 'generated',
     'gojo_cloak': 'generated',
     'kusakabe_fit': 'generated',
+    'katana': 'handheld',
+    'limitless2': 'generated',
+    'limitless3': 'generated',
 }
+# items that a layer draws in the third person with their own geometry: the flat model is shrunk to nothing there
+HIDDEN_THIRD_PERSON = {'katana'}
 
 TAB_NAME_ZH = '咒术觉醒'
 TAB_NAME_EN = 'Jujutsu Awakening'
@@ -98,8 +103,11 @@ def main(src, dst):
             img = img.resize((64, 64), Image.LANCZOS)  # the slot squeezes it into a square anyway
         img.save(os.path.join(dst, 'textures', 'item', ident + '.png'))
         with open(os.path.join(dst, 'models', 'item', ident + '.json'), 'w', encoding='utf-8') as fh:
-            json.dump({'parent': 'minecraft:item/' + parent,
-                       'textures': {'layer0': 'jujutsuenhancement:item/' + ident}}, fh, indent=2)
+            model = {'parent': 'minecraft:item/' + parent, 'textures': {'layer0': 'jujutsuenhancement:item/' + ident}}
+            if ident in HIDDEN_THIRD_PERSON:
+                zero = {'rotation': [0, 0, 0], 'translation': [0, 0, 0], 'scale': [0, 0, 0]}
+                model['display'] = {'thirdperson_righthand': zero, 'thirdperson_lefthand': zero}
+            json.dump(model, fh, indent=2)
         print('item', ident, repr(name), 'stack', comps.get('minecraft:max_stack_size'))
     langs['zh_cn']['itemGroup.jujutsuenhancement'] = TAB_NAME_ZH
     langs['en_us']['itemGroup.jujutsuenhancement'] = TAB_NAME_EN

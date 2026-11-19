@@ -4,6 +4,7 @@ import com.jujutsuenhancement.JujutsuEnhancement;
 import com.jujutsuenhancement.item.BedrockArmorItem;
 import com.jujutsuenhancement.item.BedrockItem;
 import com.jujutsuenhancement.item.BedrockSpawnEggItem;
+import com.jujutsuenhancement.item.KatanaItem;
 import com.jujutsuenhancement.item.RoughCrystalItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,4 +86,10 @@ public final class ModItems {
             reg("flyhead_spawn_egg", () -> new BedrockSpawnEggItem(ModEntities.FLYHEAD, 0x144262, 0x000000, new Item.Properties()));
 
     private ModItems() {}
+
+    // ---- weapons (咒具)
+
+    /** ds:katana, "武士刀": the four-hit combo and three skills, see {@link com.jujutsuenhancement.combat.KatanaCombat}. */
+    public static final RegistryObject<Item> KATANA =
+            reg("katana", () -> new KatanaItem(new Item.Properties().stacksTo(1)));
 }
