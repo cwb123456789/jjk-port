@@ -34,27 +34,8 @@ public final class ModItems {
         return object;
     }
 
-    // ---- spawn eggs (also in the vanilla spawn egg tab, see ModEvents)
-
-    public static final RegistryObject<Item> GOJO_AWAKENED_SPAWN_EGG =
-            reg("gojo_awakened_spawn_egg",
-                    () -> new ForgeSpawnEggItem(ModEntities.GOJO_AWAKENED, 0xEFEFEF, 0x2A5BD7, new Item.Properties()));
-
-    public static final RegistryObject<Item> MAHITO_AWAKENED_SPAWN_EGG =
-            reg("mahito_awakened_spawn_egg",
-                    () -> new ForgeSpawnEggItem(ModEntities.MAHITO_AWAKENED, 0x7C8FB5, 0x3B2A52, new Item.Properties()));
-
-    public static final RegistryObject<Item> SUKUNA_AWAKENED_SPAWN_EGG =
-            reg("sukuna_awakened_spawn_egg",
-                    () -> new ForgeSpawnEggItem(ModEntities.SUKUNA_AWAKENED, 0x8B1A1A, 0x111111, new Item.Properties()));
-
-    public static final RegistryObject<Item> YUJI_AWAKENED_SPAWN_EGG =
-            reg("yuji_awakened_spawn_egg",
-                    () -> new ForgeSpawnEggItem(ModEntities.YUJI_AWAKENED, 0xE8A0B0, 0x222222, new Item.Properties()));
-
-    public static final RegistryObject<Item> HIGURUMA_AWAKENED_SPAWN_EGG =
-            reg("higuruma_awakened_spawn_egg",
-                    () -> new ForgeSpawnEggItem(ModEntities.HIGURUMA_AWAKENED, 0x3A3A44, 0xC9A227, new Item.Properties()));
+    // ---- spawn eggs (also in the vanilla spawn egg tab, see ModEvents). The Java mod's characters (Gojo, Mahito,
+    // Sukuna, Yuji, Higuruma) are no creatures of this mod any more: their skills become techniques for players.
 
     // ---- items of the addon (items/*.json of the behavior pack)
 

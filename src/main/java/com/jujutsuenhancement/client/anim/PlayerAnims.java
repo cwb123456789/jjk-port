@@ -85,8 +85,9 @@ public final class PlayerAnims {
                 return p.anim;
             }
         }
-        if (player.getMainHandItem().getItem() instanceof KatanaItem && !player.isCrouching()
-                && ageInTicks >= IDLE_AT.getOrDefault(player.getId(), 0)) {
+        // The idle grip is shown whenever the katana is held (also while sneaking and in the gaps between two
+        // animations): without it the arm hangs and the blade, which lies across the hand, goes through the body.
+        if (player.getMainHandItem().getItem() instanceof KatanaItem) {
             BedrockAnim idle = get("katana.idle");
             if (idle != null) {
                 timeOut[0] = 0;

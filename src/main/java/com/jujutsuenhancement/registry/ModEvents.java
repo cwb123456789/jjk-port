@@ -43,11 +43,6 @@ public final class ModEvents {
     public static void onCreativeTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             event.accept(ModItems.FLYHEAD_SPAWN_EGG);
-            event.accept(ModItems.GOJO_AWAKENED_SPAWN_EGG);
-            event.accept(ModItems.MAHITO_AWAKENED_SPAWN_EGG);
-            event.accept(ModItems.SUKUNA_AWAKENED_SPAWN_EGG);
-            event.accept(ModItems.YUJI_AWAKENED_SPAWN_EGG);
-            event.accept(ModItems.HIGURUMA_AWAKENED_SPAWN_EGG);
         }
     }
 }
