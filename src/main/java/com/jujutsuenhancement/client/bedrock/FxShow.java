@@ -104,6 +104,18 @@ public final class FxShow {
         def("voice_done", 0, List.of(), List.of(s("bedrock.sukuna.youvedoneitnow", 3.0F, 1.0F)));
         // limitless2c.mcfunction: the targets of the Blue pull ("particle ds:impact" at move 15, lapse_pull2/3/4 at move 11)
         def("gojo_pull_hit", 0, List.of(p("impact")), List.of());
+        // limitless3 (赫): the blast at move 15..16 ("particle ds:red_ex1..6 ~~1~", crater and rubble on the ground, shock sounds)
+        def("gojo_red_blast", 2, List.of(p("red_ex1", 0, 1, 0), p("red_ex2", 0, 1, 0), p("red_ex3", 0, 1, 0), p("red_ex4", 0, 1, 0),
+                p("red_ex5", 0, 1, 0), p("red_ex6", 0, 1, 0), p("crater3"), p("rubble3")),
+                List.of(s("bedrock.gojo.shock2", 3.0F, 0.25F), s("bedrock.gojo.shock1", 3.0F, 1.0F), s("minecraft:entity.generic.explode", 3.0F, 0.3F),
+                        s("minecraft:entity.generic.explode", 3.0F, 0.7F)));
+        // limitless3b (赫 launch): shock2 1.15, shock1 1.25 at move 6
+        def("gojo_red_small", 3, List.of(p("red_ex1", 0, 1, 0), p("red_ex2", 0, 1, 0), p("red_ex3", 0, 1, 0)),
+                List.of(s("bedrock.gojo.shock2", 3.0F, 1.15F), s("bedrock.gojo.shock1", 3.0F, 1.25F), s("bedrock.gojo.red1", 3.0F, 1.15F)));
+        // limitless3c (赫 maximum output): shock2 0.35, shock1 0.5 at move 6, red1 0.37 at move 45
+        def("gojo_red_big", 4, List.of(p("red_ex1", 0, 1, 0), p("red_ex2", 0, 1, 0), p("red_ex3", 0, 1, 0), p("red_ex4", 0, 1, 0),
+                p("red_ex5", 0, 1, 0), p("red_ex6", 0, 1, 0)),
+                List.of(s("bedrock.gojo.shock2", 3.0F, 0.35F), s("bedrock.gojo.shock1", 3.0F, 0.5F), s("bedrock.gojo.red1", 3.0F, 0.37F)));
         // relics/rough_crystal.mcfunction: "particle ds:rough_crystal1 ~~1~" and "ds:rough_crystal2 ~~1~" at the player
         def("rough_crystal", 0, List.of(p("rough_crystal1", 0, 1, 0), p("rough_crystal2", 0, 1, 0)), List.of());
         // events.curse_die of the small curses: "particle ds:curse_death_small ~~~"

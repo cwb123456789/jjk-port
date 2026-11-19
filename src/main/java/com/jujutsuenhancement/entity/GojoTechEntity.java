@@ -174,7 +174,9 @@ public final class GojoTechEntity extends Entity {
 
     private void tickMax(ServerLevel sl, Entity owner) {
         if (age >= MAX_LIFE || owner == null || !owner.isAlive()
-                || owner instanceof GojoAwakenedEntity g && g.getSkillId() != GojoAwakenedEntity.ANIM_BLUE_MAX) {
+                || owner instanceof GojoAwakenedEntity g && g.getSkillId() != GojoAwakenedEntity.ANIM_BLUE_MAX
+                || owner instanceof net.minecraft.server.level.ServerPlayer sp
+                        && !com.jujutsuenhancement.combat.GojoSkills.isCasting(sp, com.jujutsuenhancement.combat.GojoSkills.MAX)) {
             discard();
             return;
         }

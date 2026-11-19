@@ -173,6 +173,12 @@ public final class KatanaCombat {
                 e -> e != p && e.isAlive() && e.distanceToSqr(c) <= r * r && !isFramed(e));
     }
 
+    /** Whether a katana move or combo hit is running (another technique cannot start meanwhile). */
+    public static boolean isBusy(Player p) {
+        State s = STATES.get(p.getUUID());
+        return s != null && (s.skill != 0 || s.basicM1 != 0);
+    }
+
     private static boolean isFramed(LivingEntity e) {
         if (!(e instanceof Player pl)) return false;
         State s = STATES.get(pl.getUUID());

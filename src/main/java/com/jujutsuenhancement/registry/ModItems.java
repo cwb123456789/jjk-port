@@ -73,4 +73,14 @@ public final class ModItems {
     /** ds:katana, "武士刀": the four-hit combo and three skills, see {@link com.jujutsuenhancement.combat.KatanaCombat}. */
     public static final RegistryObject<Item> KATANA =
             reg("katana", () -> new KatanaItem(new Item.Properties().stacksTo(1)));
+
+    // ---- techniques (术式)
+
+    /** ds:limitless2, "术式顺转 苍" (Gojo's Blue). */
+    public static final RegistryObject<Item> LIMITLESS2 =
+            reg("limitless2", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless2", new Item.Properties().stacksTo(1)));
+
+    /** ds:limitless3, "术式反转 赫" (Gojo's Red). */
+    public static final RegistryObject<Item> LIMITLESS3 =
+            reg("limitless3", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless3", new Item.Properties().stacksTo(1)));
 }

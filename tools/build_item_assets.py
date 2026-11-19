@@ -24,6 +24,9 @@ ITEMS = {
     'gojo_cloak': 'generated',
     'kusakabe_fit': 'generated',
     'katana': 'handheld',
+    # techniques (术式); the icons are the ones the item definitions name (limitless2 shows the limitless3 texture and vice versa)
+    'limitless2': 'generated',
+    'limitless3': 'generated',
 }
 # items that a layer draws in the third person with their own geometry: the flat model is shrunk to nothing there
 HIDDEN_THIRD_PERSON = {'katana'}
