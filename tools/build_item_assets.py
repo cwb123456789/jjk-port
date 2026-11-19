@@ -24,8 +24,6 @@ ITEMS = {
     'gojo_cloak': 'generated',
     'kusakabe_fit': 'generated',
     'katana': 'handheld',
-    'limitless2': 'generated',
-    'limitless3': 'generated',
 }
 # items that a layer draws in the third person with their own geometry: the flat model is shrunk to nothing there
 HIDDEN_THIRD_PERSON = {'katana'}
