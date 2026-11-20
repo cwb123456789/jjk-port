@@ -18,6 +18,7 @@ public final class ModNet {
         int id = 0;
         CHANNEL.registerMessage(id++, PlayAnimPacket.class, PlayAnimPacket::encode, PlayAnimPacket::decode, PlayAnimPacket::handle);
         CHANNEL.registerMessage(id++, DomainFxPacket.class, DomainFxPacket::encode, DomainFxPacket::decode, DomainFxPacket::handle);
+        CHANNEL.registerMessage(id++, MoveFxPacket.class, MoveFxPacket::encode, MoveFxPacket::decode, MoveFxPacket::handle);
         CHANNEL.registerMessage(id++, SwingPacket.class, SwingPacket::encode, SwingPacket::decode, SwingPacket::handle);
     }
 
@@ -30,5 +31,10 @@ public final class ModNet {
     /** The domain state of a casting player, for every player that can see it. */
     public static void domainFx(ServerPlayer player, int fx) {
         CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new DomainFxPacket(player.getId(), fx));
+    }
+
+    /** The effect timeline of a limitless move (moves.json) for everybody who sees the player. */
+    public static void moveFx(ServerPlayer player, String key) {
+        CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new MoveFxPacket(player.getId(), key));
     }
 }

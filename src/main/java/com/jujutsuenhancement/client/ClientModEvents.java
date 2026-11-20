@@ -73,6 +73,7 @@ public final class ClientModEvents {
         event.registerAboveAll("void_show", com.jujutsuenhancement.client.bedrock.VoidShow.OVERLAY);
         event.registerAboveAll("clash_show", com.jujutsuenhancement.client.bedrock.ClashShow.OVERLAY);
         // Titles (the addon's impact frames) are drawn over the fades.
+        event.registerAboveAll("move_fx", com.jujutsuenhancement.client.bedrock.MoveFx.OVERLAY);
         event.registerAboveAll("impact_frames", com.jujutsuenhancement.client.bedrock.ImpactFrames.OVERLAY);
     }
 

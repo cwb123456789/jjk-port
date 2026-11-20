@@ -436,40 +436,37 @@ public final class GojoSkills {
 
     /** limitless4: animation spatial_blitz, Frames; at move 5 a line ahead (step 0.33, stops at a block) hits everything within 2.5 for 8 fire + 8 projectile, Stun 15. */
     private static void blitz(ServerPlayer p, State s, ServerLevel level) {
-        if (s.t == 1) ModNet.playAnim(p, "spatial_blitz", 0);
+        if (s.t == 1) {
+            ModNet.playAnim(p, "spatial_blitz", 0);
+            ModNet.moveFx(p, "blitz");
+        }
         s.frames = 4;
         if (s.t == 11) {
             Vec3 eye = p.getEyePosition(), dir = p.getLookAngle().normalize();
             Vec3 end = eye.add(dir.scale(21.0D));
             BlockHitResult hit = level.clip(new ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p));
             if (hit.getType() != HitResult.Type.MISS) end = hit.getLocation();
-            double len = end.subtract(eye).length();
-            for (double d = 1.0D; d < len; d += 0.6D) {
-                Vec3 q = eye.add(dir.scale(d));
-                level.sendParticles(ParticleTypes.FLAME, q.x, q.y, q.z, 2, 0.15D, 0.15D, 0.15D, 0.01D);
-            }
             final Vec3 fe = end;
             for (LivingEntity t : level.getEntitiesOfClass(LivingEntity.class, new AABB(eye, end).inflate(2.5D),
                     e -> valid(p, e) && distToSegment(e.position().add(0.0D, e.getBbHeight() * 0.5D, 0.0D), eye, fe) <= 2.5D)) {
                 GojoTechEntity.hurt(level, p, t, 16.0F);
                 t.setSecondsOnFire(3);
                 GojoTechEntity.stun(t, 15);
+                BedrockFxEntity.play(level, "gojo_blitz_hit", t.getX(), t.getY(), t.getZ(), p.getYRot());
             }
-            level.playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.5F, 1.6F);
         }
         if (s.t >= 15) end(s);
     }
 
     /** limitless4b: animation spacial_blitz; for moves 8..2 everything within 30 takes 4 (override) and Stun 15. */
     private static void blitzArea(ServerPlayer p, State s, ServerLevel level) {
-        if (s.t == 1) ModNet.playAnim(p, "spacial_blitz", 0);
+        if (s.t == 1) {
+            ModNet.playAnim(p, "spacial_blitz", 0);
+            ModNet.moveFx(p, "blitz_area");
+        }
         s.frames = 4;
         if (s.t >= 7 && s.t <= 13) {
             holdStill(p);
-            if (s.t == 7) {
-                level.sendParticles(ParticleTypes.FLAME, p.getX(), p.getY() + 1.0D, p.getZ(), 80, 8.0D, 3.0D, 8.0D, 0.1D);
-                level.playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.0F, 0.8F);
-            }
             for (LivingEntity t : targets(p, p.position(), 30.0D)) {
                 GojoTechEntity.hurt(level, p, t, 4.0F);
                 t.setSecondsOnFire(2);
@@ -481,7 +478,10 @@ public final class GojoSkills {
 
     /** limitless4c: animation spacial_kick; at move 25 the nearest target ahead is marked, the caster is put behind it (^0.3 ^0.4 ^-1) and at move 15 hits it for 8, Stun 20. */
     private static void kick(ServerPlayer p, State s, ServerLevel level) {
-        if (s.t == 1) ModNet.playAnim(p, "spacial_kick", 0);
+        if (s.t == 1) {
+            ModNet.playAnim(p, "spacial_kick", 0);
+            ModNet.moveFx(p, "kick");
+        }
         s.frames = 4;
         if (s.t == 11) {
             s.kickTarget = null;
@@ -511,27 +511,12 @@ public final class GojoSkills {
                 Vec3 look = p.getLookAngle().multiply(1.0D, 0.0D, 1.0D).normalize();
                 t.setDeltaMovement(look.x * 1.5D, 0.4D, look.z * 1.5D);
                 t.hurtMarked = true;
-                level.playSound(null, t.getX(), t.getY(), t.getZ(), SoundEvents.PLAYER_ATTACK_STRONG, SoundSource.PLAYERS, 2.0F, 0.7F);
             }
         }
         if (s.t >= 35) { s.kickTarget = null; end(s); }
     }
 
     // ------------------------------------------------------------------ 茈 (limitless5)
-
-    private static void gatherParticles(ServerLevel level, ServerPlayer p, double ahead, boolean big, boolean redBlue) {
-        Vec3 c = p.getEyePosition().add(p.getLookAngle().normalize().scale(ahead));
-        double sp = big ? 1.4D : 0.7D;
-        if (redBlue) {
-            Vec3 left = new Vec3(Math.cos(Math.toRadians(p.getYRot())), 0.0D, Math.sin(Math.toRadians(p.getYRot())));
-            Vec3 a = c.add(left.scale(2.5D)), b = c.add(left.scale(-2.5D));
-            level.sendParticles(DUST_RED, a.x, a.y, a.z, 6, 0.4D, 0.4D, 0.4D, 0.02D);
-            level.sendParticles(DUST_BLUE, b.x, b.y, b.z, 6, 0.4D, 0.4D, 0.4D, 0.02D);
-        } else {
-            level.sendParticles(DUST_PURPLE, c.x, c.y, c.z, big ? 16 : 8, sp, sp, sp, 0.02D);
-            level.sendParticles(DUST_BLUE, c.x, c.y, c.z, big ? 8 : 4, sp, sp, sp, 0.03D);
-        }
-    }
 
     private static void launchPurple(ServerPlayer p, ServerLevel level, int mode, double ahead) {
         HollowPurpleEntity purple = ModEntities.HOLLOW_PURPLE.get().create(level);
@@ -542,27 +527,28 @@ public final class GojoSkills {
         if (mode == 1) purple.setCharged200Percent();
         else if (mode == 2) purple.setUnlimited();
         purple.launch(p, dir);
-        if (level.addFreshEntity(purple)) {
-            level.playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, mode == 1 ? 2.5F : 1.8F, mode == 1 ? 0.55F : 0.7F);
-            level.sendParticles(ParticleTypes.FLASH, origin.x, origin.y, origin.z, 1, 0, 0, 0, 0);
-        }
+        level.addFreshEntity(purple);
     }
 
     /** limitless5 (move 101): animation imaginary_purple; Frames for moves 52..1, slowness for moves 60..21, at move 44 the purple is shot. */
     private static void purpleFast(ServerPlayer p, State s, ServerLevel level) {
-        if (s.t == 1) ModNet.playAnim(p, "imaginary_purple", 0);
+        if (s.t == 1) {
+            ModNet.playAnim(p, "imaginary_purple", 0);
+            ModNet.moveFx(p, "purple_fast");
+        }
         if (s.t >= 49) s.frames = 4;
         if (s.t >= 41 && s.t <= 80) p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 2, false, false));
-        if (s.t > 5 && s.t < 57) gatherParticles(level, p, 3.0D, false, true);
         if (s.t == 57) launchPurple(p, level, 0, 6.0D);
         if (s.t >= 100) end(s);
     }
 
     /** limitless5b / 5c / 5d: long casts (the caster stands still); mode 0 purple (move 481, shot at 25), 1 200% purple (move 321, shot at 120), 2 unlimited (move 481). */
     private static void purple(ServerPlayer p, State s, ServerLevel level, int gatherFrom, int fire, int total, double ahead, int mode) {
-        if (s.t == 1) ModNet.playAnim(p, mode == 0 ? "hollowpurple" : mode == 1 ? "200_purple" : "limitless_purple", 0);
+        if (s.t == 1) {
+            ModNet.playAnim(p, mode == 0 ? "hollowpurple" : mode == 1 ? "200_purple" : "limitless_purple", 0);
+            ModNet.moveFx(p, mode == 0 ? "purple" : mode == 1 ? "purple200" : "purple_unl");
+        }
         if (s.t < fire) holdStill(p);
-        if (s.t >= gatherFrom && s.t < fire && s.t % 2 == 0) gatherParticles(level, p, mode == 1 ? 12.0D : 6.0D, mode != 0, mode == 2);
         if (s.t == fire) launchPurple(p, level, mode, mode == 1 ? 16.0D : mode == 2 ? 1.0D : 6.0D);
         if (s.t >= total) end(s);
     }

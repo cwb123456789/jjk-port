@@ -104,6 +104,8 @@ public final class FxShow {
         def("voice_done", 0, List.of(), List.of(s("bedrock.sukuna.youvedoneitnow", 3.0F, 1.0F)));
         // limitless2c.mcfunction: the targets of the Blue pull ("particle ds:impact" at move 15, lapse_pull2/3/4 at move 11)
         def("gojo_pull_hit", 0, List.of(p("impact")), List.of());
+        // blitz.mcfunction: "particle ds:heavy_impact1 ~~1~" at everything the line hits
+        def("gojo_blitz_hit", 0, List.of(p("heavy_impact1", 0, 1, 0)), List.of());
         // limitless3 (赫): the blast at move 15..16 ("particle ds:red_ex1..6 ~~1~", crater and rubble on the ground, shock sounds)
         def("gojo_red_blast", 2, List.of(p("red_ex1", 0, 1, 0), p("red_ex2", 0, 1, 0), p("red_ex3", 0, 1, 0), p("red_ex4", 0, 1, 0),
                 p("red_ex5", 0, 1, 0), p("red_ex6", 0, 1, 0), p("crater3"), p("rubble3")),
@@ -163,6 +165,16 @@ public final class FxShow {
         if ("locator_right".equals(locator)) { left = -0.45; up = 1.2; fwd = 0.5; }
         else if ("forward_locator".equals(locator)) { up = 1.0; }
         spawn(name, e, left, up, fwd, e.getYRot());
+    }
+
+    /** Particle of the addon at a world position (used by MoveFx). */
+    public static void particleAt(String name, double x, double y, double z, double yaw) {
+        spawnWorld(name, x, y, z, yaw);
+    }
+
+    /** Camera shake as {@code camerashake add}: amplitude and duration in ticks. */
+    public static void shakeFor(double amp, int ticks) {
+        shake(amp, Math.max(1, ticks));
     }
 
     private static void spawnWorld(String name, double x, double y, double z, double yaw) {
