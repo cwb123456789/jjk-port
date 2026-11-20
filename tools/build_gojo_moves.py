@@ -206,6 +206,62 @@ def projectile_events(path, name, anim, anims, particles):
     return out
 
 
+def trg_events(path, anims, particles, t0=21, d0=251):
+    """limitless5d: the anchor projectile LimitlessPTRG (summoned at move 460 = tick 21, Deleter 251 counting down) follows the
+    caster (tp ~~1~), spins (tp ~~~ ~speed), keeps the red and blue orbs at ^^^+-D of itself and plays the particles listed in
+    limitless5ptrg.mcfunction by Deleter range.  Everything is exported as events relative to the caster."""
+    import math
+    lines = open(path, encoding='utf-8', errors='ignore').read().replace('\r', '').split('\n')
+    pat = re.compile(r'execute as @s\[name=LimitlessPTRG,scores=\{Deleter=(\d*)(\.\.)?(\d*)\}\] at @s run (particle|camerashake) (.*)$')
+    tp = re.compile(r'tp @s\[name=LimitlessPTRG,scores=\{Deleter=(\d+)\.\.(\d*)\}\] ~~~~(\d+)')
+    spins, rules = [], []
+    for raw in lines:
+        raw = raw.strip()
+        m = tp.match(raw)
+        if m:
+            spins.append((int(m.group(1)), int(m.group(2)) if m.group(2) else 9999, int(m.group(3))))
+            continue
+        m = pat.match(raw)
+        if m:
+            lo = int(m.group(1)) if m.group(1) else 0
+            hi = int(m.group(3)) if m.group(3) else (lo if not m.group(2) else 9999)
+            rules.append((lo, hi, m.group(4), m.group(5).split()))
+    orb = [(200, 9999, 13.0, 0), (140, 200, 10.0, 0), (100, 139, 8.0, 0), (5, 99, 7.0, 0), (1, 24, 0.0, 7.0)]
+    ev = []
+    theta = 0.0
+    for n in range(0, d0):
+        d = d0 - n
+        t = t0 + n
+        sp = [v for (lo, hi, v) in spins if lo <= d <= hi]
+        if sp:
+            theta += sp[0]
+        for lo, hi, cmd, tok in rules:
+            if not (lo <= d <= hi):
+                continue
+            if cmd == 'particle' and tok[0].startswith('ds:'):
+                parts = re.split(r'(?=[~^])', tok[0][3:], maxsplit=1)
+                c = coords((parts[1] if len(parts) > 1 else '') + ''.join(tok[1:]))
+                if c is None:
+                    continue
+                particles.add(parts[0])
+                ev.append([t, 'p', parts[0], 0, c[1][0], c[1][1] + 1.0, c[1][2]])
+            elif cmd == 'camerashake' and tok[0] == 'add':
+                ev.append([t, 'k', num(tok[2]), int(round(num(tok[3]) * 20)), radius(tok[1])])
+        # the orbs (hollow_red / hollow_blue play their per-tick particles at the orb)
+        o = [(dd, up) for (lo, hi, dd, up) in orb if lo <= d <= hi]
+        if o and d >= 20 - 1 + 0 and d >= 1:
+            dist, up = o[-1] if d <= 24 else o[0]
+            if d >= 20:
+                for sign, anim in ((1, 'animation.hollow_red'), (-1, 'animation.hollow_blue')):
+                    a = anims.get(anim) or {}
+                    effs = [e['effect'] for v in (a.get('particle_effects') or {}).values() for e in (v if isinstance(v, list) else [v])]
+                    rad = math.radians(theta)
+                    for eff in effs:
+                        particles.add(eff)
+                        ev.append([t, 'p', eff, 0, -math.sin(rad) * dist * sign, 1.0 + up, math.cos(rad) * dist * sign])
+    return ev
+
+
 def load_sound_defs(src):
     defs = {}
     files = glob.glob(os.path.join(src, 'rp*', 'sounds', 'sound_definitions.json')) + \
@@ -240,6 +296,8 @@ def main(src, dst, glyph_page=None):
     out['blitz']['events'] += blitz_ray
     particles.update(['spatial_blitz2', 'spatial_blitz3', 'spatial_blitz4', 'heavy_impact1', 'impact'])
     out['blitz']['events'].sort(key=lambda r: r[0])
+    for e in out['purple_unl']['events']:
+        pass
 
     anims = {}
     for f in glob.glob(os.path.join(src, 'rp4', 'animations', 'limitless.animation.json')):
@@ -248,6 +306,9 @@ def main(src, dst, glyph_page=None):
     for key, (fn, ename, anim) in PROJECTILES.items():
         proj[key] = projectile_events(os.path.join(nfun, fn + '.mcfunction'), ename, anim, anims, particles)
         print('projectile', key, len(proj[key]['p']), 'particles', len(proj[key]['k']), 'shakes')
+    out['purple_unl']['events'] += trg_events(os.path.join(nfun, 'limitless5ptrg.mcfunction'), anims, particles)
+    out['purple_unl']['events'].sort(key=lambda r: r[0])
+    print('purple_unl events', len(out['purple_unl']['events']))
     pdir = os.path.join(dst, 'bedrock', 'gojo')
     os.makedirs(pdir, exist_ok=True)
     with open(os.path.join(pdir, 'projectiles.json'), 'w', encoding='utf-8') as fh:

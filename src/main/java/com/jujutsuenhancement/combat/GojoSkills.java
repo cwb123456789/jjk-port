@@ -230,7 +230,7 @@ public final class GojoSkills {
             case PURPLE_FAST -> purpleFast(p, s, level);
             case PURPLE -> purple(p, s, level, 360, 456, 480, 6.0D, 0);
             case PURPLE200 -> purple(p, s, level, 100, 201, 320, 16.0D, 1);
-            case PURPLE_UNL -> purple(p, s, level, 21, 306, 480, 1.0D, 2);
+            case PURPLE_UNL -> purpleUnlimited(p, s, level);
             case DOMAIN -> domain(p, s, level, false);
             case DOMAIN_QUICK -> domain(p, s, level, true);
             default -> reverse(p, s, level);
@@ -542,15 +542,37 @@ public final class GojoSkills {
         if (s.t >= 100) end(s);
     }
 
-    /** limitless5b / 5c / 5d: long casts (the caster stands still); mode 0 purple (move 481, shot at 25), 1 200% purple (move 321, shot at 120), 2 unlimited (move 481). */
+    /** limitless5b / 5c: long casts (the caster stands still); mode 0 purple (move 481, shot at 25), 1 200% purple (move 321, shot at 120). */
     private static void purple(ServerPlayer p, State s, ServerLevel level, int gatherFrom, int fire, int total, double ahead, int mode) {
         if (s.t == 1) {
-            ModNet.playAnim(p, mode == 0 ? "hollowpurple" : mode == 1 ? "200_purple" : "limitless_purple", 0);
-            ModNet.moveFx(p, mode == 0 ? "purple" : mode == 1 ? "purple200" : "purple_unl");
+            ModNet.playAnim(p, mode == 0 ? "hollowpurple" : "200_purple", 0);
+            ModNet.moveFx(p, mode == 0 ? "purple" : "purple200");
         }
         if (s.t < fire) holdStill(p);
-        if (s.t == fire) launchPurple(p, level, mode, mode == 1 ? 16.0D : mode == 2 ? 1.0D : 6.0D);
+        if (s.t == fire) launchPurple(p, level, mode, mode == 1 ? 16.0D : 6.0D);
         if (s.t >= total) end(s);
+    }
+
+    /**
+     * limitless5d (move 481): animation limitless_purple; the caster floats, everything within 280 gets Slowness for the whole cast
+     * and from move 175 to 20 (ticks 306..461) takes 12 + 4 damage (override) every tick.  The orbs, lightning and explosion are the
+     * clients' effect timeline.
+     */
+    private static void purpleUnlimited(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 1) {
+            ModNet.playAnim(p, "limitless_purple", 0);
+            ModNet.moveFx(p, "purple_unl");
+        }
+        holdStill(p);
+        if (s.t >= 1 && s.t <= 460) {
+            for (LivingEntity e : targets(p, p.position(), 280.0D)) e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 1, false, false));
+        }
+        if (s.t >= 306 && s.t <= 461) {
+            for (LivingEntity e : targets(p, p.position(), 280.0D)) {
+                GojoTechEntity.hurt(level, p, e, 16.0F);
+            }
+        }
+        if (s.t >= 480) end(s);
     }
 
     // ------------------------------------------------------------------ 领域展开 (limitless6)
