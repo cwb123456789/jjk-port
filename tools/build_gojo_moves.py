@@ -29,6 +29,7 @@ MOVES = {
     'blitz': ('limitless4', 16), 'blitz_area': ('limitless4b', 15), 'kick': ('limitless4c', 36),
     'purple_fast': ('limitless5', 101), 'purple': ('limitless5b', 481), 'purple200': ('limitless5c', 321),
     'purple_unl': ('limitless5d', 481),
+    'infinity': ('limitless1', 15), 'pressure': ('limitless1b', 81), 'levitate': ('limitless1c', 15),
 }
 # vanilla sounds the addon uses by their Bedrock name
 VANILLA = {
@@ -38,6 +39,7 @@ VANILLA = {
     'random.orb': 'minecraft:entity.experience_orb.pickup', 'mob.wither.shoot': 'minecraft:entity.wither.shoot',
     'mob.wither.hurt': 'minecraft:entity.wither.hurt', 'mob.wither.break_block': 'minecraft:entity.wither.break_block',
     'mob.wither.spawn': 'minecraft:entity.wither.spawn', 'mob.enderdragon.growl': 'minecraft:entity.ender_dragon.growl',
+    'mob.elderguardian.curse': 'minecraft:entity.elder_guardian.curse', 'mob.shulker.hurt': 'minecraft:entity.shulker.hurt',
     'random.anvil_land': 'minecraft:block.anvil.land', 'note.pling': 'minecraft:block.note_block.pling',
     'mob.stormwraith.attack': 'minecraft:entity.generic.explode', 'ambient.weather.thunder': 'minecraft:entity.lightning_bolt.thunder',
     'mob.zombie.metal': 'minecraft:entity.zombie.attack_iron_door', 'random.break': 'minecraft:entity.item.break',
@@ -294,7 +296,7 @@ def main(src, dst, glyph_page=None):
     # blitz.mcfunction: the line of particles along the look ray (once, at move 5 of limitless4)
     blitz_ray = [[11, 'r', 'spatial_blitz2', 0.33, 21.0], [11, 'r', 'spatial_blitz3', 0.33, 21.0], [11, 'r', 'spatial_blitz4', 0.33, 21.0]]
     out['blitz']['events'] += blitz_ray
-    particles.update(['spatial_blitz2', 'spatial_blitz3', 'spatial_blitz4', 'heavy_impact1', 'impact'])
+    particles.update(['infinity', 'infinity_shatter', 'infinity_shatter2', 'spatial_blitz2', 'spatial_blitz3', 'spatial_blitz4', 'heavy_impact1', 'impact'])
     out['blitz']['events'].sort(key=lambda r: r[0])
     for e in out['purple_unl']['events']:
         pass

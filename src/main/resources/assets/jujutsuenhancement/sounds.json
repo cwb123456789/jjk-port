@@ -304,5 +304,14 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.gojo.mv_mob_infinity": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_infinity",
+        "volume": 1.0
+      }
+    ]
   }
 }

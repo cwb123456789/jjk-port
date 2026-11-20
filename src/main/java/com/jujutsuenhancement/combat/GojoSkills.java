@@ -67,6 +67,7 @@ public final class GojoSkills {
     public static final int BLITZ = 7, BLITZ_AREA = 8, KICK = 9;
     public static final int PURPLE_FAST = 10, PURPLE = 11, PURPLE200 = 12, PURPLE_UNL = 13;
     public static final int DOMAIN = 14, DOMAIN_QUICK = 15;
+    public static final int INFINITY = 16, PRESSURE = 17, LEVITATE = 18;
     private static final DustParticleOptions DUST_PURPLE = new DustParticleOptions(new Vector3f(0.42F, 0.08F, 0.95F), 1.6F);
     private static final DustParticleOptions DUST_RED = new DustParticleOptions(new Vector3f(0.95F, 0.12F, 0.12F), 1.6F);
     private static final DustParticleOptions DUST_BLUE = new DustParticleOptions(new Vector3f(0.12F, 0.38F, 1.0F), 1.6F);
@@ -82,7 +83,7 @@ public final class GojoSkills {
     private static final double RED_RADIUS = 15.0D;
 
     private static final class State {
-        int skill, t, frames, ability2, ability3, ability4, ability5, ability12, domainCD, domainFx = -1;
+        int skill, t, frames, ability1, infinityLeft, ability2, ability3, ability4, ability5, ability12, domainCD, domainFx = -1;
         long domainEnd;
         UUID kickTarget;
         final Set<UUID> frozen = new HashSet<>();
@@ -159,7 +160,9 @@ public final class GojoSkills {
             if (airborne && !sneak) cast(p, s, DOMAIN_QUICK, 300, s.domainCD, "领域展开");
             else cast(p, s, DOMAIN, 800, s.domainCD, "领域展开");
         } else if (item.equals("limitless1")) {
-            p.displayClientMessage(BedrockText.parse("§l§c无限: 尚未实装"), false);
+            if (airborne) cast(p, s, LEVITATE, 50, 0, "无限");
+            else if (sneak) cast(p, s, PRESSURE, 60, s.ability1, "无限");
+            else cast(p, s, INFINITY, 50, s.ability1, "无限");
         }
     }
 
@@ -184,6 +187,9 @@ public final class GojoSkills {
             case RED -> s.ability3 = 300;
             case RED_SMALL -> s.ability3 = 80;
             case REVERSE -> s.ability3 = 500;
+            case INFINITY -> s.ability1 = 1200;
+            case PRESSURE -> s.ability1 = 500;
+            case LEVITATE -> { }
             case BLITZ -> s.ability4 = 80;
             case BLITZ_AREA -> s.ability4 = 600;
             case KICK -> s.ability4 = 250;
@@ -204,12 +210,17 @@ public final class GojoSkills {
         State s = STATES.get(p.getUUID());
         if (s == null) return;
         if (s.ability2 > 0) s.ability2--;
+        if (s.ability1 > 0) s.ability1--;
         if (s.ability3 > 0) s.ability3--;
         if (s.ability4 > 0) s.ability4--;
         if (s.ability5 > 0) s.ability5--;
         if (s.ability12 > 0) s.ability12--;
         if (s.domainCD > 0) s.domainCD--;
         if (s.frames > 0) s.frames--;
+        if (s.infinityLeft > 0) {
+            s.infinityLeft--;
+            if (s.infinityLeft >= 3) s.frames = Math.max(s.frames, 2);
+        }
         domainTick(p, s, p.serverLevel());
         if (s.skill == 0) return;
         if (!p.isAlive()) {
@@ -231,6 +242,9 @@ public final class GojoSkills {
             case PURPLE -> purple(p, s, level, 360, 456, 480, 6.0D, 0);
             case PURPLE200 -> purple(p, s, level, 100, 201, 320, 16.0D, 1);
             case PURPLE_UNL -> purpleUnlimited(p, s, level);
+            case INFINITY -> infinity(p, s, level);
+            case PRESSURE -> pressure(p, s, level);
+            case LEVITATE -> levitate(p, s, level);
             case DOMAIN -> domain(p, s, level, false);
             case DOMAIN_QUICK -> domain(p, s, level, true);
             default -> reverse(p, s, level);
@@ -430,6 +444,53 @@ public final class GojoSkills {
         Vec3 m = p.getDeltaMovement();
         p.setDeltaMovement(0.0D, Math.min(0.0D, m.y), 0.0D);
         p.hurtMarked = true;
+    }
+
+    // ------------------------------------------------------------------ 无限 (limitless1)
+
+    /** limitless1 (move 15): at move 5 "infinity" = 300 + Energy; while it is 3 or more the caster has Frames (nothing hurts). */
+    private static void infinity(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 1) ModNet.moveFx(p, "infinity");
+        if (s.t == 10) {
+            s.infinityLeft = 300 + Energy.get(p);
+            ModNet.moveFx(p, "loop:infinity:" + s.infinityLeft);
+        }
+        if (s.t >= 15) end(s);
+    }
+
+    /** limitless1b (move 81): animation infinite_pressure; targets within 5 are held (Stun 40) and hit for 1 every tick, at move 26 the finishing 100. */
+    private static void pressure(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 2) {
+            ModNet.playAnim(p, "infinite_pressure", 0);
+            ModNet.moveFx(p, "pressure");
+        }
+        if (s.t >= 4) p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 3, false, false));
+        if (s.t >= 7 && s.t <= 53 && s.infinityLeft < 5) s.infinityLeft = 5;
+        if (s.t >= 6 && s.t <= 60) {
+            for (LivingEntity e : targets(p, p.position(), 5.0D)) {
+                GojoTechEntity.hurt(level, p, e, 1.0F);
+                if (s.t >= 7 && s.t <= 57) {
+                    GojoTechEntity.stun(e, 40);
+                    e.hurtMarked = true;
+                }
+                if (s.t == 55) {
+                    GojoTechEntity.hurt(level, p, e, 100.0F);
+                    BedrockFxEntity.play(level, "gojo_pressure", e.getX(), e.getY(), e.getZ(), p.getYRot());
+                }
+            }
+        }
+        if (s.t >= 80) end(s);
+    }
+
+    /** limitless1c (move 15): animation levitation; levitation for moves 11..3, slow falling at move 8, then the particles of the timeline. */
+    private static void levitate(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 1) {
+            ModNet.playAnim(p, "levitation", 0);
+            ModNet.moveFx(p, "levitate");
+        }
+        if (s.t >= 4 && s.t <= 12) p.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20, 60, false, false));
+        if (s.t == 7) p.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 5, false, false));
+        if (s.t >= 14) end(s);
     }
 
     // ------------------------------------------------------------------ 空间撕扯 (limitless4)

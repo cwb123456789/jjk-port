@@ -105,6 +105,10 @@ public final class FxShow {
         // limitless2c.mcfunction: the targets of the Blue pull ("particle ds:impact" at move 15, lapse_pull2/3/4 at move 11)
         def("gojo_pull_hit", 0, List.of(p("impact")), List.of());
         // blitz.mcfunction: "particle ds:heavy_impact1 ~~1~" at everything the line hits
+        // limitless/pressure.mcfunction: the finishing blow of 无限之压
+        def("gojo_pressure", 4, List.of(p("blood_explode"), p("heavy_impact1", 0, 1, 0), p("heavy_impact2", 0, 1, 0), p("heavy_impact3", 0, 1, 0),
+                p("rubble3"), p("dirt3", 0, 1, 0), p("ground_slam2", 0, 1, 0), p("ground_slam3", 0, 1, 0)),
+                List.of(s("minecraft:entity.generic.explode", 3.0F, 0.5F), s("minecraft:entity.wither.break_block", 3.0F, 0.45F)));
         def("gojo_blitz_hit", 0, List.of(p("heavy_impact1", 0, 1, 0)), List.of());
         // limitless3 (赫): the blast at move 15..16 ("particle ds:red_ex1..6 ~~1~", crater and rubble on the ground, shock sounds)
         def("gojo_red_blast", 2, List.of(p("red_ex1", 0, 1, 0), p("red_ex2", 0, 1, 0), p("red_ex3", 0, 1, 0), p("red_ex4", 0, 1, 0),

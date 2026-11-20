@@ -103,6 +103,17 @@ public final class MoveFx {
     public static void start(int entityId, String key) {
         Minecraft mc = Minecraft.getInstance();
         load(mc);
+        if (key.startsWith("loop:")) {
+            // "loop:<particle>:<ticks>": that particle at the entity every tick (the addon's per-tick "particle ds:x" of a running state)
+            String[] a = key.split(":");
+            if (a.length < 3) return;
+            int n = Math.min(Integer.parseInt(a[2]), 6000);
+            List<Ev> list = new ArrayList<>();
+            for (int i = 1; i <= n; i++) list.add(new Ev(i, new Object[]{"p", a[1], 1.0D, 0.0D, 0.0D, 0.0D}));
+            RUNS.removeIf(r -> r.entityId == entityId && r.events.size() > 0 && r.events.get(0).row()[1].equals(a[1]));
+            RUNS.add(new Run(entityId, list, n));
+            return;
+        }
         List<Ev> list = moves.get(key);
         if (list == null) return;
         RUNS.removeIf(r -> r.entityId == entityId);
