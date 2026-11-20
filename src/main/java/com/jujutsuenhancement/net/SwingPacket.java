@@ -15,7 +15,10 @@ public record SwingPacket() {
     public static void handle(SwingPacket p, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             var player = ctx.get().getSender();
-            if (player != null) com.jujutsuenhancement.combat.KatanaCombat.onLeftClick(player);
+            if (player != null) {
+                com.jujutsuenhancement.combat.KatanaCombat.onLeftClick(player);
+                com.jujutsuenhancement.combat.YujiSkills.onLeftClick(player);
+            }
         });
         ctx.get().setPacketHandled(true);
     }

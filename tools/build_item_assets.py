@@ -32,6 +32,11 @@ ITEMS = {
     'limitless4': 'generated',
     'limitless5': 'generated',
     'limitless6': 'generated',
+    'yuji_technique': 'generated',
+    'black_fists': 'generated',
+    'soul_shrine1': 'generated',
+    'soul_shrine2': 'generated',
+    'blood_manipulation': 'generated',
 }
 # items that a layer draws in the third person with their own geometry: the flat model is shrunk to nothing there
 HIDDEN_THIRD_PERSON = {'katana'}

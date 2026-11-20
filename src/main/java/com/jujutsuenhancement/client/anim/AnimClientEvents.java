@@ -67,7 +67,11 @@ public final class AnimClientEvents {
         public static void onAttackKey(InputEvent.InteractionKeyMappingTriggered event) {
             if (!event.isAttack()) return;
             var player = Minecraft.getInstance().player;
-            if (player == null || !(player.getMainHandItem().getItem() instanceof KatanaItem)) return;
+            if (player == null) return;
+            var held = player.getMainHandItem().getItem();
+            String hid = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(held).getPath();
+            boolean yuji = (hid.equals("black_fists") && (player.isShiftKeyDown() || !player.onGround())) || (hid.equals("soul_shrine1") && player.isShiftKeyDown());
+            if (!(held instanceof KatanaItem) && !yuji) return;
             ModNet.CHANNEL.sendToServer(new SwingPacket());
             event.setSwingHand(false);
             event.setCanceled(true);

@@ -29,5 +29,15 @@
   "item.jujutsuenhancement.limitless_technique": "§l§b无下限术式",
   "item.jujutsuenhancement.limitless_technique.lore": "§5§o天上天下，唯我独尊\n\n§r§l§g  - 右键(长按) 使用术式\n§l§g  - 潜行 + 右键(长按) 学习术式用法/秘传§l§7 [ §l§a消耗: 10点 天赋点 §l§7]\n\n§l§9[创造模式下使用解锁所有技能]\n\n§l§7[ §l§e潜行 + 左键(单击) 取消使用此术式 §l§7]",
   "item.jujutsuenhancement.limitless1": "§l§b无限",
-  "item.jujutsuenhancement.limitless1.lore": "§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§b无限悬浮 §l§7(§l§e跳起+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§3无限之压 §l§7(§l§e潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§760 点咒力 §l§g]\n\n§4潜行 + 左键(单击) 以解除无限\n§l§5- §l§o1号技能"
+  "item.jujutsuenhancement.limitless1.lore": "§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§b无限悬浮 §l§7(§l§e跳起+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§3无限之压 §l§7(§l§e潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§760 点咒力 §l§g]\n\n§4潜行 + 左键(单击) 以解除无限\n§l§5- §l§o1号技能",
+  "item.jujutsuenhancement.yuji_technique": "§l§c御厨子",
+  "item.jujutsuenhancement.yuji_technique.lore": "§5§o跃动的黑色火花中，于此觉醒\n\n§r§l§g  - 右键(长按) 使用术式\n§l§g  - 潜行 + 右键(长按) 学习术式用法/秘传\n§l§7[ §g消耗: §410次 累积黑闪特级生物次数 §7]\n\n§l§9[创造模式下使用解锁所有技能]\n\n§l§7[ §e潜行 + 左键(单击) 取消使用此术式 §7]",
+  "item.jujutsuenhancement.black_fists": "§l§4虎杖悠仁 - 黑闪战斗风格",
+  "item.jujutsuenhancement.black_fists.lore": "§5- 空间扭曲，咒力散发黑色光芒\n§l§e(部分技能在出现qte黄色字体提示时快速 右键[长按] 可打出黑闪，黑闪后冷却将大幅降低)\n\n§l§t激连差击 §7(§e右键(长按)§7)\n\n§l§t双重连踢 §7(§e潜行+右键(长按)§7)\n\n§l§t震地跃击 §7(§e跳起+右键(长按)§7)\n\n§l§t疾驰追击 §7(§e潜行+左键(单击)§7)\n\n§l§c力之争竞 §7(§e跳起+左键(单击)§7)\n\n§l§c「黑闪」 §7(§e潜行+跳起+右键(长按)§7)",
+  "item.jujutsuenhancement.soul_shrine1": "§l§c解-灵魂 §7(§e右键(长按)§7)",
+  "item.jujutsuenhancement.soul_shrine1.lore": "§g- 消耗: [ §775 点咒力 §g]\n\n§l§c断肢裂解 §7(§e潜行+右键(长按)§7)§l\n§g- 消耗: [ §775 点咒力 §g]\n\n§l§c缭闪连斩 §7(§e跳起+右键(长按)§7)§l\n§g- 消耗: [ §7400 点咒力 §g]\n\n§l§c切石掷击 §7(§e潜行+左键(单击)§7)§l\n§g- 消耗: [ §7200 点咒力 §g]\n\n§l§4裂岩轰闪 §7(§e潜行+跳起+右键(长按)§7)§l\n§g- 消耗: [ §7600 点咒力 §g]\n§l§5- §o御厨子",
+  "item.jujutsuenhancement.blood_manipulation": "§l§c赤血操术 [ 未完成 ]",
+  "item.jujutsuenhancement.blood_manipulation.lore": "\n§e这个术式将在未来进行制作，\n我将在它占据主导地位的更新中进行完成，\n只有这样我才能让它与虎杖的技能等相兼容",
+  "item.jujutsuenhancement.soul_shrine2": "§l§c领域展开 『伏魔御佛龛』",
+  "item.jujutsuenhancement.soul_shrine2.lore": "§g- 消耗: [ §7500 点咒力 §g]\n§l§5- §o咒术的极致"
 }

@@ -31,6 +31,31 @@ MOVES = {
     'purple_unl': ('limitless5d', 481),
     'infinity': ('limitless1', 15), 'pressure': ('limitless1b', 81), 'levitate': ('limitless1c', 15),
 }
+# Yuji (functions/yuji): key -> (function, N, options). cond: which lines (none = unconditional, nbf = tag=!blackflashed, bf = tag=blackflashed);
+# hi: the move value at which the timeline is started by the server (ticks = hi - move).
+YUJI = {
+    'yuji_fierce': ('../yuji/fierce_strikes', 36, {'cond': 'none'}),
+    'yuji_fierce_n': ('../yuji/fierce_strikes', 36, {'cond': 'nbf', 'hi': 15}),
+    'yuji_fierce_b': ('../yuji/fierce_strikes', 36, {'cond': 'bf', 'hi': 15}),
+    'yuji_twin': ('../yuji/twinkicks', 43, {'cond': 'none'}),
+    'yuji_quake_air': ('../yuji/brutal_quake', 87, {'cond': 'none', 'lo': 83}),
+    'yuji_quake_land': ('../yuji/brutal_quake', 87, {'cond': 'none', 'hi': 82}),
+    'yuji_pursuit': ('../yuji/deadly_pursuit', 16, {'cond': 'none', 'lo': 2}),
+    'yuji_pursuit2': ('../yuji/deadly_pursuit', 16, {'cond': 'none', 'hi': 1001, 'lo': 900}),
+    'yuji_vengeance': ('../yuji/vengeance_fists', 16, {'cond': 'none', 'lo': 2}),
+    'yuji_vengeance2': ('../yuji/vengeance_fists', 16, {'cond': 'none', 'hi': 1002, 'lo': 900}),
+    'yuji_flash': ('../yuji/final_flash', 16, {'cond': 'none', 'lo': 2}),
+    'yuji_flash2': ('../yuji/final_flash', 16, {'cond': 'none', 'hi': 1002, 'lo': 700}),
+    'yuji_soul1': ('../yuji/soul_ab1', 26, {'cond': 'none', 'lo': 2}),
+    'yuji_soul1b': ('../yuji/soul_ab1', 26, {'cond': 'none', 'hi': 101, 'lo': 60}),
+    'yuji_soul2': ('../yuji/soul_ab2', 16, {'cond': 'none', 'lo': 2}),
+    'yuji_soul2b': ('../yuji/soul_ab2', 16, {'cond': 'none', 'hi': 1001, 'lo': 900}),
+    'yuji_soul3': ('../yuji/soul_ab3', 21, {'cond': 'none', 'lo': 2}),
+    'yuji_soul3b': ('../yuji/soul_ab3', 21, {'cond': 'none', 'hi': 1001, 'lo': 900}),
+    'yuji_soul4': ('../yuji/soul_ab4', 36, {'cond': 'none'}),
+    'yuji_soul5': ('../yuji/soul_ab5', 31, {'cond': 'none', 'lo': 2}),
+    'yuji_soul5b': ('../yuji/soul_ab5', 31, {'cond': 'none', 'hi': 1001, 'lo': 800}),
+}
 # vanilla sounds the addon uses by their Bedrock name
 VANILLA = {
     'beacon.deactivate': 'minecraft:block.beacon.deactivate', 'beacon.activate': 'minecraft:block.beacon.activate',
@@ -42,6 +67,7 @@ VANILLA = {
     'mob.elderguardian.curse': 'minecraft:entity.elder_guardian.curse', 'mob.shulker.hurt': 'minecraft:entity.shulker.hurt',
     'random.anvil_land': 'minecraft:block.anvil.land', 'note.pling': 'minecraft:block.note_block.pling',
     'mob.stormwraith.attack': 'minecraft:entity.generic.explode', 'ambient.weather.thunder': 'minecraft:entity.lightning_bolt.thunder',
+    'mob.bat.takeoff': 'minecraft:entity.bat.takeoff', 'mob.blaze.shoot': 'minecraft:entity.blaze.shoot', 'mob.enderdragon.flap': 'minecraft:entity.ender_dragon.flap', 'mob.witch.throw': 'minecraft:entity.witch.throw',
     'mob.zombie.metal': 'minecraft:entity.zombie.attack_iron_door', 'random.break': 'minecraft:entity.item.break',
 }
 COORD = re.compile(r'[~^]-?\d*\.?\d*')
@@ -96,7 +122,8 @@ def parse_line(line):
     return None
 
 
-def events_for(path, n, sounds, particles, glyphs):
+def events_for(path, n, sounds, particles, glyphs, opt=None):
+    opt = opt or {}
     ev = []
     for raw in open(path, encoding='utf-8', errors='ignore').read().replace('\r', '').split('\n'):
         line = raw.strip()
@@ -106,10 +133,24 @@ def events_for(path, n, sounds, particles, glyphs):
         if not pl:
             continue
         sel, cmd = pl
-        rng = move_range(sel, n)
+        rng = move_range(sel, 100000 if opt else n)
         if not rng:
             continue
-        ticks = sorted(set(max(1, n - m) for m in range(rng[0], rng[1] + 1)))
+        cnd = 'none'
+        if re.search(r'tag=blackflashed(?![\w])', sel):
+            cnd = 'bf'
+        elif 'tag=!blackflashed' in sel:
+            cnd = 'nbf'
+        if opt and cnd != opt.get('cond', 'none'):
+            continue
+        hi = opt.get('hi', n) if opt else n
+        lo = opt.get('lo', 0) if opt else 0
+        a, b = max(rng[0], lo), min(rng[1], hi)
+        if a > b:
+            continue
+        if b - a > 2000:
+            continue
+        ticks = sorted(set(max(1, hi - m) for m in range(a, b + 1)))
         tok = cmd.split()
         if not tok:
             continue
@@ -289,8 +330,8 @@ def main(src, dst, glyph_page=None):
     nfun = os.path.join(src, 'ba', '81e3bc74', 'JujutsuAwa', 'functions', 'limitless')
     sounds, particles, glyphs = set(), set(), set()
     out = {}
-    for key, (fn, n) in MOVES.items():
-        ev = events_for(os.path.join(nfun, fn + '.mcfunction'), n, sounds, particles, glyphs)
+    for key, (fn, n, *o) in [(k, v) for k, v in list(MOVES.items())] + [(k, v) for k, v in YUJI.items()]:
+        ev = events_for(os.path.join(nfun, fn + '.mcfunction'), n, sounds, particles, glyphs, o[0] if o else None)
         out[key] = {'n': n, 'events': ev}
         print(key, n, len(ev), 'events')
     # blitz.mcfunction: the line of particles along the look ray (once, at move 5 of limitless4)

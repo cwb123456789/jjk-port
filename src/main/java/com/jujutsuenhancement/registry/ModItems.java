@@ -103,4 +103,20 @@ public final class ModItems {
     /** ds:limitless6 (领域展开). */
     public static final RegistryObject<Item> LIMITLESS6 =
             reg("limitless6", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless6", new Item.Properties().stacksTo(1)));
+
+    /** ds:yuji_technique, "御厨子" (虎杖悠仁). */
+    public static final RegistryObject<Item> YUJI_TECHNIQUE =
+            reg("yuji_technique", () -> new com.jujutsuenhancement.item.YujiTechniqueItem(new Item.Properties().stacksTo(1)));
+    /** ds:black_fists, "虎杖悠仁 - 黑闪战斗风格". */
+    public static final RegistryObject<Item> BLACK_FISTS =
+            reg("black_fists", () -> new com.jujutsuenhancement.item.TechniqueItem("black_fists", new Item.Properties().stacksTo(1)));
+    /** ds:soul_shrine1, "解-灵魂". */
+    public static final RegistryObject<Item> SOUL_SHRINE1 =
+            reg("soul_shrine1", () -> new com.jujutsuenhancement.item.TechniqueItem("soul_shrine1", new Item.Properties().stacksTo(1)));
+    /** ds:soul_shrine2, "领域展开 『伏魔御佛龛』". */
+    public static final RegistryObject<Item> SOUL_SHRINE2 =
+            reg("soul_shrine2", () -> new com.jujutsuenhancement.item.TechniqueItem("soul_shrine2", new Item.Properties().stacksTo(1)));
+    /** ds:blood_manipulation, "赤血操术 [ 未完成 ]" (a placeholder in the addon too). */
+    public static final RegistryObject<Item> BLOOD_MANIPULATION =
+            reg("blood_manipulation", () -> new BedrockItem(new Item.Properties().stacksTo(1)));
 }

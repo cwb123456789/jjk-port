@@ -109,6 +109,12 @@ public final class FxShow {
         def("gojo_pressure", 4, List.of(p("blood_explode"), p("heavy_impact1", 0, 1, 0), p("heavy_impact2", 0, 1, 0), p("heavy_impact3", 0, 1, 0),
                 p("rubble3"), p("dirt3", 0, 1, 0), p("ground_slam2", 0, 1, 0), p("ground_slam3", 0, 1, 0)),
                 List.of(s("minecraft:entity.generic.explode", 3.0F, 0.5F), s("minecraft:entity.wither.break_block", 3.0F, 0.45F)));
+        // yuji/rock_throw.mcfunction: the rock bursts (Deleter=2)
+        def("yuji_rock_burst", 4, List.of(p("slam_dust2"), p("ground_pound2"), p("ground_pound3"), p("ground_pound4"), p("ground_pound4b"),
+                p("ground_slam1"), p("ground_slam2"), p("ground_slam3"), p("dirt0"), p("dirt2"), p("dirt3")),
+                List.of(s("minecraft:entity.generic.explode", 3.0F, 0.5F), s("minecraft:entity.generic.explode", 3.0F, 0.875F),
+                        s("minecraft:entity.wither.break_block", 3.0F, 0.5F), s("minecraft:entity.wither.break_block", 3.0F, 0.75F)));
+        def("yuji_domain_slash", 2, List.of(p("yuji_domain_slash1", 0, -0.5, 0)), List.of());
         def("gojo_blitz_hit", 0, List.of(p("heavy_impact1", 0, 1, 0)), List.of());
         // limitless3 (赫): the blast at move 15..16 ("particle ds:red_ex1..6 ~~1~", crater and rubble on the ground, shock sounds)
         def("gojo_red_blast", 2, List.of(p("red_ex1", 0, 1, 0), p("red_ex2", 0, 1, 0), p("red_ex3", 0, 1, 0), p("red_ex4", 0, 1, 0),

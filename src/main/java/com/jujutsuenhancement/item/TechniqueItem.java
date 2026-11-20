@@ -34,6 +34,7 @@ public class TechniqueItem extends BedrockItem {
         ItemStack stack = player.getItemInHand(hand);
         if (hand == InteractionHand.MAIN_HAND && player instanceof ServerPlayer sp) {
             if (id.startsWith("limitless")) GojoSkills.onUse(sp, id);
+            else if (id.equals("black_fists") || id.startsWith("soul_shrine")) com.jujutsuenhancement.combat.YujiSkills.onUse(sp, id);
         }
         return InteractionResultHolder.consume(stack);
     }

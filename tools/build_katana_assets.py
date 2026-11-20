@@ -19,7 +19,13 @@ ANIMS = ['animation.katana.idle', 'animation.katana_attack1', 'animation.katana_
          'animation.reversal_red2', 'animation.reversal_red2b', 'animation.reversal_red3',
          'animation.spatial_blitz', 'animation.spacial_blitz', 'animation.spacial_kick', 'animation.imaginary_purple',
          'animation.hollowpurple', 'animation.200_purple', 'animation.limitless_purple', 'animation.infinite_void',
-         'animation.infinite_void_2sec', 'animation.infinite_pressure', 'animation.levitation']
+         'animation.infinite_void_2sec', 'animation.infinite_pressure', 'animation.levitation',
+         # Yuji
+         'animation.black_fists.ab1', 'animation.black_fists.ab2', 'animation.black_fists.ab3', 'animation.black_fists.ab3_hold',
+         'animation.black_fists.ab4', 'animation.black_fists.ab4b', 'animation.black_fists.ab5', 'animation.black_fists.ab6',
+         'animation.soul_shrine.ab1', 'animation.soul_shrine.ab1b', 'animation.soul_shrine.ab2', 'animation.soul_shrine.ab2b',
+         'animation.soul_shrine.ab3', 'animation.soul_shrine.ab3b', 'animation.soul_shrine.ab4', 'animation.soul_shrine.ab5',
+         'animation.soul_shrine.ab5b', 'animation.yuji_domain', 'animation.yuji_domain_hold', 'animation.yuji_domain2']
 PARTICLES = ['katana_slash1', 'katana_slash2', 'katana_slash3', 'katana_slash4', 'katana_ab1', 'katana_ab2',
              'ground_slam2', 'ground_slam3', 'rapid_cuts1', 'rapid_cuts2', 'rapid_cuts3', 'rapid_cuts4', 'rapid_cuts5',
              'dirt0', 'large_impact1', 'large_impact2', 'lapseblue', 'lapseblue0a', 'lapseblue0b']
