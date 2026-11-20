@@ -538,7 +538,7 @@ public final class GojoSkills {
         }
         if (s.t >= 49) s.frames = 4;
         if (s.t >= 41 && s.t <= 80) p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 2, false, false));
-        if (s.t == 57) launchPurple(p, level, 0, 6.0D);
+        if (s.t == 57) launchPurple(p, level, 2, 6.0D);
         if (s.t >= 100) end(s);
     }
 

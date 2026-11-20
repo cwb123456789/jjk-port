@@ -42,6 +42,8 @@ public final class HollowPurpleEntity extends Entity {
 
     private UUID ownerUuid;
     private int age;
+    private static final net.minecraft.network.syncher.EntityDataAccessor<Integer> MODE_DATA =
+            net.minecraft.network.syncher.SynchedEntityData.defineId(HollowPurpleEntity.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
     private Mode mode = Mode.NORMAL;
 
     public HollowPurpleEntity(EntityType<? extends HollowPurpleEntity> type, Level level) {
@@ -50,9 +52,9 @@ public final class HollowPurpleEntity extends Entity {
         this.setNoGravity(true);
     }
 
-    public void setUnlimited() { mode = Mode.UNLIMITED; }
+    public void setUnlimited() { mode = Mode.UNLIMITED; entityData.set(MODE_DATA, mode.ordinal()); }
 
-    public void setCharged200Percent() { mode = Mode.CHARGED; }
+    public void setCharged200Percent() { mode = Mode.CHARGED; entityData.set(MODE_DATA, mode.ordinal()); }
 
     public void launch(Entity owner, Vec3 direction) {
         this.ownerUuid = owner == null ? null : owner.getUUID();
@@ -112,7 +114,6 @@ public final class HollowPurpleEntity extends Entity {
                 destroyTerrain(server, 2);
             }
         }
-        serverParticles(server, from, to);
     }
 
     private void hurtWithin(ServerLevel server, Entity owner, double radius, float amount) {
@@ -160,45 +161,25 @@ public final class HollowPurpleEntity extends Entity {
     }
 
     private void finish(ServerLevel server) {
-        server.sendParticles(PURPLE_CORE, getX(), getY(), getZ(), 40, 1.5D, 1.5D, 1.5D, 0.12D);
-        server.sendParticles(WHITE_CORE, getX(), getY(), getZ(), 12, 0.6D, 0.6D, 0.6D, 0.04D);
         discard();
     }
 
-    private void serverParticles(ServerLevel server, Vec3 from, Vec3 to) {
-        double size = switch (mode) { case NORMAL -> 1.2D; case CHARGED -> 3.0D; case UNLIMITED -> 1.0D; };
-        int segments = 4;
-        for (int i = 0; i < segments; i++) {
-            double t = (i + 1.0D) / (segments + 1.0D);
-            double px = from.x + (to.x - from.x) * t;
-            double py = from.y + (to.y - from.y) * t;
-            double pz = from.z + (to.z - from.z) * t;
-            server.sendParticles(PURPLE_CORE, px, py, pz, 5, size * 0.5D, size * 0.5D, size * 0.5D, 0.01D);
-            server.sendParticles(BLUE_EDGE, px, py, pz, 3, size * 0.6D, size * 0.6D, size * 0.6D, 0.02D);
-        }
-        server.sendParticles(WHITE_CORE, to.x, to.y, to.z, 3, size * 0.2D, size * 0.2D, size * 0.2D, 0.0D);
-    }
 
     private void clientParticles() {
-        double size = switch (mode) { case NORMAL -> 0.9D; case CHARGED -> 2.5D; case UNLIMITED -> 0.8D; };
-        double phase = age * 0.42D;
-        for (int i = 0; i < 3; i++) {
-            double angle = phase + (Math.PI * 2.0D * i / 3.0D);
-            double radius = size * (0.5D + 0.08D * Math.sin(phase * 0.7D + i));
-            level().addParticle(PURPLE_CORE, getX() + Math.cos(angle) * radius, getY() + Math.sin(angle * 1.35D) * radius * 0.7D,
-                    getZ() + Math.sin(angle) * radius, 0.0D, 0.015D, 0.0D);
-            level().addParticle(BLUE_EDGE, getX() + (random.nextDouble() - 0.5D) * size, getY() + (random.nextDouble() - 0.5D) * size,
-                    getZ() + (random.nextDouble() - 0.5D) * size, 0.0D, 0.01D, 0.0D);
-        }
-        level().addParticle(WHITE_CORE, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
+        com.jujutsuenhancement.client.bedrock.ProjFx.tick(this, switch (Mode.values()[Math.floorMod(entityData.get(MODE_DATA), Mode.values().length)]) {
+            case NORMAL -> "hollow_purple";
+            case CHARGED -> "hollow_purple200";
+            case UNLIMITED -> "imaginary_purple";
+        });
     }
 
-    @Override protected void defineSynchedData() {}
+    @Override protected void defineSynchedData() { entityData.define(MODE_DATA, 0); }
 
     @Override protected void readAdditionalSaveData(CompoundTag tag) {
         if (tag.hasUUID("Owner")) ownerUuid = tag.getUUID("Owner");
         age = tag.getInt("Age");
         mode = Mode.values()[Math.floorMod(tag.getInt("Mode"), Mode.values().length)];
+        entityData.set(MODE_DATA, mode.ordinal());
     }
 
     @Override protected void addAdditionalSaveData(CompoundTag tag) {

@@ -155,6 +155,57 @@ def events_for(path, n, sounds, particles, glyphs):
     return ev
 
 
+PROJECTILES = {
+    # key: (function, entity name, animation file key of the per-tick animation)
+    'hollow_purple': ('hollow_purple', 'HollowP', 'animation.hollowp'),
+    'hollow_purple200': ('200hollow_purple', '200HollowP', 'animation.200hollowp'),
+    'imaginary_purple': ('imaginary_purple', 'ImaginaryP', 'animation.imaginaryp'),
+}
+
+
+def projectile_events(path, name, anim, anims, particles):
+    """Per-tick effects of a projectile entity: [kind, ...] rows with a condition (0 always, 1 inside a block, 2 on the ground)
+    and a chance (1 = every tick, 5 = one in five)."""
+    out = {'p': [], 'k': []}
+    pat = re.compile(r'execute as @s\[name=' + re.escape(name) + r',scores=\{([^}]*)\}\] at @s (.*?)run (particle|camerashake) (.*)$')
+    for raw in open(path, encoding='utf-8', errors='ignore').read().replace('\r', '').split('\n'):
+        m = pat.match(raw.strip())
+        if not m:
+            continue
+        scores, conds, cmd, rest = m.groups()
+        cond = 0
+        if conds.strip():
+            if re.fullmatch(r'unless block ~~~ air unless block ~~~ barrier ', conds):
+                cond = 1
+            elif re.fullmatch(r'unless block ~~-0\.3~ air unless block ~~-0\.3~ barrier ', conds):
+                cond = 2
+            else:
+                continue
+        chance = 5 if 'chance=1' in scores else 1
+        tok = rest.split()
+        if cmd == 'particle' and tok and tok[0].startswith('ds:'):
+            parts = re.split(r'(?=[~^])', tok[0][3:], maxsplit=1)
+            r2 = (parts[1] if len(parts) > 1 else '') + ''.join(tok[1:])
+            c = coords(r2) if r2 else (0, [0.0, 0.0, 0.0])
+            if c is None:
+                continue
+            particles.add(parts[0])
+            out['p'].append([parts[0], c[0]] + c[1] + [cond, chance])
+        elif cmd == 'camerashake' and len(tok) >= 4 and tok[0] == 'add':
+            out['k'].append([num(tok[2]), int(round(num(tok[3]) * 20)), radius(tok[1]), cond])
+    a = anims.get(anim)
+    if a:
+        seen = []
+        for k, v in (a.get('particle_effects') or {}).items():
+            for e in (v if isinstance(v, list) else [v]):
+                if e['effect'] not in seen or True:
+                    seen.append(e['effect'])
+        for eff in seen:
+            particles.add(eff)
+            out['p'].append([eff, 0, 0.0, 0.0, 0.0, 0, 1])
+    return out
+
+
 def load_sound_defs(src):
     defs = {}
     files = glob.glob(os.path.join(src, 'rp*', 'sounds', 'sound_definitions.json')) + \
@@ -189,6 +240,18 @@ def main(src, dst, glyph_page=None):
     out['blitz']['events'] += blitz_ray
     particles.update(['spatial_blitz2', 'spatial_blitz3', 'spatial_blitz4', 'heavy_impact1', 'impact'])
     out['blitz']['events'].sort(key=lambda r: r[0])
+
+    anims = {}
+    for f in glob.glob(os.path.join(src, 'rp4', 'animations', 'limitless.animation.json')):
+        anims.update(json.loads(re.sub(r'(?m)^\s*//.*$', '', open(f, encoding='utf-8').read())).get('animations', {}))
+    proj = {}
+    for key, (fn, ename, anim) in PROJECTILES.items():
+        proj[key] = projectile_events(os.path.join(nfun, fn + '.mcfunction'), ename, anim, anims, particles)
+        print('projectile', key, len(proj[key]['p']), 'particles', len(proj[key]['k']), 'shakes')
+    pdir = os.path.join(dst, 'bedrock', 'gojo')
+    os.makedirs(pdir, exist_ok=True)
+    with open(os.path.join(pdir, 'projectiles.json'), 'w', encoding='utf-8') as fh:
+        json.dump(proj, fh, separators=(',', ':'))
 
     # sounds
     defs = load_sound_defs(src)
