@@ -50,7 +50,7 @@ public final class EnergyCommands {
                     com.jujutsuenhancement.combat.YujiTechnique.addSpecial(p, IntegerArgumentType.getInteger(ctx, "n"));
                     p.sendSystemMessage(Component.literal("累积黑闪特级生物次数 " + com.jujutsuenhancement.combat.YujiTechnique.special(p)));
                     return 1;
-                })));
+                }))));
     }
 
     private static int show(ServerPlayer p) {
