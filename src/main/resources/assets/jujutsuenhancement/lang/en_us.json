@@ -19,5 +19,15 @@
   "item.jujutsuenhancement.limitless2": "§l§b术式顺转 苍",
   "item.jujutsuenhancement.limitless2.lore": "§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§b苍之拉取 §l§7(§l§e跳起+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§1术式顺转 苍: 最大输出 §l§7(§l§e视角朝下+潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§7250 点咒力 §l§g]\n\n§l§o§c术式顺转 苍: 咒词吟唱§l §l§7(§l§e潜行+长按§l§7)§l\n§l§g- 消耗: [ §l§7300 点咒力 §l§g]\n§l§5- §l§o2号技能",
   "item.jujutsuenhancement.limitless3": "§l§4术式反转 赫",
-  "item.jujutsuenhancement.limitless3.lore": "§l§g- 消耗: [ §l§730 点咒力 §l§g]\n\n§l§c术式反转 赫: 最大输出 §l§7(§l§e跳起+长按§l§7)§l\n§l§g- 消耗: [ §l§7200 点咒力 §l§g]\n\n§l§4术式反转 赫 - 弹射起飞 §l§7(§l§e视角朝下+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§715 点咒力 §l§g]\n\n§l§o§c术式反转 赫: 咒词吟唱§l §l§7(§l§e潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§7300 点咒力 §l§g]\n§l§5- §l§o3号技能"
+  "item.jujutsuenhancement.limitless3.lore": "§l§g- 消耗: [ §l§730 点咒力 §l§g]\n\n§l§c术式反转 赫: 最大输出 §l§7(§l§e跳起+长按§l§7)§l\n§l§g- 消耗: [ §l§7200 点咒力 §l§g]\n\n§l§4术式反转 赫 - 弹射起飞 §l§7(§l§e视角朝下+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§715 点咒力 §l§g]\n\n§l§o§c术式反转 赫: 咒词吟唱§l §l§7(§l§e潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§7300 点咒力 §l§g]\n§l§5- §l§o3号技能",
+  "item.jujutsuenhancement.limitless4": "§l§b空间撕扯",
+  "item.jujutsuenhancement.limitless4.lore": "§l§g- 消耗: [ §l§745 点咒力 §l§g]\n\n§l§b空间迸裂 §l§7(§l§e潜行+右键(长按)§l§7)\n§l§g- 消耗: [ §l§7100 点咒力 §l§g]\n\n§l§b空间闪踢 §l§7(§l§e跳起+右键(长按)§l§7)\n§l§g- 消耗: [ §l§7100 点咒力 §l§g]]\n§l§5- §l§o4号技能",
+  "item.jujutsuenhancement.limitless5": "§l§5瞬发 虚式「茈」",
+  "item.jujutsuenhancement.limitless5.lore": "§l§g- 消耗: [ §l§780 点咒力 §l§g]\n\n§l§5虚式「茈」 §l§7(§l§e潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§7150 点咒力 §l§g]\n\n§l§d200%-虚式「茈」 §l§7(§l§e视角朝下+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§73500 点咒力 §l§g]\n\n§l§d无限制-虚式「茈」 §l§7(§l§e潜行+视角向上+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§77500 点咒力 §l§g]\n§l§5- §l§o5号技能",
+  "item.jujutsuenhancement.limitless6": "§l§9领域展开 『无量空处』",
+  "item.jujutsuenhancement.limitless6.lore": "§l§g- 消耗: [ §l§7800 点咒力 §l§g]\n\n§l§9领域展开 『无量空处』 - 快速展开 §l§7(§l§e潜行+右键(长按)§l§7)\n§l§g- 消耗: [ §l§7800 点咒力 §l§g]\n\n§l§t0.2秒 『无量空处』 §l§7(§l§e跳起+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§7300 点咒力 §l§g]\n§l§5- §l§o无下限的内侧",
+  "item.jujutsuenhancement.limitless_technique": "§l§b无下限术式",
+  "item.jujutsuenhancement.limitless_technique.lore": "§5§o天上天下，唯我独尊\n\n§r§l§g  - 右键(长按) 使用术式\n§l§g  - 潜行 + 右键(长按) 学习术式用法/秘传§l§7 [ §l§a消耗: 10点 天赋点 §l§7]\n\n§l§9[创造模式下使用解锁所有技能]\n\n§l§7[ §l§e潜行 + 左键(单击) 取消使用此术式 §l§7]",
+  "item.jujutsuenhancement.limitless1": "§l§b无限",
+  "item.jujutsuenhancement.limitless1.lore": "§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§b无限悬浮 §l§7(§l§e跳起+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§750 点咒力 §l§g]\n\n§l§3无限之压 §l§7(§l§e潜行+右键(长按)§l§7)§l\n§l§g- 消耗: [ §l§760 点咒力 §l§g]\n\n§4潜行 + 左键(单击) 以解除无限\n§l§5- §l§o1号技能"
 }

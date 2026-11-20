@@ -33,7 +33,16 @@ public final class EnergyCommands {
                     ServerPlayer p = ctx.getSource().getPlayerOrException();
                     Energy.setBase(p, IntegerArgumentType.getInteger(ctx, "n"));
                     return show(p);
-                })))));
+                })))
+                ).then(Commands.literal("invest").then(Commands.argument("n", IntegerArgumentType.integer(-1000, 1000)).executes(ctx -> {
+                    ServerPlayer p = ctx.getSource().getPlayerOrException();
+                    com.jujutsuenhancement.combat.LimitlessTechnique.addInvest(p, IntegerArgumentType.getInteger(ctx, "n"));
+                    p.sendSystemMessage(Component.literal("天赋点 " + com.jujutsuenhancement.combat.LimitlessTechnique.invest(p)));
+                    return 1;
+                }))).then(Commands.literal("technique").then(Commands.literal("clear").executes(ctx -> {
+                    com.jujutsuenhancement.combat.LimitlessTechnique.clear(ctx.getSource().getPlayerOrException());
+                    return 1;
+                }))));
     }
 
     private static int show(ServerPlayer p) {

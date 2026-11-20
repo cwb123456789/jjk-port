@@ -33,7 +33,7 @@ public class TechniqueItem extends BedrockItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (hand == InteractionHand.MAIN_HAND && player instanceof ServerPlayer sp) {
-            if (id.equals("limitless2") || id.equals("limitless3")) GojoSkills.onUse(sp, id);
+            if (id.startsWith("limitless")) GojoSkills.onUse(sp, id);
         }
         return InteractionResultHolder.consume(stack);
     }

@@ -76,6 +76,14 @@ public final class ModItems {
 
     // ---- techniques (术式)
 
+    /** ds:limitless_technique, "无下限术式" (天上天下，唯我独尊): gives Gojo's skill items. */
+    public static final RegistryObject<Item> LIMITLESS_TECHNIQUE =
+            reg("limitless_technique", () -> new com.jujutsuenhancement.item.LimitlessTechniqueItem(new Item.Properties().stacksTo(1)));
+
+    /** ds:limitless1 (无限). */
+    public static final RegistryObject<Item> LIMITLESS1 =
+            reg("limitless1", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless1", new Item.Properties().stacksTo(1)));
+
     /** ds:limitless2, "术式顺转 苍" (Gojo's Blue). */
     public static final RegistryObject<Item> LIMITLESS2 =
             reg("limitless2", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless2", new Item.Properties().stacksTo(1)));
@@ -83,4 +91,16 @@ public final class ModItems {
     /** ds:limitless3, "术式反转 赫" (Gojo's Red). */
     public static final RegistryObject<Item> LIMITLESS3 =
             reg("limitless3", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless3", new Item.Properties().stacksTo(1)));
+
+    /** ds:limitless4 (空间撕扯). */
+    public static final RegistryObject<Item> LIMITLESS4 =
+            reg("limitless4", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless4", new Item.Properties().stacksTo(1)));
+
+    /** ds:limitless5 (茈). */
+    public static final RegistryObject<Item> LIMITLESS5 =
+            reg("limitless5", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless5", new Item.Properties().stacksTo(1)));
+
+    /** ds:limitless6 (领域展开). */
+    public static final RegistryObject<Item> LIMITLESS6 =
+            reg("limitless6", () -> new com.jujutsuenhancement.item.TechniqueItem("limitless6", new Item.Properties().stacksTo(1)));
 }

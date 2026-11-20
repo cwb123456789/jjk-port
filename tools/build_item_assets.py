@@ -27,6 +27,11 @@ ITEMS = {
     # techniques (术式); the icons are the ones the item definitions name (limitless2 shows the limitless3 texture and vice versa)
     'limitless2': 'generated',
     'limitless3': 'generated',
+    'limitless_technique': 'generated',
+    'limitless1': 'generated',
+    'limitless4': 'generated',
+    'limitless5': 'generated',
+    'limitless6': 'generated',
 }
 # items that a layer draws in the third person with their own geometry: the flat model is shrunk to nothing there
 HIDDEN_THIRD_PERSON = {'katana'}

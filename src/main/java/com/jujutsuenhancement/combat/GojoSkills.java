@@ -4,13 +4,19 @@ import com.jujutsuenhancement.JujutsuEnhancement;
 import com.jujutsuenhancement.entity.BedrockFxEntity;
 import com.jujutsuenhancement.entity.GojoTechEntity;
 import com.jujutsuenhancement.net.ModNet;
+import com.jujutsuenhancement.entity.HollowPurpleEntity;
+import com.jujutsuenhancement.registry.ModEntities;
 import com.jujutsuenhancement.stats.Energy;
 import com.jujutsuenhancement.text.BedrockText;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -20,15 +26,20 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.joml.Vector3f;
 
 /**
  * The limitless (无下限术式) items of Gojo for a player: 苍 ({@code ds:limitless2}) and 赫 ({@code ds:limitless3}), ported from
@@ -53,6 +64,12 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class GojoSkills {
     public static final int BLUE = 1, PULL = 2, MAX = 3, RED = 4, RED_SMALL = 5, REVERSE = 6;
+    public static final int BLITZ = 7, BLITZ_AREA = 8, KICK = 9;
+    public static final int PURPLE_FAST = 10, PURPLE = 11, PURPLE200 = 12, PURPLE_UNL = 13;
+    public static final int DOMAIN = 14, DOMAIN_QUICK = 15;
+    private static final DustParticleOptions DUST_PURPLE = new DustParticleOptions(new Vector3f(0.42F, 0.08F, 0.95F), 1.6F);
+    private static final DustParticleOptions DUST_RED = new DustParticleOptions(new Vector3f(0.95F, 0.12F, 0.12F), 1.6F);
+    private static final DustParticleOptions DUST_BLUE = new DustParticleOptions(new Vector3f(0.12F, 0.38F, 1.0F), 1.6F);
 
     // {total ticks of the move, tick of the main event}
     private static final int BLUE_SHOOT = 11, BLUE_TOTAL = 14;                                 // N 15, shot at move 4
@@ -65,7 +82,10 @@ public final class GojoSkills {
     private static final double RED_RADIUS = 15.0D;
 
     private static final class State {
-        int skill, t, frames, ability2, ability3;
+        int skill, t, frames, ability2, ability3, ability4, ability5, ability12, domainCD, domainFx = -1;
+        long domainEnd;
+        UUID kickTarget;
+        final Set<UUID> frozen = new HashSet<>();
         final List<UUID> pullTargets = new ArrayList<>();
     }
 
@@ -124,6 +144,22 @@ public final class GojoSkills {
             if (lookDown) cast(p, s, RED_SMALL, 15, s.ability3, "术式反转 赫");
             else if (airborne) cast(p, s, REVERSE, 200, s.ability3, "术式反转 赫");
             else cast(p, s, RED, 30, s.ability3, "术式反转 赫");
+        } else if (item.equals("limitless4")) {
+            if (sneak) cast(p, s, BLITZ_AREA, 100, s.ability4, "空间撕扯");
+            else if (airborne) cast(p, s, KICK, 100, s.ability4, "空间撕扯");
+            else cast(p, s, BLITZ, 45, s.ability4, "空间撕扯");
+        } else if (item.equals("limitless5")) {
+            boolean lookUp = p.getXRot() <= -80.0F;           // the addon's "lookingup" (rx=-80)
+            if (sneak) {
+                if (lookUp) cast(p, s, PURPLE_UNL, 7500, s.ability12, "虚式「茈」");
+                else cast(p, s, PURPLE, 150, s.ability5, "虚式「茈」");
+            } else if (lookDown) cast(p, s, PURPLE200, 3500, s.ability5, "虚式「茈」");
+            else cast(p, s, PURPLE_FAST, 80, s.ability5, "虚式「茈」");
+        } else if (item.equals("limitless6")) {
+            if (airborne && !sneak) cast(p, s, DOMAIN_QUICK, 300, s.domainCD, "领域展开");
+            else cast(p, s, DOMAIN, 800, s.domainCD, "领域展开");
+        } else if (item.equals("limitless1")) {
+            p.displayClientMessage(BedrockText.parse("§l§c无限: 尚未实装"), false);
         }
     }
 
@@ -147,7 +183,16 @@ public final class GojoSkills {
             case MAX -> s.ability2 = 400;
             case RED -> s.ability3 = 300;
             case RED_SMALL -> s.ability3 = 80;
-            default -> s.ability3 = 500;
+            case REVERSE -> s.ability3 = 500;
+            case BLITZ -> s.ability4 = 80;
+            case BLITZ_AREA -> s.ability4 = 600;
+            case KICK -> s.ability4 = 250;
+            case PURPLE_FAST -> s.ability5 = 800;
+            case PURPLE -> s.ability5 = 2400;
+            case PURPLE200 -> s.ability5 = 6000;
+            case PURPLE_UNL -> s.ability12 = 32000;
+            case DOMAIN -> s.domainCD = 12000;
+            default -> s.domainCD = 7200;
         }
     }
 
@@ -160,7 +205,12 @@ public final class GojoSkills {
         if (s == null) return;
         if (s.ability2 > 0) s.ability2--;
         if (s.ability3 > 0) s.ability3--;
+        if (s.ability4 > 0) s.ability4--;
+        if (s.ability5 > 0) s.ability5--;
+        if (s.ability12 > 0) s.ability12--;
+        if (s.domainCD > 0) s.domainCD--;
         if (s.frames > 0) s.frames--;
+        domainTick(p, s, p.serverLevel());
         if (s.skill == 0) return;
         if (!p.isAlive()) {
             s.skill = 0;
@@ -174,6 +224,15 @@ public final class GojoSkills {
             case MAX -> max(p, s, level);
             case RED -> red(p, s, level);
             case RED_SMALL -> redSmall(p, s, level);
+            case BLITZ -> blitz(p, s, level);
+            case BLITZ_AREA -> blitzArea(p, s, level);
+            case KICK -> kick(p, s, level);
+            case PURPLE_FAST -> purpleFast(p, s, level);
+            case PURPLE -> purple(p, s, level, 360, 456, 480, 6.0D, 0);
+            case PURPLE200 -> purple(p, s, level, 100, 201, 320, 16.0D, 1);
+            case PURPLE_UNL -> purple(p, s, level, 21, 306, 480, 1.0D, 2);
+            case DOMAIN -> domain(p, s, level, false);
+            case DOMAIN_QUICK -> domain(p, s, level, true);
             default -> reverse(p, s, level);
         }
     }
@@ -186,6 +245,10 @@ public final class GojoSkills {
 
     @SubscribeEvent
     public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer p) {
+            State s = STATES.get(p.getUUID());
+            if (s != null) releaseFrozen(p.serverLevel(), s);
+        }
         STATES.remove(event.getEntity().getUUID());
     }
 
@@ -340,15 +403,214 @@ public final class GojoSkills {
         p.fallDistance = 0.0F;
     }
 
+    private static boolean valid(ServerPlayer p, LivingEntity e) {
+        if (e == p || !e.isAlive() || e instanceof ArmorStand) return false;
+        if (e instanceof Player pl) {
+            if (pl.isCreative() || pl.isSpectator()) return false;
+            return !hasFrames(pl);
+        }
+        return true;
+    }
+
     /** The entities a move hits: everything alive within r of c except the caster, armor stands, creative/spectator players and entities with Frames. */
     private static List<LivingEntity> targets(ServerPlayer p, Vec3 c, double r) {
-        return p.serverLevel().getEntitiesOfClass(LivingEntity.class, new AABB(c, c).inflate(r), e -> {
-            if (e == p || !e.isAlive() || e instanceof ArmorStand || e.position().distanceTo(c) > r) return false;
-            if (e instanceof Player pl) {
-                if (pl.isCreative() || pl.isSpectator()) return false;
-                return !hasFrames(pl);
+        return p.serverLevel().getEntitiesOfClass(LivingEntity.class, new AABB(c, c).inflate(r),
+                e -> valid(p, e) && e.position().distanceTo(c) <= r);
+    }
+
+    private static double distToSegment(Vec3 pt, Vec3 a, Vec3 b) {
+        Vec3 ab = b.subtract(a);
+        double l2 = ab.lengthSqr();
+        double k = l2 < 1.0E-9D ? 0.0D : Math.max(0.0D, Math.min(1.0D, pt.subtract(a).dot(ab) / l2));
+        return pt.distanceTo(a.add(ab.scale(k)));
+    }
+
+    /** The caster stands still while the cast lasts (the addon cancels the player's motion), falling is allowed. */
+    private static void holdStill(ServerPlayer p) {
+        Vec3 m = p.getDeltaMovement();
+        p.setDeltaMovement(0.0D, Math.min(0.0D, m.y), 0.0D);
+        p.hurtMarked = true;
+    }
+
+    // ------------------------------------------------------------------ 空间撕扯 (limitless4)
+
+    /** limitless4: animation spatial_blitz, Frames; at move 5 a line ahead (step 0.33, stops at a block) hits everything within 2.5 for 8 fire + 8 projectile, Stun 15. */
+    private static void blitz(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 1) ModNet.playAnim(p, "spatial_blitz", 0);
+        s.frames = 4;
+        if (s.t == 11) {
+            Vec3 eye = p.getEyePosition(), dir = p.getLookAngle().normalize();
+            Vec3 end = eye.add(dir.scale(21.0D));
+            BlockHitResult hit = level.clip(new ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p));
+            if (hit.getType() != HitResult.Type.MISS) end = hit.getLocation();
+            double len = end.subtract(eye).length();
+            for (double d = 1.0D; d < len; d += 0.6D) {
+                Vec3 q = eye.add(dir.scale(d));
+                level.sendParticles(ParticleTypes.FLAME, q.x, q.y, q.z, 2, 0.15D, 0.15D, 0.15D, 0.01D);
             }
-            return true;
-        });
+            final Vec3 fe = end;
+            for (LivingEntity t : level.getEntitiesOfClass(LivingEntity.class, new AABB(eye, end).inflate(2.5D),
+                    e -> valid(p, e) && distToSegment(e.position().add(0.0D, e.getBbHeight() * 0.5D, 0.0D), eye, fe) <= 2.5D)) {
+                GojoTechEntity.hurt(level, p, t, 16.0F);
+                t.setSecondsOnFire(3);
+                GojoTechEntity.stun(t, 15);
+            }
+            level.playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.5F, 1.6F);
+        }
+        if (s.t >= 15) end(s);
+    }
+
+    /** limitless4b: animation spacial_blitz; for moves 8..2 everything within 30 takes 4 (override) and Stun 15. */
+    private static void blitzArea(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 1) ModNet.playAnim(p, "spacial_blitz", 0);
+        s.frames = 4;
+        if (s.t >= 7 && s.t <= 13) {
+            holdStill(p);
+            if (s.t == 7) {
+                level.sendParticles(ParticleTypes.FLAME, p.getX(), p.getY() + 1.0D, p.getZ(), 80, 8.0D, 3.0D, 8.0D, 0.1D);
+                level.playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 3.0F, 0.8F);
+            }
+            for (LivingEntity t : targets(p, p.position(), 30.0D)) {
+                GojoTechEntity.hurt(level, p, t, 4.0F);
+                t.setSecondsOnFire(2);
+                GojoTechEntity.stun(t, 15);
+            }
+        }
+        if (s.t >= 14) end(s);
+    }
+
+    /** limitless4c: animation spacial_kick; at move 25 the nearest target ahead is marked, the caster is put behind it (^0.3 ^0.4 ^-1) and at move 15 hits it for 8, Stun 20. */
+    private static void kick(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 1) ModNet.playAnim(p, "spacial_kick", 0);
+        s.frames = 4;
+        if (s.t == 11) {
+            s.kickTarget = null;
+            Vec3 eye = p.getEyePosition(), dir = p.getLookAngle().normalize();
+            for (double d = 0.0D; d <= 50.0D && s.kickTarget == null; d += 1.0D) {
+                Vec3 c = eye.add(dir.scale(d));
+                LivingEntity best = null;
+                double bd = 4.99D;
+                for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, new AABB(c, c).inflate(5.0D), x -> valid(p, x))) {
+                    double dd = e.position().add(0.0D, e.getBbHeight() * 0.5D, 0.0D).distanceTo(c);
+                    if (dd < bd) { bd = dd; best = e; }
+                }
+                if (best != null) s.kickTarget = best.getUUID();
+            }
+            if (s.kickTarget == null) { end(s); return; }
+        }
+        Entity te = s.kickTarget == null ? null : level.getEntity(s.kickTarget);
+        if (s.t >= 11 && s.t <= 21 && te instanceof LivingEntity t && t.isAlive()) {
+            double yaw = Math.toRadians(t.getYRot());
+            double x = t.getX() + Math.cos(yaw) * 0.3D + Math.sin(yaw), z = t.getZ() + Math.sin(yaw) * 0.3D - Math.cos(yaw);
+            p.connection.teleport(x, t.getY() + 0.4D, z, t.getYRot(), p.getXRot());
+            p.setDeltaMovement(Vec3.ZERO);
+            GojoTechEntity.stun(t, 5);
+            if (s.t == 21) {
+                GojoTechEntity.hurt(level, p, t, 8.0F);
+                GojoTechEntity.stun(t, 20);
+                Vec3 look = p.getLookAngle().multiply(1.0D, 0.0D, 1.0D).normalize();
+                t.setDeltaMovement(look.x * 1.5D, 0.4D, look.z * 1.5D);
+                t.hurtMarked = true;
+                level.playSound(null, t.getX(), t.getY(), t.getZ(), SoundEvents.PLAYER_ATTACK_STRONG, SoundSource.PLAYERS, 2.0F, 0.7F);
+            }
+        }
+        if (s.t >= 35) { s.kickTarget = null; end(s); }
+    }
+
+    // ------------------------------------------------------------------ 茈 (limitless5)
+
+    private static void gatherParticles(ServerLevel level, ServerPlayer p, double ahead, boolean big, boolean redBlue) {
+        Vec3 c = p.getEyePosition().add(p.getLookAngle().normalize().scale(ahead));
+        double sp = big ? 1.4D : 0.7D;
+        if (redBlue) {
+            Vec3 left = new Vec3(Math.cos(Math.toRadians(p.getYRot())), 0.0D, Math.sin(Math.toRadians(p.getYRot())));
+            Vec3 a = c.add(left.scale(2.5D)), b = c.add(left.scale(-2.5D));
+            level.sendParticles(DUST_RED, a.x, a.y, a.z, 6, 0.4D, 0.4D, 0.4D, 0.02D);
+            level.sendParticles(DUST_BLUE, b.x, b.y, b.z, 6, 0.4D, 0.4D, 0.4D, 0.02D);
+        } else {
+            level.sendParticles(DUST_PURPLE, c.x, c.y, c.z, big ? 16 : 8, sp, sp, sp, 0.02D);
+            level.sendParticles(DUST_BLUE, c.x, c.y, c.z, big ? 8 : 4, sp, sp, sp, 0.03D);
+        }
+    }
+
+    private static void launchPurple(ServerPlayer p, ServerLevel level, int mode, double ahead) {
+        HollowPurpleEntity purple = ModEntities.HOLLOW_PURPLE.get().create(level);
+        if (purple == null) return;
+        Vec3 dir = p.getLookAngle().normalize();
+        Vec3 origin = p.getEyePosition().add(dir.scale(ahead));
+        purple.setPos(origin.x, origin.y, origin.z);
+        if (mode == 1) purple.setCharged200Percent();
+        else if (mode == 2) purple.setUnlimited();
+        purple.launch(p, dir);
+        if (level.addFreshEntity(purple)) {
+            level.playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, mode == 1 ? 2.5F : 1.8F, mode == 1 ? 0.55F : 0.7F);
+            level.sendParticles(ParticleTypes.FLASH, origin.x, origin.y, origin.z, 1, 0, 0, 0, 0);
+        }
+    }
+
+    /** limitless5 (move 101): animation imaginary_purple; Frames for moves 52..1, slowness for moves 60..21, at move 44 the purple is shot. */
+    private static void purpleFast(ServerPlayer p, State s, ServerLevel level) {
+        if (s.t == 1) ModNet.playAnim(p, "imaginary_purple", 0);
+        if (s.t >= 49) s.frames = 4;
+        if (s.t >= 41 && s.t <= 80) p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 2, false, false));
+        if (s.t > 5 && s.t < 57) gatherParticles(level, p, 3.0D, false, true);
+        if (s.t == 57) launchPurple(p, level, 0, 6.0D);
+        if (s.t >= 100) end(s);
+    }
+
+    /** limitless5b / 5c / 5d: long casts (the caster stands still); mode 0 purple (move 481, shot at 25), 1 200% purple (move 321, shot at 120), 2 unlimited (move 481). */
+    private static void purple(ServerPlayer p, State s, ServerLevel level, int gatherFrom, int fire, int total, double ahead, int mode) {
+        if (s.t == 1) ModNet.playAnim(p, mode == 0 ? "hollowpurple" : mode == 1 ? "200_purple" : "limitless_purple", 0);
+        if (s.t < fire) holdStill(p);
+        if (s.t >= gatherFrom && s.t < fire && s.t % 2 == 0) gatherParticles(level, p, mode == 1 ? 12.0D : 6.0D, mode != 0, mode == 2);
+        if (s.t == fire) launchPurple(p, level, mode, mode == 1 ? 16.0D : mode == 2 ? 1.0D : 6.0D);
+        if (s.t >= total) end(s);
+    }
+
+    // ------------------------------------------------------------------ 领域展开 (limitless6)
+
+    /** limitless6 / 6b: animation infinite_void (6b: infinite_void_2sec); the show is played by the clients, everything within 40 is held until the domain ends. */
+    private static void domain(ServerPlayer p, State s, ServerLevel level, boolean quick) {
+        int start = quick ? 4 : 1, total = quick ? 141 : 370;
+        if (s.t == 1) ModNet.playAnim(p, quick ? "infinite_void_2sec" : "infinite_void", 0);
+        if (s.t == start) {
+            s.domainEnd = level.getGameTime() + (quick ? 80 + 431 : 885);
+            s.domainFx = quick ? 1 : 0;
+            ModNet.domainFx(p, s.domainFx);
+        }
+        if (s.t < 20) p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 4, false, false));
+        if (s.t >= total) end(s);
+    }
+
+    private static void domainTick(ServerPlayer p, State s, ServerLevel level) {
+        if (s.domainFx < 0) return;
+        long now = level.getGameTime();
+        if (now >= s.domainEnd || !p.isAlive()) {
+            releaseFrozen(level, s);
+            s.domainFx = -1;
+            ModNet.domainFx(p, -1);
+            return;
+        }
+        for (LivingEntity e : targets(p, p.position(), 40.0D)) {
+            e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6, 99, false, false));
+            e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 6, 9, false, false));
+            e.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 6, 9, false, false));
+            e.addEffect(new MobEffectInstance(MobEffects.JUMP, 6, 128, false, false));
+            if (e instanceof Mob mob) {
+                mob.setTarget(null);
+                if (!mob.isNoAi()) {
+                    mob.setNoAi(true);
+                    s.frozen.add(mob.getUUID());
+                }
+            }
+        }
+    }
+
+    private static void releaseFrozen(ServerLevel level, State s) {
+        for (UUID id : s.frozen) {
+            Entity e = level.getEntity(id);
+            if (e instanceof Mob mob) mob.setNoAi(false);
+        }
+        s.frozen.clear();
     }
 }

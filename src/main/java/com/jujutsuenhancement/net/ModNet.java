@@ -17,6 +17,7 @@ public final class ModNet {
     public static void register() {
         int id = 0;
         CHANNEL.registerMessage(id++, PlayAnimPacket.class, PlayAnimPacket::encode, PlayAnimPacket::decode, PlayAnimPacket::handle);
+        CHANNEL.registerMessage(id++, DomainFxPacket.class, DomainFxPacket::encode, DomainFxPacket::decode, DomainFxPacket::handle);
         CHANNEL.registerMessage(id++, SwingPacket.class, SwingPacket::encode, SwingPacket::decode, SwingPacket::handle);
     }
 
@@ -24,5 +25,10 @@ public final class ModNet {
     public static void playAnim(ServerPlayer player, String anim, int idleBlock) {
         CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),
                 new PlayAnimPacket(player.getId(), anim, idleBlock));
+    }
+
+    /** The domain state of a casting player, for every player that can see it. */
+    public static void domainFx(ServerPlayer player, int fx) {
+        CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new DomainFxPacket(player.getId(), fx));
     }
 }

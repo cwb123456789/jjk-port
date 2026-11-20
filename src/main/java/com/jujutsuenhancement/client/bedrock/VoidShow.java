@@ -30,6 +30,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Marker;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
@@ -96,11 +97,19 @@ public final class VoidShow {
 
     public static final IGuiOverlay OVERLAY = VoidShow::renderOverlay;
 
+    /** Domain state of players that cast Unlimited Void (the server sends it, see DomainFxPacket); GojoAwakenedEntity uses its entity data. */
+    public static final java.util.Map<Integer, Integer> PLAYER_FX = new java.util.HashMap<>();
+
+    private static int fxOf(LivingEntity e) {
+        if (e instanceof GojoAwakenedEntity g) return g.getDomainFx();
+        return PLAYER_FX.getOrDefault(e.getId(), -1);
+    }
+
     private VoidShow() {}
 
     // ------------------------------------------------------------------ lifecycle
 
-    private static void start(GojoAwakenedEntity g, int fx) {
+    private static void start(LivingEntity g, int fx) {
         Minecraft mc = Minecraft.getInstance();
         clashMode = false;
         DomainClashEntity clash = fx == 2 ? ClashShow.nearestClash(mc, g) : null;
@@ -252,8 +261,8 @@ public final class VoidShow {
 
         // A domain starting within reach starts the show.
         for (Entity entity : mc.level.entitiesForRendering()) {
-            if (!(entity instanceof GojoAwakenedEntity g)) continue;
-            int fx = g.getDomainFx();
+            if (!(entity instanceof LivingEntity g) || !(entity instanceof GojoAwakenedEntity || entity instanceof Player)) continue;
+            int fx = fxOf(g);
             int prev = LAST_FX.getOrDefault(g.getId(), -1);
             LAST_FX.put(g.getId(), fx);
             if (phase == Phase.OFF && prev < 0 && fx >= 0 && g.isAlive()
@@ -265,8 +274,8 @@ public final class VoidShow {
 
         if (phase == Phase.RUN) {
             Entity g = mc.level.getEntity(gojoId);
-            boolean running = g instanceof GojoAwakenedEntity gojo && gojo.isAlive() && gojo.getDomainFx() >= 0;
-            if (g instanceof GojoAwakenedEntity gojo && gojo.isAlive() && gojo.getDomainFx() == -2) {
+            boolean running = g instanceof LivingEntity gojo && gojo.isAlive() && fxOf(gojo) >= 0;
+            if (g instanceof LivingEntity gojo && gojo.isAlive() && fxOf(gojo) == -2) {
                 // a domain clash took the cast away: nothing of it is left to break
                 stop();
             } else if (!running) {
@@ -320,6 +329,7 @@ public final class VoidShow {
     public static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
         stop();
         LAST_FX.clear();
+        PLAYER_FX.clear();
         marker = null;
     }
 

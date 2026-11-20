@@ -16,7 +16,10 @@ ANIMS = ['animation.katana.idle', 'animation.katana_attack1', 'animation.katana_
          'animation.katana_attack4', 'animation.katana.ab1', 'animation.katana.ab2', 'animation.katana.ab3',
          # Gojo (limitless) techniques, played on the player
          'animation.lapse_blue1', 'animation.lapse_blue2', 'animation.lapse_pull', 'animation.reversal_red1',
-         'animation.reversal_red2', 'animation.reversal_red2b', 'animation.reversal_red3']
+         'animation.reversal_red2', 'animation.reversal_red2b', 'animation.reversal_red3',
+         'animation.spatial_blitz', 'animation.spacial_blitz', 'animation.spacial_kick', 'animation.imaginary_purple',
+         'animation.hollowpurple', 'animation.200_purple', 'animation.limitless_purple', 'animation.infinite_void',
+         'animation.infinite_void_2sec']
 PARTICLES = ['katana_slash1', 'katana_slash2', 'katana_slash3', 'katana_slash4', 'katana_ab1', 'katana_ab2',
              'ground_slam2', 'ground_slam3', 'rapid_cuts1', 'rapid_cuts2', 'rapid_cuts3', 'rapid_cuts4', 'rapid_cuts5',
              'dirt0', 'large_impact1', 'large_impact2', 'lapseblue', 'lapseblue0a', 'lapseblue0b']
