@@ -39,5 +39,9 @@
   "item.jujutsuenhancement.blood_manipulation": "§l§c赤血操术 [ 未完成 ]",
   "item.jujutsuenhancement.blood_manipulation.lore": "\n§e这个术式将在未来进行制作，\n我将在它占据主导地位的更新中进行完成，\n只有这样我才能让它与虎杖的技能等相兼容",
   "item.jujutsuenhancement.soul_shrine2": "§l§c领域展开 『伏魔御佛龛』",
-  "item.jujutsuenhancement.soul_shrine2.lore": "§g- 消耗: [ §7500 点咒力 §g]\n§l§5- §o咒术的极致"
+  "item.jujutsuenhancement.soul_shrine2.lore": "§g- 消耗: [ §7500 点咒力 §g]\n§l§5- §o咒术的极致",
+  "item.jujutsuenhancement.sukuna_technique": "§r§l§4诅咒之王 · 两面宿傩§l",
+  "item.jujutsuenhancement.sukuna_technique.lore": "§5§o史上最恶的诅咒之王，千年前的最强 两面宿傩 此刻就在你的身体中蛰伏\n待你吃掉15根手指之后，他就能完全的受肉重生\n其手中之刃不断切割着这个世界，将虐杀的斩击与华丽结合\n残忍，暴虐，无情，是压倒性的邪恶，如同有着意识的灾厄\n\n§r§l§c- 右键(长按) 使身体主导权交换\n\n§l§c- 潜行 3 秒钟以上 + 左键(单击) 某一 玩家/生物(伏黑惠) 以使宿傩转换容器\n§7( §e使用前置: 15+ 吞下宿傩手指数 §7+ §4特质 - 宿傩的容器 / 虎杖悠仁 - 体术战斗风格 §7)\n\n§l§7[ §e潜行 + 右键(长按) 获得/取消 技能物品 §7]",
+  "item.jujutsuenhancement.sukuna1": "§l§f解-普攻 §7(§e左键(单击)§7)",
+  "item.jujutsuenhancement.sukuna1.lore": "§g- 消耗: [ §710 点咒力 §g]\n\n§l§f解-快斩 §7(§e右键(长按)§7)\n§9§o技能变体: 右键(长按) + 滞空 + 视角朝下§r\n§l§g- 消耗: [ §750 点咒力 §g]\n\n§l§7解 §7(§e跳起 + 右键(长按)§7)\n§9§o技能变体: 跳起 + 右键(长按) + 前 / 后移动§r\n§l§g- 消耗: [ §775 点咒力 §g]\n\n§l§7集连裂斩 §7(§e潜行 + 右键(长按)§7)\n§9§o技能变体: 潜行 + 右键(长按) + 滞空 + 任意移动方向§r\n§l§g- 消耗: [ §7200 点咒力 §g]\n\n§l§8重踢断斩 §7(§e疾跑 + 跳起 + 右键(长按)§7)\n§9§o技能变体: 疾跑 + 跳起 + 视角朝下 + 滞空 + 右键(长按)§r\n§l§g- 消耗: [ §7200 点咒力 §g]\n\n§l§8斩连刻辰 §7(§e潜行 + 左键(单击)§7)§l\n§g- 消耗: [ §7300 点咒力 §g]\n\n§l§c最大输出: 解 §7(§e潜行 + 跳起 + 右键(长按)§7)§l\n§9(该技能非世界斩)\n§e- 该技能可复次充能，开始充能后再次 右键(长按) 以使用§l\n§g- 消耗: [ §7500 点咒力 §g]\n§l§5- §o诅咒之王"
 }

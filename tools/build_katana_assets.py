@@ -20,6 +20,9 @@ ANIMS = ['animation.katana.idle', 'animation.katana_attack1', 'animation.katana_
          'animation.spatial_blitz', 'animation.spacial_blitz', 'animation.spacial_kick', 'animation.imaginary_purple',
          'animation.hollowpurple', 'animation.200_purple', 'animation.limitless_purple', 'animation.infinite_void',
          'animation.infinite_void_2sec', 'animation.infinite_pressure', 'animation.levitation',
+         # Sukuna
+         'animation.dismantle1', 'animation.dismantle_downwards', 'animation.dissect', 'animation.dismantle_backwards',
+         'animation.rapid_dismantle', 'animation.dismantle_spam', 'animation.heavy_dismantle', 'animation.heavy_dismantle2',
          # Yuji
          'animation.black_fists.ab1', 'animation.black_fists.ab2', 'animation.black_fists.ab3', 'animation.black_fists.ab3_hold',
          'animation.black_fists.ab4', 'animation.black_fists.ab4b', 'animation.black_fists.ab5', 'animation.black_fists.ab6',

@@ -34,6 +34,14 @@ MOVES = {
 # Yuji (functions/yuji): key -> (function, N, options). cond: which lines (none = unconditional, nbf = tag=!blackflashed, bf = tag=blackflashed);
 # hi: the move value at which the timeline is started by the server (ticks = hi - move).
 YUJI = {
+    'sukuna_ab1': ('../sukuna/attacks/dismantles/ab1', 11, {'cond': 'none'}),
+    'sukuna_ab1b': ('../sukuna/attacks/dismantles/ab1b', 66, {'cond': 'none'}),
+    'sukuna_ab1d': ('../sukuna/attacks/dismantles/ab1d', 36, {'cond': 'none'}),
+    'sukuna_ab1e': ('../sukuna/attacks/dismantles/ab1e', 41, {'cond': 'none'}),
+    'sukuna_ab2': ('../sukuna/attacks/dismantles/ab2', 31, {'cond': 'none'}),
+    'sukuna_ab2b': ('../sukuna/attacks/dismantles/ab2b', 13, {'cond': 'none'}),
+    'sukuna_ab2d': ('../sukuna/attacks/dismantles/ab2d', 31, {'cond': 'none'}),
+    'sukuna_ab2e': ('../sukuna/attacks/dismantles/ab2e', 66, {'cond': 'none'}),
     'yuji_fierce': ('../yuji/fierce_strikes', 36, {'cond': 'none'}),
     'yuji_fierce_n': ('../yuji/fierce_strikes', 36, {'cond': 'nbf', 'hi': 15}),
     'yuji_fierce_b': ('../yuji/fierce_strikes', 36, {'cond': 'bf', 'hi': 15}),

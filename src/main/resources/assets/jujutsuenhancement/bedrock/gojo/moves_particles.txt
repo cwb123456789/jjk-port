@@ -55,12 +55,15 @@ blue_tint
 bounce
 charging_rubble
 crater
+cutscene_black1
+cutscene_black3
 dirt0
 dirt02
 dirt03
 dirt1
 dirt2
 dirt3
+dismantle_star_large
 domain_breaker5
 double_jump1
 double_jump2

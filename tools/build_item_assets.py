@@ -33,6 +33,8 @@ ITEMS = {
     'limitless5': 'generated',
     'limitless6': 'generated',
     'yuji_technique': 'generated',
+    'sukuna_technique': 'generated',
+    'sukuna1': 'generated',
     'black_fists': 'generated',
     'soul_shrine1': 'generated',
     'soul_shrine2': 'generated',

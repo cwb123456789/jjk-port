@@ -119,4 +119,11 @@ public final class ModItems {
     /** ds:blood_manipulation, "赤血操术 [ 未完成 ]" (a placeholder in the addon too). */
     public static final RegistryObject<Item> BLOOD_MANIPULATION =
             reg("blood_manipulation", () -> new BedrockItem(new Item.Properties().stacksTo(1)));
+
+    /** ds:sukuna_technique, "诅咒之王 · 两面宿傩". */
+    public static final RegistryObject<Item> SUKUNA_TECHNIQUE =
+            reg("sukuna_technique", () -> new com.jujutsuenhancement.item.SukunaTechniqueItem(new Item.Properties().stacksTo(1)));
+    /** ds:sukuna1, "解" skills. */
+    public static final RegistryObject<Item> SUKUNA1 =
+            reg("sukuna1", () -> new com.jujutsuenhancement.item.TechniqueItem("sukuna1", new Item.Properties().stacksTo(1)));
 }
