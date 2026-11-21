@@ -268,7 +268,7 @@ public final class SukunaFists {
             if (s.c == 11 && target != null) {
                 GojoTechEntity.hurt(level, p, target, 6.0F);
                 GojoTechEntity.stun(target, 25);
-                target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20, 25, false, null));
+                target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20, 25, false, false));
             }
             if (s.c >= 24) s.skill = 0;
         }
@@ -304,7 +304,7 @@ public final class SukunaFists {
                 target.teleportTo(pos.x, pos.y, pos.z);
                 GojoTechEntity.stun(target, 25);
             }
-            if (t == 36 && target != null) target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20, 5, false, null));
+            if (t == 36 && target != null) target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20, 5, false, false));
             if (t >= 43 && t <= 49 && s.click && target != null) {
                 s.phase = 1;
                 s.c = 0;
