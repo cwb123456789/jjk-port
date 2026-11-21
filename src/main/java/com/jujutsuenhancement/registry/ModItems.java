@@ -126,4 +126,7 @@ public final class ModItems {
     /** ds:sukuna1, "解" skills. */
     public static final RegistryObject<Item> SUKUNA1 =
             reg("sukuna1", () -> new com.jujutsuenhancement.item.TechniqueItem("sukuna1", new Item.Properties().stacksTo(1)));
+    /** ds:sukuna2, "捌" skills. */
+    public static final RegistryObject<Item> SUKUNA2 =
+            reg("sukuna2", () -> new com.jujutsuenhancement.item.TechniqueItem("sukuna2", new Item.Properties().stacksTo(1)));
 }

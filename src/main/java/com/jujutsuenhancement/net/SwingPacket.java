@@ -18,6 +18,7 @@ public record SwingPacket() {
             if (player != null) {
                 com.jujutsuenhancement.combat.KatanaCombat.onLeftClick(player);
                 com.jujutsuenhancement.combat.YujiSkills.onLeftClick(player);
+                com.jujutsuenhancement.combat.SukunaSkills.onLeftClick(player);
             }
         });
         ctx.get().setPacketHandled(true);

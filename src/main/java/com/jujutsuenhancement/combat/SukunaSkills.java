@@ -51,17 +51,18 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaSkills {
-    private static final int QUICK = 1, DOWN = 2, DISSECT = 3, WIDE = 4, RAPID = 5, SPAM = 6, HEAVY = 7, HEAVY2 = 8;
-    private static final int[] N = {0, 11, 66, 36, 41, 31, 13, 31, 66};
-    private static final int[] CD = {0, 50, 480, 150, 150, 800, 200, 1200, 1200};
-    private static final int[] COST = {0, 50, 50, 75, 75, 200, 200, 200, 200};
-    private static final String[] NAME = {"", "解-快斩", "空中解", "解", "后撤宽斩", "集连裂斩", "连斩", "重踢断斩", "重踢断斩"};
+    private static final int QUICK = 1, DOWN = 2, DISSECT = 3, WIDE = 4, RAPID = 5, SPAM = 6, HEAVY = 7, HEAVY2 = 8,
+            CLEAVE = 9, COUNTER = 10, LAYERED = 11, SPIDER = 12, CARVE = 13;
+    private static final int[] N = {0, 11, 66, 36, 41, 31, 13, 31, 66, 11, 16, 26, 41, 191};
+    private static final int[] CD = {0, 50, 480, 150, 150, 800, 200, 1200, 1200, 30, 100, 100, 600, 6000};
+    private static final int[] COST = {0, 50, 50, 75, 75, 200, 200, 200, 200, 30, 30, 100, 100, 300};
+    private static final String[] NAME = {"", "解-快斩", "空中解", "解", "后撤宽斩", "集连裂斩", "连斩", "重踢断斩", "重踢断斩", "捌", "捌·防反", "雕斩裂刻", "蜘蛛之网", "乱斩裂割"};
     private static final String[] ANIM = {"", "dismantle1", "dismantle_downwards", "dissect", "dismantle_backwards", "rapid_dismantle",
-            "dismantle_spam", "heavy_dismantle", "heavy_dismantle2"};
+            "dismantle_spam", "heavy_dismantle", "heavy_dismantle2", "cleave", "cleave_counter", "layered_cleave", "spiderweb", "carving_combo"};
     private static final String[] FX = {"", "sukuna_ab1", "sukuna_ab1b", "sukuna_ab1d", "sukuna_ab1e", "sukuna_ab2", "sukuna_ab2b",
-            "sukuna_ab2d", "sukuna_ab2e"};
+            "sukuna_ab2d", "sukuna_ab2e", "sukuna_cleave", "sukuna_counter", "sukuna_layered", "sukuna_spider", "sukuna_carve"};
     /** the ability scoreboards share cooldowns: ab1 (1,2), ab3 (3,4), ab4/ab4 (5,6), ab5 (7,8). */
-    private static final int[] GROUP = {0, 1, 1, 3, 3, 5, 5, 7, 7};
+    private static final int[] GROUP = {0, 1, 1, 3, 3, 5, 5, 7, 7, 11, 11, 11, 12, 13};
 
     private static final class Proj {
         UUID owner;
@@ -72,7 +73,9 @@ public final class SukunaSkills {
 
     private static final class State {
         int skill, t, frames;
-        final int[] cd = new int[9];
+        final int[] cd = new int[16];
+        UUID counterTarget;
+        boolean countered;
         final List<Proj> projs = new ArrayList<>();
     }
 
@@ -95,7 +98,7 @@ public final class SukunaSkills {
     }
 
     public static void onUse(ServerPlayer p, String item) {
-        if (!item.equals("sukuna1")) return;
+        if (!item.equals("sukuna1") && !item.equals("sukuna2")) return;
         State s = state(p);
         if (s.skill != 0 || !p.isAlive() || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
         if (!SukunaTechnique.active(p)) {
@@ -105,12 +108,27 @@ public final class SukunaSkills {
         boolean sneak = p.isShiftKeyDown(), air = !p.onGround(), sprint = p.isSprinting();
         boolean down = p.getXRot() > 60.0F;
         int skill;
+        if (item.equals("sukuna2")) {
+            if (sneak) skill = SPIDER;
+            else if (air) skill = LAYERED;
+            else skill = down ? COUNTER : CLEAVE;
+            cast(p, s, skill);
+            return;
+        }
         if (sneak) skill = air ? SPAM : RAPID;
         else if (air && sprint) skill = down ? HEAVY2 : HEAVY;
         else if (air) skill = p.zza < 0.0F ? WIDE : DISSECT;
         else skill = down && p.level().getBlockState(p.blockPosition().below()).isAir() ? DOWN : QUICK;
         if (skill == DOWN && p.level().getBlockState(p.blockPosition().below()).isAir() == false) skill = QUICK;
         cast(p, s, skill);
+    }
+
+    /** Left click: sneak + left click with sukuna2 is 乱斩裂割. */
+    public static void onLeftClick(ServerPlayer p) {
+        State s = state(p);
+        if (s.skill != 0 || !p.isAlive() || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
+        String id = ForgeRegistries.ITEMS.getKey(p.getMainHandItem().getItem()).getPath();
+        if (id.equals("sukuna2") && p.isShiftKeyDown() && SukunaTechnique.active(p)) cast(p, s, CARVE);
     }
 
     private static void cast(ServerPlayer p, State s, int skill) {
@@ -128,6 +146,8 @@ public final class SukunaSkills {
         s.cd[GROUP[skill]] = CD[skill];
         s.skill = skill;
         s.t = 0;
+        s.counterTarget = null;
+        s.countered = false;
     }
 
     @SubscribeEvent
@@ -230,6 +250,92 @@ public final class SukunaSkills {
                 if (t == 49) burst(p, level, p.position().add(left.scale(4)).add(h.scale(14)));
                 if (t == 50) burst(p, level, p.position().add(left.scale(9)).add(h.scale(13)));
             }
+            case CLEAVE -> {
+                if (t == 5 || t == 6) {
+                    if (targets(p, p.position().add(look.scale(2.5D)).add(0, 0.9D, 0), 4.0D).isEmpty()) push(p, look, 1.0D, 0.0D);
+                }
+                if (t == 5) {
+                    List<LivingEntity> hit = targets(p, p.position().add(look.scale(2.5D)).add(0, 0.9D, 0), 2.49D);
+                    for (LivingEntity e : hit) {
+                        GojoTechEntity.hurt(level, p, e, 6.0F);
+                        GojoTechEntity.stun(e, 15);
+                    }
+                    if (!hit.isEmpty()) SukunaTechnique.addFuga(p, 3);
+                }
+                if (t >= 3 && t <= 4) hold(p);
+            }
+            case COUNTER -> {
+                if (t >= 2 && t <= 15) hold(p);
+                if (t >= 5 && t <= 15) s.frames = 4;
+                LivingEntity ct = s.counterTarget == null ? null : (level.getEntity(s.counterTarget) instanceof LivingEntity l && l.isAlive() ? l : null);
+                if (t == 9 && ct == null) GojoTechEntity.stun(p, 10);
+                if (t == 9 && ct != null) {
+                    s.countered = true;
+                    GojoTechEntity.stun(ct, 15);
+                    ModNet.playAnim(p, "cleave_counter2", 0);
+                }
+                if (s.countered && ct != null && t >= 10 && t <= 15) {
+                    Vec3 at = p.position().add(look.scale(1.0D)).add(0, 0.15D, 0);
+                    ct.teleportTo(at.x, at.y, at.z);
+                    ct.setDeltaMovement(Vec3.ZERO);
+                    GojoTechEntity.stun(ct, 25);
+                    if (t >= 11 && t <= 14) GojoTechEntity.hurt(level, p, ct, 2.0F);
+                }
+            }
+            case LAYERED -> {
+                if (t <= 4) p.setDeltaMovement(p.getDeltaMovement().x, -1.0D, p.getDeltaMovement().z);
+                if (t <= 6) push(p, look, 2.0D, 0.0D);
+                if (t >= 6 && t <= 22) s.frames = 5;
+                Vec3 c = p.position().add(look.scale(2.25D)).add(0, 0.9D, 0);
+                if (t >= 18 && t <= 26) hold(p);
+                if (t >= 7) for (LivingEntity e : targets(p, c, 2.249D)) {
+                    e.setDeltaMovement(Vec3.ZERO);
+                }
+                if (t == 16) {
+                    List<LivingEntity> hit = targets(p, c, 2.249D);
+                    for (LivingEntity e : hit) {
+                        GojoTechEntity.hurt(level, p, e, 33.0F);
+                        GojoTechEntity.stun(e, 35);
+                    }
+                    if (!hit.isEmpty()) SukunaTechnique.addFuga(p, 2);
+                }
+            }
+            case SPIDER -> {
+                if (t >= 6 && t <= 36) hold(p);
+                if (t >= 6 && t <= 37) s.frames = 5;
+                if (t == 31) {
+                    List<LivingEntity> hit = targets(p, p.position(), 15.0D);
+                    for (LivingEntity e : hit) {
+                        GojoTechEntity.hurt(level, p, e, 30.0F);
+                        GojoTechEntity.stun(e, 35);
+                        e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20, 2, false, false));
+                        SukunaTechnique.addFuga(p, 15);
+                    }
+                    BedrockFxEntity.play(level, "dismantle_down_land", p.getX(), p.getY(), p.getZ(), p.getYRot());
+                }
+            }
+            case CARVE -> {
+                if (t <= 157) s.frames = 5;
+                if (t >= 160 && t <= 191) hold(p);
+                if (t == 4 || t == 5) push(p, look, 2.0D, 0.0D);
+                int[] hm = {21, 31, 36, 41, 61, 86};
+                float[] hd = {5, 2, 2, 2, 5, 5};
+                Vec3 c = p.position().add(look.scale(4.0D)).add(0, 0.9D, 0);
+                for (int i = 0; i < hm.length; i++) {
+                    if (t == hm[i]) {
+                        List<LivingEntity> hit = targets(p, c, 6.0D);
+                        for (LivingEntity e : hit) {
+                            GojoTechEntity.hurt(level, p, e, hd[i]);
+                            GojoTechEntity.stun(e, 25);
+                        }
+                        if (!hit.isEmpty()) SukunaTechnique.addFuga(p, 5);
+                    }
+                }
+                if (t >= 101 && t <= 159) {
+                    hold(p);
+                    for (LivingEntity e : targets(p, p.position().add(0, 1, 0), 6.0D)) GojoTechEntity.hurt(level, p, e, 1.0F);
+                }
+            }
             default -> s.skill = 0;
         }
         if (t >= N[sk] && s.skill == sk) {
@@ -247,7 +353,10 @@ public final class SukunaSkills {
     public static void onAttacked(LivingAttackEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer p)) return;
         State s = STATES.get(p.getUUID());
-        if (s != null && s.frames > 0 && !event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) event.setCanceled(true);
+        if (s != null && s.frames > 0 && !event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+            if (s.skill == COUNTER && s.t >= 5 && s.t <= 9 && event.getSource().getEntity() instanceof LivingEntity a && a != p) s.counterTarget = a.getUUID();
+            event.setCanceled(true);
+        }
     }
 
     // ------------------------------------------------------------------ helpers

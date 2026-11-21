@@ -34,6 +34,11 @@ MOVES = {
 # Yuji (functions/yuji): key -> (function, N, options). cond: which lines (none = unconditional, nbf = tag=!blackflashed, bf = tag=blackflashed);
 # hi: the move value at which the timeline is started by the server (ticks = hi - move).
 YUJI = {
+    'sukuna_cleave': ('../sukuna/attacks/cleaves/cleave', 11, {'cond': 'none'}),
+    'sukuna_counter': ('../sukuna/attacks/cleaves/cleave_counter', 16, {'cond': 'none'}),
+    'sukuna_layered': ('../sukuna/attacks/cleaves/layered_cleave', 26, {'cond': 'none'}),
+    'sukuna_spider': ('../sukuna/attacks/cleaves/spiderweb', 41, {'cond': 'none'}),
+    'sukuna_carve': ('../sukuna/attacks/cleaves/carving_combo', 191, {'cond': 'none'}),
     'sukuna_ab1': ('../sukuna/attacks/dismantles/ab1', 11, {'cond': 'none'}),
     'sukuna_ab1b': ('../sukuna/attacks/dismantles/ab1b', 66, {'cond': 'none'}),
     'sukuna_ab1d': ('../sukuna/attacks/dismantles/ab1d', 36, {'cond': 'none'}),

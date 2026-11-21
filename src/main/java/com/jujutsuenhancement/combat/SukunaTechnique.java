@@ -25,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaTechnique {
     private static final String FINGERS = "jje_fingers", MODE = "jje_smode";
-    private static final String[] IDS = {"sukuna1"};
+    private static final String[] IDS = {"sukuna1", "sukuna2"};
 
     private SukunaTechnique() {}
 
@@ -37,6 +37,17 @@ public final class SukunaTechnique {
 
     public static int fingers(Player p) { return p.isCreative() ? Math.max(15, data(p).getInt(FINGERS)) : data(p).getInt(FINGERS); }
     public static void setFingers(Player p, int n) { data(p).putInt(FINGERS, Math.max(0, Math.min(20, n))); }
+    /** The {@code fuga} score: every hit of the cleaves fills it, at 500 「竈」 开 is ready (fuga_ready.mcfunction). */
+    public static int fuga(Player p) { return data(p).getInt("jje_fuga"); }
+    public static void addFuga(Player p, int n) {
+        int before = fuga(p);
+        int now = Math.max(0, Math.min(2000, before + n));
+        data(p).putInt("jje_fuga", now);
+        if (before < 500 && now >= 500 && p instanceof ServerPlayer sp) {
+            sp.displayClientMessage(BedrockText.parse("§r§6§l- 「竈」 开 已就绪"), false);
+            sp.serverLevel().playSound(null, sp.blockPosition(), SoundEvents.BLAZE_DEATH, SoundSource.PLAYERS, 3.0F, 0.35F);
+        }
+    }
     public static boolean active(Player p) { return data(p).getBoolean(MODE); }
 
     public static void use(ServerPlayer p) {
@@ -69,6 +80,7 @@ public final class SukunaTechnique {
     public static void grant(ServerPlayer p) {
         int f = fingers(p);
         if (f >= 1) give(p, "sukuna1");
+        if (f >= 2) give(p, "sukuna2");
         p.displayClientMessage(BedrockText.parse("§l§a技能物品已获得"), false);
     }
 
@@ -92,6 +104,6 @@ public final class SukunaTechnique {
     public static void onClone(PlayerEvent.Clone event) {
         if (!event.isWasDeath()) return;
         CompoundTag from = data(event.getOriginal()), to = data(event.getEntity());
-        for (String k : new String[]{FINGERS, MODE}) if (from.contains(k)) to.put(k, from.get(k).copy());
+        for (String k : new String[]{FINGERS, MODE, "jje_fuga"}) if (from.contains(k)) to.put(k, from.get(k).copy());
     }
 }
