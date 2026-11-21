@@ -61,6 +61,8 @@ carve3
 carve4
 carve5
 charging_rubble
+chimera_blackv1
+chimera_blackv2
 cleave1
 cleave2
 cleave3
@@ -69,7 +71,9 @@ cleave_aureole
 crater
 crater3
 cutscene_black1
+cutscene_black2
 cutscene_black3
+cutscene_black4
 dirt0
 dirt02
 dirt03
@@ -78,12 +82,17 @@ dirt2
 dirt3
 dirt4
 dismantle_star_large
+domain_area0
 domain_breaker5
+domainarea
+domainarea0
+domainarea1
 double_jump1
 double_jump2
 double_jump3
 energy_explode1
 energy_wave_large
+evade3
 finalflash10
 finalflash11
 fire_downslam
@@ -282,6 +291,10 @@ limitless_suck3
 limitless_suck4
 limitless_suck5
 limitless_suck6
+malevolent1
+malevolent2
+malevolent3
+malevolent_down
 malevolent_shockwave1
 malevolent_shockwave2
 meteor_land0

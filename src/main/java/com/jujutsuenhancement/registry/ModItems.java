@@ -135,4 +135,7 @@ public final class ModItems {
     /** ds:sukuna4, "「竈」 开". */
     public static final RegistryObject<Item> SUKUNA4 =
             reg("sukuna4", () -> new com.jujutsuenhancement.item.TechniqueItem("sukuna4", new Item.Properties().stacksTo(1)));
+    /** ds:sukuna3, "领域展开 『伏魔御厨子』". */
+    public static final RegistryObject<Item> SUKUNA3 =
+            reg("sukuna3", () -> new com.jujutsuenhancement.item.TechniqueItem("sukuna3", new Item.Properties().stacksTo(1)));
 }

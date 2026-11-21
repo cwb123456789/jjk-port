@@ -25,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaTechnique {
     private static final String FINGERS = "jje_fingers", MODE = "jje_smode";
-    private static final String[] IDS = {"sukuna1", "sukuna2", "sukuna4", "sukuna5"};
+    private static final String[] IDS = {"sukuna1", "sukuna2", "sukuna3", "sukuna4", "sukuna5"};
 
     private SukunaTechnique() {}
 
@@ -92,6 +92,7 @@ public final class SukunaTechnique {
         int f = fingers(p);
         if (f >= 1) give(p, "sukuna1");
         if (f >= 2) give(p, "sukuna2");
+        if (f >= 3) give(p, "sukuna3");
         if (f >= 15) {
             give(p, "sukuna4");
             give(p, "sukuna5");

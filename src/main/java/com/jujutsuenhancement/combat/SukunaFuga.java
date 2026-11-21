@@ -99,7 +99,7 @@ public final class SukunaFuga {
             showChoice(p, s);
             return;
         }
-        if (s.phase != 0 || !p.isAlive() || SukunaSkills.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
+        if (s.phase != 0 || !p.isAlive() || SukunaSkills.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p) || SukunaDomain.casting(p)) return;
         if (!SukunaTechnique.active(p)) {
             p.displayClientMessage(BedrockText.parse("§l§c需要宿傩掌控身体"), true);
             return;
@@ -415,7 +415,7 @@ public final class SukunaFuga {
         return server.getPlayerList().getPlayer(e.owner);
     }
 
-    private static boolean validTarget(Entity own, LivingEntity t) {
+    static boolean validTarget(Entity own, LivingEntity t) {
         if (t == own || !t.isAlive() || t instanceof ArmorStand) return false;
         if (own != null && t.isAlliedTo(own)) return false;
         if (t instanceof Player pl) {

@@ -49,5 +49,7 @@
   "item.jujutsuenhancement.sukuna5": "§l§c咒词吟唱 §7(§e右键(长按)§7)",
   "item.jujutsuenhancement.sukuna5.lore": "§g- 消耗: [ §7200 点咒力 §g]\n\n§l§3空间斩 §7(§e左键(单击)§7)\n§g- 消耗: [ §7500 点咒力 + §c3 次 咒词吟唱 §g]\n\n§l§b最大输出 空间斩 §7(§e潜行 + 右键(长按)§7)\n§g- 消耗: [ §73333 点咒力 §g]\n§4-=- 使用前置: 原身形态转变 -=-\n\n§l§b最大输出 空间斩: 垂直 §7(§e跳起 + 右键(长按)§7)\n§g- 消耗: [ §73333 点咒力 §g]\n§4-=- 使用前置: 原身形态转变 -=-\n\n§l§5- §o切断世界的斩击",
   "item.jujutsuenhancement.sukuna4": "§l§e「竈」 开",
-  "item.jujutsuenhancement.sukuna4.lore": "§g- 消耗: [ §71000 点咒力 §g]\n§9- 开放式 『伏魔御厨子』 中使用造成更大破坏\n\n§l§5- §o万死之炎"
+  "item.jujutsuenhancement.sukuna4.lore": "§g- 消耗: [ §71000 点咒力 §g]\n§9- 开放式 『伏魔御厨子』 中使用造成更大破坏\n\n§l§5- §o万死之炎",
+  "item.jujutsuenhancement.sukuna3": "§l§4领域展开 『伏魔御厨子』 §7(§e右键(长按)§7)",
+  "item.jujutsuenhancement.sukuna3.lore": "§g- 消耗: [ §7500 点咒力 §g]\n§9(封闭屏障式)\n\n§l§4领域展开 『伏魔御厨子』 §7(§e潜行 + 右键(长按)§7)\n§g- 消耗: [ §72500 点咒力 §g]\n§9(开放屏障式)\n\n§l§c领域展开 『伏魔御厨子』 - 不完全领域 §7(§e跳起 + 右键(长按)§7)\n§g- 消耗: [ §71500 点咒力 §g]\n§4-=- 使用前置: 原身形态转变 & 生命值低于 25%% 以下 -=-\n§9(开放屏障式)\n\n§l§5- §o真正的咒术"
 }

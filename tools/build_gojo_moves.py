@@ -59,6 +59,13 @@ YUJI = {
     'sukuna_fuga_scythe': ('../sukuna/attacks/fuga/divine_flames', 7001, {'cond': 'none', 'hi': 7001, 'lo': 6955}),
     'sukuna_fuga_grab': ('../sukuna/attacks/fuga/divine_flames', 6801, {'cond': 'none', 'hi': 6801, 'lo': 6660}),
     'fuga_boom': ('../sukuna/attacks/fuga/fuga_arrow1', 1001, {'cond': 'none', 'hi': 1001, 'lo': 700, 'var': 'Deleter'}),
+    # 伏魔御厨子 (sukuna3): the cast (domainstart 121 -> 1) and the cutscene that starts with it (domain 221 / 281 -> 1)
+    'sukuna_dom1_start': ('../sukuna/attacks/domains/shrine/start', 121, {'cond': 'none', 'hi': 121, 'lo': 1, 'var': 'domainstart'}),
+    'sukuna_dom1_cut': ('../sukuna/attacks/domains/shrine/cutscene', 221, {'cond': 'none', 'hi': 221, 'lo': 1, 'var': 'domain'}),
+    'sukuna_dom2_start': ('../sukuna/attacks/domains/kitchen/start', 121, {'cond': 'none', 'hi': 121, 'lo': 1, 'var': 'domainstart'}),
+    'sukuna_dom2_cut': ('../sukuna/attacks/domains/kitchen/cutscene', 221, {'cond': 'none', 'hi': 221, 'lo': 1, 'var': 'domain'}),
+    'sukuna_dom3_start': ('../sukuna/attacks/domains/incomplete/start', 121, {'cond': 'none', 'hi': 121, 'lo': 1, 'var': 'domainstart'}),
+    'sukuna_dom3_cut': ('../sukuna/attacks/domains/incomplete/cutscene', 281, {'cond': 'none', 'hi': 281, 'lo': 1, 'var': 'domain'}),
     'yuji_fierce': ('../yuji/fierce_strikes', 36, {'cond': 'none'}),
     'yuji_fierce_n': ('../yuji/fierce_strikes', 36, {'cond': 'nbf', 'hi': 15}),
     'yuji_fierce_b': ('../yuji/fierce_strikes', 36, {'cond': 'bf', 'hi': 15}),
@@ -178,7 +185,7 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
         if not pl:
             continue
         sel, cmd = pl
-        if re.search(r'Stun=1\.\.|punch=|domainactive|itemUse', sel):
+        if re.search(r'Stun=1\.\.|punch=|domainactive|itemUse|domainclashing|domain_clasher', sel):
             continue  # conditional on a state the timeline does not know (the caster being stunned, the selection click, a domain)
         rng = move_range(sel, 100000 if opt else n, opt.get('var', 'move') if opt else 'move')
         if not rng:

@@ -707,5 +707,32 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.gojo.mv_mob_bass": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_bass",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_malevolentkitchen": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_malevolentkitchen",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_malevolentshrine1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_malevolentshrine1",
+        "volume": 1.0
+      }
+    ]
   }
 }
