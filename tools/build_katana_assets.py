@@ -30,6 +30,9 @@ ANIMS = ['animation.katana.idle', 'animation.katana_attack1', 'animation.katana_
          'animation.fuga_scythe', 'animation.fuga_scythe2',
          'animation.malevolent_shrine', 'animation.malevolent_shrine2', 'animation.malevolent_shrine_under', 'animation.malevolent_shrine_hold',
          'animation.incomplete_shrine', 'animation.incomplete_shrine2',
+         'animation.sukuna.attack1', 'animation.sukuna.attack2', 'animation.sukuna.attack3', 'animation.sukuna.attack4', 'animation.sukuna.attack5',
+         'animation.demonic_blows1', 'animation.demonic_blows2', 'animation.hellish_descent', 'animation.open_space', 'animation.open_space2',
+         'animation.step', 'animation.takedown_charge', 'animation.takedown1', 'animation.demonic_blitz_dash', 'animation.demonic_blitz1',
          # Yuji
          'animation.black_fists.ab1', 'animation.black_fists.ab2', 'animation.black_fists.ab3', 'animation.black_fists.ab3_hold',
          'animation.black_fists.ab4', 'animation.black_fists.ab4b', 'animation.black_fists.ab5', 'animation.black_fists.ab6',

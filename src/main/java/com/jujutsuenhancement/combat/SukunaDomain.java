@@ -91,7 +91,7 @@ public final class SukunaDomain {
             return;
         }
         if (d.casting || d.left > 0) return;
-        if (!p.isAlive() || SukunaSkills.isBusy(p) || SukunaFuga.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
+        if (!p.isAlive() || SukunaSkills.isBusy(p) || SukunaFuga.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p) || SukunaFists.isBusy(p)) return;
         if (!SukunaTechnique.active(p) || isStunned(p)) return;
         int kind;
         int cost;

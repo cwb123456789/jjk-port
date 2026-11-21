@@ -99,7 +99,7 @@ public final class SukunaFuga {
             showChoice(p, s);
             return;
         }
-        if (s.phase != 0 || !p.isAlive() || SukunaSkills.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p) || SukunaDomain.casting(p)) return;
+        if (s.phase != 0 || !p.isAlive() || SukunaSkills.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p) || SukunaDomain.casting(p) || SukunaFists.isBusy(p)) return;
         if (!SukunaTechnique.active(p)) {
             p.displayClientMessage(BedrockText.parse("§l§c需要宿傩掌控身体"), true);
             return;

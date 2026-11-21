@@ -20,6 +20,7 @@ public record SwingPacket() {
                 com.jujutsuenhancement.combat.YujiSkills.onLeftClick(player);
                 com.jujutsuenhancement.combat.SukunaSkills.onLeftClick(player);
                 com.jujutsuenhancement.combat.SukunaFuga.onLeftClick(player);
+                com.jujutsuenhancement.combat.SukunaFists.onLeftClick(player);
             }
         });
         ctx.get().setPacketHandled(true);
