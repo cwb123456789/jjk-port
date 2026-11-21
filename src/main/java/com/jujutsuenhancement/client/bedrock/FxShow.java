@@ -205,6 +205,10 @@ public final class FxShow {
     }
 
     private static void playSet(Minecraft mc, BedrockFxEntity e) {
+        if (e.getFx().startsWith("mv:")) {
+            MoveFx.start(e.getId(), e.getFx().substring(3));
+            return;
+        }
         Fx fx = FX.get(e.getFx());
         if (fx == null) return;
         double yaw = e.getYRot();

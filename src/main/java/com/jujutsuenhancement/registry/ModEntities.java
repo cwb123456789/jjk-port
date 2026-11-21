@@ -82,7 +82,7 @@ public final class ModEntities {
             ENTITY_TYPES.register("bedrock_fx", () -> EntityType.Builder
                     .of(BedrockFxEntity::new, MobCategory.MISC)
                     .sized(0.1F, 0.1F)
-                    .clientTrackingRange(12)
+                    .clientTrackingRange(24)
                     .updateInterval(1)
                     .noSave()
                     .fireImmune()

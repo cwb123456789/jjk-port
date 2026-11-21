@@ -25,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaTechnique {
     private static final String FINGERS = "jje_fingers", MODE = "jje_smode";
-    private static final String[] IDS = {"sukuna1", "sukuna2", "sukuna5"};
+    private static final String[] IDS = {"sukuna1", "sukuna2", "sukuna4", "sukuna5"};
 
     private SukunaTechnique() {}
 
@@ -41,13 +41,18 @@ public final class SukunaTechnique {
     public static int fuga(Player p) { return data(p).getInt("jje_fuga"); }
     public static void addFuga(Player p, int n) {
         int before = fuga(p);
-        int now = Math.max(0, Math.min(2000, before + n));
+        int now = Math.max(0, before + n);
+        if (now > 600) now = 500; // sukuna_cmds: fuga 601.. -> 500
         data(p).putInt("jje_fuga", now);
         if (before < 500 && now >= 500 && p instanceof ServerPlayer sp) {
             sp.displayClientMessage(BedrockText.parse("§r§6§l- 「竈」 开 已就绪"), false);
             sp.serverLevel().playSound(null, sp.blockPosition(), SoundEvents.BLAZE_DEATH, SoundSource.PLAYERS, 3.0F, 0.35F);
         }
     }
+    /** The tag {@code fugaready}: the meter reached 500 (creative players always have it). */
+    public static boolean fugaReady(Player p) { return p.isCreative() || fuga(p) >= 500; }
+    /** divine_flames: the meter is emptied the moment 「竈」 starts. */
+    public static void resetFuga(Player p) { data(p).putInt("jje_fuga", 0); }
     public static int chants(Player p) { return data(p).getInt("jje_wcschant"); }
     public static void addChant(Player p) { data(p).putInt("jje_wcschant", Math.min(3, chants(p) + 1)); }
     public static void resetChants(Player p) { data(p).putInt("jje_wcschant", 0); }
@@ -87,7 +92,10 @@ public final class SukunaTechnique {
         int f = fingers(p);
         if (f >= 1) give(p, "sukuna1");
         if (f >= 2) give(p, "sukuna2");
-        if (f >= 15) give(p, "sukuna5");
+        if (f >= 15) {
+            give(p, "sukuna4");
+            give(p, "sukuna5");
+        }
         p.displayClientMessage(BedrockText.parse("§l§a技能物品已获得"), false);
     }
 

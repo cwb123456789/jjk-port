@@ -51,6 +51,14 @@ YUJI = {
     'sukuna_ab2b': ('../sukuna/attacks/dismantles/ab2b', 13, {'cond': 'none'}),
     'sukuna_ab2d': ('../sukuna/attacks/dismantles/ab2d', 31, {'cond': 'none'}),
     'sukuna_ab2e': ('../sukuna/attacks/dismantles/ab2e', 66, {'cond': 'none'}),
+    # 竈 (sukuna4): the charge, the four forms, the arrow's explosion (fuga_arrow1, by its Deleter timer) and the scythe's grab
+    'sukuna_fuga': ('../sukuna/attacks/fuga/divine_flames', 56, {'cond': 'none', 'hi': 56, 'lo': 11}),
+    'sukuna_fuga_arrow': ('../sukuna/attacks/fuga/divine_flames', 1001, {'cond': 'none', 'hi': 1001, 'lo': 820}),
+    'sukuna_fuga_spear': ('../sukuna/attacks/fuga/divine_flames', 4001, {'cond': 'none', 'hi': 4001, 'lo': 3850}),
+    'sukuna_fuga_mugetsu': ('../sukuna/attacks/fuga/divine_flames', 5001, {'cond': 'none', 'hi': 5001, 'lo': 4860}),
+    'sukuna_fuga_scythe': ('../sukuna/attacks/fuga/divine_flames', 7001, {'cond': 'none', 'hi': 7001, 'lo': 6955}),
+    'sukuna_fuga_grab': ('../sukuna/attacks/fuga/divine_flames', 6801, {'cond': 'none', 'hi': 6801, 'lo': 6660}),
+    'fuga_boom': ('../sukuna/attacks/fuga/fuga_arrow1', 1001, {'cond': 'none', 'hi': 1001, 'lo': 700, 'var': 'Deleter'}),
     'yuji_fierce': ('../yuji/fierce_strikes', 36, {'cond': 'none'}),
     'yuji_fierce_n': ('../yuji/fierce_strikes', 36, {'cond': 'nbf', 'hi': 15}),
     'yuji_fierce_b': ('../yuji/fierce_strikes', 36, {'cond': 'bf', 'hi': 15}),
@@ -73,6 +81,23 @@ YUJI = {
     'yuji_soul5': ('../yuji/soul_ab5', 31, {'cond': 'none', 'lo': 2}),
     'yuji_soul5b': ('../yuji/soul_ab5', 31, {'cond': 'none', 'hi': 1001, 'lo': 800}),
 }
+# timelines that are not lines of an @s function: key -> (n, rows). Row = [tick, 'p', name, 0, x, y, z] / [tick, 's', name, vol, pitch, radius] / [tick, 'k', amp, ticks, radius]
+def _loop(names, a, b):
+    return [[t, 'p', nm, 0, 0.0, 0.0, 0.0] for t in range(a, b + 1) for nm in names]
+
+
+EXTRA = {
+    # fuga_spear.mcfunction: one spear_explosion (Deleter 9 -> 3: the fall at the first ticks, the blast at Deleter 3 = tick 7)
+    'fuga_spear_blast': (9, [[2, 's', 'mob.red2', 999999.0, 2.0, 400]] + _loop(['fuga_stars1', 'fuga_stars2'], 2, 3)
+                         + _loop(['fuga_spear_fall1', 'fuga_spear_fall2'], 1, 2)
+                         + [[7, 'k', 2.0, 2, 100], [7, 's', 'random.explode', 99999.0, 1.0, 200]]
+                         + _loop(['energy_explode1', 'fuga_area', 'fuga_spear_land1', 'fuga_spear_land2', 'flame_repulse_ex2', 'stoic_explode1', 'stoic_explode3'], 7, 7)),
+    # the entities' own animations, once per tick of the flight
+    'fuga_arrow_fly': (60, _loop(['fuga_head1', 'fuga_head2', 'fuga_head3'], 1, 60)),
+    'fuga_spear_fly': (200, _loop(['fuga_spear', 'fuga_spear_shine1', 'fuga_spear_shine2'], 1, 200)),
+    'fuga_mugetsu_fly': (60, _loop(['fuga_mugetsu1', 'fuga_mugetsu2', 'fuga_mugetsu3', 'fuga_mugetsu4', 'fuga_mugetsu5', 'fuga_mugetsu6', 'fuga_mugetsu7', 'fuga_mugetsu8'], 1, 60)),
+    'fuga_scythe_fly': (22, _loop(['fuga_scythe_slash1', 'fuga_scythe_slash2', 'fuga_scythe_slash3', 'fuga_scythe_slash4', 'fuga_scythe_slash5'], 1, 22)),
+}
 # vanilla sounds the addon uses by their Bedrock name
 VANILLA = {
     'beacon.deactivate': 'minecraft:block.beacon.deactivate', 'beacon.activate': 'minecraft:block.beacon.activate',
@@ -85,6 +110,9 @@ VANILLA = {
     'random.anvil_land': 'minecraft:block.anvil.land', 'note.pling': 'minecraft:block.note_block.pling',
     'mob.stormwraith.attack': 'minecraft:entity.generic.explode', 'ambient.weather.thunder': 'minecraft:entity.lightning_bolt.thunder',
     'mob.bat.takeoff': 'minecraft:entity.bat.takeoff', 'mob.blaze.shoot': 'minecraft:entity.blaze.shoot', 'mob.enderdragon.flap': 'minecraft:entity.ender_dragon.flap', 'mob.witch.throw': 'minecraft:entity.witch.throw',
+    'mob.blaze.breathe': 'minecraft:entity.blaze.ambient', 'mob.block.campfire.crackle': 'minecraft:block.campfire.crackle',
+    'block.end_portal.spawn': 'minecraft:block.end_portal.spawn', 'break.amethyst_block': 'minecraft:block.amethyst_block.break',
+    'portal.travel': 'minecraft:block.portal.travel', 'portal.trigger': 'minecraft:block.portal.trigger',
     'mob.zombie.metal': 'minecraft:entity.zombie.attack_iron_door', 'random.break': 'minecraft:entity.item.break',
 }
 COORD = re.compile(r'[~^]-?\d*\.?\d*')
@@ -105,8 +133,8 @@ def radius(sel):
     return num(m.group(1)) if m else 0
 
 
-def move_range(sel, n):
-    m = re.search(r'\bmove=(\d*)(\.\.)?(\d*)', sel)
+def move_range(sel, n, var='move'):
+    m = re.search(r'\b' + var + r'=(\d*)(\.\.)?(\d*)', sel)
     if not m or (m.group(1) == '' and m.group(3) == ''):
         return None
     lo, dots, hi = m.group(1), m.group(2), m.group(3)
@@ -150,7 +178,9 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
         if not pl:
             continue
         sel, cmd = pl
-        rng = move_range(sel, 100000 if opt else n)
+        if re.search(r'Stun=1\.\.|punch=|domainactive|itemUse', sel):
+            continue  # conditional on a state the timeline does not know (the caster being stunned, the selection click, a domain)
+        rng = move_range(sel, 100000 if opt else n, opt.get('var', 'move') if opt else 'move')
         if not rng:
             continue
         cnd = 'none'
@@ -351,6 +381,18 @@ def main(src, dst, glyph_page=None):
         ev = events_for(os.path.join(nfun, fn + '.mcfunction'), n, sounds, particles, glyphs, o[0] if o else None)
         out[key] = {'n': n, 'events': ev}
         print(key, n, len(ev), 'events')
+    for key, (n, rows) in EXTRA.items():
+        for r in rows:
+            if r[1] == 'p':
+                particles.add(r[2])
+            if r[1] == 's':
+                sounds.add(r[2])
+        out[key] = {'n': n, 'events': sorted(rows, key=lambda r: r[0])}
+    # fuga_arrow1: the music is played by "execute as @a[r=200] ... playsound music.fuga_music" at Deleter 999..1000
+    for t in (1, 2):
+        out['fuga_boom']['events'].append([t, 's', 'music.fuga_music', 999999.0, 1.0, 200])
+        sounds.add('music.fuga_music')
+    out['fuga_boom']['events'].sort(key=lambda r: r[0])
     # blitz.mcfunction: the line of particles along the look ray (once, at move 5 of limitless4)
     blitz_ray = [[11, 'r', 'spatial_blitz2', 0.33, 21.0], [11, 'r', 'spatial_blitz3', 0.33, 21.0], [11, 'r', 'spatial_blitz4', 0.33, 21.0]]
     out['blitz']['events'] += blitz_ray

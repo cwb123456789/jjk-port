@@ -23,6 +23,7 @@ public final class BedrockFxEntity extends Entity {
             SynchedEntityData.defineId(BedrockFxEntity.class, EntityDataSerializers.STRING);
 
     private int life;
+    private int maxLife = 3;
 
     public BedrockFxEntity(EntityType<? extends BedrockFxEntity> type, Level level) {
         super(type, level);
@@ -39,6 +40,20 @@ public final class BedrockFxEntity extends Entity {
         level.addFreshEntity(e);
     }
 
+    /**
+     * A marker that runs the timeline {@code key} of {@code bedrock/gojo/moves.json} on the clients (particles, sounds, shakes, fades)
+     * at its own position and turn; the server may move it every tick (the addon's projectile entities with their per-tick animation).
+     */
+    public static BedrockFxEntity timeline(ServerLevel level, String key, double x, double y, double z, float yaw, float pitch, int life) {
+        BedrockFxEntity e = ModEntities.BEDROCK_FX.get().create(level);
+        if (e == null) return null;
+        e.moveTo(x, y, z, yaw, pitch);
+        e.entityData.set(FX, "mv:" + key);
+        e.maxLife = life;
+        level.addFreshEntity(e);
+        return e;
+    }
+
     public String getFx() {
         return entityData.get(FX);
     }
@@ -46,7 +61,7 @@ public final class BedrockFxEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (!level().isClientSide && ++life > 3) discard();
+        if (!level().isClientSide && ++life > maxLife) discard();
     }
 
     @Override protected void defineSynchedData() {

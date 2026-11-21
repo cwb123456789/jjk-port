@@ -70,7 +70,7 @@ public final class AnimClientEvents {
             if (player == null) return;
             var held = player.getMainHandItem().getItem();
             String hid = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(held).getPath();
-            boolean yuji = (hid.equals("black_fists") && (player.isShiftKeyDown() || !player.onGround())) || (hid.equals("soul_shrine1") && player.isShiftKeyDown()) || (hid.equals("sukuna2") && player.isShiftKeyDown()) || hid.equals("sukuna5");
+            boolean yuji = (hid.equals("black_fists") && (player.isShiftKeyDown() || !player.onGround())) || (hid.equals("soul_shrine1") && player.isShiftKeyDown()) || (hid.equals("sukuna2") && player.isShiftKeyDown()) || hid.equals("sukuna5") || hid.equals("sukuna4");
             if (!(held instanceof KatanaItem) && !yuji) return;
             ModNet.CHANNEL.sendToServer(new SwingPacket());
             event.setSwingHand(false);

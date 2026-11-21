@@ -622,5 +622,90 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.gojo.mv_mob_blitz1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_blitz1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_burn": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_burn1",
+        "volume": 1.0
+      },
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_burn2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_fuga": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_fuga",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_fuga_appear": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_fuga_appear",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_fuga_form": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_fuga_form",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_fuga_hands": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_fuga_hands",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_fuga_shoot": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_fuga_shoot",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_bassboost": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_bassboost",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_fuga_music": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_fuga_music",
+        "volume": 1.0
+      }
+    ]
   }
 }
