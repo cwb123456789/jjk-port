@@ -50,7 +50,12 @@ public final class EnergyCommands {
                     com.jujutsuenhancement.combat.SukunaTechnique.setFingers(p, IntegerArgumentType.getInteger(ctx, "n"));
                     p.sendSystemMessage(Component.literal("宿傩手指数 " + com.jujutsuenhancement.combat.SukunaTechnique.fingers(p)));
                     return 1;
-                }))).then(Commands.literal("bfspecial").then(Commands.argument("n", IntegerArgumentType.integer(-1000, 1000)).executes(ctx -> {
+                }))).then(Commands.literal("heian").executes(ctx -> {
+                    ServerPlayer p = ctx.getSource().getPlayerOrException();
+                    com.jujutsuenhancement.combat.SukunaTechnique.setHeian(p, !com.jujutsuenhancement.combat.SukunaTechnique.heian(p));
+                    p.sendSystemMessage(Component.literal("千年原身 " + com.jujutsuenhancement.combat.SukunaTechnique.heian(p)));
+                    return 1;
+                })).then(Commands.literal("bfspecial").then(Commands.argument("n", IntegerArgumentType.integer(-1000, 1000)).executes(ctx -> {
                     ServerPlayer p = ctx.getSource().getPlayerOrException();
                     com.jujutsuenhancement.combat.YujiTechnique.addSpecial(p, IntegerArgumentType.getInteger(ctx, "n"));
                     p.sendSystemMessage(Component.literal("累积黑闪特级生物次数 " + com.jujutsuenhancement.combat.YujiTechnique.special(p)));

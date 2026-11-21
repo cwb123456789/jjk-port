@@ -25,6 +25,7 @@ ANIMS = ['animation.katana.idle', 'animation.katana_attack1', 'animation.katana_
          'animation.rapid_dismantle', 'animation.dismantle_spam', 'animation.heavy_dismantle', 'animation.heavy_dismantle2',
          'animation.cleave', 'animation.cleave_counter', 'animation.cleave_counter2', 'animation.layered_cleave',
          'animation.spiderweb', 'animation.carving_combo',
+         'animation.world_slash_chant', 'animation.world_slash_small1', 'animation.world_slash1', 'animation.world_slash2',
          # Yuji
          'animation.black_fists.ab1', 'animation.black_fists.ab2', 'animation.black_fists.ab3', 'animation.black_fists.ab3_hold',
          'animation.black_fists.ab4', 'animation.black_fists.ab4b', 'animation.black_fists.ab5', 'animation.black_fists.ab6',

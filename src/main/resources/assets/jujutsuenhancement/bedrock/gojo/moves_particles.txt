@@ -182,6 +182,7 @@ lapse_pull3
 lapse_pull4
 large_impact1
 large_impact2
+large_impact3
 large_slam1
 large_slam2
 leap
@@ -247,3 +248,13 @@ turbo_intensity2
 turbo_intensity3
 turbo_intensity4
 unparrymarker
+world_slash_charge1
+world_slash_charge2
+world_slash_ending
+world_slash_intensity
+world_slash_intensity2
+world_slash_intensity3
+world_slash_shatter
+world_slash_shatter2
+world_slash_start1
+world_slash_start2

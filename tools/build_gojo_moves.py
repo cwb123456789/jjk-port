@@ -34,6 +34,10 @@ MOVES = {
 # Yuji (functions/yuji): key -> (function, N, options). cond: which lines (none = unconditional, nbf = tag=!blackflashed, bf = tag=blackflashed);
 # hi: the move value at which the timeline is started by the server (ticks = hi - move).
 YUJI = {
+    'sukuna_chant': ('../sukuna/attacks/worldslash/chant', 21, {'cond': 'none'}),
+    'sukuna_wcs': ('../sukuna/attacks/worldslash/wcs1', 31, {'cond': 'none'}),
+    'sukuna_ws1': ('../sukuna/attacks/worldslash/world_slash1', 136, {'cond': 'none'}),
+    'sukuna_ws2': ('../sukuna/attacks/worldslash/world_slash2', 136, {'cond': 'none'}),
     'sukuna_cleave': ('../sukuna/attacks/cleaves/cleave', 11, {'cond': 'none'}),
     'sukuna_counter': ('../sukuna/attacks/cleaves/cleave_counter', 16, {'cond': 'none'}),
     'sukuna_layered': ('../sukuna/attacks/cleaves/layered_cleave', 26, {'cond': 'none'}),

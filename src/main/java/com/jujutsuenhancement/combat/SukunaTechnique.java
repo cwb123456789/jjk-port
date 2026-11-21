@@ -25,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaTechnique {
     private static final String FINGERS = "jje_fingers", MODE = "jje_smode";
-    private static final String[] IDS = {"sukuna1", "sukuna2"};
+    private static final String[] IDS = {"sukuna1", "sukuna2", "sukuna5"};
 
     private SukunaTechnique() {}
 
@@ -48,6 +48,12 @@ public final class SukunaTechnique {
             sp.serverLevel().playSound(null, sp.blockPosition(), SoundEvents.BLAZE_DEATH, SoundSource.PLAYERS, 3.0F, 0.35F);
         }
     }
+    public static int chants(Player p) { return data(p).getInt("jje_wcschant"); }
+    public static void addChant(Player p) { data(p).putInt("jje_wcschant", Math.min(3, chants(p) + 1)); }
+    public static void resetChants(Player p) { data(p).putInt("jje_wcschant", 0); }
+    /** Original body (千年原身): the tag {@code body_transformation}; creative players have it. */
+    public static boolean heian(Player p) { return p.isCreative() || data(p).getBoolean("jje_heian"); }
+    public static void setHeian(Player p, boolean b) { data(p).putBoolean("jje_heian", b); }
     public static boolean active(Player p) { return data(p).getBoolean(MODE); }
 
     public static void use(ServerPlayer p) {
@@ -81,6 +87,7 @@ public final class SukunaTechnique {
         int f = fingers(p);
         if (f >= 1) give(p, "sukuna1");
         if (f >= 2) give(p, "sukuna2");
+        if (f >= 15) give(p, "sukuna5");
         p.displayClientMessage(BedrockText.parse("§l§a技能物品已获得"), false);
     }
 
@@ -104,6 +111,6 @@ public final class SukunaTechnique {
     public static void onClone(PlayerEvent.Clone event) {
         if (!event.isWasDeath()) return;
         CompoundTag from = data(event.getOriginal()), to = data(event.getEntity());
-        for (String k : new String[]{FINGERS, MODE, "jje_fuga"}) if (from.contains(k)) to.put(k, from.get(k).copy());
+        for (String k : new String[]{FINGERS, MODE, "jje_fuga", "jje_wcschant", "jje_heian"}) if (from.contains(k)) to.put(k, from.get(k).copy());
     }
 }

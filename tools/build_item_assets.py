@@ -36,6 +36,7 @@ ITEMS = {
     'sukuna_technique': 'generated',
     'sukuna1': 'generated',
     'sukuna2': 'generated',
+    'sukuna5': 'generated',
     'black_fists': 'generated',
     'soul_shrine1': 'generated',
     'soul_shrine2': 'generated',

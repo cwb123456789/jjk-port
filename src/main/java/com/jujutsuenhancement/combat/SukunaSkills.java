@@ -52,17 +52,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaSkills {
     private static final int QUICK = 1, DOWN = 2, DISSECT = 3, WIDE = 4, RAPID = 5, SPAM = 6, HEAVY = 7, HEAVY2 = 8,
-            CLEAVE = 9, COUNTER = 10, LAYERED = 11, SPIDER = 12, CARVE = 13;
-    private static final int[] N = {0, 11, 66, 36, 41, 31, 13, 31, 66, 11, 16, 26, 41, 191};
-    private static final int[] CD = {0, 50, 480, 150, 150, 800, 200, 1200, 1200, 30, 100, 100, 600, 6000};
-    private static final int[] COST = {0, 50, 50, 75, 75, 200, 200, 200, 200, 30, 30, 100, 100, 300};
-    private static final String[] NAME = {"", "解-快斩", "空中解", "解", "后撤宽斩", "集连裂斩", "连斩", "重踢断斩", "重踢断斩", "捌", "捌·防反", "雕斩裂刻", "蜘蛛之网", "乱斩裂割"};
+            CLEAVE = 9, COUNTER = 10, LAYERED = 11, SPIDER = 12, CARVE = 13, CHANT = 14, WCS = 15, WS1 = 16, WS2 = 17;
+    private static final int[] N = {0, 11, 66, 36, 41, 31, 13, 31, 66, 11, 16, 26, 41, 191, 21, 31, 136, 136};
+    private static final int[] CD = {0, 50, 480, 150, 150, 800, 200, 1200, 1200, 30, 100, 100, 600, 6000, 100, 100, 7200, 7200};
+    private static final int[] COST = {0, 50, 50, 75, 75, 200, 200, 200, 200, 30, 30, 100, 100, 300, 200, 500, 3333, 3333};
+    private static final String[] NAME = {"", "解-快斩", "空中解", "解", "后撤宽斩", "集连裂斩", "连斩", "重踢断斩", "重踢断斩", "捌", "捌·防反", "雕斩裂刻", "蜘蛛之网", "乱斩裂割", "咒词吟唱", "空间斩", "最大输出 空间斩", "最大输出 空间斩: 垂直"};
     private static final String[] ANIM = {"", "dismantle1", "dismantle_downwards", "dissect", "dismantle_backwards", "rapid_dismantle",
-            "dismantle_spam", "heavy_dismantle", "heavy_dismantle2", "cleave", "cleave_counter", "layered_cleave", "spiderweb", "carving_combo"};
+            "dismantle_spam", "heavy_dismantle", "heavy_dismantle2", "cleave", "cleave_counter", "layered_cleave", "spiderweb", "carving_combo", "world_slash_chant", "world_slash_small1", "world_slash1", "world_slash2"};
     private static final String[] FX = {"", "sukuna_ab1", "sukuna_ab1b", "sukuna_ab1d", "sukuna_ab1e", "sukuna_ab2", "sukuna_ab2b",
-            "sukuna_ab2d", "sukuna_ab2e", "sukuna_cleave", "sukuna_counter", "sukuna_layered", "sukuna_spider", "sukuna_carve"};
+            "sukuna_ab2d", "sukuna_ab2e", "sukuna_cleave", "sukuna_counter", "sukuna_layered", "sukuna_spider", "sukuna_carve", "sukuna_chant", "sukuna_wcs", "sukuna_ws1", "sukuna_ws2"};
     /** the ability scoreboards share cooldowns: ab1 (1,2), ab3 (3,4), ab4/ab4 (5,6), ab5 (7,8). */
-    private static final int[] GROUP = {0, 1, 1, 3, 3, 5, 5, 7, 7, 11, 11, 11, 12, 13};
+    private static final int[] GROUP = {0, 1, 1, 3, 3, 5, 5, 7, 7, 11, 11, 11, 12, 13, 14, 15, 14, 14};
 
     private static final class Proj {
         UUID owner;
@@ -98,7 +98,7 @@ public final class SukunaSkills {
     }
 
     public static void onUse(ServerPlayer p, String item) {
-        if (!item.equals("sukuna1") && !item.equals("sukuna2")) return;
+        if (!item.equals("sukuna1") && !item.equals("sukuna2") && !item.equals("sukuna5")) return;
         State s = state(p);
         if (s.skill != 0 || !p.isAlive() || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
         if (!SukunaTechnique.active(p)) {
@@ -108,6 +108,16 @@ public final class SukunaSkills {
         boolean sneak = p.isShiftKeyDown(), air = !p.onGround(), sprint = p.isSprinting();
         boolean down = p.getXRot() > 60.0F;
         int skill;
+        if (item.equals("sukuna5")) {
+            if (sneak || air) {
+                if (!SukunaTechnique.heian(p)) {
+                    p.displayClientMessage(BedrockText.parse("§l§4-=- 使用前置: 原身形态转变 -=-"), false);
+                    return;
+                }
+                cast(p, s, sneak ? WS1 : WS2);
+            } else cast(p, s, CHANT);
+            return;
+        }
         if (item.equals("sukuna2")) {
             if (sneak) skill = SPIDER;
             else if (air) skill = LAYERED;
@@ -129,6 +139,13 @@ public final class SukunaSkills {
         if (s.skill != 0 || !p.isAlive() || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
         String id = ForgeRegistries.ITEMS.getKey(p.getMainHandItem().getItem()).getPath();
         if (id.equals("sukuna2") && p.isShiftKeyDown() && SukunaTechnique.active(p)) cast(p, s, CARVE);
+        if (id.equals("sukuna5") && !p.isShiftKeyDown() && SukunaTechnique.active(p)) {
+            if (SukunaTechnique.chants(p) < 3) {
+                p.displayClientMessage(BedrockText.parse("§l§c需要先 咒词吟唱 3 次 (" + SukunaTechnique.chants(p) + " / 3)"), true);
+                return;
+            }
+            cast(p, s, WCS);
+        }
     }
 
     private static void cast(ServerPlayer p, State s, int skill) {
@@ -336,6 +353,35 @@ public final class SukunaSkills {
                     for (LivingEntity e : targets(p, p.position().add(0, 1, 0), 6.0D)) GojoTechEntity.hurt(level, p, e, 1.0F);
                 }
             }
+            case CHANT -> {
+                if (t == 1 && SukunaTechnique.chants(p) >= 3) {
+                    p.displayClientMessage(BedrockText.parse("§l§4咒词已吟唱完毕..."), false);
+                    Energy.set(p, Energy.get(p) + 200);
+                    s.cd[GROUP[sk]] = 0;
+                    s.skill = 0;
+                    return;
+                }
+                if (t <= 20) p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 2, 2, false, false));
+                if (t == 11) {
+                    SukunaTechnique.addChant(p);
+                    level.playSound(null, p.blockPosition(), SoundEvents.WITHER_AMBIENT, SoundSource.PLAYERS, 1.0F, 0.6F);
+                }
+            }
+            case WCS -> {
+                if (t <= 30) p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2, 25, false, false));
+                if (t == 21) {
+                    slashLine(p, level, p.getEyePosition(), look, 7.0D, 80.0D, 6.99D);
+                    SukunaTechnique.resetChants(p);
+                }
+            }
+            case WS1, WS2 -> {
+                if (t <= 17) for (LivingEntity e : targets(p, p.position(), 5.0D)) e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 2, 11, false, false));
+                if (t <= 2 || t >= 98 && t <= 106) hold(p);
+                if (t == 103) {
+                    for (int i = 1; i <= 5; i++) slashAt(p, level, p.position().add(look.scale(7.5D * i)).add(0, 1.0D, 0), 7.49D);
+                    SukunaTechnique.resetChants(p);
+                }
+            }
             default -> s.skill = 0;
         }
         if (t >= N[sk] && s.skill == sk) {
@@ -392,6 +438,18 @@ public final class SukunaSkills {
     private static List<LivingEntity> targets(ServerPlayer p, Vec3 c, double r) {
         return p.serverLevel().getEntitiesOfClass(LivingEntity.class, new AABB(c, c).inflate(r),
                 e -> valid(p, e) && e.position().distanceTo(c) <= r + e.getBbWidth() * 0.5D);
+    }
+
+    /** wcs_damage3: 250 damage and Stun 45 to everything within r of every point of the line (the function calls itself 7 blocks further). */
+    private static void slashLine(ServerPlayer p, ServerLevel level, Vec3 from, Vec3 dir, double step, double max, double r) {
+        for (double d = step; d <= max; d += step) slashAt(p, level, from.add(dir.scale(d)), r);
+    }
+
+    private static void slashAt(ServerPlayer p, ServerLevel level, Vec3 at, double r) {
+        for (LivingEntity e : targets(p, at, r)) {
+            GojoTechEntity.hurt(level, p, e, 250.0F);
+            GojoTechEntity.stun(e, 45);
+        }
     }
 
     private static void burst(ServerPlayer p, ServerLevel level, Vec3 at) {
