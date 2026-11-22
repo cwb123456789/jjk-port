@@ -493,7 +493,7 @@ public final class SukunaFuga {
         if (e.age == 6) {
             ServerPlayer own = owner(server, e);
             for (LivingEntity t : around(e, own, e.pos, 32.0D)) {
-                GojoTechEntity.hurt(e.level, own, t, 6.0F);
+                GojoTechEntity.hurt(e.level, own, t, 24.0F);   // spear_explosion (1.84.5: 6 -> 24)
                 GojoTechEntity.stun(t, 20);
                 t.setSecondsOnFire(1);
             }

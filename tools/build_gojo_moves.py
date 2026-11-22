@@ -94,6 +94,9 @@ def _loop(names, a, b):
 
 
 EXTRA = {
+    # functions/obliterated.mcfunction (1.84.5): a target at low health is blown apart
+    'obliterated': (6, [[1, 'p', 'blood_mist', 0, 0.0, 1.0, 0.0], [1, 'p', 'blood_explosion1', 0, 0.0, 1.0, 0.0], [1, 'p', 'impact_vfx', 0, 0.0, 1.0, 0.0],
+                        [1, 'k', 2.0, 2, 100], [1, 's', 'mob.blood', 9999.0, 1.0, 100], [1, 's', 'mob.blood4', 9999.0, 1.5, 100]]),
     # fuga_spear.mcfunction: one spear_explosion (Deleter 9 -> 3: the fall at the first ticks, the blast at Deleter 3 = tick 7)
     'fuga_spear_blast': (9, [[2, 's', 'mob.red2', 999999.0, 2.0, 400]] + _loop(['fuga_stars1', 'fuga_stars2'], 2, 3)
                          + _loop(['fuga_spear_fall1', 'fuga_spear_fall2'], 1, 2)

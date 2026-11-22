@@ -48,6 +48,7 @@ black_flash9
 black_flash_small
 black_flash_small1
 blood_2
+blood_explosion1
 blood_hit
 blood_mist
 blood_mist2
@@ -245,6 +246,7 @@ imaginary_purple4
 imaginary_purple5
 imaginary_purple6
 impact
+impact_vfx
 incomplete_shrine_aura3
 incomplete_shrine_slashes1
 infinite_pressure1

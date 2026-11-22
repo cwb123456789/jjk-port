@@ -185,7 +185,7 @@ public final class SukunaDomain {
             }
             if (d.kind == 2 && d.c == 64) ModNet.playAnim(p, "malevolent_shrine_under", 0);
             if (d.kind == 2 && d.c == 121) ModNet.playAnim(p, "malevolent_shrine_hold", 0);
-            for (LivingEntity t : around(level, p, d.center, 33.0D)) GojoTechEntity.stun(t, d.kind == 3 ? 7 : 5);
+            for (LivingEntity t : around(level, p, d.center, 47.0D)) GojoTechEntity.stun(t, d.kind == 3 ? 7 : 5);   // 1.84.5: r 33 -> 47
             int act = d.kind == 3 ? 57 : 71;
             if (d.c == act) {
                 d.left = (d.kind == 1 ? 331 : d.kind == 2 ? 600 : 1000) + (d.kind == 3 ? 0 : Energy.get(p));
@@ -242,8 +242,8 @@ public final class SukunaDomain {
             if (e == null || !e.isAlive()) continue;
             double dx = e.getX() - d.center.x, dz = e.getZ() - d.center.z;
             double dist = Math.sqrt(dx * dx + dz * dz);
-            if (dist > 32.5D) {
-                double k = 32.0D / dist;
+            if (dist > 46.5D) {
+                double k = 46.0D / dist;
                 e.teleportTo(d.center.x + dx * k, e.getY(), d.center.z + dz * k);
                 e.setDeltaMovement(Vec3.ZERO);
                 e.hurtMarked = true;

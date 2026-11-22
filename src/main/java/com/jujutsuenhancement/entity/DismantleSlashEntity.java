@@ -33,7 +33,7 @@ import java.util.UUID;
  * The addon's {@code Deleter} score counts down from 25 (20 for the downward slashes). Numbers taken from the functions:
  * <ul>
  *   <li>QUICK  (ds:dismantle): shot at 4.5 blocks/tick, hits everything within 4 blocks (feet position), 25 damage, Stun 25, Hit 5, ends on the first hit;</li>
- *   <li>DISSECT (解·切): moves 4 blocks/tick while Deleter &gt;= 11, hits within 5 blocks, 30 damage, Stun 35, Hit 5; after
+ *   <li>DISSECT (解·切): moves 4 blocks/tick while Deleter &gt;= 11, hits within 5 blocks, 60 damage (1.84.5, was 30), Stun 35, Hit 5; after
  *       meeting a block in its first 8 ticks it keeps going for 5 more;</li>
  *   <li>WIDE (后撤宽斩): moves 7 blocks/tick while Deleter &gt;= 11, five hit spheres of radius 3.99 at 0/+-4/+-8 to the side, 30 damage, Stun 35;</li>
  *   <li>DOWN (空中解): falls 6 blocks/tick until it is inside a block, then everything within 10 blocks takes 32 damage, Stun 35, Hit 10.</li>
@@ -92,7 +92,7 @@ public final class DismantleSlashEntity extends Entity {
         int left = deleter - age; // the addon's Deleter score
         switch (kind) {
             case QUICK -> tickQuick(sl, owner, left);
-            case DISSECT -> tickLine(sl, owner, left, 4.0D, 5.0D, 30.0F, 35, false);
+            case DISSECT -> tickLine(sl, owner, left, 4.0D, 5.0D, 60.0F, 35, false);  // dissect_land (1.84.5): 30 -> 60
             case WIDE -> tickLine(sl, owner, left, 7.0D, 3.99D, 30.0F, 35, true);
             default -> tickDown(sl, owner);
         }

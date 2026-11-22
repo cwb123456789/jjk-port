@@ -27,9 +27,9 @@ import java.util.UUID;
  * ds:shootprojectile motion).
  *
  * Normal   : 4 blocks/tick for 98 ticks. Every tick 40 damage within 7 blocks and 5 damage within 15.
- * 200%     : 1.65 blocks/tick for 12 ticks, then 5 blocks/tick up to 58 ticks total.
+ * 200%     : 1.65 blocks/tick for 12 ticks, then 8 blocks/tick up to 58 ticks total (1.84.5).
  *            Every tick 300 damage within 17 blocks (+10 bypassing invulnerability).
- * Unlimited: 4 blocks/tick for 40 ticks. Every tick 200 damage within 4 blocks, and every living
+ * Unlimited: 6 blocks/tick for 40 ticks (1.84.5). Every tick 200 damage within 4 blocks, and every living
  *            thing within 64 blocks is frozen (heavy slowness) while it exists.
  * All three erase terrain along their path when mob griefing is on (the "griefable" tag).
  */
@@ -70,8 +70,9 @@ public final class HollowPurpleEntity extends Entity {
 
     private double speedNow() {
         return switch (mode) {
-            case NORMAL, UNLIMITED -> 4.0D;
-            case CHARGED -> age <= 12 ? 1.65D : 5.0D;
+            case NORMAL -> 4.0D;
+            case UNLIMITED -> 6.0D; // limitless5: "velocity:6" (1.84.5, was 4)
+            case CHARGED -> age <= 12 ? 1.65D : 8.0D; // 200hollow_purple: two "tp ^^^4" per tick (1.84.5, was 2 x 2.5)
         };
     }
 

@@ -338,8 +338,10 @@ public final class SukunaFists {
         else hold(p);
         p.hurtMarked = true;
         if (t == 31) {
-            for (LivingEntity e : around(level, p, p.position(), 9.0D, null)) {
-                GojoTechEntity.hurt(level, p, e, 20.0F);
+            for (LivingEntity e : around(level, p, p.position(), 14.0D, null)) {   // step (1.84.5): r 14, knockdown 60, Stun 60, knock 60
+                if (e.position().distanceTo(p.position()) <= 9.0D) GojoTechEntity.hurt(level, p, e, 20.0F);
+                knockdown(e, 60);
+                GojoTechEntity.stun(e, 60);
                 Vec3 d = e.position().subtract(p.position()).multiply(1, 0, 1);
                 if (d.lengthSqr() > 1.0E-4D) {
                     d = d.normalize();

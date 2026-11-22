@@ -41,7 +41,7 @@ import java.util.UUID;
  *       and keeps them stunned for 15 ticks;</li>
  *   <li>BLUE_MAX (MaxBlue): kept 14 blocks in front of Gojo for 89 ticks, pulls everything within 15 blocks by up to 1.44 blocks/tick
  *       (three layers at 15, 13.75 and 12.5 blocks), hurts everything within 5 blocks for 2 every tick;</li>
- *   <li>RED_BEAM (Reversal): shot at 15 blocks/tick for 10 ticks; every tick everything within 20 blocks takes 26 damage and the
+ *   <li>RED_BEAM (Reversal): shot at 15 blocks/tick for 10 ticks; every tick everything within 20 blocks takes 45 damage (1.84.5, was 26) and the
  *       knockback roars of {@code ds:red_reverse} (9 blocks behind it) throw everything within 7 blocks away.</li>
  * </ul>
  * The addon's {@code lapse_explode} / {@code red_reversal} entities are explosions of which the victims are immune to
@@ -210,7 +210,7 @@ public final class GojoTechEntity extends Entity {
             }
             if (step > 0.0D) pullToward(t, c, step);
             if (d <= 5.0D) {
-                hurt(sl, owner, t, 2.0F);
+                hurt(sl, owner, t, 4.0F);
                 stun(t, 15);
             }
         }
@@ -234,7 +234,7 @@ public final class GojoTechEntity extends Entity {
             e.discard();
         }
         for (LivingEntity t : sl.getEntitiesOfClass(LivingEntity.class, new AABB(c, c).inflate(20.0D), e -> isTarget(sl, owner, e))) {
-            if (t.position().distanceTo(c) <= 20.0D) hurt(sl, owner, t, 26.0F);
+            if (t.position().distanceTo(c) <= 20.0D) hurt(sl, owner, t, 45.0F);
         }
         // the three red_reverse knockback roars (range 7, strength 9) and red_reversal explosions 9 blocks behind and 1 below
         Vec3 horiz = new Vec3(dir.x, 0.0D, dir.z);
@@ -271,6 +271,18 @@ public final class GojoTechEntity extends Entity {
 
     public static void stun(LivingEntity t, int ticks) {
         t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 6, false, false));
+    }
+
+    /**
+     * {@code function obliterated} (1.84.5): after a heavy hit a target whose health is at most {@code threshold} is blown apart
+     * (blood mist / explosion, camera shake, the blood sounds) and dies.
+     */
+    public static boolean obliterateIfLow(ServerLevel sl, Entity owner, LivingEntity t, float threshold) {
+        if (!t.isAlive() || t.getHealth() > threshold) return false;
+        BedrockFxEntity.timeline(sl, "obliterated", t.getX(), t.getY(), t.getZ(), 0.0F, 0.0F, 6);
+        t.hurt(sl.damageSources().generic(), Float.MAX_VALUE);
+        if (t.isAlive()) t.kill();
+        return true;
     }
 
     public static boolean isBig(Entity e) {

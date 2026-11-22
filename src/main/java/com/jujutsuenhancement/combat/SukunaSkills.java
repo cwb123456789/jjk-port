@@ -349,7 +349,7 @@ public final class SukunaSkills {
                 }
             }
             case CARVE -> {
-                if (t <= 157) s.frames = 5;
+                if (t <= 160) s.frames = 5;   // carving_combo (1.84.5): Frames from move 31
                 if (t >= 160 && t <= 191) hold(p);
                 if (t == 4 || t == 5) push(p, look, 2.0D, 0.0D);
                 int[] hm = {21, 31, 36, 41, 61, 86};
@@ -471,7 +471,8 @@ public final class SukunaSkills {
 
     private static void burst(ServerPlayer p, ServerLevel level, Vec3 at) {
         for (LivingEntity t : targets(p, at, 11.0D)) {
-            GojoTechEntity.hurt(level, p, t, 80.0F);
+            GojoTechEntity.hurt(level, p, t, 100.0F); // max_dismantle1_land (1.84.5: 80 -> 100)
+            GojoTechEntity.obliterateIfLow(level, p, t, 100.0F);
             GojoTechEntity.stun(t, 40);
             t.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 25, 2, false, false));
         }
@@ -495,8 +496,8 @@ public final class SukunaSkills {
                     List<LivingEntity> hit = targets(p, pr.pos, 2.5D);
                     if (!hit.isEmpty()) {
                         for (LivingEntity t : hit) {
-                            GojoTechEntity.hurt(level, p, t, 5.0F);
-                            GojoTechEntity.stun(t, 5);
+                            GojoTechEntity.hurt(level, p, t, 5.0F);   // dismantle_quick_land (1.84.5): no Stun 5 any more, low health is obliterated
+                            GojoTechEntity.obliterateIfLow(level, p, t, 5.0F);
                         }
                         BedrockFxEntity.play(level, "dismantle_land", pr.pos.x, pr.pos.y, pr.pos.z, p.getYRot());
                         done = true;
@@ -519,7 +520,8 @@ public final class SukunaSkills {
                         if (pr.kind == HEAVY) {
                             for (LivingEntity t : targets(p, pr.pos, 15.0D)) {
                                 if (!pr.hit.add(t.getUUID())) continue;
-                                GojoTechEntity.hurt(level, p, t, 60.0F);
+                                GojoTechEntity.hurt(level, p, t, 125.0F);   // heavy_dismantle_land (1.84.5: 60 -> 125)
+                                GojoTechEntity.obliterateIfLow(level, p, t, 125.0F);
                                 GojoTechEntity.stun(t, 40);
                                 BedrockFxEntity.play(level, "dissect_land", t.getX(), t.getY(), t.getZ(), p.getYRot());
                             }
@@ -531,7 +533,7 @@ public final class SukunaSkills {
                 if (pr.left < 11 || blocked) {
                     if (pr.kind == RAPID) {
                         for (LivingEntity t : targets(p, pr.pos, 8.0D)) {
-                            GojoTechEntity.hurt(level, p, t, 40.0F);
+                            GojoTechEntity.hurt(level, p, t, 60.0F);   // rapid_dismantle_land (1.84.5: 40 -> 60)
                             GojoTechEntity.stun(t, 40);
                         }
                     }

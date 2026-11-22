@@ -860,5 +860,14 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.gojo.mv_mob_blood4": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_blood4",
+        "volume": 1.0
+      }
+    ]
   }
 }

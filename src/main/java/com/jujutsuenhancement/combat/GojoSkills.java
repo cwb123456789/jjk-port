@@ -388,7 +388,7 @@ public final class GojoSkills {
     /** limitless3c: animation reversal_red2 (red2b in the air); at move 10 a 100-damage blast 7 blocks ahead and the Reversal beam. */
     private static void reverse(ServerPlayer p, State s, ServerLevel level) {
         if (s.t == 1) ModNet.playAnim(p, p.onGround() ? "reversal_red2" : "reversal_red2b", 0);
-        s.frames = 5;
+        if (s.t >= 40) s.frames = 5;   // limitless3c (1.84.5): Frames only for move 1..11
         if (s.t >= 40) freeze(p);
         if (s.t == 6) level.playSound(null, p.getX(), p.getY(), p.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.5F, 0.37F);
         if (s.t == 38) BedrockFxEntity.play(level, "gojo_red_big", p.getX(), p.getY(), p.getZ(), p.getYRot());
@@ -448,11 +448,11 @@ public final class GojoSkills {
 
     // ------------------------------------------------------------------ 无限 (limitless1)
 
-    /** limitless1 (move 15): at move 5 "infinity" = 300 + Energy; while it is 3 or more the caster has Frames (nothing hurts). */
+    /** limitless1 (move 15): at move 5 "infinity" = 320 + Energy (1.84.5, was 300); while it is 3 or more the caster has Frames (nothing hurts). */
     private static void infinity(ServerPlayer p, State s, ServerLevel level) {
         if (s.t == 1) ModNet.moveFx(p, "infinity");
         if (s.t == 10) {
-            s.infinityLeft = 300 + Energy.get(p);
+            s.infinityLeft = 320 + Energy.get(p);
             ModNet.moveFx(p, "loop:infinity:" + s.infinityLeft);
         }
         if (s.t >= 15) end(s);
@@ -660,7 +660,7 @@ public final class GojoSkills {
             ModNet.domainFx(p, -1);
             return;
         }
-        for (LivingEntity e : targets(p, p.position(), 40.0D)) {
+        for (LivingEntity e : targets(p, p.position(), 47.0D)) {
             e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6, 99, false, false));
             e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 6, 9, false, false));
             e.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 6, 9, false, false));
