@@ -52,17 +52,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaSkills {
     private static final int QUICK = 1, DOWN = 2, DISSECT = 3, WIDE = 4, RAPID = 5, SPAM = 6, HEAVY = 7, HEAVY2 = 8,
-            CLEAVE = 9, COUNTER = 10, LAYERED = 11, SPIDER = 12, CARVE = 13, CHANT = 14, WCS = 15, WS1 = 16, WS2 = 17;
-    private static final int[] N = {0, 11, 66, 36, 41, 31, 13, 31, 66, 11, 16, 26, 41, 191, 21, 31, 136, 136};
-    private static final int[] CD = {0, 50, 480, 150, 150, 800, 200, 1200, 1200, 30, 100, 100, 600, 6000, 100, 100, 7200, 7200};
+            CLEAVE = 9, COUNTER = 10, LAYERED = 11, SPIDER = 12, CARVE = 13, CHANT = 14, WCS = 15, WS1 = 16, WS2 = 17, BASIC = 18;
+    private static final int[] N = {0, 11, 66, 36, 41, 31, 13, 31, 66, 11, 16, 26, 41, 191, 21, 31, 136, 136, 5};
+    private static final int[] CD = {0, 50, 480, 150, 150, 800, 200, 1200, 1200, 30, 100, 100, 600, 6000, 100, 100, 7200, 7200, 6};
     private static final int[] COST = {0, 50, 50, 75, 75, 200, 200, 200, 200, 30, 30, 100, 100, 300, 200, 500, 3333, 3333};
-    private static final String[] NAME = {"", "解-快斩", "空中解", "解", "后撤宽斩", "集连裂斩", "连斩", "重踢断斩", "重踢断斩", "捌", "捌·防反", "雕斩裂刻", "蜘蛛之网", "乱斩裂割", "咒词吟唱", "空间斩", "最大输出 空间斩", "最大输出 空间斩: 垂直"};
+    private static final String[] NAME = {"", "解-快斩", "空中解", "解", "后撤宽斩", "集连裂斩", "连斩", "重踢断斩", "重踢断斩", "捌", "捌·防反", "雕斩裂刻", "蜘蛛之网", "乱斩裂割", "咒词吟唱", "空间斩", "最大输出 空间斩", "最大输出 空间斩: 垂直", "解-普攻"};
     private static final String[] ANIM = {"", "dismantle1", "dismantle_downwards", "dissect", "dismantle_backwards", "rapid_dismantle",
-            "dismantle_spam", "heavy_dismantle", "heavy_dismantle2", "cleave", "cleave_counter", "layered_cleave", "spiderweb", "carving_combo", "world_slash_chant", "world_slash_small1", "world_slash1", "world_slash2"};
+            "dismantle_spam", "heavy_dismantle", "heavy_dismantle2", "cleave", "cleave_counter", "layered_cleave", "spiderweb", "carving_combo", "world_slash_chant", "world_slash_small1", "world_slash1", "world_slash2", ""};
     private static final String[] FX = {"", "sukuna_ab1", "sukuna_ab1b", "sukuna_ab1d", "sukuna_ab1e", "sukuna_ab2", "sukuna_ab2b",
-            "sukuna_ab2d", "sukuna_ab2e", "sukuna_cleave", "sukuna_counter", "sukuna_layered", "sukuna_spider", "sukuna_carve", "sukuna_chant", "sukuna_wcs", "sukuna_ws1", "sukuna_ws2"};
+            "sukuna_ab2d", "sukuna_ab2e", "sukuna_cleave", "sukuna_counter", "sukuna_layered", "sukuna_spider", "sukuna_carve", "sukuna_chant", "sukuna_wcs", "sukuna_ws1", "sukuna_ws2", ""};
     /** the ability scoreboards share cooldowns: ab1 (1,2), ab3 (3,4), ab4/ab4 (5,6), ab5 (7,8). */
-    private static final int[] GROUP = {0, 1, 1, 3, 3, 5, 5, 7, 7, 11, 11, 11, 12, 13, 14, 15, 14, 14};
+    private static final int[] GROUP = {0, 1, 1, 2, 2, 3, 3, 4, 4, 11, 11, 11, 12, 13, 14, 15, 14, 14, 2};
 
     private static final class Proj {
         UUID owner;
@@ -156,6 +156,7 @@ public final class SukunaSkills {
         if (s.skill != 0 || !p.isAlive() || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
         String id = ForgeRegistries.ITEMS.getKey(p.getMainHandItem().getItem()).getPath();
         if (id.equals("sukuna2") && p.isShiftKeyDown() && SukunaTechnique.active(p)) cast(p, s, CARVE);
+        if (id.equals("sukuna1") && !p.isShiftKeyDown() && SukunaTechnique.active(p) && !SukunaFists.isBusy(p)) cast(p, s, BASIC);
         if (id.equals("sukuna5") && !p.isShiftKeyDown() && SukunaTechnique.active(p)) {
             if (SukunaTechnique.chants(p) < 3) {
                 p.displayClientMessage(BedrockText.parse("§l§c需要先 咒词吟唱 3 次 (" + SukunaTechnique.chants(p) + " / 3)"), true);
@@ -201,8 +202,8 @@ public final class SukunaSkills {
         s.t++;
         int t = s.t, sk = s.skill;
         if (t == 1) {
-            ModNet.playAnim(p, ANIM[sk], 0);
-            ModNet.moveFx(p, FX[sk]);
+            if (!ANIM[sk].isEmpty()) ModNet.playAnim(p, ANIM[sk], 0);
+            if (!FX[sk].isEmpty()) ModNet.moveFx(p, FX[sk]);
         }
         Vec3 look = p.getLookAngle();
         switch (sk) {
@@ -283,6 +284,17 @@ public final class SukunaSkills {
                 if (t == 48) burst(p, level, p.position().add(h.scale(15)));
                 if (t == 49) burst(p, level, p.position().add(left.scale(4)).add(h.scale(14)));
                 if (t == 50) burst(p, level, p.position().add(left.scale(9)).add(h.scale(13)));
+            }
+            case BASIC -> {
+                // ab1c (1.84.5): move 4 shoots ds:dismantle_small, move 3 hits everything within 3.49 of ^^^3.5 from the eyes: 2 damage (override), Hit 3
+                if (t == 2) {
+                    Vec3 at = p.getEyePosition().add(look.scale(3.5D));
+                    for (LivingEntity e : targets(p, at, 3.49D)) {
+                        GojoTechEntity.hurt(level, p, e, 2.0F);
+                        GojoTechEntity.stun(e, 3);
+                    }
+                    BedrockFxEntity.play(level, "dismantle_land", at.x, at.y, at.z, p.getYRot());
+                }
             }
             case CLEAVE -> {
                 if (t == 5 || t == 6) {
