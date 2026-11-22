@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "jujutsuenhancement:item/blood_manipulation"
+    "layer0": "jujutsuenhancement:item/cleave_fists"
   }
 }

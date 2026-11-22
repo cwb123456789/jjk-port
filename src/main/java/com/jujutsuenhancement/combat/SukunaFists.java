@@ -41,7 +41,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SukunaFists {
     private static final int BLOWS = 1, DESCENT = 2, SPACE = 3, STEP = 4, TAKEDOWN = 5, BLITZ = 6;
-    private static final String[] NAME = {"", "魔弹重击", "堕天落拳", "放开手脚吧", "震地重踏", "在这死吧", "魔乱狂袭"};
+    private static final String[] NAME = {"", "疾闪升拳", "堕天落拳", "放开手脚吧", "震地重踏", "在这死吧", "魔乱狂袭"};
     private static final int[] N = {0, 31, 31, 56, 51, 71, 21};
     private static final int[] CD = {0, 120, 229, 200, 229, 600, 1200};
     private static final String[] ANIM = {"", "demonic_blows1", "hellish_descent", "open_space", "step", "takedown_charge", "demonic_blitz_dash"};
@@ -76,11 +76,11 @@ public final class SukunaFists {
         return s != null && s.frames > 0;
     }
 
-    private static boolean otherBusy(ServerPlayer p) {
-        return SukunaSkills.isBusy(p) || SukunaFuga.isBusy(p) || SukunaDomain.casting(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p);
+    static boolean otherBusy(ServerPlayer p) {
+        return SukunaSkills.isBusy(p) || SukunaFuga.isBusy(p) || SukunaDomain.casting(p) || SukunaCleave.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p);
     }
 
-    private static boolean isStunned(Player p) {
+    static boolean isStunned(Player p) {
         MobEffectInstance e = p.getEffect(MobEffects.MOVEMENT_SLOWDOWN);
         return e != null && e.getAmplifier() >= 6;
     }
@@ -420,17 +420,17 @@ public final class SukunaFists {
 
     // ------------------------------------------------------------------ helpers
 
-    private static void knockdown(LivingEntity t, int ticks) {
+    static void knockdown(LivingEntity t, int ticks) {
         t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 6, false, false));
         t.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, ticks, 2, false, false));
     }
 
-    private static void hold(ServerPlayer p) {
+    static void hold(ServerPlayer p) {
         p.setDeltaMovement(0.0D, Math.min(0.0D, p.getDeltaMovement().y), 0.0D);
         p.hurtMarked = true;
     }
 
-    private static Vec3 flat(Player p) {
+    static Vec3 flat(Player p) {
         double y = Math.toRadians(p.getYRot());
         return new Vec3(-Math.sin(y), 0.0D, Math.cos(y));
     }
@@ -439,13 +439,13 @@ public final class SukunaFists {
         return flat(p);
     }
 
-    private static void push(ServerPlayer p, Vec3 d, double h) {
+    static void push(ServerPlayer p, Vec3 d, double h) {
         p.setDeltaMovement(d.x * h, p.getDeltaMovement().y, d.z * h);
         p.hurtMarked = true;
     }
 
     /** {@code big}: only Big targets (height 3, width 2.5); otherwise only the small ones. */
-    private static List<LivingEntity> around(ServerLevel level, Player own, Vec3 c, double r, Boolean big) {
+    static List<LivingEntity> around(ServerLevel level, Player own, Vec3 c, double r, Boolean big) {
         return level.getEntitiesOfClass(LivingEntity.class, new AABB(c, c).inflate(r + 1.0D),
                 t -> SukunaFuga.validTarget(own, t) && t.position().add(0, t.getBbHeight() * 0.5D, 0).distanceTo(c.add(0, 1.0D, 0)) <= r + t.getBbWidth() * 0.5D
                         && (big == null || GojoTechEntity.isBig(t) == big));

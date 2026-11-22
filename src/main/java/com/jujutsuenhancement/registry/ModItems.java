@@ -116,9 +116,9 @@ public final class ModItems {
     /** ds:soul_shrine2, "领域展开 『伏魔御佛龛』". */
     public static final RegistryObject<Item> SOUL_SHRINE2 =
             reg("soul_shrine2", () -> new com.jujutsuenhancement.item.TechniqueItem("soul_shrine2", new Item.Properties().stacksTo(1)));
-    /** ds:blood_manipulation, "赤血操术 [ 未完成 ]" (a placeholder in the addon too). */
+    /** ds:yuji_blood_manipulation, "百敛" (1.84.5: the placeholder became a real technique, only the item exists so far). */
     public static final RegistryObject<Item> BLOOD_MANIPULATION =
-            reg("blood_manipulation", () -> new BedrockItem(new Item.Properties().stacksTo(1)));
+            reg("yuji_blood_manipulation", () -> new BedrockItem(new Item.Properties().stacksTo(1)));
 
     /** ds:sukuna_technique, "诅咒之王 · 两面宿傩". */
     public static final RegistryObject<Item> SUKUNA_TECHNIQUE =
@@ -141,4 +141,7 @@ public final class ModItems {
     /** ds:sukuna_fists, "拳法风格". */
     public static final RegistryObject<Item> SUKUNA_FISTS =
             reg("sukuna_fists", () -> new com.jujutsuenhancement.item.TechniqueItem("sukuna_fists", new Item.Properties().stacksTo(1)));
+    /** ds:cleave_fists, "斩击战斗风格". */
+    public static final RegistryObject<Item> CLEAVE_FISTS =
+            reg("cleave_fists", () -> new com.jujutsuenhancement.item.TechniqueItem("cleave_fists", new Item.Properties().stacksTo(1)));
 }

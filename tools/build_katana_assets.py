@@ -30,6 +30,8 @@ ANIMS = ['animation.katana.idle', 'animation.katana_attack1', 'animation.katana_
          'animation.fuga_scythe', 'animation.fuga_scythe2',
          'animation.malevolent_shrine', 'animation.malevolent_shrine2', 'animation.malevolent_shrine_under', 'animation.malevolent_shrine_hold',
          'animation.incomplete_shrine', 'animation.incomplete_shrine2',
+         'animation.cleave.attack1', 'animation.cleave.attack2', 'animation.cleave.attack3', 'animation.cleave.attack4', 'animation.cleave.attack5',
+         'animation.carve', 'animation.rushing_cleave', 'animation.dual_cleave', 'animation.rapid_cleave', 'animation.cleave_combo',
          'animation.sukuna.attack1', 'animation.sukuna.attack2', 'animation.sukuna.attack3', 'animation.sukuna.attack4', 'animation.sukuna.attack5',
          'animation.demonic_blows1', 'animation.demonic_blows2', 'animation.hellish_descent', 'animation.open_space', 'animation.open_space2',
          'animation.step', 'animation.takedown_charge', 'animation.takedown1', 'animation.demonic_blitz_dash', 'animation.demonic_blitz1',

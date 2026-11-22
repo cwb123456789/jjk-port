@@ -37,13 +37,14 @@ ITEMS = {
     'sukuna1': 'generated',
     'sukuna2': 'generated',
     'sukuna_fists': 'generated',
+    'cleave_fists': 'generated',
     'sukuna3': 'generated',
     'sukuna4': 'generated',
     'sukuna5': 'generated',
     'black_fists': 'generated',
     'soul_shrine1': 'generated',
     'soul_shrine2': 'generated',
-    'blood_manipulation': 'generated',
+    'yuji_blood_manipulation': 'generated',
 }
 # items that a layer draws in the third person with their own geometry: the flat model is shrunk to nothing there
 HIDDEN_THIRD_PERSON = {'katana'}
@@ -53,16 +54,18 @@ TAB_NAME_EN = 'Jujutsu Awakening'
 
 
 def find_item_json(behavior, ident):
-    for f in glob.glob(os.path.join(behavior, 'items', '**', '*.json'), recursive=True):
-        if ' - Copy' in f:
-            continue
-        try:
-            d = json.load(open(f, encoding='utf-8-sig'))
-        except Exception:
-            continue
-        item = d.get('minecraft:item')
-        if item and item['description']['identifier'] == 'ds:' + ident:
-            return item
+    # a definition in a "- Copy" file is the fallback (soul_shrine2 only exists as a copy of soul_shrine1 in the addon)
+    for allow_copy in (False, True):
+        for f in glob.glob(os.path.join(behavior, 'items', '**', '*.json'), recursive=True):
+            if ' - Copy' in f and not allow_copy:
+                continue
+            try:
+                d = json.load(open(f, encoding='utf-8-sig'))
+            except Exception:
+                continue
+            item = d.get('minecraft:item')
+            if item and item['description']['identifier'] == 'ds:' + ident:
+                return item
     return None
 
 

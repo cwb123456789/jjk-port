@@ -24,7 +24,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = JujutsuEnhancement.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class YujiTechnique {
     private static final String HAS = "jje_yuji", FORMS = "jje_yforms", SPECIAL = "jje_bfspecial", COUNT = "jje_bfcount";
-    private static final String[] IDS = {"black_fists", "soul_shrine1", "soul_shrine2", "blood_manipulation"};
+    private static final String[] IDS = {"black_fists", "soul_shrine1", "soul_shrine2", "yuji_blood_manipulation"};
 
     private YujiTechnique() {}
 
