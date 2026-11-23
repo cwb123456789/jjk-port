@@ -34,6 +34,17 @@ MOVES = {
 # Yuji (functions/yuji): key -> (function, N, options). cond: which lines (none = unconditional, nbf = tag=!blackflashed, bf = tag=blackflashed);
 # hi: the move value at which the timeline is started by the server (ticks = hi - move).
 YUJI = {
+    # 最大输出 (maximum_output_charge): the charge (move 66 -> 3) and the four stages
+    'sukuna_maxd_charge': ('../sukuna/attacks/dismantles/maximum_output_charge', 66, {'cond': 'none', 'hi': 66, 'lo': 3}),
+    'sukuna_maxd1': ('../sukuna/attacks/dismantles/maximum_output_charge', 501, {'cond': 'none', 'hi': 501, 'lo': 475}),
+    'sukuna_maxd2': ('../sukuna/attacks/dismantles/maximum_output_charge', 601, {'cond': 'none', 'hi': 601, 'lo': 575}),
+    'sukuna_maxd3': ('../sukuna/attacks/dismantles/maximum_output_charge', 821, {'cond': 'none', 'hi': 821, 'lo': 715}),
+    'sukuna_maxd4': ('../sukuna/attacks/dismantles/maximum_output_charge', 1001, {'cond': 'none', 'hi': 1001, 'lo': 935}),
+    'sukuna_maxc_charge': ('../sukuna/attacks/cleaves/maximum_output_charge', 66, {'cond': 'none', 'hi': 66, 'lo': 3}),
+    'sukuna_maxc1': ('../sukuna/attacks/cleaves/maximum_output_charge', 501, {'cond': 'none', 'hi': 501, 'lo': 420}),
+    'sukuna_maxc2': ('../sukuna/attacks/cleaves/maximum_output_charge', 601, {'cond': 'none', 'hi': 601, 'lo': 525}),
+    'sukuna_maxc3': ('../sukuna/attacks/cleaves/maximum_output_charge', 821, {'cond': 'none', 'hi': 821, 'lo': 765}),
+    'sukuna_maxc4': ('../sukuna/attacks/cleaves/maximum_output_charge', 2001, {'cond': 'none', 'hi': 2001, 'lo': 1795}),
     'sukuna_chant': ('../sukuna/attacks/worldslash/chant', 21, {'cond': 'none'}),
     'sukuna_wcs': ('../sukuna/attacks/worldslash/wcs1', 31, {'cond': 'none'}),
     'sukuna_ws1': ('../sukuna/attacks/worldslash/world_slash1', 136, {'cond': 'none'}),

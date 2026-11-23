@@ -77,7 +77,7 @@ public final class SukunaFists {
     }
 
     static boolean otherBusy(ServerPlayer p) {
-        return SukunaSkills.isBusy(p) || SukunaFuga.isBusy(p) || SukunaDomain.casting(p) || SukunaCleave.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p);
+        return SukunaSkills.isBusy(p) || SukunaFuga.isBusy(p) || SukunaDomain.casting(p) || SukunaCleave.isBusy(p) || SukunaFour.isBusy(p) || SukunaMax.isBusy(p) || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p);
     }
 
     static boolean isStunned(Player p) {

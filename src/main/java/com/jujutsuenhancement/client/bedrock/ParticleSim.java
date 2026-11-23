@@ -20,6 +20,8 @@ public final class ParticleSim {
         final double x, y, z;
         /** Cosine / sine of the emitter's yaw (Minecraft yaw: 0 faces +z); only used when the particle is in local space. */
         final double cy, sy;
+        /** The emitter's yaw whatever the particle's space is: the plane of the emitter_transform_* billboards. */
+        final double ecy, esy;
         double age;
         final double lifetime;
         final double[] rnd = new double[4];
@@ -35,6 +37,9 @@ public final class ParticleSim {
             double r = def.localRotation ? Math.toRadians(yawDeg) : 0.0;
             this.cy = Math.cos(r);
             this.sy = Math.sin(r);
+            double er = Math.toRadians(yawDeg);
+            this.ecy = Math.cos(er);
+            this.esy = Math.sin(er);
             this.lifetime = def.activeTime;
             for (int i = 0; i < 4; i++) rnd[i] = RNG.nextDouble();
         }
@@ -351,6 +356,21 @@ public final class ParticleSim {
                 double[] y = cross(z, x);
                 set(ex, x);
                 set(ey, y);
+                return;
+            }
+            case EMITTER_XY: {   // the emitter's X (left) and Y axes: a wall facing the emitter's forward
+                set(ex, new double[] {p.em.ecy, 0, p.em.esy});
+                set(ey, new double[] {0, 1, 0});
+                return;
+            }
+            case EMITTER_XZ: {   // the emitter's X and Z axes: lying flat on the ground
+                set(ex, new double[] {p.em.ecy, 0, p.em.esy});
+                set(ey, new double[] {-p.em.esy, 0, p.em.ecy});
+                return;
+            }
+            case EMITTER_YZ: {   // the emitter's Z and Y axes: a wall along the emitter's forward
+                set(ex, new double[] {-p.em.esy, 0, p.em.ecy});
+                set(ey, new double[] {0, 1, 0});
                 return;
             }
             case LOOKAT_DIRECTION: {

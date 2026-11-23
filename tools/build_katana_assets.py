@@ -35,6 +35,13 @@ ANIMS = ['animation.katana.idle', 'animation.katana_attack1', 'animation.katana_
          'animation.sukuna.attack1', 'animation.sukuna.attack2', 'animation.sukuna.attack3', 'animation.sukuna.attack4', 'animation.sukuna.attack5',
          'animation.demonic_blows1', 'animation.demonic_blows2', 'animation.hellish_descent', 'animation.open_space', 'animation.open_space2',
          'animation.step', 'animation.takedown_charge', 'animation.takedown1', 'animation.demonic_blitz_dash', 'animation.demonic_blitz1',
+         'animation.dismantle_charge1', 'animation.dismantle_charge1hold', 'animation.dismantle_maximum1', 'animation.dismantle_maximum2',
+         'animation.dismantle_maximum3', 'animation.dismantle_maximum4', 'animation.cleave_charge1', 'animation.cleave_charge2hold',
+         'animation.cleave_maximum1', 'animation.cleave_maximum2', 'animation.cleave_maximum3', 'animation.cleave_maximum4',
+         'animation.heian_sukuna.double_impact', 'animation.heian_sukuna.demonic_leap', 'animation.heian_sukuna.demonic_leap2',
+         'animation.heian_sukuna.overwhelming_power', 'animation.heian_sukuna.demonic_counter', 'animation.heian_sukuna.demonic_counter2',
+         'animation.heian_sukuna.attack1', 'animation.heian_sukuna.attack2', 'animation.heian_sukuna.attack3', 'animation.heian_sukuna.attack4',
+         'animation.heian_sukuna.attack5', 'animation.forced_roles',
          # Yuji
          'animation.black_fists.ab1', 'animation.black_fists.ab2', 'animation.black_fists.ab3', 'animation.black_fists.ab3_hold',
          'animation.black_fists.ab4', 'animation.black_fists.ab4b', 'animation.black_fists.ab5', 'animation.black_fists.ab6',

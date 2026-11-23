@@ -144,4 +144,7 @@ public final class ModItems {
     /** ds:cleave_fists, "斩击战斗风格". */
     public static final RegistryObject<Item> CLEAVE_FISTS =
             reg("cleave_fists", () -> new com.jujutsuenhancement.item.TechniqueItem("cleave_fists", new Item.Properties().stacksTo(1)));
+    /** ds:four_fists, "四手战斗风格". */
+    public static final RegistryObject<Item> FOUR_FISTS =
+            reg("four_fists", () -> new com.jujutsuenhancement.item.TechniqueItem("four_fists", new Item.Properties().stacksTo(1)));
 }

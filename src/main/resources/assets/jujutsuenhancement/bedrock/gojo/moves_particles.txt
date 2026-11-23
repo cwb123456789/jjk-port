@@ -63,6 +63,9 @@ carve2
 carve3
 carve4
 carve5
+carving_aureole
+chanting
+chanting2
 charging_rubble
 chimera_blackv1
 chimera_blackv2
@@ -71,6 +74,7 @@ cleave2
 cleave3
 cleave4
 cleave_aureole
+cleave_aureole_big
 crater
 crater3
 cutscene_black1
@@ -87,6 +91,12 @@ dirt2
 dirt3
 dirt4
 dismantle_star_large
+dismantle_stars
+dismantle_stars1
+dismantle_stars2
+dismantle_stars_charge
+dismantle_stars_small
+divergent_ac5
 domain_area0
 domain_breaker5
 domainarea
@@ -118,6 +128,8 @@ fire_hit5
 fire_hit6
 first_blackflash1
 first_blackflash2
+fissure1
+fissure2
 flame_repulse_ex1
 flame_repulse_ex2
 flame_stars
@@ -266,6 +278,7 @@ infinity_2
 infinity_shatter
 infinity_shatter2
 invert
+invert_2sec
 lapse_pull2
 lapse_pull3
 lapse_pull4
@@ -325,6 +338,7 @@ malevolent_shrine_floor
 malevolent_shrine_floor2
 malevolent_shrine_slashes1
 malevolent_shrine_slashes9
+max_dismantle_v2h
 meteor_land0
 meteor_land1
 meteor_land2
@@ -373,6 +387,7 @@ turbo_intensity2
 turbo_intensity3
 turbo_intensity4
 unparrymarker
+white_lightning1
 world_slash_charge1
 world_slash_charge2
 world_slash_ending

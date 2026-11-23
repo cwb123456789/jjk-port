@@ -38,6 +38,7 @@ ITEMS = {
     'sukuna2': 'generated',
     'sukuna_fists': 'generated',
     'cleave_fists': 'generated',
+    'four_fists': 'generated',
     'sukuna3': 'generated',
     'sukuna4': 'generated',
     'sukuna5': 'generated',

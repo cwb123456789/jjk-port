@@ -146,7 +146,8 @@ public final class SukunaCleave {
         Item held = p.getMainHandItem().getItem();
         String to;
         if (held == ModItems.SUKUNA_FISTS.get()) to = "cleave_fists";
-        else if (held == ModItems.CLEAVE_FISTS.get()) to = "sukuna_fists";
+        else if (held == ModItems.CLEAVE_FISTS.get()) to = SukunaTechnique.heian(p) ? "four_fists" : "sukuna_fists";
+        else if (held == ModItems.FOUR_FISTS.get()) to = "sukuna_fists";
         else return;
         Item it = style(to);
         if (it == null) return;
@@ -165,7 +166,7 @@ public final class SukunaCleave {
         if (p.isShiftKeyDown()) s.sneakTicks++;
         else s.sneakTicks = 0;
         if (s.sneakTicks == 1 && p.getXRot() > 75.0F && !SukunaFists.isStunned(p) && SukunaTechnique.active(p)
-                && (holds(p) || p.getMainHandItem().getItem() == ModItems.SUKUNA_FISTS.get())) switchStyle(p, s);
+                && (holds(p) || p.getMainHandItem().getItem() == ModItems.SUKUNA_FISTS.get() || p.getMainHandItem().getItem() == ModItems.FOUR_FISTS.get())) switchStyle(p, s);
         for (int i = 1; i < s.cd.length; i++) if (s.cd[i] > 0) s.cd[i]--;
         if (s.frames > 0) s.frames--;
         if (s.disabled > 0) s.disabled--;

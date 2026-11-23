@@ -13,7 +13,7 @@ public final class ParticleDef {
     public enum Material { ADD, BLEND, ALPHA }
     public enum Shape { POINT, SPHERE, DISC, BOX }
     public enum DirMode { OUTWARDS, INWARDS, CUSTOM }
-    public enum Facing { ROTATE_XYZ, ROTATE_Y, LOOKAT_XYZ, LOOKAT_Y, DIR_X, DIR_Y, DIR_Z, LOOKAT_DIRECTION }
+    public enum Facing { ROTATE_XYZ, ROTATE_Y, LOOKAT_XYZ, LOOKAT_Y, DIR_X, DIR_Y, DIR_Z, LOOKAT_DIRECTION, EMITTER_XY, EMITTER_XZ, EMITTER_YZ }
 
     public String id = "";
     public Material material = Material.BLEND;
@@ -191,6 +191,9 @@ public final class ParticleDef {
                 case "direction_y": d.facing = Facing.DIR_Y; break;
                 case "direction_z": d.facing = Facing.DIR_Z; break;
                 case "lookat_direction": d.facing = Facing.LOOKAT_DIRECTION; break;
+                case "emitter_transform_xy": d.facing = Facing.EMITTER_XY; break;
+                case "emitter_transform_xz": d.facing = Facing.EMITTER_XZ; break;
+                case "emitter_transform_yz": d.facing = Facing.EMITTER_YZ; break;
                 default: d.facing = Facing.ROTATE_XYZ; break;
             }
             JsonObject dm = o.getAsJsonObject("direction");

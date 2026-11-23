@@ -94,12 +94,20 @@ public final class SukunaSkills {
 
     public static boolean hasFrames(Player p) {
         State s = STATES.get(p.getUUID());
-        return (s != null && s.frames > 0) || SukunaFuga.hasFrames(p) || SukunaFists.hasFrames(p) || SukunaCleave.hasFrames(p);
+        return (s != null && s.frames > 0) || SukunaFuga.hasFrames(p) || SukunaFists.hasFrames(p) || SukunaCleave.hasFrames(p) || SukunaMax.hasFrames(p) || SukunaFour.hasFrames(p);
     }
 
     public static void onUse(ServerPlayer p, String item) {
         if (item.equals("sukuna4")) {
             SukunaFuga.onUse(p);
+            return;
+        }
+        if (SukunaMax.isBusy(p) && (item.equals("sukuna1") || item.equals("sukuna2"))) {
+            SukunaMax.onUse(p, item.equals("sukuna2"));
+            return;
+        }
+        if ((item.equals("sukuna1") || item.equals("sukuna2")) && p.isShiftKeyDown() && !p.onGround()) {
+            SukunaMax.onUse(p, item.equals("sukuna2"));
             return;
         }
         if (item.equals("sukuna_fists")) {
@@ -110,13 +118,17 @@ public final class SukunaSkills {
             SukunaCleave.onUse(p);
             return;
         }
+        if (item.equals("four_fists")) {
+            SukunaFour.onUse(p);
+            return;
+        }
         if (item.equals("sukuna3")) {
             SukunaDomain.onUse(p);
             return;
         }
         if (!item.equals("sukuna1") && !item.equals("sukuna2") && !item.equals("sukuna5")) return;
         State s = state(p);
-        if (SukunaFuga.isBusy(p) || SukunaDomain.casting(p) || SukunaFists.isBusy(p) || SukunaCleave.isBusy(p)) return;
+        if (SukunaFuga.isBusy(p) || SukunaDomain.casting(p) || SukunaFists.isBusy(p) || SukunaCleave.isBusy(p) || SukunaMax.isBusy(p) || SukunaFour.isBusy(p)) return;
         if (s.skill != 0 || !p.isAlive() || GojoSkills.isBusy(p) || YujiSkills.isBusy(p) || KatanaCombat.isBusy(p)) return;
         if (!SukunaTechnique.active(p)) {
             p.displayClientMessage(BedrockText.parse("§l§c需要宿傩掌控身体"), true);
