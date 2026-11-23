@@ -97,6 +97,18 @@ public final class PlayerAnims {
         return null;
     }
 
+    private static final Map<Integer, Map<String, org.joml.Matrix4f>> POSES = new HashMap<>();
+
+    /** The world matrices (vanilla model space, pixels) of the skeleton bones in the last animated pose of a player. */
+    public static void setPose(int id, Map<String, org.joml.Matrix4f> bones) {
+        if (bones == null) POSES.remove(id);
+        else POSES.put(id, bones);
+    }
+
+    public static Map<String, org.joml.Matrix4f> pose(int id) {
+        return POSES.get(id);
+    }
+
     public static void setItemRot(int id, float[] rot) {
         if (rot == null) ITEM_ROT.remove(id);
         else ITEM_ROT.put(id, rot);

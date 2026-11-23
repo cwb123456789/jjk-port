@@ -171,10 +171,10 @@ public final class FxShow {
 
     /** An animation's particle event: the effect at a locator of the player (animation.*.particle_effects). */
     public static void animParticle(String name, Entity e, String locator) {
-        double left = 0, up = 0, fwd = 0;
-        if ("locator_right".equals(locator)) { left = -0.45; up = 1.2; fwd = 0.5; }
-        else if ("forward_locator".equals(locator)) { up = 1.0; }
-        spawn(name, e, left, up, fwd, e.getYRot());
+        double[] at = Locators.resolve(e, locator);
+        double yaw = Locators.yaw(e);
+        if (at == null) spawn(name, e, 0, 0, 0, yaw);   // no locator: at the entity's feet
+        else spawn(name, e, at[0], at[1], at[2], yaw);
     }
 
     /** Particle of the addon at a world position (used by MoveFx). */

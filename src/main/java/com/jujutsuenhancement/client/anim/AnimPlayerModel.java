@@ -31,6 +31,7 @@ public final class AnimPlayerModel extends PlayerModel<AbstractClientPlayer> {
         BedrockAnim anim = PlayerAnims.current(player, ageInTicks, time);
         if (anim == null) {
             PlayerAnims.setItemRot(player.getId(), null);
+            PlayerAnims.setPose(player.getId(), null);
             return;
         }
         float t = time[0];
@@ -43,16 +44,29 @@ public final class AnimPlayerModel extends PlayerModel<AbstractClientPlayer> {
         Matrix4f bodyW = rootW;
         float[] bodyRot = {body.xRot, body.yRot, body.zRot};
         bodyW = world(rootW, body.x, body.y, body.z, bodyPose, bodyRot);
+        // the world matrices of the bones, kept for the particle locators (Locators)
+        java.util.Map<String, Matrix4f> bones = new java.util.HashMap<>();
+        bones.put("root", rootW);
+        bones.put("body", bodyW);
+        BedrockAnim.Pose hp = anim.sample("head", t), rp = anim.sample("rightArm", t), lp = anim.sample("leftArm", t);
+        BedrockAnim.Pose rlp = anim.sample("rightLeg", t), llp = anim.sample("leftLeg", t);
+        float[] hr = {head.xRot, head.yRot, head.zRot}, rr = {rightArm.xRot, rightArm.yRot, rightArm.zRot};
+        float[] lr = {leftArm.xRot, leftArm.yRot, leftArm.zRot}, rlr = {rightLeg.xRot, rightLeg.yRot, rightLeg.zRot};
+        float[] llr = {leftLeg.xRot, leftLeg.yRot, leftLeg.zRot};
+        bones.put("head", world(bodyW, head.x, head.y, head.z, hp, hr));
+        Matrix4f rightArmW = world(bodyW, rightArm.x, rightArm.y, rightArm.z, rp, rr);
+        bones.put("rightArm", rightArmW);
+        bones.put("leftArm", world(bodyW, leftArm.x, leftArm.y, leftArm.z, lp, lr));
+        bones.put("rightLeg", world(rootW, rightLeg.x, rightLeg.y, rightLeg.z, rlp, rlr));
+        bones.put("leftLeg", world(rootW, leftLeg.x, leftLeg.y, leftLeg.z, llp, llr));
+        bones.put("rightItem", world(rightArmW, -6, 9, 1, anim.sample("rightItem", t), null));
+        PlayerAnims.setPose(player.getId(), bones);
         apply(body, rootW, body.x, body.y, body.z, bodyPose, bodyRot);
-        apply(head, bodyW, head.x, head.y, head.z, anim.sample("head", t), new float[] {head.xRot, head.yRot, head.zRot});
-        apply(rightArm, bodyW, rightArm.x, rightArm.y, rightArm.z, anim.sample("rightArm", t),
-                new float[] {rightArm.xRot, rightArm.yRot, rightArm.zRot});
-        apply(leftArm, bodyW, leftArm.x, leftArm.y, leftArm.z, anim.sample("leftArm", t),
-                new float[] {leftArm.xRot, leftArm.yRot, leftArm.zRot});
-        apply(rightLeg, rootW, rightLeg.x, rightLeg.y, rightLeg.z, anim.sample("rightLeg", t),
-                new float[] {rightLeg.xRot, rightLeg.yRot, rightLeg.zRot});
-        apply(leftLeg, rootW, leftLeg.x, leftLeg.y, leftLeg.z, anim.sample("leftLeg", t),
-                new float[] {leftLeg.xRot, leftLeg.yRot, leftLeg.zRot});
+        apply(head, bodyW, head.x, head.y, head.z, hp, hr);
+        apply(rightArm, bodyW, rightArm.x, rightArm.y, rightArm.z, rp, rr);
+        apply(leftArm, bodyW, leftArm.x, leftArm.y, leftArm.z, lp, lr);
+        apply(rightLeg, rootW, rightLeg.x, rightLeg.y, rightLeg.z, rlp, rlr);
+        apply(leftLeg, rootW, leftLeg.x, leftLeg.y, leftLeg.z, llp, llr);
 
         hat.copyFrom(head);
         jacket.copyFrom(body);
