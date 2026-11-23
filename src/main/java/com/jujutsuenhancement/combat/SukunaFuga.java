@@ -539,4 +539,9 @@ public final class SukunaFuga {
         }
         return e.d <= 0;
     }
+
+    public static void resetCooldowns(Player p) {
+        State s = STATES.get(p.getUUID());
+        if (s != null) s.cd = 0;
+    }
 }

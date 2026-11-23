@@ -103,6 +103,11 @@ public final class MoveFx {
     public static void start(int entityId, String key) {
         Minecraft mc = Minecraft.getInstance();
         load(mc);
+        if (key.startsWith("shake:")) {
+            String[] a = key.split(":");
+            if (a.length >= 3) FxShow.shakeFor(Double.parseDouble(a[1]), Integer.parseInt(a[2]));
+            return;
+        }
         if (key.startsWith("loop:")) {
             // "loop:<particle>:<ticks>": that particle at the entity every tick (the addon's per-tick "particle ds:x" of a running state)
             String[] a = key.split(":");

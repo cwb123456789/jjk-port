@@ -307,4 +307,9 @@ public final class KatanaCombat {
             for (LivingEntity t : near(p, point(p, 4), 3.99)) hit(p, t, PlayerStats.get(p, "damageadd"), 0, 0.4);
         }
     }
+
+    public static void resetCooldowns(Player p) {
+        State s = STATES.get(p.getUUID());
+        if (s != null) s.wep1 = s.wep2 = s.wep3 = 0;
+    }
 }

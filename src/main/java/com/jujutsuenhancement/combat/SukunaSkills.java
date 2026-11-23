@@ -568,4 +568,9 @@ public final class SukunaSkills {
             if (done) s.projs.remove(i);
         }
     }
+
+    public static void resetCooldowns(Player p) {
+        State s = STATES.get(p.getUUID());
+        if (s != null) java.util.Arrays.fill(s.cd, 0);
+    }
 }

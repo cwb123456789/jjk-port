@@ -147,4 +147,7 @@ public final class ModItems {
     /** ds:four_fists, "四手战斗风格". */
     public static final RegistryObject<Item> FOUR_FISTS =
             reg("four_fists", () -> new com.jujutsuenhancement.item.TechniqueItem("four_fists", new Item.Properties().stacksTo(1)));
+    /** jjkshortcut:quick_command, "咒术觉醒快捷指令": opens the quick-command menu. */
+    public static final RegistryObject<Item> QUICK_COMMAND =
+            reg("quick_command", () -> new com.jujutsuenhancement.item.QuickCommandItem(new Item.Properties().stacksTo(1)));
 }

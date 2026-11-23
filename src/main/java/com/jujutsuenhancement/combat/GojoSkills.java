@@ -682,4 +682,11 @@ public final class GojoSkills {
         }
         s.frozen.clear();
     }
+
+    /** The quick command "瞬间冷却": every ability cooldown of the player is cleared. */
+    public static void resetCooldowns(Player p) {
+        State s = STATES.get(p.getUUID());
+        if (s == null) return;
+        s.ability1 = s.ability2 = s.ability3 = s.ability4 = s.ability5 = s.ability12 = s.domainCD = 0;
+    }
 }

@@ -722,4 +722,9 @@ public final class YujiSkills {
         }
         s.frozen.clear();
     }
+
+    public static void resetCooldowns(Player p) {
+        State s = STATES.get(p.getUUID());
+        if (s != null) java.util.Arrays.fill(s.cd, 0);
+    }
 }

@@ -10,6 +10,7 @@ The icon is searched in the updated resource pack first (rpnew), then in the old
 """
 import glob
 import json
+import re
 import os
 import sys
 
@@ -49,6 +50,20 @@ ITEMS = {
 }
 # items that a layer draws in the third person with their own geometry: the flat model is shrunk to nothing there
 HIDDEN_THIRD_PERSON = {'katana'}
+
+
+def air_items(src):
+    """Items whose attachable draws geometry.air in the hand (the techniques of the addon): nothing is held in either person."""
+    out = set()
+    for f in glob.glob(os.path.join(src, 'rpnew', '*', 'attachables', '**', '*.json'), recursive=True):
+        try:
+            d = json.loads(re.sub(r'(?m)^\s*//.*$', '', open(f, encoding='utf-8-sig', errors='ignore').read()))['minecraft:attachable']['description']
+        except Exception:
+            continue
+        geo = d.get('geometry', {})
+        if d['identifier'].startswith('ds:') and (geo.get('default') if isinstance(geo, dict) else geo) == 'geometry.air':
+            out.add(d['identifier'][3:])
+    return out
 
 TAB_NAME_ZH = '咒术觉醒'
 TAB_NAME_EN = 'Jujutsu Awakening'
@@ -101,6 +116,8 @@ def main(src, dst):
         langs[lang] = json.load(open(path, encoding='utf-8')) if os.path.exists(path) else {}
     os.makedirs(os.path.join(dst, 'textures', 'item'), exist_ok=True)
     os.makedirs(os.path.join(dst, 'models', 'item'), exist_ok=True)
+    AIR = air_items(src)
+    print('items drawn as geometry.air:', sorted(AIR & set(ITEMS)))
     for ident, parent in ITEMS.items():
         item = find_item_json(behavior, ident)
         if item is None:
@@ -126,8 +143,11 @@ def main(src, dst):
         img.save(os.path.join(dst, 'textures', 'item', ident + '.png'))
         with open(os.path.join(dst, 'models', 'item', ident + '.json'), 'w', encoding='utf-8') as fh:
             model = {'parent': 'minecraft:item/' + parent, 'textures': {'layer0': 'jujutsuenhancement:item/' + ident}}
-            if ident in HIDDEN_THIRD_PERSON:
-                zero = {'rotation': [0, 0, 0], 'translation': [0, 0, 0], 'scale': [0, 0, 0]}
+            zero = {'rotation': [0, 0, 0], 'translation': [0, 0, 0], 'scale': [0, 0, 0]}
+            if ident in AIR:
+                model['display'] = {'thirdperson_righthand': zero, 'thirdperson_lefthand': zero, 'firstperson_righthand': zero,
+                                    'firstperson_lefthand': zero}
+            elif ident in HIDDEN_THIRD_PERSON:
                 model['display'] = {'thirdperson_righthand': zero, 'thirdperson_lefthand': zero}
             json.dump(model, fh, indent=2)
         print('item', ident, repr(name), 'stack', comps.get('minecraft:max_stack_size'))

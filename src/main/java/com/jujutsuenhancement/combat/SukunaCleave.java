@@ -405,4 +405,9 @@ public final class SukunaCleave {
     public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         STATES.remove(event.getEntity().getUUID());
     }
+
+    public static void resetCooldowns(Player p) {
+        State s = STATES.get(p.getUUID());
+        if (s != null) java.util.Arrays.fill(s.cd, 0);
+    }
 }

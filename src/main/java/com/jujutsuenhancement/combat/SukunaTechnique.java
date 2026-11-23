@@ -125,4 +125,8 @@ public final class SukunaTechnique {
         CompoundTag from = data(event.getOriginal()), to = data(event.getEntity());
         for (String k : new String[]{FINGERS, MODE, "jje_fuga", "jje_wcschant", "jje_heian"}) if (from.contains(k)) to.put(k, from.get(k).copy());
     }
+
+    public static void setActive(Player p, boolean on) { data(p).putBoolean(MODE, on); }
+    public static void setFuga(Player p, int n) { data(p).putInt("jje_fuga", Math.max(0, n)); }
+    public static void setFlag(Player p, String key, boolean on) { data(p).putBoolean("jje_" + key, on); }
 }

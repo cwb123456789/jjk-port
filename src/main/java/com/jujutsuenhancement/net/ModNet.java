@@ -19,6 +19,7 @@ public final class ModNet {
         CHANNEL.registerMessage(id++, PlayAnimPacket.class, PlayAnimPacket::encode, PlayAnimPacket::decode, PlayAnimPacket::handle);
         CHANNEL.registerMessage(id++, DomainFxPacket.class, DomainFxPacket::encode, DomainFxPacket::decode, DomainFxPacket::handle);
         CHANNEL.registerMessage(id++, MoveFxPacket.class, MoveFxPacket::encode, MoveFxPacket::decode, MoveFxPacket::handle);
+        CHANNEL.registerMessage(id++, QuickCommandPacket.class, QuickCommandPacket::encode, QuickCommandPacket::decode, QuickCommandPacket::handle);
         CHANNEL.registerMessage(id++, SwingPacket.class, SwingPacket::encode, SwingPacket::decode, SwingPacket::handle);
     }
 
@@ -36,5 +37,10 @@ public final class ModNet {
     /** The effect timeline of a limitless move (moves.json) for everybody who sees the player. */
     public static void moveFx(ServerPlayer player, String key) {
         CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new MoveFxPacket(player.getId(), key));
+    }
+
+    /** camerashake add: the client of {@code player} shakes its camera. */
+    public static void shake(ServerPlayer player, double amp, int ticks) {
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new MoveFxPacket(player.getId(), "shake:" + amp + ":" + ticks));
     }
 }

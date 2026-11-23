@@ -272,4 +272,9 @@ public final class SukunaDomain {
         D d = STATES.remove(event.getEntity().getUUID());
         if (d != null) finish(d);
     }
+
+    public static void resetCooldowns(Player p) {
+        D d = STATES.get(p.getUUID());
+        if (d != null) d.cd = d.cd12 = 0;
+    }
 }
