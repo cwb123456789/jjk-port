@@ -22,9 +22,13 @@ public final class PlayerAnims {
         int start;
         int idleAt;
         int nextEvent;
+        int loopUntil;
     }
 
     private static Map<String, BedrockAnim> library;
+    /** animation id -> the file group of bedrock/anims/ that holds it (every animation of the addon). */
+    private static Map<String, String> index;
+    private static final Map<String, BedrockAnim> LAZY = new HashMap<>();
     private static final Map<Integer, Play> PLAYING = new HashMap<>();
     /** The tick after which the idle animation may show again, per player (the addon's Disabled / BasicM1s gating). */
     private static final Map<Integer, Integer> IDLE_AT = new HashMap<>();
@@ -55,10 +59,48 @@ public final class PlayerAnims {
 
     public static void reload() {
         library = null;
+        index = null;
+        LAZY.clear();
+    }
+
+    private static JsonObject read(String path) {
+        try {
+            var res = Minecraft.getInstance().getResourceManager().getResource(new ResourceLocation(JujutsuEnhancement.MODID, path));
+            if (res.isPresent()) {
+                try (Reader r = res.get().openAsReader()) {
+                    return JsonParser.parseReader(r).getAsJsonObject();
+                }
+            }
+        } catch (Exception ex) {
+            com.mojang.logging.LogUtils.getLogger().warn("Could not read {}: {}", path, ex.toString());
+        }
+        return null;
+    }
+
+    /** Any animation of the addon by its full id (animation.xxx); a file group is read the first time one of its animations is asked. */
+    public static BedrockAnim getFull(String id) {
+        BedrockAnim hit = LAZY.get(id);
+        if (hit != null) return hit;
+        if (index == null) {
+            index = new HashMap<>();
+            JsonObject root = read("bedrock/anims/index.json");
+            if (root != null) for (Map.Entry<String, JsonElement> e : root.entrySet()) index.put(e.getKey(), e.getValue().getAsString());
+        }
+        String group = index.get(id);
+        if (group != null) {
+            JsonObject g = read("bedrock/anims/" + group + ".json");
+            if (g != null) {
+                for (Map.Entry<String, JsonElement> e : g.entrySet()) {
+                    if (index.get(e.getKey()) != null) LAZY.put(e.getKey(), new BedrockAnim(e.getKey(), e.getValue().getAsJsonObject()));
+                }
+            }
+            return LAZY.get(id);
+        }
+        return library().get(id);
     }
 
     public static BedrockAnim get(String name) {
-        return library().get("animation." + name);
+        return getFull("animation." + name);
     }
 
     public static void start(int entityId, String name, int idleBlock) {
@@ -72,6 +114,7 @@ public final class PlayerAnims {
         p.start = e.tickCount;
         p.idleAt = e.tickCount + Math.max(idleBlock, (int) Math.ceil(anim.length * 20));
         PLAYING.put(entityId, p);
+        p.loopUntil = e.tickCount + Math.max(idleBlock, 0);
         IDLE_AT.put(entityId, p.idleAt);
     }
 
@@ -80,6 +123,7 @@ public final class PlayerAnims {
         Play p = PLAYING.get(player.getId());
         if (p != null) {
             float t = (ageInTicks - p.start) / 20.0F;
+            if (p.anim.loop && p.anim.length > 0 && t > p.anim.length && player.tickCount < p.loopUntil) t = t % p.anim.length;
             if (t <= p.anim.length) {
                 timeOut[0] = Math.max(t, 0);
                 return p.anim;
@@ -139,9 +183,15 @@ public final class PlayerAnims {
             float t = (e.tickCount - p.start) / 20.0F;
             while (p.nextEvent < p.anim.events.size() && p.anim.events.get(p.nextEvent).time() <= t + 0.001F) {
                 BedrockAnim.Event ev = p.anim.events.get(p.nextEvent++);
-                FxShow.animParticle(ev.effect(), e, ev.locator());
+                if (ev.sound()) FxShow.animSound(ev.effect(), e);
+                else FxShow.animParticle(ev.effect(), e, ev.locator());
             }
-            if (t > p.anim.length) it.remove();
+            if (t > p.anim.length) {
+                if (p.anim.loop && p.anim.length > 0 && !e.isRemoved() && e.tickCount < p.loopUntil) {
+                    p.start += Math.max(1, Math.round(p.anim.length * 20));
+                    p.nextEvent = 0;
+                } else it.remove();
+            }
         }
     }
 }

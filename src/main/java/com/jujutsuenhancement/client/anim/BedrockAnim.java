@@ -61,16 +61,19 @@ public final class BedrockAnim {
     }
 
     /** A particle effect fired at a time of the animation. */
-    public record Event(float time, String effect, String locator) {}
+    public record Event(float time, String effect, String locator, boolean sound) {}
 
     public final String id;
     public final float length;
+    public final boolean loop;
     private final Map<String, BoneTracks> bones = new HashMap<>();
     public final List<Event> events = new ArrayList<>();
 
     public BedrockAnim(String id, JsonObject json) {
         this.id = id;
         this.length = json.has("animation_length") ? json.get("animation_length").getAsFloat() : 0.0F;
+        this.loop = json.has("loop") && json.get("loop").isJsonPrimitive() && json.get("loop").getAsJsonPrimitive().isBoolean()
+                && json.get("loop").getAsBoolean();
         if (json.has("bones")) {
             for (Map.Entry<String, JsonElement> e : json.getAsJsonObject("bones").entrySet()) {
                 BoneTracks bt = new BoneTracks();
@@ -81,23 +84,27 @@ public final class BedrockAnim {
                 bones.put(e.getKey(), bt);
             }
         }
-        if (json.has("particle_effects")) {
-            for (Map.Entry<String, JsonElement> e : json.getAsJsonObject("particle_effects").entrySet()) {
-                float time = Float.parseFloat(e.getKey());
-                JsonElement v = e.getValue();
-                if (v.isJsonArray()) {
-                    for (JsonElement x : v.getAsJsonArray()) addEvent(time, x.getAsJsonObject());
-                } else {
-                    addEvent(time, v.getAsJsonObject());
-                }
+        readEvents(json, "particle_effects", false);
+        readEvents(json, "sound_effects", true);
+        events.sort(Comparator.comparingDouble(Event::time));
+    }
+
+    private void readEvents(JsonObject json, String key, boolean sound) {
+        if (!json.has(key) || !json.get(key).isJsonObject()) return;
+        for (Map.Entry<String, JsonElement> e : json.getAsJsonObject(key).entrySet()) {
+            float time = Float.parseFloat(e.getKey());
+            JsonElement v = e.getValue();
+            if (v.isJsonArray()) {
+                for (JsonElement x : v.getAsJsonArray()) addEvent(time, x.getAsJsonObject(), sound);
+            } else {
+                addEvent(time, v.getAsJsonObject(), sound);
             }
-            events.sort(Comparator.comparingDouble(Event::time));
         }
     }
 
-    private void addEvent(float time, JsonObject o) {
+    private void addEvent(float time, JsonObject o, boolean sound) {
         if (!o.has("effect")) return;
-        events.add(new Event(time, o.get("effect").getAsString(), o.has("locator") ? o.get("locator").getAsString() : null));
+        events.add(new Event(time, o.get("effect").getAsString(), o.has("locator") ? o.get("locator").getAsString() : null, sound));
     }
 
     private static float[] vec(JsonElement e) {

@@ -177,6 +177,13 @@ public final class FxShow {
         else spawn(name, e, at[0], at[1], at[2], yaw);
     }
 
+    /** An animation's sound event: the resolved sound at the player. */
+    public static void animSound(String sound, Entity e) {
+        if (sound == null || sound.isEmpty()) return;
+        Minecraft mc = Minecraft.getInstance();
+        sound(mc, new S(sound, 1.0F, 1.0F), e.getX(), e.getY(), e.getZ());
+    }
+
     /** Particle of the addon at a world position (used by MoveFx). */
     public static void particleAt(String name, double x, double y, double z, double yaw) {
         spawnWorld(name, x, y, z, yaw);
