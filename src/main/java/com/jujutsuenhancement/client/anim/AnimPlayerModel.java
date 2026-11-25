@@ -20,6 +20,40 @@ import org.joml.Vector4f;
 public final class AnimPlayerModel extends PlayerModel<AbstractClientPlayer> {
     private final float[] time = new float[1];
 
+    /** Implemented by the skin add-on: draws a worn skin's Bedrock geometry instead of the vanilla boxes (true = drawn). */
+    public interface RenderHook {
+        boolean render(AnimPlayerModel model, com.mojang.blaze3d.vertex.PoseStack poseStack, com.mojang.blaze3d.vertex.VertexConsumer buffer,
+                int light, int overlay, float r, float g, float b, float a);
+    }
+
+    public static volatile RenderHook hook;
+    /** head, body, rightArm, leftArm, rightLeg, leftLeg of the vanilla pose: x, y, z, xRot, yRot, zRot (before the animation). */
+    public final float[][] vanilla = new float[6][6];
+    /** the animation playing on this player and its time, null when none (read by the skin add-on). */
+    public BedrockAnim curAnim;
+    public float curTime;
+
+    @Override
+    public void renderToBuffer(com.mojang.blaze3d.vertex.PoseStack poseStack, com.mojang.blaze3d.vertex.VertexConsumer buffer, int light,
+            int overlay, float r, float g, float b, float a) {
+        RenderHook h = hook;
+        if (h != null && h.render(this, poseStack, buffer, light, overlay, r, g, b, a)) return;
+        super.renderToBuffer(poseStack, buffer, light, overlay, r, g, b, a);
+    }
+
+    private void stash() {
+        ModelPart[] ps = {head, body, rightArm, leftArm, rightLeg, leftLeg};
+        for (int i = 0; i < 6; i++) {
+            ModelPart p = ps[i];
+            vanilla[i][0] = p.x;
+            vanilla[i][1] = p.y;
+            vanilla[i][2] = p.z;
+            vanilla[i][3] = p.xRot;
+            vanilla[i][4] = p.yRot;
+            vanilla[i][5] = p.zRot;
+        }
+    }
+
     public AnimPlayerModel(ModelPart root, boolean slim) {
         super(root, slim);
     }
@@ -28,7 +62,10 @@ public final class AnimPlayerModel extends PlayerModel<AbstractClientPlayer> {
     public void setupAnim(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float ageInTicks,
                           float netHeadYaw, float headPitch) {
         super.setupAnim(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        stash();
         BedrockAnim anim = PlayerAnims.current(player, ageInTicks, time);
+        curAnim = anim;
+        curTime = time[0];
         if (anim == null) {
             PlayerAnims.setItemRot(player.getId(), null);
             PlayerAnims.setPose(player.getId(), null);

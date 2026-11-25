@@ -146,6 +146,10 @@ public final class BedrockAnim {
         return t;
     }
 
+    public java.util.Set<String> boneNames() {
+        return bones.keySet();
+    }
+
     public boolean has(String bone) {
         return bones.containsKey(bone);
     }

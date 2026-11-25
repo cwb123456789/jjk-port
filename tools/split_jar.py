@@ -26,6 +26,8 @@ description="Assets of Jujutsu Enhancement (sounds / textures). Keep it next to 
 def main(src, out, limit_mb=22.0):
     os.makedirs(out, exist_ok=True)
     zin = zipfile.ZipFile(src)
+    # the skin add-on (code only, no mod class: the main mod starts it) becomes its own jar
+    skin = [i for i in zin.infolist() if i.filename.startswith('com/jujutsuenhancement/skin/') and not i.is_dir()]
     heavy = [i for i in zin.infolist() if i.filename.startswith(HEAVY) and not i.is_dir()]
     heavy.sort(key=lambda i: -i.compress_size)
     limit = int(limit_mb * 1024 * 1024)
@@ -38,7 +40,7 @@ def main(src, out, limit_mb=22.0):
                 break
         else:
             parts.append([i.compress_size, [i]])
-    moved = {i.filename for p in parts for i in p[1]}
+    moved = {i.filename for p in parts for i in p[1]} | {i.filename for i in skin}
     base = os.path.basename(src)
     stem = base[:-4]
     with zipfile.ZipFile(os.path.join(out, base), 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
@@ -52,6 +54,13 @@ def main(src, out, limit_mb=22.0):
             z.writestr('META-INF/mods.toml', TOML % ('jujutsuenhancement_assets%d' % n, n))
             z.writestr('pack.mcmeta', '{"pack":{"description":"Jujutsu Enhancement assets","pack_format":15}}')
             for i in infos:
+                z.writestr(i.filename, zin.read(i.filename))
+    if skin:
+        with zipfile.ZipFile(os.path.join(out, stem + '-skin.jar'), 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+            z.writestr('META-INF/mods.toml', TOML % ('jujutsuenhancement_skin', 0).replace('assets 0', 'skin add-on').replace(
+                'Assets of Jujutsu Enhancement (sounds / textures)', 'Skin / outfit add-on of Jujutsu Enhancement'))
+            z.writestr('pack.mcmeta', '{"pack":{"description":"Jujutsu Enhancement skin add-on","pack_format":15}}')
+            for i in skin:
                 z.writestr(i.filename, zin.read(i.filename))
     for f in sorted(os.listdir(out)):
         print(f, os.path.getsize(os.path.join(out, f)))
