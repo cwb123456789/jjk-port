@@ -136,6 +136,32 @@ VANILLA = {
     'portal.travel': 'minecraft:block.portal.travel', 'portal.trigger': 'minecraft:block.portal.trigger',
     'mob.zombie.metal': 'minecraft:entity.zombie.attack_iron_door', 'random.break': 'minecraft:entity.item.break',
 }
+
+VANILLA.update({
+    'ambient.weather.lightning.impact': 'minecraft:entity.lightning_bolt.impact', 'beacon.ambient': 'minecraft:block.beacon.ambient',
+    'beacon.power': 'minecraft:block.beacon.power_select', 'block.sniffer_egg.hatch': 'minecraft:block.sniffer_egg.hatch',
+    'block.turtle_egg.break': 'minecraft:block.turtle_egg.break', 'bubble.down': 'minecraft:block.bubble_column.downwards_ambient',
+    'bubble.up': 'minecraft:block.bubble_column.upwards_ambient', 'conduit.short': 'minecraft:block.conduit.ambient.short',
+    'dig.ancient_debris': 'minecraft:block.ancient_debris.break', 'dig.chain': 'minecraft:block.chain.break',
+    'dig.grass': 'minecraft:block.grass.break', 'elytra.loop': 'minecraft:item.elytra.flying',
+    'firework.blast': 'minecraft:entity.firework_rocket.blast', 'item.trident.return': 'minecraft:item.trident.return',
+    'item.trident.throw': 'minecraft:item.trident.throw', 'item.trident.thunder': 'minecraft:item.trident.thunder',
+    'jump.cloth': 'minecraft:block.wool.step', 'mob.bee.loop': 'minecraft:entity.bee.loop',
+    'mob.ender_dragon.flap': 'minecraft:entity.ender_dragon.flap', 'mob.enderdragin.flap': 'minecraft:entity.ender_dragon.flap',
+    'ob.enderdragon.flap': 'minecraft:entity.ender_dragon.flap', 'mob.endermen.idle': 'minecraft:entity.enderman.ambient',
+    'mob.endermen.portal': 'minecraft:entity.enderman.teleport', 'mob.evocation_illager.cast_spell': 'minecraft:entity.evoker.cast_spell',
+    'mob.guardian.death': 'minecraft:entity.guardian.death', 'mob.phantom.death': 'minecraft:entity.phantom.death',
+    'mob.phantom.hurt': 'minecraft:entity.phantom.hurt', 'mob.phantom.idle': 'minecraft:entity.phantom.ambient',
+    'mob.wither.ambient': 'minecraft:entity.wither.ambient', 'mob.wither.death': 'minecraft:entity.wither.death',
+    'mob.zombie.remedy': 'minecraft:entity.zombie_villager.cure', 'note.bell': 'minecraft:block.note_block.bell',
+    'random.burp': 'minecraft:entity.player.burp', 'random.click': 'minecraft:ui.button.click', 'random.eat': 'minecraft:entity.generic.eat',
+    'random.splash': 'minecraft:entity.generic.splash', 'random.swim': 'minecraft:entity.generic.swim',
+    'random.wither.shoot': 'minecraft:entity.wither.shoot', 'respawn_anchor.deplete': 'minecraft:block.respawn_anchor.deplete',
+    'step.stone': 'minecraft:block.stone.step', 'ambient.crimson_forest.mood': 'minecraft:ambient.crimson_forest.mood',
+    'ambient.soulsand_valley.mood': 'minecraft:ambient.soul_sand_valley.mood',
+    'breeze_wind_charge.burst': 'minecraft:entity.generic.explode', 'mob.breeze.shoot': 'minecraft:entity.generic.explode',
+    'mob.breeze.charge': 'minecraft:entity.generic.explode',
+})
 COORD = re.compile(r'[~^]-?\d*\.?\d*')
 
 
@@ -234,6 +260,13 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
             continue  # the other commands are not exported with the eye anchor
         if re.search(r'Stun=1\.\.|punch=|domainactive|itemUse|domainclashing|domain_clasher', sel):
             continue  # conditional on a state the timeline does not know (the caster being stunned, the selection click, a domain)
+        if opt.get('strict'):
+            # generic export: only the lines that depend on nothing but the counter (and the black-flash tag) of the caster
+            names = set(re.findall(r'(\w+)=', re.search(r'scores=\{([^}]*)\}', sel).group(1))) if 'scores=' in sel else set()
+            if names - {opt.get('var', 'move')} or re.search(r'\bname=|type=!|type=(?!player)', sel):
+                continue
+            if any(t not in ('blackflashed', '!blackflashed') for t in re.findall(r'tag=([!\w]+)', sel)):
+                continue
         rng = move_range(sel, 100000 if opt else n, opt.get('var', 'move') if opt else 'move')
         if not rng:
             continue

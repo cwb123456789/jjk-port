@@ -62,6 +62,51 @@ def events(node):
                 yield t, e
 
 
+def resolve_sounds(src, dst, sounds):
+    """Copies the ogg files of the named Bedrock sound events and registers them in sounds.json; -> {name: sound id}."""
+    defs = gm.load_sound_defs(src)
+    sdir = os.path.join(dst, 'sounds', 'bedrock')
+    os.makedirs(sdir, exist_ok=True)
+    sj_path = os.path.join(dst, 'sounds.json')
+    sj = json.load(open(sj_path, encoding='utf-8')) if os.path.exists(sj_path) else {}
+    resolved = {}
+    for name in sorted(sounds):
+        base = re.sub(r'\.(mp3|ogg|wav)$', '', name)
+        dfn = None
+        for cand in (name, 'mob.' + name, 'music.' + name, base, 'mob.' + base, 'music.' + base, re.sub(r'^(mob|music)\.', '', base)):
+            if cand in defs:
+                dfn = defs[cand]
+                break
+        if dfn is None and name == 'mob.slime.jump':
+            resolved[name] = 'minecraft:entity.slime.jump_small'
+            continue
+        if dfn is None and name == 'armor.equip_chain':
+            resolved[name] = 'minecraft:item.armor.equip_chain'
+            continue
+        if dfn is None:
+            if name in gm.VANILLA:
+                resolved[name] = gm.VANILLA[name]
+            continue
+        files = []
+        for s in dfn.get('sounds', []):
+            rel = s if isinstance(s, str) else s.get('name')
+            p = gm.find_ogg(src, rel)
+            if p:
+                safe = 'gojo_mv_' + re.sub(r'[^a-z0-9_]', '_', rel.lower().split('/')[-1])
+                if not os.path.exists(os.path.join(sdir, safe + '.ogg')):
+                    shutil.copyfile(p, os.path.join(sdir, safe + '.ogg'))
+                files.append({'name': 'jujutsuenhancement:bedrock/' + safe, 'volume': 1.0})
+        if files:
+            key = 'bedrock.gojo.mv_' + re.sub(r'[^a-z0-9_]', '_', name.lower())
+            sj[key] = {'category': 'hostile', 'sounds': files}
+            resolved[name] = 'jujutsuenhancement:' + key
+    unresolved = sorted(n for n in sounds if n not in resolved)
+    print('sounds resolved', len(resolved), 'unresolved', len(unresolved), unresolved)
+    with open(sj_path, 'w', encoding='utf-8') as fh:
+        json.dump(sj, fh, indent=2)
+    return resolved, unresolved
+
+
 def main(src, dst):
     pm, sm = player_maps(src)
     print('player particle map', len(pm), 'sound map', len(sm))
@@ -104,47 +149,7 @@ def main(src, dst):
     # particles
     bba.WANT = sorted(particles | set(bba.WANT))
     bba.main(src, dst)
-    # sounds
-    defs = gm.load_sound_defs(src)
-    sdir = os.path.join(dst, 'sounds', 'bedrock')
-    os.makedirs(sdir, exist_ok=True)
-    sj_path = os.path.join(dst, 'sounds.json')
-    sj = json.load(open(sj_path, encoding='utf-8')) if os.path.exists(sj_path) else {}
-    resolved = {}
-    for name in sorted(sounds):
-        base = re.sub(r'\.(mp3|ogg|wav)$', '', name)
-        dfn = None
-        for cand in (name, 'mob.' + name, 'music.' + name, base, 'mob.' + base, 'music.' + base):
-            if cand in defs:
-                dfn = defs[cand]
-                break
-        if dfn is None and name == 'mob.slime.jump':
-            resolved[name] = 'minecraft:entity.slime.jump_small'
-            continue
-        if dfn is None and name == 'armor.equip_chain':
-            resolved[name] = 'minecraft:item.armor.equip_chain'
-            continue
-        if dfn is None:
-            if name in gm.VANILLA:
-                resolved[name] = gm.VANILLA[name]
-            continue
-        files = []
-        for s in dfn.get('sounds', []):
-            rel = s if isinstance(s, str) else s.get('name')
-            p = gm.find_ogg(src, rel)
-            if p:
-                safe = 'gojo_mv_' + re.sub(r'[^a-z0-9_]', '_', rel.lower().split('/')[-1])
-                if not os.path.exists(os.path.join(sdir, safe + '.ogg')):
-                    shutil.copyfile(p, os.path.join(sdir, safe + '.ogg'))
-                files.append({'name': 'jujutsuenhancement:bedrock/' + safe, 'volume': 1.0})
-        if files:
-            key = 'bedrock.gojo.mv_' + re.sub(r'[^a-z0-9_]', '_', name.lower())
-            sj[key] = {'category': 'hostile', 'sounds': files}
-            resolved[name] = 'jujutsuenhancement:' + key
-    unresolved = sorted(n for n in sounds if n not in resolved)
-    print('sounds resolved', len(resolved), 'unresolved', len(unresolved), unresolved)
-    with open(sj_path, 'w', encoding='utf-8') as fh:
-        json.dump(sj, fh, indent=2)
+    resolved, unresolved = resolve_sounds(src, dst, sounds)
     adir = os.path.join(dst, 'bedrock', 'anims')
     if os.path.isdir(adir):
         shutil.rmtree(adir)

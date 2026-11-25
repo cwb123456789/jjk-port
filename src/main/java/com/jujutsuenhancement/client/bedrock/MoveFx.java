@@ -60,6 +60,8 @@ public final class MoveFx {
     }
 
     private static Map<String, List<Ev>> moves;
+    /** key ("folder/file#counter") -> file of bedrock/fx/ that holds the timeline of every function of the addon. */
+    private static Map<String, String> fxIndex;
     private static final Map<String, Integer> TOTALS = new HashMap<>();
     private static final List<Run> RUNS = new ArrayList<>();
 
@@ -99,6 +101,53 @@ public final class MoveFx {
         }
     }
 
+    private static List<Ev> parse(JsonObject o, String key) {
+        TOTALS.put(key, o.get("n").getAsInt());
+        List<Ev> list = new ArrayList<>();
+        for (JsonElement el : o.getAsJsonArray("events")) {
+            JsonArray a = el.getAsJsonArray();
+            Object[] row = new Object[a.size() - 1];
+            for (int i = 1; i < a.size(); i++) {
+                var pr = a.get(i).getAsJsonPrimitive();
+                row[i - 1] = pr.isString() ? pr.getAsString() : (Object) pr.getAsDouble();
+            }
+            list.add(new Ev(a.get(0).getAsInt(), row));
+        }
+        return list;
+    }
+
+    private static JsonObject readJson(Minecraft mc, String path) {
+        try {
+            Optional<Resource> res = mc.getResourceManager().getResource(new ResourceLocation(JujutsuEnhancement.MODID, path));
+            if (res.isPresent()) {
+                try (java.io.Reader r = res.get().openAsReader()) {
+                    return JsonParser.parseReader(r).getAsJsonObject();
+                }
+            }
+        } catch (Exception ignored) {
+            // nothing then
+        }
+        return null;
+    }
+
+    /** "fx:<function path>#<counter>[#bf|nbf]": a timeline of ANY function of the addon, read from its folder file the first time. */
+    private static void loadFx(Minecraft mc, String key) {
+        if (fxIndex == null) {
+            fxIndex = new HashMap<>();
+            JsonObject root = readJson(mc, "bedrock/fx/index.json");
+            if (root != null) for (Map.Entry<String, JsonElement> e : root.entrySet()) fxIndex.put(e.getKey(), e.getValue().getAsString());
+        }
+        String k = key.substring(3);
+        String folder = fxIndex.get(k);
+        if (folder == null) return;
+        JsonObject file = readJson(mc, "bedrock/fx/" + folder + ".json");
+        if (file == null) return;
+        for (Map.Entry<String, JsonElement> e : file.entrySet()) {
+            String full = "fx:" + e.getKey();
+            if (!moves.containsKey(full)) moves.put(full, parse(e.getValue().getAsJsonObject(), full));
+        }
+    }
+
     /** The server tells that {@code entityId} began the move {@code key} (the click tick). */
     public static void start(int entityId, String key) {
         Minecraft mc = Minecraft.getInstance();
@@ -119,6 +168,7 @@ public final class MoveFx {
             RUNS.add(new Run(entityId, list, n));
             return;
         }
+        if (key.startsWith("fx:") && !moves.containsKey(key)) loadFx(mc, key);
         List<Ev> list = moves.get(key);
         if (list == null) return;
         RUNS.removeIf(r -> r.entityId == entityId);
