@@ -174,9 +174,39 @@ def coords(rest):
     return kind, [num(t[1:]) for t in toks[:3]]
 
 
+def camera_row(cmd, sel, eyes):
+    """['c', eyes, target radius, ease seconds, ease name, pos local, px, py, pz, aim, a, b, c, d] of a `camera set minecraft:free`."""
+    m = re.match(r'camera \S+ set minecraft:free(?: ease ([\d.]+) (\w+))?(?: pos (.*?))?(?: (facing|rot) (.*))?$', cmd.strip())
+    if not m:
+        return None
+    ease_t, ease_n, pos, aim_kind, aim = m.groups()
+    ptxt = pos or '~ ~ ~'
+    c = coords(ptxt)
+    if c is None:
+        return None
+    row = ['c', 1 if eyes else 0, radius(sel), num(ease_t), ease_n or 'linear', c[0]] + c[1]
+    if aim_kind == 'facing':
+        fc = coords(aim)
+        if fc is None:
+            return None
+        row += [1 if fc[0] == 1 else 2] + fc[1] + [0]
+    elif aim_kind == 'rot':
+        t = aim.split()
+        if len(t) < 2:
+            return None
+        def one(x):
+            return (1.0, num(x[1:])) if x.startswith('~') else (0.0, num(x))
+        yr, yv = one(t[0])
+        pr, pv = one(t[1])
+        row += [3, yv, pv, yr, pr]
+    else:
+        row += [0, 0, 0, 0, 0]
+    return row
+
+
 def parse_line(line):
     """-> (selector of the executor, command) for the lines that run at the caster."""
-    m = re.match(r'execute as @s\[(.*?)\] at @s run (.*)$', line)
+    m = re.match(r'execute as @s\[(.*?)\] at @s(?: anchored eyes)? run (.*)$', line)
     if m:
         return m.group(1), m.group(2)
     m = re.match(r'execute as @s\[(.*?)\] run (.*)$', line)
@@ -199,6 +229,9 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
         if not pl:
             continue
         sel, cmd = pl
+        eyes = ' anchored eyes ' in line
+        if eyes and not cmd.startswith('camera'):
+            continue  # the other commands are not exported with the eye anchor
         if re.search(r'Stun=1\.\.|punch=|domainactive|itemUse|domainclashing|domain_clasher', sel):
             continue  # conditional on a state the timeline does not know (the caster being stunned, the selection click, a domain)
         rng = move_range(sel, 100000 if opt else n, opt.get('var', 'move') if opt else 'move')
@@ -245,6 +278,12 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
             row = ['s', name, vol, pit, radius(selr)]
         elif tok[0] == 'camerashake' and len(tok) >= 5:
             row = ['k', num(tok[3]), int(round(num(tok[4]) * 20)), radius(tok[2])]
+        elif tok[0] == 'camera' and len(tok) >= 3 and tok[2] == 'clear' and 'tag=' not in tok[1]:
+            row = ['x', radius(tok[1])]
+        elif tok[0] == 'camera' and len(tok) >= 4 and tok[2] == 'set' and tok[3] == 'minecraft:free' and 'tag=' not in tok[1]:
+            row = camera_row(cmd, tok[1], eyes)
+            if row is None:
+                continue
         elif tok[0] == 'camera' and 'fade' in tok and 'color' in tok:
             i = tok.index('time')
             ci = tok.index('color')

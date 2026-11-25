@@ -223,6 +223,15 @@ public final class MoveFx {
                 fadeB = (int) d(r[6]);
                 fadeAge = 0;
             }
+            case "c" -> {
+                // camera @s set minecraft:free ...: [eyes, target radius, ease seconds, ease name, pos local, px, py, pz, aim, a, b, c, d]
+                if (!inRange(mc, e, d(r[2]))) return;
+                CgCamera.set(e, d(r[1]) > 0.5D, d(r[3]), (String) r[4], d(r[5]) > 0.5D, d(r[6]), d(r[7]), d(r[8]), (int) d(r[9]),
+                        d(r[10]), d(r[11]), d(r[12]), d(r[13]));
+            }
+            case "x" -> {
+                if (inRange(mc, e, d(r[1]))) CgCamera.clear();
+            }
             case "i" -> {
                 if (e != mc.player) return;
                 int cp = (int) d(r[1]);
