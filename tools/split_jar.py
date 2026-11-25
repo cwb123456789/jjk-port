@@ -57,8 +57,9 @@ def main(src, out, limit_mb=22.0):
                 z.writestr(i.filename, zin.read(i.filename))
     if skin:
         with zipfile.ZipFile(os.path.join(out, stem + '-skin.jar'), 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
-            z.writestr('META-INF/mods.toml', TOML % ('jujutsuenhancement_skin', 0).replace('assets 0', 'skin add-on').replace(
-                'Assets of Jujutsu Enhancement (sounds / textures)', 'Skin / outfit add-on of Jujutsu Enhancement'))
+            toml = (TOML % ('jujutsuenhancement_skin', 0)).replace('assets 0', 'skin add-on').replace(
+                'Assets of Jujutsu Enhancement (sounds / textures)', 'Skin / outfit add-on of Jujutsu Enhancement')
+            z.writestr('META-INF/mods.toml', toml)
             z.writestr('pack.mcmeta', '{"pack":{"description":"Jujutsu Enhancement skin add-on","pack_format":15}}')
             for i in skin:
                 z.writestr(i.filename, zin.read(i.filename))
