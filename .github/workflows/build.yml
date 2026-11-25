@@ -28,7 +28,7 @@ jobs:
           mkdir -p /tmp/out
           cp build.log /tmp/out/ || true
           grep -E "error:|warning: \[|FAILED|What went wrong|Caused by|Could not" build.log | head -300 > /tmp/out/errors.txt || true
-          cp build/libs/*.jar /tmp/out/ 2>/dev/null || true
+          for j in build/libs/*.jar; do python3 tools/split_jar.py "$j" /tmp/out 26 || cp "$j" /tmp/out/; done
           GJ=$(find ~/.gradle -name 'geckolib-forge-1.20.1-*.jar' ! -name '*sources*' 2>/dev/null | head -1)
           echo "geckolib jar: $GJ" > /tmp/out/api.txt
           if [ -n "$GJ" ]; then
