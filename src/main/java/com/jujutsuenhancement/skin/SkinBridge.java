@@ -40,7 +40,13 @@ final class SkinBridge {
         mReset = bm.getMethod("reset");
         mBone = bm.getMethod("bone", String.class);
         mRender = bm.getMethod("render", PoseStack.class, VertexConsumer.class, int.class, int.class, float.class, float.class, float.class, float.class);
-        mTranslate = bm.getMethod("translateTo", bone, PoseStack.class);
+        Method tr = null;
+        try {
+            tr = bm.getMethod("translateTo", bone, PoseStack.class);
+        } catch (Exception ignored) {
+            // an older skin mod: no glow layers on its head then
+        }
+        mTranslate = tr;
         Method open = null;
         try {
             open = Class.forName("com." + id + ".client.ClientHooks").getMethod("openScreen", int.class);
@@ -135,6 +141,7 @@ final class SkinBridge {
 
     /** Moves the pose stack to the bone (pivot and rotation of the bone and of its parents). */
     void translateTo(Object bm, Object bone, PoseStack ps) {
+        if (mTranslate == null) return;
         try {
             mTranslate.invoke(bm, bone, ps);
         } catch (Exception ignored) {

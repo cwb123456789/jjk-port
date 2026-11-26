@@ -26,6 +26,8 @@ public final class CgSessions {
         /** the player animation of the CG, replayed with it */
         public String anim;
         public int idle;
+        /** the other people shown in the CG (their entity ids): after 咒术替换 they can be re-skinned too */
+        public final java.util.Set<Integer> participants = new java.util.LinkedHashSet<>();
 
         Session(String id, Runnable restart, Runnable cancel, long startTick, int ticks) {
             this.id = id;
@@ -47,6 +49,20 @@ public final class CgSessions {
         RUNNING.put(p.getUUID(), s);
         PAUSED.remove(p.getUUID());
         return s;
+    }
+
+    /** A technique/CG that shows another person (victim, partner) tells the session, so both can be re-skinned. */
+    public static void addParticipant(ServerPlayer caster, net.minecraft.world.entity.Entity other) {
+        Session s = RUNNING.get(caster.getUUID());
+        if (s == null) s = PAUSED.get(caster.getUUID());
+        if (s != null && other != null && other != caster) s.participants.add(other.getId());
+    }
+
+    /** The people of the running or paused CG besides the caster. */
+    public static int[] participants(ServerPlayer p) {
+        Session s = RUNNING.get(p.getUUID());
+        if (s == null) s = PAUSED.get(p.getUUID());
+        return s == null ? new int[0] : s.participants.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public static Session current(ServerPlayer p) {

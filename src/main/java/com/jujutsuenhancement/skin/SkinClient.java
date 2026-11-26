@@ -31,6 +31,8 @@ final class SkinClient {
     private static final String[] NAMES = {"head", "body", "rightArm", "leftArm", "rightLeg", "leftLeg"};
     /** after 咒术替换: the skin screen was opened, tell the server when it is closed so the CG restarts */
     static boolean waitingScreen;
+    private static final List<Integer> pendingOthers = new ArrayList<>();
+    private static SkinBridge lastBridge;
     private static int waitTicks;
 
     private SkinClient() {}
@@ -76,15 +78,23 @@ final class SkinClient {
         if (event.phase != TickEvent.Phase.END || !waitingScreen) return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen == null && ++waitTicks > 3) {
-            waitingScreen = false;
             waitTicks = 0;
+            if (!pendingOthers.isEmpty() && lastBridge != null) {   // the other people of the CG: their skin screens, one after the other
+                int id = pendingOthers.remove(0);
+                if (mc.level != null && mc.level.getEntity(id) != null) {
+                    mc.player.displayClientMessage(net.minecraft.network.chat.Component.literal("请选择 CG 中另一个人的皮肤: " + mc.level.getEntity(id).getName().getString()), true);
+                    lastBridge.openScreen(id);
+                    return;
+                }
+            }
+            waitingScreen = false;
             SkinNet.CHANNEL.sendToServer(new SkinNet.Done());
         }
         if (mc.screen != null) waitTicks = 0;
     }
 
     /** Opens the skin screen of the (first or chosen) skin mod; the CG restarts when it is closed. */
-    static void openScreen(boolean replayAfter) {
+    static void openScreen(boolean replayAfter, int[] others) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
         List<SkinBridge> all = SkinBridge.all();
@@ -95,12 +105,18 @@ final class SkinClient {
         }
         waitingScreen = replayAfter;
         waitTicks = 0;
-        if (all.size() == 1) all.get(0).openScreen(mc.player.getId());
+        pendingOthers.clear();
+        if (replayAfter) for (int id : others) pendingOthers.add(id);
+        if (all.size() == 1) {
+            lastBridge = all.get(0);
+            lastBridge.openScreen(mc.player.getId());
+        }
         else mc.setScreen(new PackSelectScreen(all));
     }
 
     static void openFrom(SkinBridge b) {
         Minecraft mc = Minecraft.getInstance();
+        lastBridge = b;
         if (mc.player != null) b.openScreen(mc.player.getId());
     }
 

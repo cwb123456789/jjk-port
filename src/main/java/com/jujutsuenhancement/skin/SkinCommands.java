@@ -21,9 +21,10 @@ public final class SkinCommands {
             boolean outfit = name.equals("服饰替换");
             event.getDispatcher().register(Commands.literal(name).executes(ctx -> {
                 ServerPlayer p = ctx.getSource().getPlayerOrException();
+                int[] others = CgSessions.participants(p);   // read before the pause: the session moves to "paused" but keeps them
                 boolean was = CgSessions.pause(p);
                 if (was) p.sendSystemMessage(Component.literal("CG 已暂停，可以自由移动并更换" + (outfit ? "服饰" : "皮肤") + "，关闭界面后 CG 会重新开始"));
-                SkinNet.open(p, was);
+                SkinNet.open(p, was, others);
                 return 1;
             }));
         }

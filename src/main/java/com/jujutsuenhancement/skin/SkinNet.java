@@ -17,7 +17,7 @@ final class SkinNet {
     static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation("jujutsuenhancement", "skin"),
             () -> VERSION, v -> true, v -> true);
 
-    record Open(boolean replayAfter) {}
+    record Open(boolean replayAfter, int[] others) {}
 
     record Done() {}
 
@@ -25,16 +25,19 @@ final class SkinNet {
 
     static void register() {
         int id = 0;
-        CHANNEL.registerMessage(id++, Open.class, (m, b) -> b.writeBoolean(m.replayAfter()), b -> new Open(b.readBoolean()), SkinNet::onOpen);
+        CHANNEL.registerMessage(id++, Open.class, (m, b) -> {
+            b.writeBoolean(m.replayAfter());
+            b.writeVarIntArray(m.others());
+        }, b -> new Open(b.readBoolean(), b.readVarIntArray()), SkinNet::onOpen);
         CHANNEL.registerMessage(id++, Done.class, (m, b) -> {}, b -> new Done(), SkinNet::onDone);
     }
 
-    static void open(ServerPlayer p, boolean replayAfter) {
-        CHANNEL.send(PacketDistributor.PLAYER.with(() -> p), new Open(replayAfter));
+    static void open(ServerPlayer p, boolean replayAfter, int[] others) {
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> p), new Open(replayAfter, others));
     }
 
     private static void onOpen(Open m, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> SkinClient.openScreen(m.replayAfter())));
+        ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> SkinClient.openScreen(m.replayAfter(), m.others())));
         ctx.get().setPacketHandled(true);
     }
 
