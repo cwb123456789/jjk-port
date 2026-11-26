@@ -233,6 +233,23 @@ def camera_row(cmd, sel, eyes):
 POSITIONED = r'(?: positioned ((?:[~^][-\d.]*\s*){3}))?'
 
 
+def parse_line_old(line):
+    """The first parser (used by the hand-ported moves of moves.json; kept as it was so that their export does not change)."""
+    m = re.match(r'execute as @s\[(.*?)\] at @s(?: anchored eyes)? run (.*)$', line)
+    if m:
+        return m.group(1), m.group(2)
+    m = re.match(r'execute as @s\[(.*?)\] run (.*)$', line)
+    if m:
+        return m.group(1), m.group(2)
+    m = re.match(r'scoreboard players set @s\[([^\]]*)\] Camera (\d+)$', line)
+    if m:
+        return m.group(1), 'camhold ' + m.group(2)
+    m = re.match(r'(camera|title|playsound|particle|camerashake) .*?@s\[(.*?)\]', line)
+    if m and line.startswith(('camera ', 'title ', 'playsound ')):
+        return m.group(2), line
+    return None
+
+
 def parse_line(line, with_pos=False):
     """-> (selector of the executor, command) for the lines that run at the caster; with_pos also gives the `positioned` offset
     (kind, [x, y, z]) or None as a third value."""
@@ -246,6 +263,9 @@ def parse_line(line, with_pos=False):
     m = re.match(r'execute as @s\[(.*?)\] run (.*)$', line)
     if m and ' if ' not in m.group(2) and ' unless ' not in m.group(2):
         return (m.group(1), m.group(2), None) if with_pos else (m.group(1), m.group(2))
+    m = re.match(r'scoreboard players set @s\[([^\]]*)\] Camera (\d+)$', line)
+    if m:   # the camera lock: the score counts down by itself and `camera @a[scores={Camera=1..2}] clear` ends the shot at 2
+        return (m.group(1), 'camhold ' + m.group(2), None) if with_pos else (m.group(1), 'camhold ' + m.group(2))
     m = re.match(r'(camera|title|playsound|particle|camerashake) .*?@s\[(.*?)\]', line)
     if m and line.startswith(('camera ', 'title ', 'playsound ')):
         return (m.group(2), line, None) if with_pos else (m.group(2), line)
@@ -283,7 +303,11 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
         line = raw.strip()
         if not line or line.startswith('#'):
             continue
-        pl = parse_line(line, True)
+        if opt.get('strict'):
+            pl = parse_line(line, True)
+        else:
+            pl = parse_line_old(line)
+            pl = pl + (None,) if pl else None
         if not pl:
             continue
         sel, cmd, off = pl
@@ -321,6 +345,10 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
         if not tok:
             continue
         row = None
+        if tok[0] == 'camhold':
+            # score N at tick t falls by one per tick and the camera is cleared when it reaches 2: the shot ends N-1 ticks after the last set
+            ev.append([ticks[-1] + max(int(tok[1]) - 2, 0) + 1, 'x', -1])
+            continue
         if tok[0] == 'particle' and len(tok) >= 2 and tok[1].startswith('ds:'):
             parts = re.split(r'(?=[~^])', tok[1][3:], maxsplit=1)
             name = parts[0]
@@ -373,8 +401,21 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
             continue
         for t in ticks:
             ev.append([t] + row)
+    ensure_camera_end(ev, n)
     ev.sort(key=lambda r: r[0])
     return ev
+
+
+def ensure_camera_end(ev, n):
+    """Safety net: a timeline whose last camera shot is never cleared (Bedrock clears it from another function, which the export does not
+    see) would leave the camera stuck on the client: clear it 40 ticks after the last shot, or at the end of the countdown."""
+    cams = [r[0] for r in ev if r[1] == 'c']
+    if not cams:
+        return
+    last_c = max(cams)
+    if any(r[1] == 'x' and r[0] >= last_c for r in ev):
+        return
+    ev.append([min(last_c + 40, n) if n > last_c else last_c + 1, 'x', -1])
 
 
 PROJECTILES = {
