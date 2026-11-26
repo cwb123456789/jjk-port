@@ -32,12 +32,18 @@ public final class AnimPlayerModel extends PlayerModel<AbstractClientPlayer> {
     /** the animation playing on this player and its time, null when none (read by the skin add-on). */
     public BedrockAnim curAnim;
     public float curTime;
+    /** true when the last draw of this model was done by the skin add-on (a worn skin) */
+    public boolean skinDrawn;
 
     @Override
     public void renderToBuffer(com.mojang.blaze3d.vertex.PoseStack poseStack, com.mojang.blaze3d.vertex.VertexConsumer buffer, int light,
             int overlay, float r, float g, float b, float a) {
         RenderHook h = hook;
-        if (h != null && h.render(this, poseStack, buffer, light, overlay, r, g, b, a)) return;
+        skinDrawn = false;
+        if (h != null && h.render(this, poseStack, buffer, light, overlay, r, g, b, a)) {
+            skinDrawn = true;
+            return;
+        }
         super.renderToBuffer(poseStack, buffer, light, overlay, r, g, b, a);
     }
 

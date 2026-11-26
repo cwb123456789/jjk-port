@@ -49,6 +49,7 @@ public final class AnimClientEvents {
                     field.setAccessible(true);
                     field.set(renderer, model);
                     ((LivingEntityRenderer) renderer).addLayer(new HeldKatanaLayer((net.minecraft.client.renderer.entity.RenderLayerParent) renderer));
+                    ((LivingEntityRenderer) renderer).addLayer(new com.jujutsuenhancement.client.render.SixEyesLayer((net.minecraft.client.renderer.entity.RenderLayerParent) renderer));
                 } catch (Exception e) {
                     LogUtils.getLogger().warn("Could not install the animated player model ({}): {}", skin, e.toString());
                 }

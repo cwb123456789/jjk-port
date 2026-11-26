@@ -144,6 +144,15 @@ final class SkinClient {
         if (tex.glow() != null) {
             br.render(bm, ps, buffers.getBuffer(RenderType.eyes(tex.glow())), 0xF000F0, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         }
+        if (com.jujutsuenhancement.client.render.SixEyes.has(act.entityId())) {
+            Object head = br.bone(bm, "head");
+            if (head != null) {
+                ps.pushPose();
+                br.translateTo(bm, head, ps);
+                com.jujutsuenhancement.client.render.SixEyes.draw(ps, buffers);
+                ps.popPose();
+            }
+        }
         return true;
     }
 }

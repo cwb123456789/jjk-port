@@ -4,22 +4,53 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 /**
- * The cutscenes (CG animations, hurt animations, camera shots) that are running on a player. A technique registers one when its CG
- * starts and ends it when the CG is over; the skin add-on's commands (咒术替换 / 服饰替换) cancel the running one so the player can
- * move and swap the skin, then call {@code restart} so the CG plays again, unchanged except for the skin.
+ * The cutscenes (CG animations, hurt animations, camera shots) that are running on a player. A CG registers one when it starts (every
+ * effect timeline with a camera shot does, see {@code ModNet.moveFx}) and it ends by itself when the timeline is over; the skin add-on's
+ * commands (咒术替换 / 服饰替换) cancel the running one so the player can move and swap the skin, then call {@code resume} so the CG
+ * plays again from its first tick, unchanged except for the skin.
  */
+@Mod.EventBusSubscriber(modid = com.jujutsuenhancement.JujutsuEnhancement.MODID)
 public final class CgSessions {
-    public record Session(String id, Runnable restart, Runnable cancel) {}
+    public static final class Session {
+        public final String id;
+        public final Runnable restart;
+        public final Runnable cancel;
+        public long endTick;
+        public final long startTick;
+        public final int ticks;
+        /** the player animation of the CG, replayed with it */
+        public String anim;
+        public int idle;
+
+        Session(String id, Runnable restart, Runnable cancel, long startTick, int ticks) {
+            this.id = id;
+            this.restart = restart;
+            this.cancel = cancel;
+            this.startTick = startTick;
+            this.ticks = ticks;
+            this.endTick = startTick + ticks;
+        }
+    }
 
     private static final Map<UUID, Session> RUNNING = new ConcurrentHashMap<>();
     private static final Map<UUID, Session> PAUSED = new ConcurrentHashMap<>();
 
     private CgSessions() {}
 
-    public static void begin(ServerPlayer p, String id, Runnable restart, Runnable cancel) {
-        RUNNING.put(p.getUUID(), new Session(id, restart, cancel));
+    public static Session begin(ServerPlayer p, String id, int ticks, Runnable restart, Runnable cancel) {
+        Session s = new Session(id, restart, cancel, p.level().getGameTime(), Math.max(ticks, 1));
+        RUNNING.put(p.getUUID(), s);
+        PAUSED.remove(p.getUUID());
+        return s;
+    }
+
+    public static Session current(ServerPlayer p) {
+        return RUNNING.get(p.getUUID());
     }
 
     public static void end(ServerPlayer p) {
@@ -35,7 +66,8 @@ public final class CgSessions {
         Session s = RUNNING.remove(p.getUUID());
         if (s == null) return false;
         PAUSED.put(p.getUUID(), s);
-        if (s.cancel() != null) s.cancel().run();
+        if (s.cancel != null) s.cancel.run();
+        else com.jujutsuenhancement.net.ModNet.stopCg(p);
         return true;
     }
 
@@ -43,11 +75,23 @@ public final class CgSessions {
     public static boolean resume(ServerPlayer p) {
         Session s = PAUSED.remove(p.getUUID());
         if (s == null) return false;
-        if (s.restart() != null) s.restart().run();
+        if (s.restart != null) s.restart.run();
+        else com.jujutsuenhancement.net.ModNet.replayCg(p, s);
         return true;
     }
 
     public static boolean paused(ServerPlayer p) {
         return PAUSED.containsKey(p.getUUID());
+    }
+
+    @SubscribeEvent
+    public static void onTick(TickEvent.PlayerTickEvent e) {
+        if (e.phase != TickEvent.Phase.END || !(e.player instanceof ServerPlayer p)) return;
+        Session s = RUNNING.get(p.getUUID());
+        if (s != null && p.level().getGameTime() >= s.endTick) RUNNING.remove(p.getUUID());
+        if (!p.isAlive()) {
+            RUNNING.remove(p.getUUID());
+            PAUSED.remove(p.getUUID());
+        }
     }
 }

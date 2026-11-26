@@ -106,6 +106,11 @@ public final class PlayerAnims {
     public static void start(int entityId, String name, int idleBlock) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return;
+        if (name.isEmpty()) {   // the CG was stopped (咒术替换): the player is free again
+            PLAYING.remove(entityId);
+            IDLE_AT.remove(entityId);
+            return;
+        }
         Entity e = mc.level.getEntity(entityId);
         BedrockAnim anim = get(name);
         if (e == null || anim == null) return;

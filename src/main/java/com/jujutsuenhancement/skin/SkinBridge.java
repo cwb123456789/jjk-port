@@ -20,7 +20,7 @@ final class SkinBridge {
 
     final String id;
     final String display;
-    private final Method get, remove, set, texture, model, stSkin, stBedrock, mReset, mBone, mRender, openScreen;
+    private final Method get, remove, set, texture, model, stSkin, stBedrock, mReset, mBone, mRender, mTranslate, openScreen;
     private final Field fx, fy, fz, frx, fry, frz, fbx, fby, fbz, fbrx, fbry, fbrz;
 
     private SkinBridge(String id, String display) throws Exception {
@@ -40,6 +40,7 @@ final class SkinBridge {
         mReset = bm.getMethod("reset");
         mBone = bm.getMethod("bone", String.class);
         mRender = bm.getMethod("render", PoseStack.class, VertexConsumer.class, int.class, int.class, float.class, float.class, float.class, float.class);
+        mTranslate = bm.getMethod("translateTo", bone, PoseStack.class);
         Method open = null;
         try {
             open = Class.forName("com." + id + ".client.ClientHooks").getMethod("openScreen", int.class);
@@ -129,6 +130,15 @@ final class SkinBridge {
             return model.invoke(null, state);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    /** Moves the pose stack to the bone (pivot and rotation of the bone and of its parents). */
+    void translateTo(Object bm, Object bone, PoseStack ps) {
+        try {
+            mTranslate.invoke(bm, bone, ps);
+        } catch (Exception ignored) {
+            // nothing
         }
     }
 
