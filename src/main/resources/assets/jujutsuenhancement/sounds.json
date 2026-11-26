@@ -4231,5 +4231,301 @@
         "volume": 1.0
       }
     ]
+  },
+  "bedrock.gojo.mv_mob_honoredone": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_honoredone",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_megunacutscene1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_megunacutscene1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_mountain_buster": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_mountain_buster",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_adapt": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_adapt",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_alwaysbetonahakari": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_alwaysbetonahakari",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_improvisedpurple2": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_improvisedpurple2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_jackpot2": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_jackpot2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_megunacutscene1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_megunacutscene1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_rare": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_rare",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_tukadonka": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_tukadonka",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_bonk": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_bonk",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_comeatme": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_comeatme",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_cursed_speech": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_cursed_speech1",
+        "volume": 1.0
+      },
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_cursed_speech2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_gambaregambare2": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_gambaregambare2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_icebreaker1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_icebreaker1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_kai": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_kai",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_metal1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_metal1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_shi_yourself": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_shi_yourself",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_blastaway": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_blastaway",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_break": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_break",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_die": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_die",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_dontmove": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_dontmove",
+        "volume": 1.0
+      },
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_dontmove2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_getcrushed": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_getcrushed",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_heal": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_heal",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_plummet": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_plummet",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_return": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_return",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_runaway": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_runaway",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_speech_sleep": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_speech_sleep",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_mob_sukuna_laugh2": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_sukuna_laugh2",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_energy": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_energy1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_laser1": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_laser1",
+        "volume": 1.0
+      }
+    ]
+  },
+  "bedrock.gojo.mv_music_objection": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "jujutsuenhancement:bedrock/gojo_mv_objection",
+        "volume": 1.0
+      }
+    ]
   }
 }

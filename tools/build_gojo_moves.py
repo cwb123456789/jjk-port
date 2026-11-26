@@ -230,31 +230,63 @@ def camera_row(cmd, sel, eyes):
     return row
 
 
-def parse_line(line):
-    """-> (selector of the executor, command) for the lines that run at the caster."""
-    m = re.match(r'execute as @s\[(.*?)\] at @s(?: anchored eyes)? run (.*)$', line)
+POSITIONED = r'(?: positioned ((?:[~^][-\d.]*\s*){3}))?'
+
+
+def parse_line(line, with_pos=False):
+    """-> (selector of the executor, command) for the lines that run at the caster; with_pos also gives the `positioned` offset
+    (kind, [x, y, z]) or None as a third value."""
+    line = re.sub(r' {2,}', ' ', line)
+    m = re.match(r'execute as @s\[([^\]]*)\] at @s(?: anchored eyes)?' + POSITIONED + r' run (.*)$', line)
     if m:
-        return m.group(1), m.group(2)
+        pos = coords(m.group(2)) if m.group(2) else None
+        if m.group(2) and pos is None:
+            return None
+        return (m.group(1), m.group(3), pos) if with_pos else (None if (pos and not _zero(pos)) else (m.group(1), m.group(3)))
     m = re.match(r'execute as @s\[(.*?)\] run (.*)$', line)
-    if m:
-        return m.group(1), m.group(2)
+    if m and ' if ' not in m.group(2) and ' unless ' not in m.group(2):
+        return (m.group(1), m.group(2), None) if with_pos else (m.group(1), m.group(2))
     m = re.match(r'(camera|title|playsound|particle|camerashake) .*?@s\[(.*?)\]', line)
     if m and line.startswith(('camera ', 'title ', 'playsound ')):
-        return m.group(2), line
+        return (m.group(2), line, None) if with_pos else (m.group(2), line)
     return None
+
+
+def _zero(pos):
+    return all(abs(v) < 1e-9 for v in pos[1])
+
+
+def identity_tags(path, var):
+    """Positive tags (wep1, the weapon's name ...) that sit on most counter lines of a function: they say WHICH skill it is, and the caster has
+    them while it runs, so they are no condition of the timeline. A tag on only some lines (sixeyes, a form, !x) stays a condition."""
+    lines = 0
+    count = {}
+    for raw in open(path, encoding='utf-8', errors='ignore').read().replace('\r', '').split('\n'):
+        pl = parse_line(raw.strip()) if raw.strip() and not raw.strip().startswith('#') else None
+        if not pl:
+            continue
+        sel = pl[0]
+        if not re.search(r'\b' + var + r'=', sel):
+            continue
+        lines += 1
+        for t in set(re.findall(r'tag=(\w+)', sel)):
+            count[t] = count.get(t, 0) + 1
+    return {t for t, c in count.items() if lines >= 2 and c >= 0.6 * lines and t != 'blackflashed'}
 
 
 def events_for(path, n, sounds, particles, glyphs, opt=None):
     opt = opt or {}
     ev = []
+    if opt.get('strict') and 'ident' not in opt:
+        opt['ident'] = identity_tags(path, opt.get('var', 'move'))
     for raw in open(path, encoding='utf-8', errors='ignore').read().replace('\r', '').split('\n'):
         line = raw.strip()
         if not line or line.startswith('#'):
             continue
-        pl = parse_line(line)
+        pl = parse_line(line, True)
         if not pl:
             continue
-        sel, cmd = pl
+        sel, cmd, off = pl
         eyes = ' anchored eyes ' in line
         if eyes and not cmd.startswith('camera'):
             continue  # the other commands are not exported with the eye anchor
@@ -265,7 +297,7 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
             names = set(re.findall(r'(\w+)=', re.search(r'scores=\{([^}]*)\}', sel).group(1))) if 'scores=' in sel else set()
             if names - {opt.get('var', 'move')} or re.search(r'\bname=|type=!|type=(?!player)', sel):
                 continue
-            if any(t not in ('blackflashed', '!blackflashed') for t in re.findall(r'tag=([!\w]+)', sel)):
+            if any(t not in ('blackflashed', '!blackflashed') and t not in opt.get('ident', ()) for t in re.findall(r'tag=([!\w]+)', sel)):
                 continue
         rng = move_range(sel, 100000 if opt else n, opt.get('var', 'move') if opt else 'move')
         if not rng:
@@ -296,6 +328,13 @@ def events_for(path, n, sounds, particles, glyphs, opt=None):
             c = coords(rest) if rest else (1, [0.0, 0.0, 0.0])
             if c is None:
                 continue
+            if off is not None and not _zero(off):
+                if _zero(c):
+                    c = off
+                elif c[0] == off[0]:
+                    c = (c[0], [c[1][i] + off[1][i] for i in range(3)])
+                else:
+                    continue
             particles.add(name)
             row = ['p', name, c[0]] + c[1]
         elif tok[0] == 'playsound' and len(tok) >= 4:
