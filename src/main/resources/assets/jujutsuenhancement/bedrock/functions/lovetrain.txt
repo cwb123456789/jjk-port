@@ -1,0 +1,1475 @@
+@@lovetrain/brutal_barrage
+tellraw @s[scores={hakarimode=0,move=80}] {"rawtext":[{"translate":"text.requires_jackpot.lovetrain"}]}
+scoreboard players set @s[scores={hakarimode=0,move=4..80}] move 3
+playanimation @s[scores={move=80}] animation.brutal_barrage
+execute as @s[scores={move=79..}] at @s run tp @s @s
+tag @e[scores={move=1..2}] remove wep4
+tag @s[scores={move=75..,Stun=1..}] remove wep4
+scoreboard players set @s[scores={move=76..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=1..75}] Frames 4
+effect @s[scores={move=80..81}] slowness 3 5 true
+scoreboard players set @a[scores={move=31}] atk 2
+scoreboard players random @s[scores={move=20}] blackflashchance 1 269
+scoreboard players set @s[scores={move=20},tag=blackflashrig] blackflashchance 7
+execute as @s[scores={move=35..68}] at @s positioned ^^^3.05 run playsound random.barrage @a[r=199] ~~~ 99999 1.5 99999
+execute as @s[scores={move=31..68}] at @s run camerashake add @a[r=50] 1 0.2
+execute as @s[scores={move=31..68}] at @s positioned ^^^3.05 run damage @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] 1 override
+execute as @s[scores={move=31..68}] at @s positioned ^^^3.05 run execute as @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] at @s run tp @s ~~~
+execute as @s[scores={move=31..68}] at @s positioned ^^^3.05 run scoreboard players add @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Evade 2
+execute as @s[scores={move=31..68}] at @s positioned ^^^3.05 run scoreboard players set @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Stun 25
+execute as @s[scores={move=31..68}] at @s positioned ^^^3.05 run scoreboard players set @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Hit 2
+scoreboard players set @s[scores={move=15..16}] atk 2
+execute as @s[scores={move=15}] at @s positioned ^^^3.05 run scoreboard players operation @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] damage += @s damageadd
+execute as @s[scores={move=15}] at @s positioned ^^^3.05 run damage @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] 25 override
+execute as @s[scores={move=15}] at @s positioned ^^^3.05 run scoreboard players add @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Evade 2
+execute as @s[scores={move=15}] at @s positioned ^^^3.05 run scoreboard players set @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Stun 25
+execute as @s[scores={move=15}] at @s run summon ds:red_reverse ~~~
+execute as @s[scores={move=15}] at @s run summon ds:red_reverse ~~~
+execute as @s[scores={move=15}] at @s run summon ds:red_reverse ~~~
+execute as @s[scores={move=1..15}] at @s run tp @s ~~~
+execute as @s[scores={move=15}] at @s positioned ^^^3.05 run scoreboard players set @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] knockdown 96
+execute as @s[scores={move=15}] at @s positioned ^^^3.05 run scoreboard players set @e[tag=!Frames,r=3,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Hit 2
+execute as @s[scores={move=27}] at @s anchored eyes positioned ^^^-1 run playsound mob.magic2 @a ~~~ 1 0.25
+title @s[scores={move=18},tag=!impactframesoff] title 
+title @s[scores={move=17},tag=!impactframesoff] title 
+title @s[scores={move=16},tag=!impactframesoff] title 
+title @s[scores={move=15},tag=!impactframesoff] title 
+title @s[scores={move=14},tag=!impactframesoff] title 
+title @s[scores={move=13},tag=!impactframesoff] title 
+title @s[scores={move=12},tag=!impactframesoff] title §l
+execute as @s[scores={move=11}] at @s run summon gg:impact_frame
+execute as @s[scores={move=13}] at @s run summon gg:impact_frame_black
+execute as @s[scores={move=12}] at @s anchored eyes positioned ^^^1 run camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=12}] at @s anchored eyes positioned ^^^2.5 run playsound mob.witch.throw @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=12}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.5 99999
+execute as @s[scores={move=12}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.3 99999
+execute as @s[scores={move=12}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 2 99999
+execute as @s[scores={move=12}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 1.65 99999
+execute as @s[scores={move=12}] at @s positioned ^^^2.5 run playsound mob.shock1 @a[r=199] ~~~ 99999 0.75 99999
+execute as @s[scores={move=12}] at @s positioned ^^^2.5 run playsound mob.shock1 @a[r=199] ~~~ 99999 0.4 99999
+execute as @s[scores={move=12}] at @s positioned ^^^2.5 run playsound mob.bullet @a[r=199] ~~~ 99999 1 99999
+@@lovetrain/cargo
+execute as @s[name="Cargo Crate"] at @s run tp @s ^^^2
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run summon ds:red_reversal
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run summon ds:red_reversal
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run particle ds:crater3
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run particle ds:large_slam1 ~~~
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run particle ds:large_slam2 ~~~
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run particle ds:large_slam3 ~~~
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run particle ds:large_slam4 ~~~
+execute as @s[scores={Deleter=1..86}] at @s unless block ~~~ air run camerashake add @a[r=40] 2 0.15
+execute as @s[scores={Deleter=1..86}] at @s run kill @e[type=item,r=20]
+tag @s add Frames
+execute as @s[scores={Deleter=5..}] at @s run scoreboard players set @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] Stun 30
+execute as @s[scores={Deleter=5..}] at @s run scoreboard players add @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] Evade 10
+execute as @s[scores={Deleter=5..}] at @s run scoreboard players set @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] knockdown 95
+execute as @s[scores={Deleter=5..}] at @s run scoreboard players add @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] Hit 3
+execute as @s[scores={Deleter=5..},type=ds:cargo1] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] 10 override
+execute as @s[scores={Deleter=5..},type=ds:cargo2] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] 16 override
+execute as @s[scores={Deleter=5..},type=ds:cargo3] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] 24 override
+execute as @s[scores={Deleter=5..},type=ds:cargo4] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=6,type=!ds:knockback,type=!ds:pachinko_impact1] 30 override
+execute as @s[scores={Deleter=5..}] at @s if entity @e[type=!item,tag=!Frames,family=!projectile,r=5,type=!ds:knockback,type=!ds:pachinko_impact1] run summon ds:knockback
+execute as @s[type=ds:cargo3] at @s run particle ds:gold_cargo
+execute as @s[type=ds:cargo4] at @s run particle ds:rainbow_cargo
+function damages/blunt_damage
+execute as @s[scores={Deleter=1..4},type=ds:cargo1] at @s run particle ds:doorcrash_green1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo1] at @s run particle ds:doorcrash_green2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo1] at @s run particle ds:doorcrash_green3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo2] at @s run particle ds:doorcrash_red1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo2] at @s run particle ds:doorcrash_red2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo2] at @s run particle ds:doorcrash_red3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo3] at @s run particle ds:doorcrash_gold1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo3] at @s run particle ds:doorcrash_gold2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo3] at @s run particle ds:doorcrash_gold3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo4] at @s run particle ds:doorcrash_rainbow1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo4] at @s run particle ds:doorcrash_rainbow2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:cargo4] at @s run particle ds:doorcrash_rainbow3 ~~~
+execute as @s[scores={Deleter=4}] at @s run playsound mob.magic2 @a[r=100] ~~~ 99999 0.6 99999
+execute as @s[scores={Deleter=4}] at @s run playsound random.explode @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={Deleter=4}] at @s run playsound random.explode @a[r=100] ~~~ 99999 1.85 99999
+execute as @s[scores={Deleter=4}] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={Deleter=1..}] at @s run kill @e[type=item,r=7]
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact1 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact2 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact3 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run tp @s ~~-200~
+@@lovetrain/devastating_blow
+tellraw @s[scores={hakarimode=0,move=24}] {"rawtext":[{"translate":"text.requires_jackpot.lovetrain"}]}
+scoreboard players set @s[scores={hakarimode=0,move=4..}] move 3
+playanimation @s[scores={move=24}] animation.devastating_punch
+tag @s[scores={move=1..2}] remove wep3
+scoreboard players set @s[scores={move=1..}] Frames 4
+scoreboard players set @s[scores={move=1..}] Move 4
+scoreboard players set @s[scores={move=1..}] Camera 4
+scoreboard players set @a[scores={move=14..15}] atk 2
+scoreboard players random @s[scores={move=20}] blackflashchance 1 269
+scoreboard players set @s[scores={move=20},tag=blackflashrig] blackflashchance 7
+execute as @s[scores={move=23..24}] at @s run scriptevent ds:knockback 6
+execute as @s[scores={move=5..20}] at @s anchored eyes run camera @s set minecraft:third_person
+scoreboard players set @s[scores={move=14..96}] atk 2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact1
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact5
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^4 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^4 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^4^^4 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^4^^4 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^-4^^4 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^-4^^4 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^8 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^8 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^8^^8 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^8^^8 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^-8^^8 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^-8^^8 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^4^^8 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^4^^8 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^-4^^8 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^-4^^8 run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^2.5 run playsound mob.witch.throw @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.5 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.3 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 2 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 1.65 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound mob.shock1 @a[r=199] ~~~ 99999 0.75 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound mob.shock1 @a[r=199] ~~~ 99999 0.4 99999
+execute as @s[scores={move=14}] at @s run camerashake add @a[r=50] 4 1
+execute as @s[scores={move=14}] at @s positioned ^^^5 run scoreboard players operation @e[tag=!Frames,r=4.99,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] damage += @s damageadd
+execute as @s[scores={move=14}] at @s positioned ^^^5 run damage @e[tag=!Frames,r=4.99,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] 14 override entity @s
+execute as @s[scores={move=14}] at @s positioned ^^^5 run scoreboard players add @e[tag=!Frames,r=4.99,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Evade 20
+execute as @s[scores={move=14}] at @s positioned ^^^5 run scoreboard players add @e[tag=!Frames,r=4.99,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] knockdown 95
+execute as @s[scores={move=14}] at @s positioned ^^^5 run scoreboard players set @e[tag=!Frames,r=4.99,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Stun 25
+execute as @s[scores={move=14}] at @s positioned ^^^5 run scoreboard players add @e[tag=!Frames,r=4.99,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Hit 3
+execute as @s[scores={move=14}] at @s positioned ^^^2 run summon ds:red_reversal
+execute as @s[scores={move=1..14}] at @s run tp @s ~~~
+@@lovetrain/fever_combo
+tellraw @s[scores={hakarimode=0,move=109}] {"rawtext":[{"translate":"text.requires_jackpot.lovetrain"}]}
+scoreboard players set @s[scores={hakarimode=0,move=4..109}] move 3
+playanimation @s[scores={move=109}] animation.fever_combo
+tag @s[scores={move=1..2}] remove wep2
+tag @s[scores={move=97..,Stun=1..}] remove wep2
+scoreboard players set @s[scores={move=97..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=1..94}] Frames 4
+scoreboard players set @s[scores={move=1..}] Move 4
+scoreboard players set @s[scores={move=1..94}] Camera 4
+scoreboard players set @a[scores={move=94..95}] atk 2
+scoreboard players random @s[scores={move=20}] blackflashchance 1 269
+scoreboard players set @s[scores={move=20},tag=blackflashrig] blackflashchance 7
+execute as @s[scores={move=1..12}] at @s run tag @e[tag=FeverCombod] remove FeverCombod
+execute as @s[scores={move=1..},type=!player] at @s run tp @s ~~~
+execute as @s[scores={move=103..106}] at @s positioned ^^^2.5 unless entity @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] run scriptevent ds:knockback 5
+execute as @s[scores={move=106}] at @s run particle ds:air_forward
+execute as @s[scores={move=106}] at @s run playsound random.whoosh @a[r=100] ~~1~ 99999 1.5 99999
+execute as @s[scores={move=94}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact1
+execute as @s[scores={move=94}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact2
+execute as @s[scores={move=94}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact3
+execute as @s[scores={move=94}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact5
+execute as @s[scores={move=94}] at @s anchored eyes positioned ^^^1 run particle ds:ground_slam3
+execute as @s[scores={move=94}] at @s anchored eyes positioned ^^^1 run camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=94}] at @s anchored eyes positioned ^^^2.5 run playsound mob.witch.throw @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.5 99999
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.3 99999
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 2 99999
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 1.65 99999
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run playsound mob.shock1 @a[r=199] ~~~ 99999 1.75 99999
+execute as @s[scores={move=94}] at @s run camerashake add @a[r=50] 3 0.25
+scoreboard players set @s[scores={move=94..96}] atk 2
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] damage += @s damageadd
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run damage @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] 4 override entity @s
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Evade 8
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run scoreboard players set @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Stun 95
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Hit 3
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run tag @e[tag=!Frames,r=2.49,c=1,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] add FeverCombod
+execute as @s[scores={move=94}] at @s positioned ^^^2.5 run effect @e[tag=!Frames,r=2.49,c=1,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] levitation 3 12 true
+execute as @s[scores={move=89}] at @s run summon ds:red_reverse ~~~
+execute as @s[scores={move=85..90}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=92}] at @s run camera @s fade time 0.25 0.1 0.25 color 0 0 0
+execute as @s[scores={move=92}] at @s run tp @s @s
+execute as @s[scores={move=78}] at @s anchored eyes run camera @s set minecraft:free pos ^0.5 ^ ^2 rot ~-5 ~160
+execute as @s[scores={move=77}] at @s anchored eyes run camera @s set minecraft:free ease 1 in_sine pos ^1 ^-0.1 ^2.5 rot ~-6 ~155
+execute as @s[scores={move=57}] at @s anchored eyes run camera @s set minecraft:free pos ^2 ^-0.45 ^0.5 rot ~-15 ~100
+execute as @s[scores={move=56}] at @s anchored eyes run camera @s set minecraft:free ease 0.8 in_out_circ pos ^2.25 ^-0.45 ^0.35 rot ~10 ~95
+execute as @s[scores={move=30}] at @s anchored eyes run camera @s set minecraft:free ease 0.25 in_out_circ pos ^2.25 ^-0.45 ^0.35 rot ~10 ~25
+execute as @s[scores={move=30}] at @s run camera @s fade time 0.2 0.1 0.1 color 0 0 0
+execute as @s[scores={move=23}] at @s anchored eyes run camera @s set minecraft:free pos ^ ^1 ^-4.5 rot ~15 ~
+execute as @s[scores={move=1..25}] at @s run execute as @e[type=!item,tag=FeverCombod,c=1] at @s run tp @e[scores={move=1..25}] ^^2^2 facing @s
+execute as @s[scores={move=5}] at @s run camera @s fade time 0.4 0.5 0.2 color 0 0 0
+title @s[scores={move=15..90},tag=!impactframesoff] title 
+execute as @s[scores={move=1..25}] at @s run tp @s ~~~
+scoreboard players set @s[scores={move=14..16}] atk 2
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] damage += @s damageadd
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run damage @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] 12 override entity @s
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Evade 25
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] knockdown 95
+execute as @s[scores={move=13..14}] at @s run summon ds:red_reverse ~~~
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run scoreboard players set @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Stun 25
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] Hit 3
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run tag @e[tag=!Frames,r=2.49,c=1,type=!ds:lapse_explode,family=!projectile,family=!damage,type=!item] remove FeverCombod
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound mob.wither.break_block @a[r=199] ~~~ 99999 0.7 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.45 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound random.explode @a[r=199] ~~~ 99999 0.25 99999
+execute as @s[scores={move=14}] at @s run particle ds:burst_impact ^^^1
+execute as @s[scores={move=12}] at @s run summon gg:impact_frame_black
+execute as @s[scores={move=14}] at @s run summon gg:impact_frame
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound mob.shock1 @a[r=199] ~~~ 99999 1.25 99999
+execute as @s[scores={move=14}] at @s positioned ^^^2.5 run playsound mob.shock1 @a[r=199] ~~~ 99999 1 99999
+execute as @s[scores={move=14}] at @s run camerashake add @a[r=50] 2 0.15 rotational
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact1
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact2
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact5
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s anchored eyes positioned ^^^1 run camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=93}] at @s unless entity @e[tag=FeverCombod,r=10] run playanimation @s animation.stunned
+execute as @s[scores={move=93}] at @s unless entity @e[tag=FeverCombod,r=10] run scoreboard players set @s move 3
+@@lovetrain/hakari_dance
+playanimation @s[scores={cutscene=430},tag=hakaridance] animation.hakari_dance
+execute as @s[scores={cutscene=430..},tag=hakaridance] at @s run tp @s @s
+execute as @s[scores={cutscene=430..},tag=hakaridance] at @s run playsound music.jackpot2 @a[r=50] ~~~ 99999 1 99999
+tag @e[scores={cutscene=1..2},tag=hakaridance] remove hakaridance
+scoreboard players add @s[scores={cutscene=430..}] infinity 15
+scoreboard players add @s[scores={cutscene=1..}] infinity 1
+execute as @s run scoreboard players set @s Frames 4
+execute as @s[scores={cutscene=70..}] run scoreboard players set @e[r=40,type=!item,type=!xp_orb,family=!damage,family=!projectile,type=!ds:projectile,type=!arrow,family=!despawncito,type=!armor_stand] Stun 5
+execute as @s run scoreboard players set @e[r=40,type=!item,type=!xp_orb,family=!damage,family=!projectile,type=!ds:projectile,type=!arrow,family=!despawncito,type=!armor_stand] Move 4
+execute as @s run scoreboard players set @e[r=40,type=!item,type=!xp_orb,family=!damage,family=!projectile,type=!ds:projectile,type=!arrow,family=!despawncito,type=!armor_stand] Camera 4
+titleraw @s[scores={cutscene=300..410}] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.skip_jackpot.tip"}]}
+execute as @s[scores={cutscene=300..410},tag=itemUse:ds:lovetrain5] at @s run playanimation @s animation.stunned
+execute as @s[scores={cutscene=300..410},tag=itemUse:ds:lovetrain5] at @s run scoreboard players set @s cutscene 56
+execute as @s[scores={cutscene=55},tag=hakaridance] at @s run playsound music.alwaysbetonahakari @a[r=50] ~~~ 99999 1 99999
+execute as @s[scores={cutscene=25},tag=hakaridance] at @s anchored eyes run tellraw @s {"rawtext":[{"translate":"text.jackpot"}]}
+execute as @s[scores={cutscene=430..},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^ ^-0.25 ^1.5 rot ~ ~180
+execute as @s[scores={cutscene=429},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1.85 in_sine pos ^ ^-0.25 ^2 rot ~ ~180
+execute as @s[scores={cutscene=404},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.2 0.1 0.2 color 0 0 0
+execute as @s[scores={cutscene=398},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^2 ^-0.85 ^-3 rot ~5 ~30
+execute as @s[scores={cutscene=397},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.5 in_out_circ pos ^3 ^-0.85 ^-4 rot ~-5 ~40
+execute as @s[scores={cutscene=380},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.5 0.1 0.1 color 0 0 0
+execute as @s[scores={cutscene=369},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^ ^-0.3 ^1 rot ~15 ~
+execute as @s[scores={cutscene=368},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.75 in_sine pos ^ ^-0.3 ^1 rot ~-2 ~
+execute as @s[scores={cutscene=360},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.35 0.5 0.5 color 255 255 255
+execute as @s[scores={cutscene=386..392},tag=hakaridance] at @s run camerashake add @a[r=40] 2 0.15
+execute as @s[scores={cutscene=386..392},tag=hakaridance] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 0.5 0.75
+execute as @s[scores={cutscene=356..392},tag=hakaridance] at @s run particle ds:hakari_dance_start1 ~~~
+execute as @s[scores={cutscene=356..392},tag=hakaridance] at @s run particle ds:hakari_dance_start2 ~~~
+execute as @s[scores={cutscene=356..355},tag=hakaridance] at @s run particle ds:hakari_dance_start3 ~~~
+execute as @s[scores={cutscene=394},tag=hakaridance] at @s run particle ds:burst_impact ~~1~
+execute as @s[scores={cutscene=393},tag=hakaridance] at @s run particle ds:invert
+execute as @s[scores={cutscene=394},tag=hakaridance] at @s run summon gg:impact_frame
+execute as @s[scores={cutscene=390},tag=hakaridance] at @s run summon gg:impact_frame_black
+execute as @s[scores={cutscene=246..350},tag=hakaridance] at @s run camerashake add @a[r=50] 0.15 0.05
+execute as @s[scores={cutscene=76..186},tag=hakaridance] at @s run camerashake add @a[r=50] 0.15 0.05
+execute as @s[scores={cutscene=1..355},tag=hakaridance] at @s run particle ds:hakari_dance ~~~
+execute as @s[scores={cutscene=348},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^2.5 ^2 ^15 rot ~25 ~150
+execute as @s[scores={cutscene=347},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.1 0 0.15 color 255 255 255
+execute as @s[scores={cutscene=346},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 2 in_sine pos ^1.25 ^0.25 ^2 rot ~10 ~140
+execute as @s[scores={cutscene=308},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^-1.5 ^-0.5 ^2.25 rot ~ ~210
+execute as @s[scores={cutscene=307},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.1 0 0.15 color 255 255 255
+execute as @s[scores={cutscene=306},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1 in_sine pos ^-1.25 ^-0.5 ^2 rot ~-15 ~220
+execute as @s[scores={cutscene=278},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^ ^1 ^4 rot ~15 ~180
+execute as @s[scores={cutscene=277},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.1 0 0.15 color 255 255 255
+execute as @s[scores={cutscene=276},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1 in_sine pos ^ ^0.25 ^1.5 rot ~5 ~180
+execute as @s[scores={cutscene=248},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^ ^-1.25 ^0.95 rot ~20 ~180
+execute as @s[scores={cutscene=236},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.5 0 0.5 color 255 255 255
+execute as @s[scores={cutscene=246},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1 in_sine pos ^ ^-1.35 ^0.65 rot ~16 ~180
+execute as @s[scores={cutscene=228},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^-1.5 ^ ^2.25 rot ~ ~210
+execute as @s[scores={cutscene=226},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.15 in_sine pos ^-1 ^-0.3 ^0.75 rot ~ ~230
+execute as @s[scores={cutscene=223},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.175 in_sine pos ^-0.75 ^-0.15 ^0.75 rot ~3 ~225
+execute as @s[scores={cutscene=219},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.15 in_sine pos ^-1 ^-0.3 ^0.75 rot ~ ~230
+execute as @s[scores={cutscene=216},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.175 in_sine pos ^-0.75 ^-0.15 ^0.75 rot ~3 ~225
+execute as @s[scores={cutscene=212},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.15 in_sine pos ^-1 ^-0.3 ^0.75 rot ~ ~230
+execute as @s[scores={cutscene=208},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.175 in_sine pos ^-0.75 ^-0.15 ^0.75 rot ~3 ~225
+execute as @s[scores={cutscene=205},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.15 in_sine pos ^-1 ^-0.3 ^0.75 rot ~ ~230
+execute as @s[scores={cutscene=202},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.175 in_sine pos ^-0.75 ^-0.15 ^0.75 rot ~3 ~225
+execute as @s[scores={cutscene=198},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.15 in_sine pos ^-1 ^-0.3 ^0.75 rot ~ ~230
+execute as @s[scores={cutscene=186},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 0.175 in_sine pos ^-0.75 ^-0.15 ^0.75 rot ~3 ~225
+execute as @s[scores={cutscene=197},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.5 0.15 0.5 color 255 255 255
+execute as @s[scores={cutscene=186},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^-0.5 ^-0.6 ^ rot ~15 ~-90
+execute as @s[scores={cutscene=175},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1 in_sine pos ^-1.25 ^-0.5 ^ rot ~-2 ~-90
+execute as @s[scores={cutscene=140},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.2 0.05 0.2 color 255 255 255
+execute as @s[scores={cutscene=136},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^-2 ^-0.75 ^-3 rot ~5 ~-30
+execute as @s[scores={cutscene=135},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1 in_sine pos ^-2 ^-0.75 ^-3 rot ~-15 ~-30
+execute as @s[scores={cutscene=100},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.2 0.05 0.2 color 255 255 255
+execute as @s[scores={cutscene=96},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^0.3 ^-0.25 ^0.4 rot ~35 ~-150
+execute as @s[scores={cutscene=95},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1 in_out_circ pos ^-0.65 ^0.75 ^1 rot ~35 ~-150
+execute as @s[scores={cutscene=52},tag=hakaridance] at @s run playsound music.tukadonka @a[r=50] ~~~ 99999 1 99999
+execute as @s[scores={cutscene=1..40},tag=hakaridance] at @s run scoreboard players set @s hakarimode 5020
+execute as @s[scores={cutscene=1..40},tag=hakaridance] at @s run scoreboard players set @s countdown2 1480
+execute as @s[scores={cutscene=60..70},tag=hakaridance] at @s run scoreboard players set @e[type=ds:kashimo,r=60] ability2 0
+execute as @s[scores={cutscene=150},tag=hakaridance] at @s if entity @e[type=ds:kashimo,r=60] run tellraw @a[r=60] {"rawtext":[{"translate":"text.kashimo_cutscene1.jackpot"}]}
+execute as @s[scores={cutscene=115},tag=hakaridance] at @s if entity @e[type=ds:kashimo,r=60] run tellraw @a[r=60] {"rawtext":[{"translate":"text.kashimo_cutscene2.jackpot"}]}
+execute as @s[scores={cutscene=80},tag=hakaridance] at @s if entity @e[type=ds:kashimo,r=60] run tellraw @a[r=60] {"rawtext":[{"translate":"text.kashimo_cutscene3.jackpot"}]}
+execute as @s[scores={cutscene=55},tag=hakaridance] at @s if entity @e[type=ds:kashimo,r=60] run tellraw @a[r=60] {"rawtext":[{"translate":"text.kashimo_cutscene4.jackpot"}]}
+execute as @s[scores={cutscene=55},tag=hakaridance] at @s if entity @e[type=ds:kashimo,r=60] run damage @e[type=ds:kashimo] 1 none entity @s
+execute as @s[scores={cutscene=40,divergent=0},tag=hakaridance,type=player] at @s run scoreboard players operation @s damageinsurance = @s damageadd
+execute as @s[scores={cutscene=40,divergent=0},tag=hakaridance,type=player] at @s run scoreboard players operation @s divfist = @s damageadd
+execute as @s[scores={cutscene=40,divergent=0},tag=hakaridance,type=player] at @s run scoreboard players operation @s divfist /= two Mode
+execute as @s[scores={cutscene=40,divergent=0},tag=hakaridance,type=player] at @s run scoreboard players operation @s damageadd += @s divfist
+execute as @s[scores={cutscene=40,divergent=0},tag=roughce,tag=hakaridance,type=player] at @s run scoreboard players operation @s divfist /= two Mode
+execute as @s[scores={cutscene=40,divergent=0},tag=roughce,tag=hakaridance,type=player] at @s run scoreboard players operation @s damageadd += @s divfist
+execute as @s[scores={cutscene=52},tag=hakaridance] at @s anchored eyes run camera @a[r=50] fade time 0.5 1 0.5 color 0 0 0
+execute as @s[scores={cutscene=66},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^0.5 ^ ^-1 rot ~ ~15
+execute as @s[scores={cutscene=65},tag=hakaridance] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 2 in_sine pos ^0.75 ^ ^-3 rot ~ ~
+@@lovetrain/hakarimode
+tag @s[tag=!fistenergy] add fistenergy
+scoreboard players remove @s[type=!player,scores={hakarimode=1..}] hakarimode 1
+scoreboard players remove @s[scores={countdown1=1..}] countdown1 1
+scoreboard players remove @s[scores={countdown2=1..}] countdown2 1
+scoreboard players set @s[scores={countdown1=..-1}] countdown1 1
+replaceitem entity @s[scores={countdown1=0},hasitem={item=ds:hakarimode,location=slot.weapon.offhand,quantity=0}] slot.weapon.offhand 1 ds:hakarimode 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+scoreboard players set @s[scores={countdown1=0}] countdown1 30
+execute as @s[scores={countdown2=0}] at @s run playsound music.tukadonka @a[r=50]
+scoreboard players set @s[scores={countdown2=0}] countdown2 1420
+execute as @s[scores={countdown1=20}] at @s run camerashake add @a[r=50] 0.25 0.15
+execute as @s[scores={countdown1=10}] at @s run camerashake add @a[r=50] 0.25 0.15
+scoreboard players add @s domainCD 1
+scoreboard players set @s[scores={hakarimode=3..}] divergent 40
+scoreboard players set @s[type=player] divergentfistCD 40
+effect @s[scores={countdown1=0,antiheal=0}] instant_health 1 2 true
+effect @s[scores={countdown1=10,antiheal=0}] instant_health 1 2 true
+effect @s[scores={Disabled=0,Disabled2=0}] regeneration 2 20 true
+effect @s[scores={BasicM1s=0,BasicM1=0,AfterAnim=0,detect_sprint=1..}] speed 1 12 true
+effect @s[scores={BasicM1s=0,BasicM1=0,AfterAnim=0,detect_sprint=1..}] jump_boost 1 4 true
+scoreboard players set @s[type=player] reversecursedCD 40
+scoreboard players add @s[type=player] Energy 20
+execute if entity @e[type=ds:grand_festival,r=60,tag=DomainExpansion] run execute as @s[tag=!heavenlyrestriction,tag=lovetrain,tag=!domainimmune,tag=!Frames] at @s run function discharge/firework_explode
+execute as @s[scores={hakarimode=2..200}] at @s as @e[family=mahoraga,r=10,tag=!soul_adapting,tag=!soul_adapted,tag=adapted_1] at @s run function damages/soul_damage
+scoreboard players set @s[scores={hakarimode=..2,divergent=4..}] divergent 3
+scoreboard players set @s[scores={hakarimode=..2,countdown1=!0}] countdown1 0
+scoreboard players set @s[scores={hakarimode=..2,countdown2=!0}] countdown2 0
+clear @s[scores={hakarimode=..1},hasitem={item=ds:hakarimode}] ds:hakarimode
+execute as @s[scores={hakarimode=..1}] at @s run stopsound @a music.tukadonka
+@@lovetrain/idledeathgamble
+execute as @s[type=!player,scores={detect_health=200..}] at @s run tag @e[tag=!cantdomain,r=100,type=!ds:hakari] add cantdomain
+execute as @s[type=!player,scores={detect_health=200..}] at @s run scoreboard players set @e[scores={Stun=0},r=100,type=!player,type=!ds:hakari] Stun 100
+scoreboard players set @s[type=!player,scores={domainstart=42..93}] domainstart 41
+playanimation @s[scores={domainstart=100..}] animation.hakari_domain
+execute as @s[scores={domainstart=95}] at @s run playsound mob.deathgamble1 @a ~~~ 100000 1 100000
+execute as @s[scores={domainstart=95}] at @s run playsound mob.wither.shoot @a ~~~ 100000 0.15 100000
+execute as @s[scores={domainstart=85}] at @s run playsound mob.wither.shoot @a ~~~ 100000 0.25 100000
+execute as @s[scores={domainstart=100}] at @s run camerashake add @a[r=48] 2 0.25
+execute as @s[scores={domainstart=100}] at @s run playsound mob.bass @a ~~~ 100000 1 100000
+execute as @s[scores={domainstart=100}] at @s run particle ds:domain_area0 ~~~
+execute as @s[scores={domainstart=100}] at @s run particle ds:domainarea0 ~~~
+execute as @s[scores={domainstart=100}] at @s run particle ds:domainarea1 ~~~
+execute as @s[scores={domainstart=1..80}] at @s run particle ds:domainarea ~~~
+tag @e[type=!item,scores={domainstart=1..2},tag=form5] remove form5
+execute unless entity @s[scores={infinity=15..}] run scoreboard players add @s[scores={domainstart=100..}] infinity 15
+scoreboard players add @s[scores={domainstart=1..}] infinity 1
+execute as @s[scores={domainstart=1..200}] at @s[tag=!domainclashing] run execute as @e[r=48,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run tp @s ~~~
+effect @s speed 1 4 true
+scoreboard players set @s[scores={domainstart=1..}] Camera 4
+tag @s[scores={domainstart=1..},tag=!domainlayout] add domainlayout
+execute as @s[scores={domainstart=1..90}] at @s if entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run scoreboard players set @s domainstart 70
+execute as @s[scores={domainstart=41..50}] at @s unless entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run scoreboard players set @s domainstart 40
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run tag @s add domainclashing
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run scoreboard objectives add domain_clasher dummy
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run scoreboard players set @s domain_clasher 0
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run scoreboard players set @e[tag=domainclashing] domainstart 1001
+execute as @s[scores={domainstart=999..}] at @s if entity @e[r=33,tag=domainclashing,scores={domain_clasher=4}] unless entity @s[scores={domain_clasher=1..4}] run scoreboard players set @s domainstart 3
+execute as @s[scores={domainstart=999..}] at @s if entity @e[r=33,tag=domainclashing,scores={domain_clasher=4}] unless entity @s[scores={domain_clasher=1..4}] run tag @s remove domainclashing
+execute as @s[scores={domainstart=999..}] at @s if entity @e[r=33,tag=domainclashing,scores={domain_clasher=4}] unless entity @s[scores={domain_clasher=1..4}] run function domainloser
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=1..}] run scoreboard players set @s domain_clasher 1
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] if entity @e[tag=domainclashing,r=48,scores={domain_clasher=1}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=2..}] run scoreboard players set @s domain_clasher 2
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] if entity @e[tag=domainclashing,r=48,scores={domain_clasher=2}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=3..}] run scoreboard players set @s domain_clasher 3
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] if entity @e[tag=domainclashing,r=48,scores={domain_clasher=3}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=4..}] run scoreboard players set @s domain_clasher 4
+execute as @s[scores={domainstart=961..}] at @s run playsound mob.wither.shoot @a[r=100] ^^-15^5 9999 0.25 99999
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash ~~~
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash1 ~~~
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash2 ~~~
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash3 ~~~
+execute as @s[scores={domainstart=900..}] at @s if entity @e[tag=domainlayout,r=48,rm=0.15] run playanimation @s animation.hakari_domain_standby
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] run scoreboard objectives add num dummy
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] run scoreboard players add @s num 1
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] if entity @s[scores={num=100..}] run execute as @e[scores={domainstart=1..1002},r=50] at @s run function cancel_attack
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] run scoreboard players set @s domainstart 962
+execute as @s[scores={domainstart=961}] at @s run scoreboard objectives add domain_clasher_id dummy
+execute as @s[scores={domainstart=960}] at @s run scoreboard players random @s domain_clasher_id 1 999999
+execute as @s[scores={domainstart=960}] at @s run tag @s add deploy_idle
+execute as @s[scores={domainstart=960}] at @s run scriptevent ds:spawn_middle "domainclashing" "ds:clash_starting" "domainclashing"
+execute as @s[scores={domainstart=960}] at @s run scoreboard players set @e[r=50] Stun 33
+scoreboard players set @s[scores={domainstart=900..940}] domainstart 950
+execute as @s[scores={domainstart=38}] at @s unless entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run scoreboard players set @s domain 441
+execute as @s[scores={domainstart=38}] at @s unless entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run scoreboard players set @e[r=48] domainstart 1
+@@lovetrain/idledeathgamble2
+execute as @s[scores={domain=1..}] at @s run tag @e[family=mahoraga,r=60,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] add domain_barrier_adapting
+execute as @s[scores={domain=1..}] at @s if entity @e[tag=domain_barrier_adapted,r=50] run particle ds:domain_smash1 ~~1~
+execute as @s[scores={domain=1..}] at @s if entity @e[tag=domain_barrier_adapted,r=50] run particle ds:domain_smash2 ~~1~
+execute as @s[scores={domain=1..}] at @s if entity @e[tag=domain_barrier_adapted,r=50] run particle ds:domain_smash3 ~~1~
+execute as @s[scores={domain=1..}] at @s if entity @e[tag=domain_barrier_adapted,r=50] run function domain_end
+execute as @s[scores={domain=430..}] at @s run scoreboard players set @e[r=47,scores={domainstart=1..}] domainstart 0
+scoreboard players add @s[scores={domain=430..,Energy=1..50}] Energy 200
+execute as @s[scores={domain=440}] at @s run stopsound @a[r=48]
+execute as @s[scores={domain=440}] at @s run scoreboard players set @a[r=48,rm=0.2,scores={move=4..}] move 3
+execute as @s[scores={domain=440}] at @s run playanimation @a[r=48,rm=0.2,m=!spectator] animation.stunned
+execute as @s[scores={domain=440}] at @s run tp @s ~~~~ 0
+playanimation @s[scores={domain=440..}] animation.hakari_domain2
+execute as @s[scores={domain=440}] at @s run effect @e[r=48,rm=0.2,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,tag=!spectator,type=!gg:impact_frame,type=!armor_stand] invisibility 15 1 true
+scoreboard players add @s[scores={domain=440}] infinity 15
+scoreboard players add @s[scores={domain=1..}] infinity 1
+execute as @s[scores={domain=1..}] at @s run scoreboard players set @e[r=48,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!spectator,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] Move 15
+execute as @s[scores={domain=1..}] at @s run scoreboard players set @e[r=48,scores={Move=15}] Stun 15
+execute as @s[scores={domain=1..}] at @s run scoreboard players set @a[r=40] Camera 5
+execute as @s[scores={domain=1..440}] at @s as @e[r=48,rm=40,family=!despawncito,family=!disappear,type=!gg:impact_frame] facing entity @s feet positioned as @s run tp @s ^^^4
+execute as @s[scores={domain=390}] at @s run playsound music.deathgamble2 @a[r=40] ~~~ 0.25 1 10000
+execute as @s[scores={domain=400}] at @s run playsound music.deathgamblesfx1 @a[r=40] ~~~ 0.25 1 10000
+execute as @s[scores={domain=440}] at @s run playsound beacon.power @a[r=40] ~~~ 99999 0.35 99999
+execute as @s[scores={domain=400..}] at @s run particle ds:deathgamble_white1 ~~~
+execute as @s[scores={domain=178..390}] at @s run particle ds:domain_floor1 ~~0.1~
+execute as @s[scores={domain=178..400}] at @s run particle ds:infinite_void_whitev2 ~~~
+execute as @s[scores={domain=178..400}] at @s run particle ds:domain_barrierv2 ~~~
+execute as @s[scores={domain=440}] at @s anchored eyes rotated ~ 0 run camera @a[r=40] set minecraft:free ease 0.2 in_out_circ pos ^ ^-0.33 ^1.5 rot ~-15 ~180
+execute as @s[scores={domain=415}] at @s run camera @a[r=40] fade time 0.25 0 0.1 color 0 0 0
+execute as @s[scores={domain=409}] at @s anchored eyes rotated ~ 0 run camera @a[r=40] set minecraft:free pos ^ ^1.95 ^1 rot ~-12 ~180
+execute as @s[scores={domain=384..409}] at @s anchored eyes run particle ds:cutscene_black1 ~~3~
+execute as @s[scores={domain=384..409}] at @s anchored eyes run particle ds:cutscene_black1 ~~3~
+execute as @s[scores={domain=384..409}] at @s anchored eyes rotated ~ 0 run particle ds:purple_energy1 ^^2.1^0.44
+execute as @s[scores={domain=384..409}] at @s anchored eyes rotated ~ 0 run particle ds:purple_energy2 ^^2.1^0.44
+execute as @s[scores={domain=385}] at @s run camera @a[r=40] fade time 0 0.2 0.25 color 220 0 220
+execute as @s[scores={domain=372}] at @s rotated ~ 0 run summon ds:deathgamble ^^^-1 facing ^^^20
+execute as @s[scores={domain=372}] at @s rotated ~ 0 positioned ^^^-1 run scoreboard players set @e[type=ds:deathgamble,c=1] Deleter 215
+execute as @s[scores={domain=383}] at @s anchored eyes rotated ~ 0 run camera @a[r=40] set minecraft:free pos ^ ^-0.5 ^2 rot ~ ~180
+execute as @s[scores={domain=381}] at @s run playsound mob.shock2 @a[r=40] ~~~ 99999 0.35 99999
+execute as @s[scores={domain=383}] at @s run playsound mob.bass @a[r=40] ~~~ 99999 0.85 99999
+execute as @s[scores={domain=380..384}] at @s run particle ds:doorcrash_rainbow1 ~~1~
+execute as @s[scores={domain=380..384}] at @s run particle ds:doorcrash_rainbow2 ~~1~
+execute as @s[scores={domain=380..384}] at @s run particle ds:doorcrash_rainbow3 ~~1~
+execute as @s[scores={domain=380..384}] at @s run particle ds:doorcrash_rainbow1 ~~1~
+execute as @s[scores={domain=380..384}] at @s run particle ds:doorcrash_rainbow2 ~~1~
+execute as @s[scores={domain=380..384}] at @s run particle ds:doorcrash_rainbow3 ~~1~
+execute as @s[scores={domain=380..384}] at @s run particle ds:pachinkostrike_rainbow1 ~~1~
+execute as @s[scores={domain=375}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=374}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=373}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=372}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=371}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=370}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=369}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=368}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=367}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=366}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=365}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=364}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=363}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=362}] at @s run title @a[r=40,tag=!impactframesoff] title §l
+execute as @s[scores={domain=361}] at @s run camera @a[r=40] fade time 0 0.5 0.5 color 255 255 255
+execute as @s[scores={domain=200..362}] at @s run title @a[r=40,tag=!impactframesoff] title 
+execute as @s[scores={domain=276..385}] at @s run camerashake add @a[r=40] 0.15 0.1
+execute as @s[scores={domain=350}] at @s anchored eyes rotated ~ 0 run camera @a[r=40] set minecraft:free ease 0.25 in_out_circ pos ^ ^-0.5 ^10 rot ~-5 ~180
+execute as @s[scores={domain=347}] at @s anchored eyes rotated ~ 0 run camera @a[r=40] set minecraft:free ease 2.25 in_sine pos ^ ^-0.5 ^13 rot ~-5 ~180
+execute as @s[scores={domain=287}] at @s run camera @a[r=40] fade time 0.5 0.25 0.25 color 0 0 0
+execute as @s[scores={domain=276}] at @s anchored eyes rotated ~ 0 run camera @a[r=40] set minecraft:free pos ^ ^6.95 ^3.5 rot ~-5 ~180
+execute as @s[scores={domain=100..276}] at @s anchored eyes run particle ds:cutscene_black1 ~~7~
+execute as @s[scores={domain=100..276}] at @s anchored eyes run particle ds:cutscene_black1 ~~7~
+execute as @s[scores={domain=255..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls1 ^-1.75 ^7 ^
+execute as @s[scores={domain=255..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls2 ^-1.75 ^7 ^
+execute as @s[scores={domain=255..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls3 ^-1.75 ^7 ^
+execute as @s[scores={domain=239..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls1 ^ ^7 ^
+execute as @s[scores={domain=239..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls2 ^ ^7^
+execute as @s[scores={domain=239..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls3 ^ ^7 ^
+execute as @s[scores={domain=225..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls1 ^1.75 ^7 ^
+execute as @s[scores={domain=225..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls2 ^1.75 ^7 ^
+execute as @s[scores={domain=225..276}] at @s anchored eyes rotated ~ 0 run particle ds:card_rolls3 ^1.75 ^7 ^
+scoreboard players random @s[scores={domain=248}] chance 1 99
+scoreboard players random @s[scores={domain=248},tag=gambler] chance2 1 10
+scoreboard players operation @s[scores={domain=248}] chance += @s fever
+scoreboard players operation @s[scores={domain=248,fever=1..},tag=gambler] chance += @s chance2
+scoreboard players set @s[scores={domain=248,chance=101..}] chance 100
+scoreboard players set @s[scores={domain=248,chance2=1..}] chance2 0
+scoreboard players set @s[scores={domain=248},tag=jackpotrig] chance 100
+execute as @s[scores={domain=248..251}] at @s run camerashake add @a[r=50] 3 0.15
+execute as @s[scores={domain=248..251}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled1 ^-1.75 ^7 ^
+execute as @s[scores={domain=248..251}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled2 ^-1.75 ^7 ^
+execute as @s[scores={domain=248..251}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled3 ^-1.75 ^7 ^
+execute as @s[scores={domain=248..251}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled4 ^-1.75 ^7 ^
+scoreboard players random @s[scores={domain=248}] jackpot_roll 1 7
+execute as @s[scores={domain=1..248,jackpot_roll=1}] at @s anchored eyes rotated ~ 0 run particle ds:slot1 ^-1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..248,jackpot_roll=2}] at @s anchored eyes rotated ~ 0 run particle ds:slot2 ^-1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..248,jackpot_roll=3}] at @s anchored eyes rotated ~ 0 run particle ds:slot3 ^-1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..248,jackpot_roll=4}] at @s anchored eyes rotated ~ 0 run particle ds:slot4 ^-1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..248,jackpot_roll=5}] at @s anchored eyes rotated ~ 0 run particle ds:slot5 ^-1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..248,jackpot_roll=6}] at @s anchored eyes rotated ~ 0 run particle ds:slot6 ^-1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..248,jackpot_roll=7}] at @s anchored eyes rotated ~ 0 run particle ds:slot7 ^-1.75 ^7 ^-0.15
+execute as @s[scores={domain=235..238}] at @s run camerashake add @a[r=50] 3.75 0.2
+execute as @s[scores={domain=235..238}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled1 ^ ^7 ^
+execute as @s[scores={domain=235..238}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled2 ^ ^7 ^
+execute as @s[scores={domain=235..238}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled3 ^ ^7 ^
+execute as @s[scores={domain=235..238}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled4 ^ ^7 ^
+scoreboard players random @s[scores={domain=235,chance=..99}] jackpot_roll2 1 7
+execute if entity @s[scores={domain=235,chance=..99}] unless score @s jackpot_roll2 = @s jackpot_roll run scoreboard players random @s chance2 1 99
+execute if entity @s[scores={domain=235,chance=..99}] unless score @s jackpot_roll2 = @s jackpot_roll if score @s chance2 < @s chance run scoreboard players random @s chance2 101 200
+execute if entity @s[scores={domain=235,chance2=151..170,chance=..99}] unless score @s jackpot_roll2 = @s jackpot_roll run tag @s add roll3_surehit
+execute if entity @s[scores={domain=235,chance2=171..200,chance=..99}] unless score @s jackpot_roll2 = @s jackpot_roll run scoreboard players operation @s jackpot_roll2 = @s jackpot_roll
+scoreboard players set @s[scores={domain=235,chance2=1..}] chance2 0
+scoreboard players operation @s[scores={domain=235,chance=100..}] jackpot_roll2 = @s jackpot_roll
+execute as @s[scores={domain=1..235,jackpot_roll2=1}] at @s anchored eyes rotated ~ 0 run particle ds:slot1 ^ ^7 ^-0.15
+execute as @s[scores={domain=1..235,jackpot_roll2=2}] at @s anchored eyes rotated ~ 0 run particle ds:slot2 ^ ^7 ^-0.15
+execute as @s[scores={domain=1..235,jackpot_roll2=3}] at @s anchored eyes rotated ~ 0 run particle ds:slot3 ^ ^7 ^-0.15
+execute as @s[scores={domain=1..235,jackpot_roll2=4}] at @s anchored eyes rotated ~ 0 run particle ds:slot4 ^ ^7 ^-0.15
+execute as @s[scores={domain=1..235,jackpot_roll2=5}] at @s anchored eyes rotated ~ 0 run particle ds:slot5 ^ ^7 ^-0.15
+execute as @s[scores={domain=1..235,jackpot_roll2=6}] at @s anchored eyes rotated ~ 0 run particle ds:slot6 ^ ^7 ^-0.15
+execute as @s[scores={domain=1..235,jackpot_roll2=7}] at @s anchored eyes rotated ~ 0 run particle ds:slot7 ^ ^7 ^-0.15
+execute as @s[scores={domain=218..221}] at @s run camerashake add @a[r=50] 4 0.25
+execute as @s[scores={domain=218..221}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled1 ^1.75 ^7 ^
+execute as @s[scores={domain=218..221}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled2 ^1.75 ^7 ^
+execute as @s[scores={domain=218..221}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled3 ^1.75 ^7 ^
+execute as @s[scores={domain=218..221}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled4 ^1.75 ^7 ^
+scoreboard players random @s[scores={domain=218,chance=..99}] jackpot_roll3 1 7
+execute if score @s[scores={domain=218,chance=..99}] jackpot_roll3 = @s jackpot_roll run scoreboard players random @s chance2 1 2
+execute if score @s[scores={domain=218,chance=..99,chance2=1}] jackpot_roll3 = @s jackpot_roll run scoreboard players add @s jackpot_roll3 1
+execute if score @s[scores={domain=218,chance=..99,chance2=2}] jackpot_roll3 = @s jackpot_roll run scoreboard players remove @s jackpot_roll3 1
+scoreboard players set @s[scores={domain=218,chance=..99,jackpot_roll3=8..}] jackpot_roll3 1
+scoreboard players operation @s[scores={domain=218,chance=100..}] jackpot_roll3 = @s jackpot_roll
+execute if entity @s[scores={domain=218},tag=roll3_surehit] unless score @s jackpot_roll2 = @s jackpot_roll run scoreboard players operation @s jackpot_roll3 = @s jackpot_roll
+tag @s[scores={domain=218},tag=roll3_surehit] remove roll3_surehit
+scoreboard players set @s[scores={domain=218,chance2=1..}] chance2 0
+execute as @s[scores={domain=1..218,jackpot_roll3=1}] at @s anchored eyes rotated ~ 0 run particle ds:slot1 ^1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..218,jackpot_roll3=2}] at @s anchored eyes rotated ~ 0 run particle ds:slot2 ^1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..218,jackpot_roll3=3}] at @s anchored eyes rotated ~ 0 run particle ds:slot3 ^1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..218,jackpot_roll3=4}] at @s anchored eyes rotated ~ 0 run particle ds:slot4 ^1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..218,jackpot_roll3=5}] at @s anchored eyes rotated ~ 0 run particle ds:slot5 ^1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..218,jackpot_roll3=6}] at @s anchored eyes rotated ~ 0 run particle ds:slot6 ^1.75 ^7 ^-0.15
+execute as @s[scores={domain=1..218,jackpot_roll3=7}] at @s anchored eyes rotated ~ 0 run particle ds:slot7 ^1.75 ^7 ^-0.15
+execute as @s[scores={domain=218,chance=100..}] at @s run playsound music.jackpot @a[r=40]
+execute as @s[scores={domain=200}] at @s run playsound music.deathgambleend @a[r=40]
+execute as @s[scores={domain=202..215,chance=100..}] at @s run camerashake add @a[r=40] 0.0075 0.08 rotational
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled1 ^1.75 ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled2 ^1.75 ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled3 ^1.75 ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled4 ^1.75 ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled1 ^ ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled2 ^ ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled3 ^ ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled4 ^ ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled1 ^-1.75 ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled2 ^-1.75 ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled3 ^-1.75 ^7 ^
+execute as @s[scores={domain=208..215,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:slots_rolled4 ^-1.75 ^7 ^
+execute as @s[scores={domain=207..211,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:doorcrash_rainbow1 ^ ^7 ^
+execute as @s[scores={domain=207..211,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:doorcrash_rainbow2 ^ ^7 ^
+execute as @s[scores={domain=207..211,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:doorcrash_rainbow3 ^ ^7 ^
+execute as @s[scores={domain=207..211,chance=100..}] at @s anchored eyes rotated ~ 0 run particle ds:pachinkostrike_rainbow1 ^ ^7 ^
+execute as @s[scores={domain=145..170}] at @s anchored eyes rotated ~ 0 run camera @a[r=40] set minecraft:free pos ^^^3 rot ~-5 ~180
+execute as @s[scores={domain=178}] at @s run camera @a[r=60] fade time 0.35 1.5 1 color 255 255 255
+execute as @s[scores={domain=175}] at @s run playsound music.domainbreak @a[r=60]
+execute as @s[scores={domain=166..170}] at @s run title @a[tag=!impactframesoff,r=60] title 
+execute as @s[scores={domain=150}] at @s run title @a[tag=!impactframesoff,r=60] title §l
+execute as @s[scores={domain=145..150}] at @s run particle ds:domain_smash1 ~~5~
+execute as @s[scores={domain=145..150}] at @s run particle ds:domain_smash2 ~~5~
+execute as @s[scores={domain=145..150}] at @s run particle ds:domain_smash3 ~~5~
+execute as @s[scores={domain=160}] at @s run tp @e[type=ds:deathgamble,r=50,c=1] ~~-100~
+tag @s[scores={domain=5..145,chance=100..}] add hakaridance
+scoreboard players set @s[scores={domain=5..145,chance=100..}] cutscene 431
+scoreboard players set @s[scores={domain=5..145}] fever 0
+scoreboard players set @s[scores={domain=5..145}] chance 0
+scoreboard players set @s[scores={domain=5..145}] domain 3
+tag @s[scores={domain=1..415},tag=form5] remove form5
+execute as @s[scores={domain=1..5}] at @s run camera @a[r=40] clear
+@@lovetrain/lovetrain
+execute as @e[family=projectile,type=!item,name="Shutter Doors"] run function lovetrain/shutterdoors
+execute as @e[family=projectile,type=!item,name="Pachinko Ball"] run function lovetrain/pachinko_rush
+execute as @e[family=projectile,type=!item,name="Pachinko Cannon"] run function lovetrain/pachinko_cannon
+execute as @e[type=ds:slots,family=projectile,type=!item,name="Slot Slam"] run function lovetrain/slot_slam
+execute as @e[family=projectile,type=!item,name="Cargo Crate"] run function lovetrain/cargo
+@@lovetrain/lovetrain1
+playanimation @s[scores={move=20}] animation.lovetrain.shutter_doors1
+scoreboard players set @s[scores={move=3..}] Move 5
+tag @s[scores={move=1..2}] remove form1
+tag @s[scores={move=16..,Stun=1..}] remove form1
+scoreboard players set @s[scores={move=16..,Stun=1..}] move 0
+execute as @s[scores={move=14..16}] at @s run tp @s @s
+execute as @s[scores={move=17}] at @s run scoreboard players random @s chance 1 100
+execute as @s[scores={move=17},tag=gambler] at @s run scoreboard players random @s chance 41 100
+scoreboard players set @s[scores={move=11..17}] Frames 7
+execute as @s[scores={move=16,chance=1..40}] at @s run summon ds:shutterdoors1 ^^1^0.25 facing ^^^20 none "Shutter Doors"
+execute as @s[scores={move=16,chance=41..70}] at @s run summon ds:shutterdoors2 ^^1^0.25 facing ^^^20 none "Shutter Doors"
+execute as @s[scores={move=16,chance=71..90}] at @s run summon ds:shutterdoors3 ^^1^0.25 facing ^^^20 none "Shutter Doors"
+execute as @s[scores={move=16,chance=91..100}] at @s run summon ds:shutterdoors4 ^^1^0.25 facing ^^^20 none "Shutter Doors"
+scoreboard players add @s[scores={move=16,chance=41..70}] fever 1
+scoreboard players add @s[scores={move=16,chance=71..90}] fever 3
+scoreboard players add @s[scores={move=16,chance=91..100}] fever 5
+execute as @s[scores={move=16}] at @s run scoreboard players set @e[name="Shutter Doors",c=1] Deleter 41
+execute as @s[scores={move=19}] at @s run playsound mob.wither.shoot @a ~~~ 1 1.4
+execute as @s[scores={move=11,chance=1..}] at @s run playsound random.anvil_land @a ~~~ 1 0.94
+@@lovetrain/lovetrain1b
+playanimation @s[scores={move=20}] animation.lovetrain.shutter_doors1
+scoreboard players set @s[scores={move=3..}] Move 5
+tag @s[scores={move=1..2}] remove form1b
+tag @s[scores={move=16..,Stun=1..}] remove form1b
+scoreboard players set @s[scores={move=16..,Stun=1..}] move 0
+execute as @s[scores={move=19}] at @s run playsound mob.wither.shoot @a ~~~ 1 1.4
+execute as @s[scores={move=14..16}] at @s run tp @s ~~~
+execute as @s[scores={move=17}] at @s run scoreboard players random @s luck 1 100
+execute as @s[scores={move=17},tag=gambler] at @s run scoreboard players random @s luck 41 100
+execute as @s[scores={move=16,luck=1..40}] at @s positioned ^^^12 run execute as @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=11.99,c=2] at @s run summon ds:shutterdoors1  "Shutter Doors" ~~1~
+execute as @s[scores={move=16,luck=41..70}] at @s positioned ^^^12  run execute as @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=11.99,c=2] at @s run  summon ds:shutterdoors2  "Shutter Doors" ~~1~
+execute as @s[scores={move=16,luck=71..90}] at @s positioned ^^^12  run execute as @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=11.99,c=2] at @s run  summon ds:shutterdoors3  "Shutter Doors" ~~1~
+execute as @s[scores={move=16,luck=91..100}] at @s positioned ^^^12  run execute as @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=11.99,c=2] at @s run summon ds:shutterdoors4  "Shutter Doors" ~~1~
+execute as @s[scores={move=16,luck=1..100}] at @s positioned ^^^12  run execute as @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=11.99,c=2] at @s run scoreboard players set @e[name="Shutter Doors",c=2] Deleter 55
+execute as @s[scores={move=16,luck=1..100}] at @s positioned ^^^12  run execute as @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=11.99,c=2] at @s run tag @e[name="Shutter Doors",c=2] add closing
+execute as @s[scores={move=16,luck=1..100}] at @s positioned ^^^12  run execute as @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=11.99,c=2] at @s run tag @e[name="Shutter Doors",c=2] add closing2
+execute as @s[scores={move=11,luck=1..}] at @s run playsound random.anvil_land @a ~~~ 1 0.94
+scoreboard players add @s[scores={move=16,luck=41..70}] fever 1
+scoreboard players add @s[scores={move=16,luck=71..90}] fever 3
+scoreboard players add @s[scores={move=16,luck=91..100}] fever 5
+@@lovetrain/lovetrain1c
+playanimation @s[scores={move=20}] animation.lovetrain.shutter_doors2
+scoreboard players set @s[scores={move=3..}] Move 5
+tag @s[scores={move=1..2}] remove form1c
+tag @s[scores={move=16..,Stun=1..}] remove form1c
+scoreboard players set @s[scores={move=16..,Stun=1..}] move 0
+execute as @s[scores={move=14..16}] at @s run tp @s @s
+execute as @s[scores={move=17}] at @s run scoreboard players random @s chance 1 100
+execute as @s[scores={move=17},tag=gambler] at @s run scoreboard players random @s chance 41 100
+scoreboard players set @s[scores={move=11..17}] Frames 7
+execute as @s[scores={move=16,chance=1..40}] at @s run summon ds:shutterdoors1 ^^^0.25 facing ^^^20 none "Shutter Doors"
+execute as @s[scores={move=16,chance=41..70}] at @s run summon ds:shutterdoors2 ^^^0.25 facing ^^^20 none "Shutter Doors"
+execute as @s[scores={move=16,chance=71..90}] at @s run summon ds:shutterdoors3 ^^^0.25 facing ^^^20 none "Shutter Doors"
+execute as @s[scores={move=16,chance=91..100}] at @s run summon ds:shutterdoors4 ^^^0.25 facing ^^^20 none "Shutter Doors"
+execute as @s[scores={move=16}] at @s run scoreboard players set @e[name="Shutter Doors",c=1] Deleter 41
+execute as @s[scores={move=15..16}] at @s run tag @e[name="Shutter Doors",c=1] add slicingdoor
+execute as @s[scores={move=19}] at @s run playsound mob.slash1 @a ~~~ 1 1.5
+execute as @s[scores={move=19}] at @s run playsound mob.wither.shoot @a ~~~ 1 1
+execute as @s[scores={move=19,chance=1..}] at @s run playsound mob.metal1 @a ~~~ 1 0.7
+scoreboard players add @s[scores={move=16,chance=41..70}] fever 1
+scoreboard players add @s[scores={move=16,chance=71..90}] fever 3
+scoreboard players add @s[scores={move=16,chance=91..100}] fever 5
+@@lovetrain/lovetrain2
+playanimation @s[scores={move=35}] animation.lovetrain.pachinko_strike
+execute as @s[scores={move=34}] at @s run scoreboard players random @s chance 1 100
+execute as @s[scores={move=34},tag=gambler] at @s run scoreboard players random @s chance 41 100
+execute as @s[scores={move=1..11}] at @s run scoreboard players set @s chance 0
+event entity @s[scores={move=3..33,chance=1..40}] pachinkohand1
+event entity @s[scores={move=3..33,chance=41..70}] pachinkohand2
+event entity @s[scores={move=3..33,chance=71..90}] pachinkohand3
+event entity @s[scores={move=3..33,chance=91..}] pachinkohand4
+execute as @s[scores={move=32,chance=1..40}] at @s run particle ds:doorcrash_green2 ^^0.35^0.4
+execute as @s[scores={move=32,chance=1..40}] at @s run particle ds:doorcrash_green3 ^^0.35^0.4
+execute as @s[scores={move=32,chance=1..40}] at @s run playsound mob.magic2 @a ~~~ 1 1.3
+execute as @s[scores={move=32,chance=41..70}] at @s run particle ds:doorcrash_red2 ^^0.35^0.4
+execute as @s[scores={move=32,chance=41..70}] at @s run particle ds:doorcrash_red3 ^^0.35^0.4
+execute as @s[scores={move=32,chance=41..70}] at @s run playsound mob.magic2 @a ~~~ 1 1.15
+execute as @s[scores={move=32,chance=71..90}] at @s run particle ds:doorcrash_gold2 ^^0.35^0.4
+execute as @s[scores={move=32,chance=71..90}] at @s run particle ds:doorcrash_gold3 ^^0.35^0.4
+execute as @s[scores={move=32,chance=71..90}] at @s run playsound mob.magic4 @a ~~~ 1 0.8
+execute as @s[scores={move=32,chance=91..}] at @s run particle ds:doorcrash_rainbow2 ^^0.35^0.4
+execute as @s[scores={move=32,chance=91..}] at @s run particle ds:doorcrash_rainbow3 ^^0.35^0.4
+execute as @s[scores={move=32,chance=91..}] at @s run playsound mob.magic4 @a ~~~ 1 0.5
+execute as @s[scores={move=32}] at @s run camerashake add @a[r=10] 2 0.15
+event entity @s[scores={Stun=1..}] pachinkotextureoff
+event entity @s[scores={move=1..12}] pachinkotextureoff
+scoreboard players add @s[scores={move=32,chance=41..70}] fever 1
+scoreboard players add @s[scores={move=32,chance=71..90}] fever 3
+scoreboard players add @s[scores={move=32,chance=91..100}] fever 5
+tag @s[scores={move=1..2}] remove form2
+scoreboard players set @s[scores={move=11..32}] Frames 7
+execute as @s[scores={move=24}] at @s run scriptevent ds:knockback 12
+execute as @s[scores={move=30}] at @s run effect @s speed 1 16 true
+execute as @s[scores={move=30}] at @s run particle ds:flashstep1 ~~~
+execute as @s[scores={move=30}] at @s run particle ds:flashstep2 ~~~
+execute as @s[scores={move=30}] at @s run particle ds:evade3 ~~~
+execute as @s[scores={move=21}] at @s run particle ds:flashstep1 ~~~
+execute as @s[scores={move=21}] at @s run particle ds:flashstep2 ~~~
+execute as @s[scores={move=21}] at @s run particle ds:evade3 ~~~
+execute as @s[scores={move=19}] at @s run tp @s ~~~
+execute as @s[scores={move=21..25}] at @s run effect @s slowness 1 2 true
+execute as @s[scores={move=1..20}] at @s run effect @s slowness 1 2 true
+execute as @s[scores={move=1..25}] at @s run effect @s speed 0 20 true
+scoreboard players set @s[scores={move=5..19}] Move 5
+scoreboard players set @s[scores={move=5..19}] Camera 5
+execute as @s[scores={move=12..14,chance=1..40}] at @s run function damages/blunt_damage
+execute as @s[scores={move=12..14,chance=1..40}] at @s run particle ds:doorcrash_green1 ^^^
+execute as @s[scores={move=12..14,chance=1..40}] at @s run particle ds:doorcrash_green2 ^^^
+execute as @s[scores={move=12..14,chance=1..40}] at @s run particle ds:doorcrash_green3 ^^^
+execute as @s[scores={move=14,chance=1..40}] at @s run particle ds:pachinkostrike_green1 ^^^
+execute as @s[scores={move=14,chance=1..40}] at @s run particle ds:pachinkostrike_green2 ^^^
+execute as @s[scores={move=14,chance=1..40}] at @s run damage @e[tag=!Frames,r=6,type=!item] 9
+execute as @s[scores={move=12..14,chance=41..70}] at @s run particle ds:doorcrash_red1 ^^^
+execute as @s[scores={move=12..14,chance=41..70}] at @s run particle ds:doorcrash_red2 ^^^
+execute as @s[scores={move=12..14,chance=41..70}] at @s run particle ds:doorcrash_red3 ^^^
+execute as @s[scores={move=14,chance=41..70}] at @s run particle ds:pachinkostrike_red1 ^^^
+execute as @s[scores={move=14,chance=41..70}] at @s run particle ds:pachinkostrike_red2 ^^^
+execute as @s[scores={move=14,chance=41..70}] at @s run damage @e[tag=!Frames,r=6,type=!item] 14
+execute as @s[scores={move=12..14,chance=71..90}] at @s run particle ds:doorcrash_gold1 ^^^
+execute as @s[scores={move=12..14,chance=71..90}] at @s run particle ds:doorcrash_gold2 ^^^
+execute as @s[scores={move=12..14,chance=71..90}] at @s run particle ds:doorcrash_gold3 ^^^
+execute as @s[scores={move=14,chance=71..90}] at @s run particle ds:pachinkostrike_gold1 ^^^
+execute as @s[scores={move=14,chance=71..90}] at @s run particle ds:pachinkostrike_gold2 ^^^
+execute as @s[scores={move=14,chance=71..90}] at @s run damage @e[tag=!Frames,r=6,type=!item] 20
+execute as @s[scores={move=12..14,chance=91..}] at @s run particle ds:doorcrash_rainbow1 ^^^
+execute as @s[scores={move=12..14,chance=91..}] at @s run particle ds:doorcrash_rainbow2 ^^^
+execute as @s[scores={move=12..14,chance=91..}] at @s run particle ds:doorcrash_rainbow3 ^^^
+execute as @s[scores={move=14,chance=91..}] at @s run particle ds:pachinkostrike_rainbow1 ^^^
+execute as @s[scores={move=14,chance=91..}] at @s run particle ds:pachinkostrike_rainbow2 ^^^
+execute as @s[scores={move=14,chance=91..}] at @s run damage @e[tag=!Frames,r=6,type=!item] 27
+execute as @s[scores={move=14}] at @s run particle ds:ground_slam1
+execute as @s[scores={move=14}] at @s run particle ds:ground_slam2
+execute as @s[scores={move=14}] at @s run particle ds:ground_slam3
+execute as @s[scores={move=14}] at @s run particle ds:ground_slam4
+execute as @s[scores={move=14}] at @s run particle ds:leap
+execute as @s[scores={move=14}] at @s run particle ds:heavy_impact1
+execute as @s[scores={move=14}] at @s run particle ds:heavy_impact2
+execute as @s[scores={move=14}] at @s run particle ds:heavy_impact3
+execute as @s[scores={move=14}] at @s run particle ds:rubble3
+execute as @s[scores={move=14}] at @s run particle ds:crater2
+execute as @s[scores={move=1..14}] at @s run tp @s ~~~
+execute as @s[scores={move=14}] at @s run scoreboard players set @e[tag=!Frames,type=!item,r=6] knock 25
+execute as @s[scores={move=14}] at @s run scoreboard players set @e[tag=!Frames,type=!item,r=6] knockdown 40
+execute as @s[scores={move=14}] at @s run scoreboard players add @e[tag=!Frames,type=!item,r=6] Hit 3
+execute as @s[scores={move=14}] at @s run scoreboard players add @e[tag=!Frames,type=!item,r=6] Evade 25
+execute as @s[scores={move=14}] at @s run camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=14}] at @s run playsound random.explode @a[r=120] ~~~ 99999 0.25 99999
+execute as @s[scores={move=14}] at @s run playsound random.explode @a[r=120] ~~~ 99999 0.45 99999
+execute as @s[scores={move=14}] at @s run playsound mob.wither.break_block @a[r=120] ~~~ 99999 0.5 99999
+execute as @s[scores={move=14}] at @s run playsound mob.magic3 @a[r=120] ~~~ 99999 0.65 99999
+@@lovetrain/lovetrain2b
+playanimation @s[scores={move=20}] animation.lovetrain.pachinko_rush
+scoreboard players set @s[scores={move=3..}] Move 5
+tag @s[scores={move=1..2}] remove form2b
+tag @s[scores={move=16..,Stun=1..}] remove form2b
+scoreboard players set @s[scores={move=16..,Stun=1..}] move 0
+execute as @s[scores={move=14..16}] at @s run tp @s ~~~
+execute as @s[scores={move=18}] at @s run scoreboard objectives add luck dummy
+execute as @s[scores={move=11..17}] at @s run scoreboard players random @s luck 1 100
+execute as @s[scores={move=11..17},tag=gambler] at @s run scoreboard players random @s luck 41 100
+scoreboard players set @s[scores={move=11..17}] Frames 7
+execute as @s[scores={move=11..16,luck=1..40}] at @s run summon ds:pachinko1 ^^1^0.25 facing ^^^20 none "Pachinko Ball"
+execute as @s[scores={move=11..16,luck=41..70}] at @s run summon ds:pachinko2 ^^1^0.25 facing ^^^20 none "Pachinko Ball"
+execute as @s[scores={move=11..16,luck=71..90}] at @s run summon ds:pachinko3 ^^1^0.25 facing ^^^20 none "Pachinko Ball"
+execute as @s[scores={move=11..16,luck=91..100}] at @s run summon ds:pachinko4 ^^1^0.25 facing ^^^20 none "Pachinko Ball"
+execute as @s[scores={move=7}] at @s run summon ds:projectile  "PachinkoTRG" ^^1^50
+execute as @s[scores={move=10..16}] at @s run scoreboard players set @e[name="Pachinko Ball",r=10] Deleter 25
+execute as @s[scores={move=6..7}] at @s positioned ^^^50   run scoreboard players set @e[name="PachinkoTRG",c=1] Deleter 25
+scoreboard objectives add LeftMove dummy
+scoreboard objectives add RightMove dummy
+scoreboard objectives add UpMove dummy
+scoreboard players remove @e[scores={LeftMove=1..}] LeftMove 1
+execute as @e[family=projectile,type=!item,scores={LeftMove=1..}] at @s run tp @s ^0.41 ^ ^
+execute as @e[family=projectile,type=!item,scores={LeftMove=1..}] at @s run tp @s ^0.41 ^ ^
+scoreboard players remove @e[scores={RightMove=1..}] RightMove 1
+execute as @e[family=projectile,type=!item,scores={RightMove=1..}] at @s run tp @s ^-0.41 ^ ^
+execute as @e[family=projectile,type=!item,scores={RightMove=1..}] at @s run tp @s ^-0.41 ^ ^
+scoreboard players remove @e[scores={UpMove=1..}] UpMove 1
+execute as @e[family=projectile,type=!item,scores={UpMove=1..}] at @s run tp @s ^ ^0.61 ^
+execute as @e[family=projectile,type=!item,scores={UpMove=1..}] at @s run tp @s ^ ^0.61 ^
+execute as @s[scores={move=11..14,luck=1..40}] at @s run scoreboard players random @e[name="Pachinko Ball",r=10] UpMove 1 3
+execute as @s[scores={move=11..14,luck=1..40}] at @s run scoreboard players random @e[name="Pachinko Ball",r=10] LeftMove 1 3
+execute as @s[scores={move=11..14,luck=1..40}] at @s run scoreboard players random @e[name="Pachinko Ball",r=10] RightMove 1 3
+execute as @s[scores={move=11..16,luck=1..40}] at @s run  particle ds:doorcrash_green2 ^^1^1
+execute as @s[scores={move=11..16,luck=1..40}] at @s run  particle ds:doorcrash_green3 ^^1^1
+execute as @s[scores={move=11..16,luck=1..40}] at @s run  playsound mob.magic2 @a ~~~ 1 1.3
+execute as @s[scores={move=11..16,luck=41..70}] at @s run particle ds:doorcrash_red2 ^^1^1
+execute as @s[scores={move=11..16,luck=41..70}] at @s run particle ds:doorcrash_red3 ^^1^1
+execute as @s[scores={move=11..16,luck=41..70}] at @s run  playsound mob.magic2 @a ~~~ 1 1.15
+execute as @s[scores={move=11..16,luck=71..90}] at @s run particle ds:doorcrash_gold2 ^^1^1
+execute as @s[scores={move=11..16,luck=71..90}] at @s run particle ds:doorcrash_gold3 ^^1^1
+execute as @s[scores={move=11..16,luck=71..90}] at @s run playsound mob.magic4 @a ~~~ 1 0.8
+execute as @s[scores={move=11..16,luck=91..}] at @s run particle ds:doorcrash_rainbow2 ^^1^1
+execute as @s[scores={move=11..16,luck=91..}] at @s run particle ds:doorcrash_rainbow3 ^^1^1
+execute as @s[scores={move=11..16,luck=91..}] at @s run playsound mob.magic4 @a ~~~ 1 0.5
+execute as @s[scores={move=11,luck=91..}] at @s run playsound mob.wither.shoot @a ~~~ 1 1.5
+scoreboard players add @s[scores={move=16,luck=41..70}] fever 1
+scoreboard players add @s[scores={move=16,luck=71..90}] fever 3
+scoreboard players add @s[scores={move=16,luck=91..100}] fever 5
+@@lovetrain/lovetrain2c
+playanimation @s[scores={move=35}] animation.lovetrain.pachinko_rush2
+scoreboard players set @s[scores={move=3..}] Move 5
+tag @s[scores={move=1..2}] remove form2c
+execute as @s[scores={move=14..16}] at @s run tp @s ~~~
+execute as @s[scores={move=32}] at @s run scoreboard players random @s chance 1 100
+execute as @s[scores={move=32},tag=gambler] at @s run scoreboard players random @s chance 41 100
+scoreboard players set @s[scores={move=10..33}] Frames 10
+execute as @s[scores={move=30,chance=1..40}] at @s run summon ds:pachinko1 ^^1^0.25 facing ^^^20 none "Pachinko Cannon"
+execute as @s[scores={move=30,chance=41..70}] at @s run summon ds:pachinko2 ^^1^0.25 facing ^^^20 none "Pachinko Cannon"
+execute as @s[scores={move=30,chance=71..90}] at @s run summon ds:pachinko3 ^^1^0.25 facing ^^^20 none "Pachinko Cannon"
+execute as @s[scores={move=30,chance=91..100}] at @s run summon ds:pachinko4 ^^1^0.25 facing ^^^20 none "Pachinko Cannon"
+execute as @s[scores={move=28..30}] at @s run playanimation @e[name="Pachinko Cannon"] animation.big_pachinko
+execute as @s[scores={move=15..30}] at @s run tp @e[name="Pachinko Cannon",c=1] ^^1^2 facing ^^^20
+execute as @s[scores={move=1..5}] at @s run camera @s clear
+execute as @s[scores={move=6..}] at @s run camera @s set minecraft:third_person
+execute as @s[scores={move=29,chance=1..40}] at @s run particle ds:doorcrash_green2 ^^1^2
+execute as @s[scores={move=29,chance=1..40}] at @s run particle ds:doorcrash_green3 ^^1^2
+execute as @s[scores={move=29,chance=1..40}] at @s run playsound mob.magic2 @a ~~~ 1 1.3
+execute as @s[scores={move=29,chance=41..70}] at @s run particle ds:doorcrash_red2 ^^1^2
+execute as @s[scores={move=29,chance=41..70}] at @s run particle ds:doorcrash_red3 ^^1^2
+execute as @s[scores={move=29,chance=41..70}] at @s run playsound mob.magic2 @a ~~~ 1 1.15
+execute as @s[scores={move=29,chance=71..90}] at @s run particle ds:doorcrash_gold2 ^^1^2
+execute as @s[scores={move=29,chance=71..90}] at @s run particle ds:doorcrash_gold3 ^^1^2
+execute as @s[scores={move=29,chance=71..90}] at @s run playsound mob.magic4 @a ~~~ 1 0.8
+execute as @s[scores={move=29,chance=91..}] at @s run particle ds:doorcrash_rainbow2 ^^1^2
+execute as @s[scores={move=29,chance=91..}] at @s run particle ds:doorcrash_rainbow3 ^^1^2
+execute as @s[scores={move=29,chance=91..}] at @s run playsound mob.magic4 @a ~~~ 1 0.5
+execute as @s[scores={move=15}] at @s run particle ds:heavy_impact1 ^^1^1
+execute as @s[scores={move=15}] at @s run particle ds:heavy_impact2 ^^1^1
+execute as @s[scores={move=15}] at @s run particle ds:heavy_impact3 ^^1^1
+execute as @s[scores={move=15}] at @s run particle ds:heavy_impact5 ^^1^1
+execute as @s[scores={move=15}] at @s run particle ds:ground_slam2 ^^1^1
+execute as @s[scores={move=15}] at @s run particle ds:ground_slam3 ^^1^1
+execute as @s[scores={move=15,chance=1..40}] at @s run particle ds:doorcrash_green1 ^^1^1
+execute as @s[scores={move=15,chance=1..40}] at @s run particle ds:doorcrash_green2 ^^1^1
+execute as @s[scores={move=15,chance=1..40}] at @s run particle ds:doorcrash_green3 ^^1^1
+execute as @s[scores={move=15,chance=1..40}] at @s run particle ds:pachinkostrike_green1 ^^1^1
+execute as @s[scores={move=15,chance=41..70}] at @s run particle ds:doorcrash_red1 ^^1^1
+execute as @s[scores={move=15,chance=41..70}] at @s run particle ds:doorcrash_red2 ^^1^1
+execute as @s[scores={move=15,chance=41..70}] at @s run particle ds:doorcrash_red3 ^^1^1
+execute as @s[scores={move=15,chance=41..70}] at @s run particle ds:pachinkostrike_red1 ^^1^1
+execute as @s[scores={move=15,chance=71..90}] at @s run particle ds:doorcrash_gold1 ^^1^1
+execute as @s[scores={move=15,chance=71..90}] at @s run particle ds:doorcrash_gold2 ^^1^1
+execute as @s[scores={move=15,chance=71..90}] at @s run particle ds:doorcrash_gold3 ^^1^1
+execute as @s[scores={move=15,chance=71..90}] at @s run particle ds:pachinkostrike_gold1 ^^1^1
+execute as @s[scores={move=15,chance=91..}] at @s run particle ds:doorcrash_rainbow1 ^^1^1
+execute as @s[scores={move=15,chance=91..}] at @s run particle ds:doorcrash_rainbow2 ^^1^1
+execute as @s[scores={move=15,chance=91..}] at @s run particle ds:doorcrash_rainbow3 ^^1^1
+execute as @s[scores={move=15,chance=91..}] at @s run particle ds:pachinkostrike_rainbow1 ^^1^1
+execute as @s[scores={move=15}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=14}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=13}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=12}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=11}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=10}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=6}] at @s run title @s[tag=!impactframesoff] title §l
+execute as @s[scores={move=15}] at @s run playsound random.explode @a[r=200] ~~~ 999999 0.5 999999
+execute as @s[scores={move=15}] at @s run playsound random.explode @a[r=200] ~~~ 999999 0.75 999999
+execute as @s[scores={move=15}] at @s run playsound random.explode @a[r=200] ~~~ 999999 0.35 999999
+execute as @s[scores={move=15}] at @s run playsound  mob.wither.shoot @a[r=200] ~~~ 999999 0.8 999999
+execute as @s[scores={move=15}] at @s run playsound  mob.wither.shoot @a[r=200] ~~~ 999999 0.5 999999
+execute as @s[scores={move=15}] at @s run camerashake add @a[r=40] 3 0.25
+execute as @s[scores={move=15}] at @s run summon ds:projectile "PachinkoCannonTRG" ^^^50
+execute as @s[scores={move=15..}] at @s run scoreboard players set @e[name="Pachinko Cannon",r=10] Deleter 21
+execute as @s[scores={move=15}] at @s positioned ^^^50  run scoreboard players set @e[name="PachinkoCannonTRG",c=1] Deleter 21
+scoreboard players add @s[scores={move=14,chance=41..70}] fever 1
+scoreboard players add @s[scores={move=14,chance=71..90}] fever 3
+scoreboard players add @s[scores={move=14,chance=91..100}] fever 5
+@@lovetrain/lovetrain3
+playanimation @s[scores={move=20},tag=form3,tag=lovetrain] animation.lovetrain.slot_slam
+tag @s[scores={move=11..,Stun=1..},tag=form3,tag=lovetrain] remove form3
+tag @s[scores={move=1..5},tag=form3,tag=lovetrain] remove form3
+execute as @s[scores={move=9..10},tag=form3,tag=lovetrain] at @s run tp @s @s
+execute as @s[scores={move=9},tag=form3,tag=lovetrain] at @s run summon ds:slots ^^-10^3 facing @s none "Slot Slam"
+execute as @s[scores={move=8..9},tag=form3,tag=lovetrain] at @s positioned ^^-10^3 run scoreboard players set @e[name="Slot Slam",c=1] Deleter 92
+execute as @s[scores={move=9},tag=form3,tag=lovetrain] at @s run playsound mob.wither.shoot @a ~~~ 1 0.75
+execute as @s[scores={move=9},tag=form3,tag=lovetrain] at @s run playsound mob.wither.shoot @a ~~~ 1 0.45
+execute as @s[scores={move=9},tag=form3,tag=lovetrain] at @s run playsound mob.magic3 @a ~~~ 1 0.75
+execute as @s[scores={move=9},tag=form3,tag=lovetrain] at @s run tag @s add slots
+@@lovetrain/lovetrain3b
+playanimation @s[scores={move=28..},tag=form3b,tag=lovetrain] animation.lovetrain.joystick
+event entity @s[scores={move=22..,Stun=1..},tag=form3b,tag=lovetrain] joysticktextureoff
+tag @s[scores={move=22..,Stun=1..},tag=form3b,tag=lovetrain] remove form3b
+event entity @s[scores={move=1..3},tag=form3b,tag=lovetrain] joysticktextureoff
+tag @s[scores={move=1..2},tag=form3b,tag=lovetrain] remove form3b
+event entity @s[scores={move=24..25},tag=form3b,tag=lovetrain] joystick
+scoreboard players set @s[scores={move=15..17},tag=form3b,tag=lovetrain] Frames 4
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run damage @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] 13 entity_attack entity @s
+execute as @s[scores={move=14},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run scoreboard players operation @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] damage += @s damageadd
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run  scoreboard players add @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] Evade 13
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run  scoreboard players add @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] Stun 25
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run scoreboard players add @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] Hit 5
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run scoreboard players add @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] knockdown 95
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^1 run camerashake add @a[r=40] 2 0.2
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^1 run playsound mob.witch.throw @a ~~~ 1 0.25
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^1 run playsound mob.wither.shoot @a ~~~ 1 0.85
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 if entity @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] run playsound mob.metal1 @a ~~~ 1 0.4
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run execute as @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] at @s run particle ds:heavy_impact1 ~~1~
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run execute as @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] at @s run particle ds:heavy_impact2 ~~1~
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run execute as @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] at @s run particle ds:heavy_impact3 ~~1~
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run execute as @e[type=!item,type=!ds:red_reverse,tag=!Frames,r=6.49] at @s run particle ds:heavy_impact5 ~~1~
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^1 run summon ds:red_reverse
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^2.5^^2 run particle ds:ground_slam3
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^4 run particle ds:ground_slam3
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^-2.5^^2 run particle ds:ground_slam3
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^7 run function damages/blunt_damage
+execute as @s[scores={move=15},tag=form3b,tag=lovetrain] at @s positioned ^^^6.5 run execute as @e[family=projectile,r=6.49] at @s run tp @s ~ ~ ~ ~ ~180
+execute as @s[scores={move=10..15},tag=form3b,tag=lovetrain] at @s run tp @s ~~~
+@@lovetrain/lovetrain4
+playanimation @s[scores={move=35}] animation.lovetrain.cargo
+scoreboard players set @s[scores={move=3..25}] Camera 5
+scoreboard players set @s[scores={move=3..}] Move 5
+tag @s[scores={move=1..2}] remove form4
+scoreboard players set @s[scores={move=1..}] Frames 5
+execute as @s[scores={move=10..}] at @s if block ~~-1~ air run fill ~-1~-1~-1 ~1~-3~1 barrier [] replace air
+execute as @s[scores={move=1..9}] at @s run fill ~15~15~15~-15~-15~-15 air [] replace barrier
+execute as @s[scores={move=22}] at @s run particle ds:dirt2
+execute as @s[scores={move=22}] at @s run particle ds:crater2
+execute as @s[scores={move=22}] at @s run particle ds:rubble3
+execute as @s[scores={move=22}] at @s run playsound random.explode @a ~~~ 1 2
+execute as @s[scores={move=22}] at @s run playsound mob.wither.shoot @a ~~~ 1 1.25
+execute as @s[scores={move=33}] at @s run camera @s fade time 0.1 0.15 0.5 color 0 0 0
+execute as @s[scores={move=31}] at @s run camera @s  set minecraft:free pos ^3 ^10 ^-4 rot ~15 ~15
+execute as @s[scores={move=30}] at @s run camera @s  set minecraft:free ease 0.5 linear pos ^4 ^11 ^-5 rot ~20 ~25
+execute as @s[scores={move=1..15}] at @s run tp @s @s
+execute as @s[scores={move=20}] at @s run scoreboard players random @s luck 1 100
+execute as @s[scores={move=20},tag=gambler] at @s run scoreboard players random @s luck 41 100
+scoreboard players set @s[scores={move=11..16}] Frames 7
+execute as @s[scores={move=19,luck=1..40}] at @s run summon ds:cargo1 ^^5^1.25 facing ^^^20 none "Cargo Crate"
+execute as @s[scores={move=19,luck=41..70}] at @s run summon ds:cargo2 ^^5^1.25 facing ^^^20 none "Cargo Crate"
+execute as @s[scores={move=19,luck=71..90}] at @s run summon ds:cargo3 ^^5^1.25 facing ^^^20 none "Cargo Crate"
+execute as @s[scores={move=19,luck=91..100}] at @s run summon ds:cargo4 ^^5^1.25 facing ^^^20 none "Cargo Crate"
+execute as @s[scores={move=17..19}] at @s run playanimation @e[name="Cargo Crate",c=1] animation.cargo.idle
+execute as @s[scores={move=14..16}] at @s run scoreboard players set @e[name="Cargo Crate",c=1] Deleter 51
+execute as @s[scores={move=14..16}] at @s run camerashake add @a[r=40] 3 0.25
+execute as @s[scores={move=14..16}] at @s run  particle ds:heavy_impact1 ^^7^1.25
+execute as @s[scores={move=14..16}] at @s run  particle ds:heavy_impact2 ^^7^1.25
+execute as @s[scores={move=14..16}] at @s run  particle ds:heavy_impact3 ^^7^1.25
+execute as @s[scores={move=14..16}] at @s run  particle ds:ground_slam3 ^^7^1.25
+execute as @s[scores={move=14..16}] at @s run  particle ds:ground_slam3 ^^7^1.25
+execute as @s[scores={move=14..16}] at @s run  particle ds:heavy_impact5 ^^6^1.25
+execute as @s[scores={move=17}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=16}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=15}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=14}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=13}] at @s run title @s[tag=!impactframesoff] title 
+execute as @s[scores={move=13}] at @s run camera @s fade time 0 0.2 0.25 color 255 255 255
+execute as @s[scores={move=12}] at @s run title @s[tag=!impactframesoff] title §l
+scoreboard players add @s[scores={move=16,luck=41..70}] fever 1
+scoreboard players add @s[scores={move=16,luck=71..90}] fever 3
+scoreboard players add @s[scores={move=16,luck=91..100}] fever 5
+execute as @s[scores={move=19}] at @s run playsound mob.wither.shoot @a ~~~ 1 1.4
+execute as @s[scores={move=15,luck=1..}] at @s run playsound random.anvil_land @a ~~~ 1 0.94
+execute as @s[scores={move=15,luck=1..}] at @s run playsound mob.metal1 @a ~~~ 1 0.34
+execute as @s[scores={move=15,luck=1..}] at @s run playsound mob.metal1 @a ~~~ 1 0.45
+execute as @s[scores={move=15,luck=1..}] at @s run playsound mob.metal1 @a ~~~ 1 1
+execute as @s[scores={move=15,luck=1..}] at @s run playsound mob.shock1 @a ~~~ 1 1
+execute as @s[scores={move=19,luck=1..}] at @s run playsound mob.punch @a ~~~ 1 0.5
+@@lovetrain/lovetrain_clear
+clear @p ds:lovetrain_fists
+clear @p ds:lovetrain1
+clear @p ds:lovetrain2
+clear @p ds:lovetrain3
+clear @p ds:lovetrain4
+clear @p ds:lovetrain5
+tellraw @p {"rawtext":[{"translate":"text.skills_clear"}]}
+playsound random.orb @p
+@@lovetrain/lovetrain_click
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=0,Sneaking=0,detect_jump=0,Energy=50..}] add form1
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Energy=0..49,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=50..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=50..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=50..}] move 21
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=50..}] ability1 140
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Energy=50..,move=21,Sneaking=0,detect_jump=0}] Energy 50
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1,ability1=0,Energy=120..}] add form1b
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Sneaking=0,detect_jump=1,Stun=0,Disabled2=0,ability1=0,Energy=0..119}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1,ability1=1..,Energy=120..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1,ability1=1..,Energy=120..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=1,Energy=120..}] move 21
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=1,Energy=120..}] ability1 400
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Energy=120..,move=21,Sneaking=0,detect_jump=1}] Energy 120
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability1=0,Energy=100..}] add form1c
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Sneaking=1..,detect_jump=0,Stun=0,Disabled2=0,ability1=0,Energy=0..99}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability1=1..,Energy=100..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability1=1..,Energy=100..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=1..,detect_jump=0,Energy=120..}] move 21
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=1..,detect_jump=0,Energy=100..}] ability1 200
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand},scores={Stun=0,Energy=00..,move=21,Sneaking=1..,detect_jump=0}] Energy 100
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain1,location=slot.weapon.mainhand}] remove lovetrainclick
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability2=0,Sneaking=0,detect_jump=0,Energy=100..}] add form2
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Energy=0..99,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability2=1..,Sneaking=0,detect_jump=0,Energy=100..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability2=1..,Sneaking=0,detect_jump=0,Energy=100..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=0,detect_jump=0,Energy=100..}] move 36
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=0,detect_jump=0,Energy=100..}] ability2 220
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Energy=100..,move=36,Sneaking=0,detect_jump=0}] Energy 100
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1,ability2=0,Sneaking=0,detect_jump=1,Energy=120..}] add form2b
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Energy=0..119,Sneaking=0,detect_jump=1}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1,ability2=1..,Sneaking=0,detect_jump=1,Energy=120..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1,ability2=1..,Sneaking=0,detect_jump=1,Energy=120..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=0,detect_jump=1,Energy=120..}] move 21
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=0,detect_jump=1,Energy=120..}] ability2 250
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Energy=120..,move=21,Sneaking=0,detect_jump=1}] Energy 120
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=300..}] add form2c
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Energy=0..299,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=1..,Sneaking=1..,detect_jump=0,Energy=300..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=1..,Sneaking=1..,detect_jump=0,Energy=300..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=300..}] move 36
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=300..}] ability2 400
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand},scores={Energy=300..,move=36,Sneaking=1..,detect_jump=0}] Energy 300
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain2,location=slot.weapon.mainhand}] remove lovetrainclick
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability3=0,Sneaking=0,detect_jump=0,Energy=250..}] add form3
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Energy=0..249,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability3=1..,Sneaking=0,detect_jump=0,Energy=250..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability3=1..,Sneaking=0,detect_jump=0,Energy=250..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab3"},{"score":{"name": "@p","objective": "ability3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=0,Energy=250..}] move 21
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=0,Energy=250..}] ability3 400
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Energy=250..,move=21,Sneaking=0,detect_jump=0}] Energy 250
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability3=0,Sneaking=1..,detect_jump=0,Energy=150..}] add form3b
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Energy=0..149,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability3=1..,Sneaking=1..,detect_jump=0,Energy=150..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability3=1..,Sneaking=1..,detect_jump=0,Energy=150..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab3"},{"score":{"name": "@p","objective": "ability3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=1..,detect_jump=0,Energy=150..}] move 31
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=1..,detect_jump=0,Energy=150..}] ability3 400
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand},scores={Energy=150..,move=31,Sneaking=1..,detect_jump=0}] Energy 150
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain3,location=slot.weapon.mainhand}] remove lovetrainclick
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability4=0,Sneaking=0,detect_jump=0,Energy=200..}] add form4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Energy=0..199,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability4=1..,Sneaking=0,detect_jump=0,Energy=200..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability4=1..,Sneaking=0,detect_jump=0,Energy=200..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.ab4"},{"score":{"name": "@p","objective": "ability4"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=0,detect_jump=0,Energy=200..}] move 37
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=0,detect_jump=0,Energy=200..}] ability4 500
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand},scores={Energy=200..,move=37,Sneaking=0,detect_jump=0}] Energy 200
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain4,location=slot.weapon.mainhand}] remove lovetrainclick
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,domainCD=0,Sneaking=0,detect_jump=0,Energy=800..}] add form5
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,domainCD=0,Energy=0..799,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,domainCD=1..,Sneaking=0,detect_jump=0,Energy=800..}] at @s run playsound note.pling @s ~~~ 0.05 0.5
+execute as @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,domainCD=1..,Sneaking=0,detect_jump=0,Energy=800..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.domain"},{"score":{"name": "@p","objective": "domainCD"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,domainCD=0,Sneaking=0,detect_jump=0,Energy=800..}] domainstart 101
+scoreboard players set @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,domainCD=0,Sneaking=0,detect_jump=0,Energy=800..}] domainCD 4000
+scoreboard players remove @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand},scores={Energy=800..,domainstart=101,Sneaking=0,detect_jump=0}] Energy 800
+tag @s[tag=lovetrainclick,hasitem={item=ds:lovetrain5,location=slot.weapon.mainhand}] remove lovetrainclick
+@@lovetrain/lovetrain_clickfist
+tag @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep1=0,Sneaking=0,detect_jump=0,Energy=50..}] add wep1
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep1=0,Sneaking=0,detect_jump=0,Energy=0..49}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep1=1..,Sneaking=0,detect_jump=0,Energy=50..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep1=1..,Sneaking=0,detect_jump=0,Energy=50..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.wep1"},{"score":{"name": "@p","objective": "wep1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Sneaking=0,detect_jump=0,Energy=50..}] move 31
+scoreboard players set @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Sneaking=0,detect_jump=0,Energy=50..}] wep1 200
+scoreboard players remove @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,Energy=50..,move=31}] Energy 50
+tag @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0,Energy=80..}] add wep2
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0,Energy=0..79}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=1..,Sneaking=1..,detect_jump=0,Energy=80..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=1..,Sneaking=1..,detect_jump=0,Energy=80..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.wep2"},{"score":{"name": "@p","objective": "wep2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0,Energy=80..}] move 111
+scoreboard players set @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0,Energy=80..}] wep2 600
+scoreboard players remove @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,Energy=80..,move=111}] Energy 80
+tag @s remove lovetrainclickfist
+@@lovetrain/lovetrain_clicks
+tag @s[tag=itemUse:ds:lovetrain1] add lovetrainclick
+tag @s[tag=itemUse:ds:lovetrain2] add lovetrainclick
+tag @s[tag=itemUse:ds:lovetrain3] add lovetrainclick
+tag @s[tag=itemUse:ds:lovetrain4] add lovetrainclick
+tag @s[tag=itemUse:ds:lovetrain5] add lovetrainclick
+tag @s[tag=itemUse:ds:lovetrain6] add lovetrainclick
+tag @s[tag=itemUse:ds:lovetrain_fists] add lovetrainclickfist
+tag @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=0,detect_sprint=1..,detect_jump=1,Energy=200..}] add wep3
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=0,detect_sprint=1..,detect_jump=1,Energy=0..199}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=1..,detect_sprint=1..,detect_jump=1,Energy=200..}] at @s run playsound note.pling @a ~~~ 0.05 0.4
+execute as @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=1..,detect_sprint=1..,detect_jump=1,Energy=200..}] at @s run tellraw @s {"rawtext":[{"translate":"text.lovetrain.wep3"},{"score":{"name": "@p","objective": "wep3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=0,detect_sprint=1..,detect_jump=1,Energy=200..}] move 25
+scoreboard players set @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=0,detect_sprint=1..,detect_jump=1,Energy=200..}] wep3 400
+scoreboard players remove @s[tag=lovetrainclickfist,hasitem={item=ds:lovetrain_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_sprint=1..,detect_jump=1,Energy=200..,move=25}] Energy 200
+execute as @s[tag=lovetrainclick] run function lovetrain/lovetrain_click
+execute as @s[tag=lovetrainclickfist] run function lovetrain/lovetrain_clickfist
+@@lovetrain/lovetrain_moves
+execute as @s[scores={move=1..},tag=form1] run function lovetrain/lovetrain1
+execute as @s[scores={move=1..},tag=form1b] run function lovetrain/lovetrain1b
+execute as @s[scores={move=1..},tag=form1c] run function lovetrain/lovetrain1c
+execute as @s[scores={move=1..},tag=form2] run function lovetrain/lovetrain2
+execute as @s[scores={move=1..},tag=form2b] run function lovetrain/lovetrain2b
+execute as @s[scores={move=1..},tag=form2c] run function lovetrain/lovetrain2c
+execute as @s[scores={move=1..},tag=form3] run function lovetrain/lovetrain3
+execute as @s[scores={move=1..},tag=form3b] run function lovetrain/lovetrain3b
+execute as @s[scores={move=1..},tag=form3c] run function lovetrain/lovetrain3c
+execute as @s[scores={move=1..},tag=form4] run function lovetrain/lovetrain4
+execute as @s[scores={domainstart=1..},tag=form5,tag=!sukunadomain1,tag=!sukunadomain2,tag=!sukunadomain3] run function lovetrain/idledeathgamble
+execute as @s[scores={domain=1..},tag=!sukunadomain1,tag=!sukunadomain2,tag=!sukunadomain3] run function lovetrain/idledeathgamble2
+execute as @s[scores={cutscene=1..},tag=hakaridance] run function lovetrain/hakari_dance
+execute as @s[scores={move=1..},tag=wep1,tag=lovetrainfists] run function lovetrain/lucky_fist
+execute as @s[scores={move=1..},tag=wep2,tag=lovetrainfists] run function lovetrain/fever_combo
+execute as @s[scores={move=1..},tag=wep3,tag=lovetrainfists] run function lovetrain/devastating_blow
+execute as @s[scores={move=1..},tag=wep4,tag=lovetrainfists] run function lovetrain/brutal_barrage
+@@lovetrain/lovetrain_technique
+scoreboard objectives add luck dummy
+scoreboard players add @s luck 0
+scoreboard objectives add hakarimode dummy
+scoreboard players add @s hakarimode 0
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] at @s run function remove_ct
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=lovetrain] {"rawtext":[{"translate":"text.lovetrain.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!curse,tag=lovetrain] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] {"rawtext":[{"translate":"text.lovetrain.using1"},{"translate":"text.lovetrain.using2"},{"translate":"text.lovetrain.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain,m=!c] forms 1
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain,m=c] forms 6
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] ds:lovetrain_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] ds:lovetrain1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain,m=c] ds:lovetrain2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain,m=c] ds:lovetrain3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain,m=c] ds:lovetrain4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain,m=c] ds:lovetrain5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain,m=c] {"rawtext":[{"translate":"text.creativeforms"}]}
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!curse,tag=!lovetrain] add lovetrain
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=!curse,tag=lovetrain] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..6,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] at @s run scoreboard players add @s forms 1
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..6,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] at @s run playsound random.orb @a ~~~ 100000 0.5 100000
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..6,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] at @s run playsound mob.wither.hurt @a ~~~ 100000 2 100000
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=!curse,tag=lovetrain] ds:lovetrain_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=!curse,tag=lovetrain] ds:lovetrain1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] {"rawtext":[{"translate":"text.lovetrain_ab2.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2..},tag=!curse,tag=lovetrain] ds:lovetrain2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] {"rawtext":[{"translate":"text.lovetrain_ab3.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3..},tag=!curse,tag=lovetrain] ds:lovetrain3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=4,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] {"rawtext":[{"translate":"text.lovetrain_ab4.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=4..},tag=!curse,tag=lovetrain] ds:lovetrain4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=5,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] {"rawtext":[{"translate":"text.lovetrain_ab5.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=5..},tag=!curse,tag=lovetrain] ds:lovetrain5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=5..,invest=10..},tag=!curse,tag=lovetrain]  {"rawtext":[{"translate":"text.lovetrain_all.unlocked"}]}
+scoreboard players remove @a[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..5,invest=10..},tag=!curse,tag=lovetrain,tag=!cantupgrade] invest 10
+tag @e remove cantupgrade
+scoreboard objectives add fever dummy
+scoreboard players add @a[tag=lovetrain] fever 0
+@@lovetrain/lucky_fist
+playanimation @s[scores={move=25}] animation.lucky_fist
+tag @s[scores={move=1..2}] remove wep1
+tag @s[scores={move=20..,Stun=1..}] remove wep1
+scoreboard players set @s[scores={move=20..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=16}] Frames 4
+scoreboard players set @s[scores={move=16..}] Move 4
+scoreboard players set @a[scores={move=15..17}] atk 2
+execute as @s[scores={move=16}] at @s run scoreboard objectives add luck dummy
+execute as @s[scores={move=16}] at @s run scoreboard players random @s luck 1 100
+execute as @s[scores={move=1..8}] at @s run scoreboard players set @s luck 0
+execute as @s[scores={move=16},tag=gambler] at @s run scoreboard players random @s luck 41 100
+scoreboard players random @s[scores={move=18}] blackflashluck 1 269
+scoreboard players set @s[scores={move=18},tag=blackflashrig] blackflashluck 7
+execute as @s[scores={move=15}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact1
+execute as @s[scores={move=15}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact2
+execute as @s[scores={move=15}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact3
+execute as @s[scores={move=15}] at @s anchored eyes positioned ^^^1 run particle ds:heavy_impact5
+execute as @s[scores={move=15}] at @s anchored eyes positioned ^^^1 run particle ds:ground_slam3
+execute as @s[scores={move=15}] at @s anchored eyes positioned ^^^1 run camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=27}] at @s anchored eyes positioned ^^^2.5 run playsound mob.magic2 @a[r=100] ~~~ 99999 0.4 99999
+execute as @s[scores={move=15,luck=1..40}] at @s anchored eyes positioned ^^^2.5 run playsound mob.witch.throw @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=15,luck=1..40}] at @s anchored eyes positioned ^^^2.5 run playsound mob.magic4 @a[r=100] ~~~ 99999 0.8 99999
+execute as @s[scores={move=15,luck=1..40}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_green1
+execute as @s[scores={move=15,luck=1..40}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_green2
+execute as @s[scores={move=15,luck=1..40}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_green3
+execute as @s[scores={move=15,luck=1..40}] at @s anchored eyes positioned ^^^1 run particle ds:pachinkostrike_green1
+execute as @s[scores={move=15,luck=1..40}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.49] damage += @s damageadd
+execute as @s[scores={move=15,luck=1..40}] at @s positioned ^^^2.5 run damage @e[tag=!Frames,r=2.49] 4 override entity @s
+execute as @s[scores={move=15,luck=1..40}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Evade 8
+execute as @s[scores={move=15,luck=1..40}] at @s positioned ^^^2.5 run scoreboard players set @e[tag=!Frames,r=2.49] Stun 25
+execute as @s[scores={move=15,luck=1..40}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Hit 3
+execute as @s[scores={move=15,luck=41..70}] at @s anchored eyes positioned ^^^2.5 run playsound mob.witch.throw @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=15,luck=41..70}] at @s anchored eyes positioned ^^^2.5 run playsound mob.magic4 @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=15,luck=41..70}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_red1
+execute as @s[scores={move=15,luck=41..70}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_red2
+execute as @s[scores={move=15,luck=41..70}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_red3
+execute as @s[scores={move=15,luck=41..70}] at @s anchored eyes positioned ^^^1 run particle ds:pachinkostrike_red1
+execute as @s[scores={move=15,luck=41..70}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.49] damage += @s damageadd
+execute as @s[scores={move=15,luck=41..70}] at @s positioned ^^^2.5 run damage @e[tag=!Frames,r=2.49] 7 override entity @s
+execute as @s[scores={move=15,luck=41..70}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Evade 11
+execute as @s[scores={move=15,luck=41..70}] at @s positioned ^^^2.5 run scoreboard players set @e[tag=!Frames,r=2.49] Stun 28
+execute as @s[scores={move=15,luck=41..70}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Hit 3
+execute as @s[scores={move=15,luck=71..}] at @s anchored eyes positioned ^^^2.5 run playsound mob.magic4 @a[r=100] ~~~ 99999 0.5 99999
+execute as @s[scores={move=15,luck=71..}] at @s anchored eyes positioned ^^^2.5 run playsound mob.witch.throw @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=15,luck=71..}] at @s anchored eyes positioned ^^^2.5 run playsound mob.shock1 @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={move=15,luck=71..}] at @s anchored eyes positioned ^^^2.5 run playsound random.explode @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={move=15,luck=71..90}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_gold1
+execute as @s[scores={move=15,luck=71..90}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_gold2
+execute as @s[scores={move=15,luck=71..90}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_gold3
+execute as @s[scores={move=15,luck=71..90}] at @s anchored eyes positioned ^^^1 run particle ds:pachinkostrike_gold1
+execute as @s[scores={move=15,luck=71..90}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.49] damage += @s damageadd
+execute as @s[scores={move=15,luck=71..90}] at @s positioned ^^^2.5 run damage @e[tag=!Frames,r=2.49] 11 override entity @s
+execute as @s[scores={move=15,luck=71..90}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Flourish 12
+execute as @s[scores={move=15,luck=71..90}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Evade 12
+execute as @s[scores={move=15,luck=71..90}] at @s positioned ^^^2.5 run scoreboard players set @e[tag=!Frames,r=2.49] Stun 33
+execute as @s[scores={move=15,luck=71..90}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Hit 3
+execute as @s[scores={move=9..15}] at @s run tp @s ~~~
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^2.5 run playsound mob.magic4 @a[r=100] ~~~ 99999 0.3 99999
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^2.5 run playsound mob.witch.throw @a[r=100] ~~~ 99999 0.5 99999
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^2.5 run playsound mob.shock1 @a[r=100] ~~~ 99999 1.3 99999
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^2.5 run playsound random.explode @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_rainbow1
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_rainbow2
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^1 run particle ds:doorcrash_rainbow3
+execute as @s[scores={move=15,luck=91..}] at @s anchored eyes positioned ^^^1 run particle ds:pachinkostrike_rainbow1
+execute as @s[scores={move=15,luck=91..}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.49] damage += @s damageadd
+execute as @s[scores={move=15,luck=91..}] at @s positioned ^^^2.5 run damage @e[tag=!Frames,r=2.49] 16 override entity @s
+execute as @s[scores={move=15,luck=91..}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] knockdown 85
+execute as @s[scores={move=15,luck=91..}] at @s positioned ^^^2.5 run effect @e[tag=!Frames,r=2.49] levitation 1 20 true
+execute as @s[scores={move=15,luck=71..}] at @s positioned ^^^ run summon ds:red_reverse ^^^
+execute as @s[scores={move=15,luck=71..}] at @s positioned ^^^ run summon ds:red_reverse ^^^
+execute as @s[scores={move=15,luck=91..}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Evade 18
+execute as @s[scores={move=15,luck=91..}] at @s positioned ^^^2.5 run scoreboard players set @e[tag=!Frames,r=2.49] Stun 25
+execute as @s[scores={move=15,luck=91..}] at @s positioned ^^^2.5 run scoreboard players add @e[tag=!Frames,r=2.49] Hit 3
+scoreboard players add @s[scores={move=13,luck=41..70}] fever 1
+scoreboard players add @s[scores={move=13,luck=71..90}] fever 3
+scoreboard players add @s[scores={move=13,luck=91..100}] fever 5
+@@lovetrain/pachinko_cannon
+scoreboard players set @s[scores={Deleter=22..}] Deleter 21
+execute as @s[name="Pachinko Cannon"] at @s run tp @s ^^^3 facing @e[type=!item,name=PachinkoCannonTRG,c=1]
+tag @s add Frames
+execute as @s[scores={Deleter=5..19}] at @s run scoreboard players set @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] Stun 20
+execute as @s[scores={Deleter=5..19}] at @s run scoreboard players add @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] Evade 10
+execute as @s[scores={Deleter=5..19}] at @s run scoreboard players add @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] Hit 3
+execute as @s[scores={Deleter=5..19},type=ds:pachinko1] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] 5 override
+execute as @s[scores={Deleter=5..19},type=ds:pachinko2] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] 8 override
+execute as @s[scores={Deleter=5..19},type=ds:pachinko3] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] 12 override
+execute as @s[scores={Deleter=5..19},type=ds:pachinko4] at @s run damage @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] 18 override
+execute as @s[scores={Deleter=5..19}] at @s if entity @e[type=!item,tag=!Frames,family=!projectile,r=4.5,type=!ds:knockback,type=!ds:pachinko_impact1] run summon ds:knockback
+execute as @s[type=ds:pachinko3] at @s run particle ds:gold_pachinko2
+execute as @s[type=ds:pachinko4] at @s run particle ds:rainbow_pachinko2
+function damages/blunt_damage
+execute as @s[scores={Deleter=1..}] at @s run effect @e[type=!item,r=30] resistance 1 3 true
+execute as @s[scores={Deleter=1..}] at @s run effect @e[type=!item,r=30] resistance 1 3 true
+execute as @s[scores={Deleter=1..19}] at @s run particle ds:heavy_impact2 ~~1~
+execute as @s[scores={Deleter=1..19}] at @s run particle ds:heavy_impact3 ~~1~
+execute as @s[scores={Deleter=1..19}] at @s run summon ds:lapse_explode ^^^-3
+execute as @s[scores={Deleter=1..19}] at @s run summon ds:lapse_explode ^^^-4
+execute as @s[scores={Deleter=1..19}] at @s run summon ds:lapse_explode ^^^-5
+execute as @s[scores={Deleter=1..4},type=ds:pachinko1] at @s run particle ds:doorcrash_green1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko1] at @s run particle ds:doorcrash_green2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko1] at @s run particle ds:doorcrash_green3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko2] at @s run particle ds:doorcrash_red1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko2] at @s run particle ds:doorcrash_red2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko2] at @s run particle ds:doorcrash_red3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko3] at @s run particle ds:doorcrash_gold1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko3] at @s run particle ds:doorcrash_gold2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko3] at @s run particle ds:doorcrash_gold3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko4] at @s run particle ds:doorcrash_rainbow1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko4] at @s run particle ds:doorcrash_rainbow2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko4] at @s run particle ds:doorcrash_rainbow3 ~~~
+execute as @s[scores={Deleter=4}] at @s run playsound mob.magic2 @a[r=100] ~~~ 99999 0.6 99999
+execute as @s[scores={Deleter=4}] at @s run playsound random.explode @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={Deleter=4}] at @s run playsound random.explode @a[r=100] ~~~ 99999 1.85 99999
+execute as @s[scores={Deleter=4}] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={Deleter=1..19}] at @s run kill @e[type=item,r=7]
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact1 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact2 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact3 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run tp @s ~~-200~
+playanimation @s[tag=countered_proj] animation.big_pachinko2
+execute as @s[tag=countered_proj] at @s run tp @s ^^^2
+@@lovetrain/pachinko_rush
+execute as @s[name="Pachinko Ball"] at @s run tp @s ^^^1.33 facing @e[name=PachinkoTRG,c=1]
+execute as @s[name="Pachinko Ball"] at @s run tp @s ^^^1.33 facing @e[name=PachinkoTRG,c=1]
+execute as @s[scores={Deleter=5..}] at @s run scoreboard players set @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] Stun 20
+execute as @s[scores={Deleter=5..}] at @s run scoreboard players add @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] Evade 10
+execute as @s[scores={Deleter=5..}] at @s run scoreboard players add @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] Hit 3
+execute as @s[scores={Deleter=5..},type=ds:pachinko1] at @s run damage @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] 2 override
+execute as @s[scores={Deleter=5..},type=ds:pachinko2] at @s run damage @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] 4 override
+execute as @s[scores={Deleter=5..},type=ds:pachinko3] at @s run damage @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] 10 override
+execute as @s[scores={Deleter=5..},type=ds:pachinko4] at @s run damage @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] 15 override
+execute as @s[scores={Deleter=5..}] at @s if entity @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] run summon ds:knockback
+execute as @s[scores={Deleter=5..}] at @s if entity @e[tag=!Frames,type=!item,family=!projectile,r=2,type=!ds:knockback,type=!ds:pachinko_impact1] run scoreboard players set @s Deleter 4
+function damages/blunt_damage
+execute as @s[type=ds:pachinko3] at @s run particle ds:gold_pachinko
+execute as @s[type=ds:pachinko4] at @s run particle ds:rainbow_pachinko
+execute as @s[scores={Deleter=5..}] at @s unless block ~~~ air run particle ds:ground_slam1 ~~~
+execute as @s[scores={Deleter=5..}] at @s unless block ~~~ air run particle ds:ground_slam2 ~~~
+execute as @s[scores={Deleter=5..}] at @s unless block ~~~ air run particle ds:ground_slam3 ~~~
+execute as @s[scores={Deleter=5..}] at @s unless block ~~~ air run particle ds:rubble3 ~~~
+execute as @s[scores={Deleter=5..}] at @s unless block ~~~ air run summon ds:pachinko_impact1
+execute as @s[scores={Deleter=5..}] at @s unless block ~~~ air run scoreboard players set @s Deleter 4
+execute as @s[scores={Deleter=1..4},type=ds:pachinko1] at @s run particle ds:doorcrash_green1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko1] at @s run particle ds:doorcrash_green2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko1] at @s run particle ds:doorcrash_green3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko2] at @s run particle ds:doorcrash_red1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko2] at @s run particle ds:doorcrash_red2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko2] at @s run particle ds:doorcrash_red3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko3] at @s run particle ds:doorcrash_gold1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko3] at @s run particle ds:doorcrash_gold2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko3] at @s run particle ds:doorcrash_gold3 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko4] at @s run particle ds:doorcrash_rainbow1 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko4] at @s run particle ds:doorcrash_rainbow2 ~~~
+execute as @s[scores={Deleter=1..4},type=ds:pachinko4] at @s run particle ds:doorcrash_rainbow3 ~~~
+execute as @s[scores={Deleter=4}] at @s run playsound mob.magic2 @a[r=100] ~~~ 99999 0.6 99999
+execute as @s[scores={Deleter=4}] at @s run playsound random.explode @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={Deleter=4}] at @s run playsound random.explode @a[r=100] ~~~ 99999 1.85 99999
+execute as @s[scores={Deleter=4}] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={Deleter=1..4}] at @s run kill @e[type=item,r=7]
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact1 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact2 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run particle ds:heavy_impact3 ~~~
+execute as @s[scores={Deleter=1..4}] at @s run tp @s ~~-200~
+@@lovetrain/shutterdoors
+playanimation @s[tag=!closing,scores={Deleter=38..},tag=!slicingdoor] animation.shutter_doors.appear1
+playanimation @s[tag=!closing,scores={Deleter=38..},tag=slicingdoor] animation.shutter_doors.appear2
+execute as @s at @s run tp @s ~~~
+execute as @s[tag=!slicingdoor,tag=!closing] at @s run tp @s ^^^1.33
+execute as @s[tag=!slicingdoor,scores={Deleter=1..3}] at @s run tp @s ~~-40~
+effect @s[scores={Deleter=1..3}] invisibility 1 1 true
+execute as @s[tag=!slicingdoor,scores={Deleter=4..}] at @s unless block ^^^1.5 air unless block ^^^1.5 tallgrass unless block ^^^1.5 double_plant run scoreboard players set @s Deleter 3
+execute as @s[tag=!slicingdoor,tag=!closing,scores={Deleter=1..}] at @s if entity @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=2.25] run scoreboard players set @s Deleter 51
+execute as @s[tag=!slicingdoor,tag=!closing,scores={Deleter=1..}] at @s if entity @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,type=!arrow,type=!armor_stand,type=!ds:projectile,r=2.25] run tag @s add closing
+playanimation @s[tag=closing,scores={Deleter=49..},tag=!closing2] animation.shutter_doors.close
+playanimation @s[tag=closing,scores={Deleter=52..},tag=closing2] animation.shutter_doors.appear_close
+tag @s[scores={Deleter=49..}] add closing
+execute as @s[tag=!slicingdoor,scores={Deleter=45}] at @s run function damages/slash_damage
+execute as @s[tag=!slicingdoor,scores={Deleter=46},tag=closing] at @s run scoreboard players random @s chance 1 100
+execute as @s[tag=!slicingdoor,scores={Deleter=46},tag=closing] at @s if entity @p[scores={chance=6969},r=100] run scoreboard players set @s chance 100
+execute as @s[tag=!slicingdoor,scores={Deleter=45,chance=1..98},tag=closing] at @s run playsound mob.metal1 @a[r=100] ~~~ 99999 1.25 99999
+execute as @s[tag=!slicingdoor,scores={Deleter=45,chance=99..},tag=closing] at @s run playsound mob.metal2 @a[r=100] ~~~ 99999 1 99999
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run camerashake add @a[r=10] 2 0.15
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run playsound random.anvil_land @a ~~~ 1 0.85
+execute as @s[tag=!slicingdoor,scores={Deleter=1..45},tag=closing] at @s run tp @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=5,tag=Big,c=1] ~~-0.9~
+execute as @s[tag=!slicingdoor,scores={Deleter=1..45},tag=closing] at @s run tp @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25,c=1] ~~-0.9~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors1] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25] 10 entity_attack entity @s
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors2] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25] 17 entity_attack entity @s
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors3] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25] 22 entity_attack entity @s
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors4] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25] 30 entity_attack entity @s
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25] Stun 25
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25] Evade 14
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=2.25] Hit 3
+execute as @s[tag=!slicingdoor,type=ds:shutterdoors3] at @s run particle ds:golden_door ~~~
+execute as @s[tag=!slicingdoor,type=ds:shutterdoors4] at @s run particle ds:rainbow_door ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run particle ds:heavy_impact1 ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run particle ds:heavy_impact2 ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run particle ds:heavy_impact3 ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run particle ds:dirt2 ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing] at @s run particle ds:ground_slam2 ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors1] at @s run particle ds:doorcrash_green1~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors1] at @s run particle ds:doorcrash_green2~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors1] at @s run particle ds:doorcrash_green3~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors2] at @s run particle ds:doorcrash_red1~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors2] at @s run particle ds:doorcrash_red2~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors2] at @s run particle ds:doorcrash_red3~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors3] at @s run particle ds:doorcrash_gold1~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors3] at @s run particle ds:doorcrash_gold2~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors3] at @s run particle ds:doorcrash_gold3~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors4] at @s run particle ds:doorcrash_rainbow1 ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors4] at @s run particle ds:doorcrash_rainbow2 ~~~
+execute as @s[tag=!slicingdoor,scores={Deleter=45},tag=closing,type=ds:shutterdoors4] at @s run particle ds:doorcrash_rainbow3 ~~~
+execute as @s[tag=slicingdoor] at @s run tp @s ^^^1.44
+execute as @s[tag=slicingdoor] at @s unless block ~~-0.2~ air run particle ds:skid_sparks1 ^^^-6.4
+execute as @s[tag=slicingdoor,type=ds:shutterdoors3] at @s run particle ds:golden_door2 ~~~
+execute as @s[tag=slicingdoor,type=ds:shutterdoors4] at @s run particle ds:rainbow_door2 ~~~
+execute as @s[tag=slicingdoor] at @s if entity @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] run camerashake add @a[r=10] 2 0.15
+execute as @s[tag=slicingdoor] at @s if entity @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] run playsound mob.sword @a ~~~ 1 1.25
+execute as @s[tag=slicingdoor,type=ds:shutterdoors1] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] 5 entity_attack entity @s
+execute as @s[tag=slicingdoor,type=ds:shutterdoors2] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] 10 entity_attack entity @s
+execute as @s[tag=slicingdoor,type=ds:shutterdoors3] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] 20 entity_attack entity @s
+execute as @s[tag=slicingdoor,type=ds:shutterdoors4] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] 30 entity_attack entity @s
+execute as @s[tag=slicingdoor] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] Stun 35
+execute as @s[tag=slicingdoor] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] Evade 15
+execute as @s[tag=slicingdoor] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=1.5,tag=!Big] Hit 8
+execute as @s[tag=slicingdoor] at @s if entity @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] run camerashake add @a[r=10] 2 0.15
+execute as @s[tag=slicingdoor] at @s if entity @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] run playsound mob.sword @a ~~~ 1 1.25
+execute as @s[tag=slicingdoor,type=ds:shutterdoors1] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] 5 entity_attack entity @s
+execute as @s[tag=slicingdoor,type=ds:shutterdoors2] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] 10 entity_attack entity @s
+execute as @s[tag=slicingdoor,type=ds:shutterdoors3] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] 20 entity_attack entity @s
+execute as @s[tag=slicingdoor,type=ds:shutterdoors4] at @s run damage @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] 30 entity_attack entity @s
+execute as @s[tag=slicingdoor] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] Stun 35
+execute as @s[tag=slicingdoor] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] Evade 15
+execute as @s[tag=slicingdoor] at @s run scoreboard players add @e[tag=!Frames,family=!projectile,family=!damage,family=!despawncito,type=!item,r=3.85,tag=Big] Hit 8
+@@lovetrain/slot_slam
+scoreboard players random @s[scores={Deleter=89..}] chance -10 100
+playanimation @s[scores={chance=-10..14,Deleter=88..}] animation.slot_slam5
+playanimation @s[scores={chance=15..40,Deleter=88..}] animation.slot_slam1
+playanimation @s[scores={chance=41..70,Deleter=88..}] animation.slot_slam2
+playanimation @s[scores={chance=71..90,Deleter=88..}] animation.slot_slam3
+playanimation @s[scores={chance=91..,Deleter=88..}] animation.slot_slam4
+execute as @s[scores={Deleter=88}] at @s run tp @s ~~10~
+execute as @s[scores={Deleter=1..}] at @s run tp @s ~~~
+tag @s[tag=!Frames] add Frames
+execute as @s[scores={Deleter=88}] at @s run particle ds:fall_fast
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={Deleter=1..86}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={Deleter=79}] at @s run particle ds:doorcrash_rainbow1 ~~~
+execute as @s[scores={Deleter=79}] at @s run particle ds:doorcrash_rainbow2 ~~~
+execute as @s[scores={Deleter=79}] at @s run particle ds:doorcrash_rainbow3 ~~~
+execute as @s[scores={Deleter=79}] at @s run particle ds:dirt0 ~~0.15~
+execute as @s[scores={Deleter=79}] at @s run particle ds:dirt2
+execute as @s[scores={Deleter=79}] at @s run particle ds:crater2
+execute as @s[scores={Deleter=79}] at @s run particle ds:crater3
+execute as @s[scores={Deleter=79}] at @s run particle ds:large_slam1
+execute as @s[scores={Deleter=79}] at @s run particle ds:large_slam2
+execute as @s[scores={Deleter=79}] at @s run particle ds:large_slam3
+execute as @s[scores={Deleter=79}] at @s run particle ds:leap2
+execute as @s[scores={Deleter=79}] at @s run particle ds:ground_slam1
+execute as @s[scores={Deleter=79}] at @s run particle ds:ground_slam2
+execute as @s[scores={Deleter=79}] at @s run particle ds:ground_slam3
+execute as @s[scores={Deleter=79}] at @s run particle ds:ground_slam4
+execute as @s[scores={Deleter=79}] at @s run particle mcdp_v:knockback_roar_particle_2
+execute as @s[scores={Deleter=79}] at @s run camerashake add @a[r=60] 3 0.2
+execute as @s[scores={Deleter=79,chance=1..98}] at @s run playsound mob.metal1 @a[r=160] ~~~ 99999 0.5 99999
+execute as @s[scores={Deleter=79,chance=99..}] at @s run playsound mob.metal2 @a[r=160]  ~~~ 99999 1 99999
+execute as @s[scores={Deleter=79}] at @s run playsound random.explode @a[r=160]  ~~~ 99999 0.5 99999
+execute as @s[scores={Deleter=79}] at @s run playsound random.explode @a[r=160]  ~~~ 99999 0.75 99999
+execute as @s[scores={Deleter=79}] at @s run playsound mob.wither.break_block @a[r=160]  ~~~ 99999 0.45 99999
+execute as @s[scores={Deleter=79}] at @s run  damage @e[tag=!Frames,r=7.5,tag=!slots,type=!item] 25
+execute as @s[scores={Deleter=79}] at @s run  scoreboard players add @e[tag=!Frames,r=7.5,tag=!slots,type=!item] knockdown 35
+execute as @s[scores={Deleter=79}] at @s run  scoreboard players add @e[tag=!Frames,r=7.5,tag=!slots,type=!item] knock 40
+execute as @s[scores={Deleter=79}] at @s run  scoreboard players add @e[tag=!Frames,r=7.5,tag=!slots,type=!item] Evade 25
+execute as @s[scores={Deleter=79}] at @s run  scoreboard players add @e[tag=!Frames,r=7.5,tag=!slots,type=!item] Stun 35
+execute as @s[scores={Deleter=79}] at @s run  scoreboard players add @e[tag=!Frames,r=7.5,tag=!slots,type=!item] Hit 4
+execute as @s[scores={Deleter=78}] at @s run function damages/blunt_damage
+execute as @s[scores={Deleter=77}] at @s run playsound mob.slots1 @a[r=160]  ~~~ 99999 1 99999
+execute as @s[scores={Deleter=25,chance=-10..14}] at @s run playsound mob.magic1 @a[r=160]  ~~~ 99999 0.5 99999
+execute as @s[scores={Deleter=25,chance=-10..14}] at @s run particle ds:doorcrash_red1 ~~1.5~
+execute as @s[scores={Deleter=25,chance=-10..14}] at @s run particle ds:doorcrash_red3 ~~1.5~
+execute as @s[scores={Deleter=25,chance=-10..14}] at @s run scoreboard players remove @e[tag=slots,c=1] Energy 100
+execute as @s[scores={Deleter=25,chance=-10..14}] at @s run scoreboard players remove @e[tag=slots,c=1] fever 5
+execute as @s[scores={Deleter=25,chance=-10..14}] at @s run tellraw @p[tag=slots,c=1] {"rawtext":[{"translate":"text.slot_slam1"}]}
+execute as @s[scores={Deleter=25,chance=15..40}] at @s run playsound mob.magic1 @a[r=160]  ~~~ 99999 1 99999
+execute as @s[scores={Deleter=25,chance=15..40}] at @s run particle ds:doorcrash_green3 ~~1.5~
+execute as @s[scores={Deleter=25,chance=15..40}] at @s run scoreboard players add @e[tag=slots,c=1] Energy 100
+execute as @s[scores={Deleter=25,chance=15..40}] at @s run tellraw @p[tag=slots,c=1] {"rawtext":[{"translate":"text.slot_slam2"}]}
+execute as @s[scores={Deleter=25,chance=15..40}] at @s run scoreboard players add @e[tag=slots,c=1] fever 3
+execute as @s[scores={Deleter=25,chance=41..70}] at @s run playsound mob.magic1 @a[r=160]  ~~~ 99999 1.25 99999
+execute as @s[scores={Deleter=25,chance=41..70}] at @s run particle ds:doorcrash_gold3 ~~1.5~
+execute as @s[scores={Deleter=25,chance=41..70}] at @s run scoreboard players set @e[tag=slots,c=1,scores={ability3=1..}] ability3 0
+execute as @s[scores={Deleter=25,chance=41..70}] at @s run tellraw @p[tag=slots,c=1] {"rawtext":[{"translate":"text.slot_slam3"}]}
+execute as @s[scores={Deleter=25,chance=41..70}] at @s run scoreboard players add @e[tag=slots,c=1] fever 5
+execute as @s[scores={Deleter=25,chance=71..90}] at @s run playsound mob.magic1 @a[r=160]  ~~~ 99999 1.5 99999
+execute as @s[scores={Deleter=20,chance=71..90}] at @s run playsound mob.magic1 @a[r=160]  ~~~ 99999 1.65 99999
+execute as @s[scores={Deleter=15,chance=71..90}] at @s run playsound mob.magic1 @a[r=160]  ~~~ 99999 1.75 99999
+execute as @s[scores={Deleter=25,chance=71..90}] at @s run particle ds:doorcrash_red3 ~~1.5~
+execute as @s[scores={Deleter=20,chance=71..90}] at @s run particle ds:doorcrash_red3 ~~1.5~
+execute as @s[scores={Deleter=15,chance=71..90}] at @s run particle ds:doorcrash_red3 ~~1.5~
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run  playsound random.explode @a[r=200] ~~~ 99999 0.5 99999
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run  playsound random.explode @a[r=200] ~~~ 99999 0.45 99999
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run  playsound mob.shock1 @a[r=200] ~~~ 99999 0.5 99999
+execute as @s[scores={Deleter=9..12,chance=71..90}] at @s run  damage @e[tag=!Frames,r=7.5,tag=!slots,type=!item] 15 override
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run  scoreboard players add @e[tag=!Frames,r=15,tag=!slots,type=!item] knockdown 95
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run  scoreboard players add @e[tag=!Frames,r=15,tag=!slots,type=!item] Evade 25
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run  scoreboard players add @e[tag=!Frames,r=15,tag=!slots,type=!item] Stun 35
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run  scoreboard players add @e[tag=!Frames,r=15,tag=!slots,type=!item] Hit 4
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:crater4
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:dirt0 ~~0.15~
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:dirt2
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:crater2
+execute as @s[scores={Deleter=79}] at @s run particle ds:crater3
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:large_slam1
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:large_slam2
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:large_slam3
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:leap2
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:ground_slam1
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:ground_slam2
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:ground_slam3
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:ground_slam4
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:slots_explode1 ~~1.5~
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:slots_explode2 ~~1.5~
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:slots_explode3 ~~1.5~
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:slots_explode4 ~~1.5~
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:impact2 ~~1.5~
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run particle ds:heavy_impact5
+execute as @s[scores={Deleter=8..12,chance=71..90}] at @s run summon ds:red_reversal ~~~
+execute as @s[scores={Deleter=8..12,chance=71..90}] at @s run summon ds:red_reversal ~-4~~
+execute as @s[scores={Deleter=8..12,chance=71..90}] at @s run summon ds:red_reversal ~4~~
+execute as @s[scores={Deleter=8..12,chance=71..90}] at @s run summon ds:red_reversal ~~~-4
+execute as @s[scores={Deleter=8..12,chance=71..90}] at @s run summon ds:red_reversal ~~~4
+execute as @s[scores={Deleter=8..12,chance=71..90}] at @s run kill @e[type=item,r=25]
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run effect @e[type=!item,tag=slots,r=20] resistance 1 10 true
+execute as @s[scores={Deleter=12,chance=71..90}] at @s run camerashake add @a[r=100] 3 0.45
+execute as @s[scores={Deleter=25,chance=71..90}] at @s run scoreboard players add @e[tag=slots,c=1] fever 5
+execute as @s[scores={Deleter=25,chance=91..}] at @s run playsound mob.slots2 @a[r=160]  ~~~ 99999 0.85 99999
+execute as @s[scores={Deleter=25,chance=91..}] at @s run  particle ds:doorcrash_gold1 ~~1.5~
+execute as @s[scores={Deleter=25,chance=91..}] at @s run  particle ds:doorcrash_gold2 ~~1.5~
+execute as @s[scores={Deleter=25,chance=91..}] at @s run  particle ds:doorcrash_gold3 ~~1.5~
+execute as @s[scores={Deleter=25,chance=91..}] at @s run scoreboard players add @p[tag=slots] Energy 777
+execute as @s[scores={Deleter=25,chance=91..}] at @s run scoreboard players set @p[tag=slots] ability3 0
+execute as @s[scores={Deleter=25,chance=91..}] at @s run tellraw @p[tag=slots,c=1] {"rawtext":[{"translate":"text.slot_slam4"}]}
+execute as @s[scores={Deleter=25,chance=91..}] at @s run scoreboard players add @e[tag=slots,c=1] fever 10
+execute as @s[scores={Deleter=1..6}] at @s run tag @e[tag=slots] remove slots
+execute as @s[scores={Deleter=1..6}] at @s run playsound mob.magic2 @a ~~~ 1 0.5
+execute as @s[scores={Deleter=1..6}] at @s run particle ds:doorcrash_rainbow1 ~~1.5~
+execute as @s[scores={Deleter=1..6}] at @s run particle ds:doorcrash_rainbow2 ~~1.5~
+execute as @s[scores={Deleter=1..6}] at @s run particle ds:doorcrash_rainbow3 ~~1.5~
+execute as @s[scores={Deleter=1..6}] at @s run particle ds:pachinkostrike_rainbow1 ~~1.5~
+execute as @s[scores={Deleter=1..6}] at @s run particle ds:rainbow_pachinko ~~1.5~
+execute as @s[scores={Deleter=1..4}] at @s run tp @s ~~-40~

@@ -1,0 +1,362 @@
+@@ce/basket_enable
+tag @s[scores={move=4..},tag=!not_attack] add not_attack
+tag @s[scores={move=1..3},tag=not_attack] remove not_attack
+playanimation @s[scores={move=20..}] animation.basket_enable
+scoreboard players set @s[scores={move=20..}] Move 20
+execute as @s[scores={move=15}] at @s run playsound beacon.power @a[r=25] ~~~ 9999 1.5 9999
+execute as @s[scores={move=15}] at @s run camerashake add @a[r=10] 0.15 1
+execute as @s[scores={move=7..13}] at @s run particle ds:divergent_ac2 ~~1~
+execute as @s[scores={move=7..13}] at @s run particle ds:divergent_ac3 ~~1~
+execute as @s[scores={move=7..13}] at @s run particle ds:divergent_ac6 ~~~
+scoreboard players set @s[scores={move=17}] hollowwickerbasket 200
+scoreboard players operation @s[scores={move=17},tag=heian_era] hollowwickerbasket += @s Energy
+scoreboard players operation @s[scores={move=17},tag=heian_era] hollowwickerbasket /= two endurance
+tag @s[scores={move=1..3},tag=hollow_basket_activate] remove hollow_basket_activate
+@@ce/basket_passive
+tag @s[scores={hollowwickerbasket=3..},tag=!hollowwickerbasket] add hollowwickerbasket
+tag @s[scores={hollowwickerbasket=1..2},tag=hollowwickerbasket] remove hollowwickerbasket
+scoreboard players set @s domainimmune 5
+event entity @s[scores={hollowwickerbasket=5..},has_property={property:hollow_basket=0}] hollow_basket
+event entity @s[scores={hollowwickerbasket=1..4},has_property={property:hollow_basket=!0}] hollow_basket_off
+execute as @s[scores={damagehalf=1..,hollowwickerbasket=101..}] at @s run scoreboard players operation @s damagehalf /= two Mode
+execute as @s[scores={damagehalf=1..,hollowwickerbasket=101..}] at @s run scoreboard players operation @s hollowwickerbasket -= @s damagehalf
+execute as @s[scores={damagehalf=1..,hollowwickerbasket=101..}] at @s run scoreboard players operation @s damagehalf *= two Mode
+execute as @s[scores={damage=1..,hollowwickerbasket=101..}] at @s run scoreboard players operation @s hollowwickerbasket -= @s damage
+scoreboard players set @s[scores={hollowwickerbasket=..2},tag=hollowwickerbasket] hollowwickerbasket 3
+execute as @s[scores={Hit=1..,hollowwickerbasket=6..}] at @s run scoreboard players remove @s hollowwickerbasket 5
+playsound beacon.ambient @a ~~~ 0.005 3
+execute as @s[scores={hollowwickerbasket=..1}] at @s run particle ds:divergent_ac6
+execute as @s[scores={hollowwickerbasket=..1}] at @s run particle ds:divergent_ac3 ~~1~
+execute as @s[scores={hollowwickerbasket=..1}] at @s run particle ds:divergent_ac2 ~~1~
+execute as @s[scores={hollowwickerbasket=..1}] at @s run playsound beacon.deactivate @a ~~~ 1 2
+scoreboard players remove @s[scores={hollowwickerbasket=1..}] hollowwickerbasket 1
+@@ce/divergent_hit
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.25 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.5 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.4 99999
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound mob.stomp @a[r=40] ~~~ 99999 0.5 99999
+execute at @s positioned ^^^3 run scoreboard players add @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] damage 2
+effect @a[r=4] night_vision 1 1 true
+camerashake add @a[r=20] 3 0.2 positional
+execute at @s run function damages/blunt_damage
+particle ds:punch1 ~~~
+particle ds:punch2 ~~~
+particle ds:punch3 ~~~
+particle ds:punch4 ~~~
+particle ds:heavy_impact1 ~~~
+particle ds:heavy_impact5 ~~~
+particle ds:blood ~~0.1~
+particle ds:divergent_ac1
+particle ds:divergent_ac2
+particle ds:divergent_ac3
+particle ds:divergent_ac4
+particle ds:divergent_ac5
+particle ds:divergent_ac6
+@@ce/divergent_hit_green
+playsound random.explode @a[r=40] ~~~ 99999 0.75 99999
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.25 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.5 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.4 99999
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound mob.stomp @a[r=40] ~~~ 99999 0.35 99999
+execute at @s positioned ^^^3 run scoreboard players add @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] damage 2
+effect @a[r=4] night_vision 1 1 true
+camerashake add @a[r=20] 4 0.25 positional
+execute at @s run function damages/blunt_damage
+particle ds:punch1 ~~~
+particle ds:punch2 ~~~
+particle ds:punch3 ~~~
+particle ds:punch4 ~~~
+particle ds:blood ~~0.1~
+particle ds:heavy_impact1 ~~~
+particle ds:heavy_impact5 ~~~
+particle ds:heavy_impact1 ~~~
+particle ds:divergent_ac1
+particle ds:divergent_acgreen2
+particle ds:divergent_acgreen3
+particle ds:divergent_ac4
+particle ds:divergent_ac5
+particle ds:divergent_acgreen6
+@@ce/divergent_hit_purple
+playsound random.explode @a[r=40] ~~~ 99999 0.75 99999
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.25 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.5 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.4 99999
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound mob.stomp @a[r=40] ~~~ 99999 0.35 99999
+execute at @s positioned ^^^3 run scoreboard players add @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] damage 2
+effect @a[r=4] night_vision 1 1 true
+camerashake add @a[r=20] 4 0.25 positional
+execute at @s run function damages/blunt_damage
+particle ds:punch1 ~~~
+particle ds:punch2 ~~~
+particle ds:punch3 ~~~
+particle ds:punch4 ~~~
+particle ds:blood ~~0.1~
+particle ds:heavy_impact1 ~~~
+particle ds:heavy_impact5 ~~~
+particle ds:heavy_impact1 ~~~
+particle ds:divergent_ac1
+particle ds:curses_energy_hit1 ~~~
+particle ds:curses_energy_hit3 ~~~
+particle ds:curses_energy_hit3 ~~~
+particle ds:divergent_ac4
+particle ds:divergent_ac5
+@@ce/divergent_hit_red
+playsound random.explode @a[r=40] ~~~ 99999 0.75 99999
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.25 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.5 99999
+playsound random.explode @a[r=40] ~~~ 99999 1.4 99999
+playsound random.explode @a[r=40] ~~~ 99999 2.2 99999
+playsound mob.stomp @a[r=40] ~~~ 99999 0.35 99999
+execute at @s positioned ^^^3 run scoreboard players add @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] damage 2
+effect @a[r=4] night_vision 1 1 true
+camerashake add @a[r=20] 4 0.25 positional
+execute at @s run function damages/blunt_damage
+particle ds:punch1 ~~~
+particle ds:punch2 ~~~
+particle ds:punch3 ~~~
+particle ds:punch4 ~~~
+particle ds:blood ~~0.1~
+particle ds:heavy_impact1 ~~~
+particle ds:heavy_impact5 ~~~
+particle ds:heavy_impact1 ~~~
+particle ds:divergent_ac1
+particle ds:divergent_acred2
+particle ds:divergent_acred3
+particle ds:divergent_ac4
+particle ds:divergent_ac5
+particle ds:divergent_acred6
+@@ce/divergent_passive
+tag @s[scores={divergent=2..},tag=!fistenergy] add fistenergy
+scoreboard players add @s divergentfistCD 1
+scoreboard players remove @s[scores={atk=1..,Energy=4..},type=player] Energy 4
+scoreboard players set @s[scores={Energy=0..3,divergent=4..},type=player] divergent 3
+execute as @s[scores={atk=1..},family=!purecurse,tag=!curse,tag=!roughce] unless entity @s[tag=has_sukuna,tag=sukuna,type=!player] unless entity @s[tag=sukuna,type=player] at @s positioned ^^^3 if entity @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] at @s positioned ^^1^1.25 run function ce/divergent_hit
+execute as @s[scores={atk=1..},tag=!roughce] unless entity @s[family=!purecurse,tag=!curse] unless entity @s[tag=has_sukuna,tag=sukuna,type=!player] unless entity @s[tag=sukuna,type=player] at @s positioned ^^^3 if entity @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] at @s positioned ^^1^1.25 run function ce/divergent_hit_purple
+execute as @s[scores={atk=1..},tag=roughce] unless entity @s[tag=has_sukuna,tag=sukuna,type=!player] unless entity @s[tag=sukuna,type=player] at @s positioned ^^^3 if entity @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] at @s positioned ^^1^1.25 run function ce/divergent_hit_green
+execute as @s[scores={atk=1..},tag=has_sukuna,tag=sukuna,type=!player] at @s positioned ^^^3 if entity @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] at @s positioned ^^1^1.25 run function ce/divergent_hit_red
+execute as @s[scores={atk=1..},tag=sukuna,type=player] at @s positioned ^^^3 if entity @e[tag=!Frames,r=2.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame] at @s positioned ^^1^1.25 run function ce/divergent_hit_red
+execute if entity @s[scores={divergent=..1}] run function removefistenergy
+scoreboard players remove @s[scores={divergent=1..}] divergent 1
+@@ce/divergentfist
+tag @s[scores={move=4..},tag=!not_attack] add not_attack
+tag @s[scores={move=1..3},tag=not_attack] remove not_attack
+playanimation @s[scores={move=40}] animation.divergent_enable
+tag @s[scores={move=32..,Stun=1..},tag=divergentfist] remove divergentfist
+playanimation @s[scores={move=32..,Stun=1..},tag=!noStunnedAnim] animation.stunned
+scoreboard players set @s[scores={move=32..,Stun=1..}] move 0
+tag @s[scores={move=1..2},tag=divergentfist] remove divergentfist
+execute if entity @s[scores={move=24}] run function removefistenergy
+execute as @s[scores={move=19..20}] at @s run playsound random.wither.shoot @a[r=100] ~~~ 99999 0.6 9999
+execute as @s[scores={move=19..20}] at @s run playsound mob.blaze.shoot @a[r=100] ~~~ 99999 0.6 9999
+execute as @s[scores={move=19..20}] at @s run playsound mob.cursed_energy @a[r=100] ~~~ 99999 1 9999
+execute as @s[scores={move=12..20},tag=!roughce] at @s run particle ds:divergent_ac4 ~~1~
+execute as @s[scores={move=12..20}] at @s run particle ds:divergent_ac5 ~~1~
+execute as @s[scores={move=12..20},tag=!roughce] at @s run particle ds:divergent_ac6 ~~1~
+execute as @s[scores={move=12..20},tag=roughce] at @s run particle ds:divergent_acgreen4 ~~1~
+execute as @s[scores={move=12..20},tag=roughce] at @s run particle ds:divergent_acgreen6 ~~1~
+execute as @s[scores={move=1..13},family=!purecurse,tag=!curse,tag=!roughce,hasitem={item=ds:divergentfists,location=slot.weapon.offhand,quantity=0}] unless entity @s[tag=has_sukuna,tag=sukuna,type=!player] unless entity @s[tag=sukuna,type=player] run replaceitem entity @s slot.weapon.offhand 1 ds:divergentfists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+execute as @s[scores={move=1..13},tag=!roughce,hasitem={item=ds:divergentfists,location=slot.weapon.offhand,quantity=0}] unless entity @s[family=!purecurse,tag=!curse] unless entity @s[tag=has_sukuna,tag=sukuna,type=!player] unless entity @s[tag=sukuna,type=player] run replaceitem entity @s slot.weapon.offhand 1 ds:divergentfists_purple 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+execute as @s[scores={move=1..13},tag=roughce,hasitem={item=ds:divergentfists,location=slot.weapon.offhand,quantity=0}] unless entity @s[tag=has_sukuna,tag=sukuna,type=!player] unless entity @s[tag=sukuna,type=player] run replaceitem entity @s[scores={move=1..13},tag=roughce,tag=!sukuna,hasitem={item=ds:divergentfists_green,location=slot.weapon.offhand,quantity=0}] slot.weapon.offhand 1 ds:divergentfists_green 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s[scores={move=1..13},tag=has_sukuna,tag=sukuna,type=!player,hasitem={item=ds:divergentfists_red,location=slot.weapon.offhand,quantity=0}] slot.weapon.offhand 1 ds:divergentfists_red 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s[scores={move=1..13},tag=sukuna,type=player,hasitem={item=ds:divergentfists_red,location=slot.weapon.offhand,quantity=0}] slot.weapon.offhand 1 ds:divergentfists_red 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+execute as @s[scores={move=20}] at @s run particle ds:dirt2
+execute as @s[scores={move=20}] at @s unless block ~~-1~ air unless block ~~-1~ barrier run playsound mob.wither.break_block @a ~~~ 1 0.5
+execute as @s[scores={move=20}] at @s unless block ~~-1~ air unless block ~~-1~ barrier run particle ds:crater
+execute as @s[scores={move=20}] at @s unless block ~~-1~ air unless block ~~-1~ barrier run particle ds:rubble3
+scoreboard players operation @s[scores={move=20}] damageinsurance = @s damageadd
+scoreboard players operation @s[scores={move=20}] divfist = @s damageadd
+scoreboard players operation @s[scores={move=20}] divfist /= two Mode
+scoreboard players operation @s[scores={move=20}] damageadd += @s divfist
+scoreboard players operation @s[scores={move=20},tag=roughce] divfist /= two Mode
+scoreboard players operation @s[scores={move=20},tag=roughce] damageadd += @s divfist
+execute as @s[scores={move=5..20}] at @s run camerashake add @a 4 0.25
+scoreboard players set @s[scores={move=5..20}] Stun 15
+scoreboard players set @s[scores={move=5..20}] Move 4
+scoreboard players remove @s[scores={move=5..20}] Energy 2
+scoreboard players set @s[scores={move=20}] divergent 300
+scoreboard players operation @s[scores={move=20}] divergent += @s Energy
+scoreboard players operation @s[scores={move=20}] divergent /= two Mode
+@@ce/domainamp
+tag @s[scores={move=4..},tag=!not_attack] add not_attack
+tag @s[scores={move=1..3},tag=not_attack] remove not_attack
+execute if entity @s[scores={move=7}] run function removefistenergy
+tag @s[scores={move=1..2},tag=domainamp] remove domainamp
+scoreboard players add @s[scores={move=7}] Stun 5
+execute as @s[scores={move=6}] at @s run particle ds:domainamp_use ~~1~
+execute as @s[scores={move=6}] at @s run playsound beacon.deactivate @a[r=100] ~~~ 99999 0.5 9999
+execute as @s[scores={move=6}] at @s run playsound beacon.deactivate @a[r=100] ~~~ 99999 0.5 9999
+execute as @s[scores={move=6}] at @s run playsound beacon.deactivate @a[r=100] ~~~ 99999 0.5 9999
+execute as @s[scores={move=5}] at @s run particle ds:domainamp_use2 ~~1~
+execute as @s[scores={move=5}] at @s run playsound beacon.deactivate @a[r=100] ~~~ 99999 0.35 9999
+execute as @s[scores={move=5}] at @s run playsound beacon.deactivate @a[r=100] ~~~ 99999 0.35 9999
+execute as @s[scores={move=5}] at @s run playsound beacon.deactivate @a[r=100] ~~~ 99999 0.35 9999
+execute as @s[scores={move=1..5},hasitem={item=ds:domainamplification,location=slot.weapon.offhand,quantity=0}] at @s run replaceitem entity @s slot.weapon.offhand 1 ds:domainamplification 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+execute as @s[scores={move=5}] at @s run scoreboard players set @s domainamp 300
+execute as @s[scores={move=5}] at @s run scoreboard players operation @s domainamp += @s Energy
+execute as @s[scores={move=5}] at @s run scoreboard players operation @s domainamp /= two Mode
+scoreboard players remove @s[scores={domainamp=1..}] Energy 1
+scoreboard players remove @s[scores={domainamp=1..}] Energy 1
+scoreboard players remove @s[scores={domainamp=1..}] Energy 1
+scoreboard players remove @s[scores={domainamp=1..}] Energy 1
+@@ce/domainamp_hit
+particle ds:infinite_pressure1 ~~1~
+particle ds:infinite_pressure2 ~~1~
+@@ce/domainamp_passive
+tag @s[scores={domainamp=2..},tag=!domainamplification] add domainamplification
+tag @s[scores={domainamp=2..},tag=!fistenergy] add fistenergy
+tag @s[scores={domainamp=2..},tag=!resistance_0.5x] add resistance_0.5x
+execute as @s[has_property={property:ct_particle=2..4}] at @s run function blood/diluted_blood
+playsound beacon.ambient @a ~~~ 0.005 2
+scoreboard players set @s[scores={domainampCD=0..5}] domainampCD 600
+scoreboard players set @s nocts 8
+scoreboard players set @s domainimmune 5
+scoreboard players set @s[scores={divergentfistCD=0..1}] divergentfistCD 15
+scoreboard players set @s[scores={hakarimode=4..}] hakarimode 3
+scoreboard players set @s[scores={amberbeast=4..,Energy=4..}] Energy 1
+tellraw @s[scores={domainactive=4..},tag=!sukuna] {"rawtext":[{"translate":"text.notlearned.domainamp_in_DE"}]}
+scoreboard players set @s[scores={domainactive=4..,domainamp=4..},tag=!sukuna] domainamp 3
+scoreboard players remove @s[scores={onfire=3..}] onfire 1
+scoreboard players remove @s[scores={shocked=3..}] shocked 1
+execute as @s[scores={atk=1..2,Energy=0..}] positioned ^^^3 as @e[scores={infinity=4..},tag=limitless,tag=functiontrg_infinity,tag=!unselect,r=2.95] unless entity @s[scores={cutscene=1..}] unless entity @s[scores={move=1..}] unless entity @s[scores={domainstart=1..}] unless entity @s[scores={domain=1..}] positioned ^^^-3 run scoreboard players operation @s domainamp_damage = @e[scores={atk=1..2,Energy=0..,domainamp=1..},r=4,c=1] Energy
+execute as @s[scores={atk=1..2,Energy=1..}] positioned ^^^3 as @e[scores={infinity=4..,domainamp_damage=1..},tag=limitless,tag=functiontrg_infinity,tag=!unselect,r=2.95] unless entity @s[scores={cutscene=1..}] unless entity @s[scores={move=1..}] unless entity @s[scores={domainstart=1..}] unless entity @s[scores={domain=1..}] run scoreboard players operation @s domainamp_damage /= five Mode
+execute as @s[scores={atk=1..2,Energy=1..}] positioned ^^^3 as @e[scores={infinity=4..,domainamp_damage=1..},tag=limitless,tag=functiontrg_infinity,tag=!unselect,r=2.95] unless entity @s[scores={cutscene=1..}] unless entity @s[scores={move=1..}] unless entity @s[scores={domainstart=1..}] unless entity @s[scores={domain=1..}] at @s run function ce/domainamp_hit
+execute as @s[scores={atk=1..2,Energy=1..}] positioned ^^^3 as @e[scores={infinity=4..,domainamp_damage=1..},tag=limitless,tag=functiontrg_infinity,tag=!unselect,r=2.95] unless entity @s[scores={cutscene=1..}] unless entity @s[scores={move=1..}] unless entity @s[scores={domainstart=1..}] unless entity @s[scores={domain=1..}] run scoreboard players operation @s infinity -= @s domainamp_damage
+execute as @s[scores={atk=1..2,Energy=1..}] positioned ^^^3 as @e[scores={infinity=4..,domainamp_damage=1..},tag=limitless,tag=functiontrg_infinity,tag=!unselect,r=2.95] unless entity @s[scores={cutscene=1..}] unless entity @s[scores={move=1..}] unless entity @s[scores={domainstart=1..}] unless entity @s[scores={domain=1..}] run scoreboard players operation @s domainamp_damage /= five Mode
+execute as @s[scores={atk=1..2,Energy=1..}] positioned ^^^3 as @e[scores={infinity=4..,domainamp_damage=1..},tag=limitless,tag=functiontrg_infinity,tag=!unselect,r=2.95] unless entity @s[scores={cutscene=1..}] unless entity @s[scores={move=1..}] unless entity @s[scores={domainstart=1..}] unless entity @s[scores={domain=1..}] run scoreboard players operation @s ability1 += @s domainamp_damage
+execute as @s[scores={atk=1..2,Energy=0..}] positioned ^^^3 as @e[scores={infinity=..1},tag=limitless,tag=functiontrg_infinity,tag=!unselect,r=2.95] unless entity @s[scores={cutscene=1..}] unless entity @s[scores={move=1..}] unless entity @s[scores={domainstart=1..}] unless entity @s[scores={domain=1..}] run scoreboard players set @s infinity 3
+event entity @s[tag=sukuna,hasitem={item=ds:sukuna1,location=slot.weapon.mainhand},scores={punch=1..2,domainamp=10..},has_property={property:ct_particle=!5}] dismantle_amp
+event entity @s[tag=sukuna,tag=itemUse:ds:sukuna1,scores={domainamp=10..},has_property={property:ct_particle=!5}] dismantle_amp
+event entity @s[tag=modulo_yuji,hasitem={item=ds:soul_dismantle,location=slot.weapon.mainhand},scores={punch=1..2,domainamp=10..},has_property={property:ct_particle=!5}] dismantle_amp
+event entity @s[tag=modulo_yuji,tag=itemUse:ds:soul_dismantle,scores={domainamp=10..},has_property={property:ct_particle=!5}] dismantle_amp
+execute as @s[scores={Hit=1..},has_property={property:ct_particle=5}] at @s positioned ^^^4 as @e[scores={atk=1..},r=4] at @s unless entity @s[scores={domainamp=1..}] run function dismantle_amp_hit
+execute as @s[scores={Stun=1..},has_property={property:ct_particle=5}] at @s positioned ^^^4 as @e[scores={atk=1..},r=4] at @s unless entity @s[scores={domainamp=1..}] run function dismantle_amp_hit
+execute as @s[scores={atk=1..},has_property={property:ct_particle=5}] at @s positioned ^^^4 as @e[scores={Stun=1..},r=4] at @s unless entity @s[scores={domainamp=1..}] run function dismantle_amp_hit
+execute as @s[has_property={property:ct_particle=5}] at @s run playsound mob.shrine_slashes @a ~~~ 0.0075 2.25
+execute if entity @s[scores={domainamp=..1}] run function removefistenergy
+scoreboard players remove @s[scores={domainamp=1..}] domainamp 1
+@@ce/rct_obtain
+scoreboard players set @s[scores={cutscene=4..},tag=curse] cutscene 3
+playanimation @s[scores={cutscene=199..},tag=reversecursedobtain] animation.rct_obtain
+scoreboard players set @s infinity 10
+scoreboard players set @s[scores={knock=!0}] knock 0
+execute unless entity @s[scores={knockdown=0}] run scoreboard players set @s knockdown 0
+effect @s[scores={cutscene=199..},tag=reversecursedobtain] instant_health 1 4 true
+effect @s[scores={cutscene=100..},tag=reversecursedobtain] regeneration 1 5 true
+execute as @s[scores={cutscene=192},tag=reversecursedobtain] at @s run particle ds:dirt2
+execute as @s[scores={cutscene=192},tag=reversecursedobtain] at @s run particle ds:sprint
+execute as @s[scores={cutscene=192},tag=reversecursedobtain] at @s run playsound dig.dirt
+scoreboard players set @s[scores={cutscene=10..},tag=reversecursedobtain] infinity 11
+scoreboard players set @s[scores={cutscene=10..},tag=reversecursedobtain] Camera 11
+scoreboard players set @s[scores={cutscene=10..},tag=reversecursedobtain] Move 11
+scoreboard players set @s[scores={cutscene=10..},tag=reversecursedobtain] Frames 11
+execute as @s[scores={cutscene=10..160},tag=reversecursedobtain] at @s run particle ds:rct_obtain1
+execute as @s[scores={cutscene=196..},tag=reversecursedobtain] at @s run tp @s @s
+execute as @s[scores={cutscene=198},tag=reversecursedobtain] at @s run playsound mob.honoredone @a[r=1000] ~~~ 999999 1 999999
+execute as @s[scores={cutscene=200},tag=reversecursedobtain] at @s run camera @s fade time 0.25 0.5 0.75 color 0 0 0
+execute as @s[scores={cutscene=195},tag=reversecursedobtain] at @s run camera @s set minecraft:free pos ~ ~10 ~ rot ~90 ~
+execute as @s[scores={cutscene=194},tag=reversecursedobtain] at @s run camera @s set minecraft:free ease 2 in_sine pos ~ ~5 ~ rot ~90 ~90
+execute as @s[scores={cutscene=164},tag=reversecursedobtain] at @s run camera @s fade time 0.5 0.15 0.25 color 0 0 0
+execute as @s[scores={cutscene=153},tag=reversecursedobtain] at @s anchored eyes run camera @s set minecraft:free pos ^4^3^4 rot ~15 ~70
+execute as @s[scores={cutscene=152},tag=reversecursedobtain] at @s anchored eyes run camera @s set minecraft:free ease 2 in_sine pos ^4^4^4 rot ~28 ~170
+execute as @s[scores={cutscene=122},tag=reversecursedobtain] at @s run camera @s fade time 0.25 0.15 0.15 color 0 0 0
+execute as @s[scores={cutscene=113},tag=reversecursedobtain] at @s anchored eyes run camera @s set minecraft:free pos ^-4^^-4 rot ~15 ~10
+execute as @s[scores={cutscene=112},tag=reversecursedobtain] at @s anchored eyes run camera @s set minecraft:free ease 2 in_sine pos ^-4^^-4 rot ~-25 ~-55
+execute as @s[scores={cutscene=72},tag=reversecursedobtain] at @s anchored eyes run camera @s set minecraft:free pos ^^-1^4 rot ~15 ~180
+execute as @s[scores={cutscene=71},tag=reversecursedobtain] at @s anchored eyes run camera @s set minecraft:free ease 3.4 in_sine  pos ^^^3 rot ~-20 ~180
+execute as @s[scores={cutscene=30},tag=reversecursedobtain] at @s run camera @s fade time 1.5 0.5 1 color 255 255 255
+execute as @s[scores={cutscene=5},tag=reversecursedobtain] at @s run playsound music.rare @s ~~~ 1 2
+tellraw @s[scores={cutscene=5},tag=reversecursedobtain] {"rawtext":[{"translate":"text.rct.unlocked"}]}
+tag @s[scores={cutscene=1..},tag=!reversecursed] add reversecursed
+tag @s[scores={cutscene=1..3},tag=reversecursedobtain] remove reversecursedobtain
+@@ce/rctself
+tag @s[scores={move=4..},tag=!not_attack] add not_attack
+tag @s[scores={move=1..3},tag=not_attack] remove not_attack
+playanimation @s[scores={move=40},tag=!burnt_leg] animation.rct_self
+playanimation @s[scores={move=40..},tag=burnt_leg] animation.rct_self_leg
+playanimation @s[scores={move=35..,Stun=1..},tag=!noStunnedAnim] animation.stunned
+scoreboard players set @s[scores={move=35..,Stun=1..}] move 2
+tag @s[scores={move=1..2},tag=rctself] remove rctself
+tag @s[tag=dying] remove dying
+scoreboard players set @s[scores={dying=2..}] dying 1
+execute as @s[scores={move=35},type=player] at @s run tp @s @s
+execute as @s[scores={move=35},type=player] at @s run tp @e[type=ds:modulo_yuji,r=100,c=1,scores={combat=1..}] ^^^-1 facing @s
+execute as @s[scores={move=35},type=player] at @s run scoreboard players set  @e[type=ds:modulo_yuji,r=100,c=1,scores={combat=1..,move=0,chance=0}] chance 4
+execute as @s[scores={move=35},tag=!rctmaster,type=player] unless entity @s[scores={rctuses=-9999..}] run scoreboard players set @s rctuses 3
+execute as @s[scores={move=35},tag=rctmaster,type=player] unless entity @s[scores={rctuses=-9999..}] run scoreboard players set @s rctuses 5
+execute as @s[scores={move=35},type=!player] unless entity @s[scores={rctuses=-9999..}] run scoreboard players set @s rctuses 0
+scoreboard players set @s[scores={move=35,rctuses=!0},family=purecurse,tag=!curse] rctuses 0
+damage @s[scores={move=35},family=purecurse,tag=!curse] 50 self_destruct
+scoreboard players set @s[scores={move=35,rctuses=!0},tag=curse] rctuses 0
+damage @s[scores={move=35},tag=curse] 50 self_destruct
+scoreboard players set @s[scores={rctuses=4..},tag=!rctmaster,type=player] rctuses 3
+scoreboard players set @s[scores={rctuses=6..},tag=rctmaster,type=player] rctuses 5
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] run effect @s blindness 7 1 true
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] run scoreboard players set @s Hit 25
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] run scoreboard players set @s Stun 45
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] run damage @s 33 self_destruct
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] at @s run playsound mob.zombie.remedy @a[r=5] ~~~ 0.5 0.8
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] run playanimation @s animation.braindamage
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] at @s run particle ds:blood ~~1~
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] at @s run particle ds:blood1 ~~1~
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] at @s run particle ds:blood2 ~~1~
+execute as @s[scores={move=34,rctuses=-9999..0}] unless entity @s[type=!player,family=!purecurse,tag=!curse] run scoreboard players set @s move 3
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run effect @s blindness 7 1 true
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run scoreboard players set @s Hit 25
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run scoreboard players set @s Stun 45
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run damage @s 33 self_destruct
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run playsound mob.zombie.remedy @a[r=5] ~~~ 0.5 0.8
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run playanimation @s animation.braindamage
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run particle ds:blood ~~1~
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run particle ds:blood1 ~~1~
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run particle ds:blood2 ~~1~
+execute as @s[scores={move=34},type=!player,family=!purecurse,tag=!curse] unless entity @s[scores={rctuses=..599},family=grade1] unless entity @s[scores={rctuses=..799},family=special_grade] run scoreboard players set @s move 3
+execute as @s[scores={move=34}] at @s run playsound beacon.power @a[r=50] ~~~ 99999 2 99999
+execute as @s[scores={move=25}] at @s run playsound beacon.ambient @a[r=50] ~~~ 99999 3 99999
+execute as @s[scores={move=25}] at @s run playsound mob.wither.shoot @a[r=50] ~~~ 99999 0.7 99999
+execute as @s[scores={move=5}] at @s run playsound beacon.deactivate @a[r=50] ~~~ 99999 1.5 99999
+scoreboard players remove @s[scores={move=20,rctuses=1..}] rctuses 1
+scoreboard players set @s[scores={move=5..25}] Move 4
+scoreboard players remove @s[scores={move=5..25}] Energy 5
+scoreboard players add @s[scores={move=25}] rct 50
+scoreboard players remove @s[scores={move=25,speech=1..}] speech 30
+scoreboard players set @s[scores={move=24..25,speech=-9999..-1}] speech 0
+scoreboard players operation @s[scores={move=24}] rct += @s Energy
+scoreboard players operation @s[scores={move=24}] rct /= nine Mode
+effect @s[scores={move=19..20}] clear slowness
+event entity @a[has_property={property:burnt_leg=1..},scores={move=4..20}] burnt_legtextureoff
+tag @s[scores={move=4..20},tag=burnt_leg] remove burnt_leg
+tag @s[scores={move=1..2},tag=mob_rct] remove mob_rct
+@@ce/simpledomain
+tag @s[scores={move=4..},tag=!not_attack] add not_attack
+tag @s[scores={move=1..3},tag=not_attack] remove not_attack
+playanimation @s[scores={move=60..}] animation.simple_domain_use
+scoreboard players set @s[scores={move=15..}] Move 6
+scoreboard players set @s[scores={move=15..}] Camera 6
+scoreboard players set @s[scores={move=15..}] infinity 7
+tp @s[scores={move=60}] ~~~~ 0
+camera @s[scores={move=60..},type=player] fade time 0 0.6 0.45 color 0 0 0
+camera @s[scores={move=59..60},type=player] set minecraft:free pos ^^^10 facing ^^2^-1
+camera @s[scores={move=57..58},type=player] set minecraft:free ease 2 in_out_circ pos ^^1^4 facing ~~1~
+execute as @s[scores={move=50}] at @s run particle ds:simpledomain1 ^-1.85^1.5^1
+execute as @s[scores={move=30}] at @s run particle ds:simpledomain2 ^1.85^1^1
+execute as @s[scores={move=24}] at @s run particle ds:simple_domain_start1
+execute as @s[scores={move=24}] at @s run particle ds:simple_domain_start2
+execute as @s[scores={move=24}] at @s run particle ds:simple_domain_start3
+execute as @s[scores={move=20}] at @s run summon ds:simple_domain ~~~
+execute as @s[scores={move=20},type=!player] at @s run tag @e[type=ds:simple_domain,c=1] add simpledomain_mobs
+execute as @s[scores={move=20}] at @s run scoreboard players operation @e[type=ds:simple_domain,c=1] Deleter += @s Energy
+execute as @s[scores={move=20}] at @s run scoreboard players operation @e[type=ds:simple_domain,c=1] Deleter /= ten Mode
+execute as @s[scores={move=20}] at @s run scoreboard players add @e[type=ds:simple_domain,c=1] Deleter 300
+execute as @s[scores={move=20}] at @s run playsound beacon.power @a[r=100] ~~~ 9999 0.64 9999
+execute as @s[scores={move=20}] at @s run playsound mob.bass @a[r=100] ~~~ 9999 1.2 9999
+execute as @s[scores={move=20}] at @s run playsound mob.wither.shoot @a[r=10] ~~~ 0.2 0.5
+execute as @s[scores={move=18..20}] at @s run camerashake add @a[r=15] 1.25 0.15
+scoreboard players set @s[scores={move=4..15}] move 3
+tag @s[scores={move=1..5},tag=simpledomain] remove simpledomain

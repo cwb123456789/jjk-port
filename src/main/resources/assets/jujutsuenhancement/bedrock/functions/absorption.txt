@@ -1,0 +1,486 @@
+@@absorption/absorption
+scoreboard players set @e[scores={absorption=3001..}] absorption 3000
+scoreboard players add @a[scores={absorption=1..}] absorption_timer 1
+scoreboard players remove @a[scores={absorption_timer=100..,Energy=2..}] Energy 2
+scoreboard players remove @a[scores={absorption_timer=100..,Energy=200..}] Energy 3
+scoreboard players remove @a[scores={absorption_timer=100..,Energy=500..}] Energy 4
+scoreboard players remove @a[scores={absorption_timer=100..,Energy=1000..}] Energy 8
+scoreboard players remove @a[scores={absorption_timer=100..,absorption=2..}] absorption 2
+scoreboard players remove @a[scores={absorption_timer=100..,absorption=50..}] absorption 4
+scoreboard players remove @a[scores={absorption_timer=100..,absorption=150..}] absorption 8
+scoreboard players set @a[scores={absorption_timer=100..}] absorption_timer 0
+scoreboard players set @a[scores={absorption=1}] absorption 0
+execute as @a[tag=absorption] unless score @s damage_taken = @s prev_health run scoreboard players operation @s damage_taken = @s prev_health
+execute as @a[tag=absorption] unless score @s damage_taken = @s detect_health run scoreboard players operation @s damage_taken -= @s detect_health
+execute as @a[tag=absorption,scores={damage_taken=1..},m=!spectator] unless score @s damage_taken = @s detect_health at @s run playsound mob.electricity @a[r=15] ~~~ 9999 1.35 9999
+execute as @a[tag=absorption,scores={damage_taken=1..}] unless score @s damage_taken = @s detect_health run scoreboard players operation @s absorption += @s damage_taken
+execute as @a[tag=absorption] unless score @s prev_health = @s detect_health run scoreboard players operation @s prev_health = @s detect_health
+scoreboard players add @s[tag=absorption,scores={Sneaking=5..50,move=0},tag=!nocts,m=c] absorption 1
+scoreboard players add @s[tag=absorption,scores={Sneaking=51..100,move=0},tag=!nocts,m=c] absorption 5
+scoreboard players add @a[tag=absorption,scores={Sneaking=101..,move=0},tag=!nocts,m=c] absorption 25
+execute as @a[scores={absorption=1..},tag=absorption,m=!spectator] at @s run particle ds:absorption
+execute as @a[scores={absorption=51..},tag=absorption,m=!spectator] at @s run particle ds:absorption
+execute as @a[scores={absorption=101..},tag=absorption,m=!spectator] at @s run particle ds:absorption6
+@@absorption/absorption1
+playanimation @s[scores={move=33..}] animation.absorption.ab1
+tag @s[scores={move=1..2},tag=form1] remove form1
+tag @s[scores={move=30..,Stun=1..},tag=form1] remove form1
+playanimation @s[scores={move=30..,Stun=1..}] animation.stunned
+scoreboard players set @s[scores={move=30..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=15..}] Move 15
+scoreboard players set @s[scores={move=20..21}] Camera 5
+scoreboard players set @s[scores={move=21}] atk 2
+execute as @s[scores={move=25..30}] at @s run playsound mob.electricity @a[r=10] ~~~ 0.25 2.5
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run particle ds:absorption_ex
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run particle ds:large_impact1
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run particle ds:large_impact2
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run particle ds:impact2
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run particle ds:ground_slam2
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run playsound mob.electricity @a[r=25] ~~~ 9999 0.95 9999
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run playsound mob.shock1 @a[r=25] ~~~ 9999 0.95 9999
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run camerashake add @a[r=25] 1 0.15
+execute as @s[scores={move=20}] at @s positioned ^^^3 run damage @e[tag=!Frames,r=2.9] 5 override
+execute as @s[scores={move=20}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.9] Hit 3
+execute as @s[scores={move=20}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.9] Stun 30
+execute as @s[scores={move=20}] at @s positioned ^^^3 run scoreboard players add @e[tag=!Frames,r=2.9] Evade 5
+execute as @s[scores={move=20}] at @s positioned ^^^3 run scoreboard players operation @e[tag=!Frames,r=2.9] damage += @s absorption
+execute as @s[scores={move=20}] at @s positioned ^^^3 run scoreboard players operation @e[tag=!Frames,r=2.9] damage /= five endurance
+execute as @s[scores={move=20}] at @s positioned ^^^3 run scoreboard players operation @e[tag=!Frames,r=2.9] damage += @s damageadd
+execute as @s[scores={move=21}] at @s run function damages/electric_damage
+execute as @s[scores={move=15}] at @s run function damages/electric_damage
+execute as @s[scores={move=11}] at @s run function damages/electric_damage
+execute as @s[scores={move=14,absorption=50..}] at @s anchored eyes positioned ^^^1.5 run particle ds:absorption_ex
+execute as @s[scores={move=14,absorption=50..}] at @s anchored eyes positioned ^^^1.5 run particle ds:dirt3
+execute as @s[scores={move=14,absorption=50..}] at @s anchored eyes positioned ^^^1.5 run playsound mob.electricity @a[r=25] ~~~ 9999 0.95 9999
+execute as @s[scores={move=14,absorption=50..}] at @s anchored eyes positioned ^^^1.5 run playsound mob.shock1 @a[r=25] ~~~ 9999 0.5 9999
+execute as @s[scores={move=14,absorption=50..}] at @s anchored eyes positioned ^^^1.5 run camerashake add @a[r=25] 2 0.15
+execute as @s[scores={move=14,absorption=50..}] at @s positioned ^^^3 run damage @e[tag=!Frames,r=2.9] 5 override
+execute as @s[scores={move=14,absorption=50..}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.9] Hit 3
+execute as @s[scores={move=14,absorption=50..}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.9] Stun 30
+execute as @s[scores={move=14,absorption=50..}] at @s positioned ^^^3 run scoreboard players add @e[tag=!Frames,r=2.9] Evade 5
+execute as @s[scores={move=14,absorption=50..}] at @s positioned ^^^3 run scoreboard players operation @e[tag=!Frames,r=2.9] damage += @s absorption
+execute as @s[scores={move=14,absorption=50..}] at @s positioned ^^^3 run scoreboard players operation @e[tag=!Frames,r=2.9] damage /= seven endurance
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^0.5 run particle ds:invert
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^0.5 run particle ds:blue_tint
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^0.5 run summon gg:impact_Frame
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^1.5 run particle ds:absorption_ex
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^1.5 run particle ds:dirt3
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^1.5 run playsound mob.electricity @a[r=25] ~~~ 9999 0.5 9999
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^1.5 run playsound mob.shock1 @a[r=25] ~~~ 9999 0.5 9999
+execute as @s[scores={move=10,absorption=150..}] at @s anchored eyes positioned ^^^1.5 run camerashake add @a[r=25] 4 0.15
+execute as @s[scores={move=10,absorption=150..}] at @s positioned ^^^3 run damage @e[tag=!Frames,r=2.9] 5 override
+execute as @s[scores={move=10,absorption=150..}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.9] Hit 3
+execute as @s[scores={move=10,absorption=150..}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.9] Stun 30
+execute as @s[scores={move=10,absorption=150..}] at @s positioned ^^^3 run scoreboard players add @e[tag=!Frames,r=2.9] Evade 5
+execute as @s[scores={move=10,absorption=150..}] at @s positioned ^^^3 run scoreboard players operation @e[tag=!Frames,r=2.9] damage += @s absorption
+execute as @s[scores={move=10,absorption=150..}] at @s positioned ^^^3 run scoreboard players operation @e[tag=!Frames,r=2.9] damage /= nine endurance
+execute as @s[scores={move=10,absorption=150..}] at @s positioned ^^^3 run effect @e[tag=!Frames,r=2.9] levitation 1 20 true
+execute as @s[scores={move=10,absorption=150..}] at @s run summon ds:red_reverse ^^^1
+execute as @s[scores={move=10,absorption=150..}] at @s if entity @p[tag=griefable] run effect @e[r=20] resistance 1 10 true
+execute as @s[scores={move=10,absorption=150..}] at @s if entity @p[tag=griefable] run summon ds:energy_explosion ~~~
+execute as @s[scores={move=15}] at @s positioned ^^1^3 run particle ds:absorption_leftover
+scoreboard players set @s[scores={move=1..5}] Camera 1
+scoreboard players remove @s[scores={absorption=5..,move=20}] absorption 5
+scoreboard players remove @s[scores={absorption=50..,move=14}] absorption 5
+scoreboard players remove @s[scores={absorption=150..,move=10}] absorption 5
+@@absorption/absorption2
+playanimation @s[scores={move=15}] animation.absorption.ab2
+tag @s[scores={move=1..2},tag=form2] remove form2
+scoreboard players set @s[scores={move=1..11}] Frames 4
+scoreboard players set @s[scores={move=1..}] Move 4
+scoreboard players set @s[scores={move=1..7}] Camera 4
+scoreboard players set @e[tag=manji,r=7,c=1] Camera 4
+scoreboard players set @e[tag=manji,r=7,c=1] Move 4
+scoreboard players set @e[tag=manji,r=7,c=1] Stun 5
+execute as @s[scores={move=14}] at @s run playsound mob.electricity @a[r=10] ~~~ 1 1.5
+execute as @s[scores={move=10}] at @s run particle ds:absorption2
+execute as @s[scores={move=8..10}] at @s positioned ^^^2 run scoreboard players set @e[r=7.5,tag=!Frames,scores={punch=1..},c=1,type=!item,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!arrow,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] atk 2
+execute as @s[scores={move=8..10}] at @s positioned ^^^2 run tag @e[r=7.5,tag=!Frames,scores={atk=1..},c=1,type=!item,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!arrow,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] add manji
+execute as @s[scores={move=8..10}] at @s positioned ^^^2 run scoreboard players set @e[r=7.5,tag=!Frames,scores={atk=1..},c=1,type=!item,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!arrow,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] Stun 15
+execute as @s[scores={move=8..10}] at @s positioned ^^^2 run scoreboard players set @e[r=7.5,tag=!Frames,scores={atk=1..},c=1,type=!item,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!arrow,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] move 6
+execute as @s[scores={move=6..7}] at @s positioned ^^^2 unless entity @e[tag=manji,r=7.5] run function cancel_attack_fully
+playanimation @s[scores={move=5}] animation.absorption.ab2b
+scoreboard players set @s[scores={move=4..5}] atk 2
+execute as @s[scores={move=2..6}] at @s run tp @s ~~~ facing @e[tag=manji,c=1]
+execute as @s[scores={move=4}] at @s positioned ^^1^0.5 run camerashake add @a[r=10] 2 0.15
+execute as @s[scores={move=4}] at @s positioned ^^1^0.5 run particle ds:absorption_ex
+execute as @s[scores={move=4}] at @s positioned ^^1^0.5 run particle ds:invert
+execute as @s[scores={move=4}] at @s positioned ^^^0.5 run playsound mob.shock1 @a[r=50] ~~~ 9999 1.25 9999
+execute as @s[scores={move=1..4}] at @s positioned ^^^0.5 run playsound mob.electricity @a[r=50] ~~~ 9999 1.25 9999
+execute as @s[scores={move=1..4}] at @s positioned ^^^7.5 run damage @e[r=7.4,c=1] 5 override
+execute as @s[scores={move=4}] at @s positioned ^^^7.5 run scoreboard players operation @e[r=7.4,c=1] damage += @s absorption
+execute as @s[scores={move=4}] at @s positioned ^^^7.5 run scoreboard players operation @e[r=7.4,c=1] damage /= three endurance
+execute as @s[scores={move=4}] at @s positioned ^^^7.5 run scoreboard players add @e[r=7.4,c=1] Evade 25
+execute as @s[scores={move=4}] at @s run  function damages/electric_damage
+execute as @s[scores={move=4}] at @s positioned ^^^7.5 run scoreboard players set @e[r=7.4,c=1] knockdown 95
+execute as @s[scores={move=3}] at @s run summon ds:red_reverse
+execute as @s[scores={move=3}] at @s positioned ^^^7.5 run effect @e[r=7.4,c=1] levitation 1 20
+scoreboard players remove @s[scores={move=1..5,absorption=1..}] absorption 1
+execute as @s[scores={move=1..3}] at @s run tag @e[c=1,tag=manji] remove manji
+@@absorption/absorption3
+playanimation @s[scores={move=7..8}] animation.absorption.ab3
+tag @e[scores={move=1..2}] remove form3
+scoreboard players set @s[scores={move=1..6}] Frames 4
+execute as @s[scores={move=6}] at @s run playsound mob.electricity @a ~~~  100000 1.15 100000
+execute as @s[scores={move=6}] at @s run playsound mob.shock1 @a ~~~  100000 1.25 100000
+execute as @s[scores={move=5}] at @s run camerashake add @a[r=40] 3 0.15
+execute as @s[scores={move=5}] at @s run execute as @e[r=5,tag=!Frames] at @s run tp @s
+execute as @s[scores={move=5}] at @s run execute as @e[r=5,tag=!Frames] at @s run tp @s ~~~ facing @p[scores={move=1..5}]
+execute as @s[scores={move=5}] at @s run damage @e[r=5,tag=!Frames] 3 none entity @s
+execute as @s[scores={move=5}] at @s run  particle ds:absorption_ex ~~~
+execute as @s[scores={move=5}] at @s run  particle ds:power_leap1 ~~~
+execute as @s[scores={move=5}] at @s run  particle ds:power_leap2 ~~~
+execute as @s[scores={move=5}] at @s run  particle ds:power_leap3 ~~~
+execute as @s[scores={move=1..7}] at @s run scoreboard players remove @s[scores={absorption=1..}] absorption 1
+execute as @s[scores={move=5}] at @s run  summon ds:knockback ~~~
+execute as @s[scores={move=5}] at @s run  summon ds:knockback ~~~
+execute as @s[scores={move=5}] at @s run  summon ds:knockback ~~~
+execute as @s[scores={move=5}] at @s run effect @s levitation 1 35 true
+@@absorption/absorption4
+playanimation @s[scores={move=35}] animation.absorption.ab4
+execute as @s[scores={move=1..3}] at @s run tag @e[tag=choke,r=5] remove choke
+tag @s[scores={move=1..2},tag=form4] remove form4
+tag @s[scores={move=26..,Stun=1..},tag=form4] remove form4
+playanimation @s[scores={move=26..,Stun=1..}] animation.stunned
+scoreboard players set @s[scores={move=26..,Stun=1..}] move 0
+execute as @s[scores={move=31..}] at @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={move=31..}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={move=31..}] at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s[scores={move=31..}] at @s if block ~~-0.73~ air run tp @s ~~-0.73~
+execute as @s[scores={move=26}] at @s positioned ^^^2 run tag @e[tag=!Frames,type=!ds:ember_insect,r=1.95,c=1,type=!item,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!arrow,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] add choke
+execute as @s[scores={move=25}] at @s run playanimation @e[tag=choke,c=1,r=5] animation.confisgate2
+execute as @s[scores={move=5..24}] at @s unless entity @e[tag=choke,c=1,r=5] run playanimation @s animation.cancel
+execute as @s[scores={move=5..24}] at @s unless entity @e[tag=choke,c=1,r=5] run scoreboard players set @s move 3
+scoreboard players set @s[scores={move=5..24}] Camera 5
+execute as @s[scores={move=5..24}] at @s run scoreboard players set @a[tag=choke,c=1,r=5] Camera 5
+execute as @s[scores={move=5..24},type=player] at @s anchored eyes run camera @s set minecraft:free pos ^-1.5 ^0.5 ^-1.33 facing ^^^0.63
+execute as @s[scores={move=5..24}] at @s anchored eyes run camera @a[tag=choke,c=1,r=5] set minecraft:free pos ^-1.5 ^0.5 ^-1.33 facing ^^^0.63
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^^^1.5 run effect @a[r=20] night_vision 1 1 true
+execute as @s[scores={move=10}] at @s anchored eyes positioned ^^^1.5 run effect @a[r=20] night_vision 0 20 true
+execute as @s[scores={move=1..25}] at @s run camerashake add @a[r=10] 0.15 0.1 rotational
+execute as @s[scores={move=25}] at @s run particle ds:invert
+execute as @s[scores={move=25}] at @s anchored eyes positioned ^^^0.5 run playsound mob.blood3 @a[r=100] ~~~ 9999 1.75 9999
+execute as @s[scores={move=25}] at @s anchored eyes positioned ^^^0.5 run playsound mob.shock1 @a[r=100] ~~~ 9999 1.75 9999
+execute as @s[scores={move=15,absorption=50..}] at @s anchored eyes positioned ^^^0.5 run playsound mob.blood2 @a[r=100] ~~~ 9999 1.5 9999
+execute as @s[scores={move=15,absorption=50..}] at @s anchored eyes positioned ^^^0.5 run playsound mob.shock1 @a[r=100] ~~~ 9999 1.5 9999
+execute as @s[scores={move=15,absorption=50..}] at @s anchored eyes positioned ^^^0.5 run playsound mob.electricity @a[r=100] ~~~ 9999 0.75 9999
+execute as @s[scores={move=15,absorption=50..}] at @s anchored eyes positioned ^^^0.5 run particle ds:invert
+execute as @s[scores={move=15,absorption=50..}] at @s anchored eyes positioned ^^^0.5 run particle ds:blue_tint
+execute as @s[scores={move=15,absorption=50..}] at @s anchored eyes positioned ^^^0.5 run summon gg:impact_Frame
+execute as @s[scores={move=15,absorption=50..}] at @s anchored eyes positioned ^^^1.5 run particle ds:absorption_ex
+execute as @s[scores={move=25}] at @s anchored eyes run particle ds:absorption_ex ^^0.25^0.75
+execute as @s[scores={move=6}] at @s anchored eyes run particle ds:absorption_ex ^^0.25^0.75
+execute as @s[scores={move=5..25}] at @s anchored eyes run particle ds:absorption ^^0.25^0.75
+execute as @s[scores={move=5..25},type=player] at @s run tp @s @s
+execute as @s[scores={move=5..25},type=!player] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=5..25}] at @s run tp @e[tag=choke,c=1,r=5] ^^0.25^0.75 facing @s
+execute as @s[scores={move=5..25}] at @s run  damage @e[tag=choke,c=1,r=5] 1 override
+execute as @s[scores={move=5..25}] at @s run scoreboard players set @e[tag=choke,c=1,r=5] Hit 2
+execute as @s[scores={move=4..5}] at @s run scoreboard players set @e[tag=choke,c=1,r=5] Flourish 7
+execute as @s[scores={move=6}] at @s run scoreboard players operation @e[tag=choke,c=1,r=5] damage += @s absorption
+execute as @s[scores={move=6}] at @s run scoreboard players operation @e[tag=choke,c=1,r=5] damage /= three endurance
+execute as @s[scores={move=35}] at @s run playsound mob.burn @a[r=20] ~~~ 0.1 1
+execute as @s[scores={move=25}] at @s run playsound random.explode @a[r=20] ~~~ 9999 0.5 9999
+execute as @s[scores={move=15..25}] at @s run playsound mob.electricity @a[r=20] ~~-5~ 9999 1.75 9999
+execute as @s[scores={move=24..25}] at @s run playsound mob.shock1 @a[r=20] ~~~ 0.1 2
+execute as @s[scores={move=4..5}] at @s run playsound mob.shock1 @a[r=20] ~~~ 0.1 2
+@@absorption/absorption5
+playanimation @s[scores={move=30..31}] animation.absorption.ab5
+tag @s[scores={move=1..3}] remove form5
+playanimation @s[scores={move=24..,Stun=1..}] animation.cancel
+scoreboard players set @s[scores={move=24..,Stun=1..}] move 3
+execute as @s[scores={move=3..}] at @s run scriptevent ds:antiair
+scoreboard players set @s[scores={move=5..}] Move 3
+scoreboard players set @s[scores={move=21..22}] Frames 5
+execute as @s[scores={move=21..}] at @s run playsound mob.electricity @a[r=350] ~~~ 99999 3 999999
+execute as @s[scores={move=23}] at @s run playsound mob.shock1 @a[r=350] ~~~ 99999 2 999999
+execute as @s[scores={move=23}] at @s run playsound mob.distort3 @a[r=350] ~~~ 99999 1 999999
+execute as @s[scores={move=20}] at @s run playsound mob.shock1 @a[r=350] ~~~ 99999 1.5 999999
+execute as @s[scores={move=20..23}] at @s run scriptevent ds:lightning 1,0.85,5,  1,1,0,  1,5,0, 0,1,1, 2,2.75,0
+execute as @s[scores={move=23}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run particle ds:invert ^0.5^1^-0.25
+execute as @s[scores={move=23}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run playsound mob.electricity @a[r=200] ~~~ 9999 1 9999
+execute as @s[scores={move=20..22}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run playsound mob.electricity @a ~~~ 0.15 3
+execute as @s[scores={move=20..22}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run playsound beacon.power @a ~~~ 0.15 2
+execute as @s[scores={move=23}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run particle ds:absorption_ex ^^^1
+execute as @s[scores={move=20..22}] at @s run camerashake add @a[r=20] 0.01 0.08 rotational
+scoreboard players remove @s[scores={move=1..10,absorption=1..}] absorption 1
+execute as @s[scores={move=22}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run function absorption/bolt
+execute as @s[scores={move=20}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run function absorption/bolt
+@@absorption/absorption6
+playanimation @s[scores={move=46}] animation.absorption.ab6
+tag @s[scores={move=1..3}] remove form6
+playanimation @s[scores={move=40..,Stun=1..}] animation.cancel
+scoreboard players set @s[scores={move=24..,Stun=1..}] move 3
+execute as @s[scores={move=3..}] at @s run scriptevent ds:antiair
+scoreboard players set @s[scores={move=5..}] Move 3
+execute as @s[scores={move=31..}] at @s run playsound mob.electricity @a[r=350] ~~~ 99999 3 999999
+execute as @s[scores={move=31}] at @s run playsound mob.shock1 @a[r=350] ~~~ 99999 2 999999
+execute as @s[scores={move=31}] at @s run playsound mob.distort3 @a[r=350] ~~~ 99999 1 999999
+execute as @s[scores={move=30}] at @s run playsound mob.shock1 @a[r=350] ~~~ 99999 1.5 999999
+scoreboard players set @s[scores={move=11..32}] Frames 5
+execute as @s[scores={move=30}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run particle ds:invert ^0.5^1^-0.25
+execute as @s[scores={move=31}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run playsound mob.electricity @a[r=200] ~~~ 9999 0.75 9999
+execute as @s[scores={move=15..30}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run playsound mob.electricity @a ~~~ 0.15 1.5
+execute as @s[scores={move=10..30}] at @s anchored eyes positioned ^0.2^-0.25^1.5 run particle ds:absorption_ex ^^^1
+execute as @s[scores={move=10..30}] at @s run scriptevent ds:lightning 1,0.85,5,  1,1,0,  1,5,0, 0,1,1, 2,2.75,0
+execute as @s[scores={move=10..30}] at @s run camerashake add @a[r=20] 0.01 0.08 rotational
+scoreboard players remove @s[scores={move=1..20,absorption=1..}] absorption 1
+execute as @s[scores={move=10..30}] at @s anchored eyes positioned ^0.2^-0.25^4.5 run function absorption/beam
+@@absorption/absorption7
+playanimation @s[scores={move=30..31}] animation.absorption.ab7
+scoreboard players set @s[scores={move=30..}] Frames 25
+scoreboard players set @s[scores={move=30..}] Move 25
+scoreboard players set @s[scores={move=19..20}] Camera 15
+tag @s[scores={move=1..3}] remove form7
+execute if block ~~-1~ air run tp @s ~~-1~
+execute if block ~~-0.1~ air run tp @s ~~-0.1~
+execute if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={move=20}] at @s run effect @a[r=33] night_vision 1 1 true
+execute as @s[scores={move=25..}] at @s run particle ds:absorption
+execute as @s[scores={move=25..}] at @s run playsound mob.electricity @a[r=100] ~~-6~ 99999 1.5 99999
+execute as @s[scores={move=25..}] at @s run camerashake add @a[r=25] 0.15 0.15
+execute as @s[scores={move=20,absorption=0..99}] at @s run particle ds:absorption_ex
+execute as @s[scores={move=15..20,absorption=100..}] at @s run particle ds:absorption_exb
+execute as @s[scores={move=20}] at @s run camerashake add @a[r=100] 4 0.25
+execute as @s[scores={move=10..}] at @s run camera @s set minecraft:free pos ^^10^10 facing ~~~
+execute as @s[scores={move=1..5}] at @s run camera @s clear
+execute as @s[scores={move=20}] at @s run playsound mob.blasted4 @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={move=20}] at @s run  playsound mob.distort3 @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={move=20}] at @s run  playsound mob.electricity @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=20}] at @s run  playsound mob.shock1 @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={move=20}] at @s run  playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.5 99999
+execute as @s[scores={move=20}] at @s run  playsound mob.wither.break_block @a[r=100] ~~~ 99999 0.5 99999
+execute as @s[scores={move=20}] at @s run particle ds:ground_pound1 ~~~
+execute as @s[scores={move=20}] at @s run particle ds:ground_pound2 ~~~
+execute as @s[scores={move=20}] at @s run particle ds:ground_pound3 ~~~
+execute as @s[scores={move=20}] at @s run particle ds:ground_pound4 ~~~
+execute as @s[scores={move=20}] at @s run  damage @e[tag=!Frames,r=20] 20 override
+execute as @s[scores={move=20}] at @s run  scoreboard players set @e[tag=!Frames,r=20] Stun 30
+execute as @s[scores={move=20}] at @s run  scoreboard players set @e[tag=!Frames,r=20] Hit 5
+execute as @s[scores={move=20}] at @s run  scoreboard players add @e[tag=!Frames,r=20] Evade 25
+execute as @s[scores={move=11}] at @s run summon gg:impact_frame
+execute as @s[scores={move=11}] at @s run particle ds:invert
+execute as @s[scores={move=11}] at @s run particle ds:blue_tint
+execute as @s[scores={move=10}] at @s run particle ds:red_tint
+execute as @s[scores={move=10}] at @s run particle ds:invert
+execute as @s[scores={move=10}] at @s run playsound mob.blasted4 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={move=10}] at @s run playsound mob.blasted3 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={move=20}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={move=20}] at @s run playsound mob.distort2 @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={move=10,absorption=0..99}] at @s run particle ds:absorption_ex
+execute as @s[scores={move=10,absorption=100..}] at @s run particle ds:absorption_exb
+execute as @s[scores={move=20}] at @s run particle ds:dirt2
+execute as @s[scores={move=15}] at @s run particle ds:dirt3
+execute as @s[scores={move=10}] at @s run particle ds:power_wave1 ~~1~
+execute as @s[scores={move=10}] at @s run particle ds:power_wave2 ~~1~
+execute as @s[scores={move=10}] at @s run camerashake add @a[r=100] 4 0.25 rotational
+execute as @s[scores={move=10}] at @s run  damage @e[tag=!Frames,r=20] 20 override
+execute as @s[scores={move=10}] at @s run  scoreboard players set @e[tag=!Frames,r=25] knockdown 100
+execute as @s[scores={move=10}] at @s run  scoreboard players set @e[tag=!Frames,r=25] Hit 5
+execute as @s[scores={move=10}] at @s run  scoreboard players add @e[tag=!Frames,r=25] Evade 25
+execute as @s[scores={move=10}] at @s run  scoreboard players operation @e[tag=!Frames,r=25] damage += @s absorption
+execute as @s[scores={move=10}] at @s run  scoreboard players operation @e[tag=!Frames,r=25] damage /= two endurance
+execute as @s[scores={move=10}] at @s run  effect @e[tag=!Frames,r=25] levitation 1 19 true
+execute as @s[scores={move=10}] at @s run summon ds:mahoraga_knockback2
+execute as @s[scores={move=10}] at @s run  function damages/electric_damage
+execute as @s[scores={move=20}] at @s run  function damages/electric_damage
+execute as @s[scores={move=15}] at @s run  function damages/electric_damage
+scoreboard players remove @s[scores={move=5..10,absorption=5..}] absorption 5
+execute as @s[scores={move=1..}] at @s run tp @s ~~~
+@@absorption/absorption8
+playanimation @s[scores={move=70..71}] animation.absorption.ab8
+scoreboard players set @s[scores={move=30..}] Frames 25
+scoreboard players set @s[scores={move=30..}] Move 25
+scoreboard players set @s[scores={move=1..}] Camera 15
+tag @s[scores={move=1..3}] remove form8
+execute as @s[scores={move=70..}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=70..}] at @s run camera @s set minecraft:free pos ^^0.15^1.5 facing ^^^
+execute as @s[scores={move=68..69}] at @s run camera @s set minecraft:free ease 1.5 in_out_circ pos ^^1.6^1.5 facing ^^1.6^
+execute as @s[scores={move=10}] at @s run camera @s set minecraft:free ease 1.5 in_out_circ pos ^^40^40 facing ^^1.6^
+execute as @s[scores={move=70..}] at @s run playsound music.nuke @a[r=100] ~~-5~ 99999 1.6 99999
+execute as @s[scores={move=30..}] at @s run playsound mob.electricity @a[r=100] ~~-5~ 99999 1.25 99999
+execute as @s[scores={move=30..}] at @s run camerashake add @a[r=20] 0.15 0.15
+execute as @s[scores={move=10..}] at @s run particle ds:absorption
+execute as @s[scores={move=10..}] at @s run particle ds:turbo_intensity2
+execute as @s[scores={move=10..}] at @s run particle ds:turbo_intensity3
+execute as @s[scores={move=10..}] at @s run particle ds:turbo_intensity3b
+execute as @s[scores={move=10..}] at @s run particle ds:turbo_intensity3c
+execute as @s[scores={move=10..}] at @s run particle ds:turbo_intensity3e
+execute as @s[scores={move=10..}] at @s run particle ds:absorption_ex7
+execute as @s[scores={move=10..45}] at @s run particle ds:absorption_ex7b
+execute as @s[scores={move=10..25}] at @s run particle ds:absorption_exb ~~1~
+execute as @s[scores={move=1..14}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=5..10}] at @s run particle ds:absorption_exc ~~1~
+execute as @s[scores={move=5..10}] at @s run particle ds:absorption_leftover2 ~~1~
+execute as @s[scores={move=5..10}] at @s run particle ds:absorption_leftover3 ~~1~
+execute as @s[scores={move=20}] at @s run  function damages/electric_damage
+execute as @s[scores={move=5}] at @s run  function damages/electric_damage
+execute as @s[scores={move=15}] at @s run  function damages/electric_damage
+execute as @s[scores={move=10}] at @s run  function damages/electric_damage
+camera @s[scores={move=1..3}] clear
+execute as @s[scores={move=12}] at @s run  playsound mob.blasted3 @a ~~~ 999999999 0.95 9999999999
+execute as @s[scores={move=12}] at @s run  playsound mob.blasted4 @a ~~~ 999999999 0.95 9999999999
+execute as @s[scores={move=12}] at @s run  summon gg:impact_frame
+execute as @s[scores={move=11}] at @s run particle ds:invert
+execute as @s[scores={move=10}] at @s run particle ds:blue_tint
+execute as @s[scores={move=9}] at @s run particle ds:red_tint
+execute as @s[scores={move=10}] at @s run  summon gg:impact_frame
+execute as @s[scores={move=9}] at @s run particle ds:invert
+execute as @s[scores={move=11}] at @s run  effect @a[r=300] night_vision 1 1 true
+execute as @s[scores={move=11}] at @s run camerashake add @a[r=300] 4 0.25 rotational
+execute as @s[scores={move=8..12}] at @s run playsound mob.shock1 @a[r=1000] ~~~ 999999 0.5 999999
+execute as @s[scores={move=10}] at @s run scoreboard players operation @e[tag=!Frames,r=50] damage += @s absorption
+execute as @s[scores={move=8}] at @s run  summon ds:mahoraga_knockback2
+execute as @s[scores={move=10}] at @s run damage @e[tag=!Frames,r=50] 20 override
+execute as @s[scores={move=10}] at @s run scoreboard players set @e[tag=!Frames,r=50] knockdown 100
+execute as @s[scores={move=10}] at @s run effect  @e[tag=!Frames,r=50] levitation 1 20
+execute as @s[scores={move=10}] at @s run  playsound mob.electricity @a[r=1000] ~~~ 99999 0.33 999999
+execute as @s[scores={move=8}] at @s if entity @p[tag=griefable] run function 32x32sphere
+execute as @s[scores={move=5}] at @s if entity @p[tag=griefable] run fill ~5~5~5 ~-5~-5~-5 air
+execute as @s[scores={move=5}] at @s if entity @p[tag=griefable] positioned ~~-21~ run fill ~2~2~2 ~-2~-3~-2 air
+scoreboard players set @s[scores={move=1..6}] absorption 0
+@@absorption/absorption_clear
+clear @p ds:absorption1
+clear @p ds:absorption2
+clear @p ds:absorption3
+tellraw @p {"rawtext":[{"translate":"text.skills_clear"}]}
+playsound random.orb @p
+@@absorption/absorption_click
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=0,Sneaking=0,detect_jump=0,Energy=50..,absorption=5..}] add form1
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Energy=0..49,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=0,Sneaking=0,detect_jump=0,absorption=0..4}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=50..,absorption=5..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=50..,absorption=5..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=50..,absorption=5..}] move 34
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=50..,absorption=5..}] ability1 300
+scoreboard players remove @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Energy=50..,move=34,Sneaking=0,detect_jump=0,absorption=5..}] Energy 50
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=0,Energy=75..,absorption=5..}] add form2
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Energy=0..64,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=0,Sneaking=1..,detect_jump=0,absorption=0..4}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=1..,Energy=75..,absorption=5..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=1..,Energy=75..,absorption=5..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=75..,absorption=5..}] move 21
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=75..,absorption=5..}] ability2 80
+scoreboard players remove @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Energy=75..,move=34,Sneaking=1..,detect_jump=0,absorption=5..}] Energy 75
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability3=0,Energy=50..,absorption=5..}] add form3
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Energy=0..49,Sneaking=0,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=1..,absorption=0..4}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability3=1..,Energy=50..,absorption=5..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability3=1..,Energy=50..,absorption=5..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab3"},{"score":{"name": "@p","objective": "ability3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=1..,Energy=50..,absorption=5..}] move 8
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=1..,Energy=50..,absorption=5..}] ability3 100
+scoreboard players remove @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Energy=50..,move=8,Sneaking=0,detect_jump=1..,absorption=5..}] Energy 50
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=1..,ability4=0,Energy=200..,absorption=15..}] add form4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Energy=0..199,Sneaking=1..,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,detect_jump=1..,absorption=0..14}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=1..,ability4=1..,Energy=200..,absorption=15..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=1..,ability4=1..,Energy=200..,absorption=51..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab4"},{"score":{"name": "@p","objective": "ability4"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,detect_jump=1..,Energy=200..,absorption=15..}] move 36
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,detect_jump=1..,Energy=200..,absorption=15..}] ability4 300
+scoreboard players remove @s[tag=absorptionclick,hasitem={item=ds:absorption1,location=slot.weapon.mainhand},scores={Energy=200..,move=36,Sneaking=1..,detect_jump=1..,absorption=15..}] Energy 200
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability5=0,Sneaking=0,detect_jump=0,Energy=100..,absorption=10..}] add form5
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Energy=0..99,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability5=0,Sneaking=0,detect_jump=0,absorption=0..9}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability5=1..,Sneaking=0,detect_jump=0,Energy=100..,absorption=10..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability5=1..,Sneaking=0,detect_jump=0,Energy=100..,absorption=10..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab5"},{"score":{"name": "@p","objective": "ability5"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=0,detect_jump=0,Energy=100..,absorption=10..}] move 31
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=0,detect_jump=0,Energy=100..,absorption=10..}] ability5 200
+scoreboard players remove @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Energy=100..,move=31,Sneaking=0,detect_jump=0,absorption=10..}] Energy 100
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability6=0,Energy=200..,absorption=20..}] add form6
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Energy=0..199,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability6=0,absorption=0..19}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability6=1..,Sneaking=1..,detect_jump=0,Energy=200..,absorption=20..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability6=1..,Sneaking=1..,detect_jump=0,Energy=200..,absorption=20..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab6"},{"score":{"name": "@p","objective": "ability6"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Sneaking=1..,detect_jump=0,Energy=200..,absorption=20..}] move 47
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Sneaking=1..,detect_jump=0,Energy=200..,absorption=20..}] ability6 700
+scoreboard players remove @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Energy=200..,move=31,Sneaking=1..,detect_jump=0,absorption=20..}] Energy 200
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=0,detect_jump=1..,Energy=250..,absorption=50..}] add form7
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Energy=0..249,Sneaking=0,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=0,detect_jump=1..,absorption=0..49}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=1..,Sneaking=0,detect_jump=1..,Energy=250..,absorption=50..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=1..,Sneaking=0,detect_jump=1..,Energy=250..,absorption=50..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab7"},{"score":{"name": "@p","objective": "ability7"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=0,detect_jump=1..,Energy=250..,absorption=50..}] move 31
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=0,detect_jump=1..,Energy=250..,absorption=50..}] ability7 900
+scoreboard players remove @s[tag=absorptionclick,hasitem={item=ds:absorption2,location=slot.weapon.mainhand},scores={Energy=250..,move=31,Sneaking=0,detect_jump=1..,absorption=50..}] Energy 250
+tag @s[tag=absorptionclick,hasitem={item=ds:absorption3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability8=0,Sneaking=0,detect_jump=0,absorption=100..}] add form8
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=0,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability8=0,Sneaking=0,detect_jump=0,absorption=0..99}] at @s run tellraw @s {"rawtext":[{"translate":"text.need_100_stored_energy"}]}
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability8=1..,Sneaking=0,detect_jump=0,absorption=100..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=absorptionclick,hasitem={item=ds:absorption3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability8=1..,Sneaking=0,detect_jump=0,absorption=100..}] at @s run tellraw @s {"rawtext":[{"translate":"text.absorption.ab8"},{"score":{"name": "@p","objective": "ability8"}},{"text":"§c."}]}
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=0,Sneaking=0,detect_jump=0,absorption=100..}] move 71
+scoreboard players set @s[tag=absorptionclick,hasitem={item=ds:absorption3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=0,Sneaking=0,detect_jump=0,absorption=100..}] ability8 2400
+tag @s remove absorptionclick
+@@absorption/absorption_clicks
+tag @s[tag=itemUse:ds:absorption1] add absorptionclick
+tag @s[tag=itemUse:ds:absorption2] add absorptionclick
+tag @s[tag=itemUse:ds:absorption3] add absorptionclick
+execute as @s[tag=absorptionclick] run function absorption/absorption_click
+@@absorption/absorption_moves
+execute as @s[scores={move=1..},tag=form1] run function absorption/absorption1
+execute as @s[scores={move=1..},tag=form2] run function absorption/absorption2
+execute as @s[scores={move=1..},tag=form3] run function absorption/absorption3
+execute as @s[scores={move=1..},tag=form4] run function absorption/absorption4
+execute as @s[scores={move=1..},tag=form5] run function absorption/absorption5
+execute as @s[scores={move=1..},tag=form6] run function absorption/absorption6
+execute as @s[scores={move=1..},tag=form7] run function absorption/absorption7
+execute as @s[scores={move=1..},tag=form8] run function absorption/absorption8
+@@absorption/absorption_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption] at @s run function remove_ct
+tag @s[scores={forms=3..},tag=!cantupgrade] add cantupgrade
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=absorption] {"rawtext":[{"translate":"text.absorption.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!absorption] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=absorption] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption] {"rawtext":[{"translate":"text.absorption.using1"},{"translate":"text.absorption.using2"},{"translate":"text.absorption.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption,m=!c] forms 0
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption,m=c] forms 3
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=1..},tag=!absorption,m=!c] ds:absorption1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=2..},tag=!absorption,m=!c] ds:absorption2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=3..},tag=!absorption,m=!c] ds:absorption3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption,m=c] ds:absorption1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption,m=c] ds:absorption2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption,m=c] ds:absorption3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption,m=c] {"rawtext":[{"translate":"text.creativeforms"}]}
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!absorption] add absorption
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..},tag=absorption] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..3,invest=10..},tag=absorption,tag=!cantupgrade] at @s run scoreboard players add @s forms 1
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..3,invest=10..},tag=absorption,tag=!cantupgrade] at @s run playsound random.orb @a ~~~ 100000 0.5 100000
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..3,invest=10..},tag=absorption,tag=!cantupgrade] at @s run playsound mob.wither.hurt @a ~~~ 100000 2 100000
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1,invest=10..},tag=absorption,tag=!cantupgrade] {"rawtext":[{"translate":"text.absorption_ab1.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=absorption] ds:absorption1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2,invest=10..},tag=absorption,tag=!cantupgrade] {"rawtext":[{"translate":"text.absorption_ab2.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2..},tag=absorption] ds:absorption2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3,invest=10..},tag=absorption,tag=!cantupgrade] {"rawtext":[{"translate":"text.absorption_ab3.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3..},tag=absorption] ds:absorption3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0},tag=absorption,tag=cantupgrade]  {"rawtext":[{"translate":"text.absorption_all.unlocked"}]}
+scoreboard players remove @a[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..3,invest=10..},tag=absorption,tag=!cantupgrade] invest 10
+tag @s[tag=cantupgrade] remove cantupgrade
+@@absorption/beam
+execute as @p if entity @e[scores={move=10..30},c=1,r=60] unless block ~~~ air run particle ds:absorption_ex
+execute as @p if entity @e[scores={move=30},c=1,r=60] unless block ~~~ air if entity @p[tag=griefable,scores={absorption=1..49}] run summon ds:lapse_explode
+execute as @p if entity @e[scores={move=30},c=1,r=60] unless block ~~~ air if entity @p[tag=griefable,scores={absorption=50..}] run summon ds:energy_explosion
+execute as @p if entity @e[scores={move=10},c=1,r=60] unless block ~~~ air if entity @p[tag=griefable,scores={absorption=1..49}] run summon ds:lapse_explode
+execute as @p if entity @e[scores={move=10},c=1,r=60] unless block ~~~ air if entity @p[tag=griefable,scores={absorption=50..}] run summon ds:energy_explosion
+execute as @p if entity @e[scores={move=30},c=1,r=60] run scoreboard players operation @e[r=3.99,c=1,tag=!Frames,type=!ds:kashimo,tag=!form5] damage += @e[scores={move=10..30,absorption=1..},c=1] absorption
+execute as @p if entity @e[scores={move=30},c=1,r=60] run scoreboard players operation @e[r=3.99,c=1,tag=!Frames,type=!ds:kashimo,tag=!form5] damage /= ten endurance
+execute as @p if entity @e[scores={move=11},c=1,r=60] run scoreboard players operation @e[r=3.99,c=1,tag=!Frames,type=!ds:kashimo,tag=!form5] damage += @e[scores={move=10..30,absorption=1..},c=1] absorption
+execute as @p if entity @e[scores={move=11},c=1,r=60] run scoreboard players operation @e[r=3.99,c=1,tag=!Frames,type=!ds:kashimo,tag=!form5] damage /= ten endurance
+execute as @p if entity @e[scores={move=10..30},c=1,r=60] run damage @e[r=3.99,c=1,tag=!Frames,tag=!lightning,type=!ds:kashimo,tag=!form5] 1 override
+execute as @p if entity @e[scores={move=30},c=1,r=20] run function damages/electric_damage
+execute as @p if entity @e[scores={move=25},c=1,r=20] run function damages/electric_damage
+execute as @p if entity @e[scores={move=20},c=1,r=20] run function damages/electric_damage
+execute as @p if entity @e[scores={move=15},c=1,r=20] run function damages/electric_damage
+execute as @p if entity @e[scores={move=10},c=1,r=20] run function damages/electric_damage
+execute as @p if entity @e[scores={move=10..30},c=1,r=60] positioned ^^^4 run function absorption/beam
+@@absorption/bolt
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] unless block ~~~ air run particle ds:absorption_ex
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] unless block ~~~ air if entity @p[tag=griefable,scores={absorption=1..49}] run summon ds:lapse_explode
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] unless block ~~~ air if entity @p[tag=griefable,scores={absorption=50..}] run summon ds:energy_explosion
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] run scoreboard players operation @e[r=3.99,c=1,tag=!Frames,type=!ds:kashimo,tag=!form5] damage += @e[scores={move=20..22,absorption=1..},c=1] absorption
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] run scoreboard players operation @e[r=3.99,c=1,tag=!Frames,type=!ds:kashimo,tag=!form5] damage /= ten endurance
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] run scoreboard players add @e[r=3.99,c=1,tag=!Frames,tag=!lightning,type=!ds:kashimo,tag=!form5] damage 1
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] run scoreboard players set @e[r=3.99,c=1,tag=!Frames,tag=!lightning,type=!ds:kashimo,tag=!form5] Hit 3
+execute as @p if entity @e[scores={move=20},c=1,r=20] run function damages/electric_damage
+execute as @p if entity @e[scores={move=20..22},c=1,r=60] positioned ^^^4 run function absorption/bolt

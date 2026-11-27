@@ -1,0 +1,3 @@
+@@structures/load_cursed_closet
+summon ds:cursed_closet ~~3~
+fill ~~~ ~~1~ mossy_stone_bricks

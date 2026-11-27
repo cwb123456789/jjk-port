@@ -1,0 +1,1334 @@
+@@missions/cancel_missions
+scoreboard players set @s[scores={activemission=1..}] activemission 0
+scoreboard players set @s missionsCD 1200
+tellraw @s[tag=killquest_grade2_curse] {"rawtext":[{"translate":"text.cancel_missions1b"}]}
+tellraw @s[tag=!killquest_grade2_curse] {"rawtext":[{"translate":"text.cancel_missions1"}]}
+tellraw @s[tag=!killquest_grade2_curse,scores={respawn=0}] {"rawtext":[{"translate":"text.exp_deducted"}]}
+scoreboard players operation @s[tag=!killquest_grade2_curse,scores={respawn=0}] Exp /= two Mode
+playsound random.pling @a ~~~ 0.5 0.5
+tag @s[tag=killquest_5curses_lowgrade] remove killquest_5curses_lowgrade
+tag @s[tag=killquest_10curses_lowgrade] remove killquest_10curses_lowgrade
+tag @s[tag=killquest_30curses_lowgrade] remove killquest_30curses_lowgrade
+tag @s[tag=killquest_5sorcerers_lowgrade] remove killquest_5sorcerers_lowgrade
+tag @s[tag=killquest_10sorcerers_lowgrade] remove killquest_10sorcerers_lowgrade
+tag @s[tag=killquest_30sorcerers_lowgrade] remove killquest_30sorcerers_lowgrade
+tag @s[tag=killquest_5curses_medgrade] remove killquest_5curses_medgrade
+tag @s[tag=killquest_10curses_medgrade] remove killquest_10curses_medgrade
+tag @s[tag=killquest_30curses_medgrade] remove killquest_30curses_medgrade
+tag @s[tag=killquest_5sorcerers_medgrade] remove killquest_5sorcerers_medgrade
+tag @s[tag=killquest_10sorcerers_medgrade] remove killquest_10sorcerers_medgrade
+tag @s[tag=killquest_30sorcerers_medgrade] remove killquest_30sorcerers_medgrade
+tag @s[tag=killquest_3curses_highgrade] remove killquest_3curses_highgrade
+tag @s[tag=killquest_1curse_highgrade] remove killquest_1curse_highgrade
+tag @s[tag=killquest_30curses_medgrade] remove killquest_30curses_medgrade
+tag @s[tag=killquest_5curses_highgrade] remove killquest_5curses_highgrade
+tag @s[tag=killquest_special_grade_curse] remove killquest_special_grade_curse
+execute as @s[tag=killquest_flyheads_infestation] as @e[type=ds:projectile,name=waypoint,c=1,tag=flyheads_quest] at @s run kill @e[family=flyhead,r=40]
+execute as @s[tag=killquest_flyheads_infestation] as @e[type=ds:projectile,name=waypoint,c=1,tag=flyheads_quest] at @s run kill @s
+execute as @s[tag=killquest_flyheads_infestation] run tickingarea remove flyheads_quest
+tag @s[tag=killquest_flyheads_infestation] remove killquest_flyheads_infestation
+execute as @s[tag=killquest_grasshopper_curse] as @e[type=ds:projectile,name=waypoint,c=1,tag=grasshopper_quest] at @s run kill @e[type=ds:grasshopper_curse,r=40]
+execute as @s[tag=killquest_grasshopper_curse] as @e[type=ds:projectile,name=waypoint,c=1,tag=grasshopper_quest] at @s run kill @s
+execute as @s[tag=killquest_grasshopper_curse] run tickingarea remove grasshopper_quest
+tag @s[tag=killquest_grasshopper_curse] remove killquest_grasshopper_curse
+execute as @s[tag=killquest_grade2_curse] as @e[type=ds:projectile,name=waypoint,c=1,tag=grade2_curse_quest] at @s run kill @e[family=grade2,r=40]
+execute as @s[tag=killquest_grade2_curse] as @e[type=ds:projectile,name=waypoint,c=1,tag=grade2_curse_quest] at @s run kill @e[family=grade1,r=40]
+execute as @s[tag=killquest_grade2_curse] as @e[type=ds:projectile,name=waypoint,c=1,tag=grade2_curse_quest] at @s run kill @s
+execute as @s[tag=killquest_grade2_curse] run tickingarea remove grade2_curse_quest
+tag @s[tag=killquest_grade2_curse] remove killquest_grade2_curse
+tag @s[tag=cursed_box_mission] remove cursed_box_mission
+execute as @s[tag=capture_point] as @e[type=ds:projectile,name=waypoint,c=1,tag=capture_point] at @s run kill @s
+execute as @s[tag=capture_point] run tickingarea remove capture_point
+execute as @s[tag=capture_point] at @s run event entity @e[type=ds:capture_point,r=200,c=1] ds:disappear
+tag @s[tag=capture_point] remove capture_point
+tag @s[tag=mission_exterminate_negative_field_v1] remove mission_exterminate_negative_field_v1
+tag @s[tag=mission_exterminate_negative_field_v2] remove mission_exterminate_negative_field_v2
+tag @s[tag=killquest_3sorcerers_highgrade] remove killquest_3sorcerers_highgrade
+tag @s[tag=killquest_1sorcerer_highgrade] remove killquest_1sorcerer_highgrade
+tag @s[tag=killquest_30sorcerers_medgrade] remove killquest_30sorcerers_medgrade
+tag @s[tag=killquest_5sorcerers_highgrade] remove killquest_5sorcerers_highgrade
+tag @s[tag=killquest_special_grade_sorcerer] remove killquest_special_grade_sorcerer
+tag @s[tag=killquest_5villagers] remove killquest_5villagers
+tag @s[tag=killquest_10villagers] remove killquest_10villagers
+tag @s[tag=mission_negative_field_v1] remove mission_negative_field_v1
+tag @s[tag=mission_negative_field_v2] remove mission_negative_field_v2
+execute as @s[tag=high_sorcerer_quest] as @e[type=ds:projectile,name=waypoint,c=1,tag=high_sorcerer_curse_quest] at @s run kill @e[family=grade1,r=40]
+execute as @s[tag=high_sorcerer_quest] as @e[type=ds:projectile,name=waypoint,c=1,tag=high_sorcerer_curse_quest] at @s run kill @e[family=grade2,r=40]
+execute as @s[tag=high_sorcerer_quest] as @e[type=ds:projectile,name=waypoint,c=1,tag=high_sorcerer_curse_quest] at @s run kill @e[family=grade3,r=40]
+execute as @s[tag=high_sorcerer_quest] as @e[type=ds:projectile,name=waypoint,c=1,tag=high_sorcerer_curse_quest] at @s run kill @e[family=grade4,r=40]
+execute as @s[tag=high_sorcerer_quest] as @e[type=ds:projectile,name=waypoint,c=1,tag=high_sorcerer_curse_quest] at @s run kill @s
+execute as @s[tag=high_sorcerer_quest] run tickingarea remove high_sorcerer_curse_quest
+tag @s[tag=high_sorcerer_quest] remove high_sorcerer_quest
+@@missions/capture_point_curse
+execute as @s at @s run summon ds:projectile "waypoint"
+execute as @s at @s run tag @e[name="waypoint",c=1] add capture_point
+execute as @s at @s run spreadplayers ~ ~ 100 750 @e[tag=capture_point,name=waypoint,c=1]
+execute as @e[name=waypoint,tag=capture_point,c=1] at @s run tickingarea add ~30 ~ ~30 ~-30 ~ ~-30 capture_point
+execute as @s at @s run tp @s ~~~ facing @e[name=waypoint,c=1,tag=capture_point]
+@@missions/capture_point_curse_spawn
+execute as @s at @s run summon ds:capture_point "capture_point_curse"
+tellraw @a[tag=capture_point,r=40] {"rawtext":[{"translate":"text.capture_point_curse.mission"}]}
+execute as @s at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.2 99999
+camerashake add @a[r=40] 0.5 2
+tickingarea remove capture_point
+kill @s
+@@missions/capture_point_sorcerer
+execute as @s at @s run summon ds:projectile "waypoint"
+execute as @s at @s run tag @e[name="waypoint",c=1] add capture_point
+execute as @s at @s run spreadplayers ~ ~ 100 750 @e[tag=capture_point,name=waypoint,c=1]
+execute as @e[name=waypoint,tag=capture_point,c=1] at @s run tickingarea add ~30 ~ ~30 ~-30 ~ ~-30 capture_point
+execute as @s at @s run tp @s ~~~ facing @e[name=waypoint,c=1,tag=capture_point]
+@@missions/capture_point_sorcerer_spawn
+execute as @s at @s run summon ds:capture_point "capture_point_sorcerer"
+tellraw @a[tag=capture_point,r=40] {"rawtext":[{"translate":"text.capture_point_sorcerer.mission"}]}
+execute as @s at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.2 99999
+camerashake add @a[r=40] 0.5 2
+tickingarea remove capture_point
+kill @s
+@@missions/credit/killcredit_grade1curse
+scoreboard objectives add mission_credit dummy
+scoreboard objectives add kusakabequest dummy
+execute as @s if entity @p[tag=killquest_1curse_highgrade,r=30] run scoreboard players add @p[tag=killquest_1curse_highgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_3curses_highgrade,r=30] run scoreboard players add @p[tag=killquest_3curses_highgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_5curses_highgrade,r=30] run scoreboard players add @p[tag=killquest_5curses_highgrade] mission_credit 1
+execute as @s if entity @p[tag=simpledomainquest2,r=30] run scoreboard players add @p[tag=simpledomainquest2] kusakabequest 1
+execute as @a[tag=killquest_1curse_highgrade,scores={mission_credit=1..}] at @s run function missions/rewards/1_highcurses
+execute as @a[tag=killquest_3curses_highgrade,scores={mission_credit=3..}] at @s run function missions/rewards/3_highcurses
+execute as @a[tag=killquest_5curses_highgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_highcurses
+execute as @a[tag=simpledomainquest2,scores={kusakabequest=5..}] at @s run function missions/rewards/kusakabequest
+@@missions/credit/killcredit_grade1sorcerer
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_1sorcerer_highgrade,r=30] run scoreboard players add @p[tag=killquest_1sorcerer_highgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_3sorcerers_highgrade,r=30] run scoreboard players add @p[tag=killquest_3sorcerers_highgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_5sorcerers_highgrade,r=30] run scoreboard players add @p[tag=killquest_5sorcerers_highgrade] mission_credit 1
+execute as @a[tag=killquest_1sorcerer_highgrade,scores={mission_credit=1..}] at @s run function missions/rewards/1_highsorcerers
+execute as @a[tag=killquest_3sorcerers_highgrade,scores={mission_credit=3..}] at @s run function missions/rewards/3_highsorcerers
+execute as @a[tag=killquest_5sorcerers_highgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_highsorcerers
+@@missions/credit/killcredit_grade2_curse
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_grade2_curse,r=30] run scoreboard players set @p[tag=killquest_grade2_curse] mission_credit 99
+execute as @s[family=grade1] if entity @p[tag=killquest_grade2_curse,r=30] run scoreboard players set @p[tag=killquest_grade2_curse] mission_credit 100
+execute as @a[tag=killquest_grade2_curse,scores={mission_credit=99}] at @s run function missions/rewards/grade2_curse
+execute as @a[tag=killquest_grade2_curse,scores={mission_credit=100}] at @s run function missions/rewards/grade2_curse_extra
+@@missions/credit/killcredit_grade2curse
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_5curses_medgrade,r=30] run scoreboard players add @p[tag=killquest_5curses_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10curses_medgrade,r=30] run scoreboard players add @p[tag=killquest_10curses_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30curses_medgrade,r=30] run scoreboard players add @p[tag=killquest_30curses_medgrade] mission_credit 1
+execute as @a[tag=killquest_5curses_medgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_medcurses
+execute as @a[tag=killquest_10curses_medgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_medcurses
+execute as @a[tag=killquest_30curses_medgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_medcurses
+@@missions/credit/killcredit_grade2sorcerer
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_5sorcerers_medgrade,r=30] run scoreboard players add @p[tag=killquest_5sorcerers_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10sorcerers_medgrade,r=30] run scoreboard players add @p[tag=killquest_10sorcerers_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30sorcerers_medgrade,r=30] run scoreboard players add @p[tag=killquest_30sorcerers_medgrade] mission_credit 1
+execute as @a[tag=killquest_5sorcerers_medgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_medsorcerers
+execute as @a[tag=killquest_10sorcerers_medgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_medsorcerers
+execute as @a[tag=killquest_30sorcerers_medgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_medsorcerers
+@@missions/credit/killcredit_grade3curse
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_5curses_lowgrade,r=30] run scoreboard players add @p[tag=killquest_5curses_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10curses_lowgrade,r=30] run scoreboard players add @p[tag=killquest_10curses_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30curses_lowgrade,r=30] run scoreboard players add @p[tag=killquest_30curses_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_5curses_medgrade,r=30] run scoreboard players add @p[tag=killquest_5curses_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10curses_medgrade,r=30] run scoreboard players add @p[tag=killquest_10curses_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30curses_medgrade,r=30] run scoreboard players add @p[tag=killquest_30curses_medgrade] mission_credit 1
+execute as @a[tag=killquest_5curses_lowgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_lowcurses
+execute as @a[tag=killquest_10curses_lowgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_lowcurses
+execute as @a[tag=killquest_30curses_lowgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_lowcurses
+execute as @a[tag=killquest_5curses_medgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_medcurses
+execute as @a[tag=killquest_10curses_medgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_medcurses
+execute as @a[tag=killquest_30curses_medgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_medcurses
+@@missions/credit/killcredit_grade3sorcerer
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_5sorcerers_lowgrade,r=30] run scoreboard players add @p[tag=killquest_5sorcerers_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10sorcerers_lowgrade,r=30] run scoreboard players add @p[tag=killquest_10sorcerers_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30sorcerers_lowgrade,r=30] run scoreboard players add @p[tag=killquest_30sorcerers_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_5sorcerers_medgrade,r=30] run scoreboard players add @p[tag=killquest_5sorcerers_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10sorcerers_medgrade,r=30] run scoreboard players add @p[tag=killquest_10sorcerers_medgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30sorcerers_medgrade,r=30] run scoreboard players add @p[tag=killquest_30sorcerers_medgrade] mission_credit 1
+execute as @a[tag=killquest_5sorcerers_lowgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_lowsorcerers
+execute as @a[tag=killquest_10sorcerers_lowgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_lowsorcerers
+execute as @a[tag=killquest_30sorcerers_lowgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_lowsorcerers
+execute as @a[tag=killquest_5sorcerers_medgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_medsorcerers
+execute as @a[tag=killquest_10sorcerers_medgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_medsorcerers
+execute as @a[tag=killquest_30sorcerers_medgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_medsorcerers
+@@missions/credit/killcredit_grade4curse
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_5curses_lowgrade,r=75] run scoreboard players add @p[tag=killquest_5curses_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10curses_lowgrade,r=75] run scoreboard players add @p[tag=killquest_10curses_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30curses_lowgrade,r=75] run scoreboard players add @p[tag=killquest_30curses_lowgrade] mission_credit 1
+execute as @a[tag=killquest_5curses_lowgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_lowcurses
+execute as @a[tag=killquest_10curses_lowgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_lowcurses
+execute as @a[tag=killquest_30curses_lowgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_lowcurses
+execute as @s if entity @p[tag=killquest_flyheads_infestation,r=75] run scoreboard players add @p[tag=killquest_flyheads_infestation] mission_credit 1
+execute as @a[tag=killquest_flyheads_infestation,scores={mission_credit=30..}] at @s run function missions/rewards/flyheads_infestation
+@@missions/credit/killcredit_grade4sorcerer
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_5sorcerers_lowgrade,r=30] run scoreboard players add @p[tag=killquest_5sorcerers_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_10sorcerers_lowgrade,r=30] run scoreboard players add @p[tag=killquest_10sorcerers_lowgrade] mission_credit 1
+execute as @s if entity @p[tag=killquest_30sorcerers_lowgrade,r=30] run scoreboard players add @p[tag=killquest_30sorcerers_lowgrade] mission_credit 1
+execute as @a[tag=killquest_5sorcerers_lowgrade,scores={mission_credit=5..}] at @s run function missions/rewards/5_lowsorcerers
+execute as @a[tag=killquest_10sorcerers_lowgrade,scores={mission_credit=10..}] at @s run function missions/rewards/10_lowsorcerers
+execute as @a[tag=killquest_30sorcerers_lowgrade,scores={mission_credit=30..}] at @s run function missions/rewards/30_lowsorcerers
+@@missions/credit/killcredit_grasshopper_curse
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_grasshopper_curse,r=30] run scoreboard players set @p[tag=killquest_grasshopper_curse] mission_credit 99
+execute as @a[tag=killquest_grasshopper_curse,scores={mission_credit=99}] at @s run function missions/rewards/grasshopper_curse
+@@missions/credit/killcredit_high_sorcerer
+scoreboard objectives add mission_credit dummy
+scoreboard players set @p[tag=high_sorcerer_quest] mission_credit 0
+execute as @s[family=special_grade] run scoreboard players set @p[tag=high_sorcerer_quest,r=100] mission_credit 100
+execute as @s[family=grade1] run scoreboard players set @p[tag=high_sorcerer_quest,r=100] mission_credit 99
+execute as @s[family=grade2] run scoreboard players set @p[tag=high_sorcerer_quest,r=100] mission_credit 98
+execute as @s[family=grade3] run scoreboard players set @p[tag=high_sorcerer_quest,r=100] mission_credit 97
+execute as @a[tag=high_sorcerer_quest,scores={mission_credit=97}] at @s run function missions/rewards/high_sorcerer_quest1
+execute as @a[tag=high_sorcerer_quest,scores={mission_credit=98}] at @s run function missions/rewards/high_sorcerer_quest2
+execute as @a[tag=high_sorcerer_quest,scores={mission_credit=99}] at @s run function missions/rewards/high_sorcerer_quest3
+execute as @a[tag=high_sorcerer_quest,scores={mission_credit=100}] at @s run function missions/rewards/high_sorcerer_quest4
+@@missions/credit/killcredit_special_grade_curse
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_special_grade_curse,r=30] run scoreboard players add @p[tag=killquest_special_grade_curse] mission_credit 1
+execute as @a[tag=killquest_special_grade_curse,scores={mission_credit=1..}] at @s run function missions/rewards/special_grade_curse
+@@missions/credit/killcredit_special_grade_sorcerer
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_special_grade_sorcerer,r=30] run scoreboard players add @p[tag=killquest_special_grade_sorcerer] mission_credit 1
+execute as @a[tag=killquest_special_grade_sorcerer,scores={mission_credit=1..}] at @s run function missions/rewards/special_grade_sorcerer
+@@missions/credit/killcredit_villager
+scoreboard objectives add mission_credit dummy
+execute as @s if entity @p[tag=killquest_5villagers] run scoreboard players add @p[tag=killquest_5villagers] mission_credit 1
+execute as @s if entity @p[tag=killquest_10villagers] run scoreboard players add @p[tag=killquest_10villagers] mission_credit 1
+execute as @a[tag=killquest_5villagers,scores={mission_credit=5..}] at @s run function missions/rewards/5villagers
+execute as @a[tag=killquest_10villagers,scores={mission_credit=10..}] at @s run function missions/rewards/10villagers
+@@missions/flyheads
+execute as @s at @s run summon ds:projectile "waypoint"
+execute as @s at @s run tag @e[name="waypoint",c=1] add flyheads_quest
+execute as @s at @s run spreadplayers ~ ~ 100 750 @e[tag=flyheads_quest,name=waypoint,c=1]
+execute as @e[name=waypoint,tag=flyheads_quest,c=1] at @s run tickingarea add ~30 ~ ~30 ~-30 ~ ~-30 flyheads_quest
+execute as @s at @s run tp @s ~~~ facing @e[name=waypoint,c=1,tag=flyheads_quest]
+@@missions/flyheads_swarm
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead4 ~~4~
+execute as @s at @s run summon ds:flyhead4 ~~4~
+execute as @s at @s run summon ds:flyhead4 ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead2 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead3 ~~4~
+execute as @s at @s run summon ds:flyhead4 ~~4~
+execute as @s at @s run summon ds:flyhead4 ~~4~
+execute as @s at @s run summon ds:flyhead4 ~~4~
+tellraw @a[tag=killquest_flyheads_infestation,r=40] {"rawtext":[{"translate":"text.flyheads_infestation.mission"}]}
+execute as @s at @s run spreadplayers ~ ~ 3 20 @e[family=pest,r=30]
+execute as @s at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.2 99999
+camerashake add @a[r=40] 0.5 2
+tickingarea remove flyheads_quest
+kill @s
+@@missions/grade2_curse
+execute as @s at @s run summon ds:projectile "waypoint"
+execute as @s at @s run tag @e[name="waypoint",c=1] add grade2_curse_quest
+execute as @s at @s run spreadplayers ~ ~ 100 750 @e[tag=grade2_curse_quest,name=waypoint,c=1]
+execute as @e[name=waypoint,tag=grade2_curse_quest,c=1] at @s run tickingarea add ~30 ~ ~30 ~-30 ~ ~-30 grade2_curse_quest
+execute as @s at @s run tp @s ~~~ facing @e[name=waypoint,c=1,tag=grade2_curse_quest]
+@@missions/grade2_curse2
+scoreboard players random @s chance 1 11
+execute as @s[scores={chance=1..}] at @s if block ~~-1~ water run scoreboard players set @s chance 9
+execute as @s[scores={chance=1..3}] at @s run summon ds:lizard_curse ~~~
+execute as @s[scores={chance=2..6}] at @s run summon ds:grasshopper_curse ~~~
+execute as @s[scores={chance=7..8}] at @s run summon ds:brute4 ~~~
+execute as @s[scores={chance=9}] at @s run summon ds:sharko ~~~
+execute as @s[scores={chance=7..8}] at @s run effect @e[type=ds:brute4,c=1] resistance 999999 1 true
+execute as @s[scores={chance=10}] at @s run summon ds:azureflames_curse
+execute as @s[scores={chance=11}] at @s run summon ds:centipede_grade1
+execute as @s[scores={chance=12}] at @s run summon ds:mammoth_curse
+execute as @s[scores={chance=1..9}] at @s run tellraw @a[tag=killquest_grade2_curse,r=40] {"rawtext":[{"translate":"text.grade2_curse.mission"}]}
+execute as @s[scores={chance=10..12}] at @s run tellraw @a[tag=killquest_grade2_curse,r=40] {"rawtext":[{"translate":"text.grade2_curse_extra.mission"}]}
+execute as @s at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.2 99999
+camerashake add @a[r=40] 0.5 2
+tickingarea remove grade2_curse_quest
+kill @s
+@@missions/grasshopper_curse
+execute as @s at @s run summon ds:projectile "waypoint"
+execute as @s at @s run tag @e[name="waypoint",c=1] add grasshopper_quest
+execute as @s at @s run spreadplayers ~ ~ 100 750 @e[tag=grasshopper_quest,name=waypoint,c=1]
+execute as @e[name=waypoint,tag=grasshopper_quest,c=1] at @s run tickingarea add ~30 ~ ~30 ~-30 ~ ~-30 grasshopper_quest
+execute as @s at @s run tp @s ~~~ facing @e[name=waypoint,c=1,tag=grasshopper_quest]
+@@missions/grasshopper_curse2
+execute as @s at @s run summon ds:grasshopper_curse
+execute as @s at @s run effect @e[type=ds:grasshopper_curse,c=1] resistance 999999 1 true
+tellraw @a[tag=killquest_grasshopper_curse,r=40] {"rawtext":[{"translate":"text.grasshopper_curse.mission"}]}
+execute as @s at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.2 99999
+camerashake add @a[r=40] 0.5 2
+tickingarea remove grasshopper_quest
+kill @s
+@@missions/high_sorcerer_quest
+execute as @s at @s run summon ds:projectile "waypoint"
+execute as @s at @s run tag @e[name="waypoint",c=1] add high_sorcerer_curse_quest
+execute as @s at @s run spreadplayers ~ ~ 100 750 @e[tag=high_sorcerer_curse_quest,name=waypoint,c=1]
+execute as @e[name=waypoint,tag=high_sorcerer_curse_quest,c=1] at @s run tickingarea add ~30 ~ ~30 ~-30 ~ ~-30 high_sorcerer_curse_quest
+execute as @s at @s run tp @s ~~~ facing @e[name=waypoint,c=1,tag=high_sorcerer_curse_quest]
+@@missions/high_sorcerer_quest2
+execute as @p[tag=curse,scores={grade=1..2},tag=high_sorcerer_quest] run scoreboard players random @e[name=waypoint,c=1] chance -2 3
+execute as @p[tag=curse,scores={grade=3..4},tag=high_sorcerer_quest] run scoreboard players random @e[name=waypoint,c=1] chance -2 5
+execute as @p[tag=curse,scores={grade=5..},tag=high_sorcerer_quest] run scoreboard players random @e[name=waypoint,c=1] chance -2 9
+execute as @s[scores={chance=-2}] at @s run summon ds:sorcerer_male_grade1 ~~1~
+execute as @s[scores={chance=-2}] at @s run summon ds:sorcerer_male_grade1 ~~1~
+execute as @s[scores={chance=-1}] at @s run summon ds:juzo ~~1~
+execute as @s[scores={chance=0}] at @s run summon ds:miwa ~~1~
+execute as @s[scores={chance=1}] at @s run summon ds:megumi ~~1~
+execute as @s[scores={chance=2}] at @s run summon ds:yuji_itadori ~~1~
+execute as @s[scores={chance=3}] at @s run summon ds:kusakabe ~~1~
+execute as @s[scores={chance=4}] at @s run summon ds:maki_cullinggames ~~1~
+execute as @s[scores={chance=5}] at @s run summon ds:higuruma ~~1~
+execute as @s[scores={chance=6}] at @s run summon ds:hakari ~~1~
+execute as @s[scores={chance=7}] at @s run summon ds:toji ~~1~
+execute as @s[scores={chance=8}] at @s run summon ds:kashimo ~~1~
+execute as @s[scores={chance=9}] at @s run summon ds:yuji_itadori_awakened ~~1~
+execute as @s[scores={chance=10}] at @s run summon ds:student_gojo ~~1~
+tellraw @a[tag=high_sorcerer_quest,r=40] {"rawtext":[{"translate":"text.high_sorcerer_quest.mission"}]}
+execute as @s at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.2 99999
+camerashake add @a[r=40] 0.5 2
+tickingarea remove high_sorcerer_curse_quest
+kill @s
+@@missions/missions_assign
+playsound note.pling @a ~~~ 0.1 1.75
+scoreboard objectives add activemission dummy
+scoreboard players add @s activemission 0
+scoreboard objectives add random_mission dummy
+scoreboard objectives add missiontimer dummy
+scoreboard objectives add calling dummy
+scoreboard objectives add callingrandom dummy
+scoreboard players random @s callingrandom 1 20
+execute as @s[scores={callingrandom=1..19}] at @s run playsound mob.phone @a ~~1~ 0.25 1.15
+execute as @s[scores={callingrandom=20}] at @s run playsound mob.phone2 @a ~~1~ 1 1.15
+scoreboard players random @s random_mission 1 20
+scoreboard players set @s missionsCD 1200
+tag @s add calling
+@@missions/phone
+playanimation @s[tag=!calling] animation.phone.hold
+execute as @s[tag=itemUse:ds:phone,tag=!calling,tag=!abilitying,scores={Stun=0}] at @s run scoreboard objectives add activemission dummy
+execute as @s[tag=itemUse:ds:phone,tag=!calling,tag=!abilitying,scores={Stun=0}] at @s run scoreboard players add @s activemission 0
+execute as @s[tag=itemUse:ds:phone,tag=!calling,tag=!abilitying,scores={Stun=0,missionsCD=0}] at @s run function missions/missions_assign
+execute as @s[tag=itemUse:ds:phone,tag=!calling,tag=!abilitying,scores={Stun=0,missionsCD=1..,activemission=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.missions.cd"},{"score":{"name": "@p","objective": "missionsCD"}},{"text":"§c."}]}
+execute as @s[tag=itemUse:ds:phone,tag=!calling,tag=!abilitying,scores={Stun=0,missionsCD=1..}] at @s run playsound note.pling @s ~~~ 1 0.25
+execute as @s[tag=itemUse:ds:phone,tag=!calling,tag=!abilitying,scores={Stun=0,missionsCD=1..,activemission=1..}] at @s run tellraw @s {"rawtext":[{"translate":"text.show_mission"}]}
+execute as @s[tag=itemUse:ds:phone,tag=!calling,tag=!abilitying,scores={Stun=0,missionsCD=1..,activemission=1..}] at @s run function missions/show_mission
+execute as @s[scores={Sneaking=1..,punch=1,activemission=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.no_missions"}]}
+execute as @s[scores={Sneaking=1..,punch=1,activemission=1..}] at @s run function missions/cancel_missions
+scoreboard players set @s[scores={calling=1..25}] Stun 5
+scoreboard players set @a[tag=!calling,scores={calling=1..}] calling 0
+scoreboard players add @s[tag=calling] calling 1
+playanimation @s[scores={calling=1..48}] animation.phone.call
+tag @a[scores={calling=60..}] remove calling
+camera @s[scores={calling=24..25}] fade time 0.5 1 0.5 color 0 0 0
+execute as @s[scores={calling=50,activemission=0}] at @s run function missions/random_mission
+@@missions/random_mission
+playsound note.pling @s ~~~ 1 0.5
+scoreboard players random @s[scores={random_mission=7..8,grade=4..}] random_mission 9 10
+scoreboard players random @s[scores={grade=1,random_mission=5..6}] random_mission 1 4
+scoreboard players random @s[scores={random_mission=17..},tag=!curse] random_mission 1 16
+tag @s[scores={random_mission=1,grade=1..2},tag=!curse] add killquest_5curses_lowgrade
+tag @s[scores={random_mission=1,grade=3},tag=!curse] add killquest_5curses_medgrade
+tag @s[scores={random_mission=1,grade=4..},tag=!curse] add killquest_1curse_highgrade
+tag @s[scores={random_mission=2,grade=1..2},tag=!curse] add killquest_10curses_lowgrade
+tag @s[scores={random_mission=2,grade=3},tag=!curse] add killquest_10curses_medgrade
+tag @s[scores={random_mission=2,grade=4..},tag=!curse] add killquest_3curses_highgrade
+tag @s[scores={random_mission=3,grade=1..3},tag=!curse] add killquest_30curses_lowgrade
+tag @s[scores={random_mission=3,grade=4..},tag=!curse] add killquest_1curse_highgrade
+tag @s[scores={random_mission=4,grade=1..2},tag=!curse] add killquest_5curses_medgrade
+tag @s[scores={random_mission=4,grade=3..4},tag=!curse] add killquest_30curses_medgrade
+tag @s[scores={random_mission=4,grade=5},tag=!curse] add killquest_1curse_highgrade
+tag @s[scores={random_mission=5,grade=2..3},tag=!curse] add killquest_10curses_medgrade
+tag @s[scores={random_mission=5,grade=4..},tag=!curse] add killquest_30curses_medgrade
+tag @s[scores={random_mission=6,grade=1..3},tag=!curse] add killquest_1curse_highgrade
+tag @s[scores={random_mission=6,grade=4},tag=!curse] add killquest_special_grade_curse
+tag @s[scores={random_mission=6,grade=5},tag=!curse] add killquest_5curses_highgrade
+tag @s[scores={random_mission=7..8,grade=1..3},tag=!curse] add killquest_flyheads_infestation
+execute as @s[tag=killquest_flyheads_infestation] at @s run function missions/flyheads
+tag @s[scores={random_mission=9,grade=1..5},tag=!curse] add killquest_grasshopper_curse
+execute as @s[tag=killquest_grasshopper_curse] at @s run function missions/grasshopper_curse
+tag @s[scores={random_mission=10,grade=2..5},tag=!curse] add killquest_grade2_curse
+execute as @s[tag=killquest_grade2_curse] at @s run function missions/grade2_curse
+tag @s[scores={random_mission=11..14,grade=1..5},tag=!curse] add cursed_box_mission
+tag @s[scores={random_mission=15..16,grade=1..},tag=!curse] add capture_point
+execute as @s[tag=capture_point,tag=!curse] at @s run function missions/capture_point_sorcerer
+tag @s[scores={random_mission=1,grade=1..2},tag=curse] add killquest_5sorcerers_lowgrade
+tag @s[scores={random_mission=1,grade=3},tag=curse] add killquest_5sorcerers_medgrade
+tag @s[scores={random_mission=1,grade=4..},tag=curse] add killquest_1sorcerer_highgrade
+tag @s[scores={random_mission=2,grade=1..2},tag=curse] add killquest_10sorcerers_lowgrade
+tag @s[scores={random_mission=2,grade=3},tag=curse] add killquest_10sorcerers_medgrade
+tag @s[scores={random_mission=2,grade=4..},tag=curse] add killquest_3sorcerers_highgrade
+tag @s[scores={random_mission=3,grade=1..3},tag=curse] add killquest_30sorcerers_lowgrade
+tag @s[scores={random_mission=3,grade=4..},tag=curse] add killquest_1sorcerer_highgrade
+tag @s[scores={random_mission=4,grade=1..2},tag=curse] add killquest_5sorcerers_medgrade
+tag @s[scores={random_mission=4,grade=3..4},tag=curse] add killquest_30sorcerers_medgrade
+tag @s[scores={random_mission=4,grade=5..},tag=curse] add killquest_1sorcerer_highgrade
+tag @s[scores={random_mission=5,grade=2..3},tag=curse] add killquest_10sorcerers_medgrade
+tag @s[scores={random_mission=5,grade=4..},tag=curse] add killquest_30sorcerers_medgrade
+tag @s[scores={random_mission=6,grade=1..3},tag=curse] add killquest_1sorcerer_highgrade
+tag @s[scores={random_mission=6,grade=4},tag=curse] add killquest_special_grade_sorcerer
+tag @s[scores={random_mission=6,grade=5..},tag=curse] add killquest_5sorcerers_highgrade
+tag @s[scores={random_mission=7..10,grade=1..},tag=curse] add killquest_5villagers
+tag @s[scores={random_mission=11,grade=1..},tag=curse] add killquest_10villagers
+tag @s[scores={random_mission=12,grade=1..},tag=curse] add high_sorcerer_quest
+execute as @s[tag=high_sorcerer_quest,tag=curse] at @s run function missions/high_sorcerer_quest
+tag @s[scores={random_mission=13..14,grade=1..5},tag=curse] add cursed_box_mission
+tag @s[scores={random_mission=15..16,grade=1..5},tag=curse] add mission_negative_field_v1
+tag @s[scores={random_mission=17,grade=1..5},tag=curse] add mission_negative_field_v2
+tag @s[scores={random_mission=18..20,grade=1..},tag=curse] add capture_point
+execute as @s[tag=capture_point,tag=curse] at @s run function missions/capture_point_curse
+scoreboard players set @s activemission 1
+tellraw @s[tag=!curse,tag=killquest_5curses_lowgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.5curses_lowgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_10curses_lowgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.10curses_lowgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_30curses_lowgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.30curses_lowgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_5curses_medgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.5curses_medgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_10curses_medgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.10curses_medgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_30curses_medgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.30curses_medgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_1curse_highgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.1curses_highgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_3curses_highgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.3curses_highgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_5curses_highgrade] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.5curses_highgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_special_grade_curse] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.special_grade_curse.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_flyheads_infestation] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.flyheads_infestation.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_grasshopper_curse] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.grasshopper_curse.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_grade2_curse] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.grade2_curse.show_mission"}]}
+tellraw @s[tag=!curse,tag=cursed_box_mission] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.cursed_box_sorcerer.show_mission"}]}
+tellraw @s[tag=!curse,tag=capture_point] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.capture_point_sorcerer.show_mission"}]}
+tellraw @s[tag=!curse,tag=mission_exterminate_negative_field_v1] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.negative_field_v1_sorcerer.show_mission"}]}
+tellraw @s[tag=!curse,tag=mission_exterminate_negative_field_v2] {"rawtext":[{"translate":"text.random_mission.sorcerer"},{"translate":"text.negative_field_v2_sorcerer.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5sorcerers_lowgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.5sorcerers_lowgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_10sorcerers_lowgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.10sorcerers_lowgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_30sorcerers_lowgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.30sorcerers_lowgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5sorcerers_medgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.5sorcerers_medgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_10sorcerers_medgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.10sorcerers_medgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_30sorcerers_medgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.30sorcerers_medgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_1sorcerer_highgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.1sorcerer_highgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_3sorcerers_highgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.3sorcerers_highgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5sorcerers_highgrade] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.5sorcerers_highgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_special_grade_sorcerer] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.special_grade_sorcerer.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5villagers] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.5villagers.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_10villagers] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.10villagers.show_mission"}]}
+tellraw @s[tag=curse,tag=cursed_box_mission] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.cursed_box_curse.show_mission"}]}
+tellraw @s[tag=curse,tag=high_sorcerer_quest] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.high_sorcerer_quest.show_mission"}]}
+tellraw @s[tag=curse,tag=mission_negative_field_v1] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.negative_field_v1_curse.show_mission"}]}
+tellraw @s[tag=curse,tag=mission_negative_field_v2] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.negative_field_v2_curse.show_mission"}]}
+tellraw @s[tag=curse,tag=capture_point] {"rawtext":[{"translate":"text.random_mission.curse"},{"translate":"text.capture_point_curse.show_mission"}]}
+@@missions/reset_mission_cooldown
+tellraw @s[scores={activemission=1..}] {"rawtext":[{"translate":"text.reset_mission_cooldown"}]}
+scoreboard players set @s missionsCD 0
+@@missions/rewards/10_lowcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.10curses_lowgrade.mission_completed"}]}
+scoreboard players add @s expadd 40
+tag @s remove killquest_10curses_lowgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/10_lowsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.10sorcerers_lowgrade.mission_completed"}]}
+scoreboard players add @s expadd 40
+tag @s remove killquest_10sorcerers_lowgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/10_medcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.10curses_medgrade.mission_completed"}]}
+scoreboard players add @s expadd 140
+tag @s remove killquest_10curses_medgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/10_medsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.10sorcerers_medgrade.mission_completed"}]}
+scoreboard players add @s expadd 140
+tag @s remove killquest_10sorcerers_medgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/10villagers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.10villagers.mission_completed"}]}
+scoreboard players add @s expadd 150
+tag @s remove killquest_10villagers
+scoreboard players set @s mission_credit 0
+@@missions/rewards/1_highcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.1curses_highgrade.mission_completed"}]}
+scoreboard players add @s expadd 575
+tag @s remove killquest_1curse_highgrade
+particle ds:mission_complete ~~1~
+scoreboard players set @s mission_credit 0
+@@missions/rewards/1_highsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.1sorcerer_highgrade.mission_completed"}]}
+scoreboard players add @s expadd 500
+tag @s remove killquest_1sorcerer_highgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/30_lowcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.30curses_lowgrade.mission_completed"}]}
+scoreboard players add @s expadd 100
+tag @s remove killquest_30curses_lowgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/30_lowsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.30sorcerers_lowgrade.mission_completed"}]}
+scoreboard players add @s expadd 100
+tag @s remove killquest_30sorcerers_lowgrade
+particle ds:mission_complete ~~1~
+scoreboard players set @s mission_credit 0
+@@missions/rewards/30_medcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.30curses_medgrade.mission_completed"}]}
+scoreboard players add @s expadd 600
+tag @s remove killquest_30curses_medgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/30_medsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.30sorcerers_medgrade.mission_completed"}]}
+scoreboard players add @s expadd 600
+tag @s remove killquest_30sorcerers_medgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/3_highcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.3curses_highgrade.mission_completed"}]}
+scoreboard players add @s expadd 1750
+tag @s remove killquest_3curses_highgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/3_highsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.3sorcerers_highgrade.mission_completed"}]}
+scoreboard players add @s expadd 1500
+tag @s remove killquest_3sorcerers_highgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/5_highcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 5 0.8
+tellraw @s {"rawtext":[{"translate":"text.text.5curses_highgrade.mission_completed"}]}
+scoreboard players add @s expadd 2750
+tag @s remove killquest_5curse_highgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/5_highsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 5 0.8
+tellraw @s {"rawtext":[{"translate":"text.5sorcerers_highgrade.mission_completed"}]}
+scoreboard players add @s expadd 2500
+tag @s remove killquest_5sorcerer_highgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/5_lowcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.5curses_lowgrade.mission_completed"}]}
+scoreboard players add @s expadd 20
+tag @s remove killquest_5curses_lowgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/5_lowsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.5sorcerers_lowgrade.mission_completed"}]}
+scoreboard players add @s expadd 20
+tag @s remove killquest_5sorcerers_lowgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/5_medcurses
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.5curses_medgrade.mission_completed"}]}
+scoreboard players add @s expadd 60
+tag @s remove killquest_5curses_medgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/5_medsorcerers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.5sorcerers_medgrade.mission_completed"}]}
+scoreboard players add @s expadd 60
+tag @s remove killquest_5sorcerers_medgrade
+scoreboard players set @s mission_credit 0
+@@missions/rewards/5villagers
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+particle ds:mission_complete ~~1~
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.5villagers.mission_completed"}]}
+scoreboard players add @s expadd 50
+tag @s remove killquest_5villagers
+scoreboard players set @s mission_credit 0
+@@missions/rewards/capture_point
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.capture_point.mission_completed"}]}
+scoreboard players add @s expadd 200
+scoreboard players operation @s expadd *= @s grade
+tag @s remove capture_point
+kill @e[name=waypoint,tag=capture_point,c=1]
+tickingarea remove capture_point
+execute as @e[type=ds:capture_point,r=50] at @s run playsound block.end_portal.spawn @a[r=100] ~~~ 99999 1.25 99999
+execute as @e[type=ds:capture_point,r=50] at @s run playsound random.levelup @a[r=100] ~~~ 9999 0.25 9999
+execute as @e[type=ds:capture_point,r=50] at @s run particle ds:capture_point_win ~~0.15~
+execute as @e[type=ds:capture_point,r=50] at @s run particle ds:capture_point_win2 ~~0.15~
+execute as @e[type=ds:capture_point,r=50] at @s run particle ds:capture_point_win3 ~~0.15~
+event entity @e[type=ds:capture_point,r=50] ds:disappear
+scoreboard players set @s mission_credit 0
+@@missions/rewards/cursed_box_mission
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.cursed_box_sorcerer1.mission_completed"}]}
+scoreboard players add @s expadd 300
+tag @s remove cursed_box_mission
+scoreboard players set @s mission_credit 0
+@@missions/rewards/cursed_box_mission2
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.cursed_box_sorcerer2.mission_completed"}]}
+scoreboard players add @s expadd 500
+tag @s remove cursed_box_mission
+scoreboard players set @s mission_credit 0
+@@missions/rewards/cursed_box_mission_curses1
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.cursed_box_curse1.mission_completed"}]}
+scoreboard players add @s expadd 500
+tag @s remove cursed_box_mission
+scoreboard players set @s mission_credit 0
+@@missions/rewards/cursed_box_mission_curses2
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.cursed_box_curse2.mission_completed"}]}
+scoreboard players add @s expadd 700
+tag @s remove cursed_box_mission
+scoreboard players set @s mission_credit 0
+@@missions/rewards/flyheads_infestation
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.flyheads_infestation.mission_completed"}]}
+scoreboard players add @s expadd 200
+tag @s remove killquest_flyheads_infestation
+kill @e[name=waypoint,tag=flyheads_quest,c=1]
+tickingarea remove flyheads_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/grade2_curse
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.grade2_curse.mission_completed"}]}
+scoreboard players add @s expadd 400
+tag @s remove killquest_grade2_curse
+kill @e[name=waypoint,tag=grade2_curse_quest,c=1]
+tickingarea remove grade2_curse_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/grade2_curse_extra
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.grade2_curse_extra.mission_completed"}]}
+scoreboard players add @s expadd 750
+tag @s remove killquest_grade2_curse
+kill @e[name=waypoint,tag=grade2_curse_quest,c=1]
+tickingarea remove grade2_curse_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/grasshopper_curse
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.grasshopper_curse.mission_completed"}]}
+scoreboard players add @s expadd 450
+tag @s remove killquest_grasshopper_curse
+kill @e[name=waypoint,tag=grade2_curse_quest,c=1]
+tickingarea remove grade2_curse_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/high_sorcerer_quest1
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.high_sorcerer_quest1.mission_completed"}]}
+scoreboard players add @s expadd 300
+tag @s remove high_sorcerer_quest
+kill @e[name=waypoint,tag=high_sorcerer_curse_quest,c=1]
+tickingarea remove high_sorcerer_curse_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/high_sorcerer_quest2
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.high_sorcerer_quest2.mission_completed"}]}
+scoreboard players add @s expadd 450
+tag @s remove high_sorcerer_quest
+kill @e[name=waypoint,tag=high_sorcerer_curse_quest,c=1]
+tickingarea remove high_sorcerer_curse_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/high_sorcerer_quest3
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.high_sorcerer_quest3.mission_completed"}]}
+scoreboard players add @s expadd 750
+tag @s remove high_sorcerer_quest
+kill @e[name=waypoint,tag=high_sorcerer_curse_quest,c=1]
+tickingarea remove high_sorcerer_curse_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/high_sorcerer_quest4
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.high_sorcerer_quest4.mission_completed"}]}
+scoreboard players add @s expadd 1000
+tag @s remove high_sorcerer_quest
+kill @e[name=waypoint,tag=high_sorcerer_curse_quest,c=1]
+tickingarea remove high_sorcerer_curse_quest
+scoreboard players set @s mission_credit 0
+@@missions/rewards/kusakabequest
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s kusakabequest 0
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+tag @s add simpledomainquest2completed
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.simple_domain2.mission_completed"}]}
+scoreboard players add @s expadd 50
+tag @s remove simpledomainquest2
+particle ds:mission_complete ~~1~
+scoreboard players set @s mission_credit 0
+@@missions/rewards/negative_field_v1
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.negative_field_v1_curse.mission_completed"}]}
+scoreboard players add @s expadd 750
+tag @s remove mission_negative_field_v1
+scoreboard players set @s mission_credit 0
+@@missions/rewards/negative_field_v2
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.negative_field_v2_curse.mission_completed"}]}
+scoreboard players add @s expadd 1250
+tag @s remove mission_negative_field_v2
+scoreboard players set @s mission_credit 0
+@@missions/rewards/special_grade_curse
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.special_grade_curse.mission_completed"}]}
+scoreboard players add @s expadd 1500
+tag @s remove killquest_special_grade_curse
+scoreboard players set @s mission_credit 0
+@@missions/show_mission
+tellraw @s[tag=!curse,tag=killquest_5curses_lowgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.5curses_lowgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_10curses_lowgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.10curses_lowgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_30curses_lowgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.30curses_lowgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_5curses_medgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.5curses_medgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_10curses_medgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.10curses_medgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_30curses_medgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.30curses_medgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_1curse_highgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.1curses_highgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_3curses_highgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.3curses_highgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_5curses_highgrade] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.5curses_highgrade.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_special_grade_curse] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.special_grade_curse.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_flyheads_infestation] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.flyheads_infestation.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_grasshopper_curse] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.grasshopper_curse.show_mission"}]}
+tellraw @s[tag=!curse,tag=killquest_grade2_curse] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.grade2_curse.show_mission"}]}
+tellraw @s[tag=!curse,tag=cursed_box_mission] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.cursed_box_sorcerer.show_mission"}]}
+tellraw @s[tag=!curse,tag=capture_point] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.capture_point_sorcerer.show_mission"}]}
+tellraw @s[tag=!curse,tag=mission_exterminate_negative_field_v1] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.negative_field_v1_sorcerer.show_mission"}]}
+tellraw @s[tag=!curse,tag=mission_exterminate_negative_field_v2] {"rawtext":[{"translate":"text.show_mission.sorcerer"},{"translate":"text.negative_field_v2_sorcerer.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5sorcerers_lowgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.5sorcerers_lowgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_10sorcerers_lowgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.10sorcerers_lowgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_30sorcerers_lowgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.30sorcerers_lowgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5sorcerers_medgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.5sorcerers_medgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_10sorcerers_medgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.10sorcerers_medgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_30sorcerers_medgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.30sorcerers_medgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_1sorcerer_highgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.1sorcerer_highgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_3sorcerers_highgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.3sorcerers_highgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5sorcerers_highgrade] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.5sorcerers_highgrade.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_special_grade_curse] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.special_grade_sorcerer.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_5villagers] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.5villagers.show_mission"}]}
+tellraw @s[tag=curse,tag=killquest_10villagers] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.10villagers.show_mission"}]}
+tellraw @s[tag=curse,tag=cursed_box_mission] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.cursed_box_curse.show_mission"}]}
+tellraw @s[tag=curse,tag=high_sorcerer_quest] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.high_sorcerer_quest.show_mission"}]}
+tellraw @s[tag=curse,tag=mission_negative_field_v1] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.negative_field_v1_curse.show_mission"}]}
+tellraw @s[tag=curse,tag=mission_negative_field_v2] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.negative_field_v2_curse.show_mission"}]}
+tellraw @s[tag=curse,tag=capture_point] {"rawtext":[{"translate":"text.show_mission.curse"},{"translate":"text.capture_point_curse.show_mission"}]}
+tellraw @s[scores={activemission=1..,mission_credit=1..}] {"rawtext":[{"translate":"text.show_mission_progress"},{"score":{"name":"@s","objective":"mission_credit"}}]}
+@@missions/vessel_mission/arrived_cutscene
+execute unless entity @s[scores={Deleter=0..}] at @s run scoreboard players set @s Deleter 1021
+execute as @s[scores={Deleter=20..1021}] at @s run scoreboard players set @e[r=60,scores={Evade=1..}] Evade 0
+execute as @s[scores={Deleter=20..1021}] at @s run scoreboard players set @e[r=60,scores={Stun=0..21}] Stun 30
+execute as @s[scores={Deleter=20..1021}] at @s run scoreboard players set @e[r=60,scores={cutscene=0..6}] cutscene 20
+execute as @s[scores={Deleter=20..1021}] at @s run scoreboard players set @e[r=60,scores={Move=0..6}] Move 20
+execute as @s[scores={Deleter=20..1021}] at @s run scoreboard players set @e[r=60,scores={Camera=0..6}] Camera 20
+execute as @s[scores={Deleter=20..1021}] at @s run scoreboard players set @e[r=60,scores={infinity=4..}] infinity 3
+execute as @s[scores={Deleter=20..1021}] at @s run effect @e[type=!player,r=60] slowness 1 15 true
+kill @e[family=purecurse,type=!ds:flyhead,type=!ds:flyhead2,type=!ds:flyhead3,type=!ds:flyhead4,r=60]
+execute as @s[scores={Deleter=1..1007}] at @s run kill @e[family=purecurse,family=villain,type=!ds:toji_boss,r=60]
+kill @e[family=q_clan,r=60]
+scoreboard players set mobevent Mode 5
+execute as @s[scores={Deleter=1002..1021}] at @s run camera @a[r=50] fade time 0 0.25 0.15 color 0 0 0
+playanimation @s[scores={Deleter=801..1021}] animation.riko_amanai.resting
+playanimation @s[scores={Deleter=1..800}] animation.riko_amanai.cowering
+execute as @s[scores={Deleter=1..}] at @s run tp @s 5027 63 2053 facing 5033 63 2031
+execute as @s[scores={Deleter=1002..1007}] at @s positioned 5033 63 2047 run tp @p[tag=special_mission_vessel,c=1] ~~~ facing ~~~-10
+execute as @s[scores={Deleter=1000..1021}] at @s positioned 5033 63 2047 run playanimation @p[tag=special_mission_vessel,c=1] animation.riko_amanai.stage3_cutscene
+execute as @s run tp @s ~~~~ 0
+execute as @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={Deleter=1005..1021}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run scriptevent ds:knockback 2
+execute as @s[scores={Deleter=970..1021}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene1"}]}
+execute as @s[scores={Deleter=990..1021}] at @s run camera @a[r=50] set minecraft:free pos 5023 75 2059 facing @p[tag=special_mission_vessel,c=1]
+execute as @s[scores={Deleter=970..990}] at @s run camera @a[r=50] set minecraft:free ease 0.15 in_sine pos 5023 75 2059 facing @p[tag=special_mission_vessel,c=1]
+execute as @s[scores={Deleter=900..969}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene2"}]}
+execute as @s[scores={Deleter=840..889}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene3"}]}
+execute as @s[scores={Deleter=800..839}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene4"}]}
+execute as @s[scores={Deleter=760..799}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene5"}]}
+execute as @s[scores={Deleter=720..759}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene6"}]}
+execute as @s[scores={Deleter=675..699}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene7"}]}
+execute as @s[scores={Deleter=660..674}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene8"}]}
+execute as @s[scores={Deleter=620..640}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene9"}]}
+execute as @s[scores={Deleter=580..619}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene10"}]}
+execute as @s[scores={Deleter=520..579}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene11"}]}
+execute as @s[scores={Deleter=470..519}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene12"}]}
+execute as @s[scores={Deleter=470..519}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos ^-1^1^1 facing ~~1.4~
+execute as @s[scores={Deleter=420..469}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene13"}]}
+execute as @s[scores={Deleter=420..469}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos ^-3^4^12 facing @e[type=ds:toji_cutscene,c=1]
+execute as @s[scores={Deleter=390..419}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene14"}]}
+execute as @s[scores={Deleter=400..419}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos ^-1^1^1 facing ~~1.4~
+execute as @s[scores={Deleter=340..389}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene15"}]}
+execute as @s[scores={Deleter=340..399}] at @s positioned 5033 63 2047 run execute as @e[type=ds:toji_cutscene] at @s run camera @a[r=50] set minecraft:free pos ^1^1^1 facing ~~1.4~
+execute as @s[scores={Deleter=290..339}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene16"}]}
+execute as @s[scores={Deleter=200..289}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.arrived_cutscene17"}]}
+execute as @s[scores={Deleter=288..289}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos ^^1^4 facing ~~1.4~
+execute as @s[scores={Deleter=287..288}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free ease 2.5 in_out_circ pos ^^1.25^2.5 facing ~~1.4~
+execute as @s[scores={Deleter=270}] at @s  run camera @a[r=100] fade time 2.4 1.5 1 color 0 0 0
+execute as @s[scores={Deleter=220}] at @s  run execute as @a[r=100] at @s run playsound music.toji @s ~~~ 0.6 1
+execute as @s[scores={Deleter=210..220}] at @s positioned 5034 68 2014 unless entity @e[type=ds:toji_boss,r=10] run execute as @e[type=ds:toji_cutscene,c=1] at @s run summon ds:toji_boss ~~~ facing @p
+execute as @s[scores={Deleter=210..220}] at @s positioned 5034 68 2014 as @e[type=ds:toji_cutscene,c=1] at @s run effect @e[type=ds:toji_boss,r=0.15,c=1] instant_health 1 0 true
+execute as @s[scores={Deleter=210..220}] at @s positioned 5034 68 2014 at @e[type=ds:toji_cutscene,c=1] run damage @e[type=ds:toji_boss,r=0.15,c=1] 0 self_destruct entity @s
+execute as @s[scores={Deleter=210..220}] at @s positioned 5034 68 2014 as @e[type=ds:toji_cutscene,c=1] at @s run effect @e[type=ds:toji_boss,r=0.15,c=1] instant_health 0 1 true
+execute as @s[scores={Deleter=210..220}] at @s  run event entity @e[type=ds:toji_cutscene,c=1] ds:disappear
+execute as @s[scores={Deleter=206}] at @s run titleraw @a[r=70] title {"rawtext":[{"translate":"text.arrived_cutscene18"}]}
+execute as @s[scores={Deleter=210..220}] at @s  run playanimation @e[r=100] animation.cancel
+execute as @s[scores={Deleter=200..205}] at @s  run scoreboard players set @s Deleter 99999999
+effect @s[scores={Deleter=2000..}] invisibility 1 1 true
+execute as @s[scores={Deleter=969}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos 5024 ~0.25 2045 facing ~~1.3~
+execute as @s[scores={Deleter=940..968}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free ease 0.15 in_sine pos 5024 ~0.25 2045 facing ~~1.3~
+execute as @s[scores={Deleter=940..1021}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run scriptevent ds:knockback 0.1
+execute as @s[scores={Deleter=935..940}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos ^0.5^1.25^2 facing ~~1.4~
+execute as @s[scores={Deleter=799..800}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos ^0.5^1.6^0.85 facing ~~1.4~
+execute as @s[scores={Deleter=639..640}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free pos ^-1^1.4^-2 facing ^^1^7
+execute as @s[scores={Deleter=600..601}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camera @a[r=50] set minecraft:free ease 5 in_sine pos ^-1^3^7 facing @e[type=ds:toji_cutscene,c=1]
+execute as @s[scores={Deleter=800..810}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run tp @s ~~~~ 0
+execute as @s[scores={Deleter=800..803}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s unless entity @e[type=ds:toji_cutscene,r=50] run summon ds:toji_cutscene ^-0.15^^-0.8  facing ~~~
+execute as @s[scores={Deleter=800..803}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run playanimation @e[type=ds:toji_cutscene,c=1] animation.riko_amanai.toji_cutscene
+execute as @s[scores={Deleter=670..810}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run tp @e[type=ds:toji_cutscene,c=1] ^-0.15^^-0.8
+execute as @s[scores={Deleter=798..799}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run particle ds:blood_splat ~~~
+execute as @s[scores={Deleter=798..799}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run particle ds:blood ~~1~
+execute as @s[scores={Deleter=798..799}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run particle ds:blood_3 ~~1~
+execute as @s[scores={Deleter=798..799}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run playsound mob.sword @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={Deleter=798..799}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run playsound mob.slice4 @a[r=100] ~~~ 99999 1.15 99999
+execute as @s[scores={Deleter=798..799}] at @s positioned 5033 63 2047 run execute as @p[tag=special_mission_vessel,c=1] at @s run camerashake add @a[r=50] 2 0.15
+execute as @s[scores={Deleter=667..670}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run particle ds:flashstep1 ^^^-1
+execute as @s[scores={Deleter=667..670}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run particle ds:rubble3 ^^^-1
+execute as @s[scores={Deleter=667..670}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run particle ds:ground_slam1 ^^^-1
+execute as @s[scores={Deleter=667..670}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run particle ds:ground_slam2 ^^^-1
+execute as @s[scores={Deleter=667..670}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run playsound mob.blaze.shoot @a[r=100] ~~~ 9999 2 9999
+execute as @s[scores={Deleter=667..670}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run playsound mob.enderdragon.flap @a[r=100] ~~~ 9999 2 9999
+execute as @s[scores={Deleter=667}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run playsound random.explode @a[r=100] ~~~ 9999 1.25 9999
+execute as @s[scores={Deleter=665}] at @s run execute as @e[type=ds:toji_cutscene,c=1] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 9999 0.5 9999
+execute as @s[scores={Deleter=639..663}] at @s positioned 5034 68 2014 run tp @e[type=ds:toji_cutscene,c=1] ~~~ facing ~~~10
+execute as @s[scores={Deleter=639..663}] at @s positioned 5034 68 2014 run event entity @e[type=ds:toji_cutscene,c=1] inventory_curse_on
+@@missions/vessel_mission/arrived_destination
+event entity @e[type=ds:riko_amanai] ds:disappear
+summon ds:riko_amanai_awake 5027 63 2053 facing 5033 63 2031 none "RikoArrived"
+@@missions/vessel_mission/awake_cutscene
+execute unless entity @s[scores={Deleter=0..}] at @s run scoreboard players set @s Deleter 621
+execute as @s[scores={Deleter=20..621}] at @s run scoreboard players set @e[r=60,scores={infinity=4..}] infinity 3
+execute as @s[scores={Deleter=20..621}] at @s run scoreboard players set @e[r=60,scores={Evade=1..}] Evade 0
+execute as @s[scores={Deleter=20..621}] at @s run scoreboard players set @e[r=60,scores={Stun=0..21}] Stun 30
+execute as @s[scores={Deleter=20..621}] at @s run scoreboard players set @e[r=60,scores={cutscene=0..6}] cutscene 20
+execute as @s[scores={Deleter=20..621}] at @s run scoreboard players set @e[r=60,scores={Move=0..6}] Move 20
+execute as @s[scores={Deleter=20..621}] at @s run scoreboard players set @e[r=60,scores={Camera=0..6}] Camera 20
+execute as @s[scores={Deleter=20..621}] at @s run effect @e[type=!player,r=60] slowness 1 15 true
+playanimation @s[scores={Deleter=600..}] animation.riko_amanai.get_up
+execute as @s[scores={Deleter=600..}] at @s run playanimation @p[tag=special_mission_vessel,c=1] animation.riko_amanai.stage2_cutscene
+execute as @s[scores={Deleter=602..}] at @s run camera @a[r=50] fade time 0 0.25 0.15 color 0 0 0
+execute as @s run tp @s ~~~~ 0
+execute as @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={Deleter=600..601}] at @s run playsound mob.enderdragon.flap @a[r=100] ~~1~ 99999 2 99999
+execute as @s[scores={Deleter=570..590}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene1"}]}
+execute as @s[scores={Deleter=520..559}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene2"}]}
+execute as @s[scores={Deleter=506..519}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene3"}]}
+execute as @s[scores={Deleter=505}] at @s run playsound mob.clap @a[r=100] ~~1~ 99999 1 99999
+execute as @s[scores={Deleter=505}] at @s run playsound mob.punch1 @a[r=100] ~~1~ 99999 0.25 99999
+execute as @s[scores={Deleter=480}] at @s run playsound mob.blood1 @a[r=100] ~~1~ 99999 1.5 99999
+execute as @s[scores={Deleter=505}] at @s run camerashake add @a[r=100] 2 0.15
+execute as @s[scores={Deleter=505}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run particle ds:large_impact1 ^0.3^^0.3
+execute as @s[scores={Deleter=470..505}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene4"}]}
+execute as @s[scores={Deleter=500..469}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene5"}]}
+execute as @s[scores={Deleter=390..439}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene6"}]}
+execute as @s[scores={Deleter=360..389}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene7"}]}
+execute as @s[scores={Deleter=320..359}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene8"}]}
+execute as @s[scores={Deleter=260..319}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene9"}]}
+execute as @s[scores={Deleter=211..260}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene10"}]}
+execute as @s[scores={Deleter=171..220}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene11"}]}
+execute as @s[scores={Deleter=121..170}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene12"}]}
+execute as @s[scores={Deleter=81..120}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene13"}]}
+execute as @s[scores={Deleter=30..80}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.awake_cutscene14"}]}
+execute as @s[scores={Deleter=610..}] at @s run execute as @p[tag=special_mission_vessel] at @s run scriptevent ds:knockback 1
+execute as @s[scores={Deleter=600..609}] at @s run execute as @p[tag=special_mission_vessel] at @s run tp @s ~~~~ 0
+execute as @s[scores={Deleter=1..}] at @s run execute as @p[tag=special_mission_vessel] at @s run tp @e[type=ds:riko_amanai_awake,c=1,name=RikoAmanai,scores={Deleter=1..}] ^^^0.5 facing @s
+execute as @s[scores={Deleter=600..}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^^0.2^0.15 facing ^0.5^-0.25^0.6
+execute as @s[scores={Deleter=595..598}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 2 in_sine pos ^^0.2^0.15 facing ^0.75^-0.1^0.6
+execute as @s[scores={Deleter=570}] at @s run camera @a[r=50] fade time 0.3 0.25 0.3 color 0 0 0
+execute as @s[scores={Deleter=559..560}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^-1^1^0.45 facing ^-0.85^-0.3^0.5
+execute as @s[scores={Deleter=559..560}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 2.5 in_sine pos ^-1^1^0.45 facing ^0.5^-0.3^0.5
+execute as @s[scores={Deleter=500}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^^^1 facing ^^^
+execute as @s[scores={Deleter=490}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 1.5 in_out_circ pos ^1^-0.75^5 facing ^-1^1^
+execute as @s[scores={Deleter=450}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^^-0.25^0.8 facing ^0.5^-0.25^5
+execute as @s[scores={Deleter=508..450}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 3 in_sine pos ^^-0.25^0.5 facing ^0.5^-0.25^5
+execute as @s[scores={Deleter=380}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^0.6^-0.25^1.5 facing ^^^
+execute as @s[scores={Deleter=380}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 3 in_sine pos ^0.8^-0.25^1.75 facing ^^^
+execute as @s[scores={Deleter=258..259}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^-1^-0.25^1 facing ^0.75^-0.25^5
+execute as @s[scores={Deleter=257..258}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 2.4 in_sine pos ^-1^-0.25^1.25 facing ^0.75^-0.25^5
+execute as @s[scores={Deleter=169..170}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^0.6^-0.25^1.5 facing ^^^
+execute as @s[scores={Deleter=168..169}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 3 in_sine pos ^0.8^-0.25^1.75 facing ^^^
+execute as @s[scores={Deleter=79}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free pos ^-1^-0.25^1 facing ^0.75^-0.25^5
+execute as @s[scores={Deleter=77..78}] at @s run execute as @p[c=1,tag=special_mission_vessel] at @s anchored eyes run camera @a[r=50] set minecraft:free ease 2.4 in_sine pos ^-1^-0.25^1.25 facing ^0.75^-0.25^5
+execute as @s[scores={Deleter=45}] at @s run camera @a[r=50] fade time 1.5 1 1 color 0 0 0
+execute as @s[scores={Deleter=5}] at @s run tellraw @a[r=50] {"rawtext":[{"translate":"text.awake_cutscene15"}]}
+execute as @s[scores={Deleter=1..5}] at @s  run function structure_vessel_dropoff
+execute as @s[scores={Deleter=1..5}] at @s unless entity @e[type=ds:riko_amanai,r=100] run summon ds:riko_amanai "Riko Amanai"
+execute as @s[scores={Deleter=1..4}] at @s run  event entity @s ds:disappear
+@@missions/vessel_mission/building_explode
+execute if entity @p[tag=special_mission_vessel,r=80] run summon ds:energy_explosion
+execute if entity @p[tag=special_mission_vessel,r=80] run function 4x4sphere
+execute if entity @p[tag=special_mission_vessel,r=80] run particle ds:slam_dust1
+execute if entity @p[tag=special_mission_vessel,r=80] run particle ds:slam_dust2
+execute if entity @p[tag=special_mission_vessel,r=80] run particle ds:ground_impact2
+execute if entity @p[tag=special_mission_vessel,r=80] run particle ds:large_slam1
+execute if entity @p[tag=special_mission_vessel,r=80] run particle ds:large_slam2
+execute if entity @p[tag=special_mission_vessel,r=80] run particle ds:large_slam3
+execute if entity @p[tag=special_mission_vessel,r=80] run particle ds:large_shockwave
+execute if entity @p[tag=special_mission_vessel,r=80] run camerashake add @a[r=200] 3 0.3
+execute if entity @p[tag=special_mission_vessel,r=80] run playsound mob.shock1 @a[r=300] ~~~ 99999 0.75 99999
+execute if entity @p[tag=special_mission_vessel,r=80] run playsound mob.random.explode @a[r=300] ~~~ 99999 0.75 99999
+execute if entity @p[tag=special_mission_vessel,r=80] run playsound mob.burst @a[r=300] ~~~ 99999 1.33 99999
+execute if entity @p[tag=special_mission_vessel,r=80] run summon ds:riko_amanai_noai ~~~-2 facing ~~~1 none "SaveMe"
+execute if entity @p[tag=special_mission_vessel,r=80] run setblock ~~~ air
+execute if entity @p[tag=special_mission_vessel,r=80] run tickingarea remove hotel
+@@missions/vessel_mission/catch_riko
+scoreboard players set @a[r=100] Evade 0
+camera @a[tag=special_mission_vessel,r=100] fade time 0 1 1 color 0 0 0
+event entity @e[type=ds:riko_amanai_noai] ds:disappear
+execute as @p[r=5,tag=special_mission_vessel,c=1] at @s run summon ds:riko_amanai_noai "Stage1"
+spreadplayers ~ ~ 0 1 @p[r=5,tag=special_mission_vessel,c=1]
+@@missions/vessel_mission/complete
+scoreboard players set @s callingrandom 0
+scoreboard players set @s activemission 0
+scoreboard players set @s missionCD 200
+scoreboard players set @s calling 0
+tag @s remove calling
+scoreboard players set @s random_mission 0
+kill @e[family=purecurse,r=100]
+stopsound @a music.toji
+playsound random.levelup @a ~~~ 1 0.8
+tellraw @s {"rawtext":[{"translate":"text.special_mission_vessel.mission_completed1"}]}
+tellraw @s {"rawtext":[{"translate":"text.special_mission_vessel.mission_completed2"}]}
+scoreboard players add @s expadd 5000
+scoreboard players set @s[scores={grade=4}] grade 5
+function level_up
+give @s ds:crate_v5 10
+tag @s remove special_mission_vessel
+kill @e[name=waypoint,tag=special_mission_vessel,c=1]
+tickingarea remove special_mission_vessel
+playsound block.end_portal.spawn @a[r=100] ~~~ 99999 1.25 99999
+playsound random.levelup @a[r=100] ~~~ 9999 0.25 9999
+particle ds:special_mission_vessel_win ~~1~
+particle ds:special_mission_vessel_win2 ~~1~
+particle ds:special_mission_vessel_win3 ~~1~
+event entity @e[type=ds:riko_amanai,r=50] ds:disappear
+event entity @e[type=ds:riko_amanai_awake,r=50] ds:disappear
+scoreboard players set @s mission_credit 0
+@@missions/vessel_mission/mission_failed
+playsound mob.glock @a[tag=special_mission_vessel]
+stopsound @a music.toji
+tellraw @a[tag=special_mission_vessel] {"rawtext":[{"translate":"text.mission_failed1.vessel"}]}
+tellraw @a[tag=special_mission_vessel] {"rawtext":[{"translate":"text.exp_deducted"}]}
+scoreboard players operation @a[tag=special_mission_vessel] EXP /= two endurance
+tag @a remove special_mission_vessel
+kill @e[type=ds:toji_boss]
+event entity @e[type=ds:riko_amanai] ds:disappear
+event entity @e[type=ds:riko_amanai_awake] ds:disappear
+@@missions/vessel_mission/mob_spawn
+scoreboard players random @s chance 1 100
+execute as @s[scores={chance=1..50}] at @s run summon ds:q_sorcerer ~~25~
+execute as @s[scores={chance=51..70}] at @s run summon ds:q_sorcerer_grade3 ~~25~
+execute as @s[scores={chance=71..}] at @s unless entity @e[type=ds:bag_head,r=50] run summon ds:bag_head ~~25~
+execute as @s[scores={chance=1..}] at @s positioned ~~25~ run damage @e[family=q_clan,r=5,c=1] 1 entity_attack entity @p[tag=special_mission_vessel]
+execute as @s[scores={chance=1..}] at @s positioned ~~25~ run spreadplayers ~ ~ 20 30 @e[family=q_clan,r=5]
+scoreboard players set @s Mode 0
+scoreboard players set @s chance 0
+@@missions/vessel_mission/riko_amanai
+scoreboard players set @s[scores={Energy=0}] strength 10
+scoreboard players set @s[scores={Energy=0}] Energy 1000
+execute as @s[scores={Stun=0..20,Hit=1..,cutscene=0}] at @s run function _hitdodge
+execute as @p[tag=special_mission_vessel,scores={atk=1..2}] at @s positioned ^^^3 run scoreboard players set @e[type=ds:riko_amanai,r=2.9] Frames 6
+execute if entity  @p[tag=special_mission_vessel,r=5] run effect @e[family=purecurse,r=10] slowness 1 3 true
+execute if entity  @p[tag=special_mission_vessel,r=5] run effect @e[family=q_clan,r=10] slowness 1 3 true
+execute if entity  @p[tag=special_mission_vessel,r=5] run execute as @e[family=q_clan,r=5] at @s run scriptevent ds:knockback -1
+execute if entity  @p[tag=special_mission_vessel,r=5] run execute as @e[family=purecurse,r=5] at @s run scriptevent ds:knockback -1
+execute if entity @e[family=gojo,r=10,tag=special_mission_vessel] run scoreboard players set @s[tag=!Frames] Frames 10
+execute unless entity @e[family=gojo,r=20,tag=special_mission_vessel] run tp @e[family=gojo,tag=special_mission_vessel,c=1,r=100] ^^^1 facing @s
+tag @e[family=gojo,r=20,tag=!special_mission_vessel] add special_mission_vessel
+execute if entity @e[family=toji,r=2.5] unless entity @e[tag=special_mission_vessel,r=60] run kill @s
+execute if entity @e[family=q_clan,r=10] at @s run tp @s ~~~
+execute if entity @e[family=q_clan,r=10] at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute if entity @e[family=q_clan,r=10] at @s run effect @s slowness 1 10 true
+execute if entity @e[family=q_clan,r=10] at @s run effect @s resistance 1 1 true
+execute if entity @e[family=q_clan,r=10] at @s run playanimation @s animation.riko_amanai.cowering
+execute if entity @e[family=villain,r=10] at @s run tp @s ~~~
+execute if entity @e[family=villain,r=10] at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute if entity @e[family=villain,r=10] at @s run effect @s slowness 1 10 true
+execute if entity @e[family=villain,r=10] at @s run effect @s resistance 1 1 true
+execute if entity @e[family=villain,r=10] at @s run playanimation @s animation.riko_amanai.cowering
+execute if entity @e[family=purecurse,r=10,family=!pest] at @s run tp @s ~~~
+execute if entity @e[family=purecurse,r=10,family=!pest] at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute if entity @e[family=purecurse,r=10,family=!pest] at @s run effect @s slowness 1 10 true
+execute if entity @e[family=purecurse,r=10,family=!pest] at @s run effect @s resistance 1 1 true
+execute if entity @e[family=purecurse,r=10,family=!pest] at @s run playanimation @s animation.riko_amanai.cowering
+execute positioned 5031 62.5 2059 run particle ds:capture_point1
+execute positioned 5031 62.5 2059 if entity @e[type=ds:riko_amanai,r=16] run function missions/vessel_mission/arrived_destination
+scoreboard players add @s EnergyCap 1
+execute as @s[scores={EnergyCap=50..}] at @s run function missions/vessel_mission/riko_distress
+execute if block ~~1~ water run execute as @p[r=3.5] at @s run tp @e[type=ds:riko_amanai,c=1] ^^1^1 facing @s
+scoreboard players set @s[scores={EnergyCap=50..}] EnergyCap 0
+scoreboard players add @s Mode 1
+execute as @s[scores={Mode=600..}] at @s run function missions/vessel_mission/mob_spawn
+@@missions/vessel_mission/riko_amanai_falling
+execute unless entity @s[scores={Deleter=0..}] at @s run scoreboard players set @s Deleter 301
+playanimation @s[scores={Deleter=292..}] animation.riko_amanai.fall
+playanimation @s[scores={Deleter=1..252}] animation.riko_amanai.fall2
+execute as @s[scores={Deleter=288..}] at @s run tp @s ^^^
+execute as @s[scores={Deleter=1..252}] at @s run tp @s ^^-1^-0.15
+execute as @s[scores={Deleter=278}] at @s run tellraw @a[r=100] {"rawtext":[{"translate":"text.riko_amanai_falling"}]}
+execute as @s[scores={Deleter=300}] at @s run camera @a[r=100] fade time 0 0.25 0.25 color 0 0 0
+execute as @s[scores={Deleter=298..300}] at @s run camera @a[r=100] set minecraft:free ease 1 in_out_circ pos ^-10^-2^-5 facing ~~1~
+execute as @s[scores={Deleter=278}] at @s run camera @a[r=100] set minecraft:free ease 1.5 in_sine pos ^-10^-2^-5 facing ^^2^-3
+execute as @s[scores={Deleter=267..268}] at @s run camera @a[r=100] fade time 0.5 0.5 0.5 color 0 0 0
+execute as @s[scores={Deleter=250..252}] at @s run camera @a[r=100] clear
+execute as @s[scores={Deleter=0..252}] at @s if entity @p[tag=special_mission_vessel,r=4] run playsound random.orb @a[r=20]
+execute as @s[scores={Deleter=0..252}] at @s if entity @p[tag=special_mission_vessel,r=4] run function missions/vessel_mission/catch_riko
+execute as @s at @s unless block ~~-0.5~ air run function missions/vessel_mission/riko_fall_death
+@@missions/vessel_mission/riko_amanai_stage1
+execute unless entity @s[scores={Deleter=0..}] at @s run scoreboard players set @s Deleter 321
+execute as @s[scores={Deleter=20..321}] at @s run scoreboard players set @e[r=60,scores={Evade=1..}] Evade 0
+execute as @s[scores={Deleter=20..321}] at @s run scoreboard players set @e[r=60,scores={infinity=4..}] infinity 3
+execute as @s[scores={Deleter=20..321}] at @s run scoreboard players set @e[r=60,scores={Stun=0..21}] Stun 30
+execute as @s[scores={Deleter=20..321}] at @s run scoreboard players set @e[r=60,scores={cutscene=0..6}] cutscene 20
+execute as @s[scores={Deleter=20..321}] at @s run scoreboard players set @e[r=60,scores={Move=0..6}] Move 20
+execute as @s[scores={Deleter=20..321}] at @s run scoreboard players set @e[r=60,scores={Camera=0..6}] Camera 20
+execute as @s[scores={Deleter=20..321}] at @s run effect @e[type=!player,r=60] slowness 1 15 true
+playanimation @s[scores={Deleter=400..}] animation.riko_amanai.passed_out2
+scoreboard players set @s[scores={Deleter=0..2}] Deleter 9999999
+execute as @s[scores={Deleter=400..}] at @s unless entity @e[type=ds:kokun,r=200] unless entity @e[type=ds:bayer,r=200] run execute as @p[tag=special_mission_vessel,r=200] at @s run summon ds:riko_amanai_awake RikoAmanai
+execute as @s[scores={Deleter=400..}] at @s unless entity @e[type=ds:kokun,r=200] unless entity @e[type=ds:bayer,r=200] run event entity @s ds:disappear
+execute as @s run tp @s ~~~~ 0
+execute as @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={Deleter=320..321}] at @s run playsound mob.enderdragon.flap @a[r=100] ~~1~ 99999 2 99999
+execute as @s[scores={Deleter=296}] at @s run playsound mob.enderdragon.flap @a[r=100] ~~1~ 99999 0.25 99999
+execute as @s[scores={Deleter=176..240}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.riko_amanai_stage1"}]}
+execute as @s[scores={Deleter=141..175}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.riko_amanai_stage2"}]}
+execute as @s[scores={Deleter=81..140}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.riko_amanai_stage3"}]}
+execute as @s[scores={Deleter=41..80}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.riko_amanai_stage4"}]}
+execute as @s[scores={Deleter=7..40}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.riko_amanai_stage5"}]}
+execute as @s[scores={Deleter=1..6}] at @s run titleraw @a[r=50] title {"rawtext":[{"text":"\n\n\n\n\n\n\n\n\n\n\n\n"},{"translate":"text.riko_amanai_stage6"}]}
+execute as @s[scores={Deleter=5}] at @s run tellraw @a[r=50] {"rawtext":[{"translate":"text.riko_amanai_stage7"}]}
+execute as @s[scores={Deleter=4..6}] at @s run execute as @e[type=ds:bayer_npc] at @s unless entity @e[type=ds:bayer,r=5] run summon ds:bayer
+execute as @s[scores={Deleter=4..6}] at @s run execute as @e[type=ds:kokun_npc] at @s unless entity @e[type=ds:kokun,r=5]  run summon ds:kokun
+execute as @s[scores={Deleter=4..5}] at @s run execute as @e[type=ds:bayer_npc] at @s if entity @e[type=ds:bayer,r=5] run event entity @s ds:disappear
+execute as @s[scores={Deleter=4..5}] at @s run execute as @e[type=ds:kokun_npc] at @s if entity @e[type=ds:kokun,r=5] run event entity @s ds:disappear
+execute as @s[scores={Deleter=20}] at @s run camera @a[r=50] fade time 0.5 1 0.5 color 0 0 0
+execute as @s[scores={Deleter=319..321}] at @s run execute as @p[tag=special_mission_vessel,c=1] at @s run tp @s ~~~ facing ~~~-3
+execute as @s[scores={Deleter=318..321}] at @s run execute as @p[tag=special_mission_vessel,c=1] at @s run scriptevent ds:knockback 1
+execute as @s[scores={Deleter=315..318}] at @s run execute as @p[tag=special_mission_vessel,c=1] at @s run tp @s ~~~~ 0
+execute as @s[scores={Deleter=315..317}] at @s run execute as @p[tag=special_mission_vessel,c=1] at @s run tp @e[name=Stage1,c=1] ^^^0.6 facing @s
+execute as @s[scores={Deleter=300..321}] at @s run kill @e[family=purecurse,r=100]
+execute as @s[scores={Deleter=299..314}] at @s run tp @p[tag=special_mission_vessel,c=1] ^^^0.5 facing @s
+execute as @s[scores={Deleter=299..321}] at @s run camera @a[tag=special_mission_vessel,r=50] set minecraft:free pos ^2^1.5^-2.5 facing ^^0.25^0.5
+execute as @s[scores={Deleter=299..321}] at @s run camera @a[tag=special_mission_vessel,r=50] fade time 0 0.25 0.25 color 0 0 0
+execute as @s[scores={Deleter=299..321}] at @s run playanimation @s animation.riko_amanai.lay_down
+execute as @s[scores={Deleter=299..321}] at @s run playanimation @p[tag=special_mission_vessel,c=1] animation.riko_amanai.stage1_cutscene
+execute as @s[scores={Deleter=297..299}] at @s run camera @a[tag=special_mission_vessel,r=50] set minecraft:free ease 2 in_sine pos ^2.5^1.35^-3 facing ^^^0.5
+execute as @s[scores={Deleter=260}] at @s run camera @a[tag=special_mission_vessel,r=50] fade time 0.5 0.25 0.25 color 0 0 0
+execute as @s[scores={Deleter=249..250}] at @s run camera @a[tag=special_mission_vessel,r=50] set minecraft:free pos ^1^1.5^2 facing ^^^0.5
+execute as @s[scores={Deleter=247..250}] at @s run camera @a[tag=special_mission_vessel,r=50] set minecraft:free ease 4.5 in_sine pos ^1.5^1.5^2.5 facing ^^1.35^0.5
+execute as @s[scores={Deleter=161}] at @s run playsound random.explode @a[r=100] ^^^9 9999 1 9999
+execute as @s[scores={Deleter=161}] at @s run playsound mob.wither.shoot @a[r=100] ^^^9 9999 0.5 9999
+execute as @s[scores={Deleter=164}] at @s run playsound mob.burst @a[r=100] ^^^9 9999 2 9999
+execute as @s[scores={Deleter=161}] at @s run camerashake add @a[r=40] 1 0.15
+execute as @s[scores={Deleter=161}] at @s run particle ds:dirt0 ^2^^9
+execute as @s[scores={Deleter=161}] at @s run particle ds:slam_dust1 ^2^^9
+execute as @s[scores={Deleter=161}] at @s run particle ds:slam_dust2 ^2^^9
+execute as @s[scores={Deleter=161}] at @s run particle ds:dirt0 ^-2^^9
+execute as @s[scores={Deleter=161}] at @s run particle ds:slam_dust1 ^-2^^9
+execute as @s[scores={Deleter=161}] at @s run particle ds:slam_dust2 ^-2^^9
+execute as @s[scores={Deleter=161}] at @s run fill ^-4^0.5^2 ^4^5^11 air
+execute as @s[scores={Deleter=140..141}] at @s run camera @a[tag=special_mission_vessel,r=50] set minecraft:free ease 1 in_sine pos ^1.5^1.5^-2.5 facing ^^1.33^10
+execute as @s[scores={Deleter=140}] at @s run summon ds:bayer_npc ^2^^9 facing ~~1~
+execute as @s[scores={Deleter=140}] at @s run summon ds:kokun_npc ^-2^^9 facing ~~1~
+execute as @s[scores={Deleter=136..137}] at @s run playanimation @e[type=ds:kokun_npc,c=1] animation.kokun_intro
+execute as @s[scores={Deleter=133..137}] at @s run replaceitem entity @e[type=ds:kokun_npc,c=1] slot.weapon.mainhand 1 ds:glock
+execute as @s[scores={Deleter=136..137}] at @s run playanimation @e[type=ds:bayer_npc,c=1] animation.bayer_intro
+@@missions/vessel_mission/riko_distress
+execute if block ~~1~ water run tellraw @a[r=50] {"rawtext":[{"translate":"text.riko_distress1"}]}
+execute if block ~~1~ water run damage @s 2 drowning
+effect @s instant_health 1 0 true
+execute unless block ~~~ water run execute as @e[c=1,tag=special_mission_vessel] at @s if block ~~~ water run tellraw @a[r=50] {"rawtext":[{"translate":"text.riko_distress2"}]}
+execute if entity @e[family=q_clan,r=10]  run tellraw @a[r=50] {"rawtext":[{"translate":"text.riko_distress3"}]}
+execute unless entity @e[c=1,tag=special_mission_vessel,r=25] run tellraw @a[r=50] {"rawtext":[{"translate":"text.riko_distress4"}]}
+@@missions/vessel_mission/riko_fall_death
+playsound mob.blood1 @a ~~~ 99999 0.5 99999
+playsound mob.blood @a ~~~ 99999 0.5 99999
+playsound mob.blood3 @a ~~~ 99999 0.5 99999
+particle ds:blood_mist
+particle ds:blood_mist
+particle ds:blood_mist
+particle ds:blood_explode
+particle ds:blood_explode
+particle ds:blood_2 ~~1~
+particle ds:blood_2 ~~1~
+particle ds:bleeding2 ~~1~
+particle ds:bleeding2 ~~1~
+particle ds:bleeding2 ~~1~
+particle ds:ground_slam1
+particle ds:ground_slam2
+particle ds:ground_slam3
+particle ds:dirt0
+particle ds:large_impact1
+camerashake add @a[r=100] 2 0.15
+tellraw @a[tag=special_mission_vessel] {"rawtext":[{"translate":"text.mission_failed2.vessel"}]}
+tellraw @a[tag=special_mission_vessel] {"rawtext":[{"translate":"text.exp_deducted"}]}
+scoreboard players operation @a[tag=special_mission_vessel] EXP /= two endurance
+tag @a remove special_mission_vessel
+event entity @s ds:disappear

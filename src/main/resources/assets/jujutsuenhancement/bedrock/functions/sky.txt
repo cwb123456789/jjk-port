@@ -1,0 +1,1273 @@
+@@sky/aether_trg
+execute unless entity @e[tag=aetherTRG,r=5] run tag @e[tag=!Frames,family=!projectile,family=!damage,type=!item,type=!xp_orb,r=5] add aether_TRG
+tag @e[tag=infinity,tag=aether_TRG] remove aether_TRG
+@@sky/fist_ab1
+playanimation @s[scores={move=15..16}] animation.sky.fist_ab1
+tag @s[scores={move=1..2}] remove wep1
+execute as @s[type=!Player] at @s run tp @s ~~~~ 0
+execute as @s[type=!Player] at @s run execute as @e[tag=skyboundstrike,c=1] at @s run tp @s ~~~~ 0
+tag @s[scores={move=4..},tag=!noStunnedAnim] add noStunnedAnim
+scoreboard players set @s[scores={move=14..,Move=0..5}] Move 15
+scoreboard players set @s[scores={move=17..,Camera=0..5}] Camera 17
+execute as @s[scores={move=27..}] at @s run scoreboard players set @e[tag=skyboundstrike,c=1,scores={Stun=0..12}] Stun 32
+execute as @s[scores={move=27..}] at @s run scoreboard players set @e[tag=skyboundstrike,c=1,scores={Camera=0..5}] Camera 17
+scoreboard players set @s[tag=!Frames] Frames 15
+scoreboard players set @e[r=4,rm=2,tag=!skyboundstrike] Stun 50
+execute as @s[scores={move=14..16}] at @s run scriptevent ds:knockback 2
+execute as @s[scores={move=15}] at @s run playsound mob.enderdragon.flap @a[r=200] ~~~ 999999 0.87 999999
+execute as @s[scores={move=10}] at @s run playsound mob.enderdragon.flap @a[r=200] ~~~ 999999 1 999999
+scoreboard players set @e[scores={move=6..8}] atk 2
+execute as @s[scores={move=8}] at @s run playsound random.whoop @a[r=200] ~~~ 999999 1.15 999999
+execute as @s[scores={move=6}] at @s run playsound mob.wither.shoot @a ~~~ 0.2 0.95
+execute as @s[scores={move=6}] at @s positioned ^^^ run camerashake add @a[r=20] 0.15 0.1
+execute as @s[scores={move=6}] at @s positioned ^^^3 run tag @e[tag=!Frames,r=2.985,c=1,tag=!Big] add skyboundstrike
+execute as @s[scores={move=4..6}] at @s positioned ^^^3 if entity @e[tag=!Frames,r=2.985,c=1] run scoreboard players set @s move 1001
+playanimation @s[scores={move=4}] animation.sky.fist_ab1_fail
+event entity @s[scores={move=0..3}] heart_off
+playanimation @s[scores={move=1000..1001}] animation.sky.fist_ab1a
+execute as @s[scores={move=999..1001}] at @s run event entity @s sky_fabric
+execute as @s[scores={move=998..1001}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=998..1001}] at @s run tp @e[tag=skyboundstrike,c=1,r=10] ^^^1 facing @s
+execute as @s[scores={move=1000..1001}] at @s run playanimation @e[tag=skyboundstrike,c=1,r=10] animation.sky.fist_ab1b
+execute as @s[scores={move=1000}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run particle ds:heavy_impact1
+execute as @s[scores={move=1000}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run playsound mob.strong_punch3 @a[r=100] ~~~ 99999 2.5 99999
+execute as @s[scores={move=997}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run playsound mob.enderdragon.flap @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={move=1000}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run camerashake add @a[r=10] 0.15 0.08
+execute as @s[scores={move=996}] at @s run playsound mob.disfigure1 @a ~~~ 0.4 1.25
+execute as @s[scores={move=996}] at @s run playsound mob.slime.jump @a ~~~ 1 0.75
+execute as @s[scores={move=997}] at @s run playsound mob.elderguardian.curse @a ~~~ 1 0.5
+execute as @s[scores={move=986}] at @s run playsound mob.whoop2 @a[r=100] ~~1~ 99999 1.56 99999
+execute as @s[scores={move=984}] at @s run playsound mob.impact1 @a[r=100] ~~1~ 99999 0.75 99999
+execute as @s[scores={move=984}] at @s run playsound mob.wither.break_block @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=984}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=984}] at @s run camera @s set minecraft:free pos ^1.5^1.4^0.6 facing ^^1.4^1
+execute as @s[scores={move=984}] at @s run camera @p[tag=skyboundstrike,c=1,r=10] set minecraft:free pos ^1.5^1.4^0.6 facing ^^1.4^1
+execute as @s[scores={move=984}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run particle ds:freeze_frame_impact1 ~~1.4~
+execute as @s[scores={move=984}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run particle ds:freeze_frame_impact2 ~~1.4~
+execute as @s[scores={move=984}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run camerashake add @a[r=20] 0.1 0.15
+execute as @s[scores={move=975}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run particle ds:large_impact1 ~~1.4~
+execute as @s[scores={move=976}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run particle ds:burst_impact ~~1.4~
+execute as @s[scores={move=974}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run particle ds:blood_hit2 ~~1.4~
+execute as @s[scores={move=974}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run camerashake add @a[r=20] 1 0.2 rotational
+execute as @s[scores={move=974}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run playsound mob.impact2 @a[r=100] ~~1~ 99999 1 99999
+execute as @s[scores={move=974}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run playsound mob.wither.shoot @a[r=100] ~~1~ 99999 0.75 99999
+execute as @s[scores={move=974}] at @s run damage @e[tag=skyboundstrike,c=1,r=10] 20 override
+execute as @s[scores={move=974}] at @s run scoreboard players operation @e[tag=skyboundstrike,c=1,r=10] damage += @s damageadd
+execute as @s[scores={move=974}] at @s run scoreboard players set @e[tag=skyboundstrike,c=1,r=10] Stun 30
+execute as @s[scores={move=974}] at @s run scoreboard players add @e[tag=skyboundstrike,c=1,r=10] Evade 25
+execute as @s[scores={move=974}] at @s run scoreboard players set @e[tag=skyboundstrike,c=1,r=10] Hit 3
+execute as @s[scores={move=974}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run scoreboard players set @s Flourish 10
+execute as @s[scores={move=974}] at @s run execute as @e[tag=skyboundstrike,c=1,r=10] at @s run tag @s remove skyboundstrike
+execute as @s[scores={move=973..974}] at @s run camera @a[r=20] clear
+scoreboard players set @s[scores={move=970..971}] move 3
+@@sky/fist_ab2
+playanimation @s[scores={move=50..51}] animation.sky.fist_ab2
+tag @s[scores={move=1..2},tag=wep2] remove wep2
+execute as @s[type=!player,scores={move=20..}] at @s run tp @s ~~~ facing @e[type=!item,type=!xp_orb,family=!damage,family=!projectile,type=!ds:projectile,type=!arrow,family=!despawncito,tag=!unselect,type=!armor_stand,type=!ds:uro_takako,r=80,c=1]
+execute as @s[type=!player] at @s run tp @s ~~~~ 0
+event entity @s[scores={move=48..49}] sky_fabric_double
+event entity @s[scores={move=17..18}] heart_off
+event entity @s[scores={move=1..3}] heart_off
+scoreboard players set @s[scores={move=10..,Move=0..5}] Move 11
+scoreboard players set @s[scores={move=10..26,Camera=0..5}] Camera 11
+execute as @s[scores={move=49}] at @s run playsound mob.enderdragon.flap @a[r=33] ~~1~ 9999 0.7 9999
+execute as @s[scores={move=46}] at @s run playsound mob.blood_use @a[r=33] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=45}] at @s run playsound mob.slime.jump @a[r=33] ~~1~ 99999 0.35 99999
+execute as @s[scores={move=45}] at @s run playsound mob.disfigure1 @a[r=33] ~~1~ 99999 0.35 99999
+execute as @s[scores={move=17..20}] at @s rotated ~ 0 run tp @s ^^^0.6 true
+execute as @s[scores={move=17..20}] at @s rotated ~ 0 run tp @s ^^^0.6 true
+execute as @s[scores={move=17..20}] at @s rotated ~ 0 run tp @s ^^^0.6 true
+execute as @s[scores={move=17..20}] at @s rotated ~ 0 run tp @s ^^^0.6 true
+execute as @s[scores={move=17..20}] at @s rotated ~ 0 run tp @s ^^^0.6 true
+execute as @s[scores={move=25}] at @s run playsound mob.enderdragon.flap @a[r=33] ~~1~ 9999 1 9999
+scoreboard players set @e[scores={move=15..16}] atk 2
+execute as @s[scores={move=20}] at @s run effect @a[r=33] night_vision 1 1 true
+execute as @s[scores={move=15}] at @s run effect @a[r=33] darkness 2 1 true
+execute as @s[scores={move=15..17}] at @s run particle ds:skyrend1 ^^2^-3
+execute as @s[scores={move=15..17}] at @s run particle ds:skyrend2 ^^2^-3
+execute as @s[scores={move=15..17}] at @s run particle ds:skyrend1 ^^2^-5
+execute as @s[scores={move=15..17}] at @s run particle ds:skyrend2 ^^2^-5
+execute as @s[scores={move=16}] at @s run particle ds:invert ~~1~
+execute as @s[scores={move=20}] at @s run camerashake add @a[r=15] 0.25 0.15 rotational
+execute as @s[scores={move=17}] at @s rotated ~ 0 positioned ^^2^ run playsound mob.skyrend @a[r=100] ~~~ 999999 1.2 999999
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^2^-3 run playsound mob.elderguardian.curse @a[r=100] ~~~ 999999 1.2 999999
+execute as @s[scores={move=21}] at @s run playsound mob.blasted4 @a[r=100] ~~~ 999999 5 999999
+scoreboard players add @s[scores={move=15}] Frames 3
+tag @s[scores={move=15},tag=!Frames] add Frames
+execute as @s[scores={move=15}] at @s run camerashake add @a[r=20] 2 0.2
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 run tag @e[tag=!Frames,r=7,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] add filtered_target
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 run scoreboard players add @e[tag=filtered_target,r=7] Hit 3
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 run scoreboard players add @e[tag=filtered_target,r=7] Stun 50
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 run scoreboard players add @e[tag=filtered_target,r=7] Evade 15
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 as @e[tag=filtered_target,r=7] at @s run function randomstun3
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 as @e[tag=filtered_target,r=7] at @s run particle ds:infinity_shatter ~~1~
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 as @e[tag=filtered_target,r=7] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 as @e[tag=filtered_target,r=7] at @s run particle ds:heavy_impact2 ~~1~
+execute as @s[scores={move=15}] at @s rotated ~ 0 positioned ^^^-6 run damage @e[tag=filtered_target,r=7] 20 override
+@@sky/fist_ab3
+playanimation @s[scores={move=40..41}] animation.sky.fist_ab3
+tag @s[scores={move=1..2}] remove wep3
+scoreboard players set @s[scores={move=10..,Move=0..4}] Move 11
+execute as @s[scores={move=40}] at @s run particle ds:beam_air
+execute as @s[scores={move=40}] at @s run particle ds:beam_air2
+execute as @s[scores={move=40}] at @s run playsound mob.wither.shoot @a[r=33] ~~1~ 9999 0.85 9999
+execute as @s[scores={move=40}] at @s run effect @s levitation 1 7 true
+execute as @s[scores={move=40}] at @s run effect @s slow_falling 1 1 true
+effect @s[scores={move=32}] clear levitation
+scoreboard players set @s[tag=!Frames] Frames 12
+tag @s[tag=!Frames,scores={move=5..}] add Frames
+tag @s[scores={move=1..4},tag=!Frames] remove Frames
+execute as @s[scores={move=17..21}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=17..21}] at @s run playsound mob.slime.jump @a[r=100] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=21}] at @s run playsound mob.disfigure1 @a[r=100] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=21}] at @s run camerashake add @a[r=40] 0.2 0.15 rotational
+scoreboard players set @e[scores={move=7..21}] atk 2
+execute as @s[scores={move=7..21},type=!Player] at @s run tp @s ^^^1
+execute as @s[scores={move=7..21},type=!Player] at @s run tp @s ^^^1 facing @e[type=!item,type=!xp_orb,family=!damage,family=!projectile,type=!ds:projectile,type=!arrow,family=!despawncito,tag=!unselect,type=!armor_stand,type=!ds:uro_takako,r=80,c=1]
+execute as @s[scores={move=7..21},type=Player] at @s run scriptevent ds:fly
+execute as @s[scores={move=7..21}] at @s run particle ds:skystream2
+execute as @s[scores={move=7..21}] at @s anchored eyes positioned ^^^3 run tag @e[tag=!Frames,r=2.95,type=!item,type=!xp_orb,family=!projectile,family=!barrier,family=!damage,family=!motionless,c=1] add skylineTRG
+execute as @s[scores={move=7..21}] at @s anchored eyes positioned ^^^3 if entity @e[tag=skylineTRG,r=3] run playsound mob.strong_punch1 @a[r=100] ~~~ 9999 2.5 9999
+execute as @s[scores={move=7..21}] at @s anchored eyes positioned ^^^3 if entity @e[tag=skylineTRG,r=3] run particle ds:burst_impact ^^^
+execute as @s[scores={move=7..21}] at @s anchored eyes positioned ^^^3 if entity @e[tag=skylineTRG,r=3] run scoreboard players set @s move 1001
+tag @s[scores={move=4..},tag=!noStunnedAnim] add noStunnedAnim
+scoreboard players set @e[tag=skylineTRG,c=1,r=100,scores={Stun=0..10}] Stun 45
+scoreboard players set @e[tag=skylineTRG,c=1,r=100,scores={Camera=0..10}]  Camera 45
+playanimation @s[scores={move=1000..1001}] animation.sky.fist_ab3a
+execute as @s[scores={move=1000..1001}] at @s run playanimation @e[tag=skylineTRG,c=1] animation.sky.fist_ab3b
+execute as @s[scores={move=1000..1001}] at @s run event entity @s ds:grab_seat
+execute as @s[scores={move=1000..1001}] at @s run ride @e[tag=skylineTRG,c=1] start_riding @s teleport_rider
+execute as @s[scores={move=960..1001}] at @s unless entity @e[tag=skylineTRG,r=6] run event entity @s ds:grab_seat
+execute as @s[scores={move=960..1001}] at @s unless entity @e[tag=skylineTRG,r=6] run ride @e[tag=skylineTRG,c=1,r=100] start_riding @s teleport_rider
+execute as @s[scores={move=960..1001},type=!Player] at @s run tp @s ^^0.33^1
+execute as @s[scores={move=960..1001},type=!Player] at @s run tp @s ^^0.33^1
+execute as @s[scores={move=960..1001},type=Player] at @s run scriptevent ds:fly
+execute as @s[scores={move=960..1001}] at @s run particle ds:skystream2
+execute as @s[scores={move=960..1001}] at @s run playsound mob.breeze.idle_air @a[r=100] ~~1~ 99999 0.7 99999
+execute as @s[scores={move=960..1001}] at @s positioned ~~-1~  unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run playsound mob.blood1 @a ~~~ 0.2 1.25
+execute as @s[scores={move=960..1001}] at @s positioned ~~-1~  unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run particle ds:dust
+execute as @s[scores={move=960..1001}] at @s positioned ~~-1~  unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run particle ds:rubble5
+execute as @s[scores={move=960..1001}] at @s positioned ~~-1~  unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run camerashake add @a[r=10] 0.2 0.15
+execute as @s[scores={move=960..1001}] at @s positioned ~~-1~  unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run playsound mob.rubble1 @a ~~~ 0.2 1.5
+execute as @s[scores={move=960..1001}] at @s positioned ~~-1~  unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s unless entity @s[scores={detect_health=0..3}] run damage @e[tag=skylineTRG,c=1] 1 override
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run playsound mob.blood1 @a ~~~ 0.2 1.25
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run camerashake add @a[r=10] 0.2 0.15
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s run playsound mob.rubble1 @a ~~~ 0.2 1.5
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire run execute as @e[tag=skylineTRG,c=1,r=10] at @s unless entity @s[scores={detect_health=0..3}] run damage @e[tag=skylineTRG,c=1] 1 override
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire if entity @p[tag=griefable] run summon ds:lapse_explode
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ bedrock unless block ~~~ trip_wire if entity @p[tag=griefable] run fill ~1 ~2 ~1 ~-1 ~1 ~-1 air
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ trip_wire if entity @p[tag=griefable] run kill @e[type=item,r=10]
+execute as @s[scores={move=960..1001}] at @s anchored eyes positioned ^^^1 unless block ~~~ air unless block ~~~ short_grass unless block ~~~ tall_grass unless block ~~~ large_fern unless block ~~~ fern unless block ~~~ deadbush unless block ~~~ dandelion unless block ~~~ poppy unless block ~~~ blue_orchid unless block ~~~ allium unless block ~~~ azure_bluet unless block ~~~ red_tulip unless block ~~~ orange_tulip unless block ~~~ white_tulip unless block ~~~ pink_tulip unless block ~~~ oxeye_daisy unless block ~~~ cornflower unless block ~~~ lily_of_the_valley unless block ~~~ sunflower unless block ~~~ lilac unless block ~~~ rose_bush unless block ~~~ peony unless block ~~~ snow_layer unless block ~~~ vine  unless block ~~~ sweet_berry_bush  unless block ~~~ soul_torch unless block ~~~ torch unless block ~~~ lever unless block ~~~ bedrock unless block ~~~ trip_wire if entity @p[tag=griefable] run tp @s ^^^4
+execute as @s[scores={move=945..962}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=956..960}] at @s run tp @e[tag=skylineTRG,c=1,r=20] ^^1^2 facing @s
+event entity @s[scores={move=955..956}] ds:release_seat
+execute as @s[scores={move=962}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~1~ 99999 1.5 9999
+execute as @s[scores={move=957}] at @s run playsound random.whoop @a[r=100] ~~1~ 99999 1.5 9999
+execute as @s[scores={move=998}] at @s run playsound mob.slime.jump @a[r=100] ~~1~ 99999 0.4 99999
+execute as @s[scores={move=998}] at @s run playsound mob.disfigure1 @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=984}] at @s run playsound mob.slime.jump @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=984}] at @s run playsound mob.disfigure1 @a[r=100] ~~1~ 99999 0.6 99999
+tag @s[scores={move=955..960},type=ds:uro_takako,tag=!uro_missile] add uro_missile
+effect @s[scores={move=960}] resistance 2 30 true
+execute as @s[scores={move=955}] at @s run playsound mob.strong_punch1 @a[r=100] ^^1^1 99999 0.9 99999
+execute as @s[scores={move=955}] at @s run particle ds:burst_impact ^^1^1
+execute as @s[scores={move=955}] at @s run camerashake add @a[r=100] 3 0.15
+execute as @s[scores={move=955}] at @s run scoreboard players set @e[tag=skylineTRG,c=1,r=20] Hit 3
+execute as @s[scores={move=955}] at @s run scoreboard players set @e[tag=skylineTRG,c=1,r=20] knockdown 95
+execute as @s[scores={move=955}] at @s run scoreboard players add @e[tag=skylineTRG,c=1,r=20] Evade 10
+execute as @s[scores={move=955}] at @s run damage @e[tag=skylineTRG,c=1,r=20] 10 override
+execute as @s[scores={move=955}] at @s run summon ds:knockback ^^^
+execute as @s[scores={move=955},type=Player] at @s run summon ds:knockback ^^^
+execute as @s[scores={move=955}] at @s run execute as @e[tag=skylineTRG,c=1,r=20] at @s run scriptevent ds:knockback -25
+execute as @s[scores={move=955}] at @s run execute as @e[tag=skylineTRG,c=1,r=20] at @s run tag @s remove skylineTRG
+execute as @s[scores={move=957}] at @s if entity @p[tag=griefable] run effect @e[tag=!Frames,r=10] resistance 1 10 true
+execute as @s[scores={move=955..956}] at @s if entity @p[tag=griefable] run summon ds:red_reversal ^^^2
+scoreboard players set @s[scores={move=545..946}] move 3
+@@sky/hailbreaker
+damage @e[tag=!Frames,r=10] 150 override
+damage @e[tag=!Frames,r=33] 90 override
+scoreboard players set @e[tag=!Frames,r=33] knockdown 105
+scoreboard players set @e[tag=!Frames,r=33] Hit 3
+scoreboard players add @e[tag=!Frames,r=33] Evade 50
+playsound mob.blasted2 @a[r=200] ~~~ 99999 0.5 99999
+playsound mob.blasted4 @a[r=200] ~~~ 99999 2.5 99999
+playsound mob.burst @a[r=200] ~~~ 99999 1.5 99999
+camerashake add @a[r=40] 2 0.25 rotational
+particle ds:dirt3
+execute unless block ~~-1~ air run particle ds:large_slam_p
+execute unless block ~~-1~ air run particle ds:large_slam_p
+execute unless block ~~-1~ air run particle ds:large_slam_p
+execute unless block ~~-1~ air run particle ds:ground_impact2
+execute unless block ~~-1~ air run particle ds:rubble3
+particle ds:demons_descent1
+particle ds:demons_descent2
+particle ds:demons_descent3
+particle ds:demons_descent4
+particle ds:demons_descent5
+particle ds:demons_descent6
+effect @e[r=50] resistance 1 20 true
+summon gg:impact_frame
+particle ds:invert
+execute if entity @p[tag=griefable] run summon ds:red_reversal
+execute if entity @p[tag=griefable] run summon ds:red_reversal ~~~-8
+execute if entity @p[tag=griefable] run summon ds:red_reversal ~8~~
+execute if entity @p[tag=griefable] run summon ds:red_reversal ~-8~~
+execute if entity @p[tag=griefable] run summon ds:red_reversal ~~~8
+function damages/sky_damage
+kill @s[name=hailbreaker]
+@@sky/hitself
+execute unless entity @s[scores={cutscene=1..}] unless entity @s[tag=noStunnedAnim] unless entity @s[scores={knock=1..}] run scoreboard players random @s num 1 3
+execute if entity @e[scores={domainactive=1..},r=60,tag=sky] run particle ds:sky_surehit1 ~~1~
+execute if entity @e[scores={domainactive=1..},r=60,tag=sky] run playsound mob.elderguardian.curse @a[r=100] ~~1~ 99999 2 99999
+execute if entity @e[scores={domainactive=1..},r=60,tag=sky] run playsound mob.wither.spawn @a[r=100] ~~1~ 99999 4 99999
+particle ds:impact_vfx ~~1.5~
+particle ds:blood_hit2 ~~1~
+playsound mob.strong_punch2 @a[r=100] ~~1.5~ 99999 3 99999
+camerashake add @a[r=40] 2 0.25
+damage @s 5 override
+scoreboard players operation @s damage += @s damageadd
+scoreboard players set @s Stun 15
+scoreboard players set @s[scores={move=4..,cutscene=0},tag=!Frames] move 3
+playanimation @s[scores={num=1}] animation.sky.hitself
+playanimation @s[scores={num=2}] animation.sky.hitself2
+playanimation @s[scores={num=3}] animation.sky.hitself3
+scoreboard players set @s num 0
+execute as @s[type=!player] at @s if entity @e[scores={domainactive=1..},tag=sky,r=60] run scoreboard objectives add learning_surehit dummy
+execute as @s[type=!player] at @s if entity @e[scores={domainactive=1..},tag=sky,r=60] run scoreboard players add @s learning_surehit 1
+execute as @s[type=!player] at @s if entity @e[scores={domainactive=1..},tag=sky,r=60] run execute as @s[scores={learning_surehit=10..}] at @s run function dashback
+execute as @s[type=!player] at @s if entity @e[scores={domainactive=1..},tag=sky,r=60] run scoreboard players set @s[scores={learning_surehit=10..}] Stun 50
+@@sky/missiletp
+tag @s add missilehit
+execute positioned ~~500~ run summon ds:projectile ~~~ facing ^^^-1 none missileDetect
+execute positioned ~~500~ run tag @e[name=missileDetect,type=ds:projectile,c=1,tag=!missilehit] add missilehit
+execute positioned ^^^16.25 rotated as @e[tag=missilehit] positioned ^^^-8 rotated as @e[tag=missilehit] positioned ^^^-4 if entity @s[r=16.5] rotated as @e[tag=missilehit] positioned ^^^-2 if entity @s[r=2.5] rotated as @e[tag=missilehit] positioned ^^^-1 rotated as @e[tag=missilehit] positioned ^^^-0.5 rotated as @e[tag=missilehit] positioned ^^^-0.25 rotated as @e[tag=missilehit,type=!ds:projectile,c=1] positioned ^^^-0.5 run tp @s[r=0.5] ^^^0.5 true
+tag @e[tag=missilehit] remove missilehit
+kill @e[name=missileDetect,type=ds:projectile]
+@@sky/sky
+tag @a[tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,Energy=250..,detect_jump=0,detect_left=1}] add form4
+execute as @a[tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Energy=0..249,Sneaking=1..,detect_jump=0,detect_left=1}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @a[tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=1..,Sneaking=1..,Energy=250..,detect_jump=0,detect_left=1}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+scoreboard players set @a[tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,Energy=250..,detect_jump=0,detect_left=1}] move 16
+scoreboard players set @a[tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,Energy=250..,detect_jump=0,detect_left=1}] ability4 1200
+execute as @a[tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=1..,Sneaking=1..,Energy=250..,detect_jump=0,punch=1}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab4"},{"score":{"name": "@p","objective": "ability4"}},{"text":"§c."}]}
+scoreboard players remove @a[tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Energy=250..,move=16,Sneaking=1..,detect_jump=0,detect_left=1}] Energy 250
+event entity @e[c=1,tag=sky,scores={move=0,BasicM1s=0},has_property={property:heart=10..}] heart_off
+@@sky/sky1
+playanimation @s[scores={move=10..11}] animation.sky.ab1
+tag @s[scores={move=1..2},tag=form1] remove form1
+scoreboard players set @s[scores={Frames=0..3,move=5..},tag=!Frames,tag=!sky_adapted] Frames 6
+tag @s[scores={move=4..},tag=!noStunnedAnim] add noStunnedAnim
+tag @s[scores={move=3..},tag=!Frames,tag=!sky_adapted] add Frames
+tag @s[scores={move=1..2},tag=Frames] remove Frames
+event entity @s[scores={move=9..10}] sky_fabric
+event entity @s[scores={move=1..3}] heart_off
+execute as @s[scores={move=8}] at @s anchored eyes run playsound mob.disfigure2 @a[r=50] ^^^1 99999 0.5 99999
+execute as @s[scores={move=7..8}] at @s anchored eyes run playsound mob.slime.jump @a[r=50] ^^^1 99999 0.4 99999
+execute as @s[scores={move=4..10}] at @s anchored eyes positioned ^^^3 run execute as @e[family=!barrier,tag=!DomainExpansion,r=2.95,tag=!Frames,tag=!sky_adapted,type=!player,scores={Stun=0}] at @s run function sky/hitself
+execute as @s[scores={move=4..10}] at @s anchored eyes positioned ^^^4 run execute as @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,scores={atk=1..2,Stun=0}] at @s run function sky/hitself
+execute as @s[scores={move=4..10}] at @s positioned ^^^4 run tp @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,c=1] ^-1.5^0.35^-2.5 facing ^-3^^6
+execute as @s[scores={move=4..10}] at @s positioned ^^^4 run tp @e[family=!barrier,tag=!DomainExpansion,r=3.95,family=projectile] ^-1.5^1^-2.5 facing ^-3^1^6
+execute as @s[scores={move=4..10}] at @s positioned ^^^4 run tp @e[family=!barrier,tag=!DomainExpansion,r=3.95,scores={Deleter=1..}] ^-1.5^1^-2.5 facing ^-3^1^6
+execute as @s[scores={move=4..10}] at @s positioned ^^^4 run scoreboard players set @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted] Stun 15
+execute as @s[scores={move=4..10}] at @s positioned ^^^4 if entity @e[scores={Deleter=1..}] run scoreboard players add @e[scores={Deleter=1..},r=5] Deleter 2
+execute as @s[scores={move=4..10}] at @s positioned ^^^4 if entity @e[scores={Deleter=1..}] run scoreboard players add @s Frames 5
+execute as @s[scores={move=4..10}] at @s positioned ^^^4 if entity @e[scores={Deleter=1..}] run scriptevent ds:move_projectile_target radius:12 -14,1,-14
+execute as @s[scores={move=7}] at @s positioned ^^^4 run function damages/sky_damage
+execute as @s[scores={move=6}] at @s positioned ^^^4 run execute as @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,scores={detect_health=1..}] at @s run execute as @e[tag=!Frames,r=3.95,rm=0.2] at @s run playsound mob.strong_punch1 @a[r=100] ~~1~ 99999 2 99999
+execute as @s[scores={move=6}] at @s positioned ^^^4 run execute as @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,scores={detect_health=1..}] at @s run execute as @e[tag=!Frames,r=3.95,rm=0.2] at @s run particle ds:impact_vfx1 ~~1.4~
+execute as @s[scores={move=6}] at @s positioned ^^^4 run execute as @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,scores={detect_health=1..}] at @s run damage @e[tag=!Frames,r=3.95,rm=0.2] 10 override entity @s
+execute as @s[scores={move=6}] at @s positioned ^^^4 run execute as @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,scores={detect_health=1..}] at @s run scoreboard players operation @e[tag=!Frames,r=3.95,rm=0.2] damage += @s damageadd
+execute as @s[scores={move=6}] at @s positioned ^^^4 run execute as @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,scores={detect_health=1..}] at @s run scoreboard players set @e[tag=!Frames,r=3.95,rm=0.2] Stun 20
+execute as @s[scores={move=6}] at @s positioned ^^^4 run execute as @e[family=!barrier,tag=!DomainExpansion,r=3.95,tag=!Frames,tag=!sky_adapted,scores={detect_health=1..}] at @s run scoreboard players set @e[tag=!Frames,r=3.95,rm=0.2] Flourish 2
+@@sky/sky2
+playanimation @s[scores={move=75..76}] animation.sky.ab2
+tag @s[scores={move=1..2},tag=form2] remove form2
+scoreboard players set @s[scores={Frames=0..3,move=5..},tag=!Frames] Frames 25
+tag @s[scores={move=4..},tag=!noStunnedAnim] add noStunnedAnim
+tag @s[scores={move=3..},tag=!Frames] add Frames
+tag @s[scores={move=1..2},tag=Frames] remove Frames
+event entity @s[scores={move=69..70}] sky_fabric
+event entity @s[scores={move=1..3}] heart_off
+tag @s[scores={move=60..},tag=!sky_counter] add sky_counter
+tag @s[scores={move=1..5}] remove sky_counter
+scoreboard players set @s[scores={move=10..,Move=0..4}] Move 12
+execute as @s[scores={move=69}] at @s anchored eyes run playsound mob.disfigure2 @a[r=50] ^^^1 99999 0.5 99999
+execute as @s[scores={move=69}] at @s anchored eyes run playsound mob.slime.jump @a[r=50] ^^^1 99999 0.4 99999
+scoreboard players set @s[scores={move=74..75}] num2 0
+scoreboard players set @s[scores={move=1..4}] num2 0
+execute as @s[scores={move=30..65}] at @s run scriptevent ds:counter_projectile radius:10 time:20 rotate:7
+execute as @s[scores={move=20..21}] at @s if entity @e[scores={Deleter=1..},r=10,type=!Player] run scoreboard players set @s move 24
+execute as @s[scores={move=20..25}] at @s if entity @e[scores={Deleter=1..},r=10,type=!Player] run playanimation @s animation.sky.ab2b
+execute as @s[scores={move=22}] at @s if entity @e[scores={Deleter=1..},r=10,type=!Player] run particle ds:sky_spin ~~1~
+scoreboard players add @s[scores={move=21..25}] num2 1
+scoreboard players set @s[scores={num2=70..,move=21..25}] move 18
+execute as @s[scores={move=5..}] at @s if block ~~-1~ air run scriptevent ds:antiair
+effect @s[scores={move=75..76}] slow_falling 1 8 true
+execute as @s[scores={move=65}] at @s run summon ds:sky_dmg_test ~~~ facing ^^^10
+execute as @s[scores={move=22..65}] at @s run tp @e[type=ds:sky_dmg_test,c=1,r=10] ~~~
+execute as @s[scores={move=22..65}] at @s run execute as  @e[type=ds:sky_dmg_test,c=1,r=10] at @s run tp @e[tag=!DomainExpansion,tag=!not_projectile,family=!domain,family=!domain_clasher,tag=!sky,r=7,tag=!form2,tag=!Frames,type=!ds:sky_dmg_test,family=!projectile] ^^^6 facing ^-4^^7
+execute as @s[scores={move=22..65}] at @s run execute as  @e[type=ds:sky_dmg_test,c=1,r=10] at @s run scoreboard players set @e[tag=!DomainExpansion,tag=!not_projectile,family=!domain,family=!domain_clasher,tag=!sky,r=7,tag=!form2,tag=!Frames,type=!ds:sky_dmg_test,family=!projectile] Stun 25
+execute as @s[scores={move=22..65}] at @s run camerashake add @a[r=20] 0.08 0.08
+execute as @s[scores={move=22..65}] at @s run scoreboard players add @e[scores={Deleter=1..},r=10] Deleter 2
+execute as @s[scores={move=22..65}] at @s run scoreboard players add @e[family=projectile,r=10] Deleter 1
+execute as @s[scores={move=22..65}] at @s run scoreboard players set @e[scores={Deleter=0..20},r=10] Deleter 46
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:transfigured_human_worm,r=12] run tag @s add sky_return_human_worm
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:body_repel_max2,r=12] run tag @s add sky_return_body_repel_max
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:body_repel_max1,r=12] run tag @s add sky_return_body_repel_max
+execute as @s[scores={move=27..}] at @s if entity @e[family=dismantle,r=12] run tag @s add sky_return_dismantle
+execute as @s[scores={move=27..,onfire=1..}] at @s run tag @s add sky_return_fire
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:sky_dmg_test,c=1,scores={onfire=1..}] run tag @s add sky_return_fire
+execute as @s[scores={move=27..}] at @s positioned ^^^30 if entity @e[tag=ryu_beaming,tag=!curse,tag=!sukuna,tag=!roughce,tag=!yuta,r=60] run tag @s add sky_return_granite_b
+execute as @s[scores={move=27..}] at @s positioned ^^^30 if entity @e[tag=ryu_beaming,tag=!curse,tag=!sukuna,tag=roughce,tag=!yuta,r=60] run tag @s add sky_return_granite_g
+execute as @s[scores={move=27..}] at @s positioned ^^^30 if entity @e[tag=ryu_beaming,tag=curse,tag=!sukuna,tag=!roughce,tag=!yuta,r=60] run tag @s add sky_return_granite_p
+execute as @s[scores={move=27..}] at @s positioned ^^^30 if entity @e[tag=ryu_beaming,tag=!curse,tag=sukuna,r=60] run tag @s add sky_return_granite_r
+execute as @s[scores={move=27..}] at @s positioned ^^^30 if entity @e[tag=blood_shooting,r=60] run tag @s add sky_return_blood
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:projectile,name=fuga_arrow1,r=12] run tag @s add sky_return_fuga
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:projectile,name=homing_ce_blast,r=12] run tag @s add sky_return_small_granite
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:projectile,name=homing_ce_blast,r=12] if entity @e[tag=discharge,tag=!curse,tag=!sukuna,tag=!roughce,tag=!yuta,r=60] run tag @s add sky_return_granite_b
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:projectile,name=homing_ce_blast,r=12] if entity @e[tag=discharge,tag=!curse,tag=!sukuna,tag=roughce,tag=!yuta,r=60] run tag @s add sky_return_granite_g
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:projectile,name=homing_ce_blast,r=12] if entity @e[tag=discharge,tag=curse,tag=!sukuna,r=60] run tag @s add sky_return_granite_p
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:projectile,name=homing_ce_blast,r=12] if entity @e[tag=discharge,tag=!curse,tag=sukuna,r=60] run tag @s add sky_return_granite_r
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:projectile,name=homing_ce_blast,r=12] if entity @e[tag=discharge,tag=!curse,tag=!sukuna,tag=yuta,r=60] run tag @s add sky_return_granite_pi
+execute as @s[scores={move=27..}] at @s if entity @e[tag=blood_projectile,r=11] run tag @s add sky_return_blood
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=0},r=11] run tag @s add sky_return_granite_b
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=1},r=11] run tag @s add sky_return_granite_g
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=2},r=11] run tag @s add sky_return_granite_p
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=3},r=11] run tag @s add sky_return_granite_r
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=4},r=11] run tag @s add sky_return_granite_pi
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=0..},r=11] run playsound mob.distort3 @a[r=100] ~~1~ 99999 1.25 99999
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=0..},r=11] run tag @s add sky_return_small_granite
+execute as @s[scores={move=27..}] at @s if entity @e[type=ds:granite_beam,has_property={property:colour=0..},r=11] run event entity @e[type=ds:granite_beam,r=10] ds:disappear
+execute as @s[scores={move=35..65}] at @s if block ~~-1~ air run playsound mob.breeze.idle_air @a[r=100] ~~1~ 9999 0.8 9999
+execute as @s[scores={move=35..65}] at @s unless block ~~-1~ air run playsound mob.breeze.idle_ground @a[r=100] ~~1~ 9999 0.8 9999
+execute as @s[scores={move=65}] at @s run playsound mob.breeze.charge @a[r=100] ~~1~ 99999 1 99999
+execute as @s[scores={move=65}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=65}] at @s run playsound mob.wither.shoot @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=65}] at @s run playsound random.whoosh @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=57}] at @s run playsound mob.breeze.charge @a[r=100] ~~1~ 99999 0.8 99999
+execute as @s[scores={move=57}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=57}] at @s run playsound mob.wither.shoot @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=57}] at @s run playsound random.whoosh @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=51}] at @s run playsound mob.breeze.charge @a[r=100] ~~1~ 99999 0.6 99999
+execute as @s[scores={move=51}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=51}] at @s run playsound mob.wither.shoot @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=51}] at @s run playsound random.whoosh @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s[scores={move=45}] at @s run playsound mob.bass @a[r=100] ~~1~ 99999 1 99999
+execute as @s[scores={move=65}] at @s run particle ds:sky_spin ~~1~
+execute as @s[scores={move=60}] at @s run particle ds:sky_spin ~~1~
+execute as @s[scores={move=57}] at @s run particle ds:sky_spin ~~1~
+execute as @s[scores={move=30..55}] at @s run particle ds:sky_spin ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_granite_w] at @s run particle ds:sky_spin_granite_white ~~1~
+execute as @s[scores={move=27..55},tag=sky_return_granite_w] at @s run execute as @e[tag=ryu_beaming_white,r=60,c=1] at @s run function cancel_attack
+execute as @s[scores={move=27..65}] at @s positioned ^^^30 if entity @e[tag=ryu_beaming_white,r=60,c=1] run tag @s add sky_return_granite_w
+execute as @s[scores={move=27..55},tag=sky_return_granite_w] at @s positioned ^^^30 run execute as @e[tag=ryu_beaming_white,r=30] at @s run function cancel_attack
+execute as @s[scores={move=27..65},tag=sky_return_granite_b] at @s run particle ds:sky_spin_granite_blue ~~1~
+execute as @s[scores={move=27..55},tag=sky_return_granite_b] at @s run execute as @e[tag=ryu_beaming,tag=!curse,tag=!sukuna,tag=!roughce,tag=!yuta,r=60,c=1] at @s run function cancel_attack
+execute as @s[scores={move=27..65},tag=sky_return_granite_g] at @s run particle ds:sky_spin_granite_green ~~1~
+execute as @s[scores={move=27..55},tag=sky_return_granite_g] at @s run execute as @e[tag=ryu_beaming,tag=!curse,tag=!sukuna,tag=roughce,tag=!yuta,r=60,c=1] at @s run function cancel_attack
+execute as @s[scores={move=27..65},tag=sky_return_granite_p] at @s run particle ds:sky_spin_granite_purple ~~1~
+execute as @s[scores={move=27..55},tag=sky_return_granite_p] at @s run execute as @e[tag=ryu_beaming,tag=curse,tag=!sukuna,tag=!roughce,tag=!yuta,r=60,c=1] at @s run function cancel_attack
+execute as @s[scores={move=27..65},tag=sky_return_granite_r] at @s run particle ds:sky_spin_granite_red ~~1~
+execute as @s[scores={move=27..55},tag=sky_return_granite_r] at @s run execute as @e[tag=ryu_beaming,tag=!curse,tag=sukuna,r=60,c=1] at @s run function cancel_attack
+execute as @s[scores={move=27..65},tag=sky_return_blood] at @s run particle ds:sky_spin_blood ~~1~
+execute as @s[scores={move=27..55},tag=sky_return_blood] at @s run execute as @e[tag=blood_shooting] at @s run scriptevent ds:piercing_blood_clear
+execute as @s[scores={move=27..55},tag=sky_return_blood] at @s run execute as @e[tag=blood_shooting] at @s run function blood/diluted_blood
+execute as @s[scores={move=27..55},tag=sky_return_blood] at @s run execute as @e[tag=blood_shooting] at @s run function cancel_attack
+execute as @s[scores={move=27..55},tag=sky_return_blood] at @s run execute as @e[tag=blood_shooting] at @s run tag @s remove blood_shooting
+execute as @s[scores={move=27..65},tag=sky_return_granite_pi] at @s run particle ds:sky_spin_granite_pink ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fire] at @s run particle ds:sky_spin_fire1 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fire] at @s run particle ds:sky_spin_fire2 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fire] at @s run particle ds:fuga_aura_4 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fire] at @s run particle ds:fuga_aura_2 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fuga] at @s run particle ds:sky_spin_fire1 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fuga] at @s run particle ds:sky_spin_fire2 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fuga] at @s run particle ds:fuga_aura_1 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fuga] at @s run particle ds:fuga_aura_5 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fuga] at @s run particle ds:fuga_aura_8 ~~1~
+execute as @s[scores={move=27..65},tag=sky_return_fuga] at @s run particle ds:fuga_aura_9 ~~1~
+execute as @s[scores={move=20..21},tag=sky_return_blood] at @s run kill @e[tag=blood_projectile,r=12]
+execute as @s[scores={move=10..15},tag=sky_return_blood] at @s run playsound mob.piercing_blood @a[r=100] ^^1^1 99999 1.25 99999
+execute as @s[scores={move=10..15},tag=sky_return_blood] at @s run playsound random.swim @a[r=100] ^^1^1 99999 0.5 99999
+execute as @s[scores={move=15},tag=sky_return_blood] at @s anchored eyes positioned ^^-0.25^0.475 run particle ds:piercing_blood_inflate1
+execute as @s[scores={move=10..15},tag=sky_return_blood] at @s anchored eyes positioned ^^-0.25^0.475 run particle ds:supernova
+execute as @s[scores={move=20},tag=sky_return_blood] at @s run scriptevent ds:piercing_blood time:50 range:70 delay:4 bones:18 destruction:on onhit:yuji/blood/pierce_hit onstart:yuji/blood/pierce_start
+execute as @s[scores={move=20},tag=sky_return_blood] at @s run scoreboard players set @s Frames 75
+execute as @s[scores={move=20..21},tag=sky_return_dismantle] at @s run kill @e[family=dismantle,r=12]
+execute as @s[scores={move=10..15},tag=sky_return_dismantle] at @s run playsound mob.distort3 @a[r=100] ^^1^1 99999 2.5 99999
+execute as @s[scores={move=10..15},tag=sky_return_dismantle] at @s run playsound mob.slice1 @a[r=100] ^^1^1 99999 1.5 99999
+execute as @s[scores={move=10..15},tag=sky_return_dismantle] at @s run scriptevent ds:dismantle_small
+execute as @s[scores={move=20..23}] at @s run tag @e[scores={Deleter=1..},r=15,type=!ds:body_repel_max1,type=!ds:body_repel_max2,type=!ds:transfigured_human_worm,tag=!DomainExpansion,tag=!not_projectile,family=!domain,family=!domain_clasher] add countered_proj
+execute as @s[scores={move=5..45}] at @s run execute as @e[family=projectile,r=45,type=!ds:body_repel_max1,type=!ds:body_repel_max2,type=!ds:transfigured_human_worm,tag=!DomainExpansion,tag=!not_projectile,family=!domain,family=!domain_clasher] at @s unless entity @s[scores={Deleter=1..}] run scoreboard players set @s Deleter 46
+execute as @s[scores={move=5..45}] at @s run execute as @e[tag=countered_proj,r=45,type=!ds:body_repel_max1,type=!ds:body_repel_max2,type=!ds:transfigured_human_worm,tag=!DomainExpansion,tag=!not_projectile,family=!domain,family=!domain_clasher] at @s unless entity @s[scores={Deleter=1..}] run scoreboard players set @s Deleter 46
+execute as @s[scores={move=30..32},tag=sky_return_body_repel_max] at @s run kill @e[type=ds:body_repel_max1,r=15]
+execute as @s[scores={move=30..32},tag=sky_return_body_repel_max] at @s run kill @e[type=ds:body_repel_max2,r=15]
+execute as @s[scores={move=30..32},tag=sky_return_body_repel_max] at @s run kill @e[type=ds:transfigured_human_worm,r=15]
+execute as @s[scores={move=15..25},tag=sky_return_body_repel_max] at @s run scriptevent ds:body_repel_max
+execute as @s[scores={move=30..32},tag=sky_return_human_worm] at @s run kill @e[type=ds:transfigured_human_worm,r=15]
+execute as @s[scores={move=18..19},tag=sky_return_human_worm] at @s run scriptevent ds:transfigured_worm1
+execute as @s[scores={move=17..21},tag=sky_return_granite_w] at @s run scriptevent ds:raycast 70 6 discharge/precise_hit pierces:true piercesEnemies:true ignoretag:Frames particle:ds:sky_return_granite_w 1
+execute as @s[scores={move=10..20},tag=sky_return_granite_b,tag=!sky_return_small_granite] at @s run scriptevent ds:raycast 70 6 discharge/long_granite_beam_hit pierces:true piercesEnemies:true ignoretag:Frames particle:ds:sky_return_granite_b 0.33
+execute as @s[scores={move=10..20},tag=sky_return_granite_b,tag=!sky_return_small_granite] at @s run particle ds:granite_impact2_b ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_b,tag=!sky_return_small_granite] at @s run particle ds:granite_impact3_b ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_g,tag=!sky_return_small_granite] at @s run scriptevent ds:raycast 70 6 discharge/long_granite_beam_hit pierces:true piercesEnemies:true ignoretag:Frames particle:ds:sky_return_granite_g 0.33
+execute as @s[scores={move=10..20},tag=sky_return_granite_g,tag=!sky_return_small_granite] at @s run particle ds:granite_impact2_g ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_g,tag=!sky_return_small_granite] at @s run particle ds:granite_impact3_g ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_p,tag=!sky_return_small_granite] at @s run scriptevent ds:raycast 70 6 discharge/long_granite_beam_hit pierces:true piercesEnemies:true ignoretag:Frames particle:ds:sky_return_granite_p 0.33
+execute as @s[scores={move=10..20},tag=sky_return_granite_p,tag=!sky_return_small_granite] at @s run particle ds:granite_impact2_p ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_p,tag=!sky_return_small_granite] at @s run particle ds:granite_impact3_p ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_r,tag=!sky_return_small_granite] at @s run scriptevent ds:raycast 70 6 discharge/long_granite_beam_hit pierces:true piercesEnemies:true ignoretag:Frames particle:ds:sky_return_granite_r 0.33
+execute as @s[scores={move=10..20},tag=sky_return_granite_r,tag=!sky_return_small_granite] at @s run particle ds:granite_impact2_r ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_r,tag=!sky_return_small_granite] at @s run particle ds:granite_impact3_r ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_pi,tag=!sky_return_small_granite] at @s run scriptevent ds:raycast 70 6 discharge/long_granite_beam_hit pierces:true piercesEnemies:true ignoretag:Frames particle:ds:sky_return_granite_pi 0.33
+execute as @s[scores={move=10..20},tag=sky_return_granite_pi,tag=!sky_return_small_granite] at @s run particle ds:granite_impact2_pi ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_granite_pi,tag=!sky_return_small_granite] at @s run particle ds:granite_impact3_pi ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_b,tag=sky_return_small_granite] at @s run scriptevent ds:granite_beam
+execute as @s[scores={move=18..20},tag=sky_return_granite_b,tag=sky_return_small_granite] at @s run particle ds:granite_impact2_b ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_b,tag=sky_return_small_granite] at @s run particle ds:granite_impact3_b ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_g,tag=sky_return_small_granite] at @s run scriptevent ds:granite_beam_green
+execute as @s[scores={move=18..20},tag=sky_return_granite_g,tag=sky_return_small_granite] at @s run particle ds:granite_impact2_g ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_g,tag=sky_return_small_granite] at @s run particle ds:granite_impact3_g ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_p,tag=sky_return_small_granite] at @s run scriptevent ds:granite_beam_purple
+execute as @s[scores={move=18..20},tag=sky_return_granite_p,tag=sky_return_small_granite] at @s run particle ds:granite_impact2_p ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_p,tag=sky_return_small_granite] at @s run particle ds:granite_impact3_p ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_r,tag=sky_return_small_granite] at @s run scriptevent ds:granite_beam_red
+execute as @s[scores={move=18..20},tag=sky_return_granite_r,tag=sky_return_small_granite] at @s run particle ds:granite_impact2_r ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_r,tag=sky_return_small_granite] at @s run particle ds:granite_impact3_r ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_pi,tag=sky_return_small_granite] at @s run scriptevent ds:granite_beam_pink
+execute as @s[scores={move=18..20},tag=sky_return_granite_pi,tag=sky_return_small_granite] at @s run particle ds:granite_impact2_pi ^^1.4^2
+execute as @s[scores={move=18..20},tag=sky_return_granite_pi,tag=sky_return_small_granite] at @s run particle ds:granite_impact3_pi ^^1.4^2
+execute as @s[scores={move=25..65},tag=sky_return_fire] at @s run playsound mob.blaze.shoot @a[r=100] ~~1~ 99999 1.5 999999
+execute as @s[scores={move=10..20},tag=sky_return_fire] at @s run playsound mob.blaze.shoot @a[r=100] ~~1~ 99999 0.8 99999
+execute as @s[scores={move=10..20},tag=sky_return_fire] at @s run scriptevent ds:raycast 50 6 flames/flame_hit pierces:true piercesEnemies:true ignoretag:Frames particle:ds:blazing_impact5
+execute as @s[scores={move=10..20},tag=sky_return_fire] at @s run particle ds:fire_hit1 ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_fire] at @s run particle ds:fire_hit2 ^^1.4^2
+execute as @s[scores={move=10..20},tag=sky_return_fire] at @s run particle ds:fire_hit3 ^^1.4^2
+execute as @s[scores={move=20..25},tag=sky_return_fuga] at @s run particle ds:fire_hit1 ^^1.4^2
+execute as @s[scores={move=20..25},tag=sky_return_fuga] at @s run particle ds:fire_hit2 ^^1.4^2
+execute as @s[scores={move=20..25},tag=sky_return_fuga] at @s run particle ds:fire_hit3 ^^1.4^2
+execute as @s[scores={move=15..23}] at @s run tag @e[type=ds:sky_dmg_test,c=1,r=10] add Frames
+execute as @s[scores={move=18..26}] at @s run event entity @e[type=ds:granite_orbit,r=12] ds:disappear
+execute as @s[scores={move=18..63},tag=sky_return_small_granite] at @s run kill @e[name=homing_ce_blast,r=12]
+execute as @s[scores={move=16..17}] at @s run event entity @e[type=ds:rock_throw,r=12,c=1] ds:disappear
+execute as @s[scores={move=1..45},type=!Player] at @s run tp @s ~~~ facing @e[type=!item,type=!xp_orb,family=!damage,family=!projectile,type=!ds:projectile,type=!arrow,family=!despawncito,tag=!unselect,type=!armor_stand,type=!ds:uro_takako,scores={detect_health=0..},r=80,c=1]
+execute as @s[scores={move=20}] at @s anchored eyes run camerashake add @a[r=50] 2 0.25
+execute as @s[scores={move=20}] at @s anchored eyes run particle ds:burst_impact ^^^2
+execute as @s[scores={move=20}] at @s anchored eyes run playsound mob.red2 @a[r=100] ^^^2 99999 3 99999
+execute as @s[scores={move=20}] at @s anchored eyes run playsound mob.heavy_swing @a[r=100] ^^^2 99999 2 99999
+execute as @s[scores={move=20}] at @s anchored eyes run damage @e[tag=!Frames,type=!ds:sky_dmg_test,r=12] 15 override
+execute as @s[scores={move=20}] at @s anchored eyes run scoreboard players set @e[tag=!Frames,type=!ds:sky_dmg_test,r=12] Flourish 7
+execute as @s[scores={move=15..30}] at @s if entity @e[type=ds:rock_throw,r=60,rm=12] run event entity @e[type=ds:rock_throw,r=12] ds:disappear
+execute as @s[scores={move=1..7},tag=sky_return_granite_pi] at @s run event entity @e[type=ds:sky_dmg_test,c=1,r=10] ds:disappear
+execute as @s[scores={move=1..7},tag=sky_return_granite_pi] at @s run kill @e[family=projectile,family=!barrier,tag=!DomainExpansion,tag=!not_projectile,family=!domain,family=!domain_clasher,r=12]
+execute as @s[scores={move=1..5}] at @s run execute as @e[family=projectile,r=50,type=!ds:body_repel_max1,type=!ds:body_repel_max2] at @s run event entity @s ds:despawn_self
+tag @s[scores={move=1..4}] remove sky_return_blood
+tag @s[scores={move=1..4}] remove sky_return_fuga
+tag @s[scores={move=1..4}] remove sky_return_human_bullet
+tag @s[scores={move=1..4}] remove sky_return_human_worm
+tag @s[scores={move=1..4}] remove sky_return_body_repel_max
+tag @s[scores={move=1..4}] remove sky_return_small_granite
+tag @s[scores={move=1..4}] remove sky_return_dismantle
+tag @s[scores={move=1..4}] remove sky_return_fire
+tag @s[scores={move=1..4}] remove sky_return_granite_w
+tag @s[scores={move=1..4}] remove sky_return_granite_b
+tag @s[scores={move=1..4}] remove sky_return_granite_g
+tag @s[scores={move=1..4}] remove sky_return_granite_p
+tag @s[scores={move=1..4}] remove sky_return_granite_r
+tag @s[scores={move=1..4}] remove sky_return_granite_pi
+@@sky/sky3
+playanimation @s[scores={move=25..26}] animation.sky.ab3
+tag @s[scores={move=1..2},tag=form3] remove form3
+scoreboard players set @s[scores={move=25..26}] Frames 25
+tag @s[scores={move=25..26},tag=!Frames] add Frames
+tag @s[scores={move=1..,move=!4..24},tag=sky3_cancelled] remove sky3_cancelled
+tag @s[scores={move=5..24,Stun=1..},tag=!sky3_cancelled] add sky3_cancelled
+execute as @s[scores={move=17..21}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=17..21}] at @s run playsound mob.slime.jump @a[r=100] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=21}] at @s run camerashake add @a[r=40] 0.2 0.15 rotational
+execute as @s[scores={move=20}] at @s run playsound mob.elderguardian.curse @a[r=100] ~~1~ 9999 0.5 9999
+effect @s[scores={move=20}] invisibility 1 1 true
+effect @s[scores={move=4..5}] clear invisibility
+execute as @s[scores={move=5..20}] at @s run scriptevent ds:fly
+execute as @s[scores={move=5..20}] at @s run particle ds:skystream2 ~~1.25~
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run playsound mob.distort3 @a[r=100] ~~1~ 9999 1.5 9999
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run particle ds:impact_vfx1 ~~1~
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run camerashake add @a[r=20] 2 0.25
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run damage @s 8 override
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run damage @s 0 override entity @s
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run scoreboard players add @s Evade 12
+execute as @s[scores={move=5..20},tag=!sky3_cancelled] at @s as @e[tag=!Frames,r=3] at @s unless entity @s[scores={Stun=25..}] run scoreboard players set @s Stun 30
+execute as @s[scores={move=20}] at @s run function damages/sky_damage
+execute as @s[scores={move=5}] at @s run function damages/sky_damage
+execute as @s[scores={move=5}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=5}] at @s run playsound mob.slime.jump @a[r=100] ~~1~ 99999 0.85 99999
+execute as @s[scores={move=5}] at @s run camerashake add @a[r=40] 0.2 0.15 rotational
+execute as @s[scores={move=5}] at @s run playsound mob.elderguardian.curse @a[r=100] ~~1~ 9999 0.5 9999
+execute as @s[scores={move=5..20},type=!Player] at @s run tp @s ^^^0.6 true
+execute as @s[scores={move=5..20},type=!Player] at @s run tp @s ^^^0.6 true
+execute as @s[scores={move=5..20},type=!Player] at @s run tp @s ^^^0.6 true
+execute as @s[scores={move=5..20},type=!Player] at @s run tp @s ~~~ facing @e[rm=0.15,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand,type=!ds:uro_takako,r=80,c=1]
+@@sky/sky4
+playanimation @s[scores={move=15}] animation.sky.ab4
+tag @s[scores={move=1..2},tag=cantuse] remove cantuse
+tag @s[scores={move=1..2},tag=noStunnedAnim] remove noStunnedAnim
+tag @s[scores={move=1..2},tag=form4] remove form4
+tag @s[scores={move=11..,Stun=1..},tag=form4] remove form4
+playanimation @s[scores={move=11..,Stun=1..},tag=!noStunnedAnim] animation.stunned
+scoreboard players set @s[scores={move=11..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=16..}] Camera 4
+scoreboard players set @s[scores={move=9..10}] Frames 4
+scoreboard players set @s[scores={move=5..}] Move 4
+execute as @s[type=!player,scores={move=3..}] at @s run tp @s ~~~~ 0
+tag @s[scores={move=10..11},tag=!Frames] add Frames
+execute as @s[scores={move=10},type=player] at @s run scriptevent ds:raycast 80 4 sky/aether_trg
+execute as @s[type=!player,scores={move=10}] at @s unless entity @e[tag=aether_TRG,r=90] run tag @e[family=boss,r=80,c=1,rm=5,tag=!Frames,tag=!creative,tag=!spectator] add aether_TRG
+scoreboard players set @e[tag=aether_TRG,r=85,c=1] Stun 25
+scoreboard players set @e[tag=aether_TRG,r=85,c=1,scores={knockdown=1..}] knockdown 0
+scoreboard players set @e[tag=aether_TRG,r=85,c=1,scores={knock=1..}] knock 0
+execute as @s[scores={move=9..13}] at @s run particle ds:skystream2 ~~~
+execute as @s[scores={move=9..13}] at @s run particle ds:skystream2 ~~1~
+execute as @s[scores={move=9..11}] at @s run playsound mob.slime.jump @a ~~~ 1 2
+execute as @s[scores={move=9..11}] at @s run playsound mob.whoosh1 @a ~~~ 1 3
+execute as @s[scores={move=3..4}] at @s run particle ds:skystream2 ~~~
+execute as @s[scores={move=3..4}] at @s run particle ds:skystream2 ~~1~
+execute as @s[scores={move=3..4}] at @s run playsound mob.slime.jump @a ~~~ 1 2
+execute as @s[scores={move=3..4}] at @s run playsound mob.whoosh1 @a ~~~ 1 3
+execute as @s[scores={move=3..12}] at @s positioned ^^^80 if entity @e[tag=aether_TRG,r=80,c=1] run scoreboard players set @s move 1003
+tag @s[scores={move=999..},tag=cantuse3] remove cantuse3
+tag @s[scores={move=16..},tag=!noStunnedAnim] add noStunnedAnim
+playanimation @s[scores={move=1002..},type=player] animation.sky.ab4b
+playanimation @s[scores={move=1002..},type=!player] animation.sky.ab4b_mob
+execute as  @s[scores={move=1002..}] at @s run playanimation @e[tag=aether_TRG,c=1] animation.sky.ab4b2
+execute as @s[scores={move=985..}] at @s run particle ds:skystream2 ~~~
+execute as @s[scores={move=985..}] at @s run particle ds:skystream2 ~~1~
+execute as @s[scores={move=985..}] at @s run particle ds:skystream2 ~~2~
+execute as @s[scores={move=999..}] at @s run playsound mob.slime.jump @a ~~~ 1 2
+execute as @s[scores={move=999..}] at @s run playsound mob.whoosh1 @a ~~~ 1 3
+execute as @s[scores={move=1000..1003}] at @s positioned ^^^80 as @e[tag=aether_TRG,r=80,c=1] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=1000..1003},type=player] at @s positioned ^^^80 at @e[tag=aether_TRG,r=80,c=1] run tp @s ^^^-3.5 facing @e[tag=aether_TRG,r=0.15,c=1]
+execute as @s[scores={move=900..1000}] at @s run tp @s ~~~ facing @e[tag=aether_TRG,r=5,c=1]
+execute as @s[scores={move=999..1000}] at @s run tp @e[tag=aether_TRG,r=25,c=1] ^^^3 facing ^^^10
+execute as @s[scores={move=999..1000}] at @s run execute as @e[tag=aether_TRG,r=25,c=1] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=900..1000}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=953..1000}] at @s if block ~~-1~ air run tp @e[tag=aether_TRG,r=25,c=1] ^^^3 facing ^^^10
+event entity @s[scores={move=999..1000}] aether_collapse
+execute as @s[scores={move=998..1000}] at @s run camera @s set minecraft:free pos ^3^1.3^0.6 facing ^^2^0.5
+execute as @s[scores={move=998..1000}] at @s run camera @p[tag=aether_TRG,c=1] set minecraft:free pos ^3^1.3^0.6 facing ^^2^0.5
+execute as @s[scores={move=986..987}] at @s run camera @s set minecraft:free ease 0.25 in_out_circ pos ^15^8^1 facing ^^2^3
+execute as @s[scores={move=986..987}] at @s run camera @p[tag=aether_TRG,c=1] set minecraft:free ease 0.25 in_out_circ pos ^15^8^1 facing ^^2^3
+execute as @s[scores={move=900..980}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=950..980}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run tp @s ^^^0.15
+execute as @s[scores={move=986}] at @s run playsound mob.elderguardian.curse @a[r=100] ^^1^1 99999 0.5 99999
+execute as @s[scores={move=986}] at @s run playsound mob.distort3 @a[r=100] ^^1^1 99999 0.5 99999
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ^^0.5^-1 air run tp @s ^^^-1
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ^^0.5^-1 air run tp @s ^^^-1
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ^^0.5^-1 air run tp @s ^^^-1
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ^^0.5^-1 air run tp @s ^^^-1
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ^^0.5^-1 air run tp @s ^^^-1
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ^^0.5^-1 air run tp @s ^^^-1
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if block ^^0.5^-1 air run tp @s ^^^-1
+execute as @s[scores={move=953}] at @s run  camerashake add @a[r=100] 2 0.3 rotational
+execute as @s[scores={move=953}] at @s run particle ds:invert
+execute as @s[scores={move=952}] at @s run  particle ds:burst_impact ^^1^1
+execute as @s[scores={move=952}] at @s run summon gg:impact_frame
+execute as @s[scores={move=949}] at @s run summon gg:impact_frame_black
+execute as @s[scores={move=945..952}] at @s run playsound mob.blasted2 @a[r=100] ^^1^1 99999 0.85 99999
+execute as @s[scores={move=952}] at @s run playsound mob.red2 @a[r=100] ^^1^1 99999 0.5 99999
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run particle ds:slam_dust2 ~~1~
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run particle ds:ground_pound2 ~~1~
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run particle ds:ground_impact2 ~~1~
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run playsound mob.rubble1 @a[r=100] ~~1~ 99999 0.8 99999
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run camerashake add @a[r=100] 0.1 0.15
+scoreboard players set @e[tag=aether_TRG] Stun 20
+execute as @s[scores={move=940..953}] at @s run execute as @e[tag=aether_TRG] at @s run tp @s ~~~ facing @e[tag=form4,c=1,scores={move=940..}]
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s if entity @p[tag=griefable] run summon ds:lapse_explode
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run damage @s 3 override
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run scoreboard players set @s Hit 3
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run scoreboard players set @s knockdown 95
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run scoreboard players add @s Evade 5
+execute as @s[scores={move=940..952}] at @s run execute as @e[tag=aether_TRG,c=1] at @s run camera @s clear
+execute as @s[scores={move=950..952}] at @s run camera @s set minecraft:free ease 0.25 in_out_circ pos ^15^8^-10 facing ^^2^35
+event entity @s[scores={move=940..952},has_property={property:heart=1..}] heart_off
+execute as @s[scores={move=955}] at @s positioned ^^^3 run function damages/sky_damage
+execute as @s[scores={move=937..939}] at @s run  tag @e[tag=aether_TRG,c=1] remove aether_TRG
+scoreboard players set @s[scores={move=930..935}] move 3
+@@sky/sky5
+playanimation @s[scores={move=40..41}] animation.sky.ab5
+tag @s[scores={move=31..,Stun=1..},tag=form5] remove form5
+playanimation @s[scores={move=31..,Stun=1..},tag=!noStunnedAnim] animation.stunned
+scoreboard players set @s[scores={move=31..,Stun=1..}] move 0
+tag @s[scores={move=1..3}] remove form5
+scoreboard players set @s[scores={move=40..}] Move 35
+scoreboard players set @s[scores={move=40..}] Camera 35
+execute as @s[scores={move=1..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=1..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=1..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=40}] at @s run playsound mob.enderdragon.flap @a[r=33] ~~1~ 9999 0.8 9999
+execute as @s[scores={move=40}] at @s run particle ds:ground_pound3
+execute as @s[scores={move=32}] at @s run playsound mob.enderdragon.flap @a[r=33] ~~1~ 9999 0.9 9999
+execute as @s[scores={move=32}] at @s run scriptevent ds:ripple_start_blanket height:1 width:2 speed:1 range:2 amount:0.5
+execute as @s[scores={move=20..23}] at @s run particle ds:turbo_intensity2
+execute as @s[scores={move=20..23}] at @s run particle ds:turbo_intensity3
+execute as @s[scores={move=20}] at @s run camerashake add @a[r=100] 2 2
+execute as @s[scores={move=20}] at @s run particle ds:burst_impact
+execute as @s[scores={move=22}] at @s run playsound mob.whoosh3 @a[r=100] ~~1~ 999999 1 999999
+execute as @s[scores={move=20}] at @s run playsound mob.distort3 @a[r=100] ~~1~ 999999 0.05 999999
+execute as @s[scores={move=20}] at @s run playsound mob.distort3 @a[r=100] ~~1~ 999999 1.5 999999
+execute as @s[scores={move=20}] at @s run playsound mob.distort3 @a[r=100] ~~1~ 999999 0.2 999999
+execute as @s[scores={move=20}] at @s run summon ds:tick_6_world
+execute as @s[scores={move=19..20}] at @s run scoreboard players set @e[type=ds:tick_6_world,c=1] Deleter 100
+execute as @s[scores={move=20}] at @s unless entity @e[tag=DomainExpansion,r=60] run scriptevent ds:ripple_start_blanket height:3 width:3 speed:1 range:24 amount:2
+@@sky/sky6
+playanimation @s[scores={move=40..41}] animation.sky.ab6
+tag @s[scores={move=36..,Stun=1..},tag=form6] remove form6
+playanimation @s[scores={move=36..,Stun=1..},tag=!noStunnedAnim] animation.stunned
+scoreboard players set @s[scores={move=36..,Stun=1..}] move 0
+tag @s[scores={move=1..3}] remove form6
+scoreboard players set @s[scores={move=40..}] Move 35
+execute as @s[scores={move=35..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=35..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=35..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=40}] at @s run playsound mob.enderdragon.flap @a[r=33] ~~1~ 9999 1.25 9999
+execute as @s[scores={move=40}] at @s run particle ds:ground_pound3
+execute as @s[scores={move=34}] at @s run particle ds:leap
+execute as @s[scores={move=34}] at @s run particle ds:burst_impact4
+execute as @s[scores={move=34}] at @s unless block ~~-1~ air run particle ds:rubble5
+execute as @s[scores={move=34}] at @s unless block ~~-1~ air run particle ds:ground_pound1
+execute as @s[scores={move=34}] at @s unless block ~~-1~ air run particle ds:ground_pound2
+execute as @s[scores={move=34}] at @s run particle ds:ground_pound3
+execute as @s[scores={move=34}] at @s run particle ds:ground_pound4
+execute as @s[scores={move=34}] at @s run particle ds:ground_pound5
+execute as @s[scores={move=34}] at @s run camerashake add @a[r=20] 0.25 0.15
+execute as @s[scores={move=34}] at @s run playsound random.whoosh @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={move=34}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={move=34}] at @s unless block ~~-1~ air run playsound mob.rubble1 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={move=34}] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.45 99999
+execute as @s[scores={move=32..34}] at @s run scriptevent ds:leapforwards
+execute as @s[scores={move=32}] at @s run playsound random.whoosh @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={move=30}] at @s run playsound random.whoosh @a[r=100] ~~~ 99999 1.25 99999
+execute as @s[scores={move=24..26}] at @s run scriptevent ds:fly
+execute as @s[scores={move=10..20}] at @s run scriptevent ds:downfall
+execute as @s[scores={move=10..20}] at @s if block ~~-0.5~ air run scoreboard players set @s move 15
+execute as @s[scores={move=10..20}] at @s unless block ~~-0.5~ air run scoreboard players set @s move 1001
+execute as @s[scores={move=10..20}] at @s unless block ~~-1.5~ air run scoreboard players set @s move 1001
+scoreboard players set @s[scores={move=1..35},tag=!Frames] Frames 20
+playanimation @s[scores={move=1000..1001}] animation.sky.ab6b
+execute as @s[scores={move=999}] at @s run camerashake add @a[r=100] 2 0.25
+execute as @s[scores={move=999..}] at @s run particle ds:up_kick1
+execute as @s[scores={move=999..}] at @s run particle ds:up_kick2
+execute as @s[scores={move=999..}] at @s run particle ds:up_kick3
+execute as @s[scores={move=999..}] at @s run particle ds:large_slam_p
+execute as @s[scores={move=999..}] at @s run particle ds:turbo_intensity2
+execute as @s[scores={move=999..}] at @s run particle ds:turbo_intensity3
+execute as @s[scores={move=999}] at @s run particle ds:burst_impact
+execute as @s[scores={move=999}] at @s run playsound mob.shock1 @a[r=100] ~~1~ 999999 3 999999
+execute as @s[scores={move=999}] at @s run playsound mob.whoosh3 @a[r=100] ~~1~ 999999 1 999999
+execute as @s[scores={move=999}] at @s run playsound mob.distort3 @a[r=100] ~~1~ 999999 0.05 999999
+execute as @s[scores={move=999}] at @s run playsound mob.distort3 @a[r=100] ~~1~ 999999 1.5 999999
+execute as @s[scores={move=999}] at @s run playsound mob.distort3 @a[r=100] ~~1~ 999999 0.2 999999
+execute as @s[scores={move=999}] at @s run summon ds:tick_6_world
+execute as @s[scores={move=998..999}] at @s run scoreboard players set @e[type=ds:tick_6_world,c=1] Deleter 100
+execute as @s[scores={move=999}] at @s unless entity @e[tag=DomainExpansion,r=60] run scriptevent ds:ripple_start height:3 width:3 speed:1 range:24 amount:2
+tag @s[scores={move=999..},tag=!Frames] add Frames
+tag @s[scores={move=997..998}] remove Frames
+execute as @s[scores={move=997..999}] at @s run particle ds:aether_collapse1 ~~0.5~
+execute as @s[scores={move=997..999}] at @s run particle ds:aether_collapse2 ~~0.5~
+execute as @s[scores={move=999}] at @s run execute as @e[tag=!Frames,r=14] at @s run function randomstun3
+execute as @s[scores={move=999}] at @s run damage @e[tag=!Frames,r=14] 25 override entity @s
+execute as @s[scores={move=999}] at @s run scoreboard players set @e[tag=!Frames,r=14] Stun 30
+execute as @s[scores={move=999}] at @s run scoreboard players add @e[tag=!Frames,r=14] Evade 20
+execute as @s[scores={move=998}] at @s run summon ds:knockback
+execute as @s[scores={move=987}] at @s run playsound mob.enderdragon.flap @a[r=33] ~~1~ 9999 0.8 9999
+execute as @s[scores={move=985..999}] at @s run execute as @e[type=ds:tick_6_world,c=1,r=100] run tp @s ~~~~ 0
+execute as @s[scores={move=985..999}] at @s run tp @s ~~~~ 0
+scoreboard players set @s[scores={move=985..987}] move 3
+@@sky/sky7
+playanimation @s[scores={move=30..31}] animation.sky.ab7
+tag @s[scores={move=1..2},tag=form7] remove form7
+tag @s[scores={move=26..,Stun=1..},tag=form7] remove form7
+playanimation @s[scores={move=26..,Stun=1..},tag=!noStunnedAnim] animation.stunned
+scoreboard players set @s[scores={move=26..,Stun=1..}] move 0
+scoreboard players set @s[scores={Frames=0..3,move=5..25},tag=!Frames] Frames 6
+tag @s[scores={move=5..25},tag=!noStunnedAnim] add noStunnedAnim
+execute if block ~~-1~ air if block ~~-2~ air run tp @s ~~~~ 0
+execute as @s[scores={move=11..}] if block ~~-1~ air if block ~~-2~ air positioned ^^^3 run execute as  @e[tag=!Frames,r=2.95] at @s run tp @s ~~~ facing @e[scores={move=11..25},c=1,r=5]
+scoreboard players set @s[scores={move=15..25,Move=0..4}] Move 20
+scoreboard players set @s[scores={move=15..,Camera=0..4}] Camera 20
+execute as @s[scores={move=30}] at @s run playsound random.whoosh @a[r=33] ~~~ 9999 1.5 9999
+execute as @s[scores={move=30}] at @s run scriptevent ds:knockback 7
+execute as @s[scores={move=25..30}] at @s positioned ^^^2 if entity @e[tag=!Frames,r=1.95] at @s run tp @s ~~~~
+execute as @s[scores={move=25}] at @s run playsound mob.distort3 @a[r=50] ^^1^1 99999 2 99999
+execute as @s[scores={move=25}] at @s run playsound random.glass_crunch @a[r=50] ^^1^1 99999 1 99999
+execute as @s[scores={move=11}] at @s run playsound random.glass_break @a[r=50] ^^1^1 99999 1 99999
+execute as @s[scores={move=11..25}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95] Camera 25
+execute as @s[scores={move=11..25}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95] Move 25
+execute as @s[scores={move=11..25}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95] Stun 25
+execute as @s[scores={move=11..25}] at @s positioned ^^^3 run playanimation @e[tag=!Frames,r=2.95] animation.stunned
+execute as @s[scores={move=11..25}] at @s positioned ^^^3 run execute as  @e[tag=!Frames,r=2.95] at @s run tp @s ~~~ facing @e[scores={move=11..25},c=1,r=5]
+execute as @s[scores={move=10}] at @s positioned ^^^1 run playsound mob.distort3 @a[r=50] ~~~ 99999 0.5 99999
+execute as @s[scores={move=10..25},type=!Player] at @s run tp @s ~~~~ 0
+scoreboard players set @e[scores={move=10..11}] atk 2
+execute as @s[scores={move=10}] at @s positioned ^^^3 run  function damages/sky_damage
+execute as @s[scores={move=10}] at @s positioned ^^^3 run camerashake add @a[r=33] 2 0.25 rotational
+execute as @s[scores={move=10}] at @s positioned ^^^1 run particle ds:invert
+execute as @s[scores={move=10}] at @s positioned ^^^1 run summon gg:impact_frame_black
+execute as @s[scores={move=10}] at @s positioned ^^^3 run execute as @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] at @s run playsound mob.blood3 @a[r=100] ~~1~ 99999 1.25 9999
+execute as @s[scores={move=10}] at @s positioned ^^^3 run execute as @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] at @s run particle ds:blood_hit ~~1~
+execute as @s[scores={move=10}] at @s positioned ^^^3 run execute as @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=10}] at @s positioned ^^^3 run execute as @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] at @s if block ~~-1~ air run scoreboard players set @s knockdown 95
+execute as @s[scores={move=10}] at @s positioned ^^^3 run execute as @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] at @s if block ~~-1~ air run scriptevent ds:knockback -15
+execute as @s[scores={move=10}] at @s positioned ^^^3 run damage @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] 35 override
+execute as @s[scores={move=10}] at @s positioned ^^^3 run execute as @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] at @s unless block ~~-1~ air run scoreboard players set @s Flourish 9
+execute as @s[scores={move=10}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] Stun 35
+execute as @s[scores={move=10}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95,type=!gg:impact_frame,type=!gg:impact_frame_black] Hit 3
+@@sky/sky8
+playanimation @s[scores={move=55..56}] animation.sky.ab8
+tag @s[scores={move=1..2},tag=form8] remove form8
+tag @s[scores={move=26..,Stun=1..},tag=form8] remove form8
+playanimation @s[scores={move=26..,Stun=1..},tag=!noStunnedAnim] animation.stunned
+scoreboard players set @s[scores={move=26..,Stun=1..}] move 0
+scoreboard players set @s[scores={Frames=0..3,move=5..25},tag=!Frames] Frames 6
+tag @s[scores={move=5..25},tag=!noStunnedAnim] add noStunnedAnim
+scoreboard players set @s[scores={move=15..25,Move=0..4}] Move 20
+execute as @s[type=!player,scores={move=1..40}] at @s run tp @s ~~~ facing @e[type=!item,type=!xp_orb,family=!damage,family=!projectile,type=!ds:projectile,type=!arrow,family=!despawncito,tag=!unselect,type=!armor_stand,type=!ds:uro_takako,r=100,c=1]
+execute as @s[scores={move=55}] at @s run particle ds:leap
+execute as @s[scores={move=55}] at @s run particle ds:burst_impact4
+execute as @s[scores={move=55}] at @s unless block ~~-1~ air run particle ds:rubble5
+execute as @s[scores={move=55}] at @s unless block ~~-1~ air run particle ds:ground_pound1
+execute as @s[scores={move=55}] at @s unless block ~~-1~ air run particle ds:ground_pound2
+execute as @s[scores={move=55}] at @s run particle ds:ground_pound3
+execute as @s[scores={move=55}] at @s run particle ds:ground_pound4
+execute as @s[scores={move=55}] at @s run particle ds:ground_pound5
+execute as @s[scores={move=55}] at @s run camerashake add @a[r=20] 0.25 0.15
+execute as @s[scores={move=55}] at @s run playsound random.whoosh @a[r=100] ~~~ 99999 1.25 99999
+execute as @s[scores={move=55}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={move=55}] at @s unless block ~~-1~ air run playsound mob.rubble1 @a[r=100] ~~~ 99999 0.9 99999
+execute as @s[scores={move=55}] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.45 99999
+execute as @s[scores={move=55}] at @s run playsound random.whoosh @a[r=33] ~~~ 9999 1.5 9999
+execute as @s[scores={move=55}] at @s run scriptevent ds:leap_back
+execute as @s[scores={move=54..55}] at @s positioned ^^^50 as @e[c=1,scores={knockdown=1..},r=50] at @s if block ~~-1~ air if block ~~-2~ air if block ~~-3~ air if block ~~-4~ air if block ~~-5~ air run tp @s ~~~~ 0
+execute as @s[scores={move=54..55}] at @s positioned ^^^50 as @e[c=1,scores={knockdown=1..},r=50] at @s if block ~~-1~ air if block ~~-2~ air if block ~~-3~ air if block ~~-4~ air if block ~~-5~ air run tag @s add aetherTRG
+execute as @s[scores={move=26..53}] at @s as @e[tag=aetherTRG,c=1] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=26..53}] at @s at @e[tag=aetherTRG,c=1] run tp @s ^^1^-1.5 facing @e[tag=aetherTRG,c=1]
+execute as @s[scores={move=26..53}] at @s run playanimation @e[tag=aetherTRG,c=1,r=10] animation.stunned3
+execute as @s[scores={move=40}] at @s run playsound mob.distort3 @a[r=50] ^^1^1 99999 2 99999
+execute as @s[scores={move=35}] at @s run playsound random.glass_crunch @a[r=50] ^^1^1 99999 1 99999
+effect @s[scores={move=44..45}] slow_falling 2 1 true
+execute as @s[scores={move=25..45}] at @s run scriptevent ds:antiair
+execute as @s[scores={move=25}] at @s run playsound random.glass_break @a[r=50] ^^1^1 99999 1 99999
+execute as @s[scores={move=24}] at @s positioned ^^^1 run playsound mob.distort3 @a[r=50] ~~~ 99999 0.5 99999
+scoreboard players set @s[scores={move=15..25,Camera=0..4}] Camera 20
+execute as @s[scores={move=11..55}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95] Camera 25
+execute as @s[scores={move=11..55}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95] Move 25
+execute as @s[scores={move=11..55}] at @s positioned ^^^3 run scoreboard players set @e[tag=!Frames,r=2.95] Stun 25
+execute as @s[scores={move=11..55}] at @s positioned ^^^3 run playanimation @e[tag=!Frames,r=2.95] animation.stunned
+execute as @s[scores={move=11..55}] at @s positioned ^^^3 as  @e[tag=!Frames,r=2.95] at @s run tp @s ~~~
+execute as @s[scores={move=24..30}] at @s positioned ^^^3 as @e[tag=sky_adapted,family=mahoraga,c=1] at @s run playsound mob.whoosh2 @a[r=100] ~~1~ 99999 3.5 99999
+execute as @s[scores={move=24..30}] at @s positioned ^^^3 as @e[tag=sky_adapted,family=mahoraga,c=1] at @s run particle ds:agito_dash1 ~~~
+execute as @s[scores={move=24..30}] at @s positioned ^^^3 run tp @e[tag=sky_adapted,family=mahoraga,c=1] ^^^-3 facing @s
+execute as @s[scores={move=40}] at @s positioned ^^^3 run playsound mob.icebreaker1 @a[r=100] ~~1~ 99999 1 99999
+execute as @s[scores={move=26..54}] at @s run scoreboard players set @e[tag=aetherTRG,r=10,scores={knockdown=1..}] knockdown 0
+execute as @s[scores={move=26..54}] at @s run scoreboard players set @e[tag=aetherTRG,r=10,scores={knock=1..}] knock 0
+scoreboard players set @s[scores={move=20..27},tag=!Frames] Frames 10
+tag @s[scores={move=25..26},tag=!Frames] add Frames
+tag @s[scores={move=20..21}] remove Frames
+execute as @s[scores={move=28}] at @s positioned ^^^3 run camerashake add @a[r=100] 0.08 0.15
+execute as @s[scores={move=28}] at @s positioned ^^^3 run playsound mob.turbulence @a[r=100] 99999 1.5 99999
+execute as @s[scores={move=25}] at @s positioned ^^^3 run camerashake add @a[r=33] 2 0.25 rotational
+execute as @s[scores={move=25}] at @s positioned ^^^1 run particle ds:invert
+execute as @s[scores={move=24}] at @s positioned ^^^1 run summon gg:impact_frame
+execute as @s[scores={move=25}] at @s positioned ^^-1^1.5 run tp @e[tag=aetherTRG,c=1] ~~~ facing ^^^100
+execute as @s[scores={move=25}] at @s as @e[tag=aetherTRG,c=1] at @s run function sky/missiletp
+execute as @s[scores={move=25}] at @s run scriptevent ds:raycast 80 6 sky/thin_ice_missile pierces:true destruction:true 3 2 piercesEnemies:true ignoretag:Frames particle:ds:ice_breaker9
+execute as @s[scores={move=25}] at @s positioned ^^^1 run camerashake add @a[r=100] 2 0.15 rotational
+tag @s[scores={move=1..5}] remove uro_missile
+execute as @s[scores={move=54}] at @s if entity @e[tag=aetherTRG,c=1,r=10] run camera @s set minecraft:free pos ^10^2^2 facing ~~1~
+execute as @s[scores={move=54}] at @s if entity @e[tag=aetherTRG,c=1,r=10] run camera @p[tag=aetherTRG,c=1,r=10] set minecraft:free pos ^10^2^2 facing ~~1~
+execute as @s[scores={move=35}] at @s if entity @e[tag=aetherTRG,c=1,r=10] run camera @s set minecraft:free pos ^1^2^-1 facing ^^^0.5
+execute as @s[scores={move=35}] at @s if entity @e[tag=aetherTRG,c=1,r=10] run camera @p[tag=aetherTRG,c=1,r=10] set minecraft:free pos ^1^2^-1 facing ^^^0.5
+execute as @s[scores={move=27}] at @s if entity @e[tag=aetherTRG,c=1,r=10] run camera @s set minecraft:free pos ^7^^33 facing ~~1~
+camera @s[scores={move=1..5}] clear
+@@sky/sky9
+playanimation @s[scores={move=90..91}] animation.sky.ab9
+tag @s[scores={move=1..2},tag=form9] remove form9
+scoreboard players set @s[scores={Frames=0..3,move=6..},tag=!Frames] Frames 7
+tag @s[scores={move=6..26},tag=!noStunnedAnim] add noStunnedAnim
+scoreboard players set @s[scores={move=16..,Move=0..5}] Move 20
+scoreboard players set @s[scores={move=16..,Camera=0..5}] Camera 20
+execute as @s[scores={move=90}] at @s run particle ds:leap
+execute as @s[scores={move=90}] at @s run particle ds:burst_impact5
+execute as @s[scores={move=90}] at @s unless block ~~-1~ air run particle ds:rubble6
+execute as @s[scores={move=90}] at @s unless block ~~-1~ air run particle ds:ground_pound1
+execute as @s[scores={move=90}] at @s unless block ~~-1~ air run particle ds:ground_pound2
+execute as @s[scores={move=90}] at @s run particle ds:ground_pound3
+execute as @s[scores={move=90}] at @s run particle ds:ground_pound5
+execute as @s[scores={move=90}] at @s run particle ds:ground_pound6
+execute as @s[scores={move=90}] at @s run camerashake add @a[r=20] 0.26 0.16
+execute as @s[scores={move=90}] at @s run playsound random.whoosh @a[r=200] ~~~ 99999 1.26 99999
+execute as @s[scores={move=90}] at @s run playsound breeze_wind_charge.burst @a[r=200] ~~~ 99999 1 99999
+execute as @s[scores={move=90}] at @s unless block ~~-1~ air run playsound mob.rubble1 @a[r=200] ~~~ 99999 0.9 99999
+execute as @s[scores={move=90}] at @s run playsound mob.wither.shoot @a[r=200] ~~~ 99999 0.56 99999
+execute as @s[scores={move=90}] at @s run playsound random.whoosh @a[r=33] ~~~ 9999 1.26 9999
+execute as @s[scores={move=89..90}] at @s run scriptevent ds:leapforwards
+effect @s[scores={move=90}] levitation 1 30 true
+effect @s[scores={move=79..90}] slow_falling 8 1 true
+execute as @s[scores={move=69..70}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=69..70}] at @s run fill ~~-1~ ~~-1~ barrier [] replace air
+event entity @s[scores={move=70..71}] sky_fabric_quad
+execute as @s[scores={move=41..70}] at @s run camera @s set minecraft:free pos ^1^-6^1 facing ~~3~
+execute as @s[scores={move=39..40}] at @s run camera @s set minecraft:free pos ^12^-16^16 facing ~~3~
+execute as @s[scores={move=60..70}] at @s run playsound breeze_wind_charge.burst @a[r=100] ~~~ 99999 0.33 99999
+execute as @s[scores={move=68..70}] at @s run playsound mob.slime.jump @a[r=100] ~~1~ 9999 0.5 9999
+execute as @s[scores={move=68..70}] at @s run playsound mob.disfigure2 @a[r=100] ~~1~ 9999 0.5 9999
+execute as @s[scores={move=60..65}] at @s run playsound mob.elderguardian.curse @a[r=100] ~~1~ 9999 0.35 9999
+execute as @s[scores={move=32..70}] at @s run camerashake add @a[r=100] 0.1 0.1
+execute as @s[scores={move=70}] at @s run particle ds:hailbreaker1 ~~2~
+execute as @s[scores={move=70}] at @s run particle ds:hailbreaker2 ~~2~
+execute as @s[scores={move=70}] at @s run particle ds:hailbreaker3 ~~2~
+execute as @s[scores={move=60}] at @s run particle ds:hailbreaker1 ~~2~
+execute as @s[scores={move=60}] at @s run particle ds:hailbreaker2 ~~2~
+execute as @s[scores={move=60}] at @s run particle ds:hailbreaker3 ~~2~
+execute as @s[scores={move=70}] at @s run particle ds:hailbreaker4 ~~2~
+execute as @s[scores={move=50}] at @s run particle ds:hailbreaker4 ~~2~
+execute as @s[scores={move=60}] at @s run particle ds:ice_breaker ~~-2~
+execute as @s[scores={move=55}] at @s run particle ds:ice_breaker ~~-2~
+execute as @s[scores={move=50}] at @s run particle ds:ice_breaker ~~-2~
+execute as @s[scores={move=45}] at @s run particle ds:ice_breaker ~~-2~
+execute as @s[scores={move=40}] at @s run particle ds:ice_breaker ~~-2~
+execute as @s[scores={move=35}] at @s run particle ds:ice_breaker ~~-2~
+execute as @s[scores={move=31}] at @s run particle ds:ice_breaker7 ~~-2~
+execute as @s[scores={move=31}] at @s run particle ds:ice_breaker11 ~~-2~
+execute as @s[scores={move=40}] at @s run playsound mob.icebreaker2 @a[r=200] ~~~ 99999 1 99999
+execute as @s[scores={move=40}] at @s run execute as @a[r=100] at @s run playsound music.icebreaker2 @s ~~~ 99999 1 99999
+execute as @s[scores={move=30}] at @s run particle ds:invert ^5^-3^5
+execute as @s[scores={move=28}] at @s run particle ds:invert ^5^-3^5
+execute as @s[scores={move=30}] at @s run playsound mob.distort3 @a[r=200] ^7^-13^10 99999 1.5 99999
+execute as @s[scores={move=30}] at @s run playsound mob.distort3 @a[r=200] ~~~ 99999 1.5 99999
+execute as @s[scores={move=30}] at @s run playsound random.glass_crunch @a[r=200] ^7^-13^13 99999 0.75 99999
+execute as @s[scores={move=30}] at @s run playsound random.glass_crunch @a[r=200] ~~~ 99999 0.75 99999
+execute as @s[scores={move=30}] at @s run particle ds:ice_breaker ~~-1~
+execute as @s[scores={move=30}] at @s run particle ds:ice_breaker ~~-1~
+execute as @s[scores={move=30}] at @s run particle ds:ice_breaker ~~-1~
+execute as @s[scores={move=30}] at @s run particle ds:ice_breaker4b ~~-1~
+execute as @s[scores={move=30}] at @s run camerashake add @a[r=200] 2 0.1
+execute as @s[scores={move=10}] at @s run particle ds:invert
+execute as @s[scores={move=10}] at @s run summon gg:impact_frame ~~-20~3
+execute as @s[scores={move=8}] at @s run summon gg:impact_frame_black ~~-20~3
+execute as @s[scores={move=8..10}] at @s run  particle ds:air_impact
+execute as @s[scores={move=8..10}] at @s run particle ds:ice_breaker5 ~~-2~
+execute as @s[scores={move=8..10}] at @s run particle ds:ice_breaker6 ~~-2~
+execute as @s[scores={move=8..10}] at @s run particle ds:ice_breaker7 ~~-2~
+execute as @s[scores={move=8..15}] at @s run particle ds:ice_breaker8 ~~-2~
+execute as @s[scores={move=8..12}] at @s run particle ds:ice_breaker9 ~~-2~
+execute as @s[scores={move=8..10}] at @s run particle ds:ice_breaker10 ~~-2~
+execute as @s[scores={move=8..10}] at @s run particle ds:ice_breaker11 ~~-2~
+execute as @s[scores={move=8..10}] at @s run particle ds:ice_breaker12 ~~-2~
+execute as @s[scores={move=8..10}] at @s run camerashake add @a[r=200] 3 0.25
+execute as @s[scores={move=10}] at @s run playsound random.glass_break @a[r=200] ~~-3~ 99999 0.8 99999
+execute as @s[scores={move=10}] at @s run playsound mob.wither.shoot @a[r=200] ~~-3~ 99999 0.8 99999
+execute as @s[scores={move=10}] at @s run summon ds:projectile ~~-2.5~ facing ^^^10 none "hailbreaker"
+execute as @s[scores={move=1000..1001}] at @s run fill ~6~6~6~-6~-6~-6 air [] replace barrier
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ barrier run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air if block ~~-2~ air if block ~~-3~ air run tp @s ~~-3~
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s run execute as @e[scores={strength=38..},tag=!Frames,r=35,tag=!sky,type=!Player] at @s run function dashback
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s run particle ds:ice_breaker2
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s run particle ds:ice_breaker9
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s run particle ds:ground_pound4b
+execute as @s[scores={move=980..985}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s if block ~~-1~ air run spreadplayers ~ ~ 0 1 @s
+execute as @s[scores={move=980..}] at @s run execute as @e[name=hailbreaker,c=1,r=300] at @s unless block ~~-1~ air run function sky/hailbreaker
+event entity @s[scores={move=27..29}] heart_off
+scoreboard players set @s[scores={move=6..7}] move 1001
+execute as @s[scores={move=1000..1001}] at @s run camera @s set minecraft:free ease 0.25 in_sine pos ^15^-20^15 facing ~~-45~
+scoreboard players set @s[scores={move=980..981}] move 5
+event entity @s[scores={move=1..5}] heart_off
+execute as @s[scores={move=1..5}] at @s run fill ~6~6~6~-6~-6~-6 air [] replace barrier
+camera @s[scores={move=1..6}] clear
+@@sky/sky_clear
+clear @p ds:sky_fists
+clear @p ds:sky1
+clear @p ds:sky2
+clear @p ds:sky3
+clear @p ds:sky4
+tellraw @p {"rawtext":[{"translate":"text.skills_clear"}]}
+playsound random.orb @p
+@@sky/sky_click
+event entity @s[scores={move=0}] heart_off
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Sneaking=0,detect_jump=0,Energy=30..}] add wep1
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Energy=0..29,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,wep1=1..,Sneaking=0,detect_jump=0,Energy=30..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,wep1=1..,Sneaking=0,detect_jump=0,Energy=30..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.wep1"},{"score":{"name": "@p","objective": "wep1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Sneaking=0,detect_jump=0,Energy=30..}] move 16
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Sneaking=0,detect_jump=0,Energy=30..}] wep1 200
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Energy=30..,move=16,Sneaking=0,detect_jump=0}] Energy 30
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0,Energy=100..}] add wep2
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Energy=0..99,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,wep2=1..,Sneaking=1..,detect_jump=0,Energy=100..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,wep2=1..,Sneaking=1..,detect_jump=0,Energy=100..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.wep2"},{"score":{"name": "@p","objective": "wep2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0,Energy=100..}] move 51
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0,Energy=100..}] wep2 200
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Energy=100..,move=51,Sneaking=1..,detect_jump=0}] Energy 100
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=0,Sneaking=0,detect_jump=1..,Energy=100..}] add wep3
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=0,Energy=0..99,Sneaking=0,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=1..,Sneaking=0,detect_jump=1..,Energy=100..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=1..,Sneaking=0,detect_jump=1..,Energy=100..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.wep3"},{"score":{"name": "@p","objective": "wep3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=0,Sneaking=0,detect_jump=1..,Energy=100..}] move 41
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=0,Sneaking=0,detect_jump=1..,Energy=100..}] wep3 400
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky_fists,location=slot.weapon.mainhand},scores={Energy=100..,move=41,Sneaking=0,detect_jump=1..}] Energy 100
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=10..}] add form1
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Energy=0..9,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=10..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=10..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=10..}] move 11
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=10..}] ability1 40
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Energy=10..,move=11,Sneaking=0,detect_jump=0}] Energy 10
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=100..}] add form2
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Energy=0..99,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability2=1..,Sneaking=1..,detect_jump=0,Energy=100..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability2=1..,Sneaking=1..,detect_jump=0,Energy=100..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=100..}] move 76
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=100..}] ability2 400
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Energy=100..,move=76,Sneaking=1..,detect_jump=0}] Energy 100
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=1..,Energy=50..}] add form3
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Energy=0..49,Sneaking=0,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=1..,ability3=1..,Sneaking=0,detect_jump=1..,Energy=50..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=1..,ability3=1..,Sneaking=0,detect_jump=1..,Energy=50..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab3"},{"score":{"name": "@p","objective": "ability3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=1..,Energy=50..}] move 26
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=1..,Energy=50..}] ability3 150
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky1,location=slot.weapon.mainhand},scores={Energy=50..,move=26,Sneaking=0,detect_jump=1..}] Energy 50
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=0,detect_jump=0,Energy=200..}] add form5
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Energy=0..199,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability5=1..,Sneaking=0,detect_jump=0,Energy=200..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability5=1..,Sneaking=0,detect_jump=0,Energy=200..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab5"},{"score":{"name": "@p","objective": "ability5"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=0,detect_jump=0,Energy=200..}] move 41
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=0,detect_jump=0,Energy=200..}] ability5 600
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Energy=200..,move=41,Sneaking=0,detect_jump=0}] Energy 200
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Sneaking=0,detect_jump=1..,Energy=300..}] add form6
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Energy=0..299,Sneaking=0,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=1..,Sneaking=0,detect_jump=1..,Energy=300..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=1..,Sneaking=0,detect_jump=1..,Energy=300..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab6"},{"score":{"name": "@p","objective": "ability6"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Sneaking=0,detect_jump=1..,Energy=300..}] move 41
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Sneaking=0,detect_jump=1..,Energy=300..}] ability6 800
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky2,location=slot.weapon.mainhand},scores={Energy=300..,move=41,Sneaking=0,detect_jump=1..}] Energy 300
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=0,detect_jump=0,Energy=250..}] add form7
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Energy=0..249,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability7=1..,Sneaking=0,detect_jump=0,Energy=250..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability7=1..,Sneaking=0,detect_jump=0,Energy=250..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab7"},{"score":{"name": "@p","objective": "ability7"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=0,detect_jump=0,Energy=250..}] move 31
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=0,detect_jump=0,Energy=250..}] ability7 200
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Energy=250..,move=32,Sneaking=0,detect_jump=0}] Energy 250
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=0,Sneaking=0,detect_jump=1..,Energy=250..}] add form8
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=0,Energy=0..249,Sneaking=0,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=1..,Sneaking=0,detect_jump=1..,Energy=250..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=1..,Sneaking=0,detect_jump=1..,Energy=250..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab8"},{"score":{"name": "@p","objective": "ability8"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=0,Sneaking=0,detect_jump=1..,Energy=250..}] move 56
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability8=0,Sneaking=0,detect_jump=1..,Energy=250..}] ability8 400
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Energy=250..,move=56,Sneaking=0,detect_jump=1..}] Energy 250
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability9=0,Sneaking=1..,detect_jump=0,Energy=500..}] add form9
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability9=0,Energy=0..499,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability9=1..,Sneaking=1..,detect_jump=0,Energy=500..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability9=1..,Sneaking=1..,detect_jump=0,Energy=500..}] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.ab9"},{"score":{"name": "@p","objective": "ability9"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability9=0,Sneaking=1..,detect_jump=0,Energy=500..}] move 91
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability9=0,Sneaking=1..,detect_jump=0,Energy=500..}] ability9 1200
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky3,location=slot.weapon.mainhand},scores={Energy=500..,move=91,Sneaking=1..,detect_jump=0}] Energy 500
+tag @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,domainCD=0,Sneaking=0,detect_jump=0,Energy=1000..},tag=!cantdomain] add domain_start
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,domainCD=0,Energy=0..999,Sneaking=0,detect_jump=0,domainactive=0},tag=!cantdomain] at @s run playsound note.pling @s ~~~ 0.06 0.87
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,domainCD=1..,Energy=1000..,domainactive=0},tag=!cantdomain] at @s run playsound note.pling @s ~~~ 0.06 0.4
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,domainCD=1..,Energy=1000..,domainactive=0},tag=!cantdomain] at @s run tellraw @s {"rawtext":[{"translate":"text.sky.domain"},{"score":{"name": "@p","objective": "domainCD"}},{"text":"§c."}]}
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,domainCD=0,Energy=1000..},tag=!cantdomain] domainstart 102
+scoreboard players set @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,domainCD=0,Energy=1000..},tag=!cantdomain] domainCD 12000
+scoreboard players remove @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,Energy=1000..,domainstart=102},tag=!cantdomain] Energy 1000
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={domainactive=21..,domain=0}] at @s if entity @e[type=ds:unbound_sky] run tellraw @s {"rawtext":[{"translate":"text.cancelled_domain"}]}
+execute as @s[tag=skyclick,tag=!nocts,hasitem={item=ds:sky4,location=slot.weapon.mainhand},scores={domainactive=21..,domain=0}] at @s run scoreboard players set @e[type=ds:unbound_sky,c=1] Deleter 31
+tag @s remove cannot
+tag @s remove skyclick
+@@sky/sky_clicks
+tag @s[tag=itemUse:ds:sky_fists] add skyclick
+tag @s[tag=itemUse:ds:sky1] add skyclick
+tag @s[tag=itemUse:ds:sky2] add skyclick
+tag @s[tag=itemUse:ds:sky3] add skyclick
+tag @s[tag=itemUse:ds:sky4] add skyclick
+execute as @s[tag=skyclick] run function sky/sky_click
+@@sky/sky_collide
+particle ds:cockroaches_disperse1 ~~3~
+particle ds:cockroaches_disperse2 ~~3~
+particle ds:burst_impact1
+particle ds:roach_swarm_erupt1 ~~3~
+particle ds:roach_swarm_erupt2 ~~3~
+particle ds:roach_swarm_erupt3 ~~3~
+particle ds:large_slam_p
+camerashake add @a[r=100] 4 0.33
+playsound mob.rubble1 @a[r=100] ~~1~ 99999 0.5 99999
+playsound mob.burst @a[r=100] ~~1~ 99999 1.5 99999
+playsound mob.blasted4 @a[r=100] ~~1~ 99999 3 99999
+playsound mob.kurourushi3 @a[r=100] ~~1~ 9999 1.5 9999
+damage @e[tag=!Frames,r=33,tag=!roach,family=!roachswarm] 40 override
+scoreboard players set @e[tag=!Frames,r=33,tag=!roach,family=!roachswarm] knockdown 20
+scoreboard players set @e[tag=!Frames,r=33,tag=!roach,family=!roachswarm] Hit 10
+scoreboard players add @e[tag=!Frames,r=33,tag=!roach,family=!roachswarm] Evade 40
+effect @e[tag=!Frames,r=33,tag=!roach,family=!roachswarm] levitation 1 15 true
+summon ds:red_reverse
+function damages/explosion_damage
+event entity @s[type=ds:roachswarm3] ds:disappear
+execute if entity @p[tag=griefable] run effect @e[r=25] resistance 1 10 true
+execute if entity @p[tag=griefable] run summon ds:red_reversal
+@@sky/sky_domain
+execute as @s[scores={domain=200}] at @s run stopsound @a[r=47]
+execute as @s[scores={domain=200}] at @s run kill @e[type=ds:unbound_sky,r=47]
+execute as @s[scores={domain=200}] at @s run scoreboard players set @e[r=47,rm=0.2,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] Stun 35
+execute as @s[scores={domain=200}] at @s run scoreboard players set @a[r=47,rm=0.33,scores={move=4..}] move 3
+execute as @s[scores={domain=200}] at @s run playanimation @a[r=47,rm=0.33,m=!spectator] animation.stunned
+execute as @s[scores={domain=200}] at @s run tp @s ~~~~ 0
+playanimation @s[scores={domain=200}] animation.sky.domain_hold
+execute as @s[scores={domain=170,Energy=1..50}] at @s run scoreboard players add @s Energy 200
+execute as @s[scores={domain=190..}] at @s run scoreboard players set @e[r=47,scores={domainstart=1..}] domainstart 0
+scoreboard players add @s[scores={domain=200}] infinity 15
+scoreboard players add @s[scores={domain=1..}] infinity 1
+scoreboard players set @s[scores={domain=1..18,infinity=4..}] infinity 3
+execute as @s[scores={domain=1..}] at @s run scoreboard players set @a[r=50] Stun 5
+tag @s[scores={domain=1..3},tag=domain_start] remove domain_start
+tag @s[scores={domain=1..5},tag=domainlayout] remove domainlayout
+execute as @s[scores={domain=1..}] at @s run scoreboard players set @a[r=50] Camera 5
+execute as @s[scores={domain=199}] at @s as @a[r=47] at @s run playsound music.domainclash2 @s ~~~ 9999 1 9999
+execute as @s[scores={domain=199..200}] at @s rotated ~ 0 run camera @a[r=47] set minecraft:free ease 0.25 in_sine pos ^^1.4^1.5 facing ~~1.4~
+execute as @s[scores={domain=190}] at @s run camera @a[r=47] fade time 0.25 0.1 0.15 color 0 0 0
+execute as @s[scores={domain=200}] at @s positioned ~ 600 ~ run summon ds:cutscene_inside ~~~ facing ~~~-50 none "cutscene_barrier"
+execute as @s[scores={domain=150..200}] at @s positioned ~ 600 ~ as @e[name="cutscene_barrier",type=ds:cutscene_inside,c=1] at @s run tp @s ~~~
+execute as @s[scores={domain=177}] at @s positioned ~ 600 ~ run particle ds:uro_sky_cloth1 ~~-5~
+execute as @s[scores={domain=180}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s run tp @s ~~~ facing ~~~-50
+execute as @s[scores={domain=183..184}] at @s run camera @a[r=47] set minecraft:free pos ~ 601 ~-11 facing ~ 599 ~
+execute as @s[scores={domain=183..184}] at @s run camera @a[r=47] set minecraft:free ease 2 in_sine pos ~ 605 ~-10.75 facing ~ 599 ~5
+execute as @s[scores={domain=183}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] run playsound mob.burn @s ~~~ 99999 0.75 99999
+execute as @s[scores={domain=183}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^2.5^0.25^9
+execute as @s[scores={domain=183}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] run playsound mob.blaze.shoot @s ~~~ 99999 1 99999
+execute as @s[scores={domain=183}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^-2.5^0.25^9
+execute as @s[scores={domain=183}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^6 99999 1 99999
+execute as @s[scores={domain=181}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^-2.5^0.25^7
+execute as @s[scores={domain=181}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^4 99999 1 99999
+execute as @s[scores={domain=181}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^2.5^0.25^7
+execute as @s[scores={domain=181}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^4 99999 1 99999
+execute as @s[scores={domain=179}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^-2.5^0.25^3.5
+execute as @s[scores={domain=179}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^2 99999 1 99999
+execute as @s[scores={domain=179}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^2.5^0.25^3.5
+execute as @s[scores={domain=179}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^2 99999 1 99999
+execute as @s[scores={domain=177}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^-2.5^0.25^0.25
+execute as @s[scores={domain=177}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^ 99999 1 99999
+execute as @s[scores={domain=177}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^2.5^0.25^0.25
+execute as @s[scores={domain=177}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^ 99999 1 99999
+execute as @s[scores={domain=175}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^-2.5^0.25^-3
+execute as @s[scores={domain=175}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^-2 99999 1 99999
+execute as @s[scores={domain=175}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^2.5^0.25^-3
+execute as @s[scores={domain=175}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^-2 99999 1 99999
+execute as @s[scores={domain=173}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^-2.5^0.25^-6
+execute as @s[scores={domain=173}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^-4 99999 1 99999
+execute as @s[scores={domain=173}] at @s positioned ~ 600 ~ as @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] at @s rotated ~ 0 run particle ds:uro_sky_fire ^2.5^0.25^-6
+execute as @s[scores={domain=173}] at @s as @a[r=47] positioned ~ 600 ~ at @e[type=ds:cutscene_inside,c=1,name="cutscene_barrier"] rotated ~ 0 run playsound mob.blaze.shoot @s ^-4^0.25^-4 99999 1 99999
+execute as @s[scores={domain=169}] at @s positioned ~ 600 ~ run particle ds:uro_sky_cloth2 ~~-5~
+execute as @s[scores={domain=165}] at @s run camera @a[r=47] fade time 0.25 1 0.5 color 255 255 255
+execute as @s[scores={domain=150}] at @s positioned ~ 600 ~ run event entity @e[type=ds:cutscene_inside,name="cutscene_barrier",c=1] ds:disappear
+playanimation @s[scores={domain=140..141}] animation.sky.domain2
+execute as @s[scores={domain=139..140}] at @s rotated ~ 0 run camera @a[r=47] set minecraft:free pos ^^1.4^1.5 facing ~~1.4~
+execute as @s[scores={domain=119..120}] at @s rotated ~ 0 run camera @a[r=47] set minecraft:free ease 2 in_out_circ pos ^^-3^15 facing ~~3~
+execute as @s[scores={domain=167}] at @s unless entity @s[scores={uniqueid=1..}] run function uniqueid
+execute as @s[scores={domain=165}] at @s run summon ds:domain_barrier_white SkyBarrier ~~~
+execute as @s[scores={domain=165}] at @s run scoreboard players operation @e[type=ds:domain_barrier_white,name=SkyBarrier,c=1] barrierID = @s uniqueid
+execute as @s[scores={domain=159..160}] at @s positioned ~ 301 ~ unless entity @s[r=1] at @s as @e[r=47,family=!barrier_outside,type=!item,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand,tag=!domainunselect] at @s run tp @s ~ 301 ~
+execute as @s[scores={domain=160}] at @s run tp @s ~~~ facing ~~~1
+execute as @s[scores={domain=181}] at @s run effect @a[r=47] night_vision 2 1 true
+execute as @s[scores={domain=170}] at @s positioned ~~~ run fill ~33 300 ~33 ~-33 300 ~-33 barrier [] replace air
+execute as @s[scores={domain=140..170}] at @s positioned ~~~ run fill ~33 300 ~33 ~-33 300 ~-33 barrier [] replace air
+execute as @s[scores={domain=1..170}] at @s positioned ~~~ run fill ~33 301 ~33 ~-33 301 ~-33 air
+execute as @s[scores={domain=1..170}] at @s positioned ~~~ run fill ~33 302 ~33 ~-33 302 ~-33 air
+execute as @s[scores={domain=160}] at @s rotated ~ 0 run summon ds:unbound_sky ~ 301 ~ facing ^^^100
+execute as @s[scores={domain=160}] at @s positioned ~ 301 ~ run scoreboard players operation @e[type=ds:unbound_sky,c=1] domainID = @s uniqueid
+execute as @s[scores={domain=160}] at @s positioned ~ 301 ~ run scoreboard players add @e[type=ds:unbound_sky,c=1] Deleter 331
+execute as @s[scores={domain=160}] at @s positioned ~ 301 ~ run scoreboard players operation @e[type=ds:unbound_sky,c=1] Deleter += @s Energy
+execute as @s[scores={domain=160}] at @s positioned ~ 301 ~ run scoreboard players operation @s domainactive = @e[type=ds:unbound_sky,c=1] Deleter
+scoreboard players set @s[scores={domain=30..70}] domain 16
+execute as @s[scores={domain=75}] at @s run camera @a[r=47] fade time 0.25 1 0.5 color 0 0 0
+execute as @s[scores={domain=1..5}] at @s run camera @a[r=50] clear
+@@sky/sky_domain_start
+playanimation @s[scores={domainstart=100}] animation.sky.domain
+execute as @s[scores={domainstart=100}] at @s run playsound mob.uro_domain1 @a ~~~ 100000 1 100000
+execute as @s[scores={domainstart=100}] at @s run camerashake add @a[r=48] 2 0.25
+execute as @s[scores={domainstart=100}] at @s run playsound mob.bass @a ~~~ 100000 1 100000
+execute as @s[scores={domainstart=100}] at @s run particle ds:domain_area0 ~~~
+execute as @s[scores={domainstart=100}] at @s run particle ds:domainarea0 ~~~
+execute as @s[scores={domainstart=100}] at @s run particle ds:domainarea1 ~~~
+execute as @s[scores={domainstart=1..80}] at @s run particle ds:domainarea ~~~
+execute as @s[scores={domainstart=91..},type=!Player] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={domainstart=91..},type=!Player] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={domainstart=91..},type=!Player] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={domainstart=91..},type=!Player] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={domainstart=1..}] at @s if block ~~-1~ air run tp @s ~~-1~
+tag @s[scores={domainstart=1..2},tag=domain_start] remove domain_start
+execute unless entity @s[scores={infinity=15..}] run scoreboard players add @s[scores={domainstart=100..}] infinity 15
+scoreboard players add @s[scores={domainstart=1..}] infinity 1
+execute as @s[scores={domainstart=1..}] at @s run execute as @e[r=48,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run tp @s ~~~
+scoreboard players set @s[scores={domainstart=1..}] Camera 4
+tag @s[scores={domainstart=1..},tag=!domainlayout] add domainlayout
+execute as @s[scores={domainstart=48..50}] at @s unless entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run scoreboard players set @s domainstart 47
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run tag @s add domainclashing
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run scoreboard objectives add domain_clasher dummy
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run scoreboard players set @s domain_clasher 0
+execute as @s[scores={domainstart=4..70}] at @s unless entity @e[type=ds:domain_clash_main,r=50] unless entity @e[type=ds:clash_starting,r=50] if entity @e[tag=domainlayout,r=48,rm=0.15] run scoreboard players set @e[tag=domainclashing] domainstart 1001
+execute as @s[scores={domainstart=999..}] at @s if entity @e[r=33,tag=domainclashing,scores={domain_clasher=4}] unless entity @s[scores={domain_clasher=1..4}] run scoreboard players set @s domainstart 3
+execute as @s[scores={domainstart=999..}] at @s if entity @e[r=33,tag=domainclashing,scores={domain_clasher=4}] unless entity @s[scores={domain_clasher=1..4}] run tag @s remove domainclashing
+execute as @s[scores={domainstart=999..}] at @s if entity @e[r=33,tag=domainclashing,scores={domain_clasher=4}] unless entity @s[scores={domain_clasher=1..4}] run function domainloser
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=1..}] run scoreboard players set @s domain_clasher 1
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] if entity @e[tag=domainclashing,r=48,scores={domain_clasher=1}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=2..}] run scoreboard players set @s domain_clasher 2
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] if entity @e[tag=domainclashing,r=48,scores={domain_clasher=2}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=3..}] run scoreboard players set @s domain_clasher 3
+execute as @s[tag=domainclashing,scores={domainstart=1000..1001,domain_clasher=0}] if entity @e[tag=domainclashing,r=48,scores={domain_clasher=3}] unless entity @e[tag=domainclashing,r=48,scores={domain_clasher=4..}] run scoreboard players set @s domain_clasher 4
+execute as @s[scores={domainstart=961..}] at @s run playsound mob.wither.shoot @a[r=100] ^^-15^5 9999 0.25 99999
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash ~~~
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash1 ~~~
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash2 ~~~
+execute as @s[scores={domainstart=961..}] at @s run particle ds:domainclash3 ~~~
+execute as @s[scores={domainstart=900..}] at @s if entity @e[tag=domainlayout,r=48,rm=0.15] run playanimation @s animation.sky.domain_hold
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] run scoreboard objectives add num dummy
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] run scoreboard players add @s num 1
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] if entity @s[scores={num=100..}] run execute as @e[scores={domainstart=1..1002},r=50] at @s run function cancel_attack
+execute as @s[scores={domainstart=955..961}] at @s unless entity @e[tag=domainclashing,rm=1,r=50,scores={domain_clasher=1..}] run scoreboard players set @s domainstart 962
+execute as @s[scores={domainstart=961}] at @s run scoreboard objectives add domain_clasher_id dummy
+execute as @s[scores={domainstart=960}] at @s run scoreboard players random @s domain_clasher_id 1 999999
+execute as @s[scores={domainstart=960}] at @s run tag @s add deploy_unbound_sky
+execute as @s[scores={domainstart=960}] at @s run scriptevent ds:spawn_middle "domainclashing" "ds:clash_starting" "domainclashing"
+execute as @s[scores={domainstart=960}] at @s run scoreboard players set @e[r=50] Stun 33
+scoreboard players set @s[scores={domainstart=900..940}] domainstart 950
+execute as @s[scores={domainstart=46}] at @s unless entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run scoreboard players set @s domain 201
+execute as @s[scores={domainstart=46},tag=domain_start] at @s unless entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run tag @s remove domain_start
+execute as @s[scores={domainstart=46}] at @s unless entity @e[type=!item,tag=domainlayout,r=48,rm=0.5] run scoreboard players set @e[r=48,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] domainstart 1
+@@sky/sky_moves
+execute as @s[scores={move=1..},tag=wep1,tag=sky_fists] run function sky/fist_ab1
+execute as @s[scores={move=1..},tag=wep2,tag=sky_fists] run function sky/fist_ab2
+execute as @s[scores={move=1..},tag=wep3,tag=sky_fists] run function sky/fist_ab3
+execute as @s[scores={move=1..},tag=form1] run function sky/sky1
+execute as @s[scores={move=1..},tag=form2] run function sky/sky2
+execute as @s[scores={move=1..},tag=form3] run function sky/sky3
+execute as @s[scores={move=1..},tag=form4] run function sky/sky4
+execute as @s[scores={move=1..},tag=form5] run function sky/sky5
+execute as @s[scores={move=1..},tag=form6] run function sky/sky6
+execute as @s[scores={move=1..},tag=form7] run function sky/sky7
+execute as @s[scores={move=1..},tag=form8] run function sky/sky8
+execute as @s[scores={move=1..},tag=form9] run function sky/sky9
+execute as @s[scores={domainstart=1..},tag=domain_start,tag=!sukunadomain1,tag=!sukunadomain2,tag=!sukunadomain3] at @s run function sky/sky_domain_start
+execute as @s[scores={domain=1..},tag=!sukunadomain1,tag=!sukunadomain2,tag=!sukunadomain3] at @s unless entity @e[type=ds:malevolent_shrine1,r=60] unless entity @e[type=ds:malevolent_kitchen,r=60] unless entity @e[type=ds:incomplete_shrine,r=60] run function sky/sky_domain
+@@sky/sky_technique
+tellraw @s[r=0.2,tag=curse] {"rawtext":[{"translate":"text.cannot_equip_sky.curse"}]}
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse] at @s run function remove_ct
+tag @s[scores={forms=4..},tag=!cantupgrade] add cantupgrade
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=sky] {"rawtext":[{"translate":"text.sky.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!sky,tag=!curse] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=sky] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse] {"rawtext":[{"translate":"text.sky_ab1.unlocked"},{"translate":"text.sky_ab2.unlocked"},{"translate":"text.sky_ab3.unlocked"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=!c] forms 0
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=c] forms 4
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=0..},tag=!sky,tag=!curse,m=!c] ds:sky_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=1..},tag=!sky,tag=!curse,m=!c] ds:sky1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=2..},tag=!sky,tag=!curse,m=!c] ds:sky2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=3..},tag=!sky,tag=!curse,m=!c] ds:sky3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0,forms=4..},tag=!sky,tag=!curse,m=!c] ds:sky4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=c] ds:sky_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=c] ds:sky1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=c] ds:sky2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=c] ds:sky3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=c] ds:sky4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse,m=c] {"rawtext":[{"translate":"text.creativeforms"}]}
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sky,tag=!curse] add sky
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..},tag=sky] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..4,invest=10..},tag=sky,tag=!cantupgrade] at @s run scoreboard players add @s forms 1
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..4,invest=10..},tag=sky,tag=!cantupgrade] at @s run playsound random.orb @a ~~~ 100000 0.5 100000
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..4,invest=10..},tag=sky,tag=!cantupgrade] at @s run playsound mob.wither.hurt @a ~~~ 100000 2 100000
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..},tag=sky] ds:sky_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1,invest=10..},tag=sky,tag=!cantupgrade] {"rawtext":[{"translate":"text.sky_ab1.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=sky] ds:sky1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2,invest=10..},tag=sky,tag=!cantupgrade] {"rawtext":[{"translate":"text.sky_ab2.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2..},tag=sky] ds:sky2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3,invest=10..},tag=sky,tag=!cantupgrade] {"rawtext":[{"translate":"text.sky_ab3.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3..},tag=sky] ds:sky3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=4,invest=10..},tag=sky,tag=!cantupgrade] {"rawtext":[{"translate":"text.sky_ab4.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=4..},tag=sky] ds:sky4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0},tag=sky,tag=cantupgrade] {"rawtext":[{"translate":"text.sky_all.unlocked"}]}
+scoreboard players remove @a[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=0..4,invest=10..},tag=sky,tag=!cantupgrade] invest 10
+tag @s[tag=cantupgrade] remove cantupgrade
+@@sky/thin_ice_missile
+damage @s[tag=!Frames] 75 override
+scoreboard players set @s[tag=!Frames] knockdown 33
+scoreboard players set @s[tag=!Frames] Hit 3
+scoreboard players add @s[tag=!Frames] Evade 20
+playsound mob.blasted4 @a[r=200] ~~~ 99999 3 99999
+playsound mob.burst @a[r=200] ~~~ 99999 1.33 99999
+camerashake add @a[r=40] 2 0.25
+particle ds:dirt3
+particle ds:infinity_shatter
+execute unless block ~~-1~ air run particle ds:large_slam_p
+particle ds:burst_impact
+execute unless block ~~-1~ air run particle ds:rubble3
+effect @s[r=30] resistance 1 20 true
+execute if entity @p[tag=griefable] run summon ds:red_reversal
+function damages/sky_damage
+tp @s[tag=aetherTRG,rm=10,r=200] ~~~
+tag @s[tag=aetherTRG,r=200] remove aetherTRG
+@@sky/unbound_sky
+tp @s ~ 301 ~
+tag @s[tag=!DomainExpansion] add DomainExpansion
+execute if entity @a[scores={domainactive=1..,Energy=0..1,domain=0,Disabled=0,Disabled2=0},tag=sky,r=50] run scoreboard players set @s[scores={Deleter=32..}] Deleter 31
+execute unless entity @e[tag=sky,scores={domainactive=1..},r=50] run scoreboard players set @s[scores={Deleter=32..}] Deleter 31
+execute as @e[type=item,r=50] at @s unless entity @e[type=ds:simple_domain,r=20,tag=shadow_style] unless entity @e[type=ds:simple_domain,r=10,tag=!shadow_style] run kill @s
+execute as @e[type=arrow,r=50] at @s unless entity @e[type=ds:simple_domain,r=20,tag=shadow_style] unless entity @e[type=ds:simple_domain,r=10,tag=!shadow_style] run kill @s
+execute as @e[family=mahoraga,r=50] at @s positioned ^^^2 run function damages/domain_barrier
+execute as @e[scores={wheelactive=1..},tag=!domainactive,r=50] at @s positioned ^^^2 run function damages/domain_barrier
+scoreboard players set @e[scores={infinity=4..},r=50,tag=!domainactive,tag=!domainimmune] infinity 3
+execute if entity @s[scores={Deleter=32..}] positioned ~~-35~ run tp @e[r=34,family=!damage,family=!inanimate,family=!barrier,family=!projectile] ~~38~
+effect @a[r=50,rm=33,m=!spectator] clear levitation
+execute as @e[r=50,rm=33,type=!item,family=!despawncito,family=!disappear,type=!xp_orb,type=!ds:earthern_insect,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] facing entity @s feet positioned as @s run tp @s ^^2.5^-7 facing ^^^-25
+execute as @s[scores={Deleter=26..}] at @s run fill ~30 300 ~30 ~-30 300 ~-30 barrier [] replace air
+execute as @s[scores={Deleter=26..}] at @s run fill ~30 299 ~30 ~-30 299 ~-30 barrier [] replace air
+execute as @s[scores={Deleter=26..}] at @s run fill ~33 300 ~33 ~-33 300 ~-33 barrier [] replace air
+execute as @s[scores={Deleter=26..}] at @s run fill ~33 299 ~33 ~-33 299 ~-33 barrier [] replace air
+execute as @s[scores={Deleter=1..21}] at @s as @e[r=50,type=!item,family=!despawncito,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run fill ~15 ~ ~15 ~-15 -15 ~-15 air [] replace barrier
+execute as @s[scores={Deleter=1..30}] at @s run scoreboard players set @e[r=50,type=!item,family=!projectile,type=!fireworks_rocket,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] Stun 16
+execute as @s[scores={Deleter=25}] at @s run camera @a[r=50] fade time 0.25 0.95 1.5 color 255 255 255
+execute as @s[scores={Deleter=9..15}] at @s run title @a[tag=!impactframesoff,r=50] title 
+execute as @s[scores={Deleter=1..2}] at @s run title @a[tag=!impactframesoff,r=50] title §l
+execute as @s[scores={Deleter=1..21}] at @s as @e[r=50,type=!item,family=!despawncito,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run fill ~30 301 ~33 ~-30 301 ~-30 air [] replace barrier
+execute as @s[scores={Deleter=1..21}] at @s as @e[r=50,type=!item,family=!despawncito,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run fill ~30 300 ~33 ~-30 300 ~-30 air [] replace barrier
+execute as @s[scores={Deleter=1..21}] at @s as @e[r=50,type=!item,family=!despawncito,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run fill ~30 299 ~33 ~-30 299 ~-30 air [] replace barrier
+execute as @s[scores={Deleter=1..22}] at @s as @e[r=50,type=!item,family=!despawncito,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run fill ~5 ~5 ~5 ~-5 ~-5 ~-5 air [] replace barrier
+execute as @s[scores={Deleter=20..21}] at @s unless entity @e[type=ds:unbound_sky,scores={Deleter=32..}] run scoreboard objectives remove learning_surehit
+execute as @s[scores={Deleter=1..21}] at @s run fill ~30 301 ~30 ~-30 301 ~-30 air
+execute as @s[scores={Deleter=1..21}] at @s run fill ~30 300 ~30 ~-30 300 ~-30 air
+execute as @s[scores={Deleter=1..21}] at @s run fill ~30 299 ~30 ~-30 299 ~-30 air
+execute as @s[scores={Deleter=1..21}] at @s run fill ~34 301 ~34 ~-34 301 ~-34 air
+execute as @s[scores={Deleter=1..21}] at @s run fill ~34 300 ~34 ~-34 300 ~-34 air
+execute as @s[scores={Deleter=1..21}] at @s run fill ~34 299 ~34 ~-34 299 ~-34 air
+execute as @s[scores={Deleter=1..15}] at @s run camerashake add @a[r=50] 2 2
+execute as @s[scores={Deleter=1..20}] at @s run stopsound @a[r=50] ambient.soulsand_valley.additions
+execute as @s[scores={Deleter=1..20}] at @s run stopsound @a[r=50] ambient.ambient.basalt_deltas.loop
+execute as @s[scores={Deleter=20}] at @s run playsound music.domainbreak @a[r=50] ~~~ 100000 1 10000
+execute as @s[scores={Deleter=9..10}] at @s as @e[scores={barrierID=1..},family=barrier_outside] if score @s barrierID = @e[scores={Deleter=9..10},tag=DomainExpansion,c=1] domainID at @s run function barrier_break
+execute as @s[scores={Deleter=9..10}] as @e[scores={uniqueid=1..,domainactive=4..}] if score @s uniqueid = @e[scores={Deleter=9..10},tag=DomainExpansion,c=1] domainID run scoreboard players set @s domainactive 3
+event entity @s[scores={Deleter=1..5}] ds:disappear
+scoreboard players set @e[r=50,type=ds:uro_takako,scores={domainactive=31..,domain=0,domainstart=0,Energy=0..100},tag=sky] Energy 5000
+execute if entity @e[r=50,type=ds:uro_takako,scores={domainactive=31..,domain=0,domainstart=0}] unless entity @e[type=!ds:uro_takako,r=50,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] run scoreboard players set @s domainactive 30
+execute as @e[c=1,tag=sky,scores={domainactive=1..,domain=0},r=50] at @s as @e[tag=!DomainExpansion,tag=!domainimmune,r=2.75,tag=!heavenlyrestriction,family=!heavenlyrestriction,tag=!domainactive,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run tp @s ~~~
+execute unless entity @e[scores={domain=1..},r=50,tag=sky] as @e[r=50,family=projectile,family=!despawncito,family=!motionless,tag=!cube_landed,tag=!wall_landed,tag=!itemdrop,tag=!DomainExpansion,family=!barrier,type=!ds:wcs,type=!ds:wcs2] at @s run tp @s ^^^1.5 facing @e[c=1,tag=!DomainExpansion,tag=!domainimmune,r=50,tag=!heavenlyrestriction,family=!heavenlyrestriction,tag=!domainactive,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand]
+execute as @e[c=1,tag=sky,scores={domainactive=1..,domain=0,Frames=0..5},r=50,tag=!unselect] if entity @e[tag=!Frames,tag=!DomainExpansion,tag=!domainimmune,r=50,tag=!heavenlyrestriction,family=!heavenlyrestriction,tag=!domainactive,tag=!unselect,family=!projectile,family=!despawncito,family=!damage,family=!disappear,scores={move=1..}] run scoreboard players set @s Frames 6
+execute unless entity @e[scores={domain=1..},r=50,tag=sky] as @e[tag=!not_attack,tag=!small_adapt,tag=!adapting,c=1,tag=!Frames,tag=!DomainExpansion,tag=!domainimmune,r=50,tag=!heavenlyrestriction,family=!heavenlyrestriction,tag=!domainactive,tag=!unselect,family=!projectile,family=!despawncito,family=!damage,family=!disappear,scores={move=!0..4,move=!6..9,move=!11..19,move=!21..29,move=!31..39,move=!41..49,move=!51..59,move=!61..}] at @s unless entity @s[scores={cutscene=1..}] at @s run function sky/hitself
+execute unless entity @e[scores={domain=1..},r=50,tag=sky] as @e[tag=!not_attack,tag=!small_adapt,tag=!adapting,c=1,tag=!Frames,tag=!DomainExpansion,tag=!domainimmune,r=50,tag=!heavenlyrestriction,family=!heavenlyrestriction,tag=!domainactive,tag=!unselect,family=!projectile,family=!despawncito,family=!damage,family=!disappear,scores={atk=1..3}] at @s unless entity @s[scores={cutscene=1..}] at @s run function sky/hitself

@@ -1,0 +1,651 @@
+@@delusional/ab1
+playanimation @s[scores={move=40..41}] animation.delusional.ab1
+execute as @s[scores={move=40..41}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab1
+tag @s[scores={move=40..41},tag=!delusional1] add delusional1
+scoreboard players set @s[scores={move=5..32}] Frames 6
+scoreboard players set @s[scores={move=5..32}] Move 5
+scoreboard players set @s[scores={move=5..32}] Camera 5
+tp @s[scores={move=1..}] ~~~
+execute as @s[scores={move=1..}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^-0.5^^-0.85 facing ^^^5
+execute as @s[scores={move=35},type=player] at @s positioned ^^^1.5 run playsound music.sparkle @s ~~~ 9999 0.5 9999
+execute as @s[scores={move=25..35}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=31}] at @s positioned ^^^1.5 run playsound mob.witch.throw @a ~~~ 9999 0.75 9999
+execute as @s[scores={move=30}] at @s positioned ^^^1.5 run camerashake add @a[r=33] 2 0.15
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players set @e[tag=!Frames,r=2.4,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] knockdown 90
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact2 ~~1~
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] at @s run playsound mob.shock1 @a[r=33] ~~~ 99999 2 999999
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional 0,0,0
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run damage @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] 10 override entity @s
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players operation @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] damage += @s damageadd
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] Evade 10
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] Hit 7
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players set @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] Stun 30
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run tag @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4,tag=!noStunnedAnim] add noStunnedAnim
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run effect @e[scores={knockdown=90},tag=!Frames,tag=!unselect,r=2.4] levitation 1 17 true
+execute as @s[scores={move=28..30}] at @s run summon ds:knockback ~~~
+execute as @s[scores={move=30}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_lookright
+camera @s[scores={move=30},type=player] fade time 0 0 0.15 color 255 255 255
+execute as @s[scores={move=29},type=player] at @s rotated ~ 0 run camera @s set minecraft:free pos ^1.5^1.5^0.1 facing ^^1.5^0.1
+execute as @s[scores={move=29}] at @s run summon ds:takada_background ~~~
+execute as @s[scores={move=29}] at @s run event entity @e[type=ds:takada_background,r=1,c=1] colour_2
+camera @s[scores={move=7},type=player] fade time 0.15 0 0.15 color 255 255 255
+execute as @s[scores={move=5}] run event entity @e[type=ds:takada_background,c=1] ds:disappear
+execute as @s[scores={move=1..5}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+camera @s[scores={move=1..5},type=player] clear
+tag @s[scores={move=1..3},tag=delusional1] remove delusional1
+@@delusional/ab2
+playanimation @s[scores={move=40..41}] animation.delusional.ab2
+execute as @s[scores={move=40..41}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab2
+tag @s[scores={move=40..41},tag=!delusional2] add delusional2
+scoreboard players set @s[scores={move=1..}] Frames 6
+scoreboard players set @s[scores={move=1..}] Move 5
+scoreboard players set @s[scores={move=100..}] Camera 5
+scoreboard players set @e[tag=idols_debut,r=15,c=1] Camera 15
+scoreboard players set @e[tag=idols_debut,r=15,c=1] Stun 35
+tag @e[scores={Stun=35},tag=idols_debut,r=15,c=1,tag=!noStunnedAnim] add noStunnedAnim
+tp @s[scores={move=100..}] ~~~
+execute as @s[scores={move=1..41}] at @s run tp @e[type=ds:takada_chan,r=10,c=1] ^0.8^^-0.5 facing ^^^5
+execute as @e[tag=idols_debut,r=15,c=1] at @s run tp @s ~~~
+execute as @s[scores={move=39}] at @s positioned ^^^1.5 run playsound mob.enderdragon.flap @a ~~~ 9999 0.75 9999
+execute as @s[scores={move=38}] at @s run particle ds:ground_slam1 ~~~
+execute as @s[scores={move=38}] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={move=33..40}] at @s unless entity @e[tag=!Frames,r=4,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] run scriptevent ds:knockback 3
+execute as @s[scores={move=25}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=26}] at @s positioned ^^^1.5 run playsound mob.witch.throw @a ~~~ 9999 0.75 9999
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 run camerashake add @a[r=33] 2 0.15
+execute as @s[scores={move=25}] at @s run particle ds:ground_pound3 ~~~
+execute as @s[scores={move=25}] at @s run particle ds:ground_pound4 ~~~
+execute as @s[scores={move=25}] at @s run particle ds:ground_slam1 ~~~
+execute as @s[scores={move=25}] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 run tag @e[tag=!Frames,r=2.4,c=1,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] add idols_debut
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 as @e[tag=!Frames,tag=!unselect,tag=idols_debut,r=2.4,c=1] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 as @e[tag=!Frames,tag=!unselect,tag=idols_debut,r=2.4,c=1] at @s run particle ds:large_impact2 ~~1~
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 as @e[tag=!Frames,tag=!unselect,tag=idols_debut,r=2.4,c=1] at @s run playsound mob.shock1 @a[r=33] ~~~ 99999 1.87 999999
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 as @e[tag=!Frames,tag=!unselect,tag=idols_debut,r=2.4,c=1] at @s run playsound mob.wither.shoot @a[r=33] ~~~ 99999 1.25 999999
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 as @e[tag=!Frames,tag=!unselect,tag=idols_debut,r=2.4,c=1] at @s run scriptevent ds:delusional_ab1 0,0,0
+execute as @s[scores={move=25}] at @s positioned ^^^1.5 as @e[tag=!Frames,tag=!unselect,tag=idols_debut,r=2.4,c=1] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=20..25}] at @s positioned ^^^1.5 if entity @e[tag=!Frames,tag=!unselect,tag=idols_debut,r=2.4] run scoreboard players set @s move 1001
+playanimation @s[scores={move=1000}] animation.delusional.ab2b
+execute as @s[scores={move=1000}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab2b
+execute as @s[scores={move=1000}] at @s run playanimation @e[tag=idols_debut,r=15,c=1] animation.delusional.ab2_hit
+execute as @s[scores={move=950}] at @s run playanimation @e[tag=idols_debut,r=15,c=1] animation.delusional.ab2_hit
+execute as @s[scores={move=1000}] at @s run summon ds:takada_background ^^0.15^2
+execute as @s[scores={move=1000}] at @s positioned ^^^2 run event entity @e[type=ds:takada_background,r=1,c=1] colour_2
+tag @s[scores={move=1000..},tag=!delusional2_hit] add delusional2_hit
+execute as @s[scores={move=1000..},type=player] at @s rotated ~ 0 run camera @s set minecraft:free pos ^-1^9^4.3 facing ^1.75^^0.5
+camera @s[scores={move=1000..},type=player] fade time 0 0.1 0.1 color 255 255 255
+execute as @s[scores={move=1000..}] at @s run camerashake add @a[r=10] 0.25 0.3
+execute as @s[scores={move=1000..}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^0.5^^-0.75 facing ^^^10
+execute as @s[scores={move=1000..}] at @s rotated ~ 0 run tp @e[tag=idols_debut,r=15,c=1] ^^6^3.5 facing ^^^1
+execute as @s[scores={move=1000..}] at @s if entity @e[tag=griefable] rotated ~ 0 positioned ^^^1 unless block ~~~ bedrock unless block ~~1~ bedrock unless block ~~2~ bedrock unless block ~~3~ bedrock unless block ~~~ barrier unless block ~~1~ barrier unless block ~~2~ barrier unless block ~~3~ barrier run fill ~3~~3~-3~3~-3 air destroy
+execute as @s[scores={move=1000..}] at @s if entity @e[tag=griefable] rotated ~ 0 positioned ^^4^2 unless block ~~~ bedrock unless block ~~1~ bedrock unless block ~~2~ bedrock unless block ~~3~ bedrock unless block ~~~ barrier unless block ~~1~ barrier unless block ~~2~ barrier unless block ~~3~ barrier run fill ~3~~3~-3~3~-3 air destroy
+execute as @s[scores={move=1000..}] at @s if entity @e[tag=griefable] rotated ~ 0 positioned ^^8^3 unless block ~~~ bedrock unless block ~~1~ bedrock unless block ~~2~ bedrock unless block ~~~ barrier unless block ~~1~ barrier unless block ~~2~ barrier run fill ~2~~2~-2~2~-2 air destroy
+execute as @s[scores={move=999..1000}] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=900..1000}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=999..1000}] at @s as @e[tag=idols_debut,r=15,c=1] at @s run scriptevent ds:delusional_hit 0,0,0
+camera @s[scores={move=975},type=player] fade time 0.1 0.2 0.15 color 255 255 255
+playanimation @s[scores={move=970..971}] animation.delusional.ab2b_kick
+execute as @s[scores={move=970..971}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab2b_kick
+tag @s[scores={move=940..970},tag=!self_blind] add self_blind
+execute as @s[scores={move=970}] at @s run playsound music.bass3 @a[r=33] ~~~ 99999 1.2 99999
+execute as @s[scores={move=970}] at @s as @e[type=ds:takada_chan,r=10,c=1] at @e[tag=idols_debut,r=15,c=1] rotated ~ 0 run tp @s ^^1.5^1.5 facing ~~1.45~
+execute as @s[scores={move=970}] at @s at @e[tag=idols_debut,r=15,c=1] rotated ~ 0 run tp @s ^^1.5^1.5 facing ~~1.45~
+execute as @s[scores={move=940..970},type=player] at @s rotated ~ 0 run camera @s set minecraft:free pos ^^0.35^1 facing ~~1~
+execute as @s[scores={move=910..970}] at @s run tp @e[type=ds:takada_chan,r=10,c=1] ~~~ facing ^^^10
+camera @s[scores={move=942},type=player] fade time 0 0.1 0.15 color 255 255 255
+execute as @s[scores={move=940}] at @s run camerashake add @a[r=20] 0.15 1.5
+execute as @s[scores={move=938..940}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=938..940}] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=936}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={move=936}] at @s run particle ds:large_impact1 ^^^0.25
+execute as @s[scores={move=936}] at @s run particle ds:large_impact2 ^^^0.25
+playanimation @s[scores={move=939..940}] animation.delusional.ab2b_kick3
+execute as @s[scores={move=939..940}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab2b_kick2
+execute as @s[scores={move=939..940}] at @s run playanimation @e[tag=idols_debut,r=15,c=1] animation.delusional.ab2_hit2
+execute as @s[scores={move=916..940}] at @s at @e[tag=idols_debut,r=15,c=1] run tp @s ^^^0.1 facing ~~0.1~
+execute as @s[scores={move=910..939},type=player] at @s rotated ~ 0 run camera @s set minecraft:free pos ^1^-1^0.8 facing ^-0.15^1^
+execute as @s[scores={move=915}] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.8 99999
+execute as @s[scores={move=915}] at @s run playsound mob.bullet @a[r=100] ~~~ 99999 1.25 99999
+execute as @s[scores={move=915}] at @s run particle ds:heavy_impact2 ^^^0.25
+execute as @s[scores={move=915}] at @s run particle ds:large_impact1 ^^^0.25
+execute as @s[scores={move=915}] at @s run particle ds:large_impact2 ^^^0.25
+execute as @s[scores={move=915}] at @s run particle ds:ground_slam1 ^^^0.25
+execute as @s[scores={move=915}] at @s run particle ds:ground_slam2 ^^^0.25
+execute as @s[scores={move=915}] at @s run particle ds:ground_slam3 ^^^0.25
+execute as @s[scores={move=915}] at @s run particle ds:dirt3 ^^^0.25
+execute as @s[scores={move=915}] at @s run camerashake add @a[r=100] 4 0.25
+execute as @s[scores={move=915}] at @s run particle ds:pink_tint ^^^
+execute as @s[scores={move=915}] at @s run summon gg:impact_frame ~~-6~
+execute as @s[scores={move=915}] at @s run damage @e[tag=idols_debut,r=15,c=1] 30 override entity @s
+execute as @s[scores={move=915}] at @s run scoreboard players set @e[tag=idols_debut,r=15,c=1] Hit 4
+execute as @s[scores={move=915}] at @s run scoreboard players set @e[tag=idols_debut,r=15,c=1] Evade 25
+execute as @s[scores={move=915}] at @s run scoreboard players set @e[tag=idols_debut,r=15,c=1] Flourish 7
+execute as @s[scores={move=915}] at @s run scoreboard players set @e[tag=idols_debut,r=15,c=1] knockdown 105
+execute as @s[scores={move=915}] at @s run scoreboard players operation @e[tag=idols_debut,r=15,c=1] damage += @s damageadd
+execute as @s[scores={move=905..915}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=905..915}] at @s run scriptevent ds:delusional_hit 0,0,0
+effect @s[scores={move=915..916}] slow_falling 1 1 true
+execute as @s[scores={move=904..911}] at @s rotated ~ 0 run tp @s ^^1^-1 true
+execute as @s[scores={move=904..911}] at @s rotated ~ 0 run tp @s ~~~ facing ^^-0.25^1
+camera @s[scores={move=904..908},type=player] clear
+execute as @s[scores={move=904..908}] at @s run scoreboard players set @s move 3
+execute as @s[scores={move=1..3},tag=delusional2_hit] at @s run event entity @e[type=ds:takada_background,c=1] ds:disappear
+execute as @s[scores={move=1..3},tag=delusional2_hit] at @s run tag @e[tag=idols_debut,r=100,c=1] remove idols_debut
+tag @s[scores={move=1..3},tag=self_blind] remove self_blind
+tag @s[scores={move=1..3},tag=delusional2_hit] remove delusional2
+tag @s[scores={move=1..3},tag=delusional2] remove delusional2
+@@delusional/ab3
+playanimation @s[scores={move=59..60}] animation.delusional.ab3
+camera @s[scores={move=60},type=player] fade time 0 0 0.15 color 255 255 255
+execute as @s[scores={move=59}] at @s run summon ds:takada_background ~~~
+execute as @s[scores={move=59}] at @s run event entity @e[type=ds:takada_background,r=1,c=1] colour_2
+tag @s[scores={move=59..60},tag=!delusional3] add delusional3
+scoreboard players set @s[scores={move=5..}] Frames 6
+scoreboard players set @s[scores={move=5..}] Camera 5
+scoreboard players set @s[scores={move=5..}] Move 5
+execute as @s[scores={move=1..}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=1..}] at @s run tp @e[type=ds:takada_chan,r=10,c=1] ^-0.5^^-5 facing ^^^10
+execute as @s[scores={move=6..}] at @s run tp @e[type=ds:takada_background,r=100,c=1] ^^^-1
+execute as @s[scores={move=31..49}] at @s positioned ^^^2.5 run tp @e[scores={damage=0..,Stun=1..},tag=!Frames,tag=!unselect,r=5,c=1] ~~~ facing @s
+execute as @s[scores={move=46..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=46..}] at @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={move=46..}] at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute as @s[scores={move=46..}] at @s if block ~~-0.4~ air run tp @s ~~-0.4~
+camera @s[scores={move=5..},type=player] set minecraft:free pos ^1^1.5^0.1 facing ^^1.5^0.1
+scoreboard players set @s[scores={move=51}] atk 2
+execute as @s[scores={move=50}] at @s run scriptevent ds:delusional_hit 0,1,1
+execute as @s[scores={move=50}] at @s run scriptevent ds:delusional_small 0,1,1
+execute as @s[scores={move=50}] at @s positioned ^^^1.5 run playsound mob.wither.shoot @a ~~~ 9999 1.75 9999
+execute as @s[scores={move=50}] at @s positioned ^^^1.5 run playsound mob.witch.throw @a ~~~ 9999 0.75 9999
+execute as @s[scores={move=50}] at @s positioned ^^^1.5 run camerashake add @a[r=33] 2 0.15
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.4,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] damage += @s damageadd
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact2 ~~1~
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run playsound mob.shock1 @a[r=33] ~~~ 99999 2 999999
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run playsound mob.punch @a[r=33] ~~~ 99999 2 999999
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional 0,0,0
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 run damage @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] 10 override entity @s
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 run scoreboard players operation @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] damage += @s damageadd
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Evade 10
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 run scoreboard players set @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Stun 40
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Hit 7
+execute as @s[scores={move=50}] at @s positioned ^^^2.5 run playanimation @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] animation.stunned
+execute as @s[scores={move=50},type=player] at @s positioned ^^^1.5 run playsound music.sparkle @s ~~~ 9999 2.5 9999
+tp @s[scores={move=50}] ^^^0.5 true
+scoreboard players set @s[scores={move=46}] atk 2
+execute as @s[scores={move=45}] at @s run scriptevent ds:delusional_hit 0,1,1
+execute as @s[scores={move=45}] at @s run scriptevent ds:delusional_small 0,1,1
+execute as @s[scores={move=45}] at @s positioned ^^^1.5 run playsound mob.wither.shoot @a ~~~ 9999 1.75 9999
+execute as @s[scores={move=45}] at @s positioned ^^^1.5 run playsound mob.witch.throw @a ~~~ 9999 0.75 9999
+execute as @s[scores={move=45}] at @s positioned ^^^1.5 run camerashake add @a[r=33] 2 0.15
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.4,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] damage += @s damageadd
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact2 ~~1~
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run playsound mob.shock1 @a[r=33] ~~~ 99999 2 999999
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run playsound mob.punch @a[r=33] ~~~ 99999 2 999999
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional 0,0,0
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 run damage @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] 10 override entity @s
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Evade 10
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Hit 7
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 run scoreboard players set @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Stun 40
+execute as @s[scores={move=45}] at @s positioned ^^^2.5 run playanimation @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] animation.stunned
+execute as @s[scores={move=45},type=player] at @s positioned ^^^1.5 run playsound music.sparkle @s ~~~ 9999 2.5 9999
+tp @s[scores={move=45}] ^^^0.5 true
+scoreboard players set @s[scores={move=31}] atk 2
+execute as @s[scores={move=30}] at @s run scriptevent ds:delusional_hit 0,1,1
+execute as @s[scores={move=30}] at @s run scriptevent ds:delusional_small 0,1,1
+execute as @s[scores={move=30}] at @s positioned ^^^1.5 run playsound mob.wither.shoot @a ~~~ 9999 1.75 9999
+execute as @s[scores={move=30}] at @s positioned ^^^1.5 run playsound mob.witch.throw @a ~~~ 9999 0.75 9999
+execute as @s[scores={move=30}] at @s positioned ^^^1.5 run camerashake add @a[r=33] 2 0.15
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players operation @e[tag=!Frames,r=2.4,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] damage += @s damageadd
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run particle ds:large_impact2 ~~1~
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run playsound mob.shock1 @a[r=33] ~~~ 99999 2 999999
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run playsound mob.punch @a[r=33] ~~~ 99999 2 999999
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional 0,0,0
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 as @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run damage @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] 15 override entity @s
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Evade 15
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Hit 7
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players set @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Stun 40
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run scoreboard players add @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] Flourish 4
+execute as @s[scores={move=30}] at @s positioned ^^^2.5 run playanimation @e[scores={damage=0..},tag=!Frames,tag=!unselect,r=2.4] animation.stunned
+execute as @s[scores={move=30},type=player] at @s positioned ^^^1.5 run playsound music.sparkle @s ~~~ 9999 2 9999
+tp @s[scores={move=30}] ^^^0.5 true
+execute as @s[scores={move=7},type=player] at @s run camera @s fade time 0.15 0 0.15 color 255 255 255
+camera @s[scores={move=1..5},type=player] clear
+execute as @s[scores={move=1..5},tag=delusional3] at @s run event entity @e[type=ds:takada_background,c=1] ds:disappear
+tag @s[scores={move=1..3},tag=delusional3] remove delusional3
+@@delusional/ab4
+playanimation @s[scores={move=60..61}] animation.delusional.ab4
+execute as @s[scores={move=60..61}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab4_takada
+execute as @s[scores={move=1..61}] at @s run tp @e[type=ds:takada_chan,r=10,c=1] ^-1.25^^0.5 facing ^^^10
+tag @s[scores={move=60..61},tag=!delusional4] add delusional4
+execute as @s[scores={move=46..61}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={move=46..61}] at @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={move=46..61}] at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute as @s[scores={move=46..61}] at @s if block ~~-0.4~ air run tp @s ~~-0.4~
+scoreboard players set @s[scores={move=1..}] Frames 6
+scoreboard players set @s[scores={move=1..}] Move 5
+scoreboard players set @s[scores={move=62..,Camera=0..8}] Camera 15
+tp @s[scores={move=791..963}] ~~~
+execute as @s[scores={move=31}] at @s positioned ^^^1.5 run playsound mob.enderdragon.flap @a ~~~ 9999 0.75 9999
+execute as @s[scores={move=31}] at @s run particle ds:ground_slam1 ~~~
+execute as @s[scores={move=31}] at @s run particle ds:ground_slam2 ~~~
+execute as @e[tag=climax_jumping,r=15,c=1] run tag @s[tag=!noStunnedAnim] add noStunnedAnim
+scoreboard players set @e[tag=climax_jumping,r=15,c=1] Stun 35
+scoreboard players set @e[tag=climax_jumping,r=15,c=1] Camera 35
+scoreboard players set @e[tag=climax_jumping,r=15,c=1] Frames 6
+execute as @s[scores={move=500..}] at @s run scoreboard players set @e[type=!player,r=15,tag=!climax_jumping,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] Stun 35
+execute as @s[scores={move=500..}] at @s run scoreboard players set @e[type=!player,r=15,tag=!climax_jumping,tag=!unselect,scores={Stun=35}] Disabled 35
+execute as @s[scores={move=500..}] at @s run effect @e[type=!player,r=15,tag=!climax_jumping,tag=!unselect,scores={Stun=35}] slowness 1 10 true
+execute as @s[scores={move=25..32}] at @s unless entity @e[tag=!Frames,r=3,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] run scriptevent ds:knockback 5
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 run tag @e[tag=!Frames,r=3,c=1,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] add climax_jumping
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run scriptevent ds:delusional_small 0,1,1
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run camerashake add @a[r=33] 2 0.15
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run particle ds:ground_pound3 ~~~
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run particle ds:ground_pound4 ~~~
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run particle ds:ground_slam1 ~~~
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run particle ds:large_impact1 ~~1~
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run particle ds:large_impact2 ~~1~
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run playsound mob.shock1 @a[r=33] ~~~ 99999 1.87 999999
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run playsound mob.wither.shoot @a[r=33] ~~~ 99999 1.25 999999
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run scriptevent ds:delusional_ab1 0,0,0
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 as @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] at @s run scriptevent ds:delusional_hit 0,0,0
+execute as @s[scores={move=25..30}] at @s positioned ^^^1.5 if entity @e[tag=!Frames,r=3,c=1,tag=!unselect,tag=climax_jumping] run scoreboard players set @s move 1001
+playanimation @s[scores={move=999..}] animation.delusional.ab4b
+execute as @s[scores={move=999..}] at @s run playanimation @e[tag=climax_jumping,r=15,c=1] animation.delusional.ab4_hit
+camera @s[scores={move=1000..},type=player] fade time 0 0 0.1 color 255 255 255
+execute as @s[scores={move=1000..}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=1000..}] at @s run camerashake add @a[r=10] 0.25 0.3
+execute as @s[scores={move=1000..}] at @s run tp @e[tag=climax_jumping,r=15,c=1] ^^^0.8 facing @s
+execute as @s[scores={move=1000}] at @s run summon gg:impact_frame ~~~
+execute as @s[scores={move=1000}] at @s run summon ds:takada_background ^^^2
+execute as @s[scores={move=1000}] at @s positioned ^^^2 run event entity @e[type=ds:takada_background,c=1] colour_2
+execute as @s[scores={move=999},type=player] at @s run camera @s set minecraft:free pos ^^0.33^-1.75 facing ^^1.25^1.5
+tag @s[scores={move=971..},tag=!self_blind] add self_blind
+execute as @s[scores={move=971..}] at @s run effect @e[type=ds:takada_chan,r=10,c=1] invisibility 1 1 true
+execute as @s[scores={move=970..}] at @s run scriptevent ds:delusional_climax 0,0,1
+execute as @s[scores={move=999}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact1 ~~1.3~
+execute as @s[scores={move=999}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact2 ~~1.3~
+execute as @s[scores={move=999}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run scriptevent ds:delusional_hit 0,1,0
+execute as @s[scores={move=999}] at @s run playsound mob.punch1 @a[r=100] ~~~ 99999 2 999999
+execute as @s[scores={move=999}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 2 999999
+execute as @s[scores={move=999}] at @s run camerashake add @a[r=25] 0.5 0.25
+camera @s[scores={move=986},type=player] set minecraft:free ease 0.35 in_out_circ pos ^^0.33^-1.5 facing ^2^1^1.5
+execute as @s[scores={move=986}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact1 ~~1.3~
+execute as @s[scores={move=986}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact2 ~~1.3~
+execute as @s[scores={move=986}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run scriptevent ds:delusional_hit 0,1,0
+execute as @s[scores={move=986}] at @s run playsound mob.punch1 @a[r=100] ~~~ 99999 2.5 999999
+execute as @s[scores={move=986}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 2.5 999999
+execute as @s[scores={move=986}] at @s run camerashake add @a[r=25] 1 0.15
+camera @s[scores={move=980},type=player] set minecraft:free ease 0.35 in_out_circ pos ^^0.33^-1.6 facing ^-2^1.4^1.5
+execute as @s[scores={move=980}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact1 ~~1.3~
+execute as @s[scores={move=980}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact2 ~~1.3~
+execute as @s[scores={move=980}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run scriptevent ds:delusional_hit 0,1,0
+execute as @s[scores={move=980}] at @s run playsound mob.punch1 @a[r=100] ~~~ 99999 2.23 999999
+execute as @s[scores={move=980}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 2.23 999999
+execute as @s[scores={move=980}] at @s run camerashake add @a[r=25] 1 0.15
+camera @s[scores={move=973},type=player] set minecraft:free ease 0.35 in_out_circ pos ^^0.33^-1.5 facing ^^1.3^1.5
+camera @s[scores={move=968..969},type=player] set minecraft:free ease 0.25 in_out_circ pos ^^1^ facing ^^1.3^1.5
+execute as @s[scores={move=975}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact1 ~~1.3~
+execute as @s[scores={move=975}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact2 ~~1.3~
+execute as @s[scores={move=975}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run scriptevent ds:delusional_hit 0,1,0
+execute as @s[scores={move=975}] at @s run playsound mob.punch1 @a[r=100] ~~~ 99999 2.23 999999
+execute as @s[scores={move=975}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 2.23 999999
+execute as @s[scores={move=975}] at @s run camerashake add @a[r=25] 0.5 0.25
+camera @s[scores={move=964},type=player] fade time 0 0 0.1 color 255 255 255
+tag @s[scores={move=964},tag=self_blind] remove self_blind
+execute as @s[scores={move=964}] at @s run effect @e[type=ds:takada_chan,r=10,c=1] clear invisibility
+execute as @s[scores={move=964}] at @s run event entity @e[type=ds:takada_background,r=15,c=1] colour_4
+playanimation @s[scores={move=962..964}] animation.delusional.ab4b_barrage
+execute as @s[scores={move=962..964}] at @s run playanimation @e[tag=climax_jumping,r=15,c=1] animation.delusional.ab4b_barraged
+execute as @s[scores={move=921..964}] at @s run effect @e[type=ds:takada_chan,r=10,c=1] invisibility 1 1 true
+execute as @s[scores={move=791..963}] at @s rotated ~ 0 run tp @e[tag=climax_jumping,r=15,c=1] ^^^0.8 facing @s
+camera @s[scores={move=920..964},type=player] set minecraft:free pos ^^2.15^0.7 facing ^^1^1
+execute as @s[scores={move=920..964}] at @s run camerashake add @a[r=10] 0.15 0.15
+execute as @s[scores={move=962}] at @s run scriptevent ds:delusional_hearts 0,1.35,0.85
+execute as @s[scores={move=952}] at @s run scriptevent ds:delusional_hearts 0,1.35,0.85
+execute as @s[scores={move=942}] at @s run scriptevent ds:delusional_hearts 0,1.35,0.85
+execute as @s[scores={move=932}] at @s run scriptevent ds:delusional_hearts 0,1.35,0.85
+execute as @s[scores={move=863..962}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run playsound mob.punch @a ~~~ 0.16 2.25
+execute as @s[scores={move=860..962}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:punch4 ~~1.2~
+execute as @s[scores={move=860..962}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:punch1 ~~1.2~
+execute as @s[scores={move=860..962}] at @s run scriptevent ds:delusional_glitter 0,0.5,0.75
+camera @s[scores={move=924},type=player] fade time 0 0 0.1 color 255 255 255
+camera @s[scores={move=891..920},type=player] set minecraft:free pos ^0.65^1.6^0.4 facing ^^1.6^0.4
+execute as @s[scores={move=891..920}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^-0.5^0.25^0.4 facing ^^^1
+camera @s[scores={move=860..890},type=player] set minecraft:free pos ^-1^1.3^1 facing ^^1.5^0.15
+execute as @s[scores={move=860..890}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^-0.8^^ facing ^^^1
+execute as @s[scores={move=920}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=918}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink
+execute as @s[scores={move=916}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_lookright
+execute as @s[scores={move=914}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=911}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink2
+execute as @s[scores={move=908}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_eyesclosed
+execute as @s[scores={move=904}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=903}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink
+execute as @s[scores={move=901}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_lookright
+execute as @s[scores={move=898}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=896}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink2
+execute as @s[scores={move=893}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_eyesclosed
+execute as @s[scores={move=890}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=886}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink
+execute as @s[scores={move=885}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_lookright
+execute as @s[scores={move=883}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=881}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink2
+execute as @s[scores={move=876}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_eyesclosed
+execute as @s[scores={move=873}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=871}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink
+execute as @s[scores={move=870}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_lookright
+execute as @s[scores={move=868}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=866}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink2
+execute as @s[scores={move=863}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=919..920}] at @s run effect @e[type=ds:takada_chan,r=10,c=1] clear invisibility
+execute as @s[scores={move=918..923}] at @s rotated ~ 0 run tp @e[type=ds:takada_background,r=15,c=1] ~~~ facing ^^^1
+execute as @s[scores={move=918..920}] at @s run event entity @e[type=ds:takada_background,r=15,c=1] colour_5
+playanimation @s[scores={move=919..920}] animation.delusional.ab4b_barrage2
+execute as @s[scores={move=916..920}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab4b_barrage3
+execute as @s[scores={move=919..920}] at @s run playanimation @e[tag=climax_jumping,r=15,c=1] animation.delusional.ab4b_barraged2
+execute as @s[scores={move=860..920}] at @s run camerashake add @a[r=10] 0.15 0.15
+execute as @s[scores={move=862}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run playsound mob.shock1 @a ~~~ 0.5 3.25
+execute as @s[scores={move=862}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact1 ~~1.2~
+execute as @s[scores={move=862}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact2 ~~1.2~
+execute as @s[scores={move=859}] at @s run playsound mob.enderdragon.flap @a[r=25] ~~~ 99999 1.25 99999
+playsound music.sparkle @s[scores={move=829},type=player] ~~~ 999999 2 999999
+execute as @s[scores={move=829}] at @s run scriptevent ds:delusional_hearts2 -0.5,2,-3.5
+camera @s[scores={move=825},type=player] fade time 0.25 0 0.15 color 255 255 255
+execute as @s[scores={move=820}] at @s run event entity @e[type=ds:takada_background,r=15,c=1] colour_1
+execute as @s[scores={move=800..810}] at @s run scriptevent ds:delusional_hearts -0.35,0.6,0.5
+camera @s[scores={move=810},type=player] fade time 0.4 1.5 0.15 color 255 255 255
+execute as @s[scores={move=825..829}] at @s run scriptevent ds:delusional_small -1,0.25,-3.5
+execute as @s[scores={move=829}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink
+execute as @s[scores={move=810}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+camera @s[scores={move=865},type=player] fade time 0.1 0 0.15 color 255 255 255
+execute as @s[scores={move=863}] at @s run event entity @e[type=ds:takada_background,r=15,c=1] colour_6
+playanimation @s[scores={move=859..860}] animation.delusional.ab4b_final1
+execute as @s[scores={move=859..860}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab4b_final2
+execute as @s[scores={move=825..860}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^-1^^ facing ^^^10
+camera @s[scores={move=825..860},type=player] set minecraft:free pos ^-0.35^0.6^1 facing ^-0.5^1.5^-3
+execute as @s[scores={move=791}] at @s rotated ~ 0 run tp @e[tag=climax_jumping,r=15,c=1] ^^1^4 facing @s
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run playsound mob.shock1 @a ~~~ 0.5 1.25
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run playsound mob.wither.shoot @a ~~~ 0.5 0.3
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact1 ~~1.2~
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:large_impact2 ~~1.2~
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:pushed_up1
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:pushed_up2
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run particle ds:dirt02
+execute as @s[scores={move=790}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run camerashake add @a[tag=!delusional4,r=33] 4 0.25
+execute as @s[scores={move=789}] at @s run effect @e[tag=climax_jumping,r=15,c=1] levitation 1 30 true
+execute as @s[scores={move=789}] at @s run scoreboard players set @e[tag=climax_jumping,r=15,c=1] knockdown 110
+execute as @s[scores={move=789}] at @s as @e[tag=climax_jumping,r=15,c=1] at @s run scriptevent ds:knockback -15
+execute as @s[scores={move=789}] at @s run scoreboard players add @e[tag=climax_jumping,r=15,c=1] Evade 30
+execute as @s[scores={move=789}] at @s run scoreboard players add @e[tag=climax_jumping,r=15,c=1] Hit 10
+execute as @s[scores={move=789}] at @s run damage @e[tag=climax_jumping,r=15,c=1] 50 override entity @s
+execute as @s[scores={move=789}] at @s run scoreboard players operation @e[tag=climax_jumping,r=15,c=1] damage += @s damageadd
+execute as @s[scores={move=778..790}] at @s rotated ~ 0 run tp @e[type=ds:takada_background,r=15,c=1] ~~~ facing ^^^10
+execute as @s[scores={move=778..780}] at @s run event entity @e[type=ds:takada_background,r=15,c=1] colour_6
+playanimation @s[scores={move=778..780}] animation.delusional.ab4b_end1
+execute as @s[scores={move=778..780}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab4b_end1
+execute as @s[scores={move=700..805}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^-1^^ facing ^-1^^-5
+playsound music.takada_bell @s[scores={move=775},type=player]
+camera @s[scores={move=775..780},type=player] set minecraft:free pos ^-0.5^0.4^1.25 facing ^-0.5^0.4^
+camera @s[scores={move=773..774},type=player] set minecraft:free ease 2.5 in_out_circ pos ^-0.5^1.45^1.25 facing ^-0.5^1.45^
+execute as @s[scores={move=700..774}] at @s run scriptevent ds:delusional_end -0.5,0,0.6
+camera @s[scores={move=715},type=player] fade time 0.4 1 0.25 color 0 0 0
+execute as @s[scores={move=700..710}] at @s run tag @e[tag=climax_jumping,r=100,c=1] remove climax_jumping
+execute as @s[scores={move=700..710}] at @s run event entity @e[type=ds:takada_background,c=1] ds:disappear
+scoreboard players set @s[scores={move=700..710}] move 3
+tag @s[scores={move=0..3},tag=self_blind] remove self_blind
+tag @s[scores={move=0..3},tag=delusional4] remove delusional4
+@@delusional/ab5
+playanimation @s[scores={move=100..101}] animation.delusional.ab5
+execute as @s[scores={move=100..101}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional.ab5_takada
+execute as @s[scores={move=1..101}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^^^1.25 facing @s
+tag @s[scores={move=100..101},tag=!delusional5] add delusional5
+scoreboard players set @s[scores={move=1..}] Frames 6
+scoreboard players set @s[scores={move=1..}] Move 5
+scoreboard players set @s[scores={move=1..,Camera=0..8}] Camera 15
+execute if entity @s[tag=takada_clapped_tag] run scoreboard players set @e[tag=takada_clapped_brother,r=100,c=1] Stun 25
+execute if entity @s[tag=takada_clapped_tag] run scoreboard players set @e[tag=takada_clapped_brother,r=100,c=1] Camera 15
+execute if entity @s[tag=takada_clapped_tag] as @e[tag=takada_clapped_brother,r=100,c=1] run scoreboard players set @s Frames 6
+execute as @e[tag=takada_clapped,r=100,c=1] run tag @s[tag=!noStunnedAnim] add noStunnedAnim
+scoreboard players set @e[tag=takada_clapped,r=100,c=1] Stun 55
+scoreboard players set @e[tag=takada_clapped,r=100,c=1] Camera 25
+scoreboard players set @e[tag=takada_clapped,r=100,c=1] Frames 6
+execute as @s[scores={move=31..101}] at @s run scoreboard players set @e[tag=takada_clapped,r=100,c=1] Move 25
+execute as @s[scores={move=500..}] at @s run scoreboard players set @e[type=!player,r=15,tag=!climax_jumping,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] Stun 35
+execute as @s[scores={move=500..}] at @s run scoreboard players set @e[type=!player,r=15,tag=!climax_jumping,tag=!unselect,scores={Stun=35}] Disabled 35
+execute as @s[scores={move=500..}] at @s run effect @e[type=!player,r=15,tag=!climax_jumping,tag=!unselect,scores={Stun=35}] slowness 1 10 true
+tag @s[scores={move=99},tag=!swapper] add swapper
+execute as @s[scores={move=99},family=hero,tag=!sukuna,tag=!curse,tag=!rogue_sorcerer,type=!player] at @s positioned ^^^4 as @e[tag=!Frames,r=3.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] unless entity @s[family=hero,tag=!sukuna,tag=!curse,tag=!rogue_sorcerer,type=!player] positioned ^^^-4 unless score @s[scores={brotherID=1..}] brotherID = @e[tag=swapper,c=1] brotherID positioned ^^^4 unless entity @e[tag=takada_clapped,r=3.95] run tag @s[tag=!takada_clapped] add takada_clapped
+execute as @s[scores={move=99},tag=!sukuna,tag=!rogue_sorcerer,type=!player] unless entity @s[family=!purecurse,tag=!curse] at @s positioned ^^^4 as @e[tag=!Frames,r=3.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] unless entity @s[tag=!sukuna,tag=!rogue_sorcerer,family=purecurse,type=!player] unless entity @s[tag=!sukuna,tag=!rogue_sorcerer,tag=curse,type=!player] positioned ^^^-4 unless score @s[scores={brotherID=1..}] brotherID = @e[tag=swapper,c=1] brotherID positioned ^^^4 unless entity @e[tag=takada_clapped,r=3.95] run tag @s[tag=!takada_clapped] add takada_clapped
+execute as @s[scores={move=99},type=!player] unless entity @s[tag=!sukuna,tag=!rogue_sorcerer] at @s positioned ^^^4 as @e[tag=!Frames,r=3.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] positioned ^^^-4 unless score @s[scores={brotherID=1..}] brotherID = @e[tag=swapper,c=1] brotherID positioned ^^^4 unless entity @e[tag=takada_clapped,r=3.95] run tag @s[tag=!takada_clapped] add takada_clapped
+execute as @s[scores={move=99},family=!hero,tag=!sukuna,tag=!rogue_sorcerer,tag=!curse,family=!purecurse,type=!player] at @s positioned ^^^4 as @e[tag=!Frames,r=3.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] positioned ^^^-4 unless score @s[scores={brotherID=1..}] brotherID = @e[tag=swapper,c=1] brotherID positioned ^^^4 unless entity @e[tag=takada_clapped,r=3.95] run tag @s[tag=!takada_clapped] add takada_clapped
+execute as @s[scores={move=99},type=player] at @s positioned ^^^4 as @e[tag=!Frames,r=3.95,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] positioned ^^^-4 unless score @s[scores={brotherID=1..}] brotherID = @e[tag=swapper,c=1] brotherID positioned ^^^4 unless entity @e[tag=takada_clapped,r=3.95] run tag @s[tag=!takada_clapped] add takada_clapped
+execute as @s[scores={move=99}] at @s positioned ^^^4 if entity @e[tag=takada_clapped,r=3.95,tag=!Frames,tag=!unselect] at @s positioned ~~~ as @e[scores={brotherID=1..},r=100,tag=!takada_clapped,tag=!spectator,tag=!heavenlyrestriction,tag=!swapper] if score @s brotherID = @e[tag=swapper,c=1] brotherID run function boogie_woogie/brother_tag
+execute as @s[scores={move=99},tag=yuji_itadori_brother,tag=!yuji_awakened_brother,tag=!takada_clapped_tag] at @s positioned ^^^4 if entity @e[tag=takada_clapped,r=3.95,tag=!Frames,tag=!unselect] at @s positioned ~~~ as @e[type=ds:yuji_itadori,r=100,c=1,tag=!takada_clapped,tag=!spectator,tag=!heavenlyrestriction,tag=!swapper] run function boogie_woogie/brother_tag
+execute as @s[scores={move=99},tag=yuji_awakened_brother,tag=!yuji_itadori_brother,tag=!takada_clapped_tag] at @s positioned ^^^4 if entity @e[tag=takada_clapped,r=3.95,tag=!Frames,tag=!unselect] at @s positioned ~~~ as @e[type=ds:yuji_itadori_awakened,r=100,c=1,tag=!takada_clapped,tag=!spectator,tag=!heavenlyrestriction,tag=!swapper] run function boogie_woogie/brother_tag
+execute as @s[scores={move=99},tag=yuji_awakened_brother,tag=yuji_itadori_brother,tag=!takada_clapped_tag] at @s positioned ^^^4 if entity @e[tag=takada_clapped,r=3.95,tag=!Frames,tag=!unselect] at @s positioned ~~~ as @e[family=yuji,r=100,c=1,tag=!takada_clapped,tag=!spectator,tag=!heavenlyrestriction,tag=!swapper] run function boogie_woogie/brother_tag
+tag @s[scores={move=99},tag=swapper] remove swapper
+execute as @s[scores={move=99}] at @s positioned ^^^4 unless entity @e[tag=!Frames,r=3.95,c=1,tag=takada_clapped,tag=!unselect] run playanimation @s animation.cancel
+execute as @s[scores={move=99}] at @s positioned ^^^4 unless entity @e[tag=!Frames,r=3.95,c=1,tag=takada_clapped,tag=!unselect] run scoreboard players set @s move 3
+execute as @s[scores={move=98..99}] at @s run playanimation @e[tag=takada_clapped,r=100,c=1] animation.delusional.ab5_other
+execute as @s[scores={move=55..99}] at @s rotated ~ 0 run tp @e[tag=takada_clapped,r=100,c=1] ^^^1.25 facing @s
+camera @s[scores={move=99},type=player] fade time 0 0.25 0.25 color 0 0 0
+execute as @s[scores={move=99}] at @s run camera @p[tag=takada_clapped_brother,r=100] fade time 0 0.25 0.25 color 0 0 0
+execute as @s[scores={move=98}] at @s run summon ds:takada_background ~~~
+execute as @s[scores={move=98}] at @s run tag @e[tag=takada_clapped,r=100,c=1] add self_blind2
+execute as @s[scores={move=98}] at @s run event entity @e[type=ds:takada_background,c=1] colour_6
+execute as @s[scores={move=98},type=player] at @s rotated ~ 0 run camera @s set minecraft:free pos ^0.8^1.25^0.6 facing ^^1.25^0.6
+execute as @s[scores={move=98}] at @s rotated ~ 0 run camera @p[tag=takada_clapped_brother,r=100] set minecraft:free pos ^0.8^1.25^0.6 facing ^^1.25^0.6
+camera @s[scores={move=60},type=player] fade time 0.25 0.25 0.25 color 255 255 255
+execute as @s[scores={move=60}] at @s run camera @p[tag=takada_clapped_brother,r=100] fade time 0.25 0.25 0.25 color 255 255 255
+execute as @s[scores={move=60}] at @s run tag @e[tag=takada_clapped,c=1,tag=self_blind2] remove self_blind2
+execute as @s[scores={move=48..49}] at @s run playanimation @e[tag=takada_clapped,r=100,c=1] animation.delusional.ab5_other2
+execute as @s[scores={move=50}] at @s run event entity @e[type=ds:takada_background,c=1] ds:disappear
+execute as @s[scores={move=51..54}] at @s run effect @e[type=ds:takada_chan,r=10,c=1] invisibility 3 1 true
+execute as @s[scores={move=24..50},type=player] at @s rotated ~ 0 run camera @s set minecraft:free pos ^5^1.25^0.75 facing ^^1.25^0.75
+execute as @s[scores={move=24..50}] at @s rotated ~ 0 run camera @p[tag=takada_clapped_brother,r=100] set minecraft:free pos ^5^1.25^0.75 facing ^^1.25^0.75
+execute as @s[scores={move=16..23},type=player] at @s at @e[tag=takada_clapped_brother,r=100,c=1] rotated ~ 0 run camera @s set minecraft:free pos ^5^1.25^0.75 facing ^^1.25^0.75
+execute as @s[scores={move=16..23}] at @s as @p[tag=takada_clapped_brother,r=100] at @s rotated ~ 0 run camera @s set minecraft:free pos ^5^1.25^0.75 facing ^^1.25^0.75
+execute as @s[scores={move=5..15},type=player] at @s at @e[tag=takada_clapped_brother,r=100,c=1] rotated ~ 0 run camera @s set minecraft:free pos ^12^2^ facing ^^1.25^1
+execute as @s[scores={move=5..15}] at @s as @p[tag=takada_clapped_brother,r=100] at @s rotated ~ 0 run camera @s set minecraft:free pos ^12^2^ facing ^^1.25^1
+execute as @s[scores={move=40}] at @s run playsound mob.clap @a[r=100] ^^1^0.75 9999 0.9 9999
+execute as @s[scores={move=40}] at @s run  camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=40}] at @s run particle ds:punch1 ^^1^0.75
+execute as @s[scores={move=40}] at @s run particle ds:punch2 ^^1^0.75
+execute as @s[scores={move=40}] at @s run particle ds:punch3 ^^1^0.75
+execute as @s[scores={move=40}] at @s run particle ds:punch4 ^^1^0.75
+execute as @s[scores={move=40}] at @s run particle ds:boogie_woogie1 ^^1^0.75
+execute as @s[scores={move=40}] at @s run particle ds:boogie_woogie2 ^^1^0.75
+execute as @s[scores={move=40}] at @s run particle ds:large_impact1 ^^1^0.75
+playanimation @s[scores={move=24..25},tag=!takada_clapped_tag] animation.cancel
+scoreboard players set @s[scores={move=24..25},tag=!takada_clapped_tag] move 3
+execute as @s[scores={move=24..25}] at @s unless entity @e[tag=takada_clapped_brother,r=100] run playanimation @s animation.cancel
+execute as @s[scores={move=24..25}] at @s unless entity @e[tag=takada_clapped_brother,r=100] run scoreboard players set @s move 3
+execute as @s[scores={move=25}] at @s run summon gg:impact_frame
+execute as @s[scores={move=24}] at @s run effect @s invisibility 1 1 true
+execute as @s[scores={move=24}] at @s run effect @e[tag=takada_clapped_brother,r=100,c=1] invisibility 1 1 true
+execute as @s[scores={move=24}] at @s rotated ~ 0 run summon ds:rift ~~~ facing ^^^10 none swapper_location
+execute as @s[scores={move=24}] at @s run event entity @e[name=swapper_location,type=ds:rift,c=1] ds:disappear
+execute as @s[scores={move=24}] at @s at @e[tag=takada_clapped_brother,r=100,c=1] run tp @s ~~~ facing ^^^10
+execute as @s[scores={move=24}] as @e[tag=takada_clapped_brother,c=1] at @e[name=swapper_location,type=ds:rift,r=100,c=1] run tp @s ~~~ facing ^^^10
+execute as @s[scores={move=24..25}] at @s run particle ds:boogie_woogie_tp
+execute as @s[scores={move=24..25}] at @s run particle ds:boogie_woogie_tp2
+execute as @s[scores={move=6..24}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s[type=!player] facing entity @e[tag=takada_clapped,r=100,c=1] feet rotated ~ 0 run tp @s ~~~ facing ^^^10
+execute as @s[scores={move=17..20}] at @s run scoreboard players set @e[tag=takada_clapped_brother,r=100,c=1,scores={move=4..}] move 3
+effect @s[scores={move=14..16}] clear invisibility
+execute as @s[scores={move=14..16}] at @s run effect @e[tag=takada_clapped_brother,r=100,c=1] clear invisibility
+execute as @s[scores={move=14..16}] at @s run playanimation @e[tag=takada_clapped_brother,r=100,c=1] animation.delusional.ab5_blackflash
+execute as @s[scores={move=10..11}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run playsound mob.blackflash @a[r=100] ~~~ 9999 1.25 9999
+execute as @s[scores={move=6..7}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run playsound mob.blackflash2 @a[r=100] ~~~ 9999 0.85 9999
+execute as @s[scores={move=10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run playsound mob.kokusen3 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={move=10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run particle ds:red_tint
+execute as @s[scores={move=10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run camerashake add @a[r=20] 2 0.15
+execute as @s[scores={move=9}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run summon gg:impact_frame
+execute as @s[scores={move=9}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run particle ds:red_tint
+execute as @s[scores={move=9}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run particle ds:invert
+execute as @s[scores={move=9}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run camerashake add @a[r=20] 4 0.15 rotational
+execute as @s[scores={move=8..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run scriptevent ds:lightning 1,0.85,0.75, 0.8,0.1,0.1, 0.8,0.1,0.1, 3,3,3, 3,3,3
+execute as @s[scores={move=5..6}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run scriptevent ds:lightning 1,0.85,1, 0.8,0.1,0.1, 0.8,0.1,0.1, 2.75,2.75,2.75, 2.75,2.75,2.75
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash1
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash2
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash3
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash4
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash5
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash6
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash7
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash8
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash9
+execute as @s[scores={move=9..10}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s positioned ^^1^2 run particle ds:black_flash10
+execute as @s[scores={move=6}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run damage @e[tag=takada_clapped,r=15,c=1] 75 override entity @s
+execute as @s[scores={move=6}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run scoreboard players set @e[tag=takada_clapped,r=15,c=1] Flourish 10
+execute as @s[scores={move=6}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run scoreboard players add @e[tag=takada_clapped,r=15,c=1] Evade 35
+execute as @s[scores={move=6}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run scoreboard players add @e[tag=takada_clapped,r=15,c=1] Hit 5
+execute as @s[scores={move=6}] at @s at @e[tag=takada_clapped_brother,r=100,c=1] run scoreboard players operation @e[tag=takada_clapped,r=15,c=1] damage += @s damageadd
+execute as @s[scores={move=6}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run scoreboard players operation @e[tag=takada_clapped,r=15,c=1] damage *= four Mode
+scoreboard players set @s[scores={move=4..5}] move 1001
+execute as @s[scores={move=992..}] at @s as @e[tag=takada_clapped_brother,r=100,c=1] at @s run scriptevent ds:lightning 2,0.85,1.25, 0.8,0.1,0.1, 0.8,0.1,0.1, 2,2,2, 2,2,2
+playanimation @s[scores={move=984}] animation.todo.fast_clap
+execute as @s[scores={move=984}] at @s run playsound mob.clap @a[r=100] ^^1^-10 9999 1 9999
+execute as @s[scores={move=983}] at @s run effect @s invisibility 1 1 true
+execute as @s[scores={move=983}] at @s run effect @e[tag=takada_clapped_brother,r=100,c=1] invisibility 1 1 true
+execute as @s[scores={move=970..980}] at @s rotated ~ 0 run summon ds:rift ~~~ facing ^^^10 none swapper_location
+execute as @s[scores={move=970..980}] at @s run event entity @e[name=swapper_location,type=ds:rift,c=1] ds:disappear
+execute as @s[scores={move=970..980}] at @s at @e[tag=takada_clapped_brother,r=100,c=1] run tp @s ~~~ facing ^^^10
+execute as @s[scores={move=970..980}] as @e[tag=takada_clapped_brother,c=1] at @e[name=swapper_location,type=ds:rift,r=100,c=1] run tp @s ~~~ facing ^^^10
+execute as @s[scores={move=980..981}] at @s run particle ds:boogie_woogie_tp
+execute as @s[scores={move=980..981}] at @s run particle ds:boogie_woogie_tp2
+effect @s[scores={move=970..980}] clear invisibility
+execute as @s[scores={move=970..980}] at @s run effect @e[tag=takada_clapped_brother,r=100,c=1] clear invisibility
+scoreboard players set @s[scores={move=970..980}] move 3
+execute as @s[scores={move=0..3},tag=delusional5] at @s run tag @e[tag=takada_clapped,r=100,c=1] remove takada_clapped
+execute as @s[scores={move=0..3},tag=delusional5] at @s run tag @e[tag=takada_clapped_brother,r=100,c=1] remove takada_clapped_brother
+tag @s[scores={move=0..3},tag=takada_clapped_tag] remove takada_clapped_tag
+tag @s[scores={move=0..3},tag=delusional5] remove delusional5
+@@delusional/delusional_click
+tag @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep1=0,detect_jump=0}] add delusional1
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep1=1..,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep1=1..,Sneaking=0,detect_jump=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.delusional.wep1"},{"score":{"name": "@p","objective": "wep1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Sneaking=0,detect_jump=0}] move 41
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep1=0,Sneaking=0,detect_jump=0}] wep1 200
+tag @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep2=0,detect_jump=0}] add delusional2
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep2=1..,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep2=1..,Sneaking=1..,detect_jump=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.delusional.wep2"},{"score":{"name": "@p","objective": "wep2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0}] move 41
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep2=0,Sneaking=1..,detect_jump=0}] wep2 240
+tag @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=0,detect_jump=1..}] add delusional3
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=1..,Sneaking=0,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,wep3=1..,Sneaking=0,detect_jump=1..}] at @s run tellraw @s {"rawtext":[{"translate":"text.delusional.wep3"},{"score":{"name": "@p","objective": "wep3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=0,Sneaking=0,detect_jump=1..}] move 60
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep3=0,Sneaking=0,detect_jump=1..}] wep3 220
+tag @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep4=0,detect_jump=1..}] add delusional4
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep4=1..,Sneaking=1..,detect_jump=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep4=1..,Sneaking=1..,detect_jump=1..}] at @s run tellraw @s {"rawtext":[{"translate":"text.delusional.wep4"},{"score":{"name": "@p","objective": "wep4"}},{"text":"§c."}]}
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep4=0,Sneaking=1..,detect_jump=1..}] move 61
+scoreboard players set @s[tag=itemUse:ds:delusional2,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep4=0,Sneaking=1..,detect_jump=1..}] wep4 600
+@@delusional/delusional_cmds
+tellraw @a[tag=delusional_trait,tag=!delusional,tag=itemUse:ds:delusional,scores={Stun=0,Disabled2=0,Disabled=0},tag=sukuna] {"rawtext":[{"translate":"text.insukunamode.sukuna_use"}]}
+execute as @a[tag=delusional_trait,tag=!delusional,tag=itemUse:ds:delusional,scores={Stun=0,Disabled2=0,Disabled=0},tag=!sukuna] unless entity @s[scores={health_percent=31..},m=!c] run tag @s add delusional_cutscene
+execute as @a[tag=delusional_trait,tag=!delusional,tag=itemUse:ds:delusional,scores={Stun=0,Disabled2=0,Disabled=0},tag=!sukuna] unless entity @s[scores={health_percent=31..},m=!c] run scoreboard players set @s move 222
+event entity @a[tag=delusional_trait,has_property={property:heart=0}] special_charm_on
+execute as @a[tag=delusional_trait,tag=delusional,tag=!delusional1,tag=!delusional2,tag=!delusional3,tag=!delusional4,tag=!delusional5,scores={move=0,cutscene=0}] at @s rotated ~ 0 as @e[type=ds:takada_chan,r=10] if score @s uniqueid = @a[tag=delusional_trait,tag=delusional,tag=!delusional1,tag=!delusional2,tag=!delusional3,tag=!delusional4,tag=!delusional5,c=1] uniqueid run tp @s ^-1^0.05^ facing ^^^5
+execute as @a[tag=delusional_trait,tag=delusional,scores={move=0,cutscene=0},tag=!sukuna] at @s run scriptevent ds:delusional 0,0,0
+execute as @a[tag=delusional_trait,tag=delusional,tag=itemUse:ds:delusional2,tag=!sukuna] at @s run function delusional/delusional_click
+execute as @a[tag=delusional_trait,tag=delusional,scores={move=1..},tag=!sukuna] unless entity @s[tag=!delusional1,tag=!delusional2,tag=!delusional3,tag=!delusional4,tag=!delusional5] at @s run function delusional/delusional_moves
+execute as @a[tag=delusional_trait,tag=delusional,tag=!sukuna,tag=!delusional_cutscene] at @s run function delusional/takada_chan_spawn
+execute as @a[tag=delusional_trait,tag=delusional,tag=!sukuna,tag=!on_trial,hasitem={item=ds:cursedenergy,location=slot.weapon.mainhand,quantity=0}] run titleraw @s title {"rawtext":[{"translate":"text.delusional.imagination1"},{"selector":"@s"},{"translate":"text.delusional.imagination2"},{"text":"                                                                           \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"}]}
+scoreboard players add @a[tag=delusional_trait,tag=delusional,tag=!infinite_delusional] delusional_timer 1
+scoreboard players add @a[tag=delusional_trait,tag=delusional] delusional_music 1
+playsound music.takada @a[tag=delusional_trait,tag=delusional,scores={delusional_music=1441..}]
+scoreboard players set @a[tag=delusional_trait,scores={delusional_music=1441..}] delusional_music 1
+execute as @a[tag=delusional_trait,scores={delusional_timer=3800..,move=0,cutscene=0}] at @s run function remove_delusional
+execute as @a[tag=delusional_trait,tag=delusional,scores={move=0,cutscene=0},tag=sukuna] at @s run function remove_delusional
+tag @a[tag=delusional_trait,tag=delusional,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep5=0,detect_jump=0,punch=1},tag=boogie_woogie,tag=!delusional5] add delusional5
+execute as @a[tag=delusional_trait,tag=delusional,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep5=1..,Sneaking=1..,detect_jump=0,punch=1},tag=boogie_woogie] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @a[tag=delusional_trait,tag=delusional,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,wep5=1..,Sneaking=1..,detect_jump=0,punch=1},tag=boogie_woogie] at @s run tellraw @s {"rawtext":[{"translate":"text.delusional.wep5"},{"score":{"name": "@p","objective": "wep5"}},{"text":"§c."}]}
+scoreboard players set @a[tag=delusional_trait,tag=delusional,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep5=0,Sneaking=1..,detect_jump=0,punch=1},tag=boogie_woogie] move 101
+scoreboard players set @a[tag=delusional_trait,tag=delusional,hasitem={item=ds:delusional2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,wep5=0,Sneaking=1..,detect_jump=0,punch=1},tag=boogie_woogie] wep5 600
+@@delusional/delusional_cutscene
+playanimation @s[scores={move=200..}] animation.delusional_cutscene
+title @s[scores={move=219..},type=player] actionbar ...
+camera @s[scores={move=210..},type=player] fade time 0 0.5 0.25 color 0 0 0
+execute as @s[scores={move=203..},type=player] at @s run scriptevent ds:knockback 0.5
+tag @s[scores={move=1..},tag=!delusional] add delusional
+hud @s[scores={move=215..},type=player] hide progress_bar
+hud @s[scores={move=215..},type=player] hide hotbar
+hud @s[scores={move=215..},type=player] hide hunger
+scoreboard players set @s[scores={Frames=0..5,move=10..}] Frames 20
+scoreboard players set @s[scores={Move=0..5,move=10..}] Move 20
+scoreboard players set @s[scores={Camera=0..5,move=10..}] Camera 20
+scoreboard players set @e[type=!player,r=15,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] Stun 35
+scoreboard players set @e[type=!player,r=15,tag=!unselect,scores={Stun=35}] Disabled 35
+effect @e[type=!player,r=15,tag=!unselect,scores={Stun=35}] slowness 1 10 true
+tp @s[scores={move=200..203},type=player] ~~~~ 0
+camera @s[scores={move=200..203},type=player] set minecraft:free pos ^^0.22^0.44 facing ^^0.5^
+camera @s[scores={move=199..203},type=player] set minecraft:free ease 0.5 in_sine pos ^^0.175^0.44 facing ^^^0.2
+playsound music.takada @s[scores={move=190..191},type=player]
+scoreboard players set @s[scores={move=190..191},type=player] delusional_music 1
+camera @s[scores={move=158},type=player] fade time 0.25 0.15 0.25 color 255 255 255
+execute as @s[scores={move=154}] at @s rotated ~ 0 run summon ds:takada_background ^^^3.5
+playsound music.sparkle @s[scores={move=130},type=player] ~~~ 99999 2 99999
+camera @s[scores={move=152},type=player] set minecraft:free pos ^^1.6^1 facing ^^0.5^
+camera @s[scores={move=149..150},type=player] set minecraft:free ease 1 out_quint pos ^^1.6^1 facing ^^1.6^
+execute as @s[scores={move=152}] at @s rotated ~ 0 positioned ^0.5^0.2^-0.25 run function delusional/takada_chan_spawn
+execute as @s[scores={move=152}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_eyesclosed
+execute as @s[scores={move=115..120}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^-0.2^^-0.15 facing ^-0.2^^5
+execute as @s[scores={move=114..120}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+execute as @s[scores={move=150..152}] at @s run playanimation @e[type=ds:takada_chan,r=10,c=1] animation.delusional_cutscene2
+execute as @s[scores={move=78}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink
+playsound music.sparkle @s[scores={move=78},type=player] ~~~ 99999 1.4 99999
+execute as @s[scores={move=130..132}] at @s run event entity @e[type=ds:takada_background,r=10,c=1] colour_2
+camera @s[scores={move=130},type=player] set minecraft:free pos ^^1.6^0.65 facing ^^1.6^
+camera @s[scores={move=90},type=player] set minecraft:free ease 0.5 in_out_circ pos ^^1.6^1 facing ^-0.25^1.6^
+playsound music.sparkle @s[scores={move=50},type=player] ~~~ 99999 1 99999
+execute as @s[scores={move=48..51}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=46}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=43}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=42}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=39}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=35}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=33}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=30}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=27}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=24}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=23}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=18}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=15}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=10}] at @s run scriptevent ds:delusional_small 0,0,0
+execute as @s[scores={move=49..52}] at @s rotated ~ 0 run tp @e[type=ds:takada_chan,r=10,c=1] ^^0.15^-0.15 facing ^^^5
+execute as @s[scores={move=48}] at @s run playsound mob.enderdragon.flap @a[tag=!delusional_cutscene,r=25] ~~~ 99999 1.25 99999
+execute as @s[scores={move=49..50}] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_wink2
+camera @s[scores={move=51},type=player] fade time 0 0 0.5 color 255 255 255
+execute as @s[scores={move=50}] at @s run event entity @e[type=ds:takada_background,c=1] ds:disappear
+execute as @s[scores={move=50}] at @s rotated ~ 0 run summon ds:takada_background ^1^^4 facing ^1^^5
+execute as @s[scores={move=50}] at @s rotated ~ 0 positioned ^1^^4 run event entity @e[type=ds:takada_background,r=10,c=1] colour_3
+camera @s[scores={move=50},type=player] set minecraft:free pos ^0.4^1.6^0.8 facing ^-0.75^1.3^
+camera @s[scores={move=49..50},type=player] set minecraft:free ease 0.25 out_quint pos ^^1.6^1 facing ^^1.6^
+camera @s[scores={move=44..45},type=player] set minecraft:free ease 2 in_sine pos ^^1.6^1.25 facing ^^1.6^
+camera @s[scores={move=15},type=player] fade time 0.5 0.5 0.25 color 255 255 255
+give @s[scores={move=10},type=player] ds:delusional2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+execute as @s[scores={move=1..3},tag=delusional_cutscene] at @s run event entity @e[type=ds:takada_background,c=1] ds:disappear
+execute as @s[scores={move=1..3},tag=delusional_cutscene] at @s run event entity @e[type=ds:takada_chan,r=10,c=1] takada_face_default
+camera @s[scores={move=1..3},tag=delusional_cutscene,type=player] clear
+tag @s[scores={move=1..3},tag=delusional_cutscene] remove delusional_cutscene
+@@delusional/delusional_moves
+execute if entity @s[tag=delusional1] run function delusional/ab1
+execute if entity @s[tag=delusional2] run function delusional/ab2
+execute if entity @s[tag=delusional3] run function delusional/ab3
+execute if entity @s[tag=delusional4] run function delusional/ab4
+execute if entity @s[tag=delusional5] run function delusional/ab5
+@@delusional/takada_chan_spawn
+execute as @e[type=ds:takada_chan,r=10,scores={uniqueid=1..}] if score @s uniqueid = @e[tag=delusional_trait,tag=delusional,tag=!sukuna,c=1] uniqueid run tag @e[type=ds:takada_chan,r=10,c=1] add temp_mark
+execute unless entity @e[type=ds:takada_chan,r=10,tag=temp_mark] rotated ~ 0 run summon ds:takada_chan ^-1^0.05^ facing ^^^5
+execute unless entity @e[type=ds:takada_chan,r=10,tag=temp_mark] rotated ~ 0 positioned ^-1^0.05^ run scoreboard players operation @e[type=ds:takada_chan,c=1] uniqueid = @s uniqueid
+execute run tag @e[type=ds:takada_chan,r=10,tag=temp_mark] remove temp_mark

@@ -210,6 +210,17 @@ public final class MoveFx {
         }
     }
 
+    /** {@code camera @s fade time <in> <hold> <out> color r g b}: seconds. */
+    public static void fade(double in, double hold, double out, int r, int g, int b) {
+        fadeIn = (float) in * 20.0F;
+        fadeHold = (float) hold * 20.0F;
+        fadeOut = (float) out * 20.0F;
+        fadeR = r;
+        fadeG = g;
+        fadeB = b;
+        fadeAge = 0;
+    }
+
     private static double d(Object o) {
         return ((Number) o).doubleValue();
     }

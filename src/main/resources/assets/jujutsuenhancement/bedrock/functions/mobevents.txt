@@ -1,0 +1,202 @@
+@@mobevents/_mobevent_random
+execute unless score mobevent Mode matches 0 run scoreboard players set mobevent Mode 0
+tag @a[m=spectator,tag=!mobeventoff] add mobeventoff
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped] at @s if entity @e[family=projectile,tag=DomainExpansion,r=66] run tag @s[tag=!mobeventoff] add mobeventoff
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped] at @s if entity @e[family=damage,family=projectile,family=boss,scores={EnergyCap=0..,Energy=0..,energystat=0..},tag=DomainExpansion,r=200,c=1] run tag @s add mobeventoff
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={level=-9999..29}] mobevent 1 450
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={level=30..79}] mobevent 200 1000
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={level=80..129}] mobevent 300 1000
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={level=130..200}] mobevent 380 1000
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={level=201..}] mobevent 420 1000
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent=1..450}] mobevent_1 1 6
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent=451..700}] mobevent_2 1 6
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent=701..850}] mobevent_3 1 6
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent=851..950}] mobevent_4 1 14
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent=951..}] mobevent_5 1 4
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_1=1},c=1] at @s run function mobevents/yuji
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_1=1..3},c=1] at @s run function mobevents/flyheads
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_1=5},c=1] at @s run function mobevents/miwa
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_2=1},c=1] at @s run function mobevents/haruta
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_2=2},c=1] at @s run function mobevents/bag_head
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_2=3},c=1] at @s run function mobevents/juzo
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_2=4},c=1] at @s run function mobevents/kusakabe
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_2=5},c=1] at @s run function mobevents/inumaki
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=1},c=1] at @s run function mobevents/hakari
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=2},c=1] at @s run function mobevents/maki_cullinggames
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=3},c=1] at @s run function mobevents/higuruma
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=4},c=1] at @s run function mobevents/megumi
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=5},c=1] at @s run function mobevents/random_grade1
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=6},c=1] at @s run function mobevents/todo
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=7},c=1] at @s run function mobevents/mammoth_curse
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=1},c=1] at @s run function mobevents/hakari_vs_kashimo
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=2},c=1] at @s run function mobevents/kashimo
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=3},c=1] at @s run function mobevents/toji_hunt
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=4..5},c=1] at @s run function mobevents/random_grade1
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=6},c=1] at @s run function mobevents/gojo_vs_toji
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=7},c=1] at @s run function mobevents/yuji_awakened
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=8},tag=!unselect,c=1] at @s unless entity @e[type=ds:cursed_veil,r=100] run summon ds:cursed_veil
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=8},tag=!unselect,c=1] at @s unless entity @e[type=ds:cursed_veil,r=100,rm=0.25] run tag @e[type=ds:cursed_veil,c=1] add enemy_veil
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=8},tag=!unselect,c=1] at @s[tag=!veil_target] unless entity @e[type=ds:cursed_veil,r=100,rm=0.25] run tag @s add veil_target
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=9},c=1] at @s run function mobevents/kurourushi
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=10},c=1] at @s run function mobevents/uro_takako
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=11},c=1] at @s run function mobevents/ryu_ishigori
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=12},c=1] at @s run function mobevents/kurourushi
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=12},c=1] at @s run function mobevents/uro_takako
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=12},c=1] at @s run function mobevents/ryu_ishigori
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_5=1},c=1] at @s run function mobevents/jogo
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_5=2},c=1] at @s run function mobevents/mahito
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_5=3..4},c=1] at @s run scoreboard players random @a mobevent_5 10 11
+scoreboard players random @a[tag=!mobeventoff,tag=!prison_realm_trapped,name=ButterJaffa3452,tag=!hadanthill] mobevent_5 8 11
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_5=10},c=1] at @s run function mobevents/anthill
+execute as @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_5=11},c=1] at @s run function mobevents/massive_field
+execute as @r[y=0,dy=40,tag=!mobeventoff,scores={mobevent=1..},hasitem={item=ds:unobtanium}] at @s if entity @e[family=monster,r=40,c=1,rm=15] run effect @a[r=100,tag=!unselect] darkness 30 1 true
+execute as @r[y=0,dy=40,tag=!mobeventoff,scores={mobevent=1..},hasitem={item=ds:unobtanium}] at @s at @e[family=monster,r=40,c=1,rm=15] run summon ds:creepy ~~~0.5
+execute as @r[y=0,dy=40,tag=!mobeventoff,scores={mobevent=1..},hasitem={item=ds:unobtanium}] at @s as @e[type=ds:creepy,r=40,c=1] at @s run playsound record.mellohi @a ~~~ 9999999 0.6625199 999999
+execute as @r[y=0,dy=40,tag=!mobeventoff,scores={mobevent=1..},hasitem={item=ds:unobtanium}] at @s as @e[type=ds:creepy,r=40,c=1] at @s run playsound ambient.cave @a ~~~ 9999999 0.6625199 999999
+scoreboard players set @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent=!0}] mobevent 0
+scoreboard players set @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_1=!0}] mobevent_1 0
+scoreboard players set @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_2=!0}] mobevent_2 0
+scoreboard players set @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_3=!0}] mobevent_3 0
+scoreboard players set @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_4=!0}] mobevent_4 0
+scoreboard players set @a[tag=!mobeventoff,tag=!prison_realm_trapped,scores={mobevent_5=!0}] mobevent_5 0
+tag @a[tag=mobeventoff] remove mobeventoff
+@@mobevents/anthill
+tickingarea remove world_event_anthill
+summon ds:projectile "world_event"
+scoreboard players set @e[type=ds:projectile,name=world_event,tag=!anthill,r=1,c=1] Deleter 12000
+spreadplayers ~ ~ 300 2000 @e[type=ds:projectile,name=world_event,tag=!anthill,r=1,c=1]
+execute as @e[type=ds:projectile,name=world_event,tag=!anthill,c=1] at @s run tp @s ~ 62 ~
+tag @a[name=ButterJaffa3452,tag=!hadanthill] add hadanthill
+execute as @e[type=ds:projectile,name=world_event,tag=!anthill,c=1] at @s run structure load anthill ~-18 70 ~-18
+execute at @s run tp @s ~~~ facing @e[type=ds:projectile,name=world_event,tag=!anthill,c=1]
+tag @e[type=ds:projectile,name=world_event,tag=!anthill,c=1] add anthill
+@@mobevents/bag_head
+summon ds:bag_head ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:bag_head,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/flyheads
+summon ds:flyhead ~~15~
+summon ds:flyhead2 ~~15~
+summon ds:flyhead3 ~~15~
+summon ds:flyhead ~~15~
+summon ds:flyhead2 ~~15~
+summon ds:flyhead3 ~~15~
+summon ds:flyhead4 ~~15~
+summon ds:flyhead4 ~~15~
+execute positioned ~~15~ as @e[family=flyhead,r=0.1,c=8] positioned ~~-15~ run spreadplayers ~ ~ 1 45 @s
+@@mobevents/gojo_vs_toji
+summon ds:student_gojo ~5~~
+summon ds:toji ~-5~~
+execute positioned ~-5~~ as @e[type=ds:toji,r=1,c=1] positioned ~10~~ run damage @s 0 entity_attack entity @e[type=ds:student_gojo,r=1,c=1]
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:student_gojo,r=1,c=1]
+execute positioned ~-5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:toji,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/hakari
+summon ds:hakari ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:hakari,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/hakari_vs_kashimo
+summon ds:hakari ~5~~
+summon ds:kashimo ~-5~~
+execute positioned ~5~~ as @e[type=ds:hakari,r=1,c=1] positioned ~-10~~ run damage @e[type=ds:kashimo,r=1,c=1] 0 entity_attack entity @s
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:hakari,r=1,c=1]
+execute positioned ~-5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:kashimo,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/haruta
+summon ds:haruta ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:haruta,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/higuruma
+summon ds:higuruma ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:higuruma,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/inumaki
+summon ds:inumaki ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:inumaki,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/jogo
+summon ds:jogo ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:jogo,r=1,c=1]
+playsound mob.wither.spawn @a ~~~ 9999 1 9999
+camerashake add @a[r=100] 2 0.5
+@@mobevents/juzo
+summon ds:juzo ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:juzo,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/kashimo
+summon ds:kashimo ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:kashimo,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/kurourushi
+summon ds:kurourushi ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:kurourushi,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/kusakabe
+summon ds:kusakabe ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:kusakabe,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/mahito
+summon ds:mahito ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:mahito,r=1,c=1]
+playsound mob.wither.spawn @a ~~~ 9999 1 9999
+camerashake add @a[r=100] 2 0.5
+@@mobevents/maki_cullinggames
+summon ds:maki_cullinggames ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:maki_cullinggames,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/massive_field
+tickingarea remove world_event_kaiju
+summon ds:massive_field "kaiju_field"
+scoreboard players set @e[type=ds:massive_field,name=kaiju_field,tag=!kaiju_field,r=1,c=1] Deleter 12000
+spreadplayers ~ ~ 300 2000 @e[type=ds:massive_field,name=kaiju_field,tag=!kaiju_field,r=1,c=1]
+execute as @e[type=ds:massive_field,name=kaiju_field,tag=!kaiju_field,c=1] at @s run tp @s ~ 62 ~
+execute at @s run tp @s ~~~ facing @e[type=ds:massive_field,name=kaiju_field,tag=!kaiju_field,c=1]
+tag @e[type=ds:massive_field,name=kaiju_field,tag=!kaiju_field,c=1] add kaiju_field
+@@mobevents/megumi
+summon ds:megumi ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:megumi,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/miwa
+summon ds:miwa ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:miwa,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/random_grade1
+summon ds:projectile randomgrade1
+scoreboard players random @e[type=ds:projectile,name=randomgrade1,r=1,c=1] chance 1 10
+spreadplayers ~ ~ 45 50 @e[type=ds:projectile,name=randomgrade1,r=1,c=1]
+execute as @e[type=ds:projectile,name=randomgrade1,c=1] at @s[scores={chance=1..5}] run summon ds:centipede_grade1
+execute as @e[type=ds:projectile,name=randomgrade1,c=1] at @s[scores={chance=6..}] run summon ds:azureflames_curse
+execute at @e[type=ds:projectile,name=randomgrade1,c=1] run damage @e[family=grade1,r=1,c=1] 0 entity_attack entity @s[tag=!unselect]
+playsound random.explode @a ~~~ 9999 0.25 9999
+kill @e[type=ds:projectile,name=randomgrade1,c=1]
+@@mobevents/ryu
+summon ds:ryu_ishigori ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:ryu_ishigori,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/todo
+summon ds:todo ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:todo,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/toji_hunt
+summon ds:toji ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:toji,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/uro
+summon ds:uro_takako ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:uro_takako,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/yuji
+summon ds:yuji_itadori ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:yuji_itadori,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/yuji_awakened
+summon ds:yuji_itadori_awakened ~5~~
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:yuji_itadori_awakened,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999
+@@mobevents/yuji_vs_hakari
+summon ds:yuji_itadori ~5~~
+summon ds:hakari ~-5~~
+execute positioned ~5~~ as @e[type=ds:yuji_itadori,r=1,c=1] positioned ~-10~~ run damage @e[type=ds:hakari,r=1,c=1] 0 entity_attack entity @s
+execute positioned ~5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:yuji_itadori,r=1,c=1]
+execute positioned ~-5~~ run spreadplayers ~ ~ 35 45 @e[type=ds:hakari,r=1,c=1]
+playsound random.explode @a ~~~ 9999 0.25 9999

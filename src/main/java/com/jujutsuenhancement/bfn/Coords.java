@@ -14,7 +14,7 @@ public final class Coords {
     }
 
     /** Reads three coordinates from {@code w} starting at {@code idx}; returns the coords and writes the next index to {@code next[0]}. */
-    static Coords read(List<String> w, int idx, int[] next) {
+    public static Coords read(List<String> w, int idx, int[] next) {
         List<String> parts = new ArrayList<>();
         int i = idx;
         while (parts.size() < 3 && i < w.size()) {

@@ -1,0 +1,192 @@
+@@rays/ab1
+playanimation @s[scores={move=11},type=!player] animation.mammoth_curse.flick1
+playanimation @s[scores={move=10..11},type=player] animation.lumen1
+tag @s[scores={move=1..2},tag=form1] remove form1
+tag @s[scores={move=9..,Stun=1..},tag=form1] remove form1
+scoreboard players set @s[scores={move=9..,Stun=1..},tag=form1] move 0
+tag @s[tag=!lumenshoot] add lumenshoot
+execute as @s[scores={move=6}] at @s run playsound random.whoop @a[r=100] ~~1~ 9999 3 9999
+execute as @s[scores={move=6}] at @s run playsound portal.travel @a[r=100] ~~1~ 9999 20 9999
+execute as @s[scores={move=6},type=!Player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=8] at @s run summon ds:mammoth_beam ~~~
+execute as @s[scores={move=6},type=player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,c=8] at @s run summon ds:mammoth_beam ~~~
+tag @s[tag=lumenshoot] remove lumenshoot
+@@rays/ab2
+playanimation @s[scores={move=25},type=!player] animation.mammoth_curse.flick2
+playanimation @s[scores={move=25..26},type=player] animation.lumen2
+tag @s[scores={move=1..2},tag=form2] remove form2
+tag @s[scores={move=9..,Stun=1..},tag=form2] remove form2
+scoreboard players set @s[scores={move=9..,Stun=1..},tag=form2] move 0
+tag @s[tag=!lumenshoot] add lumenshoot
+execute as @s[scores={move=23}] at @s run playsound random.whoop @a[r=100] ~~1~ 9999 3 9999
+execute as @s[scores={move=20}] at @s run playsound portal.travel @a[r=100] ~~1~ 9999 20 9999
+execute as @s[scores={move=20},type=!Player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=8] at @s run summon ds:mammoth_beam ~~~
+execute as @s[scores={move=20},type=player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,c=8] at @s run summon ds:mammoth_beam ~~~
+execute as @s[scores={move=15}] at @s run playsound portal.travel @a[r=100] ~~1~ 9999 20 9999
+execute as @s[scores={move=15},type=!Player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=8] at @s run summon ds:mammoth_beam ~~~
+execute as @s[scores={move=15},type=player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,c=8] at @s run summon ds:mammoth_beam ~~~
+execute as @s[scores={move=10}] at @s run playsound portal.travel @a[r=100] ~~1~ 9999 20 9999
+execute as @s[scores={move=10},type=!Player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=8] at @s run summon ds:mammoth_beam ~~~
+execute as @s[scores={move=10},type=player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,c=8] at @s run summon ds:mammoth_beam ~~~
+tag @s[tag=lumenshoot] remove lumenshoot
+@@rays/ab3
+playanimation @s[scores={move=25},type=!player] animation.mammoth_curse.flick3
+playanimation @s[scores={move=25..26},type=player] animation.lumen3
+tag @s[scores={move=1..2},tag=form3] remove form3
+tag @s[scores={move=9..,Stun=1..},tag=form3] remove form3
+scoreboard players set @s[scores={move=9..,Stun=1..},tag=form3] move 0
+tag @s[tag=!lumenshoot] add lumenshoot
+execute as @s[scores={move=1..},type=!Player] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=23}] at @s run playsound random.whoop @a[r=100] ~~1~ 9999 3 9999
+execute as @s[scores={move=21}] at @s run playsound random.whoosh @a[r=100] ~~1~ 9999 3 9999
+execute as @s[scores={move=20}] at @s run playsound portal.travel @a[r=100] ~~1~ 9999 20 9999
+execute as @s[scores={move=21},type=!player] at @s run summon ds:projectile ~~~ facing @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=1] none "ray_aim"
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^3
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^5
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^7
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^9
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^11
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^13
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^15
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^17
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^19
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^21
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^23
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^25
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^27
+execute as @s[scores={move=20},type=!player] at @s run execute as @e[name=ray_aim,c=1] at @s run summon ds:mammoth_beam ^^^29
+execute as @s[scores={move=19},type=!player] at @s run tp @e[name=ray_aim,c=1] ~~-10~
+execute as @s[scores={move=14..15},type=!player] at @s run kill @e[name=ray_aim,c=1]
+execute as @s[scores={move=20},type=Player] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^3
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^5
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^7
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^9
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^11
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^13
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^15
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^17
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^19
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^21
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^23
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^25
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^27
+execute as @s[scores={move=20},type=player] at @s run summon ds:mammoth_beam ^^^29
+tag @s[tag=lumenshoot] remove lumenshoot
+@@rays/ab4
+playanimation @s[scores={move=30},type=!player] animation.mammoth_curse.flick4
+playanimation @s[scores={move=30..31},type=player] animation.lumen4
+tag @s[scores={move=1..2},tag=form4] remove form4
+tag @s[scores={move=9..,Stun=1..},tag=form4] remove form4
+scoreboard players set @s[scores={move=9..,Stun=1..},tag=form4] move 0
+tag @s[tag=!lumenshoot] add lumenshoot
+scoreboard players set @s[scores={move=30..31}] Move 25
+execute as @s[scores={move=25}] at @s run playsound random.whoop @a[r=100] ~~1~ 9999 3 9999
+execute as @s[scores={move=25}] at @s run playsound portal.travel @a[r=100] ~~1~ 9999 20 9999
+execute as @s[scores={move=26}] at @s run scoreboard players random @s num2 1 7
+execute as @s[scores={move=25,num2=1}] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=2] at @s run scriptevent ds:bullet_hell shape:line size:10 time:7 spacing:2.5 amount:5 predict:true predicttime:14 ds:mammoth_beam
+execute as @s[scores={move=25,num2=2}] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=2] at @s run scriptevent ds:bullet_hell shape:cross size:3 time:7 spacing:2.5 amount:5 predict:true predicttime:14 ds:mammoth_beam
+execute as @s[scores={move=25,num2=3}] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=2] at @s run scriptevent ds:bullet_hell shape:circle size:7 time:25 spacing:2.5 amount:14 predict:true predicttime:7 ds:mammoth_beam
+execute as @s[scores={move=25,num2=4}] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=2] at @s run scriptevent ds:bullet_hell shape:cross size:8 time:7 spacing:4 amount:12 predict:true predicttime:14 ds:mammoth_beam
+execute as @s[scores={move=25,num2=5}] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=2] at @s run scriptevent ds:bullet_hell shape:spiral size:8 time:35 spacing:4 amount:12 predict:true predicttime:14 ds:mammoth_beam
+execute as @s[scores={move=25,num2=6}] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=2] at @s run scriptevent ds:bullet_hell shape:scatter size:14 time:40 spacing:4 amount:12 predict:true predicttime:5 ds:mammoth_beam
+execute as @s[scores={move=25,num2=7}] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=1] at @s run scriptevent ds:bullet_hell shape:grid_alternate size:8 time:35 spacing:5 amount:8 predict:true predicttime:5 ds:mammoth_beam
+execute as @s[scores={move=20}] at @s run scoreboard players set @s num2 0
+tag @s[tag=lumenshoot] remove lumenshoot
+@@rays/ab5
+playanimation @s[scores={move=40..41},type=!player] animation.mammoth_curse.flick5
+playanimation @s[scores={move=40..41},type=player] animation.lumen5
+tag @s[scores={move=1..2},tag=form5] remove form5
+tag @s[scores={move=9..,Stun=1..},tag=form5] remove form5
+scoreboard players set @s[scores={move=9..,Stun=1..},tag=form5] move 0
+tag @s[tag=!lumenshoot] add lumenshoot
+scoreboard players set @s[scores={move=40..41}] Move 35
+execute as @s[scores={move=35}] at @s run playsound mob.zomba @a[r=100] ~~1~ 9999 1 9999
+execute as @s[scores={move=21}] at @s run playsound random.whoop @a[r=100] ~~1~ 9999 3 9999
+execute as @s[scores={move=21}] at @s run playsound portal.travel @a[r=100] ~~1~ 9999 15 9999
+execute as @s[scores={move=20},type=!Player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,family=!purecurse,c=8] at @s run summon ds:mammoth_beam_big ~~~
+execute as @s[scores={move=20},type=player] at @s run execute as @e[type=!item,tag=!lumenshoot,family=!motionless,family=!inanimate,type=!ds:mammoth_beam,family=!pest,family=!damage,family=!mammoth_curse,family=!projectile,type=!ds:projectile,type=!arrow,type=!xp_orb,family=!despawncito,r=39.80,tag=!unselect,type=!armor_stand,c=8] at @s run summon ds:mammoth_beam_big ~~~
+tag @s[tag=lumenshoot] remove lumenshoot
+@@rays/beam_hit
+damage @s[tag=!Frames] 30 override
+scoreboard players set @s[tag=!Frames] Stun 30
+scoreboard players set @s[tag=!Frames] Hit 11
+scoreboard players add @s[tag=!Frames] Evade 15
+execute as @s[tag=!Frames] at @s run playsound mob.blood @a[r=100] ~~1~ 9999 3 9999
+execute as @s[tag=!Frames] at @s run particle ds:blood_hit1 ~~1~
+@@rays/beam_hit2
+damage @s[tag=!Frames] 70 override
+scoreboard players set @s[tag=!Frames] knockdown 20
+scoreboard players set @s[tag=!Frames] Hit 11
+scoreboard players add @s[tag=!Frames] Evade 30
+execute as @s[tag=!Frames] at @s run playsound mob.blood @a[r=100] ~~1~ 9999 3 9999
+execute as @s[tag=!Frames] at @s run particle ds:blood_hit1 ~~1~
+@@rays/lumen_clear
+clear @p ds:lumen_cascade1
+tellraw @p {"rawtext":[{"translate":"text.skills_clear"}]}
+playsound random.orb @p
+@@rays/lumen_click
+scoreboard players add @s punch 0
+tag @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=0,Sneaking=0,detect_jump=0,Energy=100..,punch=0}] add form1
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Energy=0..99,Sneaking=0,detect_jump=0,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=100..,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=100..,punch=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.lumen.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=100..,punch=0}] move 11
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=100..,punch=0}] ability1 80
+scoreboard players remove @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Energy=100..,move=11,Sneaking=0,detect_jump=0,punch=0}] Energy 100
+tag @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,ability2=0,Sneaking=0,detect_jump=1..,Energy=250..,punch=0}] add form2
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Energy=0..249,Sneaking=0,detect_jump=1..,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability2=1..,Sneaking=0,detect_jump=1..,Energy=250..,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability2=1..,Sneaking=0,detect_jump=1..,Energy=250..,punch=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.lumen.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=0,detect_jump=1..,Energy=250..,punch=0}] move 26
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=0,detect_jump=1..,Energy=250..,punch=0}] ability2 160
+scoreboard players remove @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Energy=250..,move=26,Sneaking=0,detect_jump=1..,punch=0}] Energy 250
+tag @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability3=0,Energy=300..,punch=0}] add form3
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Sneaking=1..,detect_jump=0,Stun=0,Disabled2=0,ability3=0,Energy=0..299,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability3=1..,Energy=300..,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability3=1..,Energy=300..,punch=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.lumen.ab3"},{"score":{"name": "@p","objective": "ability3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=1..,detect_jump=0,Energy=300..,punch=0}] move 26
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=1..,detect_jump=0,Energy=300..,punch=0}] ability3 200
+scoreboard players remove @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Energy=200..,move=26,Sneaking=1..,detect_jump=0,punch=0}] Energy 300
+tag @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability4=0,Energy=400..,punch=1..2}] add form4
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Sneaking=1..,detect_jump=0,Stun=0,Disabled2=0,ability4=0,Energy=0..399,punch=1..2}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability4=1..,Energy=400..,punch=1..2}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability4=1..,Energy=400..,punch=1..2}] at @s run tellraw @s {"rawtext":[{"translate":"text.lumen.ab4"},{"score":{"name": "@p","objective": "ability4"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,detect_jump=0,Energy=400..,punch=1..2}] move 31
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,detect_jump=0,Energy=400..,punch=1..2}] ability4 100
+scoreboard players remove @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Energy=400..,move=31,Sneaking=1..,detect_jump=0,punch=1..2}] Energy 400
+tag @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=1..,ability5=0,Energy=500..,punch=0}] add form5
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Sneaking=1..,detect_jump=1..,Stun=0,Disabled2=0,ability5=0,Energy=0..499,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=1..,ability5=1..,Energy=500..,punch=0}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=1..,ability5=1..,Energy=500..,punch=0}] at @s run tellraw @s {"rawtext":[{"translate":"text.lumen.ab5"},{"score":{"name": "@p","objective": "ability5"}},{"text":"§c."}]}
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=1..,detect_jump=1..,Energy=500..,punch=0}] move 41
+scoreboard players set @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=1..,detect_jump=1..,Energy=500..,punch=0}] ability5 300
+scoreboard players remove @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand},scores={Stun=0,Energy=500..,move=41,Sneaking=1..,detect_jump=1..,punch=0}] Energy 500
+tag @s[tag=lumenclick,hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand}] remove lumenclick
+@@rays/lumen_clicks
+tag @s[tag=itemUse:ds:lumen_cascade1] add lumenclick
+tag @s[scores={punch=1..2},hasitem={item=ds:lumen_cascade1,location=slot.weapon.mainhand}] add lumenclick
+execute as @s[tag=lumenclick] run function rays/lumen_click
+@@rays/lumen_moves
+execute as @s[scores={move=1..},tag=form1] run function rays/ab1
+execute as @s[scores={move=1..},tag=form2] run function rays/ab2
+execute as @s[scores={move=1..},tag=form3] run function rays/ab3
+execute as @s[scores={move=1..},tag=form4] run function rays/ab4
+execute as @s[scores={move=1..},tag=form5] run function rays/ab5
+@@rays/lumen_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen] at @s run function remove_ct
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=lumen] {"rawtext":[{"translate":"text.lumen.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=curse,tag=!lumen] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=curse,tag=lumen] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen] {"rawtext":[{"translate":"text.lumen.using1"},{"translate":"text.lumen.using2"},{"translate":"text.lumen.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen,m=!c] forms 1
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen,m=c] forms 1
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen] ds:lumen_cascade1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen,m=c] {"rawtext":[{"translate":"text.creativeforms"}]}
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!lumen] add lumen
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=curse,tag=lumen] at @s run function clear_skills
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=curse,tag=lumen] ds:lumen_cascade1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[scores={Sneaking=0}] {"rawtext":[{"translate":"text.lumen_all.unlocked"}]}
+tag @e remove cantupgrade

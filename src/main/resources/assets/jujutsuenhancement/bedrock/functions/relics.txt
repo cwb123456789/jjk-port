@@ -1,0 +1,534 @@
+@@relics/blitz_crystal
+playanimation @s animation.finger_bearer.hit2
+tag @s[tag=!120percent,tag=heavenlyrestriction_mechimaru,scores={agility=20..}] add cant
+tag @s[tag=heavenlyrestriction_mechimaru,tag=120percent,scores={agility=24..}] add cant
+tag @s[tag=!120percent,tag=!heavenlyrestriction_mechimaru,scores={agility=50..}] add cant
+tag @s[tag=120percent,tag=!heavenlyrestriction_mechimaru,scores={agility=60..}] add cant
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=19},tag=!120percent,tag=heavenlyrestriction_mechimaru] agility 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=23},tag=120percent,tag=heavenlyrestriction_mechimaru] agility 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=49},tag=!120percent,tag=!heavenlyrestriction_mechimaru] agility 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=59},tag=120percent,tag=!heavenlyrestriction_mechimaru] agility 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=!20..},tag=!120percent,tag=heavenlyrestriction_mechimaru] agility 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=!24..},tag=120percent,tag=heavenlyrestriction_mechimaru] agility 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=!50..},tag=!120percent,tag=!heavenlyrestriction_mechimaru] agility 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={agility=!60..},tag=120percent,tag=!heavenlyrestriction_mechimaru] agility 2
+tellraw @p[scores={agility=25..26},tag=heavenlyrestriction,tag=!cant,r=0.2] {"rawtext":[{"translate":"text.sideflashstep.unlocked"}]}
+tellraw @p[scores={agility=40..41},tag=!cant,r=0.2] {"rawtext":[{"translate":"text.flashstep.unlocked"}]}
+tellraw @p[r=0.2,tag=!cant] {"rawtext":[{"translate":"text.blitz_crystal"}]}
+execute as @p[r=0.2,tag=!cant] at @s run playsound random.glass @a ~~~ 1 0.95
+execute as @p[r=0.2,tag=!cant] at @s run playsound beacon.power @a ~~~ 1 2.25
+tellraw @p[tag=cant,r=0.2] {"rawtext":[{"translate":"text.agility_limits"}]}
+execute as @p[r=0.2,tag=!cant] at @s run particle ds:blitz_crystal1 ~~1~
+execute as @p[r=0.2,tag=!cant] at @s run particle ds:blitz_crystal2 ~~1~
+execute as @p[r=0.2,tag=!cant] at @s run clear @s ds:blitz_crystal 0 1
+tag @s remove cant
+@@relics/cursed_crystal
+playanimation @s animation.finger_bearer.hit2
+tag @s remove cant
+scoreboard players add @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] Energy 2000
+scoreboard players add @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] EnergyCap 30
+scoreboard players add @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] energystat 1
+tellraw @p[tag=!cant,r=0.2,tag=!heavenlyrestriction] {"rawtext":[{"translate":"text.cursed_crystal"}]}
+execute as @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] at @s run playsound random.glass @a ~~~ 1 1
+execute as @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] at @s run playsound beacon.power @a ~~~ 1 1
+tellraw @p[tag=cant,r=0.2,tag=!heavenlyrestriction] {"rawtext":[{"translate":"text.energy_limits"}]}
+tellraw @p[r=0.2,tag=heavenlyrestriction] {"rawtext":[{"translate":"text.point_energy_restricted"}]}
+execute as @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] at @s run particle ds:cursed_crystal1 ~~1~
+execute as @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] at @s run particle ds:cursed_crystal2 ~~1~
+execute as @p[r=0.2,tag=!cant,tag=!heavenlyrestriction] at @s run clear @s ds:cursed_crystal 0 1
+tag @s remove cant
+@@relics/cursed_eye
+execute as @s[scores={Energy=200..}] at @s run playanimation @s animation.cursed_eye.use
+execute as @s[scores={Energy=200..}] at @s positioned ^^^5 run function relics/cursed_eye_target
+execute as @s[scores={Energy=200..}] at @s  if entity @e[tag=eye_trg,scores={detect_health=1..}] run playsound mob.endermen.portal @a[r=50] ~~1~ 99999 0.25 99999
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=!limitless,tag=!shikigami,tag=!lovetrain,tag=!heavenlyrestriction,tag=!lightning,tag=!absorption,tag=!judgeman,tag=!sukuna,tag=!flames,tag=!boogie_woogie,tag=!light,tag=!cursed_speech,tag=!yuji_awakened,tag=!painkiller,tag=!miracles,tag=!sight,tag=!windup,tag=!explosive,tag=!idle_transfig,tag=!sky,tag=!kurourushi,tag=!discharge,tag=!inversion,tag=!lumen] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_noct.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=limitless] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_limitless.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=shikigami] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_shikigami.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=lovetrain] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_lovetrain.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=heavenlyrestriction] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_hr.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=lightning] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_lightning.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=absorption] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_absorption.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=judgeman] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_judgeman.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=sukuna] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_sukuna.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=flames] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_flames.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=boogie_woogie] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_boogie_woogie.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=light] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_light.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=cursed_speech] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_speech.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=yuji_awakened] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_yuji_awakened.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=painkiller] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_painkiller.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=miracles] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_miracles.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=sight] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_sight.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=windup] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_windup.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=explosive] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_explosive.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=idle_transfig] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_idle_transfig.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=sky] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_sky.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=roach] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_roach.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=discharge] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_discharge.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=inversion] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_inversion.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s if entity @e[tag=eye_trg,scores={detect_health=1..},tag=lumen] run tellraw @s[scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg.cursed_eye"},{"selector":"@e[tag=eye_trg,c=1]"},{"translate":"text.eye_trg_health.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"detect_health"}},{"translate":"text.eye_trg_energy.cursed_eye"},{"score":{"name":"@e[tag=eye_trg,c=1]","objective":"Energy"}},{"translate":"text.eye_trg_lumen.cursed_eye"}]}
+execute as @s[scores={Energy=200..}] at @s run execute as @e[tag=eye_trg] at @s unless entity @s[scores={detect_health=0..}] run tellraw @p[tag=itemUse:ds:cursed_eye,c=1,scores={Energy=200..}] {"rawtext":[{"translate":"text.eye_trg_invalid.cursed_eye"}]}
+tag @e[tag=eye_trg] remove eye_trg
+scoreboard players remove @s[scores={Energy=200..}] Energy 200
+@@relics/cursed_eye_target
+execute as @p[hasitem={item=ds:cursed_eye},r=50] unless entity @e[tag=eye_trg,r=50] run tag @e[r=4.99,c=1] add eye_trg
+execute as @p[hasitem={item=ds:cursed_eye},r=50] positioned ^^^5 run function relics/cursed_eye_target
+@@relics/cursed_object
+playsound particle.soul_escape @s ~~1~ 1 1.2
+scoreboard players add @s[hasitem={item=ds:cursed_object_v1,location=slot.weapon.mainhand}] EnergyCap 20
+scoreboard players add @s[hasitem={item=ds:cursed_object_v2,location=slot.weapon.mainhand}] EnergyCap 40
+scoreboard players add @s[hasitem={item=ds:cursed_object_v3,location=slot.weapon.mainhand}] EnergyCap 60
+scoreboard players add @s[hasitem={item=ds:cursed_object_v4,location=slot.weapon.mainhand}] EnergyCap 100
+clear @s[hasitem={item=ds:cursed_object_v1,location=slot.weapon.mainhand}] ds:cursed_object_v1 0 1
+clear @s[hasitem={item=ds:cursed_object_v2,location=slot.weapon.mainhand}] ds:cursed_object_v2 0 1
+clear @s[hasitem={item=ds:cursed_object_v3,location=slot.weapon.mainhand}] ds:cursed_object_v3 0 1
+clear @s[hasitem={item=ds:cursed_object_v4,location=slot.weapon.mainhand}] ds:cursed_object_v4 0 1
+@@relics/dread_bell
+scoreboard objectives add dreadbellCD dummy
+scoreboard objectives add dreadbelladd dummy
+scoreboard players add @s dreadbellCD 0
+playanimation @s[scores={dreadbellCD=0}] animation.dread_bell
+tellraw @s[scores={dreadbellCD=1..}] {"rawtext":[{"translate":"text.dreadbell.cd"},{"score":{"name": "@p","objective": "dreadbellCD"}},{"text":"§5."}]}
+execute as @s[scores={dreadbellCD=0}] at @s run playsound block.bell.hit @a[r=500] ~~~ 99999 0.45 99999
+execute as @s[scores={dreadbellCD=0}] at @s run playsound ambient.soulsand_valley.additions @a[r=500] ~~~ 99999 0.75 99999
+execute as @s[scores={dreadbellCD=0}] at @s run camerashake add @a[r=50] 2 0.25
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,family=grade4,r=50] strength 1
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,family=grade3,r=50] strength 3
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,family=grade2,r=50] strength 7
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,family=grade1,r=50] strength 12
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,family=special_grade,r=50] strength 20
+execute as @s[scores={dreadbellCD=0}] at @s run execute as @e[family=purecurse,family=!transfigured_human,r=30] at @s run scoreboard players operation @p[tag=itemUse:ds:dread_bell,c=1] dreadbelladd += @s detect_health
+execute as @s[scores={dreadbellCD=0}] at @s run execute as @e[family=purecurse,family=!transfigured_human,r=30] at @s run scoreboard players operation @p[tag=itemUse:ds:dread_bell,c=1] dreadbelladd += @s strength
+execute as @s[scores={dreadbellCD=0}] at @s run execute as @e[tag=curse,r=30,rm=0.3] at @s run scoreboard players operation @p[tag=itemUse:ds:dread_bell,c=1] dreadbelladd += @s detect_health
+execute as @s[scores={dreadbellCD=0}] at @s run execute as @e[tag=curse,r=30,rm=0.3] at @s run scoreboard players operation @p[tag=itemUse:ds:dread_bell,c=1] dreadbelladd += @s strength
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players operation @s Energy += @s dreadbelladd
+execute as @s[scores={dreadbellCD=0}] at @s run particle ds:dread_bell ~~1~
+execute as @s[scores={dreadbellCD=0}] at @s run particle ds:dread_bell2 ~~1~
+execute as @s[scores={dreadbellCD=0}] at @s run particle ds:dread_bell3 ~~1~
+execute as @s[scores={dreadbellCD=0,dreadbelladd=1..100}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] slowness 5 2
+execute as @s[scores={dreadbellCD=0,dreadbelladd=1..100}] at @s run effect @e[tag=curse,r=30] slowness 5 2
+execute as @s[scores={dreadbellCD=0,dreadbelladd=1..100}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] weakness 5 0
+execute as @s[scores={dreadbellCD=0,dreadbelladd=1..100}] at @s run effect @e[tag=curse,r=30] weakness 5 0
+execute as @s[scores={dreadbellCD=0,dreadbelladd=101..300}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] slowness 5 3
+execute as @s[scores={dreadbellCD=0,dreadbelladd=101..300}] at @s run effect @e[tag=curse,r=30] slowness 5 3
+execute as @s[scores={dreadbellCD=0,dreadbelladd=101..300}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] weakness 5 1
+execute as @s[scores={dreadbellCD=0,dreadbelladd=101..300}] at @s run effect @e[tag=curse,r=30] weakness 5 1
+execute as @s[scores={dreadbellCD=0,dreadbelladd=101..300}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,r=30] antiheal 350
+execute as @s[scores={dreadbellCD=0,dreadbelladd=101..300}] at @s run scoreboard players add @e[tag=curse,r=30] antiheal 350
+execute as @s[scores={dreadbellCD=0,dreadbelladd=301..600}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] slowness 8 4
+execute as @s[scores={dreadbellCD=0,dreadbelladd=301..600}] at @s run effect @e[tag=curse,r=30] slowness 8 4
+execute as @s[scores={dreadbellCD=0,dreadbelladd=301..600}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] weakness 8 2
+execute as @s[scores={dreadbellCD=0,dreadbelladd=301..600}] at @s run effect @e[tag=curse,r=30] weakness 8 2
+execute as @s[scores={dreadbellCD=0,dreadbelladd=301..600}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,r=30] antiheal 600
+execute as @s[scores={dreadbellCD=0,dreadbelladd=301..600}] at @s run scoreboard players add @e[tag=curse,r=30] antiheal 600
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] slowness 8 4
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run effect @e[tag=curse,r=30] slowness 8 4
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] weakness 8 2
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run effect @e[tag=curse,r=30] weakness 8 2
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run effect @e[family=purecurse,family=!transfigured_human,r=30] wither 8 5
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run effect @e[tag=curse,r=30] wither 8 5
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run scoreboard players add @e[family=purecurse,family=!transfigured_human,r=30] antiheal 1200
+execute as @s[scores={dreadbellCD=0,dreadbelladd=601..}] at @s run scoreboard players add @e[tag=curse,r=30] antiheal 1200
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players remove @e[family=purecurse,family=!transfigured_human,family=grade4,r=50] strength 1
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players remove @e[family=purecurse,family=!transfigured_human,family=grade3,r=50] strength 3
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players remove @e[family=purecurse,family=!transfigured_human,family=grade2,r=50] strength 7
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players remove @e[family=purecurse,family=!transfigured_human,family=grade1,r=50] strength 12
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players remove @e[family=purecurse,family=!transfigured_human,family=special_grade,r=50] strength 20
+execute as @s[scores={dreadbellCD=0}] at @s run scoreboard players set @s dreadbelladd 0
+damage @s 10
+scoreboard players set @s[scores={dreadbellCD=0}] dreadbellCD 800
+@@relics/exit_prison_realm_self
+execute positioned 666000 201 666000 run camera @s fade time 0 1 0 color 255 255 255
+execute positioned 666000 201 666000 run playsound music.tinnitus @s
+execute positioned 666000 201 666000 run gamemode s @s[m=a]
+execute positioned 666000 201 666000 run tp 0 200 0
+tag @s remove prison_realm_trapped
+tag @s remove sealed_properly
+tellraw @s {"rawtext":[{"translate":"text.unsealed.prison_realm"}]}
+@@relics/prison_realm_attatch
+execute unless entity @s[scores={Deleter=0..}] run scoreboard players set @s Deleter 1201
+scoreboard players set @e[tag=prison_realm_trapped,c=1,r=10,scores={move=4..}] move 3
+scoreboard players set @e[tag=prison_realm_trapped,c=1,r=10,scores={Disabled=0..10}] Disabled 100
+scoreboard players set @e[tag=prison_realm_trapped,c=1,r=10,scores={Stun=0..10}] Stun 100
+scoreboard players set @e[tag=prison_realm_trapped,c=1,r=10,scores={Evade=1..}] Evade 0
+scoreboard players set @e[tag=prison_realm_trapped,c=1,r=10,scores={Camera=0..10}] Camera 100
+scoreboard players set @e[tag=prison_realm_trapped,c=1,r=10,scores={Move=0..10}] Move 100
+scoreboard players set @e[tag=prison_realm_trapped,c=1,r=10,scores={nocts=0..10}] nocts 1200
+execute as @e[tag=prison_realm_trapped,c=1,r=10] at @s run tp @s ~~~~ 0
+tp @e[tag=prison_realm_trapped,c=1] ~~~ facing ^^^10
+execute as @s[scores={Deleter=1200..1201}] at @s run playanimation @s animation.prison_realm_attatch
+execute as @s[scores={Deleter=1200..1201}] at @s run playanimation @e[tag=prison_realm_trapped,c=1] animation.prison_realm_cuffed
+execute as @s[scores={Deleter=1200..1201}] at @s run tag @e[tag=prison_realm_trapped,c=1] remove prison_realm_selected
+execute as @s[scores={Deleter=1200..1201}] at @s run playsound random.disfigure @a[r=100] ~~1~ 9999 1 9999
+execute as @s[scores={Deleter=1198..1199}] at @s run playsound random.disfigure @a[r=100] ~~1~ 9999 0.9 9999
+execute as @s[scores={Deleter=1200}] at @s run playsound mob.whirl @a[r=100] ~~1~ 9999 1.25 9999
+execute as @s[scores={Deleter=1177..1199}] at @s run camerashake add @a[r=10] 0.2 0.08
+execute as @s[scores={Deleter=1185}] at @s run playsound random.disfigure @a[r=100] ~~1~ 9999 1 9999
+execute as @s[scores={Deleter=1179}] at @s run playsound mob.blood @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={Deleter=1183}] at @s run playsound random.disfigure @a[r=100] ~~1~ 9999 0.85 9999
+execute as @s[scores={Deleter=1181}] at @s run playsound random.disfigure @a[r=100] ~~1~ 9999 0.65 9999
+execute as @s[scores={Deleter=1178}] at @s run playsound mob.blood @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={Deleter=1179}] at @s run playsound random.disfigure @a[r=100] ~~1~ 9999 0.85 9999
+execute as @s[scores={Deleter=1175}] at @s run playsound mob.ring @a[r=100] ~~1~ 9999 1.25 9999
+execute as @s[scores={Deleter=1180}] at @s run particle ds:slam3 ~~1~
+execute as @s[scores={Deleter=1180}] at @s run particle ds:slam4 ~~1~
+execute as @s[scores={Deleter=1180}] at @s run particle ds:slam5 ~~1~
+execute as @s[scores={Deleter=1180}] at @s run particle ds:slam6 ~~1~
+execute as @s[scores={Deleter=1180}] at @s run particle ds:slam7 ~~1~
+execute as @s[scores={Deleter=1180}] at @s run particle ds:slam8 ~~1~
+execute as @s at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute as @s at @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={Deleter=1010}] at @s run camera @p[tag=prison_realm_trapped] fade time 0.2 0.15 0.2 color 0 0 0
+execute as @s[scores={Deleter=1000}] at @s run execute as @p[tag=prison_realm_trapped,c=1] at @s anchored eyes run camera @s set minecraft:free pos ^2.25^0.75^-1.35 facing ^^1^-0.4
+execute as @s[scores={Deleter=980}] at @s run execute as @p[tag=prison_realm_trapped,c=1] at @s anchored eyes run camera @s set minecraft:free pos ^-1^-0.5^0.75 facing ^^^0.75
+execute as @s[scores={Deleter=970}] at @s run execute as @p[tag=prison_realm_trapped,c=1] at @s anchored eyes run camera @s set minecraft:free pos ^3^-0.5^0.25 facing ^^2^-3
+execute as @s[scores={Deleter=955}] at @s run execute as @p[tag=prison_realm_trapped,c=1] at @s anchored eyes run camera @s set minecraft:free pos ^^1.5^3 facing ^^^
+execute as @s[scores={Deleter=940}] at @s run execute as @p[tag=prison_realm_trapped,c=1] at @s anchored eyes run camera @s set minecraft:free ease 3 in_sine pos ^^0.35^1 facing ^^^
+execute as @s[scores={Deleter=920}] at @s run execute as @p[tag=prison_realm_trapped,c=1] at @s anchored eyes run camera @s set minecraft:free pos ^^-0.45^0.5 facing ^^2^15
+execute as @s[scores={Deleter=1000..1001}] at @s run playanimation @s animation.prison_realm_close
+execute as @s[scores={Deleter=1000..1001}] at @s run playanimation @e[tag=prison_realm_trapped,c=1] animation.prison_realm_close_player
+execute as @s[scores={Deleter=1000}] at @s run playsound mob.gate_close1 @a[r=200] ~~1~ 9999 1 9999
+execute as @s[scores={Deleter=905}] at @s run effect @a[tag=prison_realm_trapped,c=1] blindness 5 1 true
+execute as @s[scores={Deleter=894}] at @s run camera @a[tag=prison_realm_trapped,c=1] fade time 0.1 5 1
+execute as @s[scores={Deleter=935}] at @s run playsound mob.gate_close2 @a[r=200] ~~1~ 9999 1 9999
+execute as @s[scores={Deleter=890..891}] at @s unless entity @e[type=ds:prison_realm_inside] run scoreboard objectives add prison_realm_occupied dummy
+execute as @s[scores={Deleter=890..891}] at @s unless entity @e[type=ds:prison_realm_inside] run scoreboard players set prison_realm_occupied prison_realm_occupied 1
+execute as @s[scores={Deleter=890..891}] at @s unless entity @e[type=ds:prison_realm_inside] run summon ds:prison_realm_inside
+execute as @s[scores={Deleter=890..891}] at @s unless entity @e[type=ds:prison_realm_inside] run effect @e[tag=prison_realm_trapped,c=1] invisibility 1 1 true
+execute as @s[scores={Deleter=890..891}] at @s unless entity @e[type=ds:prison_realm_inside] run playanimation @e[tag=prison_realm_trapped,c=1] animation.stunned
+execute as @s[scores={Deleter=890..891}] at @s unless entity @e[type=ds:prison_realm_inside] run camera @p[tag=prison_realm_trapped,c=1] clear
+execute as @s[scores={Deleter=890..891}] at @s run scoreboard players set @e[type=ds:prison_realm_inside] prison_realm_id 0
+execute as @s[scores={Deleter=890..891}] at @s run scoreboard players operation @e[type=ds:prison_realm_inside] prison_realm_id = @e[tag=prison_realm_trapped,c=1] prison_realm_id
+execute as @s[scores={Deleter=889..890}] at @s unless entity @e[type=ds:prison_realm_inside] run tp @e[type=ds:prison_realm_inside,c=1] 666000 201 666000
+execute as @s[scores={Deleter=890}] at @s run summon ds:prison_realm_closed ~~0.25~
+execute as @s[scores={Deleter=800..886}] at @s run event entity @s ds:disappear
+@@relics/prison_realm_backdoor
+execute as @s[tag=!prison_realm_emptying] at @s if entity @p[c=1,r=2,scores={punch=1..2}] as @p[c=1,r=2,scores={punch=1..2}] unless entity @s[hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] run playanimation @s animation.finger_bearer.hit1
+execute as @s[tag=!prison_realm_emptying] at @s if entity @p[c=1,r=2,scores={punch=1..2}] as @p[c=1,r=2,scores={punch=1..2}] unless entity @s[hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] run give @s ds:prison_realm_backdoor_item
+execute as @s[tag=!prison_realm_emptying] at @s if entity @p[c=1,r=2,scores={punch=1..2}] unless entity @p[scores={punch=1..2},c=1,hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] run event entity @s ds:disappear
+execute as @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_backdoor,r=2] at @s unless entity @s[scores={Deleter=900..}] run particle ds:nullified ~~0.1~
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_backdoor,r=2] at @s unless entity @s[scores={Deleter=900..}] run camerashake add @a[r=20] 0.25 0.15
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_backdoor,r=2] at @s unless entity @s[scores={Deleter=900..}] run playsound mob.gate_open1 @a[r=100] ~~~ 9999 1.15 9999
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_backdoor,r=2] at @s unless entity @s[scores={Deleter=900..}] run tag @s add prison_realm_emptying
+execute as @s[tag=prison_realm_emptying] at @s unless entity @s[scores={Deleter=900..}] if entity @p[hasitem={item=ds:prison_realm_closed_item}] run execute as @p[hasitem={item=ds:prison_realm_closed_item}] at @s run summon ds:prison_realm_closed ^^1.4^0.5 facing ^^^10 none "Occupied Prison Realm"
+execute as @s[tag=prison_realm_emptying] at @s unless entity @s[scores={Deleter=900..}] if entity @e[type=ds:prison_realm_closed] run tag @e[type=ds:prison_realm_closed] add prison_realm_emptying
+execute as @s[tag=prison_realm_emptying] at @s unless entity @s[scores={Deleter=900..}] if entity @e[type=ds:prison_realm_closed] run scoreboard players set @e[type=ds:prison_realm_closed] Deleter 1004
+execute as @s[tag=prison_realm_emptying] at @s unless entity @s[scores={Deleter=900..}] if entity @p[hasitem={item=ds:prison_realm_closed_item}] run execute as @p[hasitem={item=ds:prison_realm_closed_item}] at @s run clear @a ds:prison_realm_closed_item
+execute as @s[tag=prison_realm_emptying] at @s unless entity @s[scores={Deleter=900..}] unless entity @a[hasitem={item=ds:prison_realm_closed_item}] run scoreboard players set @s Deleter 1004
+execute as @s[tag=prison_realm_emptying] at @s unless entity @s[scores={Deleter=900..}] unless entity @e[type=ds:prison_realm_closed,c=1] run scoreboard players set @s Deleter 1004
+execute if entity @e[scores={Deleter=900..},type=ds:prison_realm_closed] at @s run function relics/prison_realm_disappear
+execute as @s[tag=prison_realm_emptying,scores={Deleter=1000..1002}] at @s run playanimation @s animation.prison_realm_emptying2
+execute as @s[tag=prison_realm_emptying,scores={Deleter=1000}] at @s run playsound mob.gate_close2 @a[r=100] ~~~ 9999 2 9999
+execute as @s[tag=prison_realm_emptying,scores={Deleter=1000}] at @s run playsound mob.ring @a[r=100] ~~~ 9999 2 9999
+execute as @s[tag=prison_realm_emptying,scores={Deleter=977..980}] at @s run function empty_prison_realm
+execute as @s[tag=prison_realm_emptying,scores={Deleter=990..1004}] at @s run particle ds:nullified ~~0.1~
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..978}] at @s run playsound mob.blood1 @a[r=100] ~~1~ 9999 2 9999
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..978}] at @s run tag @e remove prison_realm_selected
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..980}] at @s run playanimation @e[r=5,scores={Stun=1..,Cutscene=1..}] animation.released_prison
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..978}] at @s run function relics/prison_realm_disappear
+@@relics/prison_realm_closed
+execute unless entity @s[scores={Deleter=0..}] unless entity @s[name="Occupied Prison Realm"] unless entity @s[tag=prison_realm_emptying] run scoreboard players set @s Deleter 401
+execute as @s[scores={Deleter=370},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run tellraw @a {"rawtext":[{"translate":"text.others_sealed.prison_realm"},{"selector":"@e[tag=prison_realm_trapped]"},{"translate":"text.others_sealed2.prison_realm"}]}
+execute if entity @s[scores={Deleter=0..},name="Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] run scoreboard players set @s Deleter 0
+execute as @s[scores={Deleter=400..401},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s unless entity @e[tag=prison_realm_heavy_cutscene,r=10] run playanimation @s[tag=!prison_realm_emptying,tag=!prison_realm_heavy] animation.prison_realm_closed
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run playsound mob.disfigure1 @a[r=100] ~~1~ 9999 0.85 9999
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run playsound mob.blood4 @a[r=100] ~~1~ 9999 0.85 9999
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run tag @e[scores={level=600..},tag=prison_realm_trapped] add heavy_occupant
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run tag @e[family=gojo] add heavy_occupant
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run tag @e[family=sukuna] add heavy_occupant
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run tag @e[tag=sixeyes] add heavy_occupant
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run tag @e[family=dabura] add heavy_occupant
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run particle ds:slam3 ~~1.4~
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run particle ds:slam4 ~~1.4~
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run particle ds:slam5 ~~1.4~
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run particle ds:slam6 ~~1.4~
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run particle ds:slam7 ~~1.4~
+execute as @s[scores={Deleter=400},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run particle ds:slam8 ~~1.4~
+execute as @s[scores={Deleter=370},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run playsound mob.gate_close3 @a[r=100] ~~1~ 9999 1 9999
+execute as @s[scores={Deleter=380},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run playanimation @e[tag=prison_realm_trapped] animation.stunned
+execute as @s[scores={Deleter=330},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run event entity @s colour_2
+execute as @s[scores={Deleter=330},name=!"Occupied Prison Realm",tag=!prison_realm_emptying,tag=!prison_realm_heavy] at @s run playsound random.fizz @a[r=100] ~~1~ 99999 0.5 99999
+execute as @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute unless entity @s[scores={Deleter=0..}] run scoreboard players add @s Deleter 0
+execute as @s[name="Occupied Prison Realm",has_property={property:colours=0}] at @s run event entity @s colour_2
+execute as @s unless entity @s[scores={Deleter=230..},tag=!prison_realm_emptying] at @s unless entity @s[tag=prison_realm_heavy] run execute as @p[tag=!prison_realm_trapped,c=1,r=2,scores={punch=1..2}] at @s unless entity @s[hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] run playanimation @s animation.finger_bearer.hit1
+execute as @s unless entity @s[scores={Deleter=230..},tag=!prison_realm_emptying] at @s unless entity @s[tag=prison_realm_heavy] run execute as @p[tag=!prison_realm_trapped,c=1,r=2,scores={punch=1..2}] at @s unless entity @s[hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] run give @s ds:prison_realm_closed_item 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+execute as @s unless entity @s[scores={Deleter=230..},tag=!prison_realm_emptying] at @s unless entity @s[tag=prison_realm_heavy] run execute as @p[tag=!prison_realm_trapped,c=1,r=2,scores={punch=1..2}] at @s unless entity @s[hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] run event entity @e[type=ds:prison_realm_closed,c=1,r=2] ds:disappear
+execute unless entity @s[scores={Deleter=230..}] if entity @p[r=70] unless entity @e[tag=prison_realm_heavy_cutscene,r=10] run playanimation @s[tag=!prison_realm_emptying] animation.prison_realm_closed_idle
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_closed,r=2] at @s unless entity @s[scores={Deleter=900..}] run camerashake add @a[r=20] 0.25 0.15
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_closed,r=2] at @s unless entity @s[scores={Deleter=900..}] run playsound mob.gate_open1 @a[r=100] ~~~ 9999 1.15 9999
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_closed,r=2] at @s unless entity @s[scores={Deleter=900..}] run tag @s add prison_realm_emptying
+execute as @e[scores={atk=1..2},hasitem={item=ds:inverted_spear,location=slot.weapon.mainhand}] at @s positioned ^^^2 run execute as @e[type=ds:prison_realm_closed,r=2] at @s unless entity @s[scores={Deleter=900..}] run scoreboard players set @s Deleter 1004
+execute as @s[tag=prison_realm_emptying,scores={Deleter=1000..1002}] at @s run playanimation @s animation.prison_realm_closed_emptying
+execute as @s[tag=prison_realm_emptying,scores={Deleter=1000}] at @s run playsound mob.gate_close2 @a[r=100] ~~~ 9999 2 9999
+execute as @s[tag=prison_realm_emptying,scores={Deleter=1000}] at @s run playsound mob.ring @a[r=100] ~~~ 9999 2 9999
+execute as @s[tag=prison_realm_emptying,scores={Deleter=977..980}] at @s run function empty_prison_realm
+execute as @s[name="Occupied Prison Realm"] unless entity @e[type=ds:prison_realm_inside] run function relics/prison_realm_disappear
+execute as @s[tag=prison_realm_emptying,scores={Deleter=990..1004}] at @s run particle ds:nullified ~~0.1~
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..978}] at @s run playsound mob.blood1 @a[r=100] ~~1~ 9999 2 9999
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..978}] at @s run tag @e remove prison_realm_selected
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..980}] at @s run playanimation @e[r=5,scores={Stun=1..,Cutscene=1..}] animation.released_prison
+execute as @s[tag=prison_realm_emptying,scores={Deleter=900..978}] at @s run function relics/prison_realm_disappear
+execute as @s[tag=prison_realm_heavy] at @s run scoreboard players add @s num 1
+execute as @s[tag=prison_realm_heavy,scores={num=1400..}] at @s run playsound mob.cursed_energy @a[r=100] ~~~ 99999 1 99999
+execute as @s[tag=prison_realm_heavy,scores={num=1400..}] at @s run particle ds:curses_energy1 ~~-0.25~
+tag @s[scores={num=1400..},tag=prison_realm_heavy] remove prison_realm_heavy
+scoreboard players set @s[scores={num=1400..}] num 0
+@@relics/prison_realm_disappear
+event entity @s ds:disappear
+playsound random.explode @a[r=100] ~~1~ 9999 2.5 9999
+playsound mob.blood1 @a[r=100] ~~1~ 9999 1.75 9999
+playsound mob.wither.ambient @a[r=100] ~~1~ 9999 1.5 9999
+camerashake add @a[r=25] 1 0.25 rotational
+particle ds:prison_realm_disappear
+particle ds:slam
+@@relics/prison_realm_heavy_cutscene
+execute as @s[scores={cutscene=139..142}] at @s run tag @e[type=ds:prison_realm_closed,r=10,c=1] add prison_realm_heavy
+scoreboard players set @s[scores={cutscene=20..,Frames=0..10}] Frames 30
+scoreboard players set @s[scores={cutscene=20..,Move=0..6}] Move 30
+scoreboard players set @s[scores={cutscene=20..,Camera=0..6}] Camera 30
+execute as @s[scores={cutscene=140..142}] at @s run tp @s ~~~~ 0
+execute as @s[scores={cutscene=140..142}] at @s run clear @a ds:prison_realm_closed_item
+execute as @s[scores={cutscene=140..142}] at @s unless entity @e[type=ds:prison_realm_closed,r=10] run summon ds:prison_realm_closed ~~~ facing ^^^10 none "Occupied Prison Realm"
+execute as @s[scores={cutscene=140..142}] at @s run playanimation @s animation.prison_realm_heavy_player
+execute as @s[scores={cutscene=139..142}] at @s run playanimation @e[type=ds:prison_realm_closed,r=10,c=1] animation.prison_realm_heavy_realm
+execute as @s[scores={cutscene=1..142}] at @s run scoreboard players set @e[type=ds:prison_realm_closed,r=10,c=1,scores={Deleter=1..}] Deleter 0
+execute as @s[scores={cutscene=1..142}] at @s run tag @e[tag=heavy_occupant,c=1] remove heavy_occupant
+execute as @s[scores={cutscene=77}] at @s run tp @e[type=ds:prison_realm_closed,c=1,r=10] ^^^1 facing ^^^10
+execute as @s[scores={cutscene=140}] at @s run camera @s set minecraft:free pos ^^1^1.25 facing ^-0.2^1^
+execute as @s[scores={cutscene=81..140}] at @s run camerashake add @s 0.08 0.08 rotational
+execute as @s[scores={cutscene=80}] at @s run camera @s set minecraft:free ease 0.25 in_out_circ pos ^^0.5^1.7 facing ^^^0.9
+execute as @s[scores={cutscene=140}] at @s run playsound music.bass2 @a[r=100] ~~1~ 9999 2.75 9999
+execute as @s[scores={cutscene=85}] at @s run playsound mob.ring @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={cutscene=82}] at @s run playsound mob.whoosh2 @a[r=100] ~~1~ 9999 1 9999
+execute as @s[scores={cutscene=45}] at @s run camera @s set minecraft:free pos ^1^3^1 facing ^^^0.9
+execute as @s[scores={cutscene=44}] at @s run camera @s set minecraft:free ease 0.5 in_out_circ pos ^3^12^3 facing ^^^0.9
+execute as @s[scores={cutscene=25}] at @s anchored eyes run camera @s set minecraft:free pos ^^-0.7^0.85 facing ^^0.15^0.15
+execute as @s[scores={cutscene=5..25}] at @s run camerashake add @s 0.08 0.08 rotational
+execute as @s[scores={cutscene=5..25}] at @s run particle ds:turbo_intensity2 ^^1^
+execute as @s[scores={cutscene=5..25}] at @s run particle ds:turbo_intensity3 ^^1^
+execute as @s[scores={cutscene=70..80}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:turbo_intensity2 ^^1^
+execute as @s[scores={cutscene=70..80}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:turbo_intensity3 ^^1^
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:up_kick1 ~~0.15~
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:up_kick2 ~~0.15~
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:heavy_impact1 ~~0.15~
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:slam
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:crater2
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:rubble5
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:fissure2
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:craterv3
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run playsound random.fizz @a[r=100] ~~~ 99999 0.35 99999
+execute as @s[scores={cutscene=65}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run playsound random.fizz @a[r=100] ~~~ 99999 0.55 99999
+execute as @s[scores={cutscene=55}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run playsound random.fizz @a[r=100] ~~~ 99999 0.45 99999
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run playsound mob.rubble1 @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run playsound mob.burst @a[r=100] ~~~ 99999 3 99999
+execute as @s[scores={cutscene=75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run camerashake add @a[r=100] 2 0.25 rotational
+execute as @s[scores={cutscene=30..75}] at @s run execute as @e[type=ds:prison_realm_closed,c=1,r=10] at @s positioned ^^^0.45 run particle ds:steaming_box
+camera @s[scores={cutscene=25}] fade time 0.75 1 0.25 color 0 0 0
+execute as @s[scores={cutscene=0..6}] at @s run playanimation @s animation.prison_realm_heavy_player2
+execute as @s[scores={cutscene=0..6}] at @s run playanimation @e[type=ds:prison_realm_closed,r=10,c=1] animation.prison_realm_closed_idle
+tag @s[scores={cutscene=0..4}] remove prison_realm_heavy_cutscene
+@@relics/prison_realm_idle
+execute as @s[scores={Deleter=600..601}] at @s run playanimation @s animation.prison_realm_thrown
+execute as @s[scores={Deleter=201..601}] at @s run scoreboard players add @e[r=10,c=1] prison_realm_id 0
+execute as @s at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute as @s at @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={Deleter=596..601}] at @s run tp @s ~~~~ 0
+execute as @s[scores={Deleter=596..601}] at @s run tp @s ^^^0.75
+execute as @s[scores={Deleter=596}] at @s run particle ds:bounce
+tag @s[tag=prisonrealm_tracking] remove prisonrealm_tracking
+execute as @s[scores={Deleter=202..595}] at @s unless entity @e[tag=prison_realm_selected,r=10] unless score @s prison_realm_id = @e[r=10,c=1,scores={detect_health=0..},family=!prison_realm,family=!barrier_outside,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] prison_realm_id run scoreboard players remove @s Deleter 1
+execute as @s[scores={Deleter=202..595}] at @s unless entity @e[tag=prison_realm_selected,r=10] unless score @s prison_realm_id = @e[r=10,c=1,scores={detect_health=0..},family=!prison_realm,family=!barrier_outside,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] prison_realm_id run tag @s add prisonrealm_tracking
+execute as @s[scores={Deleter=202..595},tag=!prisonrealm_tracking] at @s run scoreboard players set @s Deleter 595
+execute as @s[scores={Deleter=200..201}] at @s unless entity @e[tag=prison_realm_selected,r=10] as @e[r=10,c=1,family=!prison_realm,family=!barrier_outside,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!motionless,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!xp_bottle,type=!ender_pearl,type=!lightning_bolt,type=!splash_potion,type=!lingering_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!ds:gojo_knockback,type=!gg:impact_frame,type=!armor_stand] unless score @s prison_realm_id = @e[type=ds:prison_realm_idle,scores={Deleter=200..201},c=1] prison_realm_id run tag @s add prison_realm_selected
+execute as @s[scores={Deleter=200}] at @s run tp @s ~~~
+execute as @s[scores={Deleter=200}] at @s run playsound mob.gate_open1 @a[r=200] ~~~ 9999 1 9999
+execute as @s[scores={Deleter=200}] at @s run playanimation @s animation.prison_realm_unseal1
+execute as @s[scores={Deleter=195}] at @s run summon ds:prison_realm_open1 ~~~ facing @e[c=1,tag=prison_realm_selected,r=100]
+execute as @s[scores={Deleter=195}] at @s run scoreboard players operation @e[type=ds:prison_realm_open1,c=1,r=5] prison_realm_id = @s prison_realm_id
+execute as @s[scores={Deleter=195}] at @s run event entity @s ds:disappear
+execute as @s[tag=!timelocked] at @s if entity @e[tag=doublesneak,r=5] if score @s prison_realm_id = @e[tag=doublesneak,r=5,c=1] prison_realm_id run tellraw @a[r=10] {"rawtext":[{"translate":"text.locked_tip.prison_realm"}]}
+execute as @s[tag=!timelocked]  at @s if entity @e[tag=doublesneak,r=5] if score @s prison_realm_id = @e[tag=doublesneak,r=5,c=1] prison_realm_id run particle ds:curses_energy1 ~~-0.5~
+execute as @s[tag=!timelocked]  at @s if entity @e[tag=doublesneak,r=5] if score @s prison_realm_id = @e[tag=doublesneak,r=5,c=1] prison_realm_id run playsound random.click @a[r=10] ~~1~ 9999 1 9999
+execute as @s[tag=!timelocked]  at @s if entity @e[tag=doublesneak,r=5] if score @s prison_realm_id = @e[tag=doublesneak,r=5,c=1] prison_realm_id run playsound mob.cursed_energy @a[r=10] ~~1~ 9999 2 9999
+execute as @s[tag=!timelocked]  at @s if entity @e[tag=doublesneak,r=5] if score @s prison_realm_id = @e[tag=doublesneak,r=5,c=1] prison_realm_id run tag @s add timelocked
+scoreboard players set @s[tag=timelocked,scores={Mode=100..}] Mode 0
+scoreboard players set @s[tag=prisonrealm_tracking] Mode 0
+scoreboard players add @s[scores={Deleter=594..595},tag=!prisonrealm_tracking,tag=!timelocked] Mode 1
+execute as @s[scores={Mode=1200..}] at @s unless entity @e[tag=prison_realm_selected,c=1,r=100] run structure load prison_realm_item ~~0.25~
+execute as @s[scores={Mode=1200..}] at @s unless entity @e[tag=prison_realm_selected,c=1,r=100] run playsound mob.blood1 @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={Mode=1200..}] at @s unless entity @e[tag=prison_realm_selected,c=1,r=100] run event entity @s ds:disappear
+execute as @s[scores={Deleter=200..}] at @s if entity @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1..2}] if score @s prison_realm_id = @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1..2}] prison_realm_id as @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1}] run playanimation @s animation.finger_bearer.hit1
+execute as @s[scores={Deleter=200..}] at @s if entity @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1..2}] if score @s prison_realm_id = @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1..2}] prison_realm_id as @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1}] run give @s ds:prison_realm
+execute as @s[scores={Deleter=200..}] at @s if entity @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1..2}] if score @s prison_realm_id = @p[tag=!prison_realm_selected,c=1,r=2,scores={punch=1..2}] prison_realm_id run event entity @s ds:disappear
+@@relics/prison_realm_inside
+execute unless entity @s[scores={Mode=5..}] at @s run scoreboard players add @s num2 1
+execute unless entity @s[scores={Mode=5..}] at @s run scoreboard players random @s prison_realm_id 999 999999
+execute unless entity @s[scores={Mode=5..}] at @s run scoreboard players operation @e[tag=prison_realm_trapped,c=1,r=10] prison_realm_id = @s prison_realm_id
+execute in overworld positioned 666000 201 666000 unless entity @e[type=ds:prison_realm_inside,r=3] run tp @s 666000 201 666000
+execute unless entity @s[scores={Deleter=0..100}] run tp @e[tag=prison_realm_trapped,c=1,rm=10] ~~1~
+tag @p[tag=prison_realm_trapped,c=1,tag=!satiated] add satiated
+scoreboard players set @e[tag=prison_realm_trapped,c=1,scores={nocts=0..3}] nocts 200
+scoreboard players set @e[tag=prison_realm_trapped,c=1,scores={combat=0..5},type=!Player] combat 800
+scoreboard players set @e[tag=prison_realm_trapped,c=1,scores={Deleter=1..5},type=!Player] Deleter 1200
+scoreboard players set @e[tag=prison_realm_trapped,c=1,scores={scroll=100..},type=!Player] scroll 0
+scoreboard players set @e[tag=prison_realm_trapped,c=1,scores={move=1..}] move 0
+scoreboard players set @e[type=!Player,tag=prison_realm_trapped,c=1,scores={Stun=0..40}] Stun 1200
+execute unless entity @s[scores={Deleter=0..100}] run gamemode a @p[tag=prison_realm_trapped,c=1,m=!a]
+execute unless entity @s[scores={Deleter=0..100}] unless score prison_realm_occupied prison_realm_occupied matches 1 run scoreboard players set prison_realm_occupied prison_realm_occupied 1
+execute in overworld positioned ~ -200 ~ run kill @e[r=150,tag=!prison_realm_trapped,type=!ds:prison_realm_inside]
+execute as @s[scores={prison_realm_id=0}] run scoreboard players operation @s prison_realm_id += @e[scores={prison_realm_id=1..},c=1,tag=prison_realm_trapped,r=10] prison_realm_id
+execute in overworld positioned 666000 201 666000 unless entity @e[tag=prison_realm_trapped,r=10] if entity @e[family=!projectile,family=!damage,type=!ds:prison_realm_inside,type=!item,type=!xp_orb,r=10] run tag @e[family=!projectile,family=!damage,type=!ds:prison_realm_inside,type=!item,type=!xp_orb,r=10] add prison_realm_trapped
+execute in overworld positioned 666000 201 666000 unless entity @e[tag=prison_realm_trapped,r=10,scores={prison_realm_id=1..}] if entity @e[family=!projectile,family=!damage,type=!ds:prison_realm_inside,type=!item,type=!xp_orb,r=10] run scoreboard players operation @e[family=!projectile,family=!damage,type=!ds:prison_realm_inside,type=!item,type=!xp_orb,r=10] prison_realm_id = @s prison_realm_id
+execute as @e[tag=prison_realm_trapped,r=10] at @s if score @s prison_realm_id = @e[type=ds:prison_realm_inside,c=1] prison_realm_id run tag @s add sealed_properly
+execute as @e[tag=prison_realm_trapped,r=10,tag=!sealed_properly] at @s run function relics/exit_prison_realm_self
+event entity @s[scores={Deleter=0..1}] ds:disappear
+@@relics/prison_realm_open1
+execute unless entity @s[scores={Deleter=0..}] run scoreboard players set @s Deleter 601
+execute as @s[scores={Deleter=600..601}] at @s run playanimation @s animation.prison_realm_open1
+execute as @s[scores={Deleter=600}] at @s run playsound mob.blood1 @a[r=100] ~~1~ 99999 1.5 9999
+execute as @s[scores={Deleter=597}] at @s run playsound mob.gate_open2 @a[r=100] ~~1~ 99999 0.85 9999
+execute as @s at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s at @s if block ~~-0.2~ air run tp @s ~~-0.2~
+execute as @s at @s if block ~~-0.1~ air run tp @s ~~-0.1~
+tp @s ~~~ facing @e[tag=prison_realm_selected,c=1,r=10]
+execute as @s[scores={Deleter=543}] at @s run scoreboard players set @e[tag=prison_realm_selected,c=1,r=10] Stun 20
+execute as @s[scores={Deleter=500..503}] at @s if entity @e[tag=prison_realm_selected,c=1,r=100] at @s run playsound random.disfigure @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={Deleter=503}] at @s if entity @e[tag=prison_realm_selected,c=1,r=100] at @s run playsound mob.whoosh1 @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={Deleter=503}] at @s if entity @e[tag=prison_realm_selected,c=1,r=100] at @s run playanimation @s animation.prison_realm_attatching
+execute as @s[scores={Deleter=500}] at @s run execute as @e[tag=prison_realm_selected,c=1,r=100] at @s run tag @s add prison_realm_trapped
+execute as @s[scores={Deleter=500}] at @s run execute as @e[tag=prison_realm_selected,c=1,r=100] at @s run summon ds:prison_realm_attatch ~~~ facing ^^^10
+execute as @s[scores={Deleter=499..500}] at @s run scoreboard players operation @e[type=ds:prison_realm_attatch,c=1,r=5] prison_realm_id = @s prison_realm_id
+execute as @s[scores={Deleter=500}] at @s at @e[tag=prison_realm_selected,c=1,r=100] if entity @e[type=ds:prison_realm_attatch,r=5] run event entity @s ds:disappear
+execute as @s[scores={Deleter=500}] at @s at @e[tag=prison_realm_selected,c=1,r=100] unless entity @e[type=ds:prison_realm_attatch,r=5] run structure load prison_realm_item ~~0.25~
+execute as @s[scores={Deleter=500}] at @s at @e[tag=prison_realm_selected,c=1,r=100] unless entity @e[type=ds:prison_realm_attatch,r=5] run playsound mob.blood1 @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={Deleter=500}] at @s at @e[tag=prison_realm_selected,c=1,r=100] unless entity @e[type=ds:prison_realm_attatch,r=5] run tag @e remove prison_realm_selected
+execute as @s[scores={Deleter=400..499}] at @s at @e[tag=prison_realm_selected,c=1,r=100] unless entity @e[type=ds:prison_realm_attatch,r=5] run event entity @s ds:disappear
+execute as @s[scores={Deleter=500}] at @s unless entity  @e[tag=prison_realm_selected,c=1,r=100] run playanimation @s animation.prison_realm_failed
+execute as @s[scores={Deleter=500}] at @s unless entity  @e[tag=prison_realm_selected,c=1,r=100] run structure load prison_realm_item ~~0.25~
+execute as @s[scores={Deleter=500}] at @s unless entity  @e[tag=prison_realm_selected,c=1,r=100] run playsound mob.blood1 @a[r=100] ~~1~ 9999 2 9999
+execute as @s[scores={Deleter=500}] at @s unless entity  @e[tag=prison_realm_selected,c=1,r=100] run tag @e remove prison_realm_selected
+execute as @s[scores={Deleter=400..499}] at @s unless entity  @e[tag=prison_realm_selected,c=1,r=100] run event entity @s ds:disappear
+@@relics/prison_realm_throw
+execute as @s[scores={move=7}] at @s run playanimation @s animation.finger_bearer.hit1
+execute as @s[scores={move=6..7}] at @s run scoreboard objectives add prison_realm_id dummy
+execute as @s[scores={move=6..7}] at @s run scoreboard players random @s prison_realm_id 1 999999
+execute as @s[scores={move=5}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=5}] at @s run summon ds:prison_realm_idle ^^1^1 facing ^^^10
+execute as @s[scores={move=4..5}] at @s run scoreboard players operation @e[type=ds:prison_realm_idle,c=1,r=5] prison_realm_id = @s prison_realm_id
+execute as @s[scores={move=4..5}] at @s run scoreboard players set @e[type=ds:prison_realm_idle,c=1,r=5] Deleter 601
+execute as @s[scores={move=5}] at @s run playsound random.whoop @a[r=33] ^^1^1 99999 1.15 99999
+execute as @s[scores={move=5}] at @s run camerashake add @a[r=10] 0.25 0.1
+execute as @s[scores={move=5}] at @s run clear @s ds:prison_realm
+execute as @s[scores={move=5}] at @s run tellraw @s {"rawtext":[{"translate":"text.throw_tip.prison_realm"}]}
+tag @s[scores={move=1..3}] remove prison_realm_throw
+@@relics/prison_realm_throw2
+execute as @s[scores={move=7}] at @s run playanimation @s animation.finger_bearer.hit1
+execute as @s[scores={move=6..7}] at @s run scoreboard objectives add prison_realm_id dummy
+execute as @s[scores={move=6..7}] at @s run scoreboard players random @s prison_realm_id 1 999999
+execute as @s[scores={move=5}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=5}] at @s run summon ds:prison_realm_closed ^^1^1 facing ^^^10 none "Occupied Prison Realm"
+execute as @s[scores={move=4..5}] at @s run scoreboard players operation @e[type=ds:prison_realm_closed,c=1,r=5] prison_realm_id = @s prison_realm_id
+execute as @s[scores={move=5}] at @s run playsound random.whoop @a[r=33] ^^1^1 99999 1.15 99999
+execute as @s[scores={move=5}] at @s run camerashake add @a[r=10] 0.25 0.1
+execute as @s[scores={move=5}] at @s run clear @a ds:prison_realm_closed_item
+execute as @s[scores={move=5}] at @s run tellraw @s {"rawtext":[{"translate":"text.pickup_tip.prison_realm"}]}
+tag @s[scores={move=1..3}] remove prison_realm_throw2
+@@relics/prison_realm_throw3
+execute as @s[scores={move=7}] at @s run playanimation @s animation.finger_bearer.hit1
+execute as @s[scores={move=5}] at @s run tp @s ~~~~ 0
+execute as @s[scores={move=5}] at @s run summon ds:prison_realm_backdoor ^^1^1 facing ^^^10 none "Prison Realm Backdoor"
+execute as @s[scores={move=5}] at @s run playsound random.whoop @a[r=33] ^^1^1 99999 1.15 99999
+execute as @s[scores={move=5}] at @s run camerashake add @a[r=10] 0.25 0.1
+execute as @s[scores={move=5}] at @s run clear @s ds:prison_realm_backdoor_item 0 1
+execute as @s[scores={move=5}] at @s run tellraw @s {"rawtext":[{"translate":"text.pickup_tip.prison_realm"}]}
+tag @s[scores={move=1..3}] remove prison_realm_throw3
+@@relics/rough_crystal
+playanimation @s animation.finger_bearer.hit2
+tag @s[tag=!120percent,tag=heavenlyrestriction_mechimaru,scores={strength=20..}] add cant
+tag @s[tag=heavenlyrestriction_mechimaru,tag=120percent,scores={strength=24..}] add cant
+tag @s[tag=!120percent,tag=!heavenlyrestriction_mechimaru,scores={strength=50..}] add cant
+tag @s[tag=120percent,tag=!heavenlyrestriction_mechimaru,scores={strength=60..}] add cant
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=19},tag=!120percent,tag=heavenlyrestriction_mechimaru] strength2 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=23},tag=120percent,tag=heavenlyrestriction_mechimaru] strength2 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=49},tag=!120percent,tag=!heavenlyrestriction_mechimaru] strength2 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=59},tag=120percent,tag=!heavenlyrestriction_mechimaru] strength2 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!20..},tag=!120percent,tag=heavenlyrestriction_mechimaru] strength2 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!24..},tag=120percent,tag=heavenlyrestriction_mechimaru] strength2 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!50..},tag=!120percent,tag=!heavenlyrestriction_mechimaru] strength2 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!60..},tag=120percent,tag=!heavenlyrestriction_mechimaru] strength2 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength2=5..,strength=0..59}] damageadd 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players remove @s[scores={strength2=5..,strength=0..59}] strength2 5
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=19},tag=!120percent,tag=heavenlyrestriction_mechimaru] strength 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=23},tag=120percent,tag=heavenlyrestriction_mechimaru] strength 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=49},tag=!120percent,tag=!heavenlyrestriction_mechimaru] strength 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=59},tag=120percent,tag=!heavenlyrestriction_mechimaru] strength 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!20..},tag=!120percent,tag=heavenlyrestriction_mechimaru] strength 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!24..},tag=120percent,tag=heavenlyrestriction_mechimaru] strength 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!50..},tag=!120percent,tag=!heavenlyrestriction_mechimaru] strength 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={strength=!60..},tag=120percent,tag=!heavenlyrestriction_mechimaru] strength 2
+tellraw @p[r=0.2,tag=!cant] {"rawtext":[{"translate":"text.rough_crystal"}]}
+execute as @p[r=0.2,tag=!cant] at @s run playsound random.glass @a ~~~ 1 0.35
+execute as @p[r=0.2,tag=!cant] at @s run playsound beacon.power @a ~~~ 1 1.5
+tellraw @p[tag=cant,r=0.2] {"rawtext":[{"translate":"text.strength_limits"}]}
+execute as @p[r=0.2,tag=!cant] at @s run particle ds:rough_crystal1 ~~1~
+execute as @p[r=0.2,tag=!cant] at @s run particle ds:rough_crystal2 ~~1~
+execute as @p[r=0.2,tag=!cant] at @s run clear @s ds:rough_crystal 0 1
+tag @s remove cant
+@@relics/sukuna_finger
+scoreboard objectives add finger dummy
+scoreboard players add @a finger 0
+tag @s[tag=yuji_awakened] add canteat
+tag @s[tag=heavenlyrestriction] add canteat
+tellraw @s[tag=curse] {"rawtext":[{"translate":"text.curse_eat.sukuna_finger"}]}
+execute as @s[tag=curse] at @s unless entity @s[scores={forms=1..}] run give @s ds:explosive_technique 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[tag=curse,tag=explosive] {"rawtext":[{"translate":"text.explosive_eat.sukuna_finger"}]}
+tellraw @s[tag=canteat] {"rawtext":[{"translate":"text.canteat.sukuna_finger"}]}
+scoreboard players add @s[tag=curse] invest 20
+scoreboard players add @s[tag=curse,tag=explosive] invest 10
+clear @s[tag=curse] ds:sukuna_finger 0 1
+scoreboard objectives add sukunacutscene dummy
+execute as @s[tag=!curse,tag=!has_sukuna] if score onesukuna Mode = two Mode if score sukunauser Mode = one Mode run tag @s add canteat
+execute as @s[tag=canteat] at @s run particle ds:red_impact2 ~~1~
+tag @s[tag=!curse,tag=!has_sukuna,tag=!canteat] add finger_eaten
+scoreboard players set @s[tag=!curse,tag=!has_sukuna,tag=!canteat] sukunacutscene 141
+execute as @s[tag=!curse,tag=!has_sukuna,tag=canteat,tag=!yuji_awakened,tag=!heavenlyrestriction] run tellraw @s {"rawtext":[{"translate":"text.canteat_1vessel.sukuna_finger"}]}
+tag @s[tag=!curse,tag=has_sukuna,scores={finger=1..13}] add finger_eaten2
+scoreboard players set @s[tag=!curse,tag=has_sukuna,scores={move=0,Disabled2=0,Disabled=0,Move=0,Camera=0,Stun=0,cutscene=0,finger=1..13}] sukunacutscene 21
+tag @s[tag=!curse,tag=has_sukuna,scores={finger=14}] add 15fingers_cutscene
+scoreboard players set @s[tag=!curse,tag=has_sukuna,scores={move=0,Disabled2=0,Disabled=0,Move=0,Camera=0,Stun=0,cutscene=0,finger=14}] sukunacutscene 1001
+tag @s[tag=!curse,tag=has_sukuna,scores={finger=15..19}] add finger_eaten2
+scoreboard players set @s[tag=!curse,tag=has_sukuna,scores={move=0,Disabled2=0,Disabled=0,Move=0,Camera=0,Stun=0,cutscene=0,finger=15..19}] sukunacutscene 21
+tag @s remove canteat
+@@relics/undying_crystal
+playanimation @s animation.finger_bearer.hit2
+tag @s[tag=!120percent,tag=heavenlyrestriction_mechimaru,scores={endurance=20..}] add cant
+tag @s[tag=heavenlyrestriction_mechimaru,tag=120percent,scores={endurance=24..}] add cant
+tag @s[tag=120percent,tag=!heavenlyrestriction_mechimaru,scores={endurance=120..}] add cant
+tag @s[tag=!120percent,tag=!heavenlyrestriction_mechimaru,scores={endurance=100..}] add cant
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=19},tag=!120percent,tag=heavenlyrestriction_mechimaru] endurance 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=23},tag=120percent,tag=heavenlyrestriction_mechimaru] endurance 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=99},tag=!120percent,tag=!heavenlyrestriction_mechimaru] endurance 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=119},tag=120percent,tag=!heavenlyrestriction_mechimaru] endurance 1
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=!20..},tag=!120percent,tag=heavenlyrestriction_mechimaru] endurance 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=!24..},tag=120percent,tag=heavenlyrestriction_mechimaru] endurance 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=!100..},tag=!120percent,tag=!heavenlyrestriction_mechimaru] endurance 2
+execute as @p[r=0.2,tag=!cant] at @s run scoreboard players add @s[scores={endurance=!120..},tag=120percent,tag=!heavenlyrestriction_mechimaru] endurance 2
+tellraw @p[r=0.2,tag=!cant] {"rawtext":[{"translate":"text.undying_crystal"}]}
+effect @s regeneration 5 2 true
+execute as @p[r=0.2,tag=!cant] at @s run playsound random.glass @a ~~~ 1 0.4
+execute as @p[r=0.2,tag=!cant] at @s run playsound beacon.power @a ~~~ 1 1.75
+tellraw @p[tag=cant,r=0.2] {"rawtext":[{"translate":"text.endurance_limits"}]}
+execute as @p[r=0.2,tag=!cant] at @s run particle ds:undying_crystal1 ~~1~
+execute as @p[r=0.2,tag=!cant] at @s run particle ds:undying_crystal2 ~~1~
+execute as @p[r=0.2,tag=!cant] at @s run clear @s ds:undying_crystal 0 1
+tag @s remove cant

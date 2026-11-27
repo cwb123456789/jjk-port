@@ -78,6 +78,18 @@ public final class CgCamera {
                 pitch = owned ? tpitch : e.getXRot();
             }
         }
+        shot(mc, e, pos.x, pos.y, pos.z, yaw, pitch, easeSec, ease);
+    }
+
+    /** A shot at an absolute pose (the command engine resolves the Bedrock coordinates on the server). */
+    public static void setAbs(double easeSec, String ease, double x, double y, double z, double yaw, double pitch) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null || mc.player == null) return;
+        shot(mc, mc.player, x, y, z, yaw, pitch, easeSec, ease);
+    }
+
+    private static void shot(Minecraft mc, Entity e, double px, double py, double pz, double yaw, double pitch, double easeSec, String ease) {
+        Vec3 pos = new Vec3(px, py, pz);
         acquire(mc, e);
         // the ease starts from the pose the camera has now
         double[] now = pose(0.0F);

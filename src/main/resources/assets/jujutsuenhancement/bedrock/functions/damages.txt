@@ -1,0 +1,505 @@
+@@damages/blood_damage
+execute as @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] add water_adapting
+effect @e[family=mahoraga,r=15,tag=water_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=15,tag=water_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=water_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!water_adapted,tag=!water_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!water_adapted,tag=!water_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!water_adapted,tag=!water_adapting,rm=0.25] add water_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] instant_health 1 0 true
+execute as @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/blunt_damage
+execute as @e[family=mahoraga,r=15,tag=!blunt_adapted,tag=!blunt_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!blunt_adapted,tag=!blunt_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!blunt_adapted,tag=!blunt_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!blunt_adapted,tag=!blunt_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!blunt_adapted,tag=!blunt_adapting] add blunt_adapting
+effect @e[family=mahoraga,r=15,tag=blunt_adapted] instant_health 2 0 true
+execute as @e[family=mahoraga,r=15,tag=blunt_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=blunt_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!blunt_adapted,tag=!blunt_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!blunt_adapted,tag=!blunt_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!blunt_adapted,tag=!blunt_adapting,rm=0.25] add blunt_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=blunt_adapted,rm=0.25] instant_health 1 0 true
+execute as @e[scores={wheelactive=1..},r=15,tag=blunt_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=blunt_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=blunt_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/cleave_damage
+execute as @e[scores={detect_health=0..50},r=5,tag=!sukuna,family=!special_grade] at @s run function obliterated
+execute as @e[family=mahoraga,r=15,tag=!cleave_adapted,tag=!cleave_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!cleave_adapted,tag=!cleave_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!cleave_adapted,tag=!cleave_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!cleave_adapted,tag=!cleave_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!cleave_adapted,tag=!cleave_adapting] add cleave_adapting
+effect @e[family=mahoraga,r=15,tag=cleave_adapted] instant_health 1 2 true
+execute as @e[family=mahoraga,r=15,tag=cleave_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=cleave_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!cleave_adapted,tag=!cleave_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!cleave_adapted,tag=!cleave_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!cleave_adapted,tag=!cleave_adapting,rm=0.25] add cleave_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=cleave_adapted,rm=0.25] instant_health 1 2 true
+execute as @e[scores={wheelactive=1..},r=15,tag=cleave_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=cleave_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=cleave_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+damage @e[family=mahoraga,tag=!slash_adapted,tag=!cleave_adapted,r=6,scores={adaptsmall=!1..}] 200 override
+@@damages/darkness_damage
+execute as @e[family=mahoraga,r=40,tag=!darkness_adapted,tag=!darkness_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=40,tag=!darkness_adapted,tag=!darkness_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=40,tag=!darkness_adapted,tag=!darkness_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=40,tag=!darkness_adapted,tag=!darkness_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=40,tag=!darkness_adapted,tag=!darkness_adapting] add darkness_adapting
+effect @e[family=mahoraga,r=40,tag=darkness_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=40,tag=darkness_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=40,tag=darkness_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[family=mahoraga,r=40,tag=darkness_adapted] at @s run particle ds:darkness_shatter ~~4~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!darkness_adapted,tag=!darkness_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!darkness_adapted,tag=!darkness_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!darkness_adapted,tag=!darkness_adapting,rm=0.25] add darkness_adapting
+effect @e[scores={wheelactive=1..},r=40,tag=darkness_adapted,rm=0.25] instant_health 1 2 true
+execute as @e[scores={wheelactive=1..},r=40,tag=darkness_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=40,tag=darkness_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=40,tag=darkness_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/deletion_damage
+execute as @e[family=mahoraga,r=15,tag=!deletion_adapted,tag=!deletion_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!deletion_adapted,tag=!deletion_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!deletion_adapted,tag=!deletion_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!deletion_adapted,tag=!deletion_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!deletion_adapted,tag=!deletion_adapting] add deletion_adapting
+effect @e[family=mahoraga,r=15,tag=deletion_adapted] instant_health 3 5 true
+execute as @e[family=mahoraga,r=15,tag=deletion_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=deletion_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!deletion_adapted,tag=!deletion_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!deletion_adapted,tag=!deletion_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!deletion_adapted,tag=!deletion_adapting,rm=0.25] add deletion_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=deletion_adapted,rm=0.25] instant_health 3 5 true
+execute as @e[scores={wheelactive=1..},r=15,tag=deletion_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=deletion_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=deletion_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/domain_barrier
+execute as @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] add domain_barrier_adapting
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s at @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] run playanimation @s animation.mahoraga.tp_slam
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s at @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] at @s run playsound mob.burst @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s at @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] at @s run playsound music.domainbreak @a[r=100]  ~~~ 9999 2.5 9999
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s as @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] run scoreboard players set @e[tag=DomainExpansion,r=50,family=!mahoraga] Deleter 20
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] add domain_barrier_adapting
+@@damages/electric_damage
+execute as @e[family=mahoraga,r=15,tag=!electric_adapted,tag=!electric_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!electric_adapted,tag=!electric_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!electric_adapted,tag=!electric_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!electric_adapted,tag=!electric_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!electric_adapted,tag=!electric_adapting] add electric_adapting
+effect @e[family=mahoraga,r=15,tag=electric_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=15,tag=electric_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=electric_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!electric_adapted,tag=!electric_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!electric_adapted,tag=!electric_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!electric_adapted,tag=!electric_adapting,rm=0.25] add electric_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=electric_adapted,rm=0.25] instant_health 1 0 true
+execute as @e[scores={wheelactive=1..},r=15,tag=electric_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=electric_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=electric_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/energy_damage
+execute as @e[family=mahoraga,r=40,tag=!energy_adapted,tag=!energy_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=40,tag=!energy_adapted,tag=!energy_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=40,tag=!energy_adapted,tag=!energy_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=40,tag=!energy_adapted,tag=!energy_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=40,tag=!energy_adapted,tag=!energy_adapting] add energy_adapting
+effect @e[family=mahoraga,r=40,tag=energy_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=40,tag=energy_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=40,tag=energy_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[family=mahoraga,r=40,tag=energy_adapted] at @s run particle ds:energy_shatter ~~4~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!energy_adapted,tag=!energy_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!energy_adapted,tag=!energy_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!energy_adapted,tag=!energy_adapting,rm=0.25] add energy_adapting
+effect @e[scores={wheelactive=1..},r=40,tag=energy_adapted,rm=0.25] instant_health 1 2 true
+execute as @e[scores={wheelactive=1..},r=40,tag=energy_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=40,tag=energy_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=40,tag=energy_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/explosion_damage
+execute as @e[family=mahoraga,r=15,tag=!explosion_adapted,tag=!explosion_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!explosion_adapted,tag=!explosion_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!explosion_adapted,tag=!explosion_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!explosion_adapted,tag=!explosion_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!explosion_adapted,tag=!explosion_adapting] add explosion_adapting
+effect @e[family=mahoraga,r=15,tag=explosion_adapted] instant_health 1 1 true
+execute as @e[family=mahoraga,r=15,tag=explosion_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=explosion_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!explosion_adapted,tag=!explosion_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!explosion_adapted,tag=!explosion_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!explosion_adapted,tag=!explosion_adapting,rm=0.25] add explosion_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=explosion_adapted,rm=0.25] instant_health 1 1 true
+execute as @e[scores={wheelactive=1..},r=15,tag=explosion_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=explosion_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=explosion_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/fire_damage
+execute as @e[family=mahoraga,r=15,tag=!fire_adapted,tag=!fire_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!fire_adapted,tag=!fire_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!fire_adapted,tag=!fire_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!fire_adapted,tag=!fire_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!fire_adapted,tag=!fire_adapting] add fire_adapting
+effect @e[family=mahoraga,r=15,tag=fire_adapted,rm=0.25] instant_health 1 0 true
+effect @e[family=mahoraga,r=15,tag=fire_adapted] fire_resistance 999999 5 true
+execute as @e[family=mahoraga,r=15,tag=fire_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=fire_adapted] at @s run particle ds:mahoraga_adapted ~~~
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!fire_adapted,tag=fire_adapted] add fire_adapting2
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!fire_adapted,tag=!fire_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!fire_adapted,tag=!fire_adapting] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!fire_adapted,tag=!fire_adapting] add fire_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=fire_adapted,rm=0.25] instant_health 1 0 true
+effect @e[scores={wheelactive=1..},r=15,tag=fire_adapted] fire_resistance 5 5 true
+execute as @e[scores={wheelactive=1..},r=15,tag=fire_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=fire_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=fire_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/infinity
+execute as @e[family=mahoraga,r=15,tag=!infinity_adapted,tag=!infinity_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!infinity_adapted,tag=!infinity_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!infinity_adapted,tag=!infinity_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!infinity_adapted,tag=!infinity_adapting] add infinity_adapting
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s as @e[tag=limitless,scores={infinity=1..,move=0,cutscene=0,domain=0},r=5] at @s run particle ds:infinity_shatter ~~~
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s as @e[tag=limitless,scores={infinity=1..,move=0,cutscene=0,domain=0},r=5] at @s run particle ds:infinity_shatter2 ~~1~
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s as @e[tag=limitless,scores={infinity=1..,move=0,cutscene=0,domain=0},r=5] at @s run playsound random.glass @a ~~~ 1000000 1.5 1000000
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s as @e[tag=limitless,scores={infinity=1..,move=0,cutscene=0,domain=0},r=5] at @s run camerashake add @a[r=20] 2 0.15
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s run scoreboard players set @e[tag=limitless,scores={infinity=4..,Frames=4..,move=0,cutscene=0,domain=0},r=5] Frames 3
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s run scoreboard players set @e[tag=limitless,scores={infinity=4..,move=0,cutscene=0,domain=0},r=5] infinity 3
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s if entity @e[tag=limitless,scores={infinity=3,move=0,cutscene=0,domain=0},r=5] run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,tag=infinity_adapted,r=15,c=1] at @s if entity @e[tag=limitless,scores={infinity=3,move=0,cutscene=0,domain=0},r=5] run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=5,tag=!infinity_adapted,tag=!infinity_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=5,tag=!infinity_adapted,tag=!infinity_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=5,tag=!infinity_adapted,tag=!infinity_adapting] add infinity_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..},r=5,tag=infinity_adapted,c=1] at @s as @e[tag=limitless,scores={infinity=1..,move=0,cutscene=0,domain=0},rm=0.25,r=5] at @s run function infinity_break
+execute as @e[rm=0.25,scores={wheelactive=1..},r=5,tag=infinity_adapted,c=1] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..},r=5,tag=infinity_adapted,c=1] at @s run particle ds:wheel_aura2 ~~2.15~
+execute as @e[tag=infinity_adapted,scores={move=1..},r=4.5] at @s as @e[tag=limitless,scores={infinity=1..,move=0,cutscene=0,domain=0},rm=0.25,r=4.5] at @s run function infinity_break
+@@damages/insect_damage
+execute as @e[family=mahoraga,r=15,tag=!insect_adapted,tag=!insect_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!insect_adapted,tag=!insect_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!insect_adapted,tag=!insect_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!insect_adapted,tag=!insect_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!insect_adapted,tag=!insect_adapting] add insect_adapting
+effect @e[family=mahoraga,r=15,tag=insect_adapted,rm=0.25] instant_health 1 0 true
+execute as @e[family=mahoraga,r=15,tag=insect_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=insect_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!insect_adapted,tag=!insect_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!insect_adapted,tag=!insect_adapting] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!insect_adapted,tag=!insect_adapting] add insect_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=insect_adapted,rm=0.25] instant_health 1 1 true
+execute as @e[scores={wheelactive=1..},r=15,tag=insect_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=insect_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=insect_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/jogo_domain
+execute as @e[family=mahoraga,r=15,tag=!IronMountain_adapted,tag=!IronMountain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!IronMountain_adapted,tag=!IronMountain_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!IronMountain_adapted,tag=!IronMountain_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!IronMountain_adapted,tag=!IronMountain_adapting] add IronMountain_adapting
+execute as @e[family=mahoraga,r=15,tag=IronMountain_adapted] at @s at @e[family=projectile,name=IronMountain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run playanimation @s animation.mahoraga.slash1
+execute as @e[family=mahoraga,r=15,tag=IronMountain_adapted] at @s at @e[family=projectile,name=IronMountain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=IronMountain_adapted] at @s as @e[family=projectile,name=IronMountain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=IronMountain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=IronMountain_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!IronMountain_adapted,tag=!IronMountain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!IronMountain_adapted,tag=!IronMountain_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!IronMountain_adapted,tag=!IronMountain_adapting] add IronMountain_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=IronMountain_adapted] at @s at @e[family=projectile,name=IronMountain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run camera @a[r=60] fade time 0 0.3 0.5 color 255 255 255
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=IronMountain_adapted] at @s at @e[family=projectile,name=IronMountain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=IronMountain_adapted] at @s as @e[family=projectile,name=IronMountain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=IronMountain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=IronMountain_adapted] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=IronMountain_adapted] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/light_damage
+execute as @e[family=mahoraga,r=15,tag=!light_adapted,tag=!light_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!light_adapted,tag=!light_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!light_adapted,tag=!light_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!light_adapted,tag=!light_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!light_adapted,tag=!light_adapting] add light_adapting
+effect @e[family=mahoraga,r=15,tag=light_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=15,tag=light_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=light_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[family=mahoraga,r=15,tag=light_adapted] at @s run particle ds:light_shatter ~~4~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!light_adapted,tag=!light_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!light_adapted,tag=!light_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!light_adapted,tag=!light_adapting,rm=0.25] add light_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=light_adapted,rm=0.25] instant_health 1 0 true
+execute as @e[scores={wheelactive=1..},r=15,tag=light_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=light_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=light_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/lightspeed_adapted
+tag @e[family=mahoraga] add lightspeed_adapted
+effect @e[family=mahoraga] instant_health 3 1 true
+particle ds:large_shockwave
+playsound music.adapt @a[r=300]
+tellraw @a[r=200] {"rawtext":[{"translate":"text.mahoraga.adaption"}]}
+tellraw @a[r=200] {"rawtext":[{"translate":"text.lightspeed.adaption"}]}
+@@damages/perfection_domain
+execute as @e[family=mahoraga,r=15,tag=!perfection_domain_adapted,tag=!perfection_domain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!perfection_domain_adapted,tag=!perfection_domain_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!perfection_domain_adapted,tag=!perfection_domain_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!perfection_domain_adapted,tag=!perfection_domain_adapting] add perfection_domain_adapting
+execute as @e[family=mahoraga,r=15,tag=perfection_domain_adapted] at @s at @e[type=ds:perfection_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run playanimation @s animation.mahoraga.slash1
+execute as @e[family=mahoraga,r=15,tag=perfection_domain_adapted] at @s at @e[type=ds:perfection_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=perfection_domain_adapted] at @s as @e[type=ds:perfection_domain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=perfection_domain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=perfection_domain_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!perfection_domain_adapted,tag=!perfection_domain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!perfection_domain_adapted,tag=!perfection_domain_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!perfection_domain_adapted,tag=!perfection_domain_adapting] add perfection_domain_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=perfection_domain_adapted] at @s at @e[type=ds:perfection_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run camera @a[r=60] fade time 0 0.3 0.5 color 255 255 255
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=perfection_domain_adapted] at @s at @e[type=ds:perfection_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=perfection_domain_adapted] at @s as @e[type=ds:perfection_domain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=perfection_domain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=perfection_domain_adapted] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=perfection_domain_adapted] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/poison_damage
+execute as @e[family=mahoraga,r=15,tag=!poison_adapted,tag=!poison_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!poison_adapted,tag=!poison_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!poison_adapted,tag=!poison_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!poison_adapted,tag=!poison_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!poison_adapted,tag=!poison_adapting] add poison_adapting
+effect @e[family=mahoraga,r=15,tag=poison_adapted] instant_health 1 0 true
+effect @e[family=mahoraga,r=15,tag=poison_adapted] poison 0 50 true
+effect @e[family=mahoraga,r=15,tag=poison_adapted] wither 0 50 true
+effect @e[family=mahoraga,r=15,tag=poison_adapted] fatal_poison 0 50 true
+execute as @e[family=mahoraga,r=15,tag=poison_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=poison_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!poison_adapted,tag=!poison_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!poison_adapted,tag=!poison_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!poison_adapted,tag=!poison_adapting,rm=0.25] add poison_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=poison_adapted,rm=0.25] instant_health 1 0 true
+effect @e[scores={wheelactive=1..},r=15,tag=poison_adapted,rm=0.25] poison 0 50 true
+effect @e[scores={wheelactive=1..},r=15,tag=poison_adapted,rm=0.25] wither 0 50 true
+effect @e[scores={wheelactive=1..},r=15,tag=poison_adapted,rm=0.25] fatal_poison 0 50 true
+execute as @e[scores={wheelactive=1..},r=15,tag=poison_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=poison_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=poison_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/pull_damage
+execute as @e[family=mahoraga,r=15,tag=!pull_adapted,tag=!pull_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!pull_adapted,tag=!pull_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!pull_adapted,tag=!pull_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!pull_adapted,tag=!pull_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!pull_adapted,tag=!pull_adapting] add pull_adapting
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!pull_adapted,tag=!pull_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!pull_adapted,tag=!pull_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!pull_adapted,tag=!pull_adapting,rm=0.25] add pull_adapting
+@@damages/rct_damage
+execute as @e[family=mahoraga,r=15,tag=!energy_adapted,tag=!energy_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!energy_adapted,tag=!energy_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!energy_adapted,tag=!energy_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!energy_adapted,tag=!energy_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!energy_adapted,tag=!energy_adapting] add energy_adapting
+effect @e[family=mahoraga,r=15,tag=energy_adapted] instant_health 1 1 true
+execute as @e[family=mahoraga,r=15,tag=energy_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=energy_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!energy_adapted,tag=!energy_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!energy_adapted,tag=!energy_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!energy_adapted,tag=!energy_adapting,rm=0.25] add energy_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=energy_adapted,rm=0.25] instant_health 1 1 true
+execute as @e[scores={wheelactive=1..},r=15,tag=energy_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=energy_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=energy_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/shadowgarden
+execute as @e[family=mahoraga,r=15,tag=!shadowgarden_adapted,tag=!shadowgarden_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!shadowgarden_adapted,tag=!shadowgarden_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!shadowgarden_adapted,tag=!shadowgarden_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!shadowgarden_adapted,tag=!shadowgarden_adapting] add shadowgarden_adapting
+execute as @e[family=mahoraga,r=15,tag=shadowgarden_adapted] at @s at @e[family=projectile,tag=DomainExpansion,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run playanimation @s animation.mahoraga.slash1
+execute as @e[family=mahoraga,r=15,tag=shadowgarden_adapted] at @s at @e[family=projectile,tag=DomainExpansion,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=shadowgarden_adapted] at @s as @e[family=projectile,name=ChimeraGarden1,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=shadowgarden_adapted] at @s as @e[family=projectile,name=ChimeraGarden2,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=shadowgarden_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=shadowgarden_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!shadowgarden_adapted,tag=!shadowgarden_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!shadowgarden_adapted,tag=!shadowgarden_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!shadowgarden_adapted,tag=!shadowgarden_adapting] add shadowgarden_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=shadowgarden_adapted] at @s at @e[family=projectile,tag=DomainExpansion,c=1,r=50,scores={Deleter=33..}] unless entity @e[scores={domain=1..},r=50] run camera @a[r=60] fade time 0 0.3 0.5 color 255 255 255
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=shadowgarden_adapted] at @s at @e[family=projectile,tag=DomainExpansion,c=1,r=50,scores={Deleter=33..}] unless entity @e[scores={domain=1..},r=50] run playsound mob.slash1 @a[r=50]
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=shadowgarden_adapted] at @s as @e[family=projectile,name=ChimeraGarden1,c=1,r=50,scores={Deleter=33..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 32
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=shadowgarden_adapted] at @s as @e[family=projectile,name=ChimeraGarden2,c=1,r=50,scores={Deleter=33..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 32
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=shadowgarden_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=shadowgarden_adapted] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=shadowgarden_adapted] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/sight_damage
+execute as @e[family=mahoraga,r=15,tag=!sight_adapted,tag=!sight_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!sight_adapted,tag=!sight_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!sight_adapted,tag=!sight_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!sight_adapted,tag=!sight_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!sight_adapted,tag=!sight_adapting] add sight_adapting
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!sight_adapted,tag=!sight_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!sight_adapted,tag=!sight_adapting] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!sight_adapted,tag=!sight_adapting] add sight_adapting
+@@damages/sky_damage
+execute as @e[family=mahoraga,r=40,tag=!sky_adapted,tag=!sky_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=40,tag=!sky_adapted,tag=!sky_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=40,tag=!sky_adapted,tag=!sky_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=40,tag=!sky_adapted,tag=!sky_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=40,tag=!sky_adapted,tag=!sky_adapting] add sky_adapting
+effect @e[family=mahoraga,r=40,tag=sky_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=40,tag=sky_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=40,tag=sky_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[family=mahoraga,r=40,tag=sky_adapted] at @s run particle ds:sky_shatter ~~4~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!sky_adapted,tag=!sky_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!sky_adapted,tag=!sky_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=40,tag=!sky_adapted,tag=!sky_adapting,rm=0.25] add sky_adapting
+effect @e[scores={wheelactive=1..},r=40,tag=sky_adapted,rm=0.25] instant_health 1 1 true
+execute as @e[scores={wheelactive=1..},r=40,tag=sky_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=40,tag=sky_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=40,tag=sky_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/slash_damage
+execute as @e[family=mahoraga,r=15,tag=!slash_adapted,tag=!slash_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!slash_adapted,tag=!slash_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!slash_adapted,tag=!slash_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!slash_adapted,tag=!slash_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!slash_adapted,tag=!slash_adapting] add slash_adapting
+effect @e[family=mahoraga,r=15,tag=slash_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=15,tag=slash_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=slash_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!slash_adapted,tag=!slash_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!slash_adapted,tag=!slash_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!slash_adapted,tag=!slash_adapting,rm=0.25] add slash_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=slash_adapted,rm=0.25] instant_health 1 0 true
+execute as @e[scores={wheelactive=1..},r=15,tag=slash_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=slash_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=slash_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/soul_damage
+execute as @e[family=mahoraga,r=15,tag=!soul_adapted,tag=!soul_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!soul_adapted,tag=!soul_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!soul_adapted,tag=!soul_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!soul_adapted,tag=!soul_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!soul_adapted,tag=!soul_adapting] add soul_adapting
+effect @e[family=mahoraga,r=15,tag=soul_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=15,tag=soul_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=soul_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute if entity @e[type=ds:modulo_yuji,c=1,r=80] run effect @e[family=mahoraga,scores={adaptsmall=2..},tag=!soul_adapted,c=1,r=30] resistance 10 4 true
+effect @e[family=mahoraga,scores={adaptsmall=2..},tag=!soul_adapted,c=1,r=30] resistance 10 3 true
+@@damages/speech_damage
+execute as @e[family=mahoraga,r=15,tag=!speech_adapted,tag=!speech_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!speech_adapted,tag=!speech_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!speech_adapted,tag=!speech_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!speech_adapted,tag=!speech_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!speech_adapted,tag=!speech_adapting] add speech_adapting
+execute as @e[family=mahoraga,r=15,tag=speech_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=speech_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!speech_adapted,tag=!speech_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!speech_adapted,tag=!speech_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!speech_adapted,tag=!speech_adapting,rm=0.25] add speech_adapting
+execute as @e[scores={wheelactive=1..},r=15,tag=speech_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=speech_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=speech_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/speech_domain
+execute as @e[family=mahoraga,r=15,tag=!speechdomain_adapted,tag=!speechdomain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!speechdomain_adapted,tag=!speechdomain_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!speechdomain_adapted,tag=!speechdomain_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!speechdomain_adapted,tag=!speechdomain_adapting] add speechdomain_adapting
+execute as @e[family=mahoraga,r=15,tag=speechdomain_adapted] at @s at @e[type=ds:resonant_chamber,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run playanimation @s animation.mahoraga.slash1
+execute as @e[family=mahoraga,r=15,tag=speechdomain_adapted] at @s at @e[type=ds:resonant_chamber,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=speechdomain_adapted] at @s as @e[type=ds:resonant_chamber,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=speechdomain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=speechdomain_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!speechdomain_adapted,tag=!speechdomain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!speechdomain_adapted,tag=!speechdomain_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!speechdomain_adapted,tag=!speechdomain_adapting] add speechdomain_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=speechdomain_adapted] at @s at @e[type=ds:resonant_chamber,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run camera @a[r=60] fade time 0 0.3 0.5 color 255 255 255
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=speechdomain_adapted] at @s at @e[type=ds:resonant_chamber,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=speechdomain_adapted] at @s as @e[type=ds:resonant_chamber,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=speechdomain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=speechdomain_adapted] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=speechdomain_adapted] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/storm_domain
+execute as @e[family=mahoraga,r=15,tag=!stormdomain_adapted,tag=!stormdomain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!stormdomain_adapted,tag=!stormdomain_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!stormdomain_adapted,tag=!stormdomain_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!stormdomain_adapted,tag=!stormdomain_adapting] add stormdomain_adapting
+execute as @e[family=mahoraga,r=15,tag=stormdomain_adapted] at @s at @e[family=projectile,name=StormDomain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run playanimation @s animation.mahoraga.slash1
+execute as @e[family=mahoraga,r=15,tag=stormdomain_adapted] at @s at @e[family=projectile,name=StormDomain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=stormdomain_adapted] at @s as @e[family=projectile,name=StormDomain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=stormdomain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=stormdomain_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!stormdomain_adapted,tag=!stormdomain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!stormdomain_adapted,tag=!stormdomain_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!stormdomain_adapted,tag=!stormdomain_adapting] add stormdomain_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=stormdomain_adapted] at @s at @e[family=projectile,name=StormDomain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run camera @a[r=60] fade time 0 0.3 0.5 color 255 255 255
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=stormdomain_adapted] at @s at @e[family=projectile,name=StormDomain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=stormdomain_adapted] at @s as @e[family=projectile,name=StormDomain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=stormdomain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=stormdomain_adapted] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=stormdomain_adapted] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/sukuna_domain
+execute as @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] add domain_barrier_adapting
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s at @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] run playanimation @s animation.mahoraga.tp_slam
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s at @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] at @s run playsound mob.burst @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s at @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] at @s run playsound music.domainbreak @a[r=100]  ~~~ 9999 2.5 9999
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s as @e[tag=DomainExpansion,family=!player,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] unless entity @e[scores={domainactive=1..},tag=mahoraga_tame,r=50] run scoreboard players set @e[tag=DomainExpansion,r=50,family=!mahoraga] Deleter 20
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=domain_barrier_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!domain_barrier_adapted,tag=!domain_barrier_adapting] add domain_barrier_adapting
+@@damages/unlimitedvoid
+execute as @e[family=mahoraga,r=15,tag=!unlimitedvoid_adapted,tag=!unlimitedvoid_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!unlimitedvoid_adapted,tag=!unlimitedvoid_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!unlimitedvoid_adapted,tag=!unlimitedvoid_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!unlimitedvoid_adapted,tag=!unlimitedvoid_adapting] add unlimitedvoid_adapting
+execute as @e[family=mahoraga,r=15,tag=unlimitedvoid_adapted] at @s at @e[name=UnlimitedVoid,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run playanimation @s animation.mahoraga.slash1
+execute as @e[family=mahoraga,r=15,tag=unlimitedvoid_adapted] at @s at @e[name=UnlimitedVoid,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=unlimitedvoid_adapted] at @s as @e[name=UnlimitedVoid,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=unlimitedvoid_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=unlimitedvoid_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!unlimitedvoid_adapted,tag=!unlimitedvoid_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!unlimitedvoid_adapted,tag=!unlimitedvoid_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!unlimitedvoid_adapted,tag=!unlimitedvoid_adapting] add unlimitedvoid_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=unlimitedvoid_adapted] at @s at @e[name=UnlimitedVoid,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run camera @a[r=60] fade time 0 0.3 0.5 color 255 255 255
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=unlimitedvoid_adapted] at @s at @e[name=UnlimitedVoid,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=unlimitedvoid_adapted] at @s as @e[name=UnlimitedVoid,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=unlimitedvoid_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=unlimitedvoid_adapted] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=unlimitedvoid_adapted] at @s run particle ds:wheel_aura2 ~~2.15~
+@@damages/water_damage
+execute as @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] at @s run particle ds:mahoraga_adaptwarning ~~~
+execute as @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] adapttimer 600
+scoreboard players add @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!water_adapted,tag=!water_adapting] add water_adapting
+effect @e[family=mahoraga,r=15,tag=water_adapted] instant_health 1 0 true
+execute as @e[family=mahoraga,r=15,tag=water_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=water_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!water_adapted,tag=!water_adapting,rm=0.25] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!water_adapted,tag=!water_adapting,rm=0.25] adapttimer 600
+tag @e[scores={wheelactive=1..,adaptCD=0},r=15,tag=!water_adapted,tag=!water_adapting,rm=0.25] add water_adapting
+effect @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] instant_health 1 0 true
+execute as @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[scores={wheelactive=1..},r=15,tag=water_adapted,rm=0.25] at @s run particle ds:wheel_aura2 ~~2.15~
+execute as @e[r=5,has_property={property:ct_particle=2..4}] at @s run function blood/diluted_blood
+@@damages/yujis_domain
+execute as @e[family=mahoraga,r=15,tag=!yujidomain_adapted,tag=!yujidomain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[family=mahoraga,r=15,tag=!yujidomain_adapted,tag=!yujidomain_adapting] adapttimer 900
+scoreboard players add @e[family=mahoraga,r=15,tag=!yujidomain_adapted,tag=!yujidomain_adapting,tag=!serious] adapttimer 250
+tag @e[family=mahoraga,r=15,tag=!yujidomain_adapted,tag=!yujidomain_adapting] add yujidomain_adapting
+execute as @e[family=mahoraga,r=15,tag=yujidomain_adapted] at @s at @e[type=ds:yuji_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run playanimation @s animation.mahoraga.slash1
+execute as @e[family=mahoraga,r=15,tag=yujidomain_adapted] at @s at @e[type=ds:yuji_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[family=mahoraga,r=15,tag=yujidomain_adapted] at @s as @e[type=ds:yuji_domain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[family=mahoraga,r=15,tag=yujidomain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[family=mahoraga,r=15,tag=yujidomain_adapted] at @s run particle ds:mahoraga_adapted ~~~
+execute as @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!yujidomain_adapted,tag=!yujidomain_adapting] at @s run playsound mob.shulker.hurt @a ~~~ 1000000 0.3 1000000
+scoreboard players set @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!yujidomain_adapted,tag=!yujidomain_adapting] adapttimer 600
+tag @e[rm=0.25,scores={wheelactive=1..,adaptCD=0},r=15,tag=!yujidomain_adapted,tag=!yujidomain_adapting] add yujidomain_adapting
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=yujidomain_adapted] at @s at @e[type=ds:yuji_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] run camera @a[r=60] fade time 0 0.3 0.5 color 255 255 255
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=yujidomain_adapted] at @s at @e[type=ds:yuji_domain,c=1,r=50,scores={Deleter=21..}] unless entity @e[scores={domain=1..},r=50] at @s run playsound mob.slash1 @a[r=100]
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=yujidomain_adapted] at @s as @e[type=ds:yuji_domain,c=1,r=50,scores={Deleter=21..}] at @s unless entity @e[scores={domain=1..},r=50] run scoreboard players set @s Deleter 20
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=yujidomain_adapted] at @s run playsound place.sculk @a ~~~ 10000000 0.5 10000000
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=yujidomain_adapted] at @s run particle ds:wheel_aura1 ~~2.15~
+execute as @e[rm=0.25,scores={wheelactive=1..,domain=0,domainactive=0},r=15,tag=yujidomain_adapted] at @s run particle ds:wheel_aura2 ~~2.15~

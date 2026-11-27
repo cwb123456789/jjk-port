@@ -1,0 +1,456 @@
+@@explosive/arrow
+execute as @s run tp @s ^^^5.5 facing @e[name=FingerArrow2TRG,c=1]
+execute as @s[scores={Deleter=4..}] unless block ~~~ air run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] if entity @e[tag=!Frames,type=!item,family=!projectile,family=!damage,family=!despawncito,type=!ds:dash,type=!ds:lapse_explode,type=!arrow,type=!xp_orb,m=!c,r=6.75] run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] if entity @e[name=FingerArrow2TRG,r=3] run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] at @s run particle ds:fingerer_ex1 ^^^
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy1 ^^^
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy2 ~~~
+execute as @s[scores={Deleter=4..}] at @s run particle ds:ground_slam2 ~~~
+execute as @e[type=ds:projectile,name=FingerArrow2TRG] at @s run tp @s ~~~
+execute as @s[scores={Deleter=3..}] at @s run playsound mob.burn @a[r=30] ~~~ 99999 1.1 99999
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave1 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave2 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave3 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave4 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave5 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave6 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:ground_slam3 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:smoke_impact1 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:impact ~~~
+execute as @s[scores={Deleter=3}] at @s unless block ~~~ air run particle ds:rubble3
+execute as @s[scores={Deleter=3}] at @s unless block ~~~ air run particle ds:rubble3
+execute as @s[scores={Deleter=3}] at @s run damage @e[tag=!Frames,r=7] 26 block_explosion
+execute as @s[scores={Deleter=3}] at @s run scoreboard players add @e[tag=!Frames,r=7] knockdown 50
+execute as @s[scores={Deleter=3}] at @s run scoreboard players set @e[tag=!Frames,r=7] Hit 4
+execute as @s[scores={Deleter=3}] at @s run scoreboard players add @e[tag=!Frames,r=7] Evade 20
+execute as @s[scores={Deleter=3}] at @s run camerashake add @a[r=40] 4 0.15
+execute as @s[scores={Deleter=3}] at @s run playsound mob.shock1 @a[r=90] ~~~ 99999 1.35 99999
+execute as @s[scores={Deleter=3}] at @s run playsound beacon.deactivate @a[r=90] ~~~ 99999 0.5 99999
+execute as @s[scores={Deleter=3}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.35 99999
+execute as @s[scores={Deleter=3}] at @s run playsound mob.burn @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={Deleter=3}] at @s run effect @e[r=10] resistance 1 10 true
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run summon ds:red_reverse
+execute as @s[scores={Deleter=3}] at @s run kill @s
+@@explosive/explosive
+execute as @e[type=ds:projectile,name="EnergySpit2"] at @s run function explosive/spit
+execute as @e[type=ds:projectile,name="FingerArrow2"] at @s run function explosive/arrow
+execute as @e[type=ds:projectile,name="EnergyOrb"] at @s run function explosive/orb
+execute as @e[type=ds:projectile,name="FMugetsu2"] at @s run function explosive/mugetsu
+@@explosive/explosive1
+playanimation @s[scores={move=30}] animation.finger_bearer.palm_blast1
+effect @s[scores={move=21..}] slowness 1 3 true
+tag @s[scores={move=1..2},tag=form1] remove form1
+tag @s[scores={move=25..,Stun=1..},tag=form1] remove form1
+scoreboard players set @s[scores={move=26..,Stun=1..},tag=form1] move 0
+execute as @s[scores={move=10}] at @s run function damages/explosion_damage
+execute as @s[scores={move=26}] at @s positioned ^^^5 run playsound beacon.activate @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=26}] at @s positioned ^^^5 run playsound portal.trigger @a[r=90] ~~~ 99999 4 99999
+execute as @s[scores={move=3..10}] at @s run tp @s ~~~
+execute as @s[scores={move=10}] at @s positioned ^^^5 run scoreboard players add @e[r=4.99,tag=!Frames] Stun 30
+execute as @s[scores={move=10}] at @s positioned ^^^5 run scoreboard players add @e[r=4.99,tag=!Frames] Evade 6
+execute as @s[scores={move=10}] at @s positioned ^^^5 run scoreboard players add @e[r=4.99,tag=!Frames] Hit 8
+execute as @s[scores={move=10}] at @s positioned ^^^5 run damage @e[r=4.99,tag=!Frames] 12 entity_attack entity @s
+execute as @s[scores={move=10}] at @s positioned ^^^1 run summon ds:knockback
+execute as @s[scores={move=10}] at @s positioned ^^^5 run effect @e[r=15] resistance 1 10 true
+execute as @s[scores={move=10}] at @s positioned ^^^6 run summon ds:lapse_explode ~~~
+execute as @s[scores={move=10}] at @s positioned ^^^4 run summon ds:lapse_explode ~~~
+execute as @s[scores={move=10}] at @s positioned ^^^2 run summon ds:lapse_explode ~~~
+execute as @s[scores={move=10}] at @s positioned ^^^5 run playsound mob.shock1 @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=10}] at @s positioned ^^^5 run playsound beacon.deactivate @a[r=90] ~~~ 99999 0.45 99999
+execute as @s[scores={move=10}] at @s positioned ^^^5 run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.45 99999
+execute as @s[scores={move=10}] at @s positioned ^^^5 run playsound mob.burn @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=10}] at @s positioned ^^^5 run camerashake add @a[r=30] 4 0.25
+execute as @s[scores={move=9}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=9}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=9}] at @s run particle ds:impact1 ^^1^2
+execute as @s[scores={move=9}] at @s run particle ds:fingerer_ex1 ^^1^2
+@@explosive/explosive2
+playanimation @s[scores={move=30}] animation.finger_bearer.shockwave
+execute as @s[scores={move=3..}] at @s run tp @s ~~~
+tag @s[scores={move=1..2},tag=form2] remove form2
+tag @s[scores={move=25..,Stun=1..},tag=form2] remove form2
+scoreboard players set @s[scores={move=26..,Stun=1..},tag=form2] move 0
+execute as @s[scores={move=15}] at @s run function damages/explosion_damage
+tag @s[scores={move=6..16}] add Frames
+tag @s[scores={move=1..5}] remove Frames
+execute as @s[scores={move=1..16}] at @s positioned ~~1~ run  kill @e[type=item,r=15]
+execute as @s[scores={move=26}] at @s positioned ~~1~ run playsound beacon.activate @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=26}] at @s positioned ~~1~ run playsound portal.trigger @a[r=90] ~~~ 99999 4 99999
+execute as @s[scores={move=15}] at @s positioned ~~1~ run scoreboard players add @e[r=7.5,tag=!Frames] knockdown 95
+execute as @s[scores={move=15}] at @s positioned ~~1~ run scoreboard players add @e[r=7.5,tag=!Frames] Evade 5
+execute as @s[scores={move=15}] at @s positioned ~~1~ run scoreboard players add @e[r=7.5,tag=!Frames] Hit 8
+execute as @s[scores={move=10..15}] at @s positioned ~~1~ run damage @e[r=7.5,tag=!Frames] 5 override entity @s
+execute as @s[scores={move=15}] at @s unless entity @e[scores={ab=1..},r=7,rm=0.2] run summon ds:boss_knockback1
+execute as @s[scores={move=14}] at @s positioned ~~1~ run effect @e[r=15] resistance 1 10 true
+execute as @s[scores={move=11..13}] at @s positioned ~~1~ run summon ds:red_reversal
+execute as @s[scores={move=15}] at @s positioned ~~1~ run playsound mob.shock1 @a[r=90] ~~~ 99999 0.5 99999
+execute as @s[scores={move=15}] at @s positioned ~~1~ run playsound beacon.deactivate @a[r=90] ~~~ 99999 0.35 99999
+execute as @s[scores={move=15}] at @s positioned ~~1~ run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.25 99999
+execute as @s[scores={move=15}] at @s positioned ~~1~ run playsound mob.burn @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=1..15}] at @s run title @a[r=33,tag=!impactframesoff] title 
+execute as @s[scores={move=15}] at @s positioned ~~1~ run camerashake add @a[r=30] 4 0.35
+execute as @s[scores={move=15}] at @s run particle ds:dirt0
+execute as @s[scores={move=15}] at @s run particle ds:fingerer_ex1 ~~1~
+execute as @s[scores={move=15}] at @s run particle ds:finger_shockwave1 ~~1~
+execute as @s[scores={move=15}] at @s run particle ds:finger_shockwave2 ~~1~
+execute as @s[scores={move=15}] at @s run particle ds:finger_shockwave3 ~~1~
+execute as @s[scores={move=15}] at @s run particle ds:finger_shockwave4 ~~1~
+execute as @s[scores={move=15}] at @s run particle ds:finger_shockwave5 ~~1~
+execute as @s[scores={move=15}] at @s run particle ds:finger_shockwave6 ~~1~
+execute as @s[scores={move=15}] at @s run particle ds:ground_slam1 ~~~
+execute as @s[scores={move=15}] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={move=15}] at @s run particle ds:ground_slam3 ~~~
+execute as @s[scores={move=15}] at @s run particle ds:ground_slam4 ~~~
+execute as @s[scores={move=15}] at @s run particle ds:leap ~~~
+execute as @s[scores={move=15}] at @s unless block ~~-0.5~ air run particle ds:crater2 ~~~
+@@explosive/explosive3
+playanimation @s[scores={move=15}] animation.finger_bearer.spit
+tag @s[scores={move=1..2},tag=form3] remove form3
+tag @s[scores={move=9..,Stun=1..},tag=form3] remove form3
+scoreboard players set @s[scores={move=9..,Stun=1..},tag=form3] move 0
+scoreboard players set @s[scores={move=2..9}] Frames 5
+execute as @s[scores={move=8}] at @s anchored eyes run summon ds:projectile  ^^-0.33^1 facing ^^^10 none EnergySpit2
+execute as @s[scores={move=8}] at @s anchored eyes positioned ^^^41 run summon armor_stand EnergySpitTRG2
+execute as @s[scores={move=8}] at @s run scoreboard players set @e[name=EnergySpit2,c=1] Deleter 33
+execute as @s[scores={move=8}] at @s anchored eyes positioned ^^^41 run scoreboard players set @e[name=EnergySpitTRG2,c=1] Deleter 33
+execute as @s[scores={move=8}] at @s run playsound random.explode @a[r=90] ~~~ 99999 3.25 99999
+execute as @s[scores={move=8}] at @s run playsound beacon.deactivate @a[r=90] ~~~ 99999 1.75 99999
+execute as @s[scores={move=8}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=8}] at @s run playsound mob.slime.jump @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=8}] at @s run camerashake add @a[r=30] 3 0.25
+execute as @s[scores={move=7}] at @s run particle ds:impact ^^1^2
+execute as @s[scores={move=7}] at @s run particle ds:fingerer_ex1 ^^1^2
+execute as @s[scores={move=7..8}] at @s run effect @e[name=EnergySpitTRG2] invisibility 10 10 true
+@@explosive/explosive4
+playanimation @s[scores={move=40}] animation.finger_bearer.arrow
+tag @s[scores={move=1..2}] remove form4
+tag @s[scores={move=22..,Stun=1..}] remove form4
+scoreboard players set @s[scores={move=22..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=5..}] Move 5
+scoreboard players set @s[scores={move=5..22}] Frames 5
+execute as @s[scores={move=35}] at @s run playsound beacon.activate @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=35}] at @s run playsound portal.trigger @a[r=90] ~~~ 99999 3 99999
+execute as @s[scores={move=10}] at @s anchored eyes run summon ds:projectile FingerArrow2 ^^^1
+execute as @s[scores={move=10}] at @s anchored eyes positioned ^^^45 run summon ds:projectile FingerArrow2TRG
+execute as @s[scores={move=10}] at @s run scoreboard players set @e[name=FingerArrow2,c=1] Deleter 33
+execute as @s[scores={move=10}] at @s anchored eyes positioned ^^^45 run scoreboard players set @e[name=FingerArrow2TRG,c=1] Deleter 33
+execute as @s[scores={move=10}] at @s run playsound mob.shock1 @a[r=90] ~~~ 99999 1.25 99999
+execute as @s[scores={move=10}] at @s run playsound beacon.deactivate @a[r=90] ~~~ 99999 1.15 99999
+execute as @s[scores={move=10}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.35 99999
+execute as @s[scores={move=10}] at @s run playsound mob.burn @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=10}] at @s run camerashake add @a[r=30] 3 0.25
+execute as @s[scores={move=9}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=9}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=9}] at @s run particle ds:impact1 ^^1^2
+execute as @s[scores={move=9}] at @s run particle ds:fingerer_ex1 ^^1^2
+@@explosive/explosive5
+playanimation @s[scores={move=55}] animation.finger_bearer.bolt
+execute as @s[scores={move=51..}] at @s if block ~~-0.1~ air run tp @s ~~-0.1~
+execute as @s[scores={move=51..}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={move=51..}] at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s[scores={move=51..}] at @s if block ~~-1~ air run tp @s ~~-1~
+tag @s[scores={move=1..2}] remove form5
+tag @s[scores={move=26..,Stun=1..}] remove form5
+scoreboard players set @s[scores={move=26..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=5..}] Move 5
+scoreboard players set @s[scores={move=15..27}] Frames 5
+execute as @s[scores={move=51}] at @s run playsound beacon.activate @a[r=90] ~~~ 99999 0.55 99999
+execute as @s[scores={move=51}] at @s run playsound portal.trigger @a[r=90] ~~~ 99999 2.5 99999
+execute as @s[scores={move=25}] at @s anchored eyes run summon ds:projectile EnergyOrb ^^^1
+execute as @s[scores={move=25}] at @s anchored eyes positioned ^^^45 run summon ds:projectile EnergyOrbTRG
+execute as @s[scores={move=25}] at @s run scoreboard players set @e[name=EnergyOrb,c=1] Deleter 33
+execute as @s[scores={move=25}] at @s anchored eyes positioned ^^^45 run scoreboard players set @e[name=EnergyOrbTRG,c=1] Deleter 33
+execute as @s[scores={move=25}] at @s run playsound mob.shock1 @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=25}] at @s run playsound beacon.deactivate @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=25}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.35 99999
+execute as @s[scores={move=25}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.55 99999
+execute as @s[scores={move=25}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=25}] at @s run playsound mob.burn @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=25}] at @s run camerashake add @a[r=30] 4 0.25
+execute as @s[scores={move=24}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=24}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=24}] at @s run particle ds:impact1 ^^1^2
+execute as @s[scores={move=24}] at @s run particle ds:fingerer_ex1 ^^1^2
+@@explosive/explosive6
+playanimation @s[scores={move=45}] animation.finger_bearer.slash
+tag @s[scores={move=1..2}] remove form6
+effect @s[scores={move=21..}] slowness 1 3 true
+scoreboard players set @s[scores={move=24..26}] Frames 5
+execute as @s[scores={move=10..25}] at @s run tp @s ~~~
+execute as @s[scores={move=25}] at @s positioned ^^^7 run function damages/explosion_damage
+execute as @s[scores={move=25}] at @s positioned ^^^7 run function damages/rct_damage
+execute as @s[scores={move=45}] at @s positioned ^^^13 run playsound beacon.activate @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=45}] at @s positioned ^^^13 run playsound portal.trigger @a[r=90] ~~~ 99999 4 99999
+execute as @s[scores={move=25}] at @s positioned ^^^13 run scoreboard players add @e[r=12.99,tag=!Frames] Stun 30
+execute as @s[scores={move=25}] at @s positioned ^^^13 run scoreboard players add @e[r=12.99,tag=!Frames] Evade 29
+execute as @s[scores={move=25}] at @s positioned ^^^13 run scoreboard players add @e[r=12.99,tag=!Frames] Hit 12
+execute as @s[scores={move=25}] at @s positioned ^^^13 run damage @e[r=12.99,tag=!Frames] 25 entity_attack entity @s
+execute as @s[scores={move=25}] at @s if entity @e[tag=griefable,c=1]  run summon ds:red_reverse ^8^17^9
+execute as @s[scores={move=25}] at @s  if entity @e[tag=griefable,c=1] run summon ds:red_reverse ^4^13^13
+execute as @s[scores={move=25}] at @s if entity @e[tag=griefable,c=1]  run summon ds:red_reverse ^^9^9
+execute as @s[scores={move=25}] at @s if entity @e[tag=griefable,c=1]  run summon ds:red_reverse ^4^4^4
+execute as @s[scores={move=25}] at @s if entity @e[tag=griefable,c=1]  run summon ds:red_reverse ^8^^
+execute as @s[scores={move=25}] at @s if entity @e[tag=griefable,c=1]  run effect @e[r=25] resistance 1 10 true
+execute as @s[scores={move=25}] at @s  if entity @e[tag=griefable,c=1] run summon ds:red_reversal ^8^17^9
+execute as @s[scores={move=25}] at @s  if entity @e[tag=griefable,c=1] run summon ds:red_reversal ^4^13^13
+execute as @s[scores={move=25}] at @s run summon ds:red_reversal ^^9^9
+execute as @s[scores={move=25}] at @s  if entity @e[tag=griefable,c=1] run summon ds:red_reversal ^4^4^4
+execute as @s[scores={move=25}] at @s if entity @e[tag=griefable,c=1]  run summon ds:red_reversal ^8^^
+execute as @s[scores={move=25}] at @s positioned ^^^13 run playsound mob.shock1 @a[r=90] ~~~ 99999 2.85 99999
+execute as @s[scores={move=25}] at @s positioned ^^^13 run playsound beacon.deactivate @a[r=90] ~~~ 99999 0.45 99999
+execute as @s[scores={move=25}] at @s positioned ^^^13 run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.45 99999
+execute as @s[scores={move=25}] at @s positioned ^^^13 run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.25 99999
+execute as @s[scores={move=25}] at @s positioned ^^^13 run playsound mob.burn @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=25}] at @s positioned ^^^13 run camerashake add @a[r=30] 4 0.25
+execute as @s[scores={move=24}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=24}] at @s run particle ds:ground_slam2 ^^1^2
+execute as @s[scores={move=24}] at @s run particle ds:ground_slam3 ^^1^2
+execute as @s[scores={move=24}] at @s run particle ds:impact1 ^^1^2
+execute as @s[scores={move=24}] at @s run particle ds:fingerer_ex1 ^^1^2
+@@explosive/explosive7
+playanimation @s[scores={move=30}] animation.finger_bearer.mugetsu
+tag @s[scores={move=1..2}] remove form7
+tag @s[scores={move=16..,Stun=1..}] remove form7
+scoreboard players set @s[scores={move=16..,Stun=1..}] move 0
+scoreboard players set @s[scores={move=12..}] Move 5
+scoreboard players set @s[scores={move=11..15}] Frames 5
+execute as @s[scores={move=15}] at @s anchored eyes run summon ds:projectile ^^^1 facing ^^^20 none FMugetsu2
+execute as @s[scores={move=15}] at @s run scoreboard players set @e[name=FMugetsu2,c=1] Deleter 45
+execute as @s[scores={move=15}] at @s run playsound random.explode @a[r=90] ~~~ 99999 3.25 99999
+execute as @s[scores={move=15}] at @s run playsound beacon.deactivate @a[r=90] ~~~ 99999 1.75 99999
+execute as @s[scores={move=15}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.85 99999
+execute as @s[scores={move=15}] at @s run playsound mob.burn @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={move=15}] at @s run camerashake add @a[r=30] 3 0.25
+execute as @s[scores={move=14}] at @s run particle ds:impact ^^1^2
+execute as @s[scores={move=14}] at @s run particle ds:fingerer_ex1 ^^1^2
+@@explosive/explosive_clear
+clear @p ds:explosive1
+clear @p ds:explosive2
+clear @p ds:explosive3
+tellraw @p {"rawtext":[{"translate":"text.skills_clear"}]}
+playsound random.orb @p
+@@explosive/explosive_click
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=0,Sneaking=0,detect_jump=0,Energy=80..}] add form1
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Energy=0..79,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=80..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability1=1..,Sneaking=0,detect_jump=0,Energy=80..}] at @s run tellraw @s {"rawtext":[{"translate":"text.explosive.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=80..}] move 31
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,detect_jump=0,Energy=80..}] ability1 140
+scoreboard players remove @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Energy=80..,move=31,Sneaking=0,detect_jump=0}] Energy 80
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=0,Energy=200..}] add form2
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Sneaking=1..,detect_jump=0,Stun=0,Disabled2=0,ability2=0,Energy=0..199}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=1..,Energy=200..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability2=1..,Energy=200..}] at @s run tellraw @s {"rawtext":[{"translate":"text.explosive.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=200..}] move 31
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,detect_jump=0,Energy=200..}] ability2 800
+scoreboard players remove @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand},scores={Stun=0,Energy=200..,move=31,Sneaking=1..,detect_jump=0}] Energy 200
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive1,location=slot.weapon.mainhand}] remove explosiveclick
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability3=0,Sneaking=0,detect_jump=0,Energy=50..}] add form3
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Energy=0..49,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability3=1..,Sneaking=0,detect_jump=0,Energy=50..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability3=1..,Sneaking=0,detect_jump=0,Energy=50..}] at @s run tellraw @s {"rawtext":[{"translate":"text.explosive.ab3"},{"score":{"name": "@p","objective": "ability3"}},{"text":"§c."}]}
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=0,Energy=50..}] move 16
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability3=0,Sneaking=0,detect_jump=0,Energy=50..}] ability3 60
+scoreboard players remove @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Energy=50..,move=16,Sneaking=0,detect_jump=0}] Energy 50
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability4=0,Energy=250..}] add form4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Sneaking=1..,detect_jump=0,Stun=0,Disabled2=0,ability4=0,Energy=0..249}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability4=1..,Energy=250..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability4=1..,Energy=250..}] at @s run tellraw @s {"rawtext":[{"translate":"text.explosive.ab4"},{"score":{"name": "@p","objective": "ability4"}},{"text":"§c."}]}
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,detect_jump=0,Energy=250..}] move 41
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability4=0,Sneaking=1..,detect_jump=0,Energy=250..}] ability4 800
+scoreboard players remove @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Energy=250..,move=41,Sneaking=1..,detect_jump=0}] Energy 250
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability5=0,Energy=400..}] add form5
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Sneaking=0,detect_jump=1..,Stun=0,Disabled2=0,ability5=0,Energy=0..399}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability5=1..,Energy=400..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=1..,ability5=1..,Energy=400..}] at @s run tellraw @s {"rawtext":[{"translate":"text.explosive.ab5"},{"score":{"name": "@p","objective": "ability5"}},{"text":"§c."}]}
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=0,detect_jump=1..,Energy=400..}] move 61
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability5=0,Sneaking=0,detect_jump=1..,Energy=400..}] ability5 800
+scoreboard players remove @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand},scores={Stun=0,Energy=400..,move=61,Sneaking=0,detect_jump=1..}] Energy 400
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive2,location=slot.weapon.mainhand}] remove explosiveclick
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability6=0,Sneaking=0,detect_jump=0,Energy=200..}] add form6
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Energy=0..199,Sneaking=0,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability6=1..,Sneaking=0,detect_jump=0,Energy=200..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=0,detect_jump=0,ability6=1..,Sneaking=0,detect_jump=0,Energy=200..}] at @s run tellraw @s {"rawtext":[{"translate":"text.explosive.ab6"},{"score":{"name": "@p","objective": "ability6"}},{"text":"§c."}]}
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Sneaking=0,detect_jump=0,Energy=200..}] move 46
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability6=0,Sneaking=0,detect_jump=0,Energy=200..}] ability6 400
+scoreboard players remove @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Energy=200..,move=46,Sneaking=0,detect_jump=0}] Energy 200
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,detect_jump=0,ability7=0,Sneaking=1..,detect_jump=0,Energy=200..}] add form7
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Energy=0..199,Sneaking=1..,detect_jump=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability7=1..,Sneaking=1..,detect_jump=0,Energy=200..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,detect_jump=0,ability7=1..,Sneaking=1..,detect_jump=0,Energy=200..}] at @s run tellraw @s {"rawtext":[{"translate":"text.explosive.ab7"},{"score":{"name": "@p","objective": "ability7"}},{"text":"§c."}]}
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=1..,detect_jump=0,Energy=200..}] move 31
+scoreboard players set @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability7=0,Sneaking=1..,detect_jump=0,Energy=200..}] ability7 350
+scoreboard players remove @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand},scores={Energy=200..,move=31,Sneaking=1..,detect_jump=0}] Energy 200
+tag @s[tag=explosiveclick,hasitem={item=ds:explosive3,location=slot.weapon.mainhand}] remove explosiveclick
+@@explosive/explosive_clicks
+tag @s[tag=itemUse:ds:explosive1] add explosiveclick
+tag @s[tag=itemUse:ds:explosive2] add explosiveclick
+tag @s[tag=itemUse:ds:explosive3] add explosiveclick
+execute as @s[tag=explosiveclick] run function explosive/explosive_click
+@@explosive/explosive_moves
+execute as @s[scores={move=1..},tag=wep1,tag=explosivefists] run function explosive/explosive1a
+execute as @s[scores={move=1..},tag=wep2,tag=explosivefists] run function explosive/explosive1b
+execute as @s[scores={move=1..},tag=wep3,tag=explosivefists] run function explosive/explosive1c
+execute as @s[scores={move=1..},tag=form1] run function explosive/explosive1
+execute as @s[scores={move=1..},tag=form2] run function explosive/explosive2
+execute as @s[scores={move=1..},tag=form3] run function explosive/explosive3
+execute as @s[scores={move=1..},tag=form4] run function explosive/explosive4
+execute as @s[scores={move=1..},tag=form5] run function explosive/explosive5
+execute as @s[scores={move=1..},tag=form6] run function explosive/explosive6
+execute as @s[scores={move=1..},tag=form7] run function explosive/explosive7
+@@explosive/explosive_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive] at @s run function remove_ct
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=explosive] {"rawtext":[{"translate":"text.explosive.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=curse,tag=!explosive] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=curse,tag=explosive] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive] {"rawtext":[{"translate":"text.explosive.using1"},{"translate":"text.explosive.using2"},{"translate":"text.explosive.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive,m=!c] forms 1
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive,m=c] forms 4
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive] ds:explosive1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive,m=c] ds:explosive2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+give @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive,m=c] ds:explosive3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive,m=c] {"rawtext":[{"translate":"text.creativeforms"}]}
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=curse,tag=!explosive] add explosive
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=curse,tag=explosive] at @s run function clear_skills
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..3,invest=10..},tag=curse,tag=explosive,tag=!cantupgrade] at @s run scoreboard players add @s forms 1
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..3,invest=10..},tag=curse,tag=explosive,tag=!cantupgrade] at @s run playsound random.orb @a ~~~ 100000 0.5 100000
+execute as @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..3,invest=10..},tag=curse,tag=explosive,tag=!cantupgrade] at @s run playsound mob.wither.hurt @a ~~~ 100000 2 100000
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..},tag=curse,tag=explosive] ds:explosive1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2,invest=10..},tag=curse,tag=explosive,tag=!cantupgrade] {"rawtext":[{"translate":"text.explosive_ab2.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=2..},tag=curse,tag=explosive] ds:explosive2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3,invest=10..},tag=curse,tag=explosive,tag=!cantupgrade] {"rawtext":[{"translate":"text.explosive_ab3.unlocked"}]}
+give @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=3..},tag=curse,tag=explosive] ds:explosive3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=4..,invest=10..},tag=curse,tag=explosive]  {"rawtext":[{"translate":"text.explosive_all.unlocked"}]}
+scoreboard players remove @a[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..4,invest=10..},tag=curse,tag=explosive,tag=!cantupgrade] invest 10
+tag @e remove cantupgrade
+scoreboard objectives add fever dummy
+scoreboard players add @a[tag=explosive] fever 0
+@@explosive/mugetsu
+execute as @s[scores={Deleter=1..}] run tp @s ^^^1.45
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy2 ^^^
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy3 ^^^
+execute as @s[scores={Deleter=3..}] at @s run playsound mob.blaze.shoot @a[r=30] ~~~ 99999 0.85 99999
+execute as @s[scores={Deleter=3..}] at @s run playsound mob.burn @a[r=30] ~~~ 99999 1.35 99999
+execute as @s[scores={Deleter=3..}] at @s unless block ~~~ air run tp @s ~~0.6~
+execute as @s[scores={Deleter=3..}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={Deleter=3..}] at @s if block ~~-0.3~ air run tp @s ~~-0.3~
+execute as @s[scores={Deleter=3..}] at @s if block ~~-0.5~ air run tp @s ~~-0.5~
+execute as @s[scores={Deleter=3..}] at @s if block ~~-1~ air run tp @s ~~-1~
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu1
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu1 ^^^-0.2
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu1 ^^^-0.4
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu1 ^^^-0.6
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu1 ^^^-0.8
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu2
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu3
+execute as @s[scores={Deleter=3..}] at @s run particle ds:finger_mugetsu4
+execute as @s[scores={Deleter=3..}] at @s run particle ds:fingerer_ex1
+execute as @s[scores={Deleter=3..}] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={Deleter=3..}] at @s unless block ~~-0.33~ air run particle ds:rubble3
+execute as @s[scores={Deleter=3..}] at @s run damage @e[tag=!Frames,r=3] 8 override
+execute as @s[scores={Deleter=3..}] at @s run scoreboard players set @e[tag=!Frames,r=3] Stun 25
+execute as @s[scores={Deleter=3..}] at @s run scoreboard players set @e[tag=!Frames,r=3] Hit 4
+execute as @s[scores={Deleter=3..}] at @s run scoreboard players add @e[tag=!Frames,r=3] Evade 7
+execute as @s[scores={Deleter=3..}] at @s run camerashake add @a[r=40] 1 0.15
+execute as @s[scores={Deleter=3..}] at @s unless block ~~~ bedrock unless block ~~~ end_portal_frame unless block ~~~ obsidian run fill ~~~ ~~7~ air [] destroy
+execute as @s[scores={Deleter=3..}] at @s run  kill @e[type=item,r=15]
+@@explosive/orb
+execute as @s run tp @s ^^^3 facing @e[name=EnergyOrbTRG,c=1]
+execute as @s[scores={Deleter=4..}] unless block ~~~ air run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] if entity @e[tag=!Frames,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand,r=2.96] run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] if entity @e[name=EnergyOrbTRG,r=2] run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] at @s run scoreboard players random @e[family=boss,r=10,type=!ds:finger_bearer] chance 1 3
+execute as @s[scores={Deleter=4..}] at @s run scoreboard players set @e[scores={chance=3},family=boss,r=10,type=!ds:finger_bearer] punch 1
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_awaken6 ^^^-1.5
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_awaken6 ^^^
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_awaken7 ^^^-1.5
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_awaken7 ^^^
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy2 ^^^
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy3 ^^^
+execute as @s[scores={Deleter=3..}] at @s run playsound mob.burn @a[r=30] ~~~ 99999 1.35 99999
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run tellraw @a[scores={detect_left=1..2},r=5,tag=!spectator] {"rawtext":[{"translate":"text.energy_orb.parried"}]}
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:finger_shockwave2
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:finger_shockwave3
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:finger_shockwave3
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:finger_awaken3
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:finger_awaken3
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:finger_awaken3
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run playsound random.fizz @a[r=100] ~~~ 99999 0.5 99999
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run playsound random.fizz @a[r=100] ~~~ 99999 0.75 99999
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:heavy_impact1 ~~~
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:heavy_impact2 ~~~
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run particle ds:heavy_impact3 ~~~
+execute as @s[scores={Deleter=4..}] at @s if entity @e[scores={detect_left=1..2},r=5,tag=!spectator] run scoreboard players set @s Deleter 2
+execute as @s[scores={Deleter=3}] at @s run camera @a[r=30] fade time 0 0 0.5 color 255 255 255
+execute as @s[scores={Deleter=3}] at @s run particle ds:fingerer_ex1
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken1 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken2 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken3 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken4 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken5 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken1 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken2 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken3 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken4 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_awaken5 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave1 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave2 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave3 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave4 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:finger_shockwave5
+execute as @s[scores={Deleter=3}] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:ground_slam3 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:smoke_impact1 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:impact ~~~
+execute as @s[scores={Deleter=3}] at @s unless block ~~~ air run particle ds:rubble3
+execute as @s[scores={Deleter=3}] at @s unless block ~~~ air run particle ds:rubble3
+execute as @s[scores={Deleter=3}] at @s run damage @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] 2 block_explosion
+execute as @s[scores={Deleter=3}] at @s run scoreboard players set @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] knockdown 95
+execute as @s[scores={Deleter=3}] at @s run scoreboard players set @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] Hit 4
+execute as @s[scores={Deleter=3}] at @s run scoreboard players add @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] Evade 12
+execute as @s[scores={Deleter=3}] at @s run camerashake add @a[r=40] 4 0.5
+execute as @s[scores={Deleter=3}] at @s run playsound mob.shock1 @a[r=90] ~~~ 99999 0.25 99999
+execute as @s[scores={Deleter=3}] at @s run playsound beacon.deactivate @a[r=90] ~~~ 99999 0.35 99999
+execute as @s[scores={Deleter=3}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.25 99999
+execute as @s[scores={Deleter=3}] at @s run playsound mob.burn @a[r=90] ~~~ 99999 1 99999
+execute as @s[scores={Deleter=3}] at @s run summon ds:red_reversal ~~~
+execute as @s[scores={Deleter=3}] at @s run kill @s
+@@explosive/spit
+execute as @s[scores={Deleter=1..}] at @s run tp @s ^^^2.25 facing @e[name=EnergySpitTRG2,c=1]
+execute as @s[scores={Deleter=4..}] unless block ~~~ air run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] if entity @e[tag=!Frames,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand,r=2.96] run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] if entity @e[name=EnergySpitTRG2,r=2] run scoreboard players set @s Deleter 3
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy2 ^^^
+execute as @s[scores={Deleter=4..}] at @s run particle ds:finger_energy3 ^^^
+execute as @s[scores={Deleter=3..}] at @s run playsound mob.burn @a[r=30] ~~~ 99999 1.35 99999
+execute as @s[scores={Deleter=3}] at @s run particle ds:fingerer_ex1
+execute as @s[scores={Deleter=3}] at @s run particle ds:ground_slam2 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:ground_slam3 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:smoke_impact1 ~~~
+execute as @s[scores={Deleter=3}] at @s run particle ds:impact ~~~
+execute as @s[scores={Deleter=3}] at @s unless block ~~~ air run particle ds:rubble3
+execute as @s[scores={Deleter=3}] at @s unless block ~~~ air run particle ds:rubble3
+execute as @s[scores={Deleter=3}] at @s run damage @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] 10 block_explosion
+execute as @s[scores={Deleter=3}] at @s run scoreboard players set @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] Stun 12
+execute as @s[scores={Deleter=3}] at @s run scoreboard players set @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] Hit 4
+execute as @s[scores={Deleter=3}] at @s run scoreboard players add @e[tag=!Frames,r=3,type=!item,type=!ds:projectile,family=!projectile,family=!despawncito,family=!damage,type=!xp_orb,type=!ds:dash0,type=!ds:dash,type=!ds:dash2,type=!arrow,tag=!unselect,type=!falling_block,type=!ds:knockback,type=!ds:lapse_explode,type=!ds:red_reversal,type=!armor_stand] Evade 12
+execute as @s[scores={Deleter=3}] at @s run camerashake add @a[r=40] 4 0.15
+execute as @s[scores={Deleter=3}] at @s run playsound mob.shock1 @a[r=90] ~~~ 99999 2.25 99999
+execute as @s[scores={Deleter=3}] at @s run playsound beacon.deactivate @a[r=90] ~~~ 99999 0.75 99999
+execute as @s[scores={Deleter=3}] at @s run playsound mob.wither.shoot @a[r=90] ~~~ 99999 0.7 99999
+execute as @s[scores={Deleter=3}] at @s run playsound mob.burn @a[r=90] ~~~ 99999 1 99999
+execute as @s[scores={Deleter=3}] at @s run effect @e[r=10,tag=!unselect] resistance 1 10 true
+execute as @s[scores={Deleter=3}] at @s run summon ds:lapse_explode ~~~
+execute as @s[scores={Deleter=3}] at @s run kill @s

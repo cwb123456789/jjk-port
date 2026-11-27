@@ -1,0 +1,49 @@
+@@blood/beam_explode_small
+playsound mob.blood4 @a[r=100] ~~~ 999999 2.5 999999
+camerashake add @a[r=10] 0.15 0.08
+damage @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] 15 override entity @e[tag=blood_beam,c=1]
+scoreboard players set @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] Stun 15
+scoreboard players set @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] Hit 3
+scoreboard players add @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] Evade 5
+effect @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] nausea 7 1
+effect @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] poison 7 2
+effect @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] slowness 7 1
+execute as @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] at @s run particle ds:supernova ~~1~
+execute as @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] at @s run particle ds:blood_hit ~~1~
+execute as @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] at @s run playsound mob.blood @a[r=50] ~~1~ 99999 1.25 99999
+scoreboard players add @e[type=!player,r=7,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames] Evade 8
+execute as @e[r=5,type=!item,family=!projectile,type=!falling_block,type=!xp_orb,tag=!light_adapted,tag=!Frames,scores={detect_health=0..10}] at @s run function obliterated
+execute if entity @p[tag=griefable] run summon ds:lapse_explode
+execute if entity @e[tag=bloodshot,c=1] run particle ds:blood_impact
+camera @s[type=player] clear
+tag @e[tag=bloodshot] remove bloodshot
+function damages/blood_damage
+event entity @s[family=projectile] ds:disappear
+tp @s[family=projectile] ~~-200~
+kill @s[family=projectile]
+tag @s remove blood_beam
+tag @s remove light_beam
+function cancel_attack
+playanimation @s animation.stunned
+function randomstun3
+@@blood/diluted_blood
+playanimation @s[has_property={property:ct_particle=4},scores={move=!1..}] animation.diluted_all
+event entity @s[has_property={property:ct_particle=4}] blood_orb2
+playanimation @s[has_property={property:ct_particle=3},scores={move=!1..}] animation.diluted_all2
+event entity @s[has_property={property:ct_particle=3}] blood_orb1
+playanimation @s[has_property={property:ct_particle=2},scores={move=!1..}] animation.diluted_1
+event entity @s[has_property={property:ct_particle=2}] blood_orb0
+playsound mob.blood3 @a[r=100] ~~1~ 99999 2 99999
+event entity @s blood_orb0
+execute as @s[type=ds:supernova] at @s run particle ds:blood_diluted
+execute as @s[type=ds:supernova] at @s run event entity @s ds:disappear
+@@blood/diluted_blood_singular
+execute as @s[scores={move=1..}] at @s anchored eyes run particle ds:blood_diluted ^^-0.4^0.75
+execute as @s[scores={move=1..}] at @s anchored eyes positioned ^^-0.4^0.75 run playsound mob.blood_use @a[r=100] ~~~ 9999 2 9999
+playanimation @s[has_property={property:ct_particle=4},scores={move=0}] animation.diluted_3
+event entity @s[has_property={property:ct_particle=4}] blood_orb2
+playanimation @s[has_property={property:ct_particle=3},scores={move=0}] animation.diluted_2
+event entity @s[has_property={property:ct_particle=3}] blood_orb1
+playanimation @s[has_property={property:ct_particle=2},scores={move=0}] animation.diluted_1
+event entity @s[has_property={property:ct_particle=2}] blood_orb0
+playsound mob.blood3 @a[r=100] ~~1~ 99999 2 99999

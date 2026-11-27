@@ -1,0 +1,403 @@
+@@small_cts/inversion_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!inversion] at @s run function remove_ct
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!inversion] at @s run function clear_skills
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=inversion] {"rawtext":[{"translate":"text.inversion.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!inversion] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=inversion] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!inversion] {"rawtext":[{"translate":"text.inversion.using1"},{"translate":"text.inversion.using2"},{"translate":"text.inversion.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!inversion] forms 1
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!inversion] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!inversion] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s add inversion
+clear @s ds:inversion_technique
+tag @s remove cantupgrade
+@@small_cts/miracle_add
+fill ~33~1~33~-33~-1~-33 stone [] replace diamond_ore
+fill ~33~1~33~-33~-1~-33 stone [] replace emerald_ore
+fill ~33~1~33~-33~-1~-33 netherrack [] replace ancient_debris
+fill ~15~15~15~-15~-15~-15 stone [] replace diamond_ore
+fill ~15~15~15~-15~-15~-15 stone [] replace emerald_ore
+fill ~15~15~15~-15~-15~-15 netherrack [] replace ancient_debris
+playsound random.orb @s[type=player] ~~~ 9999 0.5 9999
+scoreboard players set @s[scores={chance=!0}] chance 0
+tellraw @s[type=player] {"rawtext":[{"translate":"text.add.miracles"}]}
+scoreboard players add @s miracles 1
+scoreboard players set @s[scores={miracles=7..}] miracles 6
+@@small_cts/miracle_save
+scoreboard players remove @s[scores={miracles=1..}] miracles 1
+scoreboard players set @s Evasive 21
+scoreboard players set @s detect_health 6
+scoreboard players set @s Frames 40
+effect @s instant_health 1 3 true
+particle ds:miracles
+playsound random.orb @s ~~~ 9999 1.5 9999
+tellraw @s {"rawtext":[{"translate":"text.save.miracles"}]}
+@@small_cts/miracles_ct
+event entity @e[has_property={property:ct_face=!1},scores={miracles=0},tag=!cursed_speech,family=!inumaki] miracle0
+event entity @e[has_property={property:ct_face=!2},scores={miracles=1},tag=!cursed_speech,family=!inumaki] miracle1
+event entity @e[has_property={property:ct_face=!3},scores={miracles=2},tag=!cursed_speech,family=!inumaki] miracle2
+event entity @e[has_property={property:ct_face=!4},scores={miracles=3},tag=!cursed_speech,family=!inumaki] miracle3
+event entity @e[has_property={property:ct_face=!5},scores={miracles=4},tag=!cursed_speech,family=!inumaki] miracle4
+event entity @e[has_property={property:ct_face=!6},scores={miracles=5},tag=!cursed_speech,family=!inumaki] miracle5
+event entity @e[has_property={property:ct_face=!7},scores={miracles=6},tag=!cursed_speech,family=!inumaki] miracle6
+scoreboard players set @e[tag=!miracles,scores={miracles=1..}] miracles -1
+@@small_cts/miracles_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] at @s run function remove_ct
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] at @s run function clear_skills
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=miracles] {"rawtext":[{"translate":"text.miracles.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!miracles] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=miracles] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] {"rawtext":[{"translate":"text.miracles.using1"},{"translate":"text.miracles.using2"},{"translate":"text.miracles.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] forms 1
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] at @s run scoreboard objectives add miracles dummy
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] at @s run scoreboard players set @s miracles 0
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] at @s run event entity @s miracle0
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!miracles] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s add miracles
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..,invest=10..},tag=miracles]  {"rawtext":[{"translate":"text.miracles_all.unlocked"}]}
+tag @s remove cantupgrade
+clear @s ds:miracles_technique
+scoreboard objectives add miracles dummy
+@@small_cts/painkiller
+execute as @p[tag=itemUse:ds:painkiller1] at @s run function small_cts/painkiller_use
+execute as @a[scores={move=1..},tag=form1,tag=painkiller] at @s run function small_cts/painkiller_self
+execute as @a[scores={move=1..},tag=form2,tag=painkiller] at @s run function small_cts/painkiller_other
+execute as @e[scores={painkiller=1..}] at @s run function painkiller
+@@small_cts/painkiller_other
+playanimation @s[scores={move=20..}] animation.painkiller_other
+execute as @s[scores={move=17}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=13}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=10}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=7}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=7}] at @s run playsound mob.zombie.remedy @a[r=10] ~~~ 9999 1.5 9999
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run scoreboard objectives add painkiller dummy
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run scoreboard players operation @e[r=3,tag=!form2] painkiller += @s Energy
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run scoreboard players operation @e[r=3,tag=!form2] painkiller /= seven endurance
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] regeneration 5 1 true
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear blindness
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear nausea
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear darkness
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear poison
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear fatal_poison
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear wither
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear slowness
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear bad_omen
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear oozing
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear mining_fatigue
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear infested
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear hunger
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear weakness
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear wind_charged
+execute as @s[scores={move=7}] at @s anchored eyes positioned ^^^3.08 run effect @e[r=3,tag=!form2] clear weaving
+tag @s[scores={move=1..3}] remove form2
+@@small_cts/painkiller_self
+playanimation @s[scores={move=20..}] animation.painkiller_self
+execute as @s[scores={move=17}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=13}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=10}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=7}] at @s run playsound mob.witch.throw @a[r=10] ~~~ 9999 1.25 9999
+execute as @s[scores={move=7}] at @s run playsound mob.zombie.remedy @a[r=10] ~~~ 9999 1.5 9999
+execute as @s[scores={move=7}] at @s run scoreboard objectives add painkiller dummy
+execute as @s[scores={move=7}] at @s run scoreboard players operation @s painkiller += @s Energy
+execute as @s[scores={move=7}] at @s run scoreboard players operation @s painkiller /= seven endurance
+execute as @s[scores={move=7}] at @s run effect @s regeneration 5 1 true
+execute as @s[scores={move=7}] at @s run effect @s clear blindness
+execute as @s[scores={move=7}] at @s run effect @s clear nausea
+execute as @s[scores={move=7}] at @s run effect @s clear darkness
+execute as @s[scores={move=7}] at @s run effect @s clear poison
+execute as @s[scores={move=7}] at @s run effect @s clear fatal_poison
+execute as @s[scores={move=7}] at @s run effect @s clear wither
+execute as @s[scores={move=7}] at @s run effect @s clear slowness
+execute as @s[scores={move=7}] at @s run effect @s clear bad_omen
+execute as @s[scores={move=7}] at @s run effect @s clear oozing
+execute as @s[scores={move=7}] at @s run effect @s clear mining_fatigue
+execute as @s[scores={move=7}] at @s run effect @s clear infested
+execute as @s[scores={move=7}] at @s run effect @s clear hunger
+execute as @s[scores={move=7}] at @s run effect @s clear weakness
+execute as @s[scores={move=7}] at @s run effect @s clear wind_charged
+execute as @s[scores={move=7}] at @s run effect @s clear weaving
+tag @s[scores={move=1..3}] remove form1
+@@small_cts/painkiller_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!painkiller] at @s run function remove_ct
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!painkiller] at @s run function clear_skills
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=painkiller] {"rawtext":[{"translate":"text.painkiller.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!painkiller] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=painkiller] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!painkiller] {"rawtext":[{"translate":"text.painkiller.using1"},{"translate":"text.painkiller.using2"},{"translate":"text.painkiller.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!painkiller] forms 1
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!painkiller] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!painkiller] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s add painkiller
+give @s ds:painkiller1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+clear @s ds:painkiller_technique
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..,invest=10..},tag=painkiller]  {"rawtext":[{"translate":"text.painkiller_all.unlocked"}]}
+tag @s remove cantupgrade
+scoreboard objectives add painkiller dummy
+@@small_cts/painkiller_use
+execute as @s unless entity @s[scores={painkiller=1..}] run tag @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,Energy=50..}] add form1
+execute as @s unless entity @s[scores={painkiller=1..}] run execute as @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Energy=0..49,Sneaking=0}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s unless entity @s[scores={painkiller=1..}] run execute as @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=1..,Sneaking=0,Energy=50..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s unless entity @s[scores={painkiller=1..}] run execute as @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=1..,Sneaking=0,Energy=50..}] at @s run tellraw @s {"rawtext":[{"translate":"text.painkiller.ab1"},{"score":{"name": "@p","objective": "ability1"}},{"text":"§c."}]}
+execute as @s unless entity @s[scores={painkiller=1..}] run scoreboard players set @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,Energy=50..}] move 21
+execute as @s unless entity @s[scores={painkiller=1..}] run scoreboard players set @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability1=0,Sneaking=0,Energy=50..}] ability1 300
+execute as @s unless entity @s[scores={painkiller=1..}] run scoreboard players remove @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Energy=50..,move=21,Sneaking=0}] Energy 50
+tag @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,ability2=0,Energy=100..}] add form2
+execute as @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Energy=0..99,Sneaking=1..}] at @s run playsound note.pling @s ~~~ 0.05 0.87
+execute as @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,ability2=1..,Energy=100..}] at @s run playsound note.pling @s ~~~ 0.05 0.4
+execute as @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,Sneaking=1..,ability2=1..,Energy=100..}] at @s run tellraw @s {"rawtext":[{"translate":"text.painkiller.ab2"},{"score":{"name": "@p","objective": "ability2"}},{"text":"§c."}]}
+scoreboard players set @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,Energy=100..}] move 21
+scoreboard players set @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Stun=0,Disabled2=0,ability2=0,Sneaking=1..,Energy=100..}] ability2 300
+scoreboard players remove @s[tag=!nocts,tag=!domainamplification,hasitem={item=ds:painkiller1,location=slot.weapon.mainhand},scores={Energy=100..,move=21,Sneaking=1..}] Energy 100
+@@small_cts/sight
+scoreboard players set @s[tag=sight,r=7,scores={ability1=0,Sneaking=6..}] num 100
+scoreboard players add @s[tag=sight,r=7,scores={Sneaking=6..}] num 2
+execute as @s[tag=sight,r=7,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] at @s anchored eyes run particle ds:sight_eyes ^0.1^-0.8^0.44
+execute as @s[tag=sight,r=7,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] at @s anchored eyes run particle ds:sight_eyes ^-0.1^-0.8^0.44
+execute as @s[tag=sight,r=50,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] run effect @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] slowness 1 20 true
+execute as @s[tag=sight,r=50,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] run scoreboard players set @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] Stun 5
+execute as @s[tag=sight,r=50,scores={Sneaking=6,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run summon gg:impact_frame
+execute as @s[tag=sight,r=50,scores={Sneaking=7,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:invert ^^^0.15
+execute as @s[tag=sight,r=50,scores={Sneaking=6,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run summon ds:cutscene_models floor_air_large ~~0.15~
+execute as @s[tag=sight,r=50,scores={Sneaking=60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run summon ds:cutscene_models floor_air_large ~~0.15~
+execute as @s[tag=sight,r=50,scores={Sneaking=7..60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:red_tint2 ~~1~
+execute as @s[tag=sight,r=50,scores={Sneaking=7..60,move=0,detect_jump=0,Stun=0}] at @s anchored eyes run particle ds:red_tint2 ^^^0.25
+execute as @s[tag=sight,r=50,scores={Sneaking=7..60,move=0,detect_jump=0,Stun=0}] at @s anchored eyes run particle ds:red_tint2 ^^^-2
+execute as @s[tag=sight,r=50,scores={Sneaking=7..60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:sight_eyes2 ~~7~
+execute as @s[tag=sight,r=50,scores={Sneaking=60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run summon gg:impact_frame
+execute as @s[tag=sight,r=50,scores={Sneaking=61,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:invert ^^^0.15
+execute as @s[tag=sight,r=50,scores={Sneaking=61,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run camerashake add @a[r=100] 2 0.15 rotational
+execute as @s[tag=sight,r=50,scores={Sneaking=61,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:large_slam_p
+execute as @s[tag=sight,r=50,scores={Sneaking=61,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:burst_impact ~~1~
+execute as @s[tag=sight,r=50,scores={Sneaking=5..60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:turbo_intensity1
+execute as @s[tag=sight,r=50,scores={Sneaking=5..60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:turbo_intensity2
+execute as @s[tag=sight,r=50,scores={Sneaking=30..60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s unless block ~~-0.2~ air run particle ds:ground_melt ~~0.1~
+execute as @s[tag=sight,r=50,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run playsound mob.wither.shoot @a[r=100] ~~~ 99999 0.33 99999
+execute as @s[tag=sight,r=50,scores={Sneaking=6..7,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run execute as @a[r=100] at @s run playsound music.distort_boom @s ~~~ 99999 0.6 99999
+execute as @s[tag=sight,r=50,scores={Sneaking=60,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run execute as @a[r=100] at @s run playsound music.red2 @s ~~~ 99999 0.9 99999
+execute as @s[tag=sight,r=50,scores={Sneaking=8,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s unless block ~~-0.2~ air run playsound mob.distort3 @a[r=100] ~~1~ 99999 0.75 99999
+execute as @s[tag=sight,r=50,scores={Sneaking=6..7,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s unless block ~~-0.2~ air run particle ds:burst_impact ~~1~
+execute as @s[tag=sight,r=50,scores={Sneaking=6,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s unless block ~~-0.2~ air run particle ds:slam_more
+execute as @s[tag=sight,r=50,scores={Sneaking=6..30,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s unless block ~~-0.2~ air run particle ds:turbo_intensity4 ~~1~
+execute as @s[tag=sight,r=50,scores={Sneaking=6..7,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s unless block ~~-0.2~ air run camerashake add @a[r=100] 2 0.15 rotational
+execute as @s[tag=sight,r=50,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:world_slash_intensity
+execute as @s[tag=sight,r=50,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:world_slash_intensity2
+execute as @s[tag=sight,r=50,scores={Sneaking=61..,move=0,detect_jump=0,Stun=0,sight=0..400}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:sight_eyes3 ~~7~
+execute as @s[tag=sight,r=50,scores={Sneaking=61..,move=0,detect_jump=0,Stun=0,sight=401..800}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:sight_eyes4 ~~7~
+execute as @s[tag=sight,r=50,scores={Sneaking=61..,move=0,detect_jump=0,Stun=0,sight=801..}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:sight_eyes5 ~~7~
+execute as @s[tag=sight,r=50,scores={Sneaking=61..,move=0,detect_jump=0,Stun=0,sight=601..}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:air_gust3
+execute as @s[tag=sight,r=50,scores={Sneaking=61..,move=0,detect_jump=0,Stun=0,sight=801..}] run execute as @e[tag=!Frames,r=5.99,tag=!domainamplification,tag=!sight_adapted,type=!item,family=!projectile,family=!despawncito,family=!damage,family=!disappear,type=!xp_orb,type=!arrow,type=!thrown_trident,type=!fireball,type=!dragon_fireball,type=!small_fireball,type=!fireworks_rocket,type=!fishing_hook,type=!splash_potion,type=!area_effect_cloud,type=!snowball,type=!egg,type=!falling_block,tag=!unselect,type=!ds:lapse_explode,type=!ds:red_reversal,type=!ds:hollow_nuke,type=!ds:limitless_explosion,type=!ds:pressure,type=!ds:energy_explosion,type=!ds:massive_bomb,type=!ds:shrine_dmg,type=!ds:pachinko_impact1,type=!ds:bolt_explode,type=!ds:shikigami_impact,type=!ds:oxrushex,type=!gg:impact_frame,type=!armor_stand] at @s run particle ds:air_impact
+particle ds:sight
+execute as @s[tag=sight,r=50,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] positioned ^^^6 run function small_cts/sight
+execute as @s[tag=sight,r=7,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] at @s anchored eyes positioned ^^^15.05 run function damages/sight_damage
+execute as @s[tag=sight,r=7,scores={Sneaking=5..,move=0,detect_jump=0,Stun=0}] at @s anchored eyes positioned ^^^35 run function damages/sight_damage
+effect @s[r=7] slowness 1 2 true
+effect @s[r=7] weakness 1 10 true
+scoreboard players add @s[r=7] sight 2
+scoreboard players add @s[r=7,scores={sight=500..}] sight 1
+damage @s[r=7,scores={sight=600..799}] 1
+damage @s[r=7,scores={sight=800..999}] 3
+damage @s[r=7,scores={sight=1000..}] 1 self_destruct
+execute as @s[r=7,scores={sight=1200..}] at @s run playsound mob.wither.hurt @s ~~~ 1 0.7
+effect @s[r=7,scores={sight=1200..}] blindness 10 10 true
+scoreboard players set @s[r=7,scores={sight=1200..}] Hit 170
+scoreboard players set @s[r=7,scores={sight=1200..}] Stun 200
+scoreboard players set @s[r=7,scores={sight=1200..}] Disabled 200
+@@small_cts/sight_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sight] at @s run function remove_ct
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sight] at @s run function clear_skills
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=sight] {"rawtext":[{"translate":"text.sight.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!sight] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=sight] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sight] {"rawtext":[{"translate":"text.sight.using1"},{"translate":"text.sight.using2"},{"translate":"text.sight.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sight] forms 1
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sight] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!sight] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s add sight
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..,invest=10..},tag=sight]  {"rawtext":[{"translate":"text.sight_all.unlocked"}]}
+tag @s remove cantupgrade
+clear @s ds:sight_technique
+scoreboard objectives add sight dummy
+@@small_cts/windup_hit
+tag @s[tag=windup] add Frames
+scoreboard players set @s[tag=windup] Frames 7
+effect @s resistance 1 40 true
+execute as @s[tag=windup] at @s run tp @s ~~~
+execute as @s[scores={windup=1..50}] at @s run particle ds:windup_hit1 ^^1^1.5
+execute as @s[scores={windup=1..50}] at @s run particle ds:windup_hit2 ^^1^1.5
+execute as @s[scores={windup=1..50}] at @s run particle ds:windup_hit3 ^^1^1.5
+execute as @s[scores={windup=1..50}] at @s run particle ds:windup_hit4 ^^1^1.5
+execute as @s[scores={windup=1..50}] at @s run particle ds:windup_hit5 ^^1^1.5
+execute as @s[scores={windup=1..50}] at @s run particle ds:windup_hit6 ^^1^1.5
+execute as @s[scores={windup=10..50}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={windup=1..50}] at @s run playsound mob.shock2 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={windup=10..50}] at @s run camerashake add @a[r=10] 4 0.15 rotational
+execute as @s[scores={windup=1..50}] at @s run scoreboard players add @e[tag=!Frames,r=2.5] Flourish 5
+execute as @s[scores={windup=1..50}] at @s run scoreboard players add @e[tag=!Frames,r=2.5] Stun 10
+execute as @s[scores={windup=1..50}] at @s run scoreboard players add @e[tag=!Frames,r=2.5] Hit 5
+execute as @s[scores={windup=51..150}] at @s run particle ds:windup_hit1b ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:windup_hit2b ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:windup_hit3b ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:windup_hit4b ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:windup_hit5b ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:windup_hit6b ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:large_impact1 ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:large_impact2 ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:dirt0
+execute as @s[scores={windup=51..150}] at @s run particle ds:rubble3
+execute as @s[scores={windup=51..150}] at @s run particle ds:ground_slam2
+execute as @s[scores={windup=51..150}] at @s run particle ds:ground_slam2
+execute as @s[scores={windup=51..150}] at @s run particle ds:ground_slam3
+execute as @s[scores={windup=51..150}] at @s run particle ds:ground_slam3
+execute as @s[scores={windup=51..150}] at @s run particle ds:impact1 ^^1^1
+execute as @s[scores={windup=51..150}] at @s run particle ds:impact1 ^^1^1.5
+execute as @s[scores={windup=51..150}] at @s run particle ds:impact1 ^^1^2
+execute as @s[scores={windup=51..150}] at @s run particle ds:impact1 ^^1^2.5
+execute as @s[scores={windup=51..150}] at @s run summon ds:lapse_explode ^^1^1
+execute as @s[scores={windup=141..150}] at @s run summon ds:lapse_explode ^^1^2
+execute as @s[scores={windup=51..150}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={windup=51..150}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 0.95 99999
+execute as @s[scores={windup=51..150}] at @s run playsound mob.shock2 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={windup=51..150}] at @s run camerashake add @a[r=10] 4 0.25 rotational
+execute as @s[scores={windup=51..150}] at @s positioned ^^^5  run scoreboard players add @e[tag=!Frames,r=5] Flourish 8
+execute as @s[scores={windup=51..150}] at @s positioned ^^^5  run scoreboard players add @e[tag=!Frames,r=5] Stun 20
+execute as @s[scores={windup=51..150}] at @s positioned ^^^5  run scoreboard players add @e[tag=!Frames,r=5] Hit 15
+execute as @s[scores={windup=151..499}] at @s run particle ds:windup_hit1c ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:windup_hit2c ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:windup_hit3c ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:windup_hit4c ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:windup_hit5c ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:windup_hit6c ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:large_impact1 ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:large_impact2 ^^1^1.5
+execute as @s[scores={windup=151..499}] at @s run particle ds:dirt0
+execute as @s[scores={windup=151..499}] at @s run particle ds:rubble3
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam2 ^^^1
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam2 ^^^2
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^^^3
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^1^^3
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^1^^3
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^^^4
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^2^^4
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^-2^^4
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^^^5
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^3^^5
+execute as @s[scores={windup=151..499}] at @s run particle ds:ground_slam3 ^-3^^5
+execute as @s[scores={windup=151..499}] at @s run particle ds:impact1 ^^1^1
+execute as @s[scores={windup=151..499}] at @s run particle ds:impact1 ^^1^2
+execute as @s[scores={windup=151..499}] at @s run particle ds:impact1 ^^1^3
+execute as @s[scores={windup=151..499}] at @s run particle ds:impact1 ^^1^4
+execute as @s[scores={windup=151..499}] at @s run particle ds:impact1 ^^1^5
+execute as @s[scores={windup=151..499}] at @s run particle ds:impact1 ^^1^6
+execute as @s[scores={windup=151..499}] at @s run particle ds:impact1 ^^1^7
+execute as @s[scores={windup=151..499}] at @s positioned ^^^7.5 run scoreboard players operation @e[tag=!Frames,r=7.5] damage += @s windup
+execute as @s[scores={windup=151..499}] at @s run tp @s ~~~
+execute as @s[scores={windup=151..499}] at @s run summon ds:red_reversal ^^1^1
+execute as @s[scores={windup=151..499}] at @s run summon ds:red_reverse ^^1^0.75
+execute as @s[scores={windup=151..499}] at @s run tp @s ~~~
+execute as @s[scores={windup=151..499}] at @s run playsound mob.burst @a[r=100] ~~~ 99999 2 99999
+execute as @s[scores={windup=151..499}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 0.5 99999
+execute as @s[scores={windup=151..499}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 0.95 99999
+execute as @s[scores={windup=151..499}] at @s run playsound mob.shock2 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={windup=151..499}] at @s run camerashake add @a[r=10] 4 0.5 rotational
+execute as @s[scores={windup=151..499}] at @s positioned ^^^7  run effect @e[tag=!Frames,r=8] levitation 1 25 true
+execute as @s[scores={windup=151..499}] at @s positioned ^^^7  run scoreboard players add @e[tag=!Frames,r=8] Stun 40
+execute as @s[scores={windup=151..499}] at @s positioned ^^^7  run scoreboard players add @e[tag=!Frames,r=8] Hit 15
+execute as @s[scores={windup=500..}] at @s run particle ds:windup_hit1d ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:windup_hit2d ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:windup_hit3d ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:windup_hit4d ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:windup_hit5d ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:windup_hit6d ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:large_impact1 ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:large_impact2 ^^1^1.5
+execute as @s[scores={windup=500..}] at @s run particle ds:dirt0
+execute as @s[scores={windup=500..}] at @s run particle ds:rubble3
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam2 ^^^1
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam2 ^^^2
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^^^3
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^1^^3
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^1^^3
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^^^4
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^2^^4
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^-2^^4
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^^^5
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^3^^5
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^-3^^5
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam2 ^^^1
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam2 ^^^2
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^^^3
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^1^^3
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^1^^3
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^^^4
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^2^^4
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^-2^^4
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^^^5
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^3^^5
+execute as @s[scores={windup=500..}] at @s run particle ds:ground_slam3 ^-3^^5
+execute as @s[scores={windup=500..}] at @s run particle ds:impact1 ^^1^1
+execute as @s[scores={windup=500..}] at @s run particle ds:impact1 ^^1^2
+execute as @s[scores={windup=500..}] at @s run particle ds:impact1 ^^1^3
+execute as @s[scores={windup=500..}] at @s run particle ds:impact1 ^^1^4
+execute as @s[scores={windup=500..}] at @s run particle ds:impact1 ^^1^5
+execute as @s[scores={windup=500..}] at @s run particle ds:impact1 ^^1^6
+execute as @s[scores={windup=500..}] at @s run particle ds:impact1 ^^1^7
+execute as @s[scores={windup=500..}] at @s positioned ^^^7.5 run scoreboard players operation @e[tag=!Frames,r=15] damage += @s windup
+execute as @s[scores={windup=500..}] at @s run tp @s ~~~
+execute as @s[scores={windup=500..}] at @s run summon ds:red_reversal ^^1^1
+execute as @s[scores={windup=500..}] at @s run summon ds:red_reversal ^^1^7
+execute as @s[scores={windup=500..}] at @s run summon ds:red_reverse ^^1^0.75
+execute as @s[scores={windup=500..}] at @s run summon ds:red_reverse ^^1^0.75
+execute as @s[scores={windup=500..}] at @s run summon ds:red_reverse ^^1^0.75
+execute as @s[scores={windup=500..}] at @s run tp @s ~~~
+execute as @s[scores={windup=500..}] at @s run playsound mob.burst @a[r=100] ~~~ 99999 1.5 99999
+execute as @s[scores={windup=500..}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 0.5 99999
+execute as @s[scores={windup=500..}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 0.45 99999
+execute as @s[scores={windup=500..}] at @s run playsound random.explode @a[r=100] ~~~ 99999 0.35 99999
+execute as @s[scores={windup=500..}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 0.25 99999
+execute as @s[scores={windup=500..}] at @s run playsound mob.shock1 @a[r=100] ~~~ 99999 0.95 99999
+execute as @s[scores={windup=500..}] at @s run playsound mob.shock2 @a[r=100] ~~~ 99999 1 99999
+execute as @s[scores={windup=500..}] at @s run camerashake add @a[r=10] 4 1 rotational
+execute as @s[scores={windup=500..}] at @s run particle ds:invert ^^5^2
+execute as @s[scores={windup=151..499}] at @s positioned ^^^7  run effect @e[tag=!Frames,r=14] levitation 1 25 true
+execute as @s[scores={windup=151..499}] at @s positioned ^^^7  run scoreboard players add @e[tag=!Frames,r=14] Stun 40
+execute as @s[scores={windup=151..499}] at @s positioned ^^^7  run scoreboard players add @e[tag=!Frames,r=14] Hit 15
+execute as @s[scores={windup=1..50}] at @s run scoreboard players operation @e[tag=!Frames,r=2.5] damage += @s windup
+execute as @s[scores={windup=51..150}] at @s positioned ^^^5 run scoreboard players operation @e[tag=!Frames,r=5] damage += @s windup
+scoreboard players set @s windup 0
+effect @s slowness 5 1 true
+@@small_cts/windup_technique
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!windup] at @s run function remove_ct
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!windup] at @s run function clear_skills
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=windup] {"rawtext":[{"translate":"text.windup.alreadyusing"}]}
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=!windup] fade time 0.15 0.33 0.15 color 0 0 0
+camera @s[r=0.2,scores={Stun=0,Disabled=0},tag=windup] fade time 0.15 0.33 0.15 color 0 0 0
+tellraw @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!windup] {"rawtext":[{"translate":"text.windup.using1"},{"translate":"text.windup.using2"},{"translate":"text.windup.using3"}]}
+scoreboard players set @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!windup] forms 1
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!windup] at @s run playsound mob.wither.hurt @a ~~~ 100000 0.25 100000
+execute as @s[r=0.2,scores={Sneaking=0,Stun=0,Disabled=0},tag=!windup] at @s run playsound random.levelup @a ~~~ 100000 0.85 100000
+tag @s add windup
+tellraw @s[r=0.2,scores={Sneaking=1..,Stun=0,Disabled=0,forms=1..,invest=10..},tag=windup]  {"rawtext":[{"translate":"text.windup_all.unlocked"}]}
+tag @s remove cantupgrade
+scoreboard objectives add windup dummy
+@@small_cts/windup_technique2
+scoreboard objectives add windup dummy
+scoreboard players add @s windup 0
+scoreboard players add @s windup 1
+playanimation @s[scores={windup=0..49}] animation.windup
+playanimation @s[scores={windup=50..149}] animation.windup2
+playanimation @s[scores={windup=150..499}] animation.windup3
+playanimation @s[scores={windup=500..}] animation.windup4
+tellraw @s[scores={windup=50,strength=0..9}] {"rawtext":[{"translate":"text.upgrade_strength_10.windup"}]}
+scoreboard players set @s[scores={windup=49..,strength=0..9}] windup 49
+tellraw @s[scores={windup=150,strength=1..24}] {"rawtext":[{"translate":"text.upgrade_strength_25.windup"}]}
+scoreboard players set @s[scores={windup=149..,strength=1..24}] windup 149
+tellraw @s[scores={windup=500,strength=1..49}] {"rawtext":[{"translate":"text.upgrade_strength_50.windup"}]}
+scoreboard players set @s[scores={windup=499..,strength=1..49}] windup 499
+tellraw @s[scores={windup=1001..}] {"rawtext":[{"translate":"text.max.windup"}]}
+scoreboard players set @s[scores={windup=1001..}] windup 1000
+tellraw @s {"rawtext":[{"translate":"text.damage_stack.windup"},{"score":{"name":"@s","objective":"windup"}}]}
+camerashake add @s 2 0.15
+scoreboard players set @s ability1 100
+scoreboard players set @s Disabled 25
+scoreboard players remove @s Energy 50

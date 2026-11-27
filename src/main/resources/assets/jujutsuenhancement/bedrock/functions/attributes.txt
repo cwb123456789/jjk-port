@@ -1,0 +1,3 @@
+@@attributes/sixeyes
+effect @a[tag=sixeyes,tag=!arenaboss,tag=!matrix] night_vision 12 1 true
+event entity @a[tag=sixeyes,has_property={property:sixeyes=!1}] sixeyes

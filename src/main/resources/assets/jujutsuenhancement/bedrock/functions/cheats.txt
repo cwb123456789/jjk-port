@@ -1,0 +1,1494 @@
+@@cheats/add_level
+scoreboard players operation @p Exp = @p ExpMax
+@@cheats/bedrock_arena
+fill ~30 ~3 ~30 ~-30 ~ ~-30 air
+fill ~30 ~7 ~30 ~-30 ~4 ~-30 air
+fill ~30 ~8 ~30 ~-30 ~11 ~-30 air
+fill ~30 ~12 ~30 ~-30 ~15 ~-30 air
+fill ~29 ~-3 ~29 ~-29 ~-1 ~-29 obsidian
+fill ~30 ~-3 ~30 ~-30 ~-1 ~-30 bedrock
+playsound random.anvil_break @a ~~~
+@@cheats/character/10shadows
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+function cheats/give_all_technique
+tag @s add shikigami
+function cheats/tame_all_shikigami
+function shikigami/shikigami/mahoraga_tame
+tag @s add reversecursed
+effect @s instant_health 5 5
+tag @s add reversecursed
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 8 ds:shadow_wheel 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:shikigami10 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:shikigami11 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:shikigami12 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.armor.head 6 ds:mahoragawheel 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.armor.legs 1 ds:sorcerers_outfit
+scoreboard players set @s forms 11
+@@cheats/character/15f_sukuna
+function remove_ct
+function cheats/reset_stats
+function cheats/maxout
+function cheats/maxoutsukuna
+clear @s ds:heian_transformation
+clear @s
+function cheats/give_all_technique
+tag @s add reversecursed
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+replaceitem entity @s slot.armor.legs 1 ds:yuji_fit
+tag @s add sorcerer
+scoreboard objectives add fingers dummy
+scoreboard objectives add finger dummy
+scoreboard players set @s finger 15
+replaceitem entity @s slot.hotbar 0 ds:sukuna_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:sukuna1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:sukuna2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:sukuna3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:sukuna4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/absorption
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+tag @s add reversecursed
+function cheats/remove_ct
+tag @s add sorcerer
+tag @s add absorption
+replaceitem entity @s slot.hotbar 0 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 2 ds:absorption1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:absorption2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:absorption3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+scoreboard players set @s absorption 0
+replaceitem entity @s slot.armor.legs 1 ds:sorcerers_outfit
+@@cheats/character/awakened_yuji
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+tag @s add reversecursed
+effect @s instant_health 5 5
+function cheats/give_all_technique
+tag @s add yuji_awakened
+replaceitem entity @s slot.armor.legs 1 ds:yuji_fit
+scoreboard players set @s forms 8
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:black_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:yuji_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:soul_shrine1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:soul_shrine2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:yuji_blood_manipulation 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/dabura
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+tag @s add reversecursed
+effect @s instant_health 5 5
+function cheats/give_all_technique
+tag @s add light
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:light_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:light1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:light2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:light3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:light4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:light5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/finger_bearer
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+tag @s remove reversecursed
+function cheats/remove_ct
+tag @s add curse
+tag @s add explosive
+replaceitem entity @s slot.hotbar 0 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 2 ds:explosive1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:explosive2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:explosive3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/gojo
+clear @s
+function remove_ct
+function cheats/reset_stats
+function cheats/maxout
+tag @s add reversecursed
+effect @s instant_health 5 5
+function cheats/give_all_technique
+tag @s add limitless
+tag @s add sixeyes
+replaceitem entity @s slot.armor.legs 1 ds:gojo_torso
+replaceitem entity @s slot.armor.chest 1 ds:gojo_cloak
+tag @s add sorcerer
+scoreboard players set @s forms 6
+replaceitem entity @s slot.hotbar 0 ds:gojo_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.inventory 0 ds:limitless_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:limitless1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:limitless2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:limitless3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:limitless4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:limitless5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:limitless6 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 8 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/hakari
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+function cheats/give_all_technique
+tag @s add lovetrain
+effect @s instant_health 5 5
+tag @s remove reversecursed
+replaceitem entity @s slot.armor.chest 1 ds:gamblers_hoodie
+replaceitem entity @s slot.armor.legs 1 ds:gamblers_legs
+tag @s add sorcerer
+scoreboard players set @s fever 0
+replaceitem entity @s slot.hotbar 0 ds:lovetrain_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:basic_combat 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:lovetrain1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:lovetrain2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:lovetrain3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:lovetrain4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:lovetrain5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 8 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/haruta
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+function cheats/remove_ct
+tag @s add sorcerer
+function small_cts/miracles_technique
+replaceitem entity @s slot.hotbar 0 ds:hand_sword 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 3 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+scoreboard players set @s miracles 6
+@@cheats/character/higuruma
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+tag @s add reversecursed
+function cheats/remove_ct
+tag @s add sorcerer
+tag @s add judgeman
+replaceitem entity @s slot.hotbar 0 ds:gavel1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 3 ds:judgeman1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:judgeman2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.armor.legs 1 ds:judge_fit
+@@cheats/character/inumaki
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+tag @s add reversecursed
+function cheats/remove_ct
+tag @s add cursed_speech
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 2 ds:speech1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:speech2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:speech3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:cough_syrup 16 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:cough_syrup 16 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.armor.legs 1 ds:sorcerers_outfit
+@@cheats/character/jogo
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+tag @s remove reversecursed
+effect @s instant_health 5 5
+function cheats/give_all_technique
+tag @s add flames
+replaceitem entity @s slot.armor.chest 1 ds:jogo_fit
+tag @s add curse
+replaceitem entity @s slot.hotbar 0 ds:flames_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:flames1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:flames2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:flames3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:flames4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:flames5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:flames6 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 8 ds:flames7 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.inventory 0 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/kashimo
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+function cheats/give_all_technique
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:lightning1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:lightning2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:lightning3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:lightning4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:lightning7 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 8 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tag @s add lightning
+tag @s add reversecursed
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+replaceitem entity @s slot.armor.legs 1 ds:kashimo_fit
+@@cheats/character/kurourushi
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+tag @s add reversecursed
+effect @s instant_health 5 5
+function cheats/give_all_technique
+tag @s add roach
+event entity @s 4arms_roach
+replaceitem entity @s slot.armor.chest 1 ds:kings_cloak
+tag @s add curse
+replaceitem entity @s slot.hotbar 0 ds:festering_life_blade 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:cockroach1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:cockroach2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:cockroach3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:cockroach4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/kusakabe
+clear @s
+function cheats/reset_stats
+function cheats/givesimpledomain
+scoreboard players set @s simpledomainown 1
+function cheats/maxout
+tag @s add reversecursed
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+replaceitem entity @s slot.armor.legs 1 ds:kusakabe_fit
+tag @s add shadowstyle
+tag @s add sorcerer
+give @s[tag=sorcerer,scores={simpledomainown=1..},hasitem={item=ds:shadow_style_katana,quantity=0}] ds:shadow_style_katana 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 3 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/mahito
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+tag @s remove reversecursed
+effect @s instant_health 5 5
+function cheats/give_all_technique
+tag @s add idle_transfig
+replaceitem entity @s slot.armor.legs 1 ds:mahito_fit
+scoreboard players set @s forms 12
+tag @s add curse
+replaceitem entity @s slot.hotbar 0 ds:idle_transfig_combat1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:idle_transfig1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:idle_transfig2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:idle_transfig3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:idle_transfig4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:idle_transfig5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 8 ds:stable_transfigured_human 32 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.inventory 0 ds:unstable_transfigured_human 32 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/meguna
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+function cheats/maxoutsukuna
+clear @s ds:heian_transformation
+function cheats/give_all_technique
+tag @s add shikigami
+function cheats/tame_all_shikigami
+function shikigami/shikigami/mahoraga_tame
+tag @s add reversecursed
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+replaceitem entity @s slot.armor.legs 1 ds:sukuna_torso
+replaceitem entity @s slot.armor.chest 1 ds:kings_cloak
+tag @s add sorcerer
+scoreboard players set @s forms 12
+replaceitem entity @s slot.hotbar 0 ds:sukuna_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:shadow_wheel 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:shikigami11 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 8 ds:shikigami10 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.inventory 0 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.armor.head 1 ds:mahoragawheel 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/ranta
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+function cheats/remove_ct
+function small_cts/sight_technique
+replaceitem entity @s slot.armor.legs 1 ds:sukuna_robes
+replaceitem entity @s slot.hotbar 0 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 3 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/ryu
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+function cheats/give_all_technique
+tag @s add discharge
+tag @s add reversecursed
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+replaceitem entity @s slot.armor.chest 1 ds:ryu_fit
+replaceitem entity @s slot.armor.legs 1 ds:ryu_fit_legs
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:discharge_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:discharge1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:discharge2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:hairbrush 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:discharge3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 8 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/ryu_curse
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+function cheats/give_all_technique
+tag @s add discharge
+tag @s add reversecursed
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+replaceitem entity @s slot.armor.chest 1 ds:ryu_fit
+replaceitem entity @s slot.armor.legs 1 ds:ryu_fit_legs
+tag @s add curse
+replaceitem entity @s slot.hotbar 0 ds:discharge_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:discharge1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:discharge2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:hairbrush 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:discharge3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 8 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/todo
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+function cheats/remove_ct
+tag @s add boogie_woogie
+tag @s add yuji_itadori_brother
+replaceitem entity @s slot.hotbar 0 ds:boogie_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:boogie_woogie1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:boogie_woogie2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:boogie_woogie3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+function cheats/give_delusional_trait
+replaceitem entity @s slot.hotbar 5 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 8 cobblestone 64 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/toji
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+tag @s add reversecursed
+effect @s instant_health 5 5
+function cheats/give_all_technique
+tag @s add heavenlyrestriction
+replaceitem entity @s slot.armor.legs 1 ds:gojo_torso
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:hr_combat 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:hr1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:hr2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:hr3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:soul_sword 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 6 ds:inverted_spear 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/uro
+function remove_ct
+clear @s
+function cheats/reset_stats
+function cheats/maxout
+function cheats/give_all_technique
+tag @s add sky
+tag @s add reversecursed
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+replaceitem entity @s slot.armor.legs 1 ds:uro_fit
+tag @s add sorcerer
+replaceitem entity @s slot.hotbar 0 ds:sky_fists 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 2 ds:sky1 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 3 ds:sky2 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 4 ds:sky3 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 5 ds:sky4 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+replaceitem entity @s slot.hotbar 7 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 8 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/windup
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+scoreboard players set @s windup 100
+function cheats/remove_ct
+function small_cts/windup_technique
+replaceitem entity @s slot.hotbar 0 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 2 ds:windup1 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 3 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/character/yuji
+clear @s
+function cheats/reset_stats
+function cheats/give_all_technique
+function cheats/maxout
+effect @s instant_health 5 5
+scoreboard players set @s reversecursed 1
+function cheats/remove_ct
+replaceitem entity @s slot.armor.legs 1 ds:yuji_fit
+replaceitem entity @s slot.hotbar 2 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 0 ds:yuji_fists 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 4 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+tag @s add has_sukuna
+replaceitem entity @s slot.hotbar 3 ds:sukuna_technique 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+function sukuna/sukuna_scores
+scoreboard objectives add fingers dummy
+scoreboard objectives add finger dummy
+scoreboard players set @s finger 3
+scoreboard players set @s sukunaperm 0
+scoreboard players set @s sukunaCD 0
+@@cheats/clear_barriers
+fill ~30 ~ ~30 ~-30 ~1 ~-30 air [] replace barrier
+fill ~30 ~2 ~30 ~-30 ~3 ~-30 air [] replace barrier
+fill ~30 ~4 ~30 ~-30 ~5 ~-30 air [] replace barrier
+fill ~30 ~6 ~30 ~-30 ~7 ~-30 air [] replace barrier
+fill ~30 ~-1 ~30 ~-30 ~-2 ~-30 air [] replace barrier
+fill ~30 ~-3 ~30 ~-30 ~1 ~-4 air [] replace barrier
+@@cheats/dirt_arena
+fill ~30 ~3 ~30 ~-30 ~ ~-30 air
+fill ~30 ~7 ~30 ~-30 ~4 ~-30 air
+fill ~30 ~8 ~30 ~-30 ~11 ~-30 air
+fill ~30 ~12 ~30 ~-30 ~15 ~-30 air
+fill ~30 ~-3 ~30 ~-30 ~-1 ~-30 dirt
+playsound random.anvil_break @a ~~~
+@@cheats/disable_secret_quest
+scoreboard players set one Mode 1
+scoreboard players set two Mode 2
+scoreboard players set three Mode 3
+scoreboard players add secretquest Mode 1
+execute as @p if score secretquest Mode >= three Mode run scoreboard players set secretquest Mode 1
+execute as @p if score secretquest Mode = one Mode run tellraw @a {"rawtext":[{"translate":"text.secret_questoff.setting"}]}
+execute as @p if score secretquest Mode = one Mode run playsound note.pling @p ~~~ 99999 0.5 99999
+execute as @p if score secretquest Mode = two Mode run tellraw @a {"rawtext":[{"translate":"text.secret_queston.setting"}]}
+execute as @p if score secretquest Mode = two Mode run playsound note.pling @p ~~~ 99999 2 99999
+@@cheats/fix_scores
+scoreboard objectives add fix dummy
+execute as @a at @s unless entity @s[scores={fix=-999..}] run scoreboard players set @s fix 0
+gamerule falldamage false
+gamerule showtags false
+gamerule sendcommandfeedback false
+gamerule commandblockoutput false
+gamerule commandblocksenabled true
+gamerule doimmediaterespawn true
+gamerule recipesunlock true
+scoreboard objectives add clash_score dummy
+scoreboard objectives add techniquerolls dummy
+scoreboard objectives add traitrolls dummy
+scoreboard objectives add clanrolls dummy
+scoreboard objectives add tpdown dummy
+scoreboard objectives add rct dummy
+scoreboard players set @a Sneaking 1
+scoreboard players set @a detect_jump 0
+scoreboard players set @a detect_left 0
+execute positioned 2500 80 2500 unless entity @a[r=200] run execute as @p run function structure_attractor
+scoreboard objectives add blackflashing dummy
+scoreboard players add @a blackflashing 0
+scoreboard objectives add rct_entity_limit dummy
+scoreboard objectives add wep1v2 dummy
+scoreboard objectives add wep2v2 dummy
+scoreboard objectives add wep3v2 dummy
+scoreboard objectives add wep4v2 dummy
+scoreboard objectives add wep5v2 dummy
+scoreboard objectives add wep6v2 dummy
+scoreboard objectives add altctCD1 dummy
+scoreboard objectives add altctCD2 dummy
+scoreboard objectives add altctCD3 dummy
+scoreboard objectives add altctCD4 dummy
+scoreboard objectives add altctCD5 dummy
+scoreboard objectives add altctCD6 dummy
+scoreboard objectives add altctCD7 dummy
+scoreboard objectives add altctCD8 dummy
+scoreboard objectives add altctCD9 dummy
+scoreboard objectives add altctCD10 dummy
+scoreboard objectives add altctCD11 dummy
+scoreboard objectives add altctCD12 dummy
+scoreboard players add @a wep1v2 0
+scoreboard players add @a wep2v2 0
+scoreboard players add @a wep3v2 0
+scoreboard players add @a wep4v2 0
+scoreboard players add @a wep5v2 0
+scoreboard players add @a wep6v2 0
+scoreboard players add @a altctCD1 0
+scoreboard players add @a altctCD2 0
+scoreboard players add @a altctCD3 0
+scoreboard players add @a altctCD4 0
+scoreboard players add @a altctCD5 0
+scoreboard players add @a altctCD6 0
+scoreboard players add @a altctCD7 0
+scoreboard players add @a altctCD8 0
+scoreboard players add @a altctCD9 0
+scoreboard players add @a altctCD10 0
+scoreboard players add @a altctCD11 0
+scoreboard players add @a altctCD12 0
+scoreboard objectives add selection dummy
+scoreboard objectives add judgetimer dummy
+scoreboard objectives add counting dummy
+scoreboard objectives add evidence dummy
+scoreboard objectives add trial_mode dummy
+scoreboard objectives add verdict dummy
+scoreboard objectives add deathpenaltytimer dummy
+scoreboard objectives add menubackground dummy
+scoreboard objectives add menutimer dummy
+scoreboard objectives add menutimer2 dummy
+scoreboard objectives add menupage dummy
+scoreboard objectives add menumusic dummy
+scoreboard objectives add menuscroll dummy
+scoreboard objectives add menuselect dummy
+scoreboard objectives add human dummy
+scoreboard objectives add timertick2 dummy
+scoreboard objectives add common dummy
+scoreboard objectives add uncommon dummy
+scoreboard objectives add rare dummy
+scoreboard objectives add exotic dummy
+scoreboard objectives add honored dummy
+scoreboard objectives add simpledomainown dummy
+scoreboard objectives add divergentfistown dummy
+scoreboard objectives add fallingblossomown dummy
+scoreboard objectives add domainampown dummy
+scoreboard objectives add hollowbasketown dummy
+scoreboard objectives add abilities dummy
+scoreboard objectives add abilitiesCD dummy
+scoreboard players add @a abilities 0
+scoreboard players set @a Sneaking 0
+scoreboard objectives add reversecursedCD dummy
+scoreboard objectives add simpledomainCD dummy
+scoreboard objectives add divergentfistCD dummy
+scoreboard objectives add fallingblossomCD dummy
+scoreboard objectives add domainampCD dummy
+scoreboard objectives add hollowbasketCD dummy
+scoreboard players add @a scrollanim 0
+scoreboard players add @a simpledomainown 0
+scoreboard players add @a divergentfistown 0
+scoreboard players add @a fallingblossomown 0
+scoreboard players add @a domainampown 0
+scoreboard players add @a hollowbasketown 0
+scoreboard players set three endurance 3
+scoreboard players add @a reversecursedCD 0
+scoreboard players add @a simpledomainCD 0
+scoreboard players add @a divergentfistCD 0
+scoreboard players add @a fallingblossomCD 0
+scoreboard players add @a domainampCD 0
+scoreboard players add @a hollowbasketCD 0
+scoreboard players add @a scroll 0
+scoreboard players add @a cescroll 0
+scoreboard players add @a punch 0
+scoreboard players add @a[scores={scroll=0}] scroll 1
+scoreboard players add @a[scores={cescroll=0}] cescroll 1
+scoreboard objectives add doublejumpCD dummy
+scoreboard players add @a doublejumpCD 0
+tag @a[name=iiTestAlt,scores={start=0}] add sukunachancerig
+scoreboard objectives add jump dummy
+scoreboard objectives add finger dummy
+scoreboard players add @a finger 0
+scoreboard objectives add dying dummy
+gamerule mobgriefing true
+function sukuna/sukuna_scores
+function cheats/remove_tickingareas
+tickingarea remove kashimodomain
+tickingarea remove infinitydash
+tickingarea remove IronMountain
+tickingarea remove jogodomain
+tickingarea remove test2
+tickingarea remove deadlysentencing
+tickingarea remove malevolentshrine
+tickingarea remove shadowgarden
+tickingarea remove shadowgarden1
+tickingarea remove shadowgarden2
+scoreboard players set @a rctuses 4
+scoreboard objectives add domainamp dummy
+scoreboard objectives add clashtype dummy
+scoreboard objectives add missionsCD dummy
+scoreboard objectives add missions_count dummy
+scoreboard objectives add fingeraggro dummy
+scoreboard players set @a missions_count 3
+scoreboard players set @a missionsCD 0
+scoreboard objectives add jjkacompatible1 dummy
+scoreboard players set @a jjkacompatible1 1
+scoreboard objectives add onfire dummy
+scoreboard objectives add onfire2 dummy
+scoreboard objectives add guilty_score dummy
+scoreboard players add @a guilty_score 0
+scoreboard objectives add nocts dummy
+scoreboard objectives add scene dummy
+scoreboard objectives add itemdrop dummy
+scoreboard objectives add expadd dummy
+scoreboard objectives add Exp dummy
+scoreboard players add @a Exp 0
+scoreboard objectives add ExpMax dummy
+scoreboard objectives add level dummy
+scoreboard objectives add grade dummy
+scoreboard objectives add invest dummy
+scoreboard objectives add rctuses dummy
+scoreboard objectives add thezone dummy
+scoreboard objectives add combat dummy
+scoreboard objectives add hitCD dummy
+scoreboard objectives add antiheal dummy
+scoreboard objectives add flashstep dummy
+scoreboard objectives add moveAngle dummy
+scoreboard objectives add damagehalf dummy
+scoreboard objectives add scrollanim dummy
+scoreboard players add @a scrollanim 0
+scoreboard objectives add ab dummy
+scoreboard objectives add punch dummy
+scoreboard objectives add scroll dummy
+scoreboard objectives add anim dummy
+scoreboard objectives add doublesneak dummy
+scoreboard objectives add damage dummy
+scoreboard objectives add damageadd dummy
+scoreboard objectives add respawn dummy
+scoreboard objectives add agility dummy
+scoreboard objectives add energystat dummy
+scoreboard objectives add strength2 dummy
+scoreboard objectives add strength dummy
+scoreboard objectives add endurance dummy
+scoreboard objectives add domainstart dummy
+scoreboard objectives add domain dummy
+scoreboard objectives add domainactive dummy
+scoreboard objectives add domainCD dummy
+scoreboard objectives add knockdown dummy
+scoreboard objectives add blackflashchance dummy
+scoreboard objectives add infinity dummy
+scoreboard objectives add cutscene dummy
+scoreboard objectives add invest dummy
+scoreboard objectives add statopen dummy
+scoreboard objectives add Super dummy
+scoreboard objectives add atk dummy
+scoreboard objectives add BasicM1 dummy
+scoreboard objectives add BasicM1s dummy
+scoreboard objectives add Stun dummy
+scoreboard objectives add Hit dummy
+scoreboard objectives add Move dummy
+scoreboard objectives add Camera dummy
+scoreboard objectives add detect_left dummy
+scoreboard objectives add detect_sneak2 dummy
+scoreboard objectives add detect_sneak dummy
+scoreboard objectives add detect_doublesneak dummy
+scoreboard objectives add detect_move dummy
+scoreboard objectives add detect_sprint dummy
+scoreboard objectives add detect_health dummy
+scoreboard objectives add detect_jump dummy
+scoreboard objectives add Sneaking dummy
+scoreboard objectives add Deleter dummy
+scoreboard objectives add Mode dummy
+scoreboard objectives add Disabled dummy
+scoreboard objectives add Disabled2 dummy
+scoreboard objectives add M1Reset dummy
+scoreboard objectives add Frames dummy
+scoreboard objectives add AfterAnim dummy
+scoreboard objectives add Flourish dummy
+scoreboard objectives add Blocking dummy
+scoreboard objectives add Posture dummy
+scoreboard objectives add sprinting dummy
+scoreboard objectives add Dash dummy
+scoreboard objectives add DashCD dummy
+scoreboard objectives add knock dummy
+scoreboard objectives add AirCom dummy
+scoreboard objectives add Energy dummy
+scoreboard objectives add EnergyCap dummy
+scoreboard objectives add Evade dummy
+scoreboard objectives add Evasive dummy
+scoreboard objectives add Move dummy
+scoreboard objectives add move dummy
+scoreboard objectives add wep1 dummy
+scoreboard objectives add wep2 dummy
+scoreboard objectives add wep3 dummy
+scoreboard objectives add wep4 dummy
+scoreboard objectives add wep5 dummy
+scoreboard objectives add ability1 dummy
+scoreboard objectives add ability2 dummy
+scoreboard objectives add ability3 dummy
+scoreboard objectives add ability4 dummy
+scoreboard objectives add ability5 dummy
+scoreboard objectives add ability6 dummy
+scoreboard objectives add ability7 dummy
+scoreboard objectives add ability8 dummy
+scoreboard objectives add ability9 dummy
+scoreboard objectives add ability10 dummy
+scoreboard objectives add ability11 dummy
+scoreboard objectives add ability12 dummy
+scoreboard objectives add transform dummy
+scoreboard objectives add Evade dummy
+scoreboard objectives add chance dummy
+scoreboard objectives add forms dummy
+scoreboard objectives add divergent dummy
+scoreboard objectives add shocked dummy
+scoreboard objectives add fire dummy
+scoreboard players add @a rctuses 0
+scoreboard players add @a thezone 0
+scoreboard players add @a infinity 0
+scoreboard players add @a antiheal 0
+scoreboard players add @a divergent 0
+scoreboard players add @e ab 0
+scoreboard players add @a respawn 0
+scoreboard players add @a domainstart 0
+scoreboard players add @a domain 0
+scoreboard players add @a domainactive 0
+scoreboard players add @a domainCD 0
+scoreboard players add @a Evade 0
+scoreboard players add @a Evasive 0
+scoreboard players add @a Super 0
+scoreboard players add @a knock 0
+scoreboard players add @a atk 0
+scoreboard players add @a sprinting 0
+scoreboard players add @a Posture 0
+scoreboard players add @a Flourish 0
+scoreboard players add @a BasicM1 0
+scoreboard players add @a BasicM1s 0
+scoreboard players add @a detect_doubleneak 0
+scoreboard players add @a detect_sneak2 0
+scoreboard players add @a detect_sneak 0
+scoreboard players add @a detect_left 0
+scoreboard players add @a Hit 0
+scoreboard players add @a Stun 0
+scoreboard players add @a Move 0
+scoreboard players add @a Camera 0
+scoreboard players add @a Disabled 0
+scoreboard players add @a Disabled2 0
+scoreboard players add @a AfterAnim 0
+scoreboard players add @a Blocking 0
+scoreboard players add @a cutscene 0
+scoreboard players add @a Dash 0
+scoreboard players add @a DashCD 0
+scoreboard players add @a AirCom 0
+scoreboard players add @a Energy 0
+scoreboard players add @a ability1 0
+scoreboard players add @a ability2 0
+scoreboard players add @a ability3 0
+scoreboard players add @a ability4 0
+scoreboard players add @a ability5 0
+scoreboard players add @a ability6 0
+scoreboard players add @a ability7 0
+scoreboard players add @a ability8 0
+scoreboard players add @a ability9 0
+scoreboard players add @a ability10 0
+scoreboard players add @a ability11 0
+scoreboard players add @a ability12 0
+scoreboard players add @a wep1 0
+scoreboard players add @a wep2 0
+scoreboard players add @a wep3 0
+scoreboard players add @a wep4 0
+scoreboard players add @a wep5 0
+scoreboard players add @a move 0
+scoreboard players add @a strength 0
+scoreboard players add @a damageadd 0
+scoreboard players add @a agility 0
+scoreboard players add @a endurance 0
+scoreboard players add @a energystat 0
+scoreboard players add @a combat 0
+scoreboard players add mobeventstoggle Mode 0
+scoreboard players set zero endurance 0
+scoreboard players set five endurance 5
+scoreboard players set seven endurance 7
+scoreboard players set nine endurance 9
+scoreboard players set two endurance 2
+scoreboard players set ten endurance 10
+scoreboard players set twenty endurance 20
+execute as @p if score mobeventstoggle Mode = zero endurance run scoreboard players set mobeventstoggle Mode 2
+scoreboard players set one endurance 1
+scoreboard players add count10 endurance 0
+scoreboard players set mobeventmax Mode 24000
+scoreboard players set timer20mins Mode 24000
+scoreboard players set timer40mins Mode 48000
+scoreboard players set timer60mins Mode 72000
+scoreboard players add @a selection 0
+scoreboard players add @a judgetimer 0
+scoreboard players add @a counting 0
+scoreboard players add @a evidence 0
+scoreboard players add @a trial_mode 0
+scoreboard players add @a verdict 0
+scoreboard players add @a deathpenaltytimer 0
+playsound random.toast @a
+tellraw @a {"rawtext":[{"translate":"text.fix_scores"}]}
+@@cheats/give_all_technique
+tag @s add satiated
+function cheats/give_basket
+function cheats/givedivergentfists
+function cheats/givedomainamp
+tag @s add reversecursed
+function cheats/givesimpledomain
+tag @s remove 120percent
+scoreboard players set @s blackflashlearn 1
+scoreboard players set @s strength 50
+scoreboard players set @s endurance 100
+scoreboard players set @s forms 7
+@@cheats/give_basket
+scoreboard players set @p hollowbasketown 1
+scoreboard players set @p hollowbasketsown 1
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @p {"rawtext":[{"translate":"text.hollowbasket.learned"}]}
+@@cheats/give_delusional_trait
+tag @s add delusional_trait
+give @s ds:delusional 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+playsound random.orb @s
+tellraw @p {"rawtext":[{"translate":"text.give_delusional_trait.cheat"}]}
+@@cheats/give_extraordinaryoutput
+tag @s add extraordinaryoutput
+playsound random.orb @s
+tellraw @p {"rawtext":[{"translate":"text.give_extraordinaryoutput.cheat"}]}
+@@cheats/give_heavenlyrestriction
+tag @p add heavenlyrestriction_zenin
+give @p ds:heavenly_restriction 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+@@cheats/give_queststuff
+scoreboard players set @p astarothdeath 1
+scoreboard players set @p benedictusdeath 1
+scoreboard players set @p kaiguydeath 1
+scoreboard players set @p dukedeath 1
+scoreboard players set @p component 1
+give @p ds:conflict_essence 16
+give @p ds:reality_shard1
+give @p ds:reality_shard2
+give @p ds:reality_shard3
+give @p ds:reality_shard4
+give @p ds:core_component
+@@cheats/givedivergentfists
+scoreboard players set @p divergentfistown 1
+scoreboard players set @p divergentfistsown 1
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @p {"rawtext":[{"translate":"text.givedivergentfists.cheat"}]}
+@@cheats/givedomainamp
+scoreboard players set @p domainampown 1
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @p {"rawtext":[{"translate":"text.givedomainamp.cheat"}]}
+@@cheats/giverct
+tag @p add reversecursedobtain
+scoreboard players set @p cutscene 201
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+@@cheats/givesimpledomain
+scoreboard players set @p simpledomainown 1
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @p {"rawtext":[{"translate":"text.givesimpledomain.cheat"}]}
+@@cheats/givesixeyes
+tag @p add sixeyes
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @p {"rawtext":[{"translate":"text.givesixeyes.cheat"}]}
+@@cheats/grant_all_100technique_rerolls
+scoreboard players add @a techniquerolls 100
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_all_100trait_rerolls
+scoreboard players add @a traitrolls 100
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_all_10clan_rerolls
+scoreboard players add @a clanrolls 10
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_all_10technique_rerolls
+scoreboard players add @a techniquerolls 10
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_all_10trait_rerolls
+scoreboard players add @a traitrolls 10
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_all_5technique_rerolls
+scoreboard players add @a techniquerolls 5
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_all_5trait_rerolls
+scoreboard players add @a traitrolls 5
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_all_999invest_points
+scoreboard players add @a invest 999
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/grant_self_10clan_rerolls
+scoreboard players add @s clanrolls 10
+playsound random.orb @a ~~~ 1 1.2
+@@cheats/guarantee_finger_chance
+tellraw @a {"rawtext":[{"translate":"text.guarantee_finger_chance.cheat"}]}
+tag @s add sukunachancerig
+@@cheats/kill_useless_entities
+kill @e[type=!player,family=!heroic,family=!npc,type=!ds:void_reactor,type=!ds:void_eye,tag=!prison_realm_trapped]
+event entity @e ds:disappear
+@@cheats/learn_world_slash
+give @s[scores={finger=18..}] ds:sukuna5 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+playsound mob.wither.spawn @a ~~~
+camerashake add @a[r=10] 4 0.25
+function sukuna/attacks/worldslash/charge_vfx
+tellraw @p {"rawtext":[{"translate":"text.wcs.unlocked"}]}
+@@cheats/maxout
+tellraw @p {"rawtext":[{"translate":"text.maxout.cheat"}]}
+scoreboard players set @p grade 5
+scoreboard players set @p level 250
+scoreboard players set @p[tag=120percent] agility 60
+scoreboard players set @p[tag=120percent] endurance 120
+scoreboard players set @p[tag=120percent] strength 60
+scoreboard players set @p[tag=120percent] damageinsurance 12
+scoreboard players set @p[tag=120percent] damageadd 12
+scoreboard players set @p[tag=!120percent] agility 50
+scoreboard players set @p[tag=!120percent] endurance 100
+scoreboard players set @p[tag=!120percent] strength 50
+scoreboard players set @p[tag=!120percent] damageinsurance 10
+scoreboard players set @p[tag=!120percent] damageadd 10
+scoreboard players set @p energystat 50
+scoreboard players add @p EnergyCap 10000
+scoreboard players set @p Energy 999999
+effect @p instant_health 3 20 true
+playsound random.levelup @a ~~~ 1 0.5
+tellraw @p {"rawtext":[{"translate":"text.flashstep.unlocked"}]}
+event entity @s[tag=!120percent] ds:set_hearts_100
+event entity @s[tag=120percent] ds:set_hearts_120
+@@cheats/maxoutsukuna
+tag @s[tag=!yuji_awakened] add sukuna
+tag @s[tag=!yuji_awakened] add has_sukuna
+execute as @s[tag=!yuji_awakened] at @s run function sukuna/sukuna_clear
+scoreboard players add @s[tag=!yuji_awakened] EnergyCap 200000
+clear @s[tag=!yuji_awakened] ds:sukuna_technique
+give @s[tag=!yuji_awakened] ds:sukuna_technique 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+scoreboard players set @s[tag=!megunacutscene_p2,tag=!yuji_awakened] finger 20
+scoreboard players operation @s[tag=megunacutscene_p2,tag=!yuji_awakened] finger = @p[tag=megunacutscene_p1] finger
+execute as @s[tag=!yuji_awakened] at @s run function sukuna/15finger_sukuna_takeover
+event entity @s[tag=!yuji_awakened] sukuna_markings
+tellraw @s[tag=yuji_awakened] {"rawtext":[{"translate":"text.sukunanotprocess.cheat"}]}
+execute as @s[tag=sukuna] at @s run function sukuna/sukuna_use
+@@cheats/mode_off
+scoreboard players set @p[r=1,scores={hakarimode=1..}] hakarimode 3
+scoreboard players set @p[r=1,scores={amberbeast=1..}] amberbeast 3
+scoreboard players set @p[r=1,scores={infinity=1..}] infinity 3
+scoreboard players set @p[r=1,scores={sukunamode=21..}] sukunamode 20
+scoreboard players set @p[r=1,scores={ltncloak=1..}] ltncloak 3
+@@cheats/random_ct
+scoreboard players random @s num 1 25
+function cheats/reset_stats
+function cheats/maxout
+function cheats/give_all_technique
+scoreboard players set @s rctuses 3
+tag @s add reversecursed
+function cooldowns
+execute as @s[scores={num=1}] at @s run function cheats/character/10shadows
+execute as @s[scores={num=2}] at @s run function cheats/character/15f_sukuna
+execute as @s[scores={num=3}] at @s run function cheats/character/absorption
+execute as @s[scores={num=4}] at @s run function cheats/character/awakened_yuji
+execute as @s[scores={num=5}] at @s run function cheats/character/dabura
+execute as @s[scores={num=6}] at @s run function cheats/character/finger_bearer
+execute as @s[scores={num=7}] at @s run function cheats/character/gojo
+execute as @s[scores={num=8}] at @s run function cheats/character/hakari
+execute as @s[scores={num=9}] at @s run function cheats/character/haruta
+execute as @s[scores={num=10}] at @s run function cheats/character/higuruma
+execute as @s[scores={num=11}] at @s run function cheats/character/inumaki
+execute as @s[scores={num=12}] at @s run function cheats/character/jogo
+execute as @s[scores={num=13}] at @s run function cheats/character/kashimo
+execute as @s[scores={num=14}] at @s run function cheats/character/kurourushi
+execute as @s[scores={num=15}] at @s run function cheats/character/kusakabe
+execute as @s[scores={num=16}] at @s run function cheats/character/mahito
+execute as @s[scores={num=17}] at @s run function cheats/character/meguna
+execute as @s[scores={num=18}] at @s run function cheats/character/ranta
+execute as @s[scores={num=19}] at @s run function cheats/character/ryu
+execute as @s[scores={num=20}] at @s run function cheats/character/ryu_curse
+execute as @s[scores={num=21}] at @s run function cheats/character/todo
+execute as @s[scores={num=22}] at @s run function cheats/character/toji
+execute as @s[scores={num=23}] at @s run function cheats/character/uro
+execute as @s[scores={num=24}] at @s run function cheats/character/windup
+execute as @s[scores={num=25}] at @s run function cheats/character/yuji
+scoreboard players set @s num 0
+@@cheats/remove_all
+tag @s remove 120percent
+tag @s remove no_more_ct
+function remove_ct
+function cheats/removetraits
+effect @s clear
+scoreboard players set @s endurance 0
+scoreboard players set @s agility 0
+scoreboard players set @s strength 0
+scoreboard players set @s damageadd 0
+scoreboard players set @s damageinsurance 0
+scoreboard players set @s EnergyCap 100
+scoreboard players set @s Energy 100
+tag @s remove reversecursed
+scoreboard players set @s hollowbasketown 0
+scoreboard players set @s fallingblossomown 0
+scoreboard players set @s divergentfistown 0
+scoreboard players set @s simpledomainown 0
+scoreboard players set @s domainampown 0
+function cheats/remove_sukuna
+clear @s
+tag @s remove shadowstyle
+tag @s remove sorcerer
+tag @s remove curse
+replaceitem entity @s slot.hotbar 0 ds:basic_combat 1 0 {"minecraft:keep_on_death":{}}
+replaceitem entity @s slot.hotbar 2 ds:cursedenergy 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+@@cheats/remove_ct
+event entity @p ct_accessory_off
+event entity @p miracle_off
+event entity @p custom_body_off
+event entity @p mahito_off
+event entity @p mahito_metal_off
+execute as @p run event entity @s[tag=idle_transfig] heart_off
+execute as @p at @s[tag=instant_body] run function idle_transfig/end_transformation
+execute as @p at @s[tag=shikigami] run scriptevent mahoraga:clear_adaptations
+execute as @p run scoreboard players set @s[scores={blackflash_amount_special=!0}] blackflash_amount_special 0
+execute as @p run scoreboard players set @s[scores={prev_health=!0}] prev_health 0
+execute as @p run scoreboard players set @s[scores={damage_taken=!0}] damage_taken 0
+execute as @p run scoreboard players set @s[tag=heavenlyrestriction,scores={energystat=!0}] energystat 0
+execute as @p run scoreboard players set @s[tag=heavenlyrestriction,scores={EnergyStat=!0}] EnergyStat 0
+execute as @p run scoreboard players set @s[tag=heavenlyrestriction] EnergyCap 100
+execute as @p run scoreboard players set @s[scores={amberbeast=4..,Energy=4..},tag=!unselect] Energy 3
+tag @p remove limitless
+tag @p remove shikigami
+tag @p remove lovetrain
+tag @p remove lightning
+tag @p remove explosive
+tag @p remove flames
+tag @p remove heavenlyrestriction
+tag @p remove judgeman
+tag @p remove windup
+tag @p remove sight
+tag @p remove miracles
+tag @p remove yuji_awakened
+tag @p remove cursed_speech
+tag @p remove painkiller
+tag @p remove warden
+tag @p remove absorption
+tag @p remove apparation
+tag @p remove boogie_woogie
+tag @p remove idle_transfig
+tag @p remove light
+tag @p remove discharge
+tag @p remove sky
+tag @p remove roach
+tag @p remove rabbit_tame
+tag @p remove toad_tame
+tag @p remove dog_tame
+tag @p remove totality_wolf_own
+tag @p remove nue_tame
+tag @p remove serpent_tame
+tag @p remove ox_tame
+tag @p remove elephant_tame
+tag @p remove deer_tame
+tag @p remove mahoraga_tame
+tag @p remove yuji_itadori_brother
+tag @p remove yuji_awakened_brother
+scoreboard players set @p forms 0
+scoreboard players set @p overheated 0
+scoreboard players set @p frenzy 0
+scoreboard players set @p overheat 0
+@@cheats/remove_heian_era
+tag @s[tag=!remove_heian_era] add remove_heian_era
+effect @s[scores={endurance=666}] clear health_boost
+effect @s[scores={endurance=666}] health_boost 99999999 104 true
+effect @s[scores={endurance=666}] instant_health 1 25 true
+scoreboard players set @s[scores={endurance=666}] endurance 100
+tag @s[tag=heian_era] remove heian_era
+event entity @s jjka:remove_sukuna_scale
+event entity @s[has_property={property:body_transformation=1..4}] heian_off
+execute as @s[tag=sukuna] at @s run function sukuna/grant_skills
+event entity @s[has_property={property:sukuna_markings=!1}] sukuna_markings
+tag @s[tag=remove_heian_era] remove remove_heian_era
+@@cheats/remove_sukuna
+tag @s[tag=sukuna,tag=reversecursed,tag=!reversecursedown] remove reversecursed
+scoreboard players set @s[tag=sukuna,tag=rctmaster,tag=!rctmasterown,scores={rctuses=1}] rctuses 0
+scoreboard players remove @s[tag=sukuna,tag=rctmaster,tag=!rctmasterown,scores={rctuses=2..}] rctuses 2
+tag @s[tag=sukuna,tag=rctmaster,tag=!rctmasterown] remove rctmaster
+scoreboard players set @s[tag=sukuna,scores={hollowbasketown=1},tag=!hollowbasketown] hollowbasketown 0
+scoreboard players set @s[tag=sukuna,scores={domainampown=1},tag=!domainampown] domainampown 0
+execute if entity @s[tag=has_sukuna,type=player] run scoreboard players set sukunauser Mode 0
+tag @s[tag=sukuna] remove sukuna
+tag @s[tag=has_sukuna] remove has_sukuna
+tag @s[tag=reversecursedown] remove reversecursedown
+tag @s[tag=rctmasterown] remove rctmasterown
+tag @s[tag=hollowbasketown] remove hollowbasketown
+tag @s[tag=domainampown] remove domainampown
+function sukuna/sukuna_clear
+clear @s[hasitem={item=ds:sukuna_technique}] ds:sukuna_technique
+event entity @s sukunatextureoff
+scoreboard players set @s finger 0
+scoreboard players set @s fuga 0
+scoreboard players set @s sukunaperm 0
+function cheats/mode_off
+scoreboard players set @s[scores={sukunamode=19..}] sukunamode 18
+effect @s[scores={endurance=666}] clear health_boost
+effect @s[scores={endurance=666}] health_boost 99999999 104 true
+effect @s[scores={endurance=666}] instant_health 1 25 true
+scoreboard players set @s[scores={endurance=666}] endurance 100
+tag @s[tag=heian_era] remove heian_era
+event entity @s[has_property={property:body_transformation=1..4}] heian_off
+event entity @s jjka:remove_sukuna_scale
+scoreboard players reset @s sukuna_ab1
+scoreboard players reset @s sukuna_ab2
+scoreboard players reset @s sukuna_ab3
+scoreboard players reset @s sukuna_ab4
+scoreboard players reset @s sukuna_ab5
+scoreboard players reset @s sukuna_ab6
+scoreboard players reset @s sukuna_ab7
+scoreboard players reset @s sukuna_ab8
+scoreboard players reset @s sukuna_ab9
+scoreboard players reset @s sukuna_ab10
+scoreboard players reset @s sukuna_ab11
+scoreboard players reset @s sukuna_ab12
+@@cheats/remove_tickingareas
+scoreboard players add @a[tag=prison_realm_trapped] expadd 2
+execute unless entity @e[name=UnlimitedVoid,type=ds:projectile,tag=DomainExpansion] run tickingarea remove UnlimitedVoid
+execute unless entity @e[name=ChimeraGarden1,type=ds:projectile,tag=DomainExpansion] unless entity @e[name=ChimeraGarden2,type=ds:projectile,tag=DomainExpansion] run tickingarea remove shadowgarden
+execute unless entity @e[type=ds:resonant_chamber,tag=DomainExpansion] run tickingarea remove speech_domain
+execute unless entity @e[type=ds:deadly_sentencing,tag=DomainExpansion] run tickingarea remove deadlysentencing
+execute unless entity @e[type=ds:yuji_domain,tag=DomainExpansion] run tickingarea remove YujiDomain
+execute unless entity @e[type=ds:malevolent_kitchen,tag=DomainExpansion] run tickingarea remove shrinedmg1
+execute unless entity @e[tag=yuji_awakened,scores={domain=1..}] run tickingarea remove yuji_domain
+execute unless entity @e[type=ds:incomplete_shrine,tag=DomainExpansion] run tickingarea remove incomplete_kitchen
+execute unless entity @e[tag=flames,scores={move=1..}] run tickingarea remove meteor
+execute unless entity @e[tag=electrocannon] run tickingarea remove ecannon
+execute unless entity @e[tag=special_mission_vessel] run tickingarea remove vessel_point
+execute unless entity @e[type=ds:cursed_egg] run tickingarea remove cursed_egg
+execute unless entity @e[tag=anthill] run tickingarea remove world_event_anthill
+tickingarea remove cursed_cavern
+tickingarea remove structure_medium
+tickingarea remove jjk_high
+tickingarea remove reversal
+tickingarea remove benedictus
+tickingarea remove duke
+tickingarea remove astaroth
+tickingarea remove kai
+tickingarea remove frost
+tickingarea remove infinitydash
+tickingarea remove bomb
+tickingarea remove temp
+execute unless entity @e[name=HollowPTRG,type=ds:projectile] unless entity @e[tag=limitless,scores={move=1..}] run tickingarea remove hollowpurple
+execute unless entity @e[name=HollowP,type=ds:projectile] unless entity @e[tag=limitless,scores={move=1..}] run tickingarea remove HollowOrb1
+execute unless entity @e[name=HollowP,type=ds:projectile] unless entity @e[tag=limitless,scores={move=1..}] run tickingarea remove HollowOrb2
+execute unless entity @e[name=200HollowP,type=ds:projectile] unless entity @e[tag=limitless,scores={move=1..}] run tickingarea remove 200HollowOrb1
+execute unless entity @e[name=200HollowP,type=ds:projectile] unless entity @e[tag=limitless,scores={move=1..}] run tickingarea remove 200HollowOrb2
+scoreboard players remove @e[scores={rct_entity_limit=4..}] rct_entity_limit 4
+playanimation @e[tag=speech_limited] animation.cursed_speech.limit
+tag @e[tag=speech_limited] remove speech_limited
+scoreboard players add @e[tag=cursed_speech,scores={speech=1..}] speech_repair 1
+scoreboard players remove @e[scores={speech_repair=5..,speech=1..},tag=cursed_speech] speech 1
+scoreboard players set @e[scores={speech_repair=5..,speech=1..},tag=cursed_speech] speech_repair 0
+scoreboard players remove @e[scores={overdose=1..}] overdose 1
+execute unless score count20ticks Mode matches 0 run scoreboard players set count20ticks Mode 0
+title @a times 0 20 0
+execute as @p[hasitem={item=ds:origin_orb}] unless entity @s[scores={meteordropped=1..}] run clear @s ds:origin_orb
+execute as @p[hasitem={item=ds:conflict_essence}] unless entity @s[scores={meteordropped=1..}] run clear @s ds:conflict_essence
+execute as @p[hasitem={item=ds:mysterious_ring}] unless entity @s[scores={meteordropped=1..}] run clear @s ds:mysterious_ring
+execute as @p[hasitem={item=ds:mysterious_shard}] unless entity @s[scores={meteordropped=1..}] run clear @s ds:mysterious_shard
+execute as @p[hasitem={item=ds:mysterious_tablet}] unless entity @s[scores={meteordropped=1..}] run clear @s ds:mysterious_tablet
+execute as @p[hasitem={item=ds:mysterious_torch}] unless entity @s[scores={meteordropped=1..}] run clear @s ds:mysterious_torch
+scoreboard players set @a[scores={fuga=1..,finger=0..14}] fuga 0
+deop @a[tag=ban_timer]
+gamemode spectator @a[tag=ban_timer]
+kick @a[tag=ban_timer]
+kill @a[tag=ban_timer]
+execute as @a[tag=ban_timer] at @s run function ban_timer
+execute as @p[hasitem={item=ds:reality_shard1}] unless entity @s[scores={kaiguydeath=1..}] run clear @s ds:reality_shard1
+execute as @p[hasitem={item=ds:reality_shard2}] unless entity @s[scores={dukedeath=1..}] run clear @s ds:reality_shard2
+execute as @p[hasitem={item=ds:reality_shard3}] unless entity @s[scores={benedictusdeath=1..}] run clear @s ds:reality_shard3
+execute as @p[hasitem={item=ds:reality_shard4}] unless entity @s[scores={astarothdeath=1..}] run clear @s ds:reality_shard4
+execute as @p[hasitem={item=ds:keycard}] unless entity @s[scores={voideyedeath=1..}] run clear @s ds:keycard
+execute as @p[hasitem={item=ds:core_component}] unless entity @s[scores={component=1..}] run clear @s ds:core_component
+execute as @e[type=ds:primesoul,c=1,scores={phase=8..,cutscene=0,detect_health=3..}] at @s run function bosses/file/boss/equinox_downfall
+scoreboard players random @a[tag=miracles,tag=!abilitying,scores={move=0},has_property={property:ct_face=0..6},tag=!gambler,tag=!nocts] chance 1 150
+scoreboard players random @a[tag=miracles,tag=!abilitying,scores={move=0},has_property={property:ct_face=0..6},tag=gambler,tag=!nocts] chance 50 120
+scoreboard players random @e[tag=miracles,tag=!abilitying,scores={move=0,chance=0},has_property={property:ct_face=0..6},tag=!gambler,tag=!nocts,type=!player] chance 1 150
+scoreboard players random @e[tag=miracles,tag=!abilitying,scores={move=0,chance=0},has_property={property:ct_face=0..6},tag=gambler,tag=!nocts,type=!player] chance 50 120
+execute as @e[tag=miracles,tag=!abilitying,scores={move=0,chance=69},tag=!nocts] at @s run function small_cts/miracle_add
+effect @e[family=heavenlyrestriction] regeneration 1 2 true
+effect @a[tag=heavenlyrestriction] regeneration 1 2 true
+tag @e[tag=!idle_transfig,tag=!has_sukuna,tag=!yuji_awakened,tag=soul_learned] remove soul_learned
+tag @e[tag=idle_transfig,tag=!soul_learned] add soul_learned
+tag @e[tag=has_sukuna,tag=!soul_learned] add soul_learned
+tag @e[tag=yuji_awakened,tag=!soul_learned] add soul_learned
+tag @e[tag=owner,scores={move=0}] remove owner
+execute as @e[scores={Stun=0,punch=0},type=!player,tag=punch0] unless entity @s[scores={nocts=6..},tag=nocts,tag=!spectator,tag=confiscation,tag=!havingcts] run scoreboard players set @s punch 1
+execute as @e[scores={Stun=0},type=!player,tag=punch0] unless entity @s[scores={nocts=6..},tag=nocts,tag=!spectator,tag=confiscation,tag=!havingcts] run tag @s remove punch0
+tag @e[scores={Stun=0},type=!player,tag=unlimited_hit] remove unlimited_hit
+execute unless score rift_test move > hundred Mode as @p run function rift_test
+kill @e[type=item,name="Leaf Litter"]
+@@cheats/removetraits
+tag @s[tag=enhancedstr] remove enhancedstr
+tag @s[tag=enhancedagi] remove enhancedagi
+tag @s[tag=fasterce] remove fasterce
+tag @s[tag=alleycat] remove alleycat
+tag @s[tag=530kiq] remove 530kiq
+tag @s[tag=tacticaliq] remove tacticaliq
+tag @s[tag=exoskeleton] remove exoskeleton
+tag @s[tag=satiated] remove satiated
+tag @s[tag=lonewolf] remove lonewolf
+tag @s[tag=roughce] remove roughce
+tag @s[tag=blessedstrength] remove blessedstrength
+scoreboard players set @s[tag=rctmaster,scores={rctuses=1}] rctuses 0
+scoreboard players remove @s[tag=rctmaster,scores={rctuses=2..}] rctuses 2
+tag @s[tag=rctmaster,tag=reversecursed] remove reversecursed
+tag @s[tag=rctmasterown] remove rctmasterown
+tag @s[tag=rctmaster] remove rctmaster
+tag @s[tag=gambler] remove gambler
+scoreboard players set @s[tag=heavenlyrestriction_mechimaru,scores={EnergyCap=..3999}] EnergyCap 0
+scoreboard players remove @s[tag=heavenlyrestriction_mechimaru,scores={EnergyCap=4000..}] EnergyCap 4000
+tag @s[tag=heavenlyrestriction_mechimaru] remove heavenlyrestriction_mechimaru
+tag @s[tag=undying] remove undying
+tag @s[tag=insanity] remove insanity
+tag @s[tag=progidy] remove progidy
+tag @s[tag=extraordinaryoutput] remove extraordinaryoutput
+tag @s[tag=heavenlyrestriction_zenin] remove heavenlyrestriction_zenin
+tag @s[tag=heavenlyrestriction_fushiguro] remove heavenlyrestriction_fushiguro
+tag @s[tag=120percent] remove 120percent
+execute if entity @s[tag=delusional_trait,tag=delusional] run function remove_delusional
+execute if entity @s[tag=delusional_trait,scores={move=3..}] run function cancel_attack
+clear @s[tag=delusional_trait,hasitem={item=ds:delusional}] ds:delusional
+tag @s[tag=delusional_trait] remove delusional_trait
+tag @s[tag=sixeyes] remove sixeyes
+event entity @s heart_off
+@@cheats/reset_stats
+effect @s clear
+scoreboard players set @s endurance 0
+scoreboard players set @s agility 0
+scoreboard players set @s strength 0
+scoreboard players set @s damageadd 0
+scoreboard players set @s damageinsurance 0
+scoreboard players set @s EnergyCap 100
+scoreboard players set @s Energy 100
+tag @s remove reversecursed
+scoreboard players set @s hollowbasketown 0
+scoreboard players set @s fallingblossomown 0
+scoreboard players set @s divergentfistown 0
+scoreboard players set @s simpledomainown 0
+scoreboard players set @s domainampown 0
+function cheats/remove_sukuna
+scoreboard players set @s guilty_score 50
+event entity @s heart_off
+tag @s remove 120percent
+tag @s remove no_more_rct
+function cooldowns
+@@cheats/self_grant_100technique_rerolls
+scoreboard players add @p techniquerolls 100
+playsound random.orb @p ~~~ 1 1.2
+@@cheats/self_grant_100trait_rerolls
+scoreboard players add @p traitrolls 100
+playsound random.orb @p ~~~ 1 1.2
+@@cheats/self_grant_10technique_rerolls
+scoreboard players add @p techniquerolls 10
+playsound random.orb @p ~~~ 1 1.2
+@@cheats/self_grant_10trait_rerolls
+scoreboard players add @p traitrolls 10
+playsound random.orb @p ~~~ 1 1.2
+@@cheats/self_grant_5technique_rerolls
+scoreboard players add @p techniquerolls 5
+playsound random.orb @p ~~~ 1 1.2
+@@cheats/self_grant_5trait_rerolls
+scoreboard players add @p traitrolls 5
+playsound random.orb @p ~~~ 1 1.2
+@@cheats/self_grant_999invest_points
+scoreboard players add @p invest 999
+playsound random.orb @p ~~~ 1 1.2
+@@cheats/set_max_absorption
+scoreboard players set @s absorption 99999
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+@@cheats/set_max_fever
+scoreboard players set @s fever 100
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+@@cheats/set_max_fuga
+scoreboard players set @s fuga 600
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+@@cheats/set_max_miracles
+function small_cts/miracle_add
+function small_cts/miracle_add
+function small_cts/miracle_add
+function small_cts/miracle_add
+function small_cts/miracle_add
+function small_cts/miracle_add
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+@@cheats/stone_arena
+fill ~30 ~3 ~30 ~-30 ~ ~-30 air
+fill ~30 ~7 ~30 ~-30 ~4 ~-30 air
+fill ~30 ~8 ~30 ~-30 ~11 ~-30 air
+fill ~30 ~12 ~30 ~-30 ~15 ~-30 air
+fill ~30 ~-3 ~30 ~-30 ~-1 ~-30 smooth_stone
+fill ~29 ~-3 ~29 ~-29 ~-1 ~-29 stone
+playsound random.anvil_break @a ~~~
+@@cheats/switch_race
+tag @s[tag=!curse] add nope
+tag @s[tag=!curse] add curse
+tag @s[tag=curse,tag=!nope] remove curse
+tellraw @s[tag=!curse] {"rawtext":[{"translate":"text.human.switch_race"}]}
+tellraw @s[tag=curse] {"rawtext":[{"translate":"text.curse.switch_race"}]}
+function cheats/remove_sukuna
+function remove_ct
+tag @s remove nope
+@@cheats/tame_all_shikigami
+function shikigami/shikigami/rabbit_tame
+function shikigami/shikigami/toad_tame
+function shikigami/shikigami/dog_tame
+function shikigami/shikigami/nue_tame
+function shikigami/shikigami/serpent_tame
+function shikigami/shikigami/ox_tame
+function shikigami/shikigami/elephant_tame
+function shikigami/shikigami/deer_tame
+tellraw @p {"rawtext":[{"translate":"text.tame_all_shikigami.cheat"}]}
+@@cheats/traits/common/allaycat
+tag @p add alleycat
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.alleycat.traitsgive"}]}
+@@cheats/traits/common/fastce
+tag @p add fasterce
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.fasterce.traitsgive"}]}
+@@cheats/traits/exotic/120percent
+tag @p add 120percent
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.120percent.traitsgive"}]}
+@@cheats/traits/exotic/Delusional
+tag @p add delusional_trait
+give @p ds:delusional 1 0 {"minecraft:keep_on_death":{},"minecraft:item_lock":{"mode":"lock_in_inventory"}}
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.delusional.traitsgive"}]}
+@@cheats/traits/exotic/blacksparks
+give @p ds:yuji_fists
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.yuji.traitsgive"}]}
+@@cheats/traits/exotic/extraordinaryoutput
+tag @p add extraordinaryoutput
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.extraordinaryoutput.traitsgive"}]}
+@@cheats/traits/exotic/progidy
+tag @p add progidy
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.progidy.traitsgive"}]}
+@@cheats/traits/honored/sixeyes
+tag @p add sixeyes
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.sixeyes.traitsgive"}]}
+@@cheats/traits/rare/HRBoundless
+tag @p add heavenlyrestriction_mechimaru
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.heavenlyrestriction_mechimaru.traitsgive"}]}
+@@cheats/traits/rare/blessedstrength
+tag @p add blessedstrength
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.blessedstrength.traitsgive"}]}
+@@cheats/traits/rare/gambler
+tag @p add gambler
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.gambler.traitsgive"}]}
+@@cheats/traits/rare/insanity
+tag @p add insanity
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.insanity.traitsgive"}]}
+@@cheats/traits/rare/rctmaster
+tag @p add rctmaster
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.rctmaster.traitsgive"}]}
+@@cheats/traits/rare/roughce
+tag @p add roughce
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.roughce.traitsgive"}]}
+@@cheats/traits/rare/undying
+tag @p add undying
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.undying.traitsgive"}]}
+@@cheats/traits/uncommon/530kiq
+tag @p add 530kiq
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.530kiq.traitsgive"}]}
+@@cheats/traits/uncommon/exoskeleton
+tag @p add exoskeleton
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.exoskeleton.traitsgive"}]}
+@@cheats/traits/uncommon/lonewolf
+tag @p add lonewolf
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.lonewolf.traitsgive"}]}
+@@cheats/traits/uncommon/satiated
+tag @p add satiated
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.satiated.traitsgive"}]}
+@@cheats/traits/uncommon/tacticalIQ
+tag @p add tacticaliq
+playsound beacon.activate @a ~~~
+camerashake add @a[r=10] 4 0.25
+tellraw @s {"rawtext":[{"translate":"text.tacticaliq.traitsgive"}]}
+@@cheats/unlock_controlled_blackflashes
+scoreboard players set @s blackflashchance 7
+@@cheats/wipe_character
+function menu_end
+scoreboard players set @s endurance 0
+scoreboard players set @s fuga 0
+scoreboard players set @s fever 0
+scoreboard players set @s finger 0
+scoreboard players set @s energystat 0
+scoreboard players set @s energyinsurance 0
+scoreboard players set @s agility 0
+scoreboard players set @s strength 0
+scoreboard players set @s damageinsurance 0
+scoreboard players set @s damageadd 0
+scoreboard players set @s blackflashlearn 0
+scoreboard players set @s strangevile 0
+scoreboard players set @s respawn 2
+effect @s clear
+function stat_give
+function remove_ct
+function clear_skills
+function cheats/removetraits
+function cheats/remove_sukuna
+function cooldowns
+tag @s[tag=curse] remove curse
+tag @s[tag=human] remove human
+tag @s[tag=noct] remove noct
+tag @s[tag=reversecursed] remove reversecursed
+tag @s[tag=sorcerer] remove sorcerer
+tag @s[tag=watching] remove watching
+tag @s[tag=gojo] remove gojo
+tag @s[tag=kamo] remove kamo
+tag @s[tag=inumaki] remove inumaki
+tag @s[tag=zenin] remove zenin
+tag @s[tag=heavenlyrestriction] remove heavenlyrestriction
+tag @s[tag=heavenlyrestriction_zenin] remove heavenlyrestriction_zenin
+tag @s[tag=shadowstyle] remove shadowstyle
+scoreboard players set @s divergentfistown 0
+scoreboard players set @s domainampown 0
+scoreboard players set @s fallingblossomown 0
+scoreboard players set @s simpledomainown 0
+scoreboard players set @s hollowbasketown 0
+clear @s
+scoreboard players set @s start 0
+effect @s regeneration 10 10 true
+tellraw @s {"rawtext":[{"translate":"text.warning.wipe_character"}]}
