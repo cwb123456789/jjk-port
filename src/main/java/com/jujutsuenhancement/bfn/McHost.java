@@ -295,6 +295,9 @@ public final class McHost implements Host {
             case "fill" -> fill(eng, c, a);
             case "setblock" -> setblock(eng, c, a);
             case "summon" -> summon(eng, c, a);
+            case "scriptevent" -> {
+                if (!a.isEmpty() && !ScriptEvents.run(this, c, a.get(0), a.subList(1, a.size()))) unknown("scriptevent " + a.get(0));
+            }
             case "playanimation" -> {
                 if (a.size() >= 2) {
                     String anim = a.get(1).startsWith("animation.") ? a.get(1).substring(10) : a.get(1);
