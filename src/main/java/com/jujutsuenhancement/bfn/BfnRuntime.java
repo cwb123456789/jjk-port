@@ -58,7 +58,9 @@ public final class BfnRuntime {
 
     @SubscribeEvent
     public static void onTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || !enabled) return;
+        if (event.phase != TickEvent.Phase.END) return;
+        if (host != null) host.tickTemp();
+        if (!enabled) return;
         MinecraftServer server = event.getServer();
         ensure(server);
         long t0 = System.nanoTime();

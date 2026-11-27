@@ -204,7 +204,7 @@ public final class McHost implements Host {
         return out;
     }
 
-    private static void send(ServerPlayer sp, String op, double[] d, String s) {
+    static void send(ServerPlayer sp, String op, double[] d, String s) {
         ModNet.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new FxOncePacket(op, d, s));
     }
 
@@ -637,6 +637,56 @@ public final class McHost implements Host {
         lv.addFreshEntity(e);
         McEnt m = new McEnt(e, c.dim());
         byDim.get(Math.max(0, Math.min(2, c.dim()))).add(m);
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------- temporary blocks
+
+    private record Temp(ServerLevel lv, BlockPos pos, long removeAt, BlockState orig) {}
+
+    private final Map<String, Temp> temps = new HashMap<>();
+
+    /** ds:placeblock: a block (light / barrier ...) that is put back after {@code time} ticks; only where the block is {@code replace} (when given) */
+    void placeTemp(Ctx c, int radius, int time, String block, Integer light, String replace) {
+        ServerLevel lv = level(c.dim());
+        if (lv == null) return;
+        BlockState st;
+        if (block.equals("light_block")) {
+            st = net.minecraft.world.level.block.Blocks.LIGHT.defaultBlockState().setValue(net.minecraft.world.level.block.LightBlock.LEVEL, light == null ? 15 : light);
+        } else {
+            st = state(block);
+            if (st == null) {
+                unknown("placeblock " + block);
+                return;
+            }
+        }
+        long removeAt = server.getTickCount() + time;
+        int cx = (int) Math.floor(c.x()), cy = (int) Math.floor(c.y()), cz = (int) Math.floor(c.z());
+        BlockPos.MutableBlockPos mp = new BlockPos.MutableBlockPos();
+        for (int x = -radius; x <= radius; x++) for (int y = -radius; y <= radius; y++) for (int z = -radius; z <= radius; z++) {
+            if (x * x + y * y + z * z > radius * radius) continue;
+            mp.set(cx + x, cy + y, cz + z);
+            if (!lv.hasChunkAt(mp) || lv.isOutsideBuildHeight(mp)) continue;
+            BlockState cur = lv.getBlockState(mp);
+            if (replace != null && !(replace.equals("air") ? cur.isAir() : bare(String.valueOf(ForgeRegistries.BLOCKS.getKey(cur.getBlock()))).equals(replace))) continue;
+            BlockPos fixed = mp.immutable();
+            String key = c.dim() + ":" + fixed.asLong();
+            if (temps.containsKey(key)) continue;
+            temps.put(key, new Temp(lv, fixed, removeAt, cur));
+            lv.setBlock(fixed, st, 3);
+        }
+    }
+
+    /** puts back the temporary blocks whose time is over */
+    public void tickTemp() {
+        if (temps.isEmpty()) return;
+        long now = server.getTickCount();
+        var it = temps.values().iterator();
+        while (it.hasNext()) {
+            Temp t = it.next();
+            if (now < t.removeAt()) continue;
+            if (t.lv().hasChunkAt(t.pos())) t.lv().setBlock(t.pos(), t.orig(), 3);
+            it.remove();
+        }
     }
 
     /** a random source for callers that need one */

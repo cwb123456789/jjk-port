@@ -35,11 +35,80 @@ final class ScriptEvents {
             case "ds:leap_back" -> knock(e, view(e), -8, 3);
             case "ds:leap_back2" -> knock(e, view(e), -8, 2);
             case "ds:autoJump2" -> autoJump(e);
+            case "ds:placeblock" -> placeBlock(host, c, args);
             default -> {
+                if (DELUSIONAL.containsKey(id)) {
+                    delusional(host, c, id, args);
+                    return true;
+                }
                 return false;
             }
         }
         return true;
+    }
+
+    /** particles only the players with the tag "delusional" see, placed relative to each of them */
+    private static final java.util.Map<String, String[]> DELUSIONAL = java.util.Map.of(
+            "ds:delusional_hit", new String[] {"delusional_hit1", "delusional_hit2", "delusional_hit3", "delusional_hit4"},
+            "ds:delusional", new String[] {"delusional1", "delusional2", "delusional3", "delusional4"},
+            "ds:delusional_small", new String[] {"delusional_small1", "delusional_small2", "delusional_small3", "delusional_small4"},
+            "ds:delusional_climax", new String[] {"delusional_climax1", "delusional_climax2", "delusional_climax3", "delusional_climax4", "delusional_climax5", "delusional_climax6"},
+            "ds:delusional_hearts", new String[] {"delusional_hearts"},
+            "ds:delusional_hearts2", new String[] {"delusional_hearts2"},
+            "ds:delusional_glitter", new String[] {"delusional_glitter"},
+            "ds:delusional_end", new String[] {"delusional_end1"});
+
+    /** calcVectorOffset: right / up / forward offsets of an entity's view */
+    static double[] offset(Entity p, double xf, double yf, double zf) {
+        Vec3 d = p.getLookAngle();
+        double m = Math.hypot(d.x, d.z);
+        if (m < 1e-9) m = 1e-9;
+        double[] xx = norm(d.z, 0, -d.x, xf);
+        double[] yy = norm(d.x / m * -d.y, m, d.z / m * -d.y, yf);
+        double[] zz = norm(d.x, d.y, d.z, zf);
+        return new double[] {p.getX() + xx[0] + yy[0] + zz[0], p.getY() + xx[1] + yy[1] + zz[1], p.getZ() + xx[2] + yy[2] + zz[2]};
+    }
+
+    private static double[] norm(double x, double y, double z, double s) {
+        double l = Math.sqrt(x * x + y * y + z * z);
+        if (l < 1e-12) return new double[] {0, 0, 0};
+        return new double[] {s * x / l, s * y / l, s * z / l};
+    }
+
+    private static void delusional(McHost host, Ctx c, String id, List<String> args) {
+        String[] o = String.join(" ", args).split(",");
+        if (o.length < 3) return;
+        double a = Double.parseDouble(o[0].trim()), b = Double.parseDouble(o[1].trim()), d = Double.parseDouble(o[2].trim());
+        for (int dim = 0; dim < 3; dim++) {
+            for (Ent pl : host.players(dim)) {
+                if (!pl.tags().contains("delusional") || !(pl.handle() instanceof net.minecraft.server.level.ServerPlayer sp)) continue;
+                double[] p = offset(sp, a, b, d);
+                for (String name : DELUSIONAL.get(id)) McHost.send(sp, "P", new double[] {p[0], p[1], p[2], sp.getYRot()}, name);
+            }
+        }
+    }
+
+    private static void placeBlock(McHost host, Ctx c, List<String> args) {
+        int radius = 0, time = 20;
+        String block = null, replace = null;
+        Integer light = null;
+        for (String a : args) {
+            if (a.startsWith("radius:")) radius = (int) num(List.of(a.substring(7)), 0);
+            else if (a.startsWith("time:")) {
+                time = (int) num(List.of(a.substring(5)), 0);
+                if (time == 0) time = 20;
+            } else if (a.startsWith("replace:")) replace = a.substring(8).replace("minecraft:", "");
+            else if (a.contains("light_block")) {
+                String last = a.substring(a.lastIndexOf('_') + 1);
+                try {
+                    light = Math.min(15, Math.max(0, Integer.parseInt(last)));
+                } catch (NumberFormatException ex) {
+                    light = 15;
+                }
+                block = "light_block";
+            } else block = a.replace("minecraft:", "");
+        }
+        if (block != null) host.placeTemp(c, radius, time, block, light, replace);
     }
 
     private static double num(List<String> a, int i) {
