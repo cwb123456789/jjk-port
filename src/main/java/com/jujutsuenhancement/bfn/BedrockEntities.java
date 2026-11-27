@@ -122,6 +122,8 @@ public final class BedrockEntities {
 
     /** The Forge entity for a Bedrock id: a type the mod registers itself, else the generic Bedrock entity (when the pack defines the id). */
     public static Entity create(ServerLevel lv, String bedrockId) {
+        if (bedrockId.equals("xp_bottle")) bedrockId = "experience_bottle";
+        else if (bedrockId.equals("fireworks_rocket")) bedrockId = "firework_rocket";
         String path = bedrockId.startsWith("ds:") ? bedrockId.substring(3) : bedrockId;
         ResourceLocation id = bedrockId.startsWith("ds:") ? new ResourceLocation("jujutsuenhancement", path)
                 : bedrockId.equals("xp_orb") ? new ResourceLocation("minecraft", "experience_orb")
