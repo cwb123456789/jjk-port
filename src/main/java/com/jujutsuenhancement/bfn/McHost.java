@@ -316,6 +316,13 @@ public final class McHost implements Host {
             case "fill" -> fill(eng, c, a);
             case "setblock" -> setblock(eng, c, a);
             case "summon" -> summon(eng, c, a);
+            case "give" -> give(eng, c, a);
+            case "clear" -> clear(eng, c, a);
+            case "replaceitem" -> replaceItem(eng, c, a);
+            case "gamemode" -> gamemode(eng, c, a);
+            case "xp" -> xp(eng, c, a);
+            case "ride" -> ride(eng, c, a);
+            case "spreadplayers" -> spreadPlayers(eng, c, a);
             case "event" -> {
                 // event entity <selector> <event>
                 if (a.size() >= 3 && a.get(0).equals("entity")) {
@@ -424,6 +431,11 @@ public final class McHost implements Host {
             }
             default -> unknown("camera " + a.get(1));
         }
+    }
+
+    private static void moveEntity(Entity en, double x, double y, double z) {
+        if (en instanceof ServerPlayer sp) sp.teleportTo((ServerLevel) sp.level(), x, y, z, sp.getYRot(), sp.getXRot());
+        else en.moveTo(x, y, z, en.getYRot(), en.getXRot());
     }
 
     private static double rel(String s, double base) {
@@ -700,6 +712,171 @@ public final class McHost implements Host {
     private static float parseRel(String s) {
         String r = s.substring(1);
         return r.isEmpty() ? 0 : (float) Double.parseDouble(r);
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------- items and players
+
+    /** the item of a Bedrock id: ds:x -> jujutsuenhancement:x; EMPTY for air; null when the mod does not have it (yet) */
+    private net.minecraft.world.item.ItemStack stack(String bedrock, int count) {
+        if (bedrock.equals("air") || bedrock.equals("minecraft:air")) return net.minecraft.world.item.ItemStack.EMPTY;
+        ResourceLocation id = bedrock.startsWith("ds:") ? new ResourceLocation("jujutsuenhancement", bedrock.substring(3))
+                : new ResourceLocation(bedrock.contains(":") ? bedrock : "minecraft:" + bedrock);
+        if (!ForgeRegistries.ITEMS.containsKey(id)) return null;
+        return new net.minecraft.world.item.ItemStack(ForgeRegistries.ITEMS.getValue(id), Math.max(1, count));
+    }
+
+    private static boolean sameItem(net.minecraft.world.item.ItemStack st, net.minecraft.world.item.ItemStack ref) {
+        return !st.isEmpty() && st.getItem() == ref.getItem();
+    }
+
+    private void give(Engine eng, Ctx c, List<String> a) {
+        if (a.size() < 2) return;
+        int n = a.size() > 2 ? Engine.parseInt(a.get(2)) : 1;
+        net.minecraft.world.item.ItemStack proto = stack(a.get(1), n);
+        if (proto == null) {
+            unknown("give " + a.get(1));
+            return;
+        }
+        for (Ent e : eng.select(a.get(0), c)) {
+            if (!(e.handle() instanceof Player p)) continue;
+            net.minecraft.world.item.ItemStack st = proto.copy();
+            if (!p.getInventory().add(st)) p.drop(st, false);
+        }
+    }
+
+    private void clear(Engine eng, Ctx c, List<String> a) {
+        String sel = a.isEmpty() ? "@s" : a.get(0);
+        net.minecraft.world.item.ItemStack ref = a.size() > 1 ? stack(a.get(1), 1) : null;
+        if (a.size() > 1 && ref == null) {
+            unknown("clear " + a.get(1));
+            return;
+        }
+        int max = a.size() > 3 ? Engine.parseInt(a.get(3)) : -1;
+        for (Ent e : eng.select(sel, c)) {
+            if (!(e.handle() instanceof Player p)) continue;
+            var inv = p.getInventory();
+            if (ref == null) {
+                inv.clearContent();
+                continue;
+            }
+            if (max == 0) continue;
+            int left = max < 0 ? Integer.MAX_VALUE : max;
+            for (int i = 0; i < inv.getContainerSize() && left > 0; i++) {
+                net.minecraft.world.item.ItemStack st = inv.getItem(i);
+                if (!sameItem(st, ref)) continue;
+                int take = Math.min(left, st.getCount());
+                st.shrink(take);
+                left -= take;
+            }
+        }
+    }
+
+    private void replaceItem(Engine eng, Ctx c, List<String> a) {
+        // replaceitem entity <target> <slot.type> <slotId> <item> [amount] [data] [components]
+        if (a.size() < 5 || !a.get(0).equals("entity")) return;
+        String slot = a.get(2);
+        int idx = Engine.parseInt(a.get(3));
+        int n = a.size() > 5 ? Engine.parseInt(a.get(5)) : 1;
+        net.minecraft.world.item.ItemStack st = stack(a.get(4), n);
+        if (st == null) {
+            unknown("replaceitem " + a.get(4));
+            return;
+        }
+        for (Ent e : eng.select(a.get(1), c)) {
+            if (!(e.handle() instanceof LivingEntity le)) continue;
+            net.minecraft.world.entity.EquipmentSlot es = switch (slot) {
+                case "slot.armor.head" -> net.minecraft.world.entity.EquipmentSlot.HEAD;
+                case "slot.armor.chest" -> net.minecraft.world.entity.EquipmentSlot.CHEST;
+                case "slot.armor.legs" -> net.minecraft.world.entity.EquipmentSlot.LEGS;
+                case "slot.armor.feet" -> net.minecraft.world.entity.EquipmentSlot.FEET;
+                case "slot.weapon.offhand" -> net.minecraft.world.entity.EquipmentSlot.OFFHAND;
+                case "slot.weapon.mainhand" -> net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+                default -> null;
+            };
+            if (le instanceof Player p && (slot.equals("slot.hotbar") || slot.equals("slot.inventory"))) {
+                int i = slot.equals("slot.hotbar") ? idx : idx + 9;
+                if (i >= 0 && i < 36) p.getInventory().setItem(i, st.copy());
+            } else if (es != null) le.setItemSlot(es, st.copy());
+            else unknown("replaceitem " + slot);
+        }
+    }
+
+    private void gamemode(Engine eng, Ctx c, List<String> a) {
+        if (a.isEmpty()) return;
+        net.minecraft.world.level.GameType g = switch (a.get(0)) {
+            case "s", "survival", "0" -> net.minecraft.world.level.GameType.SURVIVAL;
+            case "c", "creative", "1" -> net.minecraft.world.level.GameType.CREATIVE;
+            case "a", "adventure", "2" -> net.minecraft.world.level.GameType.ADVENTURE;
+            case "spectator", "6" -> net.minecraft.world.level.GameType.SPECTATOR;
+            default -> null;
+        };
+        if (g == null) return;
+        for (ServerPlayer sp : players(eng, c, a.size() > 1 ? a.get(1) : "@s")) sp.setGameMode(g);
+    }
+
+    private void xp(Engine eng, Ctx c, List<String> a) {
+        if (a.size() < 2) return;
+        String v = a.get(0);
+        boolean levels = v.endsWith("l") || v.endsWith("L");
+        int n = Engine.parseInt(levels ? v.substring(0, v.length() - 1) : v);
+        for (ServerPlayer sp : players(eng, c, a.get(1))) {
+            if (levels) sp.giveExperienceLevels(n);
+            else sp.giveExperiencePoints(n);
+        }
+    }
+
+    private void ride(Engine eng, Ctx c, List<String> a) {
+        // ride <riders> start_riding <ride> [teleport_rider|teleport_ride]   |   ride <riders> stop_riding
+        if (a.size() < 2) return;
+        List<Ent> riders = eng.select(a.get(0), c);
+        if (a.get(1).equals("stop_riding")) {
+            for (Ent r : riders) ((Entity) r.handle()).stopRiding();
+            return;
+        }
+        if (!a.get(1).equals("start_riding") || a.size() < 3) {
+            unknown("ride " + a.get(1));
+            return;
+        }
+        List<Ent> rides = eng.select(a.get(2), c);
+        if (rides.isEmpty()) return;
+        Entity vehicle = (Entity) rides.get(0).handle();
+        boolean tpRider = a.size() > 3 && a.get(3).equals("teleport_rider");
+        for (Ent r : riders) {
+            Entity re = (Entity) r.handle();
+            if (re == vehicle) continue;
+            if (tpRider) moveEntity(re, vehicle.getX(), vehicle.getY(), vehicle.getZ());
+            re.startRiding(vehicle, true);
+        }
+    }
+
+    private void spreadPlayers(Engine eng, Ctx c, List<String> a) {
+        // spreadplayers <x> <z> <spreadDistance> <maxRange> <victims>
+        if (a.size() < 5) return;
+        ServerLevel lv = level(c.dim());
+        if (lv == null) return;
+        double cx = rel(a.get(0), c.x()), cz = rel(a.get(1), c.z());
+        double spread = Double.parseDouble(a.get(2)), range = Double.parseDouble(a.get(3));
+        List<double[]> placed = new ArrayList<>();
+        for (Ent e : eng.select(a.get(4), c)) {
+            double x = cx, z = cz;
+            for (int tries = 0; tries < 60; tries++) {
+                x = cx + (random.nextDouble() * 2 - 1) * range;
+                z = cz + (random.nextDouble() * 2 - 1) * range;
+                boolean ok = true;
+                for (double[] q : placed) if ((q[0] - x) * (q[0] - x) + (q[1] - z) * (q[1] - z) < spread * spread) ok = false;
+                if (ok) break;
+            }
+            placed.add(new double[] {x, z});
+            int bx = (int) Math.floor(x), bz = (int) Math.floor(z);
+            int y = lv.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, bx, bz);
+            Entity en = (Entity) e.handle();
+            moveEntity(en, bx + 0.5, y, bz + 0.5);
+        }
+    }
+
+    private static double rel(String s, double base) {
+        if (s.startsWith("~")) return base + (s.length() > 1 ? Double.parseDouble(s.substring(1)) : 0);
+        return Double.parseDouble(s);
     }
 
     // ---------------------------------------------------------------------------------------------------------------- temporary blocks
