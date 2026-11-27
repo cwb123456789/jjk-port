@@ -60,6 +60,7 @@ final class ScriptEvents {
             case "ds:lightning" -> Lightning.run(host, c, args);
             case "ds:raycast" -> RayCast.run(host, eng, c, args);
             case "ds:trail_particle" -> TrailParticle.run(host, c, args);
+            case "ds:shootprojectile" -> Projectiles.shoot(host, eng, c, e, args);
             default -> {
                 if (DELUSIONAL.containsKey(id)) {
                     delusional(host, c, id, args);

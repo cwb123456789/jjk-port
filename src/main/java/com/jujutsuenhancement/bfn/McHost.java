@@ -911,6 +911,11 @@ public final class McHost implements Host {
         }
     }
 
+    /** adds an entity created in this tick to the lists the selectors see */
+    void track(Entity e, int dim) {
+        byDim.get(Math.max(0, Math.min(2, dim))).add(new McEnt(e, dim));
+    }
+
     private final List<java.util.function.BooleanSupplier> tasks = new ArrayList<>();
 
     /** a job that runs once per server tick until it returns true (the script's system.runInterval) */
