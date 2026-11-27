@@ -11,7 +11,7 @@ final class ScriptEvents {
     private ScriptEvents() {}
 
     /** @return false when the id is not handled (yet) */
-    static boolean run(McHost host, Ctx c, String id, List<String> args) {
+    static boolean run(McHost host, Engine eng, Ctx c, String id, List<String> args) {
         if (c.self() == null || !(c.self().handle() instanceof Entity e)) return true;
         switch (id) {
             case "ds:knockback" -> knock(e, view(e), num(args, 0), num(args, 1));
@@ -37,6 +37,7 @@ final class ScriptEvents {
             case "ds:autoJump2" -> autoJump(e);
             case "ds:placeblock" -> placeBlock(host, c, args);
             case "ds:lightning" -> Lightning.run(host, c, args);
+            case "ds:raycast" -> RayCast.run(host, eng, c, args);
             default -> {
                 if (DELUSIONAL.containsKey(id)) {
                     delusional(host, c, id, args);

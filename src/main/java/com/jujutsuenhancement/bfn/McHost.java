@@ -297,7 +297,7 @@ public final class McHost implements Host {
             case "setblock" -> setblock(eng, c, a);
             case "summon" -> summon(eng, c, a);
             case "scriptevent" -> {
-                if (!a.isEmpty() && !ScriptEvents.run(this, c, a.get(0), a.subList(1, a.size()))) unknown("scriptevent " + a.get(0));
+                if (!a.isEmpty() && !ScriptEvents.run(this, eng, c, a.get(0), a.subList(1, a.size()))) unknown("scriptevent " + a.get(0));
             }
             case "playanimation" -> {
                 if (a.size() >= 2) {
