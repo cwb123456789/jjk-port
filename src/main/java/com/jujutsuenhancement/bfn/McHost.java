@@ -62,6 +62,7 @@ public final class McHost implements Host {
         this.server = server;
         this.scores = scores;
         Lightning.reset();
+        TrailParticle.reset();
         for (int i = 0; i < 3; i++) {
             byDim.add(new ArrayList<>());
             playersByDim.add(new ArrayList<>());
@@ -696,6 +697,19 @@ public final class McHost implements Host {
             if (done) tasks.remove(i);
             else i++;
         }
+    }
+
+    /** many particles of one kind in one packet (op PB: x y z triples) */
+    void sendParticles(int dim, String name, List<double[]> pts) {
+        if (pts.isEmpty()) return;
+        double[] d = new double[pts.size() * 3];
+        for (int i = 0; i < pts.size(); i++) {
+            d[i * 3] = pts.get(i)[0];
+            d[i * 3 + 1] = pts.get(i)[1];
+            d[i * 3 + 2] = pts.get(i)[2];
+        }
+        double[] f = pts.get(0);
+        sendNear(dim, f[0], f[1], f[2], 128.0, "PB", d, name);
     }
 
     void sendNear(int dim, double x, double y, double z, double r, String op, double[] d, String s) {

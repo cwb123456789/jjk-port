@@ -23,6 +23,9 @@ public final class OnceFx {
                 mc.getSoundManager().play(new SimpleSoundInstance(new ResourceLocation(s), SoundSource.HOSTILE, global ? 1.0F : (float) vol, (float) d[4],
                         RandomSource.create(), false, 0, global ? SoundInstance.Attenuation.NONE : SoundInstance.Attenuation.LINEAR, d[0], d[1], d[2], global));
             }
+            case "PB" -> {
+                for (int i = 0; i + 2 < d.length; i += 3) FxShow.particleAt(s, d[i], d[i + 1], d[i + 2], 0.0F);
+            }
             case "L" -> FxShow.lineAt(s, d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10]);
             case "K" -> FxShow.shakeFor(d[0], (int) d[1]);
             case "F" -> MoveFx.fade(d[0], d[1], d[2], (int) d[3], (int) d[4], (int) d[5]);

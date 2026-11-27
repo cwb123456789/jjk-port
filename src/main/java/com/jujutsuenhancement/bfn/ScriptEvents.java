@@ -36,8 +36,30 @@ final class ScriptEvents {
             case "ds:leap_back2" -> knock(e, view(e), -8, 2);
             case "ds:autoJump2" -> autoJump(e);
             case "ds:placeblock" -> placeBlock(host, c, args);
+            case "ds:boostup" -> knock(e, Vec3.ZERO, 0, args.isEmpty() || num(args, 0) == 0 ? 1 : num(args, 0));
+            case "ds:leapup" -> {
+                if (e instanceof net.minecraft.world.entity.player.Player) knock(e, Vec3.ZERO, 0, 4);
+            }
+            case "ds:fly" -> {
+                if (e instanceof net.minecraft.world.entity.player.Player) {
+                    Vec3 d = e.getLookAngle();
+                    double mag = d.length();
+                    if (mag != 0) {
+                        double dx = d.x / mag, dy = d.y / mag, dz = d.z / mag;
+                        double ff = 1 - Math.abs(dy);
+                        knock(e, new Vec3(dx * ff, 0, dz * ff), 3, dy * Math.abs(dy) * 3);
+                    }
+                }
+            }
+            case "ds:regeneration" -> {
+                if (e instanceof net.minecraft.world.entity.LivingEntity le) le.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.REGENERATION, 20, 6, false, false));
+            }
+            case "ds:backward2", "ds:backward5", "ds:leapbackwards", "ds:leapforwardss", "ds:dismantle_small", "sl:knockback", "ds:D1", "ds:D2", "ds:D3", "ds:D4", "ds:D5", "ds:D6",
+                 "ds:granite_beam_green", "ds:granite_beam_purple", "ds:granite_beam_red", "ds:granite_beam_blue", "ds:granite_beam_blue_spread",
+                 "ds:granite_beam_red_spread", "ds:granite_beam_green_spread", "ds:granite_beam_purple_spread" -> { }   // the Bedrock scripts have no handler: nothing happens there either
             case "ds:lightning" -> Lightning.run(host, c, args);
             case "ds:raycast" -> RayCast.run(host, eng, c, args);
+            case "ds:trail_particle" -> TrailParticle.run(host, c, args);
             default -> {
                 if (DELUSIONAL.containsKey(id)) {
                     delusional(host, c, id, args);
