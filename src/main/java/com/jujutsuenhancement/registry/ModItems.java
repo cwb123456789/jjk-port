@@ -150,4 +150,26 @@ public final class ModItems {
     /** jjkshortcut:quick_command, "咒术觉醒快捷指令": opens the quick-command menu. */
     public static final RegistryObject<Item> QUICK_COMMAND =
             reg("quick_command", () -> new com.jujutsuenhancement.item.QuickCommandItem(new Item.Properties().stacksTo(1)));
+
+    // ---- the remaining technique / skill / utility items of the behaviour pack (bedrock/items_generic.json): plain items whose use is
+    // handled by the Bedrock functions (itemUse:<id> tag); the ones above stay as they are.
+    static {
+        java.util.Set<String> have = new java.util.HashSet<>();
+        for (RegistryObject<? extends Item> o : TAB) have.add(o.getId().getPath());
+        try (java.io.InputStream in = ModItems.class.getResourceAsStream("/assets/" + JujutsuEnhancement.MODID + "/bedrock/items_generic.json")) {
+            if (in != null) {
+                com.google.gson.JsonArray rows = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8)).getAsJsonArray();
+                for (com.google.gson.JsonElement e : rows) {
+                    com.google.gson.JsonObject o = e.getAsJsonObject();
+                    String id = o.get("id").getAsString();
+                    if (have.contains(id)) continue;
+                    int stack = o.get("stack").getAsInt();
+                    boolean foil = o.get("foil").getAsBoolean();
+                    reg(id, () -> new BedrockItem(new Item.Properties().stacksTo(Math.max(1, Math.min(64, stack))), foil));
+                }
+            }
+        } catch (java.io.IOException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
 }
