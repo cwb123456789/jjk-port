@@ -142,6 +142,7 @@ public final class SukunaDomain {
 
     @SubscribeEvent
     public static void onTick(TickEvent.PlayerTickEvent event) {
+        if (com.jujutsuenhancement.bfn.BfnRuntime.isEnabled()) return;
         if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer p)) return;
         D d = STATES.get(p.getUUID());
         if (d == null) return;

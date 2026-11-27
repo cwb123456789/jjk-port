@@ -37,6 +37,11 @@ public final class BfnRuntime {
 
     private BfnRuntime() {}
 
+    /** true while the Bedrock command engine drives the game (the hand-ported techniques stand back) */
+    public static boolean isEnabled() {
+        return enabled;
+    }
+
     private static void ensure(MinecraftServer server) {
         if (host != null) return;
         data = BfnData.get(server);
@@ -58,6 +63,36 @@ public final class BfnRuntime {
         McEnt m = new McEnt(e, McHost.dimOf(e.level()));
         String c = cmd.startsWith("/") ? cmd.substring(1) : cmd;
         engine.runLine(c, new Ctx(m, e.getX(), e.getY(), e.getZ(), e.getYRot(), e.getXRot(), false, m.dim()));
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------- item use
+
+    /** the tags of this tick's item uses: removed again after the root functions have run (the add-on keeps them for one tick) */
+    private static final List<Object[]> itemTags = new ArrayList<>();
+
+    private static String bedrockItem(net.minecraft.world.item.ItemStack st) {
+        var k = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(st.getItem());
+        if (k == null) return "";
+        return k.getNamespace().equals("jujutsuenhancement") ? "ds:" + k.getPath() : k.toString();
+    }
+
+    private static void itemUsed(net.minecraft.world.entity.player.Player p, net.minecraft.world.item.ItemStack st) {
+        if (!enabled || p.level().isClientSide || st.isEmpty()) return;
+        String key = "itemUse:" + bedrockItem(st);
+        if (p.getTags().contains(key)) return;
+        p.addTag(key);
+        p.addTag("itemUse");
+        itemTags.add(new Object[] {p, key});
+    }
+
+    @SubscribeEvent
+    public static void onUseItem(net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem event) {
+        if (event.getHand() == net.minecraft.world.InteractionHand.MAIN_HAND) itemUsed(event.getEntity(), event.getItemStack());
+    }
+
+    @SubscribeEvent
+    public static void onUseItemOnBlock(net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+        if (event.getHand() == net.minecraft.world.InteractionHand.MAIN_HAND) itemUsed(event.getEntity(), event.getItemStack());
     }
 
     @SubscribeEvent
@@ -83,6 +118,12 @@ public final class BfnRuntime {
         host.refresh();
         engine.budget = 400_000;
         for (String r : roots) engine.runFunction(r, host.rootCtx());
+        for (Object[] it : itemTags) {
+            var p = (net.minecraft.world.entity.player.Player) it[0];
+            p.removeTag((String) it[1]);
+            p.removeTag("itemUse");
+        }
+        itemTags.clear();
         lastCost = System.nanoTime() - t0;
         if (++ticks % 200 == 0) data.setDirty();
     }

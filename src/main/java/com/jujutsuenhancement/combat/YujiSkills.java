@@ -172,6 +172,7 @@ public final class YujiSkills {
 
     @SubscribeEvent
     public static void onTick(TickEvent.PlayerTickEvent event) {
+        if (com.jujutsuenhancement.bfn.BfnRuntime.isEnabled()) return;
         if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer p)) return;
         State s = STATES.get(p.getUUID());
         if (s == null) return;
@@ -216,6 +217,7 @@ public final class YujiSkills {
 
     @SubscribeEvent
     public static void onAttacked(LivingAttackEvent event) {
+        if (com.jujutsuenhancement.bfn.BfnRuntime.isEnabled()) return;
         if (!(event.getEntity() instanceof ServerPlayer p)) return;
         State s = STATES.get(p.getUUID());
         if (s != null && s.frames > 0 && !event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) event.setCanceled(true);

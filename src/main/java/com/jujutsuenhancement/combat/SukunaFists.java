@@ -149,6 +149,7 @@ public final class SukunaFists {
 
     @SubscribeEvent
     public static void onTick(TickEvent.PlayerTickEvent event) {
+        if (com.jujutsuenhancement.bfn.BfnRuntime.isEnabled()) return;
         if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer p)) return;
         State s = STATES.get(p.getUUID());
         if (s == null) return;
@@ -455,6 +456,7 @@ public final class SukunaFists {
 
     @SubscribeEvent
     public static void onAttacked(net.minecraftforge.event.entity.living.LivingAttackEvent event) {
+        if (com.jujutsuenhancement.bfn.BfnRuntime.isEnabled()) return;
         if (!(event.getEntity() instanceof ServerPlayer p)) return;
         State s = STATES.get(p.getUUID());
         if (s != null && s.frames > 0 && !event.getSource().is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) event.setCanceled(true);
