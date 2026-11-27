@@ -51,6 +51,7 @@ public final class BfnRuntime {
     @SubscribeEvent
     public static void onStopping(ServerStoppingEvent event) {
         if (data != null) data.setDirty();
+        if (host != null) host.flushTemps();
         host = null;
         engine = null;
         data = null;

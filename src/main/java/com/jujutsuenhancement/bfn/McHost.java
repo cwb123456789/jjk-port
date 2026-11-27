@@ -676,6 +676,12 @@ public final class McHost implements Host {
         }
     }
 
+    /** puts back every temporary block now (the server stops) */
+    public void flushTemps() {
+        for (Temp t : temps.values()) if (t.lv().hasChunkAt(t.pos())) t.lv().setBlock(t.pos(), t.orig(), 3);
+        temps.clear();
+    }
+
     /** puts back the temporary blocks whose time is over */
     public void tickTemp() {
         if (temps.isEmpty()) return;
