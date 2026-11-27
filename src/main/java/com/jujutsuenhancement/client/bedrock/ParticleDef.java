@@ -49,6 +49,8 @@ public final class ParticleDef {
     public Molang.Expr[] size = {Molang.constant(0.1), Molang.constant(0.1)};
     public Facing facing = Facing.ROTATE_XYZ;
     public double minSpeedThreshold = 0.01;
+    /** billboard direction: {mode: custom} expressions (null when the particle uses its motion) */
+    public Molang.Expr[] billDir;
     public double texW = 16;
     public double texH = 16;
     public Molang.Expr[] uv = {Molang.constant(0), Molang.constant(0)};
@@ -198,6 +200,9 @@ public final class ParticleDef {
             }
             JsonObject dm = o.getAsJsonObject("direction");
             if (dm != null && dm.has("min_speed_threshold")) d.minSpeedThreshold = dm.get("min_speed_threshold").getAsDouble();
+            if (dm != null && dm.has("custom_direction") && "custom".equals(dm.has("mode") ? dm.get("mode").getAsString() : "")) {
+                d.billDir = exprN(dm.get("custom_direction"), 3, null);
+            }
             JsonObject uv = o.getAsJsonObject("uv");
             if (uv != null) {
                 d.texW = num(uv.get("texture_width"), 16);

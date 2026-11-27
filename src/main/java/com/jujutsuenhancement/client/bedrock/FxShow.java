@@ -189,6 +189,23 @@ public final class FxShow {
         spawnWorld(name, x, y, z, yaw);
     }
 
+    /** A particle with the variables a script gave it (the lightning lines: direction, length, plane, width). */
+    public static void lineAt(String name, double x, double y, double z, double dx, double dy, double dz, double length, double width, double r, double g, double b) {
+        if (SIM.particleCount() > 20000) return;
+        ParticleDef def = BedrockAssets.get(name);
+        if (def == null) return;
+        java.util.Map<String, Double> v = new java.util.HashMap<>();
+        v.put("direction.x", dx);
+        v.put("direction.y", dy);
+        v.put("direction.z", dz);
+        v.put("length", length);
+        v.put("width", width);
+        v.put("plane.x", r);
+        v.put("plane.y", g);
+        v.put("plane.z", b);
+        SIM.spawn(def, x, y, z, 0.0, v);
+    }
+
     /** Camera shake as {@code camerashake add}: amplitude and duration in ticks. */
     public static void shakeFor(double amp, int ticks) {
         shake(amp, Math.max(1, ticks));

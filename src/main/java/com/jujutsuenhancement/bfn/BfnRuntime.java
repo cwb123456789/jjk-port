@@ -60,7 +60,10 @@ public final class BfnRuntime {
     @SubscribeEvent
     public static void onTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if (host != null) host.tickTemp();
+        if (host != null) {
+            host.tickTemp();
+            host.tickTasks();
+        }
         if (!enabled) return;
         MinecraftServer server = event.getServer();
         ensure(server);

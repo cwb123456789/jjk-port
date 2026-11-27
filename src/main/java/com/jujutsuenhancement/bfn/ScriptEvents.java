@@ -36,6 +36,7 @@ final class ScriptEvents {
             case "ds:leap_back2" -> knock(e, view(e), -8, 2);
             case "ds:autoJump2" -> autoJump(e);
             case "ds:placeblock" -> placeBlock(host, c, args);
+            case "ds:lightning" -> Lightning.run(host, c, args);
             default -> {
                 if (DELUSIONAL.containsKey(id)) {
                     delusional(host, c, id, args);
@@ -60,13 +61,16 @@ final class ScriptEvents {
 
     /** calcVectorOffset: right / up / forward offsets of an entity's view */
     static double[] offset(Entity p, double xf, double yf, double zf) {
-        Vec3 d = p.getLookAngle();
+        return offset(p.getLookAngle(), p.getX(), p.getY(), p.getZ(), xf, yf, zf);
+    }
+
+    static double[] offset(Vec3 d, double lx, double ly, double lz, double xf, double yf, double zf) {
         double m = Math.hypot(d.x, d.z);
         if (m < 1e-9) m = 1e-9;
         double[] xx = norm(d.z, 0, -d.x, xf);
         double[] yy = norm(d.x / m * -d.y, m, d.z / m * -d.y, yf);
         double[] zz = norm(d.x, d.y, d.z, zf);
-        return new double[] {p.getX() + xx[0] + yy[0] + zz[0], p.getY() + xx[1] + yy[1] + zz[1], p.getZ() + xx[2] + yy[2] + zz[2]};
+        return new double[] {lx + xx[0] + yy[0] + zz[0], ly + xx[1] + yy[1] + zz[1], lz + xx[2] + yy[2] + zz[2]};
     }
 
     private static double[] norm(double x, double y, double z, double s) {

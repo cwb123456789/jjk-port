@@ -24,6 +24,8 @@ public final class Molang {
         public double emitterAge;
         public double emitterLifetime = 1.0;
         public double[] emitterRandom = new double[4];
+        /** variables the spawner gave the emitter (MolangVariableMap): {@code direction.x}, {@code length}, ... */
+        public java.util.Map<String, Double> vars;
     }
 
     public interface Expr {
@@ -295,8 +297,13 @@ public final class Molang {
                     return c -> c.emitterRandom[2];
                 case "emitter_random_4":
                     return c -> c.emitterRandom[3];
-                default:
-                    return constant(0.0);
+                default: {
+                    String key = n.toLowerCase();
+                    return c -> {
+                        Double v = c.vars == null ? null : c.vars.get(key);
+                        return v == null ? 0.0 : v;
+                    };
+                }
             }
         }
 

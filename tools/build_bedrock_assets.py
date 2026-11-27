@@ -42,7 +42,8 @@ def main(src, dst):
     os.makedirs(out_particles, exist_ok=True)
     textures = set()
     for name in WANT:
-        f = ids.get('ds:' + name)
+        f = ids.get(name if ':' in name else 'ds:' + name)
+        name = name.split(':')[-1]
         if not f:
             print('missing particle', name)
             continue

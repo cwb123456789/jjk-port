@@ -61,6 +61,7 @@ public final class McHost implements Host {
     public McHost(MinecraftServer server, Scores scores) {
         this.server = server;
         this.scores = scores;
+        Lightning.reset();
         for (int i = 0; i < 3; i++) {
             byDim.add(new ArrayList<>());
             playersByDim.add(new ArrayList<>());
@@ -674,6 +675,33 @@ public final class McHost implements Host {
             temps.put(key, new Temp(lv, fixed, removeAt, cur));
             lv.setBlock(fixed, st, 3);
         }
+    }
+
+    private final List<java.util.function.BooleanSupplier> tasks = new ArrayList<>();
+
+    /** a job that runs once per server tick until it returns true (the script's system.runInterval) */
+    void addTask(java.util.function.BooleanSupplier t) {
+        tasks.add(t);
+    }
+
+    public void tickTasks() {
+        if (tasks.isEmpty()) return;
+        for (int i = 0; i < tasks.size(); ) {
+            boolean done;
+            try {
+                done = tasks.get(i).getAsBoolean();
+            } catch (RuntimeException ex) {
+                done = true;
+            }
+            if (done) tasks.remove(i);
+            else i++;
+        }
+    }
+
+    void sendNear(int dim, double x, double y, double z, double r, String op, double[] d, String s) {
+        ServerLevel lv = level(dim);
+        if (lv == null) return;
+        ModNet.CHANNEL.send(PacketDistributor.NEAR.with(() -> new PacketDistributor.TargetPoint(x, y, z, r, lv.dimension())), new FxOncePacket(op, d, s));
     }
 
     /** puts back every temporary block now (the server stops) */

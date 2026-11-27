@@ -23,6 +23,7 @@ public final class ParticleSim {
         /** The emitter's yaw whatever the particle's space is: the plane of the emitter_transform_* billboards. */
         final double ecy, esy;
         double age;
+        java.util.Map<String, Double> vars;
         final double lifetime;
         final double[] rnd = new double[4];
         boolean burstDone;
@@ -62,6 +63,7 @@ public final class ParticleSim {
                   float r, float g, float b, float a);
     }
 
+    private static final Molang.Ctx BILL_CTX = new Molang.Ctx();
     private final List<Emitter> emitters = new ArrayList<>();
     private final List<Particle> particles = new ArrayList<>();
     private final Molang.Ctx ctx = new Molang.Ctx();
@@ -95,7 +97,16 @@ public final class ParticleSim {
         emitters.add(new Emitter(def, x, y, z, yawDeg));
     }
 
+    /** Spawns an emitter with the variables a script gave it (the lightning lines: direction, length, plane, width). */
+    public void spawn(ParticleDef def, double x, double y, double z, double yawDeg, java.util.Map<String, Double> vars) {
+        Emitter e = new Emitter(def, x, y, z, yawDeg);
+        e.vars = vars;
+        emitters.add(e);
+    }
+
+
     private void fillEmitterCtx(Emitter e) {
+        ctx.vars = e.vars;
         ctx.emitterAge = e.age;
         ctx.emitterLifetime = e.lifetime;
         System.arraycopy(e.rnd, 0, ctx.emitterRandom, 0, 4);
@@ -410,6 +421,13 @@ public final class ParticleSim {
 
     /** Normalised direction of travel, falling back to the initial direction; null when there is none. */
     private static double[] direction(Particle p, ParticleDef d) {
+        if (d.billDir != null) {   // direction: {mode: custom}: an expression of the emitter's variables
+            Molang.Ctx c = BILL_CTX;
+            c.vars = p.em.vars;
+            double[] v = {d.billDir[0].eval(c), d.billDir[1].eval(c), d.billDir[2].eval(c)};
+            double l = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+            return l > 1e-9 ? new double[] {v[0] / l, v[1] / l, v[2] / l} : null;
+        }
         double sp = Math.sqrt(p.vx * p.vx + p.vy * p.vy + p.vz * p.vz);
         if (sp > d.minSpeedThreshold) return new double[] {p.vx / sp, p.vy / sp, p.vz / sp};
         double l = Math.sqrt(p.dx * p.dx + p.dy * p.dy + p.dz * p.dz);
