@@ -48,6 +48,18 @@ public final class BfnRuntime {
         for (JsonElement e : JsonParser.parseString(t).getAsJsonObject().getAsJsonArray("values")) roots.add(e.getAsString());
     }
 
+    /** runs a command line as an entity at its position (entity events: queue_command) */
+    static void runAs(net.minecraft.world.entity.Entity e, String cmd) {
+        MinecraftServer s = e.getServer();
+        if (s == null) return;
+        ensure(s);
+        host.refreshIfStale();
+        if (engine.budget < 50_000) engine.budget = 50_000;
+        McEnt m = new McEnt(e, McHost.dimOf(e.level()));
+        String c = cmd.startsWith("/") ? cmd.substring(1) : cmd;
+        engine.runLine(c, new Ctx(m, e.getX(), e.getY(), e.getZ(), e.getYRot(), e.getXRot(), false, m.dim()));
+    }
+
     @SubscribeEvent
     public static void onStopping(ServerStoppingEvent event) {
         if (data != null) data.setDirty();

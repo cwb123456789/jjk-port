@@ -29,6 +29,7 @@ public final class McEnt implements Ent {
 
     /** Bedrock id of the Forge entity type: minecraft:zombie -> zombie, jujutsuenhancement:x -> ds:x */
     static String bedrockId(Entity e) {
+        if (e instanceof BfnEntity b) return b.bid();
         ResourceLocation k = ForgeRegistries.ENTITY_TYPES.getKey(e.getType());
         if (k == null) return "unknown";
         if (k.getNamespace().equals("minecraft")) {
@@ -164,6 +165,8 @@ public final class McEnt implements Ent {
         String n = name.contains(":") ? name.substring(name.indexOf(':') + 1) : name;
         var tag = e.getPersistentData();
         if (tag.contains("bfn_" + n)) return tag.getDouble("bfn_" + n);
+        double dflt = BedrockEntities.propDefault(typeId(), n);
+        if (!Double.isNaN(dflt)) return dflt;
         return e.getTags().contains(n) ? 1 : 0;
     }
 

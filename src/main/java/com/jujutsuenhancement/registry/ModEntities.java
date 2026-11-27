@@ -78,6 +78,15 @@ public final class ModEntities {
                     .updateInterval(2)
                     .build("mahito_domain_barrier"));
 
+    /** the generic behaviour-pack entity (see bfn.BfnEntity); its Bedrock id is synched */
+    public static final RegistryObject<EntityType<com.jujutsuenhancement.bfn.BfnEntity>> BFN_ENTITY =
+            ENTITY_TYPES.register("bfn_entity", () -> EntityType.Builder
+                    .of(com.jujutsuenhancement.bfn.BfnEntity::new, MobCategory.MISC)
+                    .sized(0.6F, 1.8F)
+                    .clientTrackingRange(16)
+                    .updateInterval(1)
+                    .build("bfn_entity"));
+
     public static final RegistryObject<EntityType<BedrockFxEntity>> BEDROCK_FX =
             ENTITY_TYPES.register("bedrock_fx", () -> EntityType.Builder
                     .of(BedrockFxEntity::new, MobCategory.MISC)

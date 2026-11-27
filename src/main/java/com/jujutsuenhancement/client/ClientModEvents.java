@@ -92,6 +92,7 @@ public final class ClientModEvents {
         event.registerEntityRenderer(ModEntities.HOLLOW_PURPLE.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.DOMAIN_CLASH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.BEDROCK_FX.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+        event.registerEntityRenderer(ModEntities.BFN_ENTITY.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.DISMANTLE_SLASH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.GOJO_TECH.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
         event.registerEntityRenderer(ModEntities.FLYHEAD.get(), FlyheadRenderer::new);

@@ -96,8 +96,19 @@ public final class McHost implements Host {
         if (t != null) for (Map.Entry<String, JsonElement> en : JsonParser.parseString(t).getAsJsonObject().entrySet()) soundMap.put(en.getKey(), en.getValue().getAsString());
     }
 
+    /** the entities.json record ({f: families, b: [w, h]}) of a Bedrock id, or null */
+    static JsonObject boxOf(String id) {
+        loadTables();
+        return entityDefs.get(id.contains(":") ? id : "minecraft:" + id);
+    }
+
     static List<String> families(McEnt m) {
         loadTables();
+        if (m.e instanceof BfnEntity b && b.def() != null) {
+            List<String> fam = BedrockEntities.families(b, b.def());
+            if (!fam.contains("inanimate") && fam.isEmpty()) fam.add("inanimate");
+            return fam;
+        }
         String id = m.typeId();
         JsonObject d = entityDefs.get(id.contains(":") ? id : "minecraft:" + id);
         List<String> out = new ArrayList<>();
@@ -148,7 +159,15 @@ public final class McHost implements Host {
     }
 
     /** the entity lists of this tick */
+    private long refreshedAt = -1;
+
+    /** refreshes the entity lists once per game tick (entities running their own commands between the root ticks) */
+    public void refreshIfStale() {
+        if (refreshedAt != server.getTickCount()) refresh();
+    }
+
     public void refresh() {
+        refreshedAt = server.getTickCount();
         for (int d = 0; d < 3; d++) {
             List<McEnt> all = byDim.get(d), pl = playersByDim.get(d);
             all.clear();
@@ -297,6 +316,12 @@ public final class McHost implements Host {
             case "fill" -> fill(eng, c, a);
             case "setblock" -> setblock(eng, c, a);
             case "summon" -> summon(eng, c, a);
+            case "event" -> {
+                // event entity <selector> <event>
+                if (a.size() >= 3 && a.get(0).equals("entity")) {
+                    for (Ent en : eng.select(a.get(1), c)) BedrockEntities.fire((Entity) en.handle(), a.get(2), null);
+                }
+            }
             case "scriptevent" -> {
                 if (!a.isEmpty() && !ScriptEvents.run(this, eng, c, a.get(0), a.subList(1, a.size()))) unknown("scriptevent " + a.get(0));
             }
@@ -620,25 +645,61 @@ public final class McHost implements Host {
     private void summon(Engine eng, Ctx c, List<String> a) {
         if (a.isEmpty()) return;
         String t = a.get(0);
-        ResourceLocation id = t.startsWith("ds:") ? new ResourceLocation("jujutsuenhancement", t.substring(3))
-                : t.equals("xp_orb") ? new ResourceLocation("minecraft", "experience_orb") : new ResourceLocation("minecraft", bare(t));
-        EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(id);
-        if (type == null || !ForgeRegistries.ENTITY_TYPES.containsKey(id)) {
+        ServerLevel lv = level(c.dim());
+        if (lv == null) return;
+        Entity e = BedrockEntities.create(lv, t);
+        if (e == null) {
             unknown("summon " + t);
             return;
         }
-        ServerLevel lv = level(c.dim());
-        if (lv == null) return;
         double[] p = {c.x(), c.y(), c.z()};
-        if (a.size() >= 2 && (a.get(1).startsWith("~") || a.get(1).startsWith("^") || Character.isDigit(a.get(1).charAt(0)) || a.get(1).startsWith("-"))) {
-            p = eng.resolve(Coords.read(a, 1, new int[1]), c);
+        float yaw = c.yaw(), pitch = 0;
+        int i = 1;
+        if (a.size() >= 2 && isCoord(a.get(1))) {
+            int[] nx = new int[1];
+            p = eng.resolve(Coords.read(a, 1, nx), c);
+            i = nx[0];
         }
-        Entity e = type.create(lv);
-        if (e == null) return;
-        e.moveTo(p[0], p[1], p[2], c.yaw(), 0);
+        if (i < a.size() && a.get(i).equals("facing")) {
+            i++;
+            int[] nx = new int[1];
+            if (i < a.size() && a.get(i).startsWith("@")) {
+                List<Ent> es = eng.select(a.get(i), c);
+                i++;
+                if (!es.isEmpty()) {
+                    double dx = es.get(0).x() - p[0], dy = es.get(0).y() + es.get(0).eyeHeight() - p[1], dz = es.get(0).z() - p[2];
+                    yaw = (float) Math.toDegrees(Math.atan2(-dx, dz));
+                    pitch = (float) -Math.toDegrees(Math.atan2(dy, Math.sqrt(dx * dx + dz * dz)));
+                }
+            } else if (i < a.size()) {
+                double[] f = eng.resolve(Coords.read(a, i, nx), new Ctx(c.self(), p[0], p[1], p[2], c.yaw(), c.pitch(), false, c.dim()));
+                i = nx[0];
+                double dx = f[0] - p[0], dy = f[1] - p[1], dz = f[2] - p[2];
+                yaw = (float) Math.toDegrees(Math.atan2(-dx, dz));
+                pitch = (float) -Math.toDegrees(Math.atan2(dy, Math.sqrt(dx * dx + dz * dz)));
+            }
+        } else if (i + 1 < a.size() && isCoord(a.get(i)) && isCoord(a.get(i + 1))) {
+            yaw = a.get(i).startsWith("~") ? c.yaw() + parseRel(a.get(i)) : (float) Double.parseDouble(a.get(i));
+            pitch = a.get(i + 1).startsWith("~") ? parseRel(a.get(i + 1)) : (float) Double.parseDouble(a.get(i + 1));
+            i += 2;
+        }
+        String event = i < a.size() ? a.get(i++) : null;
+        String name = i < a.size() ? a.get(i) : null;
+        e.moveTo(p[0], p[1], p[2], yaw, pitch);
+        if (name != null && !name.isEmpty()) e.setCustomName(net.minecraft.network.chat.Component.literal(name));
         lv.addFreshEntity(e);
         McEnt m = new McEnt(e, c.dim());
         byDim.get(Math.max(0, Math.min(2, c.dim()))).add(m);
+        BedrockEntities.start(e, event);
+    }
+
+    private static boolean isCoord(String s) {
+        return !s.isEmpty() && (s.charAt(0) == '~' || s.charAt(0) == '^' || s.charAt(0) == '-' || s.charAt(0) == '.' || Character.isDigit(s.charAt(0)));
+    }
+
+    private static float parseRel(String s) {
+        String r = s.substring(1);
+        return r.isEmpty() ? 0 : (float) Double.parseDouble(r);
     }
 
     // ---------------------------------------------------------------------------------------------------------------- temporary blocks
