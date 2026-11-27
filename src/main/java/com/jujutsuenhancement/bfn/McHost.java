@@ -874,11 +874,6 @@ public final class McHost implements Host {
         }
     }
 
-    private static double rel(String s, double base) {
-        if (s.startsWith("~")) return base + (s.length() > 1 ? Double.parseDouble(s.substring(1)) : 0);
-        return Double.parseDouble(s);
-    }
-
     // ---------------------------------------------------------------------------------------------------------------- temporary blocks
 
     private record Temp(ServerLevel lv, BlockPos pos, long removeAt, BlockState orig) {}
