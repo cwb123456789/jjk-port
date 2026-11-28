@@ -42,6 +42,34 @@ public final class BfnRuntime {
         return enabled;
     }
 
+    /** runs a command line as the player (a form's result: "function point_strength"); only while the engine is on */
+    public static void runCommandAs(net.minecraft.server.level.ServerPlayer p, String cmd) {
+        if (!enabled) return;
+        runAs(p, cmd);
+    }
+
+    /** runs {@code r} after {@code n} ticks (system.runTimeout) */
+    public static void afterTicks(int n, Runnable r) {
+        if (host == null) return;
+        int[] left = {n};
+        host.addTask(() -> {
+            if (--left[0] > 0) return false;
+            r.run();
+            return true;
+        });
+    }
+
+    /** sets a score of a player (0..) in the engine's scoreboard */
+    public static void setScore(net.minecraft.server.level.ServerPlayer p, String objective, int v) {
+        if (host == null) return;
+        host.scores().set(objective, p.getGameProfile().getName(), v);
+    }
+
+    /** a fake-name score such as {@code destructionlevel Mode}; null if absent */
+    public static Integer fakeScore(String objective, String holder) {
+        return host == null ? null : host.scores().get(objective, holder);
+    }
+
     /** the score of a player in an objective while the engine runs (0 if it has none), -1 is never returned; see {@link #isEnabled()} */
     public static int score(net.minecraft.server.level.ServerPlayer p, String objective) {
         if (host == null) return 0;

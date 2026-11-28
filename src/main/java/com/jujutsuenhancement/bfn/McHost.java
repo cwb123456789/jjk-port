@@ -254,20 +254,75 @@ public final class McHost implements Host {
         return i + 1 <= r.length() ? r.substring(Math.min(i + 1, r.length())) : "";
     }
 
-    /** text parts of a rawtext json; translate keys are not resolved */
-    private static String rawText(String json) {
+    /**
+     * a rawtext json ({"rawtext":[{"text"},{"translate","with"},{"score"}]}) as a JSON component array for the client: translate keys stay
+     * keys (the client's language file resolves them), scores are read now. "" if there is nothing to show.
+     */
+    String rawJson(Engine eng, Ctx c, String json) {
         try {
-            JsonObject o = JsonParser.parseString(json).getAsJsonObject();
-            StringBuilder sb = new StringBuilder();
-            JsonArray a = o.getAsJsonArray("rawtext");
-            if (a != null) for (JsonElement el : a) {
-                JsonObject p = el.getAsJsonObject();
-                if (p.has("text")) sb.append(p.get("text").getAsString());
-            }
-            return sb.toString();
+            JsonElement root = JsonParser.parseString(json);
+            JsonArray out = new JsonArray();
+            JsonArray a = root.isJsonObject() ? root.getAsJsonObject().getAsJsonArray("rawtext") : null;
+            if (a == null) return "";
+            addRaw(eng, c, a, out);
+            return out.size() == 0 ? "" : out.toString();
         } catch (Exception ex) {
             return "";
         }
+    }
+
+    private void addRaw(Engine eng, Ctx c, JsonArray a, JsonArray out) {
+        for (JsonElement el : a) {
+            if (el.isJsonPrimitive()) {
+                JsonObject t = new JsonObject();
+                t.addProperty("text", el.getAsString());
+                out.add(t);
+                continue;
+            }
+            JsonObject p = el.getAsJsonObject();
+            JsonObject comp = new JsonObject();
+            if (p.has("text")) {
+                comp.addProperty("text", p.get("text").getAsString());
+            } else if (p.has("translate")) {
+                comp.addProperty("translate", fixKey(p.get("translate").getAsString()));
+                if (p.has("with")) {
+                    JsonArray with = new JsonArray();
+                    JsonElement w = p.get("with");
+                    if (w.isJsonArray()) {
+                        for (JsonElement x : w.getAsJsonArray()) with.add(x.isJsonPrimitive() ? x : subComponent(eng, c, x));
+                    } else {
+                        with.add(subComponent(eng, c, w));
+                    }
+                    comp.add("with", with);
+                }
+            } else if (p.has("score")) {
+                JsonObject sc = p.getAsJsonObject("score");
+                String name = sc.has("name") ? sc.get("name").getAsString() : "*";
+                String obj = sc.has("objective") ? sc.get("objective").getAsString() : "";
+                String holder = name;
+                if (name.equals("*") || name.startsWith("@")) {
+                    List<Ent> es = eng.select(name.equals("*") ? "@s" : name, c);
+                    holder = es.isEmpty() ? null : es.get(0).key();
+                }
+                Integer v = holder == null ? null : scores().get(obj, holder);
+                comp.addProperty("text", v == null ? "" : Integer.toString(v));
+            } else {
+                continue;
+            }
+            out.add(comp);
+        }
+    }
+
+    private JsonElement subComponent(Engine eng, Ctx c, JsonElement el) {
+        JsonArray out = new JsonArray();
+        if (el.isJsonObject() && el.getAsJsonObject().has("rawtext")) addRaw(eng, c, el.getAsJsonObject().getAsJsonArray("rawtext"), out);
+        else if (el.isJsonObject()) { JsonArray one = new JsonArray(); one.add(el); addRaw(eng, c, one, out); }
+        return out;
+    }
+
+    /** the Bedrock language file's %1 / %2 placeholders are %1$s / %2$s in Java; keys are used as they are */
+    private static String fixKey(String k) {
+        return k;
     }
 
     private static int glyph(String text) {
@@ -304,7 +359,7 @@ public final class McHost implements Host {
             case "titleraw" -> title(eng, c, ln, true);
             case "tellraw" -> {
                 if (a.size() < 2) return;
-                String t = rawText(tail(ln, "tellraw", 1));
+                String t = rawJson(eng, c, tail(ln, "tellraw", 1));
                 if (!t.isBlank()) for (ServerPlayer sp : players(eng, c, a.get(0))) send(sp, "M", new double[0], t);
             }
             case "tp", "teleport" -> tp(eng, c, a);
@@ -457,7 +512,7 @@ public final class McHost implements Host {
                 else unknown("title text");
             }
             case "actionbar" -> {
-                String t = raw ? rawText(text) : text;
+                String t = raw ? rawJson(eng, c, text) : text;
                 if (!t.isBlank()) for (ServerPlayer sp : who) send(sp, "A", new double[0], t);
             }
             default -> { }

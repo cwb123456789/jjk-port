@@ -35,9 +35,21 @@ public final class OnceFx {
                 if ((int) d[0] == 0) ImpactFrames.clear();
                 else ImpactFrames.show((int) d[0]);
             }
-            case "A" -> mc.gui.setOverlayMessage(Component.literal(s), false);
-            case "M" -> mc.player.sendSystemMessage(Component.literal(s));
+            case "A" -> mc.gui.setOverlayMessage(text(s), false);
+            case "M" -> mc.player.sendSystemMessage(text(s));
             default -> { }
         }
+    }
+
+    /** a JSON component array of the server's rawJson, or plain text */
+    private static Component text(String s) {
+        if (s.startsWith("[")) {
+            try {
+                Component c = Component.Serializer.fromJson(s);
+                if (c != null) return c;
+            } catch (RuntimeException ignored) {
+            }
+        }
+        return Component.literal(s);
     }
 }
