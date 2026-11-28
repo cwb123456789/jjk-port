@@ -99,9 +99,7 @@ public final class FormScreens {
             g.drawString(font, title, -font.width(title) / 2, -4, 0xFFFFFF, true);
             ps.popPose();
             // hint
-            g.setColor(1, 1, 1, 0.3f);
-            g.blit(tex("textures/ui/hud_tip_text_background.png"), width / 2 - 110, py + 10, 220, 10, 0, 0, 1, 1, 1, 1);
-            g.setColor(1, 1, 1, 1);
+            g.fill(width / 2 - 110, py + 10, width / 2 + 110, py + 20, 0x4D000000);
             ps.pushPose();
             ps.translate(width / 2.0, py + 15, 0);
             ps.scale(0.8f, 0.8f, 1f);
