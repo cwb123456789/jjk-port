@@ -65,6 +65,24 @@ public final class BfnRuntime {
         engine.runLine(c, new Ctx(m, e.getX(), e.getY(), e.getZ(), e.getYRot(), e.getXRot(), false, m.dim()));
     }
 
+    // ---------------------------------------------------------------------------------------------------------------- join
+
+    /** the add-on runs the function "joined" as every player that joins the world */
+    @SubscribeEvent
+    public static void onLogin(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
+        if (!enabled || !(event.getEntity() instanceof net.minecraft.server.level.ServerPlayer p)) return;
+        ensure(p.getServer());
+        host.addTask(() -> {
+            if (!p.isRemoved()) runAs(p, "function joined");
+            return true;
+        });
+    }
+
+    @SubscribeEvent
+    public static void onLogout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event) {
+        PlayerInput.forget(event.getEntity().getUUID());
+    }
+
     // ---------------------------------------------------------------------------------------------------------------- item use
 
     /** the tags of this tick's item uses: removed again after the root functions have run (the add-on keeps them for one tick) */
@@ -116,6 +134,7 @@ public final class BfnRuntime {
         ensure(server);
         long t0 = System.nanoTime();
         host.refresh();
+        PlayerInput.tick(host, engine, server);
         engine.budget = 400_000;
         for (String r : roots) engine.runFunction(r, host.rootCtx());
         for (Object[] it : itemTags) {

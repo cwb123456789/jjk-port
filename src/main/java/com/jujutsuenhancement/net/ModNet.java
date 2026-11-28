@@ -25,6 +25,7 @@ public final class ModNet {
         CHANNEL.registerMessage(id++, GlowFlagPacket.class, GlowFlagPacket::encode, GlowFlagPacket::decode, GlowFlagPacket::handle);
         CHANNEL.registerMessage(id++, SwingPacket.class, SwingPacket::encode, SwingPacket::decode, SwingPacket::handle);
         CHANNEL.registerMessage(id++, FxOncePacket.class, FxOncePacket::encode, FxOncePacket::decode, FxOncePacket::handle);
+        CHANNEL.registerMessage(id++, InputPacket.class, InputPacket::encode, InputPacket::decode, InputPacket::handle);
     }
 
     /** playanimation: every player that can see {@code player}, and the player, plays {@code anim}. */
