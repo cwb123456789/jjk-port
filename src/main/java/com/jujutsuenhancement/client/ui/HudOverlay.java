@@ -97,7 +97,10 @@ public final class HudOverlay {
             g.blit(new ResourceLocation(JujutsuEnhancement.MODID, H + b.tex + ".png"), 0, 0, 0, v, b.regW, b.rowH, b.texW, b.texH);
             ps.popPose();
         }
-        if ((HudClient.flags() & 64) != 0) return;
+        if ((HudClient.flags() & 64) != 0) {
+            if ((HudClient.flags() & 128) == 0) oldUi(g, w, h);
+            return;
+        }
         if (!HudClient.title.contains("a:health_bar")) return;
         numbers(g, w, h);
     }
@@ -124,6 +127,64 @@ public final class HudOverlay {
         centered(g, Component.literal("§f" + n[2] + "/" + n[3]), cx, h - 28, s);
         if ((flags & 2) != 0 && !hr)
             centered(g, Component.translatable("text.stored_energy_2.ui").append(Component.literal(n[4] + "%")), cx, h - 37.5 - 4 * 9 * s, s);
+    }
+
+    private static Component t(String key) {
+        return Component.translatable(key);
+    }
+
+    private static String overheatColor(int o) {
+        if (o <= 19) return "§8";
+        if (o <= 39) return "§e";
+        if (o <= 59) return "§6";
+        if (o <= 79) return "§c";
+        return "§4";
+    }
+
+    /** scripts/index.js olduidisplay(): the action bar text block (centred on y = H - 68, the small font is about 5 px a line) */
+    private static void oldUi(GuiGraphics g, int w, int h) {
+        int[] n = HudClient.nums;
+        int flags = n[5];
+        int pct = n[3] <= 0 ? 0 : n[2] * 100 / n[3];
+        int full = Math.max(pct / 10, 1), empty = 10 - full;
+        net.minecraft.network.chat.Style gl = net.minecraft.network.chat.Style.EMPTY.withFont(new ResourceLocation(JujutsuEnhancement.MODID, "ui"));
+        net.minecraft.network.chat.MutableComponent bar = Component.literal("");
+        bar.append(Component.literal("\ue600".repeat(full)).withStyle(gl));
+        bar.append(Component.literal("\ue601".repeat(Math.max(empty, 0))).withStyle(gl));
+        List<Component> lines = new java.util.ArrayList<>();
+        lines.add(Component.empty());
+        lines.add(Component.empty());
+        lines.add(Component.empty());
+        lines.add(Component.literal("             §l§f  §l❘❘ ").append(t("text.cursed_energy.ui")).append(Component.literal(" §f| " + n[0] + "/" + n[1] + " | §l❘❘")));
+        lines.add(Component.literal("§f §l❘❘ §r").append(bar).append(Component.literal("§f §l❘❘ ")).append(t("text.health.ui"))
+                .append(Component.literal(" §f| §4" + n[2] + "/" + n[3] + " §l§f|  ")));
+        Component ev = n[9] <= 99 ? Component.literal(String.valueOf(n[9])) : t("text.evade_ready.ui").copy().append(Component.literal(" §f|"));
+        lines.add(Component.literal("     §r§f❘❘ ").append(t("text.evade.ui")).append(Component.literal(" §f|§l ")).append(ev)
+                .append(Component.literal(" §l§f|  §r§f❘❘ ")).append(t("text.xp.ui")).append(Component.literal(n[6] + "§9/" + n[7] + " §r§f❘❘ "))
+                .append(t("text.level.ui")).append(Component.literal(n[8] + " §r§f❘❘")));
+        if ((flags & 2) != 0) lines.add(Component.literal("    §r§l❘ ").append(t("text.stored_energy.ui")).append(Component.literal(n[4] + "% §r§f❘❘")));
+        else if ((flags & 4) != 0) lines.add(Component.literal("    §r§1❘ ").append(t("text.overheat.ui")).append(Component.literal(" §f| " + overheatColor(n[10]) + n[10] + "% §f| §1❘ §r§f❘❘")));
+        else if ((flags & 8) != 0) lines.add(Component.literal("    §r§l❘ ").append(t("text.fever.ui")).append(Component.literal(n[11] + "% §r§f❘❘")));
+        lines.add(Component.empty());
+        lines.add(Component.empty());
+        float s = 0.55f, lh = 9 * s;
+        double top = h - 68 - lines.size() * lh / 2.0;
+        for (int i = 0; i < lines.size(); i++) centered(g, lines.get(i), w / 2.0, top + (i + 0.5) * lh, s);
+    }
+
+    /** ui/debug_screen.json: the pack's watermark on the debug screen (bottom right here: Java's own text fills the top right) */
+    @SubscribeEvent
+    public static void onPost(RenderGuiOverlayEvent.Post e) {
+        if (e.getOverlay() != VanillaGuiOverlay.DEBUG_TEXT.type()) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (!mc.options.renderDebug) return;
+        GuiGraphics g = e.getGuiGraphics();
+        int w = mc.getWindow().getGuiScaledWidth(), hh = mc.getWindow().getGuiScaledHeight();
+        String[] ls = {"§l§cJujutsu §bAwakening §5v1.86", "§4Made by Heroic Productions"};
+        for (int i = 0; i < ls.length; i++) {
+            int tw = mc.font.width(ls[i]);
+            g.drawString(mc.font, ls[i], w - tw - 2, hh - 22 + i * 10, 0xFFFFFF, true);
+        }
     }
 
     private static void hotbar(ForgeGui gui, GuiGraphics g, float pt, int w, int h) {
