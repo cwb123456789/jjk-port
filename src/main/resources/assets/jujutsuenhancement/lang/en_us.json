@@ -460,5 +460,15 @@
   "item.jujutsuenhancement.yuji_fuga": "§r§l§d百敛: 「竈」 开",
   "item.jujutsuenhancement.yuji_fuga.lore": "§g- 消耗: [ §75000 点咒力 §g]\n§r§l§5- §o将火焰压缩至中子星密度",
   "item.jujutsuenhancement.yuta_technique": "§r§l§d术式模仿 + 诅咒女王",
-  "item.jujutsuenhancement.yuta_technique.lore": "§5§o里香，借给我力量...\n\n§r§l§g  - 右键(长按) 使用术式\n§l§g  - 潜行 + 右键(长按) 学习术式用法/秘传§l§7 [ §l§a消耗: 10点 天赋点 §l§7]\n\n§l§9[创造模式下使用解锁所有技能]"
+  "item.jujutsuenhancement.yuta_technique.lore": "§5§o里香，借给我力量...\n\n§r§l§g  - 右键(长按) 使用术式\n§l§g  - 潜行 + 右键(长按) 学习术式用法/秘传§l§7 [ §l§a消耗: 10点 天赋点 §l§7]\n\n§l§9[创造模式下使用解锁所有技能]",
+  "text.cursed_energy.ui": "§bCursed Energy",
+  "text.health.ui": "§4Health",
+  "text.evade.ui": "§l§8Evasive",
+  "text.evade_ready.ui": "§l§eReady",
+  "text.xp.ui": "§l§9XP:§l ",
+  "text.level.ui": "§l§gYour Level:§e ",
+  "text.fever.ui": "§a§l♣ Fever: ",
+  "text.stored_energy.ui": "§e§l✴ Stored Energy: ",
+  "text.stored_energy_2.ui": "§e§lStored Energy: §r§g",
+  "text.overheat.ui": "§b⋆ §bHeat"
 }

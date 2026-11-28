@@ -70,6 +70,8 @@ public final class ClientModEvents {
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
         // The Bedrock domain's screen fades sit above everything, like the camera fades they replace.
+        event.registerBelowAll("jje_bars", com.jujutsuenhancement.client.ui.HudOverlay.OVERLAY);
+        event.registerAboveAll("jje_hotbar", com.jujutsuenhancement.client.ui.HudOverlay.HOTBAR);
         event.registerAboveAll("void_show", com.jujutsuenhancement.client.bedrock.VoidShow.OVERLAY);
         event.registerAboveAll("clash_show", com.jujutsuenhancement.client.bedrock.ClashShow.OVERLAY);
         // Titles (the addon's impact frames) are drawn over the fades.

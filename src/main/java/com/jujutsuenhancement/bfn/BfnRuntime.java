@@ -42,6 +42,13 @@ public final class BfnRuntime {
         return enabled;
     }
 
+    /** the score of a player in an objective while the engine runs (0 if it has none), -1 is never returned; see {@link #isEnabled()} */
+    public static int score(net.minecraft.server.level.ServerPlayer p, String objective) {
+        if (host == null) return 0;
+        Integer v = host.scores().get(objective, p.getGameProfile().getName());
+        return v == null ? 0 : v;
+    }
+
     private static void ensure(MinecraftServer server) {
         if (host != null) return;
         data = BfnData.get(server);
